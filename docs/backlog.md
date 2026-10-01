@@ -54,7 +54,7 @@
 #### E0-2 CI 流水线 · M · S
 作为开发者，我要 push 自动跑构建和测试，以便坏提交进不了主干。
 
-- [ ] push / PR 触发 build + test，失败阻止合入
+- [x] push / PR 触发 build + test，失败阻止合入
 - [ ] 提交 openapi.json 基线，PR 跑 oasdiff 破坏性变更检测；红了必须先走 api-design §11 变更流程再合码
 - [x] README 写明本地一键跑测试的命令
 
