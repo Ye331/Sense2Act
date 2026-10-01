@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: sense2act-backend
+  profiles:
+    # 容器里由 compose 传 prod;IDE 本地跑默认 local
+    active: ${SPRING_PROFILES_ACTIVE:local}
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/sense2act}
+    username: ${SPRING_DATASOURCE_USERNAME:sense2act}
+    password: ${SPRING_DATASOURCE_PASSWORD:sense2act}
+  flyway:
+    enabled: true
+  jackson:
+    default-property-inclusion: non_null
+
+server:
+  port: 8080
+  shutdown: graceful
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    banner: false
+
+springdoc:
+  paths-to-match: /api/v1/**
+
+# 应用配置:值一律来自环境变量,环境差异不进代码(见 .env.example)
+app:
+  jwt:
+    # 默认值仅供本地开发;prod profile 会用无默认的 ${JWT_SECRET} 覆盖,弱/缺密钥直接拒绝启动
+    secret: ${JWT_SECRET:local-dev-only-secret-0123456789abcdef-CHANGE-ME}
+    ttl: ${JWT_TTL:12h}
+  internal-key: ${INTERNAL_API_KEY:}
+  snapshot-dir: ${SNAPSHOT_DIR:./snapshots}
+  seed:
+    enabled: ${SEED_USERS_ENABLED:true}
+    admin-password: ${SEED_ADMIN_PASSWORD:admin123}
+    analyst-password: ${SEED_ANALYST_PASSWORD:analyst123}
+    viewer-password: ${SEED_VIEWER_PASSWORD:viewer123}

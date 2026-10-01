@@ -1,0 +1,54 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: 构建与测试(含 Testcontainers 集成测试)
+        run: mvn -B -ntp verify
+
+  contract:
+    # 仅 PR 上做契约破坏性检查:origin/main 的 openapi 基线 vs 当前分支生成的 spec。
+    # 改了接口就要重新生成基线(docs/openapi/baseline.json)并提交;
+    # 破坏性变更(§9 路径/字段/状态值)必须先在 api-design.md §11 登记并通知外部团队。
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: 取基线 spec(origin/main)
+        run: |
+          if git show "origin/${{ github.base_ref }}:docs/openapi/baseline.json" > /tmp/base.json 2>/dev/null; then
+            echo "基线已取得"
+          else
+            echo '{}' > /tmp/base.json
+            echo "main 尚无基线,跳过破坏性检查(本次合入建立首个基线)"
+          fi
+      - name: 生成当前分支 spec
+        run: mvn -B -ntp test -Dtest=OpenApiBaselineTest -DupdateOpenapi=true -DfailIfNoTests=false
+      - name: oasdiff 破坏性变更检查
+        run: |
+          if [ "$(cat /tmp/base.json)" = "{}" ]; then exit 0; fi
+          docker run --rm \
+            -v "$PWD:/spec" \
+            -v "/tmp:/hosttmp" \
+            oasdiff/oasdiff breaking /hosttmp/base.json /spec/docs/openapi/baseline.json \
+            || { echo "::error::检测到破坏性 API 变更。先在 docs/api-design.md §11 登记并通知外部团队,重新生成基线后再合入"; exit 1; }

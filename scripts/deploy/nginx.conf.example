@@ -1,0 +1,38 @@
+# Sense2Act 后端反向代理示例(服务器部署)
+# 关键:SSE 流式响应必须关缓冲、拉长读超时,否则调查时间线/全局通知会被攒包卡死。
+# 证书以 Let's Encrypt 为例,路径按实际替换。
+
+server {
+    listen 443 ssl;
+    http2 on;
+    server_name api.example.com;
+
+    ssl_certificate     /etc/letsencrypt/live/api.example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/api.example.com/privkey.pem;
+
+    # 允许大一点的请求体(批量推文档可能携带 raw_html)
+    client_max_body_size 20m;
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+
+        # SSE 关键三件套
+        proxy_buffering off;
+        proxy_cache off;
+        proxy_read_timeout 24h;
+        # 对 SSE 保持长连接
+        proxy_set_header Connection "";
+    }
+}
+
+server {
+    listen 80;
+    server_name api.example.com;
+    return 301 https://$host$request_uri;
+}

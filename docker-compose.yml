@@ -1,0 +1,52 @@
+# 本地全栈:docker compose up --build(自动叠加 docker-compose.override.yml)
+# 只起数据库(IDE 里跑应用):docker compose up -d postgres
+# 服务器部署:见 docker-compose.prod.yml 头部注释
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-sense2act}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-sense2act}
+      POSTGRES_DB: ${POSTGRES_DB:-sense2act}
+      TZ: ${TZ:-Asia/Shanghai}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  api:
+    build: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-sense2act}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-sense2act}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-sense2act}
+      # 默认值仅本机联调用;服务器必须在 .env 覆盖为强值(prod profile 弱密钥直接拒绝启动)
+      JWT_SECRET: ${JWT_SECRET:-local-dev-secret-0123456789abcdef}
+      JWT_TTL: ${JWT_TTL:-12h}
+      INTERNAL_API_KEY: ${INTERNAL_API_KEY:-}
+      SNAPSHOT_DIR: /app/snapshots
+      TZ: ${TZ:-Asia/Shanghai}
+    ports:
+      # 默认仅绑本机;服务器经 nginx 反代访问,不直接暴露
+      - "${API_BIND:-127.0.0.1}:8080:8080"
+    volumes:
+      - snapshots:/app/snapshots
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 12
+      start_period: 60s
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  snapshots:

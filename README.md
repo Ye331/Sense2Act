@@ -26,30 +26,76 @@
 
 ## 技术栈
 
-Java 21 + Spring Boot 3（Web、Security + JWT、Validation），MyBatis-Plus（ORM），pgvector 官方 Java 客户端，Flyway 迁移，PostgreSQL 16（pgvector）。定时任务用 Spring Scheduling。快照存本地磁盘（可换 MinIO）。Redis 可选，多实例时才需要（SSE 广播、缓存），单机原型不用装。后端不调用 LLM。
+Java 21 + Spring Boot 3（Web、Security + JWT、Validation、Actuator），MyBatis-Plus（ORM），Flyway 迁移，PostgreSQL 16（pgvector 镜像），springdoc-openapi，Testcontainers 集成测试。定时任务用 Spring Scheduling。快照存本地磁盘（可换 MinIO）。Redis 可选，多实例时才需要（SSE 广播、缓存），单机原型不用装。后端不调用 LLM。
 
-## 目录结构（规划）
+## 快速开始（本地）
+
+前置：JDK 21、Maven 3.9+、Docker Desktop 已启动。
+
+```bash
+# 1. 环境变量（本地默认值即可跑）
+cp .env.example .env
+
+# 2a. 全栈容器方式：postgres + api 一键起
+docker compose up --build
+# 2b. 或只起数据库，应用在 IDEA 里跑（本地 profile，默认连 localhost:5432）
+docker compose up -d postgres
+
+# 3. 验证
+curl http://127.0.0.1:8080/actuator/health          # {"status":"UP"}
+curl -X POST http://127.0.0.1:8080/api/v1/auth/token \
+  -H 'Content-Type: application/json' \
+  -d '{"email":"admin@sense2act.local","password":"admin123"}'
+# swagger: http://127.0.0.1:8080/swagger-ui.html
+```
+
+首次启动自动建表（Flyway）并幂等补种三个角色账号：`admin@sense2act.local / admin123`、`analyst@sense2act.local / analyst123`、`viewer@sense2act.local / viewer123`（密码用 `SEED_*` 环境变量改）。
+
+## 测试
+
+```bash
+mvn -B -ntp verify        # 单元 + Testcontainers 集成测试（需 Docker）
+```
+
+改了接口后重新生成 OpenAPI 基线并提交（CI 在 PR 上跑 oasdiff 破坏性变更检查）：
+
+```bash
+mvn test -Dtest=OpenApiBaselineTest -DupdateOpenapi=true
+```
+
+## 服务器部署
+
+```bash
+git pull
+cp .env.example .env    # 必填强值：JWT_SECRET（≥32 字符）、INTERNAL_API_KEY、POSTGRES_PASSWORD；改种子密码
+docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+```
+
+要点：API 容器只绑 `127.0.0.1:8080`（默认 `API_BIND`），外网经 nginx 反代（配置示例 `scripts/deploy/nginx.conf.example`，SSE 已关缓冲）；postgres 不发布端口；数据与快照在具名卷 `pgdata`、`snapshots` 里，容器重建不丢。`INTERNAL_API_KEY` 不配置时 `/api/v1/internal/*` 整组 403，外部服务接入时再配。
+
+## 目录结构
 
 ```
 Backend/
-├── AGENT.md
-├── docs/
+├── AGENT.md                # 给 AI 编码助手的说明
+├── docs/                   # architecture / api-design / data-model / backlog
+│   └── openapi/baseline.json   # 契约基线（oasdiff 闸门用）
+├── .github/workflows/ci.yml   # 构建+测试；PR 上契约破坏性检查
+├── scripts/deploy/         # nginx 配置示例等
+├── docker-compose.yml          # 基础编排（本地 up 即用）
+├── docker-compose.override.yml # 本地自动叠加：postgres 绑 127.0.0.1:5432
+├── docker-compose.prod.yml     # 服务器叠加：日志轮转
+├── Dockerfile              # 多阶段构建，非 root 运行
 ├── pom.xml
-├── src/main/java/com/sense2act/backend/
-│   ├── BackendApplication.java
-│   ├── config/        # 安全、OpenAPI、调度线程池
-│   ├── common/        # 统一响应包、错误码、ULID、分页
-│   ├── api/           # Controller（用户接口 + /internal）
-│   ├── service/       # 业务逻辑
-│   ├── domain/        # 实体 + Repository
-│   ├── ingest/        # 文档接入内部 API（去重/快照/机构归一/org_stats）
-│   ├── signals/       # 信号通道 + 检测内部 API
-│   ├── agent/         # 调查生命周期（状态校验/留痕/预算）
-│   ├── sse/           # SSE 推送（内存广播，多实例换 Redis）
-│   └── scheduler/     # 超时清理、回测数据集导出
-├── src/main/resources/
-│   ├── application.yml
-│   └── db/migration/  # Flyway SQL
-├── scripts/           # 示例数据
-└── src/test/
+└── src/
+    ├── main/java/com/sense2act/backend/
+    │   ├── BackendApplication.java
+    │   ├── common/     # 统一响应包、错误码、异常处理、前缀 ULID、分页
+    │   ├── config/     # 安全（JWT/X-Internal-Key/pbkdf2）、OpenAPI、种子账号
+    │   ├── api/        # Controller（auth、users；随史诗增加）
+    │   └── domain/     # 实体 + Mapper（按领域分包：user、ingest、signal…）
+    ├── main/resources/
+    │   ├── application{,-local,-prod}.yml
+    │   └── db/migration/   # Flyway SQL，按史诗递增
+    └── test/java/      # 单元测试 + Testcontainers 集成测试
 ```

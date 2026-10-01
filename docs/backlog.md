@@ -45,42 +45,42 @@
 #### E0-1 一键起环境 · M · M
 作为开发者，我要 docker-compose 一条命令起 api + postgres（pgvector），以便任何人环境一致。
 
-- [ ] `docker-compose up` 后 `/actuator/health` 返回 200
-- [ ] Flyway 首个迁移自动执行：建 pgvector 扩展
-- [ ] 快照目录挂卷，容器重建不丢数据
-- [ ] 环境差异全走环境变量：`.env.example` 提交、`.env` 进 .gitignore（DB 口令、JWT 密钥、INTERNAL_API_KEY、快照目录、时区）
-- [ ] Dockerfile 多阶段构建（构建期 JDK、运行期 JRE），S1 就有，不后补；devtools 只挂 local profile，不进生产镜像
+- [x] `docker-compose up` 后 `/actuator/health` 返回 200
+- [x] Flyway 首个迁移自动执行：建 pgvector 扩展
+- [x] 快照目录挂卷，容器重建不丢数据
+- [x] 环境差异全走环境变量：`.env.example` 提交、`.env` 进 .gitignore（DB 口令、JWT 密钥、INTERNAL_API_KEY、快照目录、时区）
+- [x] Dockerfile 多阶段构建（构建期 JDK、运行期 JRE），S1 就有，不后补；devtools 只挂 local profile，不进生产镜像
 
 #### E0-2 CI 流水线 · M · S
 作为开发者，我要 push 自动跑构建和测试，以便坏提交进不了主干。
 
 - [ ] push / PR 触发 build + test，失败阻止合入
 - [ ] 提交 openapi.json 基线，PR 跑 oasdiff 破坏性变更检测；红了必须先走 api-design §11 变更流程再合码
-- [ ] README 写明本地一键跑测试的命令
+- [x] README 写明本地一键跑测试的命令
 
 #### E0-3 响应与错误框架 · M · M
 作为用户，我要所有接口返回统一结构，以便前端和外部服务统一处理。
 
-- [ ] 成功 `{code:0, message, data}`；分页 `{items, total, page, page_size}`
-- [ ] 全局异常处理覆盖错误码表（api-design §1），未知异常落 50001
-- [ ] `page_size` > 100 拒绝并返回 40001（决策 D1）
-- [ ] 带前缀 ULID 生成器就位，新实体一律使用
+- [x] 成功 `{code:0, message, data}`；分页 `{items, total, page, page_size}`
+- [x] 全局异常处理覆盖错误码表（api-design §1），未知异常落 50001
+- [x] `page_size` > 100 拒绝并返回 40001（决策 D1）
+- [x] 带前缀 ULID 生成器就位，新实体一律使用
 
 #### E0-4 认证与角色 · M · M
 作为用户，我要用账号换 JWT 调接口，以便按角色控制权限。
 
-- [ ] `POST /auth/token` 签发 JWT，`GET /users/me` 返回当前用户
-- [ ] 种子预置 admin / analyst / viewer 各一个，密码 pbkdf2 哈希（迭代数按 OWASP 建议，D11）
-- [ ] 无 token 或坏 token → 40101；viewer 执行写操作 → 40301
-- [ ] 内部接口认证框架就位：`INTERNAL_API_KEY` 未配置时 `/internal/*` 整组 403（首个内部接口在 E1-2 验证）
+- [x] `POST /auth/token` 签发 JWT，`GET /users/me` 返回当前用户
+- [x] 种子预置 admin / analyst / viewer 各一个，密码 pbkdf2 哈希（迭代数按 OWASP 建议，D11）
+- [x] 无 token 或坏 token → 40101；viewer 执行写操作 → 40301
+- [x] 内部接口认证框架就位：`INTERNAL_API_KEY` 未配置时 `/internal/*` 整组 403（首个内部接口在 E1-2 验证）
 
 #### E0-5 服务器部署基线 · S · M
 作为演示者，我要骨架在 S1 就真部署到服务器一次，以便部署风险最早暴露，而不是最后才踩坑。
 
-- [ ] `docker-compose.prod.yml`：restart: unless-stopped；postgres 端口不暴露公网；快照目录挂卷
-- [ ] 反向代理（nginx/caddy）配置放 `scripts/deploy/`：TLS、SSE 关缓冲（proxy_buffering off、读超时拉长）
+- [x] `docker-compose.prod.yml`：restart: unless-stopped；postgres 端口不暴露公网；快照目录挂卷
+- [x] 反向代理（nginx/caddy）配置放 `scripts/deploy/`：TLS、SSE 关缓冲（proxy_buffering off、读超时拉长）
 - [ ] 服务器上 INTERNAL_API_KEY 必须已配置（未配置整组 403 是兜底，不是默认态）
-- [ ] 部署步骤写进 README（git pull → compose up -d --build），可重复执行；服务器未就绪则顺延，不晚于 S8
+- [x] 部署步骤写进 README（git pull → compose up -d --build），可重复执行；服务器未就绪则顺延，不晚于 S8
 
 #### E0-6 模块边界验证 · C · S
 作为开发者，我要 CI 强制校验模块边界，以便后端长歪（跨模块乱引用内部类）时第一时间被拦。
