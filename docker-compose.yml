@@ -32,6 +32,9 @@ services:
       JWT_SECRET: ${JWT_SECRET:-local-dev-secret-0123456789abcdef}
       JWT_TTL: ${JWT_TTL:-12h}
       INTERNAL_API_KEY: ${INTERNAL_API_KEY:-}
+      # D12:embedding 端点(语义检索用),不配置则降级为关键词检索
+      EMBEDDING_ENDPOINT: ${EMBEDDING_ENDPOINT:-}
+      EMBEDDING_API_KEY: ${EMBEDDING_API_KEY:-}
       SNAPSHOT_DIR: /app/snapshots
       TZ: ${TZ:-Asia/Shanghai}
     ports:

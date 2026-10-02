@@ -259,6 +259,32 @@
         }
       }
     },
+    "/api/v1/organizations/{id}" : {
+      "get" : {
+        "tags" : [ "org-controller" ],
+        "operationId" : "detail",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseOrgDetailView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/internal/ingest-queue" : {
       "get" : {
         "tags" : [ "internal-ingest-controller" ],
@@ -270,6 +296,171 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ApiResponseMapStringObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/documents" : {
+      "get" : {
+        "tags" : [ "document-controller" ],
+        "operationId" : "list_1",
+        "parameters" : [ {
+          "name" : "keyword",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "semantic",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "doc_type",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "org_id",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "region",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "category",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "amount_gte",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "amount_lte",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "date_from",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "date_to",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sort",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "page_size",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponsePageResultDocView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/documents/{id}" : {
+      "get" : {
+        "tags" : [ "document-controller" ],
+        "operationId" : "detail_1",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseDocDetailView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/documents/{id}/snapshot" : {
+      "get" : {
+        "tags" : [ "document-controller" ],
+        "operationId" : "snapshot",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "string",
+                  "format" : "byte"
                 }
               }
             }
@@ -597,6 +788,259 @@
           "page_size" : {
             "type" : "integer",
             "format" : "int32"
+          }
+        }
+      },
+      "ApiResponseOrgDetailView" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/OrgDetailView"
+          }
+        }
+      },
+      "DocView" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "doc_type" : {
+            "type" : "string"
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "org" : {
+            "$ref" : "#/components/schemas/OrgRef"
+          },
+          "amount" : {
+            "type" : "number"
+          },
+          "publish_date" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "deadline" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "region" : {
+            "type" : "string"
+          },
+          "category" : {
+            "type" : "string"
+          },
+          "url" : {
+            "type" : "string"
+          },
+          "signal_count" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "OrgDetailView" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "aliases" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "uscc" : {
+            "type" : "string"
+          },
+          "region" : {
+            "type" : "string"
+          },
+          "created_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "stats" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/OrgStatView"
+            }
+          },
+          "recent_documents" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/DocView"
+            }
+          }
+        }
+      },
+      "OrgRef" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          }
+        }
+      },
+      "OrgStatView" : {
+        "type" : "object",
+        "properties" : {
+          "category" : {
+            "type" : "string"
+          },
+          "window_days" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "sample_count" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "amount_mean" : {
+            "type" : "number"
+          },
+          "amount_std" : {
+            "type" : "number"
+          },
+          "amount_p95" : {
+            "type" : "number"
+          },
+          "freq_mean30d" : {
+            "type" : "number"
+          },
+          "last_doc_at" : {
+            "type" : "string",
+            "format" : "date"
+          }
+        }
+      },
+      "ApiResponsePageResultDocView" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/PageResultDocView"
+          }
+        }
+      },
+      "PageResultDocView" : {
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/DocView"
+            }
+          },
+          "total" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "page" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "page_size" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "ApiResponseDocDetailView" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/DocDetailView"
+          }
+        }
+      },
+      "DocDetailView" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "doc_type" : {
+            "type" : "string"
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "org" : {
+            "$ref" : "#/components/schemas/OrgRef"
+          },
+          "amount" : {
+            "type" : "number"
+          },
+          "publish_date" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "deadline" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "region" : {
+            "type" : "string"
+          },
+          "category" : {
+            "type" : "string"
+          },
+          "url" : {
+            "type" : "string"
+          },
+          "signal_count" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "content_text" : {
+            "type" : "string"
+          },
+          "raw" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object"
+            }
+          },
+          "related_signals" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "object"
+              }
+            }
           }
         }
       },

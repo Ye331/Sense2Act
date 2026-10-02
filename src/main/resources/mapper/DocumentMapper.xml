@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sense2act.backend.domain.document.DocumentMapper">
+
+    <!-- 文档列表列:不含 raw(jsonb,typeHandler 只在 autoResultMap 的 selectById 生效)与 embedding(不进实体) -->
+    <sql id="docCols">
+        d.id, d.source_id, d.doc_type, d.title, d.content_text, d.org_id, d.amount,
+        d.publish_date, d.deadline, d.region, d.category, d.url, d.content_hash,
+        d.snapshot_key, d.signal_scanned, d.created_at
+    </sql>
+
+    <!-- 通用过滤:doc_type/org_id/category 精确;region 层级前缀(华东 匹配 华东/某省某市);
+         金额/日期为闭区间,NULL 值自然被比较条件排除 -->
+    <sql id="filters">
+        <if test="docType != null">AND d.doc_type = #{docType}</if>
+        <if test="orgId != null">AND d.org_id = #{orgId}</if>
+        <if test="region != null">AND (d.region = #{region} OR starts_with(d.region, #{region} || '/'))</if>
+        <if test="category != null">AND d.category = #{category}</if>
+        <if test="amountGte != null">AND d.amount &gt;= #{amountGte}</if>
+        <if test="amountLte != null">AND d.amount &lt;= #{amountLte}</if>
+        <if test="dateFrom != null">AND d.publish_date &gt;= #{dateFrom}</if>
+        <if test="dateTo != null">AND d.publish_date &lt;= #{dateTo}</if>
+    </sql>
+
+    <!-- 关键词条件:多个词全部命中(AND),每个词匹配标题或正文(ILIKE 子串,先转义 % _ \) -->
+    <sql id="keywordCond">
+        <if test="patterns != null and patterns.size() > 0">
+            AND <foreach collection="patterns" item="p" open="(" separator=" AND " close=")">
+                (d.title ILIKE #{p} OR coalesce(d.content_text, '') ILIKE #{p})
+            </foreach>
+        </if>
+    </sql>
+
+    <!-- 排序白名单(上层校验);DESC 显式 NULLS LAST,缺日期的排最后 -->
+    <sql id="orderBy">
+        <choose>
+            <when test="sort == 'publish_date'">ORDER BY d.publish_date ASC NULLS LAST, d.created_at ASC</when>
+            <when test="sort == 'amount'">ORDER BY d.amount ASC NULLS LAST, d.publish_date DESC NULLS LAST</when>
+            <when test="sort == '-amount'">ORDER BY d.amount DESC NULLS LAST, d.publish_date DESC NULLS LAST</when>
+            <when test="sort == 'created_at'">ORDER BY d.created_at ASC</when>
+            <when test="sort == '-created_at'">ORDER BY d.created_at DESC</when>
+            <otherwise>ORDER BY d.publish_date DESC NULLS LAST, d.created_at DESC</otherwise>
+        </choose>
+    </sql>
+
+    <select id="searchKeyword" resultType="com.sense2act.backend.domain.document.Document">
+        SELECT <include refid="docCols"/>
+        FROM documents d
+        WHERE 1 = 1
+        <include refid="keywordCond"/>
+        <include refid="filters"/>
+        <include refid="orderBy"/>
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="countKeyword" resultType="long">
+        SELECT count(*)
+        FROM documents d
+        WHERE 1 = 1
+        <include refid="keywordCond"/>
+        <include refid="filters"/>
+    </select>
+
+    <select id="searchSemantic" resultType="com.sense2act.backend.domain.document.Document">
+        SELECT <include refid="docCols"/>
+        FROM documents d
+        WHERE d.embedding IS NOT NULL
+        <include refid="filters"/>
+        ORDER BY d.embedding &lt;=&gt; #{queryVector}::vector
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="countSemantic" resultType="long">
+        SELECT count(*)
+        FROM documents d
+        WHERE d.embedding IS NOT NULL
+        <include refid="filters"/>
+    </select>
+
+    <!-- RRF:两路各按默认序排 rank(关键词路按 publish_date desc,语义路按 cosine 距离),
+         score = Σ 1/(60 + rank),同时命中两路的文档排最前 -->
+    <select id="searchRrf" resultType="com.sense2act.backend.domain.document.Document">
+        WITH kw AS (
+            SELECT id, row_number() OVER (ORDER BY publish_date DESC NULLS LAST, created_at DESC) AS rank
+            FROM documents d
+            WHERE 1 = 1
+            <include refid="keywordCond"/>
+            <include refid="filters"/>
+        ),
+        sem AS (
+            SELECT id, row_number() OVER (ORDER BY embedding &lt;=&gt; #{queryVector}::vector) AS rank
+            FROM documents d
+            WHERE d.embedding IS NOT NULL
+            <include refid="filters"/>
+        ),
+        fused AS (
+            SELECT id, sum(1.0 / (60 + rank)) AS rrf
+            FROM (SELECT id, rank FROM kw UNION ALL SELECT id, rank FROM sem) u
+            GROUP BY id
+        )
+        SELECT <include refid="docCols"/>, f.rrf
+        FROM documents d JOIN fused f ON f.id = d.id
+        ORDER BY f.rrf DESC, d.publish_date DESC NULLS LAST
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <!-- 候选集 = 关键词命中(AND 语义,与 keywordCond 一致)∪ 有 embedding -->
+    <select id="countRrf" resultType="long">
+        SELECT count(*)
+        FROM documents d
+        WHERE (
+               <foreach collection="patterns" item="p" open="(" separator=" AND " close=")">
+                   (d.title ILIKE #{p} OR coalesce(d.content_text, '') ILIKE #{p})
+               </foreach>
+               OR d.embedding IS NOT NULL)
+        <include refid="filters"/>
+    </select>
+
+    <update id="updateEmbedding">
+        UPDATE documents SET embedding = #{vector}::vector WHERE id = #{id}
+    </update>
+
+    <select id="selectWithoutEmbedding" resultType="com.sense2act.backend.domain.document.Document">
+        SELECT <include refid="docCols"/>
+        FROM documents d
+        WHERE d.embedding IS NULL
+          AND d.id IN <foreach collection="ids" item="i" open="(" separator="," close=")">#{i}</foreach>
+    </select>
+
+</mapper>

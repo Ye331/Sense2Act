@@ -51,6 +51,32 @@ curl -X POST http://127.0.0.1:8080/api/v1/auth/token \
 
 首次启动自动建表（Flyway）并幂等补种三个角色账号：`admin@sense2act.local / admin123`、`analyst@sense2act.local / analyst123`、`viewer@sense2act.local / viewer123`（密码用 `SEED_*` 环境变量改）。
 
+## 演示数据
+
+```bash
+# S3 演示链路①(E1-7):空库灌 10 个源 + 32 条文档(落库 30 篇,含 2 条重复),可重复执行
+# 二跑全计 duplicates,不新增 —— 幂等即验收
+python scripts/seed_s3.py
+
+# 语义检索演示(可选):先起 D12 embedding 演示端点,再让 api 容器知道它
+python scripts/embedding_stub.py        # 0.0.0.0:8901,POST /embed,512 维,确定性哈希,仅演示
+# .env 加 EMBEDDING_ENDPOINT=http://host.docker.internal:8901/embed 后
+# docker compose up -d --build 重建 api;不配则语义自动降级关键词,接口照常 200
+
+# S2 采集链路演示:建源 → 领取 → 推文档(含重复/坏条目)→ 回报 → 手动触发
+python scripts/demo-s2.py
+```
+
+灌完后检索示例（`documents`/`organizations` 的 GET 同时接受 JWT 与 `X-Internal-Key`，见 api-design §1）：
+
+```bash
+TOKEN=$(curl -s -X POST http://127.0.0.1:8080/api/v1/auth/token -H 'Content-Type: application/json' \
+  -d '{"email":"analyst@sense2act.local","password":"analyst123"}' | sed 's/.*"token":"\([^"]*\)".*/\1/')
+curl -s "http://127.0.0.1:8080/api/v1/documents?keyword=采购&region=华东&amount_gte=1000000" \
+  -H "Authorization: Bearer $TOKEN"
+curl -s "http://127.0.0.1:8080/api/v1/documents?semantic=数据中台" -H "Authorization: Bearer $TOKEN"
+```
+
 ## 测试
 
 ```bash
@@ -81,7 +107,8 @@ Backend/
 ├── docs/                   # architecture / api-design / data-model / backlog
 │   └── openapi/baseline.json   # 契约基线（oasdiff 闸门用）
 ├── .github/workflows/ci.yml   # 构建+测试；PR 上契约破坏性检查
-├── scripts/deploy/         # nginx 配置示例等
+├── scripts/                # 种子与演示脚本：seed_s3（灌库）、embedding_stub（D12 演示端点）、demo-s2
+│   └── deploy/             # nginx 配置示例等
 ├── docker-compose.yml          # 基础编排（本地 up 即用）
 ├── docker-compose.override.yml # 本地自动叠加：postgres 绑 127.0.0.1:5432
 ├── docker-compose.prod.yml     # 服务器叠加：日志轮转

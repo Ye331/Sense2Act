@@ -127,22 +127,22 @@
 #### E1-5 文档与机构查询 · M · L · 依赖 E1-3
 作为 analyst，我要多条件检索文档、看原文快照和采购单位画像，以便判断线索价值。
 
-- [ ] `GET /documents` 支持契约全部筛选（keyword / doc_type / org_id / region / category / amount 区间 / 日期区间 / sort），默认按 publish_date desc
-- [ ] 详情含 content_text、raw、related_signals；`/snapshot` 返回原始页面
-- [ ] `GET /organizations/{id}`：基本信息 + org_stats + 近期文档
-- [ ] 列表页字段与 api-design §3 示例一致
+- [x] `GET /documents` 支持契约全部筛选（keyword / doc_type / org_id / region / category / amount 区间 / 日期区间 / sort），默认按 publish_date desc（keyword 为多词 AND 子串匹配，适配中文；region 层级前缀；sort 白名单 publish_date/-publish_date/amount/-amount/created_at/-created_at）
+- [x] 详情含 content_text、raw、related_signals；`/snapshot` 返回原始页面（signal_count=0、related_signals=[] 为占位，E2-2 落地后接真值）
+- [x] `GET /organizations/{id}`：基本信息 + org_stats + 近期文档（近期 10 篇，按 publish_date desc）
+- [x] 列表页字段与 api-design §3 示例一致（§1 的双认证同步落地：GET/HEAD 两接口 JWT 任意角色或 X-Internal-Key 均可，见 SemanticSearchTest/DocumentApiTest）
 
 #### E1-6 语义检索 · S · M · 依赖开放问题 OQ1 的决策
 作为 analyst，我要用自然语言找相似文档，以便关键词漏掉的能被语义兜住。
 
-- [ ] `semantic` 参数走 pgvector HNSW 检索；与 keyword 同给时用 RRF 融合两路排名（score = Σ 1/(k+rank)，k=60），纯 SQL 实现零新依赖
-- [ ] embedding 来源按决策执行；文档无 embedding 时不出现在语义结果中，不报错
+- [x] `semantic` 参数走 pgvector HNSW 检索；与 keyword 同给时用 RRF 融合两路排名（score = Σ 1/(k+rank)，k=60），纯 SQL 实现零新依赖（HNSW 索引 V2 已建，余弦 `<=>`；语义态下相关度排序覆盖 sort 参数）
+- [x] embedding 来源按决策执行；文档无 embedding 时不出现在语义结果中，不报错（D12：入库后经 EMBEDDING_ENDPOINT 尽力补算，查询同端点实时算；端点未配/失败/维度不符 → 静默降级关键词路径，semantic 单给时语义文本按关键词兜底，绝不 5xx）
 
 #### E1-7 演示链路①（采集） · M · S
 作为演示者，我要空库一键灌入源和文档样本，以便外部服务不接入也能演示采集到检索。
 
-- [ ] `scripts/` 提供 ≥10 个源 + ≥30 条文档（含重复、多机构、多类别）与推送脚本
-- [ ] 脚本可重复执行，幂等
+- [x] `scripts/` 提供 ≥10 个源 + ≥30 条文档（含重复、多机构、多类别）与推送脚本（seed_s3.py：10 源 + 32 条，落库 30 篇——批内自带 URL 归一重复与 content_hash 重复各 1；另附 embedding_stub.py 演示 D12 端点）
+- [x] 脚本可重复执行，幂等（源按名字去重；文档靠后端 URL/content_hash 去重，二跑全计 duplicates，2026-10-02 本地实测通过）
 
 ### E2 信号通道（S4，余项 S5/S8）
 
