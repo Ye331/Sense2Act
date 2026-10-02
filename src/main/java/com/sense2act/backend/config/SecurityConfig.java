@@ -69,7 +69,11 @@ public class SecurityConfig {
                 .addFilterBefore(new InternalKeyFilter(props.internalKey(), objectMapper),
                         UsernamePasswordAuthenticationFilter.class)
                 // SSE 流接口允许 ?token= 承载 JWT(§7),在认证链之前折叠成标准头
-                .addFilterBefore(new SseTokenParamFilter(), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new SseTokenParamFilter(), UsernamePasswordAuthenticationFilter.class)
+                // E5-5:内部接口按 X-Internal-Key 限流,先于内部键认证(超限的请求不必再验)
+                .addFilterBefore(new InternalRateLimitFilter(
+                                props.internalRateLimitPerMinute() == null ? 0 : props.internalRateLimitPerMinute(),
+                                objectMapper), InternalKeyFilter.class);
         return http.build();
     }
 

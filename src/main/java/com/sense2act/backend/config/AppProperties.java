@@ -8,7 +8,7 @@ import java.time.Duration;
 /** 应用配置,值全部来自环境变量(见 .env.example),环境差异不进代码。 */
 @ConfigurationProperties(prefix = "app")
 public record AppProperties(Jwt jwt, String internalKey, String snapshotDir, Seed seed, Embedding embedding,
-                            Investigation investigation) {
+                            Investigation investigation, Integer internalRateLimitPerMinute) {
 
     public record Jwt(String secret, Duration ttl) {
     }

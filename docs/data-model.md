@@ -165,7 +165,7 @@ id（q_ 前缀）、investigation_id、text（≤1000）、raised_in_round、sta
 ### feedback_events / backtest_runs
 
 - feedback_events：user_id、target_type（signal/report/claim/suggestion）、target_id、action（confirm/dismiss/adopt/reject/flag_false_positive，V6 起增补 comment）、reason。
-- backtest_runs：rule_id、param_grid、date_from/date_to、status、result（JSONB）。评估在外部执行，后端出数据集、存结果。
+- backtest_runs：rule_id、param_grid、date_from/date_to、status、result（JSONB）。评估在外部执行，后端出数据集、存结果。落地（V7，2026-10-02）：id bt_+ULID 主键，状态机 queued/running/done/failed，CHECK(date_to>=date_from)，不设 rule 外键（规则历史版本行不删）。
 
 ### global_events（V6，全局通知留痕）
 

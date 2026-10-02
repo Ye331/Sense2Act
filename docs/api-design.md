@@ -215,6 +215,8 @@ PUT 全量必填（缺字段 40001），即时生效于后续自动触发；max_
 
 回测：`POST /admin/backtests` 建任务（规则 + 参数网格 + 日期区间），后端导出数据集，评估在外部执行后写回 result。
 
+回测落地进度（S8，2026-10-02）：`GET/POST /admin/backtests`、`GET /{id}`、`GET /{id}/dataset`、`PUT /{id}/result` 已交付 —— 建任务 queued（规则 40401 / 日期 40001 闸门）；导数据集即转 running（三段：documents 按 publish_date、signals 按 created_at、feedback_events 取信号级标注，各段上限 2000）；写回 done/failed（done 必带 result，终态 40901）。内部接口限流（E5-5）：`/api/v1/internal/*` 按 X-Internal-Key 令牌桶（Bucket4j，阈值 INTERNAL_RATE_LIMIT_PER_MINUTE 默认 600/分钟，0 关闭），超限 42901 + Retry-After。
+
 ## 9. 内部接口（外部服务接入）
 
 只在内网开放，`X-Internal-Key` 认证（服务端配置 `INTERNAL_API_KEY`，不配置则整组 403）。调用方向只有外部到后端。这节是三个外部服务（爬虫、信号发现、Agent 调查）与本后端的全部契约。
@@ -341,3 +343,4 @@ ReportDraft：
 | 2026-10-02 | 增补 | §7 新增可选事件 investigation_stopped（stop 接口派生）；§5 明确 steps 响应 {items, next_cursor} 形状与 stop 的信号回退语义。均为新增/澄清，非破坏性 |
 | 2026-10-02 | 增补 | S6 交付：§9.3 evidences / report / complete / fail 落地（含义见表，无形状变更）；§6 报告查询 / 证据查询 / 导出三组只读接口与详情增量字段（signal_id/status/created_at）落地。均为新增，非破坏性 |
 | 2026-10-02 | 增补 | S7 交付：§6 反馈接口落地（feedback_events 的 action 词表增补 comment，纯增量）；§7 全局流 GET /stream、§8 信号规则 GET/POST/PATCH、看板 GET /dashboard/summary、事件图谱 GET /events* 落地。均为新增，非破坏性 |
+| 2026-10-02 | 增补 | S8 交付：§8 回测细化为 GET/POST /admin/backtests + /{id}/dataset + /{id}/result（新增，非破坏性）；内部接口超限 42901（限流为既有错误码的新触发点，对外部服务是新增保护非契约变更） |
