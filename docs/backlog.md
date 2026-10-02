@@ -151,40 +151,33 @@
 #### E2-1 检测队列与扫描标记 · M · M · 依赖 E1-3
 作为信号发现服务，我要一次拿齐检测所需的全部输入，以便不再查任何别的接口。
 
-- [ ] `GET /internal/detection-queue?limit=` 只返回 `signal_scanned=false` 的文档，默认 50、上限 100（决策 D9）
-- [ ] 响应内嵌 document + org_stats + profiles，结构按契约
-- [ ] `POST /internal/detection-scan-complete` 批量置 `signal_scanned=true`，重复调用幂等
+- [x] `GET /internal/detection-queue?limit=` 只返回 `signal_scanned=false` 的文档，默认 50、上限 100（决策 D9）
+- [x] 响应内嵌 document + org_stats + profiles，结构按契约
+- [x] `POST /internal/detection-scan-complete` 批量置 `signal_scanned=true`，重复调用幂等
 
 #### E2-2 信号落库与查询 · M · M · 依赖 E2-1
 作为信号发现服务，我要推送命中结果并保证幂等；作为 analyst，我要查询信号列表。
 
-- [ ] `POST /internal/signals`：同 document + detector + hits 重复推返回已有 signal_id，不新建不报错
-- [ ] hits / score / detector 原样落库，后端不重算 score
-- [ ] 落库即发全局 SSE `signal_created`
-- [ ] `GET /signals` 支持契约全部筛选（status / rule_type / score_gte / org_id / 日期），详情含 document 摘要与 hits
-- [ ] SSE 事件在数据库事务提交后发布（afterCommit），避免"事件先到、库里还没有"的竞态
+- [x] `POST /internal/signals`：同 document + detector + hits 重复推返回已有 signal_id，不新建不报错（幂等写入用 `ON CONFLICT DO NOTHING` 而非捕获唯一冲突——PG 里约束异常会打断事务，回读兜底走不通；幂等预查的序列化须保留 null 值键，与 JsonbTypeHandler 同语义，Spring 全局 non_null 会丢键导致永不匹配）
+- [x] hits / score / detector 原样落库，后端不重算 score
+- [x] 落库即发全局 SSE `signal_created`（事务提交后 afterCommit 发 Spring 事件；/stream 事件流本身在 E2-7 落地）
+- [x] `GET /signals` 支持契约全部筛选（status / rule_type / score_gte / org_id / 日期），详情含 document 摘要与 hits
+- [x] SSE 事件在数据库事务提交后发布（afterCommit），避免"事件先到、库里还没有"的竞态
 
 #### E2-3 调查策略管理 · M · S
 作为 admin，我要配置自动调查阈值和默认预算，以便控制成本闸门。
 
-- [ ] `GET/PUT /admin/investigation-policies`（仅 admin），字段按 api-design §8
-- [ ] 种子带默认值；PUT 即时生效于后续自动触发
-- [ ] watch_profiles（关注画像）的存放按 OQ2 决策补进本故事
+- [x] `GET/PUT /admin/investigation-policies`（仅 admin，PUT 全量必填），字段按 api-design §8
+- [x] 种子带默认值；PUT 即时生效于后续自动触发
+- [x] watch_profiles（关注画像）按 D13 单独建表：`GET/POST/DELETE /admin/watch-profiles`（/admin/** 整组仅 admin），重名 40901，新增/删除实时反映到 detection-queue 内嵌 profiles
 
 #### E2-4 自动触发 · M · M · 依赖 E2-2、E2-3
 作为 analyst，我要高分信号自动开调查，以便不手工漏掉重点。
 
-- [ ] score ≥ auto_investigate_threshold 时建 Investigation（created）并回填 investigation_id，signal 状态 pending → investigating（CAS）
-- [ ] 一信号至多一调查（唯一约束兜底并发）
-- [ ] 未达阈值留 pending 等人工决策
-- [ ] 并发上限语义按 OQ3 决策执行
-
-#### E2-5 人工决策与手动调查 · M · M · 依赖 E2-2
-作为 analyst，我要确认或忽略信号（忽略必须给理由），并可手动对信号开调查。
-
-- [ ] `PATCH /signals/{id}/status`：confirmed / dismissed；dismiss 缺 reason → 40001
-- [ ] 决策写 feedback_events（target_type=signal）并留 decided_by / decided_at
-- [ ] `POST /signals/{id}/investigate`：已在调查中 → 40901；已忽略 → 42201
+- [x] score ≥ auto_investigate_threshold 时建 Investigation（created）并回填 investigation_id，signal 状态 pending → investigating（CAS）
+- [x] 一信号至多一调查（唯一约束兜底并发）
+- [x] 未达阈值留 pending 等人工决策
+- [x] 并发上限语义按 D14 执行（created 排队不限量，start 时才挡——档位在 E3-1 落地）
 
 #### E2-6 规则版本管理 · S · M
 作为 admin，我要版本化管理信号规则并记录回测指标，以便反馈迭代有落点。
@@ -202,8 +195,8 @@
 #### E2-8 演示链路②（信号） · M · S · 依赖 E2-4、E1-7
 作为演示者，我要模拟检测脚本和信号样本，以便演示信号到自动开调查的跳转。
 
-- [ ] 脚本：拉 detection-queue → 对样本文档推 signals → 报 scan-complete，可反复执行
-- [ ] 种子：对链路①文档生成 ≥3 条信号，其中 1 条 score 超阈值已自动开调查
+- [x] 脚本：拉 detection-queue → 对样本文档推 signals → 报 scan-complete，可反复执行（seed_s4_signals.py；文档定位队列优先、已扫描的走 /documents 关键词兜底，二跑 signal_id 不变）
+- [x] 种子：对链路①文档生成 4 条信号，其中"AI辅助诊断系统采购"score=0.92 超默认阈值已自动开调查（2026-10-02 本地实测通过）
 
 ### E3 调查生命周期（S5）
 
@@ -406,14 +399,16 @@ S8 是显式缓冲：只排 C 级故事、联调与打磨，不加新范围。
 | D10 | ORM 选 MyBatis-Plus（2026-10-01 拍板，OQ4 关闭，此后不再更换） | 全局 |
 | D11 | 密码哈希选 pbkdf2（Spring Security 内置，迭代数按 OWASP 建议），不引 BouncyCastle | E0-4 |
 | D12 | embedding 全部由外部计算：文档向量入库后由后端经 EMBEDDING_ENDPOINT 补算，查询向量检索时同端点实时算（2026-10-02 拍板，OQ1 关闭）。后端不含模型/提示词，仅一次无状态数据面出站调用，登记为架构边界的例外 | E1-6 |
+| D13 | watch_profiles 单独建表（不放 investigation_policies 的 JSONB）：id/name 唯一/enabled，admin 经 /admin/watch-profiles 管理，detection-queue 内嵌输出启用中的画像名（2026-10-02 拍板，OQ2 关闭，未采"存 policies JSONB"建议——独立表可查可索引） | E2-3 |
+| D14 | max_concurrent_investigations 在 start 时生效：created 排队不限量；超出并发上限 start 返回 40901，Agent 稍后重试，与"被占用"同错误码（2026-10-02 拍板，OQ3 关闭，采建议） | E2-4 |
 
 ## 9. 开放问题（带决策时点）
 
 | # | 问题 | 建议 | 决策时点 |
 | --- | --- | --- | --- |
 | ~~OQ1~~ | ~~documents.embedding 由谁计算？~~ **已决（D12）**：外部算——后端配置 EMBEDDING_ENDPOINT，入库补算 + 查询实时算；端点不可用时文档不进语义结果、不报错（关键词兜底） | D12 | 已关闭 |
-| OQ2 | detection-queue 里的 profiles（关注画像）存在哪？data-model 无对应表 | investigation_policies 加 watch_profiles JSONB 数组，admin 一个 PUT 可改；不建新表 | S4 计划会前 |
-| OQ3 | max_concurrent_investigations 的语义？建调查时挡还是 start 时挡 | created 排队不限；start 时超出并发上限返回 40901，Agent 稍后重试（与"被占用"同错误码，契约兼容） | S4 计划会前 |
+| ~~OQ2~~ | ~~detection-queue 里的 profiles（关注画像）存在哪？~~ **已决（D13）**：单独建 watch_profiles 表 | D13 | 已关闭 |
+| ~~OQ3~~ | ~~max_concurrent_investigations 的语义？~~ **已决（D14）**：start 时挡，超出返回 40901；created 排队不限 | D14 | 已关闭 |
 | OQ5 | pdf 导出的真实度 | 原型期 202 + 轮询占位；真排版视 S8 余量 | S6 计划会 |
 
 ## 10. 风险

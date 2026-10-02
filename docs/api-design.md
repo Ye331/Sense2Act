@@ -189,6 +189,19 @@ data: {"round": 3, "tool": "tender_search", "ok": true, "latency_ms": 1420, "evi
 
 调查策略（GET/PUT）：`{ "auto_investigate_threshold": 0.85, "max_concurrent_investigations": 3, "default_max_rounds": 8, "default_token_budget": 60000 }`
 
+PUT 全量必填（缺字段 40001），即时生效于后续自动触发；max_concurrent_investigations 在调查 start 时生效（决策 D14）。
+
+关注画像（D13，GET/POST/DELETE /admin/watch-profiles，2026-10-02 新增，纯增量）：
+
+```json
+// POST 请求
+{ "name": "医疗AI", "note": "影像 AI、辅助诊断相关" }
+// 响应 data
+{ "id": "wpr_01H...", "name": "医疗AI", "enabled": true, "note": "...", "created_at": "..." }
+```
+
+重名 40901；删除后不再内嵌进 detection-queue 的 profiles；GET 列表按 name 升序。/admin/** 整组仅 admin（GET 也是，analyst 40301）。
+
 回测：`POST /admin/backtests` 建任务（规则 + 参数网格 + 日期区间），后端导出数据集，评估在外部执行后写回 result。
 
 ## 9. 内部接口（外部服务接入）

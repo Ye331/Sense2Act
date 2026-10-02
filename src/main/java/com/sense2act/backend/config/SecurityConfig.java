@@ -50,6 +50,8 @@ public class SecurityConfig {
                         // 内部接口的认证完全由 InternalKeyFilter 负责,不过 Spring 授权层
                         .requestMatchers("/api/v1/internal/**").permitAll()
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+                        // 管理面(策略/规则/回测)整体仅 admin,先于方法级规则生效
+                        .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
                         // viewer 只读:写方法统一要求 admin/analyst
                         .requestMatchers(HttpMethod.POST, "/api/v1/**").hasAnyRole("ADMIN", "ANALYST")
                         .requestMatchers(HttpMethod.PUT, "/api/v1/**").hasAnyRole("ADMIN", "ANALYST")

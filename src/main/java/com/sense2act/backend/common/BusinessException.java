@@ -22,6 +22,10 @@ public class BusinessException extends RuntimeException {
         return new BusinessException(ErrorCode.CONFLICT, message);
     }
 
+    public static BusinessException unprocessable(String message) {
+        return new BusinessException(ErrorCode.UNPROCESSABLE, message);
+    }
+
     public ErrorCode errorCode() {
         return errorCode;
     }
