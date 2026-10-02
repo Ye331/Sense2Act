@@ -88,6 +88,8 @@ name（规范化）、aliases（JSONB 归一别名）、type（buyer/supplier/go
 
 主键 id，UNIQUE(id, version)。name、type（amount_anomaly / frequency_burst / semantic_match / composite）、params（JSONB，内容由外部服务和回测产出）、weight、enabled（同 id 只有一个版本生效）、backtest_result（JSONB）。
 
+落地（V6，2026-10-02）：复合主键 (id, version)，"同 id 只一个 enabled" 用部分唯一索引 `UNIQUE (id) WHERE enabled` 兜底；id 列宽 32（rule_ + ULID = 31 字符）。种子预置 rule_seed01..03 version=1（金额异常 k=2.0 / 频率突增 burst_ratio=3.0 / 语义匹配 profile=医疗AI），hits 里的 rule_id/rule_version 即引用此表口径。改规则 = PATCH 生成 version+1 新行并停用旧行，不 UPDATE 旧行。
+
 ### signals
 
 | 列 | 类型 | 说明 |
@@ -162,8 +164,12 @@ id（q_ 前缀）、investigation_id、text（≤1000）、raised_in_round、sta
 
 ### feedback_events / backtest_runs
 
-- feedback_events：user_id、target_type（signal/report/claim/suggestion）、target_id、action（confirm/dismiss/adopt/reject/flag_false_positive）、reason。
+- feedback_events：user_id、target_type（signal/report/claim/suggestion）、target_id、action（confirm/dismiss/adopt/reject/flag_false_positive，V6 起增补 comment）、reason。
 - backtest_runs：rule_id、param_grid、date_from/date_to、status、result（JSONB）。评估在外部执行，后端出数据集、存结果。
+
+### global_events（V6，全局通知留痕）
+
+id BIGSERIAL 主键（即 GET /stream 的 SSE id）、event（signal_created / investigation_completed / report_ready / source_degraded）、payload JSONB、created_at。事件在广播前先落此表，断线重连按 Last-Event-ID 补发 —— 可追溯、不丢已发事件。单写者串行插入保证 id 与推送顺序一致。
 
 ## 3. 数据流
 

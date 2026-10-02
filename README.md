@@ -78,6 +78,10 @@ python scripts/seed_s5_investigation.py
 # → 提交报告(3 结论覆盖三种 nature、2 建议、图谱 1 事件 + 3 主体)→ complete(信号 → confirmed)
 # 顺手把 md 导出存到 <report_id>.md;已 seeded 则跳过
 python scripts/seed_s6_report.py
+
+# S7 演示链路⑤(E5-6,比赛评审推荐入口):源 → 文档 → 信号 → 调查 → 报告 → 反馈 一条龙闭环
+# 以时间戳为键,每跑一次新建一条独立链路实例(不依赖上面种子);收尾打印看板/图谱/规则收口
+python scripts/demo_s7_full_chain.py
 ```
 
 调查时间线实时观察(契约 §7;EventSource 设不了 Authorization 头,JWT 走 `?token=`):
@@ -89,6 +93,10 @@ INV=$(curl -s "http://127.0.0.1:8080/api/v1/investigations?status=investigating"
   -H "Authorization: Bearer $TOKEN" | sed 's/.*"items":\[{"id":"\([^"]*\)".*/\1/')
 # 连接即补发全部留痕步骤(id=seq),25s 心跳;断线后带 -H 'Last-Event-ID: <最后 seq>' 重连只补漏
 curl -N "http://127.0.0.1:8080/api/v1/investigations/$INV/stream?token=$TOKEN"
+
+# 全局通知流(E2-7):signal_created / report_ready / investigation_completed / source_degraded
+# 事件先落 global_events 再广播,断线后带 -H 'Last-Event-ID: <最后 id>' 重连只补漏
+curl -N "http://127.0.0.1:8080/api/v1/stream?token=$TOKEN"
 ```
 
 灌完后检索示例（`documents`/`organizations` 的 GET 同时接受 JWT 与 `X-Internal-Key`，见 api-design §1）：

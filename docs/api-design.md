@@ -152,6 +152,8 @@ Base URL：`/api/v1`。REST + SSE，JSON。接口文档由 springdoc-openapi 生
 
 `POST /reports/{id}/feedback`：`{ "adopted_suggestion_ids": [], "comment": "...", "flag": "false_positive"? }`。
 
+落地进度（S7，2026-10-02）：反馈接口已交付 —— 报告须 published（否则 40901）；三要素至少其一（40001），flag 仅支持 false_positive（40001）；建议必须属于本报告（42201），重复采纳幂等（已回填的不再重复写事件）；comment/flag 落 feedback_events（user 取自 JWT，action 词表增补 comment）；响应 data 为 `{ report_id, newly_adopted, comment_recorded, flagged }`。`GET /dashboard/summary`、`GET /events`（分页/详情/图）、`GET /admin/signal-rules`、`GET /stream` 同冲刺交付，形状见对应节。
+
 导出：md 直接返回；pdf 异步生成（202 + task_id）。
 
 落地进度（S6）：`GET /reports`（investigation_id / date_from / date_to 筛选，分页）与详情已交付，详情即上方形状（另带 signal_id / status / created_at 增量字段）；`GET /evidences/{id}` 与 `/snapshot` 已交付；`GET /reports/{id}/export?format=md|pdf` 已交付（md 同步回 text/markdown，pdf 回 202 + task_id 占位，真排版 S8 视 OQ5）。反馈接口 `POST /reports/{id}/feedback` 属 E5（S7）。
@@ -182,6 +184,8 @@ data: {"round": 3, "tool": "tender_search", "ok": true, "latency_ms": 1420, "evi
 
 `GET /stream`：全局通知（signal_created / investigation_completed / report_ready / source_degraded），按用户过滤。JWT 可经 `?token=` 传（EventSource 不支持自定义 header）。
 
+落地进度（S7，2026-10-02）：已交付。事件先落 global_events 表再广播，SSE 的 id 即该表主键，断线重连带 Last-Event-ID 从表补发（可追溯，不丢已发事件）；25s 心跳注释；无效 token 40101。signal_created 的 data 为 `{ signal_id, document_id, title, org_id, score }`；report_ready / investigation_completed 附 investigation_id。按用户过滤：当前系统无按用户的数据隔离，全员同流；引入私有画像后在此分流。
+
 ## 8. 管理接口
 
 信号规则（版本化，PATCH 自动生成新版本并停用旧版）：
@@ -206,6 +210,8 @@ PUT 全量必填（缺字段 40001），即时生效于后续自动触发；max_
 ```
 
 重名 40901；删除后不再内嵌进 detection-queue 的 profiles；GET 列表按 name 升序。/admin/** 整组仅 admin（GET 也是，analyst 40301）。
+
+信号规则落地进度（S7，2026-10-02）：`GET/POST/PATCH /admin/signal-rules` 已交付。GET 返回全部版本行（name 升序、version 降序）；POST 新建 version=1 enabled（type 词表 amount_anomaly / frequency_burst / semantic_match / composite，weight 0~1，重名启用中 40901）；PATCH 按 id 合并最新版本字段生成 version+1 新行并停用全部旧行（同 id 只一个 enabled，部分唯一索引兜底；PATCH 空体 40001，id 不存在 40401；enabled 缺省为新版生效，显式 false 则全停）。weight 按列精度三位小数出串（"0.800"）。种子预置 rule_seed01..03（金额异常 / 频率突增 / 语义匹配）version=1。
 
 回测：`POST /admin/backtests` 建任务（规则 + 参数网格 + 日期区间），后端导出数据集，评估在外部执行后写回 result。
 
@@ -334,3 +340,4 @@ ReportDraft：
 | 2026-09-25 | 初稿 | 全部接口首次定义 |
 | 2026-10-02 | 增补 | §7 新增可选事件 investigation_stopped（stop 接口派生）；§5 明确 steps 响应 {items, next_cursor} 形状与 stop 的信号回退语义。均为新增/澄清，非破坏性 |
 | 2026-10-02 | 增补 | S6 交付：§9.3 evidences / report / complete / fail 落地（含义见表，无形状变更）；§6 报告查询 / 证据查询 / 导出三组只读接口与详情增量字段（signal_id/status/created_at）落地。均为新增，非破坏性 |
+| 2026-10-02 | 增补 | S7 交付：§6 反馈接口落地（feedback_events 的 action 词表增补 comment，纯增量）；§7 全局流 GET /stream、§8 信号规则 GET/POST/PATCH、看板 GET /dashboard/summary、事件图谱 GET /events* 落地。均为新增，非破坏性 |
