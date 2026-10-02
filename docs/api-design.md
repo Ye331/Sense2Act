@@ -109,7 +109,7 @@ Base URL：`/api/v1`。REST + SSE，JSON。接口文档由 springdoc-openapi 生
   { "id": "q_02H...", "text": "同市其他医院是否有同类AI采购动向？", "status": "open" } ] }
 ```
 
-`GET /investigations/{id}/steps?cursor=` 游标分页，step 类型：question / tool_select / tool_call / reflection / status_change。
+`GET /investigations/{id}/steps?cursor=` 游标分页，step 类型：question / tool_select / tool_call / reflection / status_change。响应 `{items, next_cursor}`：cursor 为上次读到的 seq，返回严格更大的批次，读完 next_cursor 省略。
 
 ```json
 { "seq": 11, "round": 3, "type": "tool_call",
@@ -121,6 +121,8 @@ Base URL：`/api/v1`。REST + SSE，JSON。接口文档由 springdoc-openapi 生
     "evidence_ids": ["ev_05H...", "ev_06H..."],
     "latency_ms": 1420, "ok": true } }
 ```
+
+`POST /investigations/{id}/stop`（admin/analyst）：investigating / reporting → stopped，记 finished_at；信号回退 pending（可再人工决策；同一信号不可再开新调查，investigation_id 留作追溯）。
 
 调查由外部 Agent 服务经内部 API 领取执行（§9.3）。服务没接入时调查停在 created（超时后端标 failed），SSE 没有事件，其余功能不受影响。
 
@@ -154,7 +156,7 @@ Base URL：`/api/v1`。REST + SSE，JSON。接口文档由 springdoc-openapi 生
 
 ## 7. SSE 事件协议
 
-`GET /investigations/{id}/stream`：调查进度流。`id` 字段等于 step 的 seq，客户端重连带 `Last-Event-ID`，服务端从 steps 表补发。25 秒一次心跳注释。
+`GET /investigations/{id}/stream`：调查进度流。`id` 字段等于 step 的 seq，客户端重连带 `Last-Event-ID`，服务端从 steps 表补发（含 start / budget_update 等派生步骤，重连不丢状态事件）。25 秒一次心跳注释。JWT 可经 `?token=` 传（同全局流）。
 
 | event | data 要点 |
 | --- | --- |
@@ -168,6 +170,7 @@ Base URL：`/api/v1`。REST + SSE，JSON。接口文档由 springdoc-openapi 生
 | report_ready | report_id |
 | investigation_completed | status、rounds、token_used |
 | investigation_failed | error、last_round |
+| investigation_stopped | status、last_round（stop 接口派生，E3 增补） |
 
 ```text
 event: tool_completed
@@ -293,6 +296,8 @@ PUT 全量必填（缺字段 40001），即时生效于后续自动触发；max_
 
 后端没有工具的概念。Agent 服务查数据用 `/documents`、`/organizations`（X-Internal-Key），把这些接口和它自己接的外部源封装成它自己的工具；工具调用记录作为 steps（type=tool_call）上报，产出经 evidences 接口登记。
 
+落地进度（S5）：领取 / start / context / steps / questions 已交付；evidences 登记与 report / complete / fail 属 E4（S6）。steps 的事件名即 §7 词表——后端派生事件（investigation_started / budget_update / investigation_stopped）由对应接口产生，Agent 直报 40001。
+
 ReportDraft：
 
 ```json
@@ -325,3 +330,4 @@ ReportDraft：
 | 日期 | 变更 | 说明 |
 | --- | --- | --- |
 | 2026-09-25 | 初稿 | 全部接口首次定义 |
+| 2026-10-02 | 增补 | §7 新增可选事件 investigation_stopped（stop 接口派生）；§5 明确 steps 响应 {items, next_cursor} 形状与 stop 的信号回退语义。均为新增/澄清，非破坏性 |
