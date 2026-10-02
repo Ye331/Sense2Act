@@ -1,13 +1,21 @@
 package com.sense2act.backend.domain.org;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.sense2act.backend.common.BusinessException;
 import com.sense2act.backend.common.IdGen;
+import com.sense2act.backend.domain.document.DocumentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.text.Normalizer;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 /**
@@ -19,12 +27,53 @@ public class OrgService {
 
     private static final Logger log = LoggerFactory.getLogger(OrgService.class);
 
+    private static final int RECENT_DOCS = 10;
+
     private final OrganizationMapper orgMapper;
+    private final OrgStatsMapper orgStatsMapper;
+    private final DocumentService documentService;
     private final ObjectMapper objectMapper;
 
-    public OrgService(OrganizationMapper orgMapper, ObjectMapper objectMapper) {
+    public OrgService(OrganizationMapper orgMapper, OrgStatsMapper orgStatsMapper,
+                      DocumentService documentService, ObjectMapper objectMapper) {
         this.orgMapper = orgMapper;
+        this.orgStatsMapper = orgStatsMapper;
+        this.documentService = documentService;
         this.objectMapper = objectMapper;
+    }
+
+    /** E1-5 机构画像:基本信息 + org_stats + 近期文档。 */
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    public OrgDetailView detail(String id) {
+        Organization org = orgMapper.selectById(id);
+        if (org == null) {
+            throw BusinessException.notFound("机构不存在: " + id);
+        }
+        List<OrgStatView> stats = orgStatsMapper.selectList(new LambdaQueryWrapper<OrgStat>()
+                        .eq(OrgStat::getOrgId, id).orderByAsc(OrgStat::getCategory))
+                .stream()
+                .map(s -> new OrgStatView(s.getCategory(), s.getWindowDays(), s.getSampleCount(),
+                        s.getAmountMean(), s.getAmountStd(), s.getAmountP95(),
+                        s.getFreqMean30d(), s.getLastDocAt()))
+                .toList();
+        return new OrgDetailView(org.getId(), org.getName(), org.getAliases(), org.getType(),
+                org.getUscc(), org.getRegion(), org.getCreatedAt(), stats,
+                documentService.recentByOrg(id, RECENT_DOCS));
+    }
+
+    /** 机构画像响应:金额类按约定序列化为字符串小数。 */
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+    public record OrgDetailView(String id, String name, List<String> aliases, String type, String uscc,
+                                String region, OffsetDateTime createdAt, List<OrgStatView> stats,
+                                List<DocumentService.DocView> recentDocuments) {
+    }
+
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+    public record OrgStatView(String category, Integer windowDays, Integer sampleCount,
+                              @JsonFormat(shape = JsonFormat.Shape.STRING) BigDecimal amountMean,
+                              @JsonFormat(shape = JsonFormat.Shape.STRING) BigDecimal amountStd,
+                              @JsonFormat(shape = JsonFormat.Shape.STRING) BigDecimal amountP95,
+                              BigDecimal freqMean30d, LocalDate lastDocAt) {
     }
 
     public static String normalizeName(String raw) {

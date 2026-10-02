@@ -1,13 +1,14 @@
 package com.sense2act.backend.domain.org;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 
 /**
- * org_stats 重算(复合主键 (org_id, category),入库文档后同步刷新)。
- * 纯 SQL 集合式重算:均值/样本标准差/P95/近 30 天日均频次,窗口 730 天。
+ * org_stats:BaseMapper 负责读(画像),recompute 负责入库后的集合式重算。
+ * 纯 SQL 重算:均值/样本标准差/P95/近 30 天日均频次,窗口 730 天。
  */
-public interface OrgStatsMapper {
+public interface OrgStatsMapper extends BaseMapper<OrgStat> {
 
     @Update("""
             INSERT INTO org_stats (org_id, category, window_days, sample_count,

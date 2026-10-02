@@ -40,6 +40,11 @@ app:
     ttl: ${JWT_TTL:12h}
   internal-key: ${INTERNAL_API_KEY:}
   snapshot-dir: ${SNAPSHOT_DIR:./snapshots}
+  embedding:
+    # D12:外部 embedding 端点;不配置则语义检索降级为关键词,不报错
+    endpoint: ${EMBEDDING_ENDPOINT:}
+    api-key: ${EMBEDDING_API_KEY:}
+    timeout: ${EMBEDDING_TIMEOUT:10s}
   seed:
     enabled: ${SEED_USERS_ENABLED:true}
     admin-password: ${SEED_ADMIN_PASSWORD:admin123}

@@ -26,10 +26,13 @@ public class InternalIngestController {
 
     private final SourceService sourceService;
     private final DocumentIngestService documentIngestService;
+    private final com.sense2act.backend.domain.embedding.EmbeddingService embeddingService;
 
-    public InternalIngestController(SourceService sourceService, DocumentIngestService documentIngestService) {
+    public InternalIngestController(SourceService sourceService, DocumentIngestService documentIngestService,
+                                    com.sense2act.backend.domain.embedding.EmbeddingService embeddingService) {
         this.sourceService = sourceService;
         this.documentIngestService = documentIngestService;
+        this.embeddingService = embeddingService;
     }
 
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
@@ -55,7 +58,10 @@ public class InternalIngestController {
         if (req.sourceId() == null || req.sourceId().isBlank()) {
             throw BusinessException.badRequest("source_id 必填");
         }
-        return ApiResponse.ok(documentIngestService.push(req.sourceId(), req.items()));
+        DocumentIngestService.BatchResult result = documentIngestService.push(req.sourceId(), req.items());
+        // D12:入库事务提交后补算 embedding(尽力而为,失败不影响接入结果)
+        embeddingService.backfill(result.documentIds());
+        return ApiResponse.ok(result);
     }
 
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
