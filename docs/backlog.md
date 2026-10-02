@@ -182,15 +182,15 @@
 #### E2-6 规则版本管理 · S · M
 作为 admin，我要版本化管理信号规则并记录回测指标，以便反馈迭代有落点。
 
-- [ ] `GET/POST/PATCH /admin/signal-rules`；PATCH 生成新版本并停用旧版，同 id 只有一个版本 enabled
-- [ ] 种子预置 3 条默认规则 version=1（金额异常 / 频率突增 / 语义匹配），参数按 data-model §4
+- [x] `GET/POST/PATCH /admin/signal-rules`；PATCH 生成新版本并停用旧版，同 id 只有一个版本 enabled（部分唯一索引兜底；PATCH 合并最新版本字段，enabled 缺省为新版生效）
+- [x] 种子预置 3 条默认规则 version=1（金额异常 / 频率突增 / 语义匹配），参数按 data-model §4（V6 迁移内联种子 rule_seed01..03）
 
 #### E2-7 全局通知流 · S · M
 作为 analyst，我要一条全局 SSE 流收通知，以便不刷页面也知道有新信号。
 
-- [ ] `GET /stream`：signal_created / investigation_completed / report_ready / source_degraded 四类事件
-- [ ] JWT 经 `?token=` 传递（EventSource 不支持自定义 header）；无效 token → 40101
-- [ ] 25 秒心跳注释；断线重连不丢已发事件（事件可追溯）
+- [x] `GET /stream`：signal_created / investigation_completed / report_ready / source_degraded 四类事件（事件先落 global_events 再广播，单写者串行保 id 有序）
+- [x] JWT 经 `?token=` 传递（EventSource 不支持自定义 header）；无效 token → 40101
+- [x] 25 秒心跳注释；断线重连不丢已发事件（事件可追溯：SSE id 即 global_events 主键，Last-Event-ID 从表补发）
 
 #### E2-8 演示链路②（信号） · M · S · 依赖 E2-4、E1-7
 作为演示者，我要模拟检测脚本和信号样本，以便演示信号到自动开调查的跳转。
@@ -318,20 +318,20 @@
 #### E5-1 报告反馈 · M · M · 依赖 E4-4
 作为 analyst，我要对报告采纳建议或标误报，以便好信号被学习、坏信号被纠偏。
 
-- [ ] `POST /reports/{id}/feedback`：adopted_suggestion_ids 回填 action_suggestions.adopted_at
-- [ ] comment / flag（false_positive）写 feedback_events，user 取自 JWT
-- [ ] target_type 覆盖 report / suggestion，与信号级反馈（E2-5）共用一张表
+- [x] `POST /reports/{id}/feedback`：adopted_suggestion_ids 回填 action_suggestions.adopted_at（重复采纳幂等，不再重复写事件；建议不属于本报告 42201）
+- [x] comment / flag（false_positive）写 feedback_events，user 取自 JWT（action 词表增补 comment，V6）
+- [x] target_type 覆盖 report / suggestion，与信号级反馈（E2-5）共用一张表
 
 #### E5-2 看板 · S · M
 作为 viewer，我要一个总览数字，以便快速判断系统活跃度和信号质量。
 
-- [ ] `GET /dashboard/summary`：文档 / 信号（按状态）/ 调查（按状态）/ 报告计数 + 今日增量
-- [ ] 数字与库内一致（测试用种子数据断言）
+- [x] `GET /dashboard/summary`：文档 / 信号（按状态）/ 调查（按状态）/ 报告计数 + 今日增量（by_status 固定给出全部状态键）
+- [x] 数字与库内一致（测试用种子数据断言）
 
 #### E5-3 图谱查询 · S · M · 依赖 E4-2
 作为 analyst，我要浏览事件图谱，以便发现跨项目的关联。
 
-- [ ] `GET /events` 分页；`/{id}` 详情含参与实体；`/{id}/graph` 返回节点 + 边 + 关联报告
+- [x] `GET /events` 分页；`/{id}` 详情含参与实体（含 role）；`/{id}/graph` 返回节点 + 边 + 关联报告（触及节点集的 event_relations 一跳扩展并入外部主体）
 
 #### E5-4 回测任务 · C · M · 依赖 E2-6、E5-1
 作为 admin，我要发起规则回测并拿到数据集，以便评估在外部跑。
@@ -348,8 +348,8 @@
 #### E5-6 演示链路⑤（闭环） · M · S · 依赖 E5-1
 作为演示者，我要一键回放全链路，以便比赛评审看到完整闭环。
 
-- [ ] 全链路脚本：源 → 文档 → 信号 → 调查 → 报告 → 反馈，一条龙可重复执行
-- [ ] 种子补反馈事件；README 增加演示路径说明
+- [x] 全链路脚本：源 → 文档 → 信号 → 调查 → 报告 → 反馈，一条龙可重复执行（scripts/demo_s7_full_chain.py，时间戳为键，每跑一次新建独立链路实例，不依赖此前种子）
+- [x] 种子补反馈事件；README 增加演示路径说明
 
 ## 5. 冲刺计划
 
