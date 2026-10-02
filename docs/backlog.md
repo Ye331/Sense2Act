@@ -85,8 +85,8 @@
 #### E0-6 模块边界验证 · C · S
 作为开发者，我要 CI 强制校验模块边界，以便后端长歪（跨模块乱引用内部类）时第一时间被拦。
 
-- [ ] 用 Spring Modulith 的测试支持或 ArchUnit 写边界验证测试，进 CI
-- [ ] 在 E1–E5 模块长全后（≥S6）启用；豁免走白名单并记录原因
+- [x] 用 ArchUnit 写边界验证测试，进 CI（ModuleBoundaryTest：common 不依赖上层、domain 不回头引用 api/ingest、@RestController 只住入口层；另有守护断言防包路径拼错静默空匹配）
+- [x] 在 E1–E5 模块长全后（≥S6）启用；豁免走白名单并记录原因（白名单目前为空：跨 domain 模块协作是明示的模块内单体形态，不设墙）
 
 ### E1 采集与文档库（S2–S3）
 
@@ -336,14 +336,14 @@
 #### E5-4 回测任务 · C · M · 依赖 E2-6、E5-1
 作为 admin，我要发起规则回测并拿到数据集，以便评估在外部跑。
 
-- [ ] `POST /admin/backtests`：rule_id + param_grid + 日期区间，status=queued
-- [ ] 后端导出数据集：区间内文档 + signals + feedback_events 标注
-- [ ] 状态机 queued / running / done / failed；result（JSONB）支持外部写回
+- [x] `POST /admin/backtests`：rule_id + param_grid + 日期区间，status=queued（规则须存在 40401，date_to<date_from 40001；另交付 GET 列表/详情）
+- [x] 后端导出数据集：区间内文档 + signals + feedback_events 标注（GET /{id}/dataset，领取即 queued→running，各段上限 2000 行）
+- [x] 状态机 queued / running / done / failed；result（JSONB）支持外部写回（PUT /{id}/result，done 必带 result，终态 40901）
 
 #### E5-5 内部接口限流 · C · S
 作为 admin，我要内部接口按 key 限流，以防某个外部服务拖垮后端。
 
-- [ ] `/internal/*` 按 X-Internal-Key 滑窗计数，超阈值 42901（阈值可配；实现选型 Bucket4j，单机内存即可）
+- [x] `/internal/*` 按 X-Internal-Key 计数，超阈值 42901 + Retry-After（阈值可配 INTERNAL_RATE_LIMIT_PER_MINUTE，默认 600，0 关闭；Bucket4j 令牌桶＝容量/分钟、贪心补币，单机内存）
 
 #### E5-6 演示链路⑤（闭环） · M · S · 依赖 E5-1
 作为演示者，我要一键回放全链路，以便比赛评审看到完整闭环。
@@ -416,7 +416,7 @@ S8 是显式缓冲：只排 C 级故事、联调与打磨，不加新范围。
 | ~~OQ1~~ | ~~documents.embedding 由谁计算？~~ **已决（D12）**：外部算——后端配置 EMBEDDING_ENDPOINT，入库补算 + 查询实时算；端点不可用时文档不进语义结果、不报错（关键词兜底） | D12 | 已关闭 |
 | ~~OQ2~~ | ~~detection-queue 里的 profiles（关注画像）存在哪？~~ **已决（D13）**：单独建 watch_profiles 表 | D13 | 已关闭 |
 | ~~OQ3~~ | ~~max_concurrent_investigations 的语义？~~ **已决（D14）**：start 时挡，超出返回 40901；created 排队不限 | D14 | 已关闭 |
-| OQ5 | pdf 导出的真实度 | 原型期 202 + 轮询占位；真排版视 S8 余量 | S6 计划会 |
+| OQ5 | pdf 导出的真实度 | 原型期 202 + 轮询占位；真排版视 S8 余量 | S6 计划会。**已决（S8）**：不做真排版——比赛演示口径 md 导出已足（内容分节/免责声明齐全），真 pdf 需嵌入中文字体与排版库，余量不值；保留 202+task_id 契约不变 |
 
 ## 10. 风险
 

@@ -54,6 +54,42 @@
         }
       }
     },
+    "/api/v1/admin/backtests/{id}/result" : {
+      "put" : {
+        "tags" : [ "admin-backtest-controller" ],
+        "operationId" : "writeResult",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ResultPut"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseRunView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/sources" : {
       "get" : {
         "tags" : [ "source-controller" ],
@@ -681,6 +717,67 @@
         }
       }
     },
+    "/api/v1/admin/backtests" : {
+      "get" : {
+        "tags" : [ "admin-backtest-controller" ],
+        "operationId" : "list_2",
+        "parameters" : [ {
+          "name" : "page",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "page_size",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponsePageResultRunView"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "admin-backtest-controller" ],
+        "operationId" : "create_3",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BacktestPost"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseRunView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/sources/{id}" : {
       "delete" : {
         "tags" : [ "source-controller" ],
@@ -896,7 +993,7 @@
     "/api/v1/signals" : {
       "get" : {
         "tags" : [ "signal-controller" ],
-        "operationId" : "list_2",
+        "operationId" : "list_3",
         "parameters" : [ {
           "name" : "status",
           "in" : "query",
@@ -999,7 +1096,7 @@
     "/api/v1/reports" : {
       "get" : {
         "tags" : [ "report-controller" ],
-        "operationId" : "list_3",
+        "operationId" : "list_4",
         "parameters" : [ {
           "name" : "investigation_id",
           "in" : "query",
@@ -1140,7 +1237,7 @@
     "/api/v1/investigations" : {
       "get" : {
         "tags" : [ "investigation-controller" ],
-        "operationId" : "list_4",
+        "operationId" : "list_5",
         "parameters" : [ {
           "name" : "signal_id",
           "in" : "query",
@@ -1462,7 +1559,7 @@
     "/api/v1/events" : {
       "get" : {
         "tags" : [ "event-controller" ],
-        "operationId" : "list_5",
+        "operationId" : "list_6",
         "parameters" : [ {
           "name" : "page",
           "in" : "query",
@@ -1549,7 +1646,7 @@
     "/api/v1/documents" : {
       "get" : {
         "tags" : [ "document-controller" ],
-        "operationId" : "list_6",
+        "operationId" : "list_7",
         "parameters" : [ {
           "name" : "keyword",
           "in" : "query",
@@ -1729,6 +1826,58 @@
         }
       }
     },
+    "/api/v1/admin/backtests/{id}" : {
+      "get" : {
+        "tags" : [ "admin-backtest-controller" ],
+        "operationId" : "detail_7",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseRunView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/admin/backtests/{id}/dataset" : {
+      "get" : {
+        "tags" : [ "admin-backtest-controller" ],
+        "operationId" : "dataset",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseMapStringObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/admin/watch-profiles/{id}" : {
       "delete" : {
         "tags" : [ "admin-policy-controller" ],
@@ -1810,6 +1959,75 @@
           "default_token_budget" : {
             "type" : "integer",
             "format" : "int32"
+          },
+          "updated_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
+      "ResultPut" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "string"
+          },
+          "result" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object"
+            }
+          }
+        }
+      },
+      "ApiResponseRunView" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/RunView"
+          }
+        }
+      },
+      "RunView" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "rule_id" : {
+            "type" : "string"
+          },
+          "param_grid" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object"
+            }
+          },
+          "date_from" : {
+            "type" : "string"
+          },
+          "date_to" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "result" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object"
+            }
+          },
+          "created_at" : {
+            "type" : "string",
+            "format" : "date-time"
           },
           "updated_at" : {
             "type" : "string",
@@ -2865,6 +3083,26 @@
           }
         }
       },
+      "BacktestPost" : {
+        "type" : "object",
+        "properties" : {
+          "rule_id" : {
+            "type" : "string"
+          },
+          "param_grid" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object"
+            }
+          },
+          "date_from" : {
+            "type" : "string"
+          },
+          "date_to" : {
+            "type" : "string"
+          }
+        }
+      },
       "StatusPatch" : {
         "type" : "object",
         "properties" : {
@@ -3545,6 +3783,44 @@
             "items" : {
               "$ref" : "#/components/schemas/RuleView"
             }
+          }
+        }
+      },
+      "ApiResponsePageResultRunView" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/PageResultRunView"
+          }
+        }
+      },
+      "PageResultRunView" : {
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/RunView"
+            }
+          },
+          "total" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "page" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "page_size" : {
+            "type" : "integer",
+            "format" : "int32"
           }
         }
       },

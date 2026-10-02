@@ -40,6 +40,8 @@ app:
     ttl: ${JWT_TTL:12h}
   internal-key: ${INTERNAL_API_KEY:}
   snapshot-dir: ${SNAPSHOT_DIR:./snapshots}
+  # E5-5:内部接口按 X-Internal-Key 限流(令牌桶,每分钟补充满桶);0 = 不限流
+  internal-rate-limit-per-minute: ${INTERNAL_RATE_LIMIT_PER_MINUTE:600}
   embedding:
     # D12:外部 embedding 端点;不配置则语义检索降级为关键词,不报错
     endpoint: ${EMBEDDING_ENDPOINT:}
