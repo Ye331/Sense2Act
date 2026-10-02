@@ -132,33 +132,33 @@ id（ist_ 前缀）、investigation_id、seq（从 1 起，UNIQUE(investigation_
 
 id（q_ 前缀）、investigation_id、text（≤1000）、raised_in_round、status（open/clarified/unresolved/abandoned）、answer_summary、evidence_ids（JSONB 数组，引用必须属于本调查的 evidences，未登记 → 42201）、created_at / updated_at。POST /internal/questions 建 open 问题；PATCH 推进状态与答案。
 
-### evidences（证据，V4 建表、E4-1 加登记 API）
+### evidences（证据，V4 建表、E4-1 登记已交付）
 
 | 列 | 类型 | 说明 |
 | --- | --- | --- |
 | source_type | VARCHAR | announcement / policy / news / company_record / web / internal_stat |
-| title / url / excerpt | | |
-| published_at | TIMESTAMPTZ | 来源自身的发布时间 |
+| title / url / excerpt | | excerpt 必填；本库变体（doc_id）回填文档的 url/title |
+| published_at | TIMESTAMPTZ | 来源自身的发布时间；外部变体必填（缺 40001），本库变体从 publish_date 回填 |
 | fetched_at | TIMESTAMPTZ | 系统获取时间，必填 |
-| content_hash / snapshot_key | | 快照防篡改 |
-| doc_id | FK | 来自本库时回指 |
-| investigation_id | FK | 由哪次调查采集（E3 阶段仅作引用归属校验目标） |
+| content_hash / snapshot_key | | 外部变体为快照 SHA-256 与落盘键（ev_ + hash）；本库变体复用文档的值 |
+| doc_id | FK | 来自本库时回指（不存在 → 42201 整条拒收） |
+| investigation_id | FK | 由哪次调查采集；登记仅限 investigating 状态 |
 
-### entities / events / event_entities / event_relations（事件图谱）
+### entities / events / event_entities / event_relations（事件图谱，V5）
 
-- entities：name、type（org/project/product/region/policy）、ref_org_id、aliases。
-- events：title、type（construction_wave/policy/procurement/...）、summary、start_date、status（ongoing/closed/speculative）、created_by_report。
-- event_entities：(event_id, entity_id) 复合主键，role（participant/object/scope/beneficiary）、since。
-- event_relations：source_type/source_id、target_type/target_id（节点可为事件、主体或证据）、relation（前置/参与/佐证/互证/同属）、evidence_id、since。
+- entities：name（唯一）、type（org/project/product/region/policy）、ref_org_id、aliases。重复抽取按名幂等复用（ON CONFLICT DO NOTHING，避免 PG 约束中断事务）。
+- events：title、type（construction_wave/policy/procurement/...）、summary、start_date、status（ongoing/closed/speculative）、created_by_report（回指首建报告；reports.event_id 与之互指，FK 分两步建）。
+- event_entities：(event_id, entity_id) 复合主键，role（participant/object/scope/beneficiary，缺省 participant）、since。
+- event_relations：source_type/source_id、target_type/target_id（节点可为事件、主体或证据；ReportDraft 引用形如 "entity:0"/"event"，下标越界 40001）、relation（前置/参与/佐证/互证/同属）、evidence_id、since；(source_type, source_id, target_type, target_id, relation) 唯一。
 
 图谱数据由 Agent 服务在 ReportDraft 的 event_extraction 里抽取，后端校验落库。
 
-### reports / claims / evidence_links / action_suggestions
+### reports / claims / evidence_links / action_suggestions（V5）
 
-- reports：investigation_id（唯一）、signal_id、event_id（可空）、title、summary、status（draft/published）、meta（JSONB，轮次/工具数/token/费用）。
-- claims：report_id、seq、text、nature（fact/inference/speculation）、confidence。
-- evidence_links：(claim_id, evidence_id) 多对多，relation（直接依据/背景/互证）。
-- action_suggestions：report_id、text、priority、adopted_at（反馈回填）。
+- reports：investigation_id（唯一，一调查一报告，重复提交 40901）、signal_id、event_id（可空）、title、summary、status（draft/published；complete 收尾时 draft → published）、meta（JSONB，轮次/工具数/token/费用——后端从 steps 统计，不采信上报值，D5）、created_at / updated_at。
+- claims：report_id、seq（报告内顺序，UNIQUE(report_id, seq)）、text、nature（fact/inference/speculation）、confidence（NUMERIC(4,3)，[0,1]）。
+- evidence_links：(claim_id, evidence_id) 多对多复合主键，relation（直接依据/背景/互证；ReportDraft 的 claims 只带 evidence_ids，先统一落"直接依据"）。
+- action_suggestions：report_id、text、priority（high/medium/low，缺省 medium）、adopted_at（反馈回填，E5）。
 
 ### feedback_events / backtest_runs
 

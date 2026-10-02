@@ -311,6 +311,140 @@
         }
       }
     },
+    "/api/v1/internal/investigations/{id}/report" : {
+      "post" : {
+        "tags" : [ "internal-report-controller" ],
+        "operationId" : "submit",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Draft"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseReportView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/internal/investigations/{id}/fail" : {
+      "post" : {
+        "tags" : [ "internal-report-controller" ],
+        "operationId" : "fail",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/FailPost"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseInvView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/internal/investigations/{id}/evidences" : {
+      "post" : {
+        "tags" : [ "internal-evidence-controller" ],
+        "operationId" : "register",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/EvidencePost"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseEvidenceView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/internal/investigations/{id}/complete" : {
+      "post" : {
+        "tags" : [ "internal-report-controller" ],
+        "operationId" : "complete",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseInvView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/internal/ingest-runs" : {
       "post" : {
         "tags" : [ "internal-ingest-controller" ],
@@ -720,10 +854,125 @@
         }
       }
     },
+    "/api/v1/reports" : {
+      "get" : {
+        "tags" : [ "report-controller" ],
+        "operationId" : "list_2",
+        "parameters" : [ {
+          "name" : "investigation_id",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "date_from",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "date_to",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "page_size",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponsePageResultReportListItem"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/reports/{id}" : {
+      "get" : {
+        "tags" : [ "report-controller" ],
+        "operationId" : "detail_1",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseReportView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/reports/{id}/export" : {
+      "get" : {
+        "tags" : [ "report-controller" ],
+        "operationId" : "export",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "format",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/organizations/{id}" : {
       "get" : {
         "tags" : [ "org-controller" ],
-        "operationId" : "detail_1",
+        "operationId" : "detail_2",
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
@@ -749,7 +998,7 @@
     "/api/v1/investigations" : {
       "get" : {
         "tags" : [ "investigation-controller" ],
-        "operationId" : "list_2",
+        "operationId" : "list_3",
         "parameters" : [ {
           "name" : "signal_id",
           "in" : "query",
@@ -812,7 +1061,7 @@
     "/api/v1/investigations/{id}" : {
       "get" : {
         "tags" : [ "investigation-controller" ],
-        "operationId" : "detail_2",
+        "operationId" : "detail_3",
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
@@ -1015,10 +1264,63 @@
         }
       }
     },
+    "/api/v1/evidences/{id}" : {
+      "get" : {
+        "tags" : [ "evidence-controller" ],
+        "operationId" : "detail_4",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseEvidenceView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/evidences/{id}/snapshot" : {
+      "get" : {
+        "tags" : [ "evidence-controller" ],
+        "operationId" : "snapshot",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "string",
+                  "format" : "byte"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/documents" : {
       "get" : {
         "tags" : [ "document-controller" ],
-        "operationId" : "list_3",
+        "operationId" : "list_4",
         "parameters" : [ {
           "name" : "keyword",
           "in" : "query",
@@ -1130,7 +1432,7 @@
     "/api/v1/documents/{id}" : {
       "get" : {
         "tags" : [ "document-controller" ],
-        "operationId" : "detail_3",
+        "operationId" : "detail_5",
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
@@ -1156,7 +1458,7 @@
     "/api/v1/documents/{id}/snapshot" : {
       "get" : {
         "tags" : [ "document-controller" ],
-        "operationId" : "snapshot",
+        "operationId" : "snapshot_1",
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
@@ -1636,6 +1938,343 @@
           }
         }
       },
+      "Draft" : {
+        "type" : "object",
+        "properties" : {
+          "title" : {
+            "type" : "string"
+          },
+          "summary" : {
+            "type" : "string"
+          },
+          "event_id" : {
+            "type" : "string"
+          },
+          "claims" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/DraftClaim"
+            }
+          },
+          "action_suggestions" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/DraftSuggestion"
+            }
+          },
+          "event_extraction" : {
+            "$ref" : "#/components/schemas/EventExtraction"
+          },
+          "token_usage" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "DraftClaim" : {
+        "type" : "object",
+        "properties" : {
+          "text" : {
+            "type" : "string"
+          },
+          "nature" : {
+            "type" : "string"
+          },
+          "confidence" : {
+            "type" : "number"
+          },
+          "evidence_ids" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "DraftEntity" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "role" : {
+            "type" : "string"
+          }
+        }
+      },
+      "DraftEvent" : {
+        "type" : "object",
+        "properties" : {
+          "title" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "start_date" : {
+            "type" : "string"
+          }
+        }
+      },
+      "DraftRelation" : {
+        "type" : "object",
+        "properties" : {
+          "source" : {
+            "type" : "string"
+          },
+          "target" : {
+            "type" : "string"
+          },
+          "relation" : {
+            "type" : "string"
+          }
+        }
+      },
+      "DraftSuggestion" : {
+        "type" : "object",
+        "properties" : {
+          "text" : {
+            "type" : "string"
+          },
+          "priority" : {
+            "type" : "string"
+          }
+        }
+      },
+      "EventExtraction" : {
+        "type" : "object",
+        "properties" : {
+          "event" : {
+            "$ref" : "#/components/schemas/DraftEvent"
+          },
+          "entities" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/DraftEntity"
+            }
+          },
+          "relations" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/DraftRelation"
+            }
+          }
+        }
+      },
+      "ApiResponseReportView" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/ReportView"
+          }
+        }
+      },
+      "ClaimView" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "seq" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "text" : {
+            "type" : "string"
+          },
+          "nature" : {
+            "type" : "string"
+          },
+          "confidence" : {
+            "type" : "number"
+          },
+          "evidences" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/EvidenceRef"
+            }
+          }
+        }
+      },
+      "EvidenceRef" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "source_type" : {
+            "type" : "string"
+          }
+        }
+      },
+      "ReportView" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "investigation_id" : {
+            "type" : "string"
+          },
+          "signal_id" : {
+            "type" : "string"
+          },
+          "event_id" : {
+            "type" : "string"
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "summary" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "claims" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ClaimView"
+            }
+          },
+          "action_suggestions" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/SuggestionView"
+            }
+          },
+          "meta" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object"
+            }
+          },
+          "disclaimer" : {
+            "type" : "string"
+          },
+          "created_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
+      "SuggestionView" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "text" : {
+            "type" : "string"
+          },
+          "priority" : {
+            "type" : "string"
+          },
+          "adopted_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
+      "FailPost" : {
+        "type" : "object",
+        "properties" : {
+          "error" : {
+            "type" : "string"
+          }
+        }
+      },
+      "EvidencePost" : {
+        "type" : "object",
+        "properties" : {
+          "source_type" : {
+            "type" : "string"
+          },
+          "doc_id" : {
+            "type" : "string"
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "url" : {
+            "type" : "string"
+          },
+          "excerpt" : {
+            "type" : "string"
+          },
+          "published_at" : {
+            "type" : "string"
+          }
+        }
+      },
+      "ApiResponseEvidenceView" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/EvidenceView"
+          }
+        }
+      },
+      "EvidenceView" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "investigation_id" : {
+            "type" : "string"
+          },
+          "source_type" : {
+            "type" : "string"
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "url" : {
+            "type" : "string"
+          },
+          "excerpt" : {
+            "type" : "string"
+          },
+          "published_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "fetched_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "content_hash" : {
+            "type" : "string"
+          },
+          "snapshot_key" : {
+            "type" : "string"
+          },
+          "doc_id" : {
+            "type" : "string"
+          }
+        }
+      },
       "RunError" : {
         "type" : "object",
         "properties" : {
@@ -2048,6 +2687,65 @@
           "page_size" : {
             "type" : "integer",
             "format" : "int32"
+          }
+        }
+      },
+      "ApiResponsePageResultReportListItem" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/PageResultReportListItem"
+          }
+        }
+      },
+      "PageResultReportListItem" : {
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ReportListItem"
+            }
+          },
+          "total" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "page" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "page_size" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "ReportListItem" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "investigation_id" : {
+            "type" : "string"
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "created_at" : {
+            "type" : "string",
+            "format" : "date-time"
           }
         }
       },

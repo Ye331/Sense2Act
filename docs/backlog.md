@@ -266,50 +266,50 @@
 #### E4-1 证据登记 · M · M · 依赖 E3-1
 作为 Agent 服务，我要登记调查中取得的证据，以便报告结论可回溯到原文。
 
-- [ ] 引本库文档传 doc_id：自动回填 url / title / published_at，excerpt 仍必填
-- [ ] 外部内容传 url / title / excerpt：后端抓快照、算 SHA-256，fetched_at 取服务端时间
-- [ ] 快照抓取带超时与有限重试（如 2 次），仍失败整条拒收 42201，由 Agent 服务换源重试（决策 D4）
-- [ ] published_at、url、fetched_at 缺一不可入库
+- [x] 引本库文档传 doc_id：自动回填 url / title / published_at，excerpt 仍必填（hash/快照键也一并复用本库文档）
+- [x] 外部内容传 url / title / excerpt：后端抓快照、算 SHA-256，fetched_at 取服务端时间
+- [x] 快照抓取带超时与有限重试（如 2 次），仍失败整条拒收 42201，由 Agent 服务换源重试（决策 D4）——5s 超时、共 3 次尝试、>2MB 拒收
+- [x] published_at、url、fetched_at 缺一不可入库（外部变体 published_at 缺失 40001；本库变体从 publish_date 回填）
 
 #### E4-2 报告提交与图谱落库 · M · L · 依赖 E3-3、E4-1
 作为 Agent 服务，我要提交完整 ReportDraft，以便调查产出结构化结论。
 
-- [ ] claims ≥1；nature ∈ fact / inference / speculation，非法值 40001；confidence ∈ [0,1]
-- [ ] claim 引用未登记或不属于本调查的证据 → 42201，整份拒收
-- [ ] event_extraction：relations 的 source/target 必须指向本次声明的 entity 或 event，否则 40001；校验通过落四张图谱表
-- [ ] meta（轮次/工具数/token/费用）由后端从 steps 统计填充，不采信上报值（决策 D5）
-- [ ] 落库发 SSE report_ready；报告响应固定带 disclaimer
+- [x] claims ≥1；nature ∈ fact / inference / speculation，非法值 40001；confidence ∈ [0,1]
+- [x] claim 引用未登记或不属于本调查的证据 → 42201，整份拒收
+- [x] event_extraction：relations 的 source/target 必须指向本次声明的 entity 或 event，否则 40001；校验通过落四张图谱表（主体按 name 幂等复用，PG 约束不炸事务用 ON CONFLICT DO NOTHING）
+- [x] meta（轮次/工具数/token/费用）由后端从 steps 统计填充，不采信上报值（决策 D5；draft.token_usage 仅对账参考不入账）
+- [x] 落库发 SSE report_ready；报告响应固定带 disclaimer（report_ready 落为 status_change 步骤,可随流补发;一调查一报告,重复提交 40901）
 
 #### E4-3 收尾 · M · S · 依赖 E4-2
 作为 Agent 服务，我要在报告提交后收尾或失败退出，以便状态机闭环。
 
-- [ ] `complete`：有已提交报告才允许，否则 42201；置 completed、finished_at，signal → confirmed（决策 D6）
-- [ ] `fail`：非终态均可，置 failed 并记 error
-- [ ] 两者均发对应 SSE（investigation_completed / investigation_failed）
+- [x] `complete`：有已提交报告才允许，否则 42201；置 completed、finished_at，signal → confirmed（决策 D6；报告随收尾转 published）
+- [x] `fail`：非终态均可，置 failed 并记 error（信号回退 pending,同 stop/TTL 口径）
+- [x] 两者均发对应 SSE（investigation_completed / investigation_failed）
 
 #### E4-4 报告查询 · M · M · 依赖 E4-2
 作为 analyst，我要查报告全文，以便逐条核证据。
 
-- [ ] `GET /reports` 列表（investigation_id / 日期筛选）；详情结构 = api-design §6 示例
-- [ ] claims 带证据摘要（id / title / source_type），nature 原样带出
-- [ ] disclaimer 固定文案逐字一致
+- [x] `GET /reports` 列表（investigation_id / 日期筛选）；详情结构 = api-design §6 示例
+- [x] claims 带证据摘要（id / title / source_type），nature 原样带出
+- [x] disclaimer 固定文案逐字一致（"本报告由AI生成，结论不替代人的自主判断"）
 
 #### E4-5 证据查询 · S · S · 依赖 E4-1
 作为 analyst，我要查证据详情和快照，以便核验结论来源。
 
-- [ ] `GET /evidences/{id}` 返回全字段；`/snapshot` 返回抓取的原始内容
+- [x] `GET /evidences/{id}` 返回全字段；`/snapshot` 返回抓取的原始内容（无快照/文件缺失 40401）
 
 #### E4-6 报告导出 · S · M · 依赖 E4-4
 作为 analyst，我要导出报告，以便线下传阅。
 
-- [ ] `format=md` 同步返回，模板含 disclaimer、claims（按 nature 分节）与证据清单
-- [ ] `format=pdf` 返回 202 + task_id，轮询接口占位（C 级，真排版 S8 视情况，见 OQ5）
+- [x] `format=md` 同步返回，模板含 disclaimer、claims（按 nature 分节）与证据清单
+- [x] `format=pdf` 返回 202 + task_id，轮询接口占位（C 级，真排版 S8 视情况，见 OQ5）
 
 #### E4-7 演示链路④（报告） · M · M · 依赖 E4-2、E3-7
 作为演示者，我要完整报告样本，以便演示证据链和"事实/推测"分离。
 
-- [ ] 种子：3 条 claims 覆盖三种 nature、≥2 条行动建议、图谱 1 事件 3 实体，挂在链路③调查上直至 completed
-- [ ] 模拟 Agent 脚本 v2：在 v1 基础上补 evidences → report → complete 全程
+- [x] 种子：3 条 claims 覆盖三种 nature、≥2 条行动建议、图谱 1 事件 3 实体，挂在链路③调查上直至 completed（seed_s6_report.py,幂等）
+- [x] 模拟 Agent 脚本 v2：在 v1 基础上补 evidences → report → complete 全程（含问题带证据 clarified、md 导出落盘）
 
 ### E5 反馈与看板（S7–S8）
 

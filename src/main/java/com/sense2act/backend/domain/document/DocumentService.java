@@ -53,7 +53,8 @@ public class DocumentService {
         this.organizationMapper = organizationMapper;
         this.signalMapper = signalMapper;
         this.embeddingService = embeddingService;
-        this.snapshotDir = Path.of(props.snapshotDir() == null ? "snapshots" : props.snapshotDir());
+        // normalize:默认 "./snapshots" 在 Windows 下带 "." 分量,snapshot() 的 startsWith 防护会误杀合法路径
+        this.snapshotDir = Path.of(props.snapshotDir() == null ? "snapshots" : props.snapshotDir()).normalize();
     }
 
     // ---------- 查询 ----------
