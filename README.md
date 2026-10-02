@@ -73,6 +73,11 @@ python scripts/seed_s4_signals.py
 # S5 演示链路③(E3-7):模拟调查 Agent 领取 → start → context → 两轮 steps/questions 留痕
 # 种下 1 条 investigating 调查(2 轮步骤 + 2 个问题,token_used>0);已 seeded 则跳过
 python scripts/seed_s5_investigation.py
+
+# S6 演示链路④(E4-7):在链路③的调查上收尾 —— 登记 3 条本库证据 → 问题带证据 clarified
+# → 提交报告(3 结论覆盖三种 nature、2 建议、图谱 1 事件 + 3 主体)→ complete(信号 → confirmed)
+# 顺手把 md 导出存到 <report_id>.md;已 seeded 则跳过
+python scripts/seed_s6_report.py
 ```
 
 调查时间线实时观察(契约 §7;EventSource 设不了 Authorization 头,JWT 走 `?token=`):

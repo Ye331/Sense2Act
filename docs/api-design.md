@@ -154,6 +154,8 @@ Base URL：`/api/v1`。REST + SSE，JSON。接口文档由 springdoc-openapi 生
 
 导出：md 直接返回；pdf 异步生成（202 + task_id）。
 
+落地进度（S6）：`GET /reports`（investigation_id / date_from / date_to 筛选，分页）与详情已交付，详情即上方形状（另带 signal_id / status / created_at 增量字段）；`GET /evidences/{id}` 与 `/snapshot` 已交付；`GET /reports/{id}/export?format=md|pdf` 已交付（md 同步回 text/markdown，pdf 回 202 + task_id 占位，真排版 S8 视 OQ5）。反馈接口 `POST /reports/{id}/feedback` 属 E5（S7）。
+
 ## 7. SSE 事件协议
 
 `GET /investigations/{id}/stream`：调查进度流。`id` 字段等于 step 的 seq，客户端重连带 `Last-Event-ID`，服务端从 steps 表补发（含 start / budget_update 等派生步骤，重连不丢状态事件）。25 秒一次心跳注释。JWT 可经 `?token=` 传（同全局流）。
@@ -296,7 +298,7 @@ PUT 全量必填（缺字段 40001），即时生效于后续自动触发；max_
 
 后端没有工具的概念。Agent 服务查数据用 `/documents`、`/organizations`（X-Internal-Key），把这些接口和它自己接的外部源封装成它自己的工具；工具调用记录作为 steps（type=tool_call）上报，产出经 evidences 接口登记。
 
-落地进度（S5）：领取 / start / context / steps / questions 已交付；evidences 登记与 report / complete / fail 属 E4（S6）。steps 的事件名即 §7 词表——后端派生事件（investigation_started / budget_update / investigation_stopped）由对应接口产生，Agent 直报 40001。
+落地进度（S6）：§9.3 表内接口全部交付。evidences 登记两变体——引本库文档传 doc_id（回填 url/title/published_at），外部内容传 url/title/excerpt/published_at（后端 5s 超时抓快照、共 3 次尝试、SHA-256 入库，失败整条拒收 42201，D4）；report 提交时 claims 证据引用整份校验（42201），调查转 reporting 并留 report_ready 步骤；complete 要求已有报告（否则 42201）并置信号 confirmed（D6）；fail 任意非终态可调，信号回退 pending。一调查一报告（investigation_id 唯一），重复提交 40901。ReportDraft 的 token_usage 仅作对账参考：预算与 meta 一律以 steps 累计为准（D5）。steps 的事件名即 §7 词表——后端派生事件（investigation_started / budget_update / investigation_stopped / report_ready / investigation_completed / investigation_failed）由对应接口产生，Agent 直报 40001。
 
 ReportDraft：
 
@@ -331,3 +333,4 @@ ReportDraft：
 | --- | --- | --- |
 | 2026-09-25 | 初稿 | 全部接口首次定义 |
 | 2026-10-02 | 增补 | §7 新增可选事件 investigation_stopped（stop 接口派生）；§5 明确 steps 响应 {items, next_cursor} 形状与 stop 的信号回退语义。均为新增/澄清，非破坏性 |
+| 2026-10-02 | 增补 | S6 交付：§9.3 evidences / report / complete / fail 落地（含义见表，无形状变更）；§6 报告查询 / 证据查询 / 导出三组只读接口与详情增量字段（signal_id/status/created_at）落地。均为新增，非破坏性 |

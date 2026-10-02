@@ -18,6 +18,8 @@ import com.sense2act.backend.domain.org.Organization;
 import com.sense2act.backend.domain.org.OrganizationMapper;
 import com.sense2act.backend.domain.policy.InvestigationPolicy;
 import com.sense2act.backend.domain.policy.PolicyService;
+import com.sense2act.backend.domain.report.Report;
+import com.sense2act.backend.domain.report.ReportMapper;
 import com.sense2act.backend.domain.signal.Signal;
 import com.sense2act.backend.domain.signal.SignalMapper;
 import org.springframework.context.ApplicationEventPublisher;
@@ -51,17 +53,18 @@ public class InvestigationService {
             Investigation.STATUS_COMPLETED, Investigation.STATUS_FAILED, Investigation.STATUS_STOPPED);
 
     /** 契约 §7 事件名 → 步骤类型(data-model §2)。 */
-    private static final Map<String, String> TYPE_BY_EVENT = Map.of(
-            "questions_generated", InvestigationStep.TYPE_QUESTION,
-            "tool_selected", InvestigationStep.TYPE_TOOL_SELECT,
-            "tool_completed", InvestigationStep.TYPE_TOOL_CALL,
-            "reflection_updated", InvestigationStep.TYPE_REFLECTION,
-            "round_started", InvestigationStep.TYPE_STATUS_CHANGE,
-            "investigation_started", InvestigationStep.TYPE_STATUS_CHANGE,
-            "budget_update", InvestigationStep.TYPE_STATUS_CHANGE,
-            "investigation_completed", InvestigationStep.TYPE_STATUS_CHANGE,
-            "investigation_failed", InvestigationStep.TYPE_STATUS_CHANGE,
-            "investigation_stopped", InvestigationStep.TYPE_STATUS_CHANGE);
+    private static final Map<String, String> TYPE_BY_EVENT = Map.ofEntries(
+            Map.entry("questions_generated", InvestigationStep.TYPE_QUESTION),
+            Map.entry("tool_selected", InvestigationStep.TYPE_TOOL_SELECT),
+            Map.entry("tool_completed", InvestigationStep.TYPE_TOOL_CALL),
+            Map.entry("reflection_updated", InvestigationStep.TYPE_REFLECTION),
+            Map.entry("round_started", InvestigationStep.TYPE_STATUS_CHANGE),
+            Map.entry("investigation_started", InvestigationStep.TYPE_STATUS_CHANGE),
+            Map.entry("budget_update", InvestigationStep.TYPE_STATUS_CHANGE),
+            Map.entry("report_ready", InvestigationStep.TYPE_STATUS_CHANGE),
+            Map.entry("investigation_completed", InvestigationStep.TYPE_STATUS_CHANGE),
+            Map.entry("investigation_failed", InvestigationStep.TYPE_STATUS_CHANGE),
+            Map.entry("investigation_stopped", InvestigationStep.TYPE_STATUS_CHANGE));
 
     /** Agent 可直接上报的事件;investigation_started/stopped/budget_update 由后端接口派生,completed/failed 属 E4-3。 */
     private static final Set<String> AGENT_EVENTS = Set.of(
@@ -80,6 +83,7 @@ public class InvestigationService {
     private final DocumentMapper documentMapper;
     private final OrganizationMapper organizationMapper;
     private final PolicyService policyService;
+    private final ReportMapper reportMapper;
     private final AppProperties props;
     private final ApplicationEventPublisher publisher;
 
@@ -87,7 +91,8 @@ public class InvestigationService {
                                 QuestionMapper questionMapper, EvidenceMapper evidenceMapper,
                                 SignalMapper signalMapper, DocumentMapper documentMapper,
                                 OrganizationMapper organizationMapper, PolicyService policyService,
-                                AppProperties props, ApplicationEventPublisher publisher) {
+                                ReportMapper reportMapper, AppProperties props,
+                                ApplicationEventPublisher publisher) {
         this.investigationMapper = investigationMapper;
         this.stepMapper = stepMapper;
         this.questionMapper = questionMapper;
@@ -96,6 +101,7 @@ public class InvestigationService {
         this.documentMapper = documentMapper;
         this.organizationMapper = organizationMapper;
         this.policyService = policyService;
+        this.reportMapper = reportMapper;
         this.props = props;
         this.publisher = publisher;
     }
@@ -465,7 +471,92 @@ public class InvestigationService {
         }
     }
 
+    // ---------- E4-3 收尾 ----------
+
+    /**
+     * 完成:reporting → completed(D6:信号 → confirmed)。契约要求有已提交报告才允许:
+     * investigating/created 一律 42201(无报告),终态 40901。报告随收尾转 published。
+     */
+    @Transactional
+    public InvView complete(String id) {
+        Investigation inv = mustGet(id);
+        if (Investigation.STATUS_REPORTING.equals(inv.getStatus())) {
+            long reports = reportMapper.selectCount(new LambdaQueryWrapper<Report>()
+                    .eq(Report::getInvestigationId, id));
+            if (reports == 0) {
+                throw BusinessException.unprocessable("无已提交报告,不可 complete: " + id);
+            }
+        } else if (Investigation.STATUS_CREATED.equals(inv.getStatus())
+                || Investigation.STATUS_INVESTIGATING.equals(inv.getStatus())) {
+            throw BusinessException.unprocessable("无已提交报告,不可 complete,当前: " + inv.getStatus());
+        } else {
+            throw BusinessException.conflict("调查已终态,不可 complete,当前: " + inv.getStatus());
+        }
+        int rows = investigationMapper.update(null, new LambdaUpdateWrapper<Investigation>()
+                .set(Investigation::getStatus, Investigation.STATUS_COMPLETED)
+                .set(Investigation::getFinishedAt, OffsetDateTime.now())
+                .eq(Investigation::getId, id)
+                .eq(Investigation::getStatus, Investigation.STATUS_REPORTING));
+        if (rows == 0) {
+            throw BusinessException.conflict("调查状态已被并发修改: " + id);
+        }
+        reportMapper.update(null, new LambdaUpdateWrapper<Report>()
+                .set(Report::getStatus, Report.STATUS_PUBLISHED)
+                .set(Report::getUpdatedAt, OffsetDateTime.now())
+                .eq(Report::getInvestigationId, id)
+                .eq(Report::getStatus, Report.STATUS_DRAFT));
+        writeStep(id, inv.getCurrentRound(), InvestigationStep.TYPE_STATUS_CHANGE, "investigation_completed",
+                Map.of("status", Investigation.STATUS_COMPLETED,
+                        "rounds", inv.getCurrentRound(),
+                        "token_used", inv.getTokenUsed()), 0);
+        signalMapper.update(null, new LambdaUpdateWrapper<Signal>()
+                .set(Signal::getStatus, "confirmed")
+                .eq(Signal::getId, inv.getSignalId())
+                .eq(Signal::getStatus, "investigating"));
+        return InvView.from(mustGet(id));
+    }
+
+    /** 失败:任意非终态 → failed(error 必填),信号回退 pending(同 stop/TTL 口径)。 */
+    @Transactional
+    public InvView fail(String id, String error) {
+        if (error == null || error.isBlank()) {
+            throw BusinessException.badRequest("error 必填");
+        }
+        Investigation inv = mustGet(id);
+        if (Investigation.STATUS_COMPLETED.equals(inv.getStatus())
+                || Investigation.STATUS_FAILED.equals(inv.getStatus())
+                || Investigation.STATUS_STOPPED.equals(inv.getStatus())) {
+            throw BusinessException.conflict("调查已终态,不可 fail,当前: " + inv.getStatus());
+        }
+        int rows = investigationMapper.update(null, new LambdaUpdateWrapper<Investigation>()
+                .set(Investigation::getStatus, Investigation.STATUS_FAILED)
+                .set(Investigation::getError, error.strip())
+                .set(Investigation::getFinishedAt, OffsetDateTime.now())
+                .eq(Investigation::getId, id)
+                .in(Investigation::getStatus, Investigation.STATUS_CREATED, Investigation.STATUS_INVESTIGATING,
+                        Investigation.STATUS_REPORTING));
+        if (rows == 0) {
+            throw BusinessException.conflict("调查状态已被并发修改: " + id);
+        }
+        writeStep(id, inv.getCurrentRound(), InvestigationStep.TYPE_STATUS_CHANGE, "investigation_failed",
+                Map.of("error", error.strip(), "last_round", inv.getCurrentRound()), 0);
+        signalMapper.update(null, new LambdaUpdateWrapper<Signal>()
+                .set(Signal::getStatus, "pending")
+                .eq(Signal::getId, inv.getSignalId())
+                .eq(Signal::getStatus, "investigating"));
+        return InvView.from(mustGet(id));
+    }
+
     // ---------- 内部 ----------
+
+    /** 供 E4 报告链路落派生步骤(report_ready 等),事件名词表走 §7 后端派生集合。 */
+    public void writeDerivedStep(String investigationId, int round, String event, Map<String, Object> payload) {
+        String type = TYPE_BY_EVENT.get(event);
+        if (type == null) {
+            throw new IllegalArgumentException("未知派生事件名: " + event);
+        }
+        writeStep(investigationId, round, type, event, payload, 0);
+    }
 
     private BigDecimal unitPrice() {
         BigDecimal price = props.investigation().tokenUnitPrice();
