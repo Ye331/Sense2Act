@@ -72,6 +72,9 @@ class SignalApiTest {
 
     String orgA;
     String titleA;
+    String docA;
+    String docB;
+    String docC;
     String sigA;   // docA(有机构) 0.80,双命中,pending → 后确认
     String sigB;   // docB(无机构) 0.42,pending → 后忽略
     String sigC;   // docC(有机构) 0.30,pending → 后手动开调查
@@ -88,10 +91,10 @@ class SignalApiTest {
         organizationMapper.insert(org);
         orgA = org.getId();
 
-        String docA = insertDoc("qa-" + suffix, orgA, "3250000.00");
+        docA = insertDoc("qa-" + suffix, orgA, "3250000.00");
         titleA = "信号查询文档-qa-" + suffix;
-        String docB = insertDoc("qb-" + suffix, null, null);
-        String docC = insertDoc("qc-" + suffix, orgA, "100.00");
+        docB = insertDoc("qb-" + suffix, null, null);
+        docC = insertDoc("qc-" + suffix, orgA, "100.00");
 
         // 三条都低于默认阈值 0.85,保持 pending,状态变化由测试自己驱动
         sigA = push(docA, """
@@ -309,6 +312,26 @@ class SignalApiTest {
                         .content("{\"status\":\"pending\"}"))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value(40001));
+    }
+
+    @Test
+    @Order(8)
+    void 文档联动_signal_count与related_signals接真值() throws Exception {
+        seed();
+        String token = "Bearer " + login("viewer@sense2act.local", "viewer123");
+        // docA 恰有 1 条信号(sigA,Order(7) 已确认),列表计数与详情内嵌都应为真值
+        mockMvc.perform(get("/api/v1/documents/{id}", docA).header("Authorization", token))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.signal_count").value(1))
+                .andExpect(jsonPath("$.data.related_signals.length()").value(1))
+                .andExpect(jsonPath("$.data.related_signals[0].id").value(sigA))
+                .andExpect(jsonPath("$.data.related_signals[0].status").value("confirmed"))
+                .andExpect(jsonPath("$.data.related_signals[0].score").value("0.800"));   // NUMERIC(4,3) 字符串小数
+        // docB 也有 1 条(被忽略的 sigB),docC 的信号在调查中
+        mockMvc.perform(get("/api/v1/documents/{id}", docB).header("Authorization", token))
+                .andExpect(jsonPath("$.data.related_signals[0].status").value("dismissed"));
+        mockMvc.perform(get("/api/v1/documents/{id}", docC).header("Authorization", token))
+                .andExpect(jsonPath("$.data.related_signals[0].status").value("investigating"));
     }
 
     // ---------- 工具 ----------
