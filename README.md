@@ -65,6 +65,10 @@ python scripts/embedding_stub.py        # 0.0.0.0:8901,POST /embed,512 维,确�
 
 # S2 采集链路演示:建源 → 领取 → 推文档(含重复/坏条目)→ 回报 → 手动触发
 python scripts/demo-s2.py
+
+# S4 演示链路②(E2-8):拉检测队列 → 推 4 条信号 → 回报扫描完成,可重复执行
+# 其中 score=0.92 的一条超默认阈值 0.85,自动开调查(investigating);二跑 signal_id 不变 —— 幂等即验收
+python scripts/seed_s4_signals.py
 ```
 
 灌完后检索示例（`documents`/`organizations` 的 GET 同时接受 JWT 与 `X-Internal-Key`，见 api-design §1）：

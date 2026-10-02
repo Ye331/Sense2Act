@@ -10,6 +10,50 @@
     "description" : "Generated server url"
   } ],
   "paths" : {
+    "/api/v1/admin/investigation-policies" : {
+      "get" : {
+        "tags" : [ "admin-policy-controller" ],
+        "operationId" : "policies",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponsePolicyView"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "admin-policy-controller" ],
+        "operationId" : "update",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PolicyPut"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponsePolicyView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/sources" : {
       "get" : {
         "tags" : [ "source-controller" ],
@@ -97,6 +141,60 @@
         }
       }
     },
+    "/api/v1/signals/{id}/investigate" : {
+      "post" : {
+        "tags" : [ "signal-controller" ],
+        "operationId" : "investigate",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseMapStringObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/internal/signals" : {
+      "post" : {
+        "tags" : [ "internal-signal-controller" ],
+        "operationId" : "push",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/SignalPush"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponsePushResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/internal/ingest-runs" : {
       "post" : {
         "tags" : [ "internal-ingest-controller" ],
@@ -128,7 +226,7 @@
     "/api/v1/internal/documents" : {
       "post" : {
         "tags" : [ "internal-ingest-controller" ],
-        "operationId" : "push",
+        "operationId" : "push_1",
         "requestBody" : {
           "content" : {
             "application/json" : {
@@ -146,6 +244,34 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ApiResponseBatchResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/internal/detection-scan-complete" : {
+      "post" : {
+        "tags" : [ "internal-signal-controller" ],
+        "operationId" : "scanComplete",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ScanComplete"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseMapStringObject"
                 }
               }
             }
@@ -181,6 +307,50 @@
         }
       }
     },
+    "/api/v1/admin/watch-profiles" : {
+      "get" : {
+        "tags" : [ "admin-policy-controller" ],
+        "operationId" : "listProfiles",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseListProfileView"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "admin-policy-controller" ],
+        "operationId" : "createProfile",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ProfilePost"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseProfileView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/sources/{id}" : {
       "delete" : {
         "tags" : [ "source-controller" ],
@@ -208,7 +378,7 @@
       },
       "patch" : {
         "tags" : [ "source-controller" ],
-        "operationId" : "update",
+        "operationId" : "update_1",
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
@@ -241,6 +411,42 @@
         }
       }
     },
+    "/api/v1/signals/{id}/status" : {
+      "patch" : {
+        "tags" : [ "signal-controller" ],
+        "operationId" : "decide",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/StatusPatch"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseSignalView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/users/me" : {
       "get" : {
         "tags" : [ "user-controller" ],
@@ -259,10 +465,113 @@
         }
       }
     },
+    "/api/v1/signals" : {
+      "get" : {
+        "tags" : [ "signal-controller" ],
+        "operationId" : "list_1",
+        "parameters" : [ {
+          "name" : "status",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "rule_type",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "score_gte",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "org_id",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "date_from",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "date_to",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "page_size",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponsePageResultSignalView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/signals/{id}" : {
+      "get" : {
+        "tags" : [ "signal-controller" ],
+        "operationId" : "detail",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseSignalView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/organizations/{id}" : {
       "get" : {
         "tags" : [ "org-controller" ],
-        "operationId" : "detail",
+        "operationId" : "detail_1",
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
@@ -303,10 +612,37 @@
         }
       }
     },
+    "/api/v1/internal/detection-queue" : {
+      "get" : {
+        "tags" : [ "internal-signal-controller" ],
+        "operationId" : "queue_1",
+        "parameters" : [ {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseMapStringObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/documents" : {
       "get" : {
         "tags" : [ "document-controller" ],
-        "operationId" : "list_1",
+        "operationId" : "list_2",
         "parameters" : [ {
           "name" : "keyword",
           "in" : "query",
@@ -418,7 +754,7 @@
     "/api/v1/documents/{id}" : {
       "get" : {
         "tags" : [ "document-controller" ],
-        "operationId" : "detail_1",
+        "operationId" : "detail_2",
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
@@ -467,10 +803,95 @@
           }
         }
       }
+    },
+    "/api/v1/admin/watch-profiles/{id}" : {
+      "delete" : {
+        "tags" : [ "admin-policy-controller" ],
+        "operationId" : "deleteProfile",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseObject"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components" : {
     "schemas" : {
+      "PolicyPut" : {
+        "type" : "object",
+        "properties" : {
+          "auto_investigate_threshold" : {
+            "type" : "number"
+          },
+          "max_concurrent_investigations" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "default_max_rounds" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "default_token_budget" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "ApiResponsePolicyView" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/PolicyView"
+          }
+        }
+      },
+      "PolicyView" : {
+        "type" : "object",
+        "properties" : {
+          "auto_investigate_threshold" : {
+            "type" : "number"
+          },
+          "max_concurrent_investigations" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "default_max_rounds" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "default_token_budget" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "updated_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
       "SourceReq" : {
         "type" : "object",
         "properties" : {
@@ -565,6 +986,79 @@
           }
         }
       },
+      "ApiResponseMapStringObject" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object"
+            }
+          }
+        }
+      },
+      "SignalPush" : {
+        "type" : "object",
+        "properties" : {
+          "document" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "hits" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "object"
+              }
+            }
+          },
+          "score" : {
+            "type" : "number"
+          },
+          "detector" : {
+            "type" : "string"
+          }
+        }
+      },
+      "ApiResponsePushResult" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/PushResult"
+          }
+        }
+      },
+      "PushResult" : {
+        "type" : "object",
+        "properties" : {
+          "signal_id" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "auto_investigated" : {
+            "type" : "boolean"
+          }
+        }
+      },
       "RunError" : {
         "type" : "object",
         "properties" : {
@@ -598,24 +1092,6 @@
             "type" : "array",
             "items" : {
               "$ref" : "#/components/schemas/RunError"
-            }
-          }
-        }
-      },
-      "ApiResponseMapStringObject" : {
-        "type" : "object",
-        "properties" : {
-          "code" : {
-            "type" : "integer",
-            "format" : "int32"
-          },
-          "message" : {
-            "type" : "string"
-          },
-          "data" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "object"
             }
           }
         }
@@ -672,6 +1148,20 @@
             "items" : {
               "type" : "string"
             }
+          }
+        }
+      },
+      "ScanComplete" : {
+        "type" : "object",
+        "properties" : {
+          "document_ids" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "detector" : {
+            "type" : "string"
           }
         }
       },
@@ -738,6 +1228,144 @@
           }
         }
       },
+      "ProfilePost" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string"
+          },
+          "note" : {
+            "type" : "string"
+          }
+        }
+      },
+      "ApiResponseProfileView" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/ProfileView"
+          }
+        }
+      },
+      "ProfileView" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "enabled" : {
+            "type" : "boolean"
+          },
+          "note" : {
+            "type" : "string"
+          },
+          "created_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
+      "StatusPatch" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "string"
+          },
+          "reason" : {
+            "type" : "string"
+          }
+        }
+      },
+      "ApiResponseSignalView" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/SignalView"
+          }
+        }
+      },
+      "DocRef" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "amount" : {
+            "type" : "number"
+          },
+          "publish_date" : {
+            "type" : "string",
+            "format" : "date"
+          }
+        }
+      },
+      "OrgRef" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          }
+        }
+      },
+      "SignalView" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "document" : {
+            "$ref" : "#/components/schemas/DocRef"
+          },
+          "org" : {
+            "$ref" : "#/components/schemas/OrgRef"
+          },
+          "hits" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "object"
+              }
+            }
+          },
+          "score" : {
+            "type" : "number"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "investigation_id" : {
+            "type" : "string"
+          },
+          "created_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
       "ApiResponseUserInfo" : {
         "type" : "object",
         "properties" : {
@@ -775,6 +1403,44 @@
             "type" : "array",
             "items" : {
               "$ref" : "#/components/schemas/SourceView"
+            }
+          },
+          "total" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "page" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "page_size" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "ApiResponsePageResultSignalView" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/PageResultSignalView"
+          }
+        }
+      },
+      "PageResultSignalView" : {
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/SignalView"
             }
           },
           "total" : {
@@ -886,17 +1552,6 @@
             "items" : {
               "$ref" : "#/components/schemas/DocView"
             }
-          }
-        }
-      },
-      "OrgRef" : {
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string"
-          },
-          "name" : {
-            "type" : "string"
           }
         }
       },
@@ -1044,7 +1699,40 @@
           }
         }
       },
+      "ApiResponseListProfileView" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ProfileView"
+            }
+          }
+        }
+      },
       "ApiResponseVoid" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "type" : "object"
+          }
+        }
+      },
+      "ApiResponseObject" : {
         "type" : "object",
         "properties" : {
           "code" : {

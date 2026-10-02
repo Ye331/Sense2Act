@@ -93,10 +93,22 @@ name（规范化）、aliases（JSONB 归一别名）、type（buyer/supplier/go
 | 列 | 类型 | 说明 |
 | --- | --- | --- |
 | document_id / org_id | FK | |
+| detector | VARCHAR(100) | 推送方标识，幂等键成员 |
 | hits | JSONB | `[{rule_id, rule_version, rule_type, weight, detail}]`，外部服务推来的 |
 | score | NUMERIC(4,3) | 外部产出，后端只消费 |
 | status | VARCHAR | pending / investigating / confirmed / dismissed，CAS 更新 |
+| investigation_id | FK | 自动/手动开调查后回填 |
 | decided_by / decided_at / decision_reason | | 人工决策留痕，dismiss 必填 reason |
+
+UNIQUE (document_id, detector, hits) 是推送幂等键：同文档同检测器同命中重复推返回已有 signal_id。jsonb 相等忽略键序，但要求键集一致（值为 null 的键也算键）。索引 (status, created_at desc)、(org_id)、(score desc)。
+
+### investigation_policies（调查策略）
+
+单行配置表（id 恒为 1，CHECK 约束保证）。auto_investigate_threshold（默认 0.85，score ≥ 阈值自动开调查）、max_concurrent_investigations（默认 3，start 时生效——D14：created 排队不限量，超出上限的 start 返回 40901）、default_max_rounds（默认 8）、default_token_budget（默认 60000）、updated_at。admin 经 GET/PUT /admin/investigation-policies 读写，PUT 全量必填、即时生效于后续自动触发。
+
+### watch_profiles（关注画像）
+
+id（wpr_ 前缀）、name（唯一，如"医疗AI"，semantic_match 的 detail.profile 引用）、enabled（默认 true）、note。admin 经 /admin/watch-profiles 维护；detection-queue 每项内嵌"启用中的画像名"列表（D13：单独建表而非存 policies 的 JSONB，可查可索引）。V3 种子预置：医疗AI / 数据平台 / 医疗网络安全。
 
 ### investigations（调查）
 
