@@ -405,12 +405,13 @@ S8 是显式缓冲：只排 C 级故事、联调与打磨，不加新范围。
 | D9 | detection-queue limit 默认 50、上限 100 | E2-1 |
 | D10 | ORM 选 MyBatis-Plus（2026-10-01 拍板，OQ4 关闭，此后不再更换） | 全局 |
 | D11 | 密码哈希选 pbkdf2（Spring Security 内置，迭代数按 OWASP 建议），不引 BouncyCastle | E0-4 |
+| D12 | embedding 全部由外部计算：文档向量入库后由后端经 EMBEDDING_ENDPOINT 补算，查询向量检索时同端点实时算（2026-10-02 拍板，OQ1 关闭）。后端不含模型/提示词，仅一次无状态数据面出站调用，登记为架构边界的例外 | E1-6 |
 
 ## 9. 开放问题（带决策时点）
 
 | # | 问题 | 建议 | 决策时点 |
 | --- | --- | --- | --- |
-| OQ1 | documents.embedding 由谁计算？后端不算向量，但 semantic 检索需要 | 爬虫推送带可选 embedding 字段（非破坏性新增，登记变更记录）；未带则该文档不进语义结果；信号服务的语义匹配用它自算的向量，契约不变 | S2 计划会前 |
+| ~~OQ1~~ | ~~documents.embedding 由谁计算？~~ **已决（D12）**：外部算——后端配置 EMBEDDING_ENDPOINT，入库补算 + 查询实时算；端点不可用时文档不进语义结果、不报错（关键词兜底） | D12 | 已关闭 |
 | OQ2 | detection-queue 里的 profiles（关注画像）存在哪？data-model 无对应表 | investigation_policies 加 watch_profiles JSONB 数组，admin 一个 PUT 可改；不建新表 | S4 计划会前 |
 | OQ3 | max_concurrent_investigations 的语义？建调查时挡还是 start 时挡 | created 排队不限；start 时超出并发上限返回 40901，Agent 稍后重试（与"被占用"同错误码，契约兼容） | S4 计划会前 |
 | OQ5 | pdf 导出的真实度 | 原型期 202 + 轮询占位；真排版视 S8 余量 | S6 计划会 |
