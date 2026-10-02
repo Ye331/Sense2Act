@@ -3,6 +3,8 @@ package com.sense2act.backend.domain.document;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sense2act.backend.common.BusinessException;
 import com.sense2act.backend.common.PageParams;
 import com.sense2act.backend.common.PageResult;
@@ -10,6 +12,8 @@ import com.sense2act.backend.config.AppProperties;
 import com.sense2act.backend.domain.embedding.EmbeddingService;
 import com.sense2act.backend.domain.org.Organization;
 import com.sense2act.backend.domain.org.OrganizationMapper;
+import com.sense2act.backend.domain.signal.Signal;
+import com.sense2act.backend.domain.signal.SignalMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,13 +43,15 @@ public class DocumentService {
 
     private final DocumentMapper documentMapper;
     private final OrganizationMapper organizationMapper;
+    private final SignalMapper signalMapper;
     private final EmbeddingService embeddingService;
     private final Path snapshotDir;
 
     public DocumentService(DocumentMapper documentMapper, OrganizationMapper organizationMapper,
-                           EmbeddingService embeddingService, AppProperties props) {
+                           SignalMapper signalMapper, EmbeddingService embeddingService, AppProperties props) {
         this.documentMapper = documentMapper;
         this.organizationMapper = organizationMapper;
+        this.signalMapper = signalMapper;
         this.embeddingService = embeddingService;
         this.snapshotDir = Path.of(props.snapshotDir() == null ? "snapshots" : props.snapshotDir());
     }
@@ -94,9 +100,19 @@ public class DocumentService {
     public DocDetailView detail(String id) {
         Document d = mustGet(id);
         OrgRef org = d.getOrgId() == null ? null : orgRef(d.getOrgId());
+        long count = signalMapper.selectCount(new LambdaQueryWrapper<Signal>()
+                .eq(Signal::getDocumentId, id));
+        List<Map<String, Object>> related = signalMapper.selectList(new LambdaQueryWrapper<Signal>()
+                        .eq(Signal::getDocumentId, id)
+                        .orderByDesc(Signal::getCreatedAt)
+                        .last("LIMIT 10"))
+                .stream()
+                .map(s -> Map.<String, Object>of(
+                        "id", s.getId(), "score", s.getScore().toPlainString(), "status", s.getStatus()))
+                .toList();
         return new DocDetailView(d.getId(), d.getDocType(), d.getTitle(), org, d.getAmount(),
                 d.getPublishDate(), d.getDeadline(), d.getRegion(), d.getCategory(), d.getUrl(),
-                signalCount(), d.getContentText(), d.getRaw(), List.of());
+                (int) count, d.getContentText(), d.getRaw(), related);
     }
 
     /** 机构画像的"近期文档":publish_date desc 前 N 条。 */
@@ -134,7 +150,7 @@ public class DocumentService {
                           String url, Integer signalCount) {
     }
 
-    /** 详情 = 列表字段 + content_text + raw + related_signals(E2-2 落地前恒为空数组)。 */
+    /** 详情 = 列表字段 + content_text + raw + related_signals(近 10 条,含 id/score/status,E2-2 起接真值)。 */
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public record DocDetailView(String id, String docType, String title, OrgRef org,
                                 @JsonFormat(shape = JsonFormat.Shape.STRING) BigDecimal amount,
@@ -148,11 +164,12 @@ public class DocumentService {
         Map<String, String> names = orgIds.isEmpty() ? Map.of()
                 : organizationMapper.selectBatchIds(orgIds).stream()
                         .collect(Collectors.toMap(Organization::getId, Organization::getName));
+        Map<String, Long> counts = signalCounts(docs.stream().map(Document::getId).toList());
         return docs.stream()
                 .map(d -> new DocView(d.getId(), d.getDocType(), d.getTitle(),
                         d.getOrgId() == null ? null : new OrgRef(d.getOrgId(), names.get(d.getOrgId())),
                         d.getAmount(), d.getPublishDate(), d.getDeadline(), d.getRegion(), d.getCategory(),
-                        d.getUrl(), signalCount()))
+                        d.getUrl(), counts.getOrDefault(d.getId(), 0L).intValue()))
                 .toList();
     }
 
@@ -161,9 +178,17 @@ public class DocumentService {
         return org == null ? new OrgRef(orgId, null) : new OrgRef(org.getId(), org.getName());
     }
 
-    /** signals 表 E2-2 才落地,此前 signal_count 恒 0、related_signals 恒空,契约字段先占位。 */
-    private static int signalCount() {
-        return 0;
+    /** 列表页 signal_count 批量计数(按 document_id 聚一次,避免逐行查)。 */
+    private Map<String, Long> signalCounts(java.util.Collection<String> docIds) {
+        if (docIds.isEmpty()) {
+            return Map.of();
+        }
+        return signalMapper.selectMaps(new QueryWrapper<Signal>()
+                        .select("document_id", "count(*) as cnt")
+                        .in("document_id", docIds)
+                        .groupBy("document_id"))
+                .stream()
+                .collect(Collectors.toMap(r -> (String) r.get("document_id"), r -> ((Number) r.get("cnt")).longValue()));
     }
 
     // ---------- 参数解析与校验 ----------
