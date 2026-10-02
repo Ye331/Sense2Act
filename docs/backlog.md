@@ -95,34 +95,34 @@
 #### E1-1 信息源管理 · M · M
 作为 admin，我要增删改查信息源并配置采集计划，以便爬虫服务按计划领取。
 
-- [ ] `GET/POST/PATCH/DELETE /sources` + `POST /sources/{id}/run`（仅 admin，越权 40301）
-- [ ] config（JSONB）原样存取；分页符合约定
-- [ ] `run` 后该源立即出现在 ingest-queue 结果中（决策 D2）
+- [x] `GET/POST/PATCH/DELETE /sources` + `POST /sources/{id}/run`（仅 admin，越权 40301）
+- [x] config（JSONB）原样存取；分页符合约定
+- [x] `run` 后该源立即出现在 ingest-queue 结果中（决策 D2）
 
 #### E1-2 到期源下发 · M · M · 依赖 E1-1
 作为爬虫服务，我要领取当前到期的源及其全部配置，以便抓取解析。
 
-- [ ] 到期判定只按 `schedule_cron` + `last_run_at`，在后端完成
-- [ ] 响应含 adapter / url / config / last_run_at，与 api-design §9.1 一致
-- [ ] 领取不产生副作用、不加锁：重复领取同一结果（去重兜底在入库）
-- [ ] `last_run_at` 只由 ingest-runs 更新，领取不更新
+- [x] 到期判定只按 `schedule_cron` + `last_run_at`，在后端完成
+- [x] 响应含 adapter / url / config / last_run_at，与 api-design §9.1 一致
+- [x] 领取不产生副作用、不加锁：重复领取同一结果（去重兜底在入库）
+- [x] `last_run_at` 只由 ingest-runs 更新，领取不更新
 
 #### E1-3 批量推送文档 · M · L · 依赖 E1-2
 作为爬虫服务，我要把解析好的文档批量推给后端，以便进入统一信息库。
 
-- [ ] content_hash 与归一化 URL 双重去重，重复计入 duplicates，不算失败
-- [ ] 单条失败跳过并计入 failed，不阻塞批次其余条目
-- [ ] org_name 归一（空白/全半角/别名）后 upsert organizations，响应条目带 org_id
-- [ ] raw_html 落快照记 snapshot_key；新文档 `signal_scanned=false`
-- [ ] 入库后同步重算该 org × category 的 org_stats
-- [ ] 响应 `{accepted, duplicates, failed, document_ids}` 与契约一致
+- [x] content_hash 与归一化 URL 双重去重，重复计入 duplicates，不算失败
+- [x] 单条失败跳过并计入 failed，不阻塞批次其余条目
+- [x] org_name 归一（空白/全半角/别名）后 upsert organizations，响应条目带 org_id（org_id 落 documents 表并经测试断言；§9.1 契约的响应形状无逐条字段，以契约为准）
+- [x] raw_html 落快照记 snapshot_key；新文档 `signal_scanned=false`
+- [x] 入库后同步重算该 org × category 的 org_stats
+- [x] 响应 `{accepted, duplicates, failed, document_ids}` 与契约一致
 
 #### E1-4 运行报告与源健康 · M · S · 依赖 E1-3
 作为 admin，我要看到每次采集的成败统计，以便坏源自动降级暴露。
 
-- [ ] `POST /internal/ingest-runs` 更新 last_run_status；错误逐条入 ingest_errors（stage 枚举校验）
-- [ ] 连续失败自动降级、成功恢复（阈值见决策 D3）
-- [ ] 降级时发全局 SSE `source_degraded`（事件流本身在 E2-7 落地，此处只发事件）
+- [x] `POST /internal/ingest-runs` 更新 last_run_status；错误逐条入 ingest_errors（stage 枚举校验）
+- [x] 连续失败自动降级、成功恢复（阈值见决策 D3）
+- [x] 降级时发全局 SSE `source_degraded`（事件流本身在 E2-7 落地，此处只发事件：事务提交后发 Spring 事件，测试已断言 degraded/down 各触发、恢复不触发）
 
 #### E1-5 文档与机构查询 · M · L · 依赖 E1-3
 作为 analyst，我要多条件检索文档、看原文快照和采购单位画像，以便判断线索价值。
