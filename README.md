@@ -69,6 +69,21 @@ python scripts/demo-s2.py
 # S4 演示链路②(E2-8):拉检测队列 → 推 4 条信号 → 回报扫描完成,可重复执行
 # 其中 score=0.92 的一条超默认阈值 0.85,自动开调查(investigating);二跑 signal_id 不变 —— 幂等即验收
 python scripts/seed_s4_signals.py
+
+# S5 演示链路③(E3-7):模拟调查 Agent 领取 → start → context → 两轮 steps/questions 留痕
+# 种下 1 条 investigating 调查(2 轮步骤 + 2 个问题,token_used>0);已 seeded 则跳过
+python scripts/seed_s5_investigation.py
+```
+
+调查时间线实时观察(契约 §7;EventSource 设不了 Authorization 头,JWT 走 `?token=`):
+
+```bash
+TOKEN=$(curl -s -X POST http://127.0.0.1:8080/api/v1/auth/token -H 'Content-Type: application/json' \
+  -d '{"email":"analyst@sense2act.local","password":"analyst123"}' | sed 's/.*"token":"\([^"]*\)".*/\1/')
+INV=$(curl -s "http://127.0.0.1:8080/api/v1/investigations?status=investigating" \
+  -H "Authorization: Bearer $TOKEN" | sed 's/.*"items":\[{"id":"\([^"]*\)".*/\1/')
+# 连接即补发全部留痕步骤(id=seq),25s 心跳;断线后带 -H 'Last-Event-ID: <最后 seq>' 重连只补漏
+curl -N "http://127.0.0.1:8080/api/v1/investigations/$INV/stream?token=$TOKEN"
 ```
 
 灌完后检索示例（`documents`/`organizations` 的 GET 同时接受 JWT 与 `X-Internal-Key`，见 api-design §1）：

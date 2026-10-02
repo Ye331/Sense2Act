@@ -50,3 +50,8 @@ app:
     admin-password: ${SEED_ADMIN_PASSWORD:admin123}
     analyst-password: ${SEED_ANALYST_PASSWORD:analyst123}
     viewer-password: ${SEED_VIEWER_PASSWORD:viewer123}
+  investigation:
+    # D7:created 状态超过 TTL 未领取 → 定时任务置 failed
+    created-ttl: ${INVESTIGATION_CREATED_TTL:60m}
+    # E3-5:cost_estimate = token_used × 单价(元/token,演示口径)
+    token-unit-price: ${TOKEN_UNIT_PRICE:0.00003}

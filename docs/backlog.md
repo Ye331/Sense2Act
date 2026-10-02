@@ -205,52 +205,59 @@
 #### E3-1 领取与占用 · M · M · 依赖 E2-4
 作为 Agent 调查服务，我要领取 created 状态的调查并独占开始，以便多个实例互不冲突。
 
-- [ ] `GET /internal/investigations?status=created` 按 created_at asc 返回
-- [ ] `POST /internal/investigations/{id}/start` 用 CAS 抢占：并发仅一个成功，其余 40901；记 started_at
-- [ ] 非 created 状态 start → 40901
+- [x] `GET /internal/investigations?status=created` 按 created_at asc 返回
+- [x] `POST /internal/investigations/{id}/start` 用 CAS 抢占：并发仅一个成功，其余 40901；记 started_at
+- [x] 非 created 状态 start → 40901
+- [x] D14 并发上限在 start 时挡；"先计数后 CAS"在 READ COMMITTED 下有竞态，领取前先过 `pg_advisory_xact_lock` 独木桥（`@Update` 声明，`@Select`+void 会触发 MyBatis 的 void 结果映射异常）
+- [x] start 本身落一条 `investigation_started` 步骤（round=0），SSE 补发从领取开始完整可追溯
 
 #### E3-2 调查查询与上下文 · M · M · 依赖 E3-1
 作为 Agent 服务，我要一次拿齐上下文；作为 analyst，我要在用户接口里看调查列表和详情。
 
-- [ ] `GET /internal/investigations/{id}/context`：信号 hits + 文档 + 问题清单（open）+ 证据摘要 + 预算余量
-- [ ] `GET /investigations` 支持 signal_id / status / 日期筛选；详情含当前问题清单（api-design §5 结构）
+- [x] `GET /internal/investigations/{id}/context`：信号 hits + 文档 + 问题清单（open）+ 证据摘要 + 预算余量
+- [x] `GET /investigations` 支持 signal_id / status / 日期筛选；详情含当前问题清单（api-design §5 结构）
+- [x] evidences 表随 V4 先行建表（E4-1 只加登记 API）：E3-4 的引用校验需要真实目标表，不是游离占位
 
 #### E3-3 步骤留痕与进度流 · M · L · 依赖 E3-1
 作为 Agent 服务，我要上报步骤；作为 analyst，我要实时看到调查时间线。
 
-- [ ] `POST /internal/investigations/{id}/steps`：seq 在调查内单调唯一，写库即发 SSE，事件 id = seq
-- [ ] steps 的 event 名映射 api-design §7 的 SSE 事件表（question / tool_select / tool_call / reflection / status_change）
-- [ ] `GET /investigations/{id}/stream` 支持 Last-Event-ID 从 steps 表补发；25 秒心跳
-- [ ] `GET /investigations/{id}/steps` 游标分页
-- [ ] SSE 发布在事务提交后执行（同 E2-2 的 afterCommit 约束）
-- [ ] 超出 max_rounds 的步骤写入 → 42201
+- [x] `POST /internal/investigations/{id}/steps`：seq 在调查内单调唯一，写库即发 SSE，事件 id = seq
+- [x] steps 的 event 名映射 api-design §7 的 SSE 事件表（question / tool_select / tool_call / reflection / status_change）
+- [x] `GET /investigations/{id}/stream` 支持 Last-Event-ID 从 steps 表补发；25 秒心跳
+- [x] `GET /investigations/{id}/steps` 游标分页
+- [x] SSE 发布在事务提交后执行（同 E2-2 的 afterCommit 约束）
+- [x] 超出 max_rounds 的步骤写入 → 42201
+- [x] 事件名词表闸门：Agent 只可上报 round_started / questions_generated / tool_selected / tool_completed / reflection_updated；investigation_started / stopped / budget_update 由后端派生，completed / failed 属 E4-3，直报一律 40001
+- [x] SSE 流的 JWT 走 `?token=`（EventSource 设不了 Authorization 头）：SseTokenParamFilter 在认证链前折叠成标准头，仅对 GET 流路径生效
 
 #### E3-4 问题管理 · M · S · 依赖 E3-1
 作为 Agent 服务，我要登记和回答问题，以便"为什么查这个"可追溯。
 
-- [ ] `POST /internal/questions` 挂调查与轮次；`PATCH /internal/questions/{id}` 更新状态 / answer_summary / evidence_ids
-- [ ] 状态枚举 open / clarified / unresolved / abandoned，非法值 40001
-- [ ] evidence_ids 引用未登记证据 → 42201
+- [x] `POST /internal/questions` 挂调查与轮次；`PATCH /internal/questions/{id}` 更新状态 / answer_summary / evidence_ids
+- [x] 状态枚举 open / clarified / unresolved / abandoned，非法值 40001
+- [x] evidence_ids 引用未登记证据 → 42201（校验含归属：必须属于本调查）
+- [x] 坑位：wrapper `.set()` 写 jsonb 列不吃实体上的 @TableField typeHandler，必须显式传 mapping 串
 
 #### E3-5 预算记账 · M · M · 依赖 E3-3
 作为 admin，我要 token 预算被强制执行，以便成本不失控。
 
-- [ ] steps 的 token_usage 累加进 token_used，发 SSE `budget_update`
-- [ ] 超出 token_budget 后的 steps 写入 → 42201；报告提交与收尾接口不受限
-- [ ] cost_estimate 按配置的单价折算累计
+- [x] steps 的 token_usage 累加进 token_used，发 SSE `budget_update`
+- [x] 超出 token_budget 后的 steps 写入 → 42201；报告提交与收尾接口不受限
+- [x] cost_estimate 按配置的单价折算累计（`TOKEN_UNIT_PRICE`，默认 0.00003 元/token；恰好用满 = 预算允许，超出才拒）
 
 #### E3-6 停止与超时清理 · M · M · 依赖 E3-1
 作为 analyst，我要能停掉跑偏的调查；作为 admin，我要无人领取的调查自动清理。
 
-- [ ] `POST /investigations/{id}/stop`：investigating / reporting → stopped，记 finished_at，发 SSE
-- [ ] 定时任务：created 超过 TTL（决策 D7）→ failed（error 注明超时未领取），任务幂等
-- [ ] 状态机全集由测试覆盖：合法转移放行，非法转移 40901
+- [x] `POST /investigations/{id}/stop`：investigating / reporting → stopped，记 finished_at，发 SSE
+- [x] 定时任务：created 超过 TTL（决策 D7）→ failed（error 注明超时未领取），任务幂等
+- [x] 状态机全集由测试覆盖：合法转移放行，非法转移 40901
+- [x] stop / TTL 清理后信号回退 pending（可再人工决策）；同一信号不可再开新调查（investigations.signal_id 唯一），investigation_id 留作追溯
 
 #### E3-7 演示链路③（调查） · M · S · 依赖 E3-3、E2-8
 作为演示者，我要模拟 Agent 驱动脚本，以便演示时间线实时滚动。
 
-- [ ] 脚本 v1：领取 → start → context → 按 round 推 steps / questions（暂不含报告）
-- [ ] 种子：一条 investigating 状态的调查，含完整 steps 与 questions，可续看时间线
+- [x] 脚本 v1：领取 → start → context → 按 round 推 steps / questions（暂不含报告）
+- [x] 种子：一条 investigating 状态的调查，含完整 steps 与 questions，可续看时间线
 
 ### E4 证据与报告（S6）
 

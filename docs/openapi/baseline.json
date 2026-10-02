@@ -167,6 +167,32 @@
         }
       }
     },
+    "/api/v1/investigations/{id}/stop" : {
+      "post" : {
+        "tags" : [ "investigation-controller" ],
+        "operationId" : "stop",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseInvView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/internal/signals" : {
       "post" : {
         "tags" : [ "internal-signal-controller" ],
@@ -188,6 +214,96 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ApiResponsePushResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/internal/questions" : {
+      "post" : {
+        "tags" : [ "internal-question-controller" ],
+        "operationId" : "create_1",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/QuestionPost"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseQuestionView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/internal/investigations/{id}/steps" : {
+      "post" : {
+        "tags" : [ "internal-investigation-controller" ],
+        "operationId" : "postStep",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/StepPost"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseStepView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/internal/investigations/{id}/start" : {
+      "post" : {
+        "tags" : [ "internal-investigation-controller" ],
+        "operationId" : "start",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseInvView"
                 }
               }
             }
@@ -447,6 +563,42 @@
         }
       }
     },
+    "/api/v1/internal/questions/{id}" : {
+      "patch" : {
+        "tags" : [ "internal-question-controller" ],
+        "operationId" : "update_2",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/QuestionPatch"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseQuestionView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/users/me" : {
       "get" : {
         "tags" : [ "user-controller" ],
@@ -594,6 +746,230 @@
         }
       }
     },
+    "/api/v1/investigations" : {
+      "get" : {
+        "tags" : [ "investigation-controller" ],
+        "operationId" : "list_2",
+        "parameters" : [ {
+          "name" : "signal_id",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "date_from",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "date_to",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "page_size",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponsePageResultInvView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/investigations/{id}" : {
+      "get" : {
+        "tags" : [ "investigation-controller" ],
+        "operationId" : "detail_2",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseInvDetailView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/investigations/{id}/stream" : {
+      "get" : {
+        "tags" : [ "investigation-controller" ],
+        "operationId" : "stream",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "Last-Event-ID",
+          "in" : "header",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "text/event-stream" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SseEmitter"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/investigations/{id}/steps" : {
+      "get" : {
+        "tags" : [ "investigation-controller" ],
+        "operationId" : "steps",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "cursor",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseMapStringObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/internal/investigations" : {
+      "get" : {
+        "tags" : [ "internal-investigation-controller" ],
+        "operationId" : "claim",
+        "parameters" : [ {
+          "name" : "status",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseMapStringObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/internal/investigations/{id}/context" : {
+      "get" : {
+        "tags" : [ "internal-investigation-controller" ],
+        "operationId" : "context",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseContextView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/internal/ingest-queue" : {
       "get" : {
         "tags" : [ "internal-ingest-controller" ],
@@ -642,7 +1018,7 @@
     "/api/v1/documents" : {
       "get" : {
         "tags" : [ "document-controller" ],
-        "operationId" : "list_2",
+        "operationId" : "list_3",
         "parameters" : [ {
           "name" : "keyword",
           "in" : "query",
@@ -754,7 +1130,7 @@
     "/api/v1/documents/{id}" : {
       "get" : {
         "tags" : [ "document-controller" ],
-        "operationId" : "detail_2",
+        "operationId" : "detail_3",
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
@@ -1004,6 +1380,72 @@
           }
         }
       },
+      "ApiResponseInvView" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/InvView"
+          }
+        }
+      },
+      "InvView" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "signal_id" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "current_round" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "max_rounds" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "token_used" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "token_budget" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "cost_estimate" : {
+            "type" : "number"
+          },
+          "judgment" : {
+            "type" : "string"
+          },
+          "error" : {
+            "type" : "string"
+          },
+          "started_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "finished_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "created_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
       "SignalPush" : {
         "type" : "object",
         "properties" : {
@@ -1056,6 +1498,141 @@
           },
           "auto_investigated" : {
             "type" : "boolean"
+          }
+        }
+      },
+      "QuestionPost" : {
+        "type" : "object",
+        "properties" : {
+          "investigation_id" : {
+            "type" : "string"
+          },
+          "text" : {
+            "type" : "string"
+          },
+          "raised_in_round" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "ApiResponseQuestionView" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/QuestionView"
+          }
+        }
+      },
+      "QuestionView" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "investigation_id" : {
+            "type" : "string"
+          },
+          "text" : {
+            "type" : "string"
+          },
+          "raised_in_round" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "answer_summary" : {
+            "type" : "string"
+          },
+          "evidence_ids" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "created_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "updated_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
+      "StepPost" : {
+        "type" : "object",
+        "properties" : {
+          "event" : {
+            "type" : "string"
+          },
+          "round" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "payload" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object"
+            }
+          },
+          "token_usage" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "ApiResponseStepView" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/StepView"
+          }
+        }
+      },
+      "StepView" : {
+        "type" : "object",
+        "properties" : {
+          "seq" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "round" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "content" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object"
+            }
+          },
+          "token_usage" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "created_at" : {
+            "type" : "string",
+            "format" : "date-time"
           }
         }
       },
@@ -1366,6 +1943,23 @@
           }
         }
       },
+      "QuestionPatch" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "string"
+          },
+          "answer_summary" : {
+            "type" : "string"
+          },
+          "evidence_ids" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
       "ApiResponseUserInfo" : {
         "type" : "object",
         "properties" : {
@@ -1584,6 +2178,130 @@
           "last_doc_at" : {
             "type" : "string",
             "format" : "date"
+          }
+        }
+      },
+      "ApiResponsePageResultInvView" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/PageResultInvView"
+          }
+        }
+      },
+      "PageResultInvView" : {
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/InvView"
+            }
+          },
+          "total" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "page" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "page_size" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "ApiResponseInvDetailView" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/InvDetailView"
+          }
+        }
+      },
+      "InvDetailView" : {
+        "type" : "object",
+        "properties" : {
+          "investigation" : {
+            "$ref" : "#/components/schemas/InvView"
+          },
+          "questions" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/QuestionView"
+            }
+          }
+        }
+      },
+      "SseEmitter" : {
+        "type" : "object",
+        "properties" : {
+          "timeout" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }
+      },
+      "ApiResponseContextView" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/ContextView"
+          }
+        }
+      },
+      "ContextView" : {
+        "type" : "object",
+        "properties" : {
+          "investigation" : {
+            "$ref" : "#/components/schemas/InvView"
+          },
+          "signal" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object"
+            }
+          },
+          "open_questions" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/QuestionView"
+            }
+          },
+          "evidences" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "object"
+              }
+            }
+          },
+          "budget_remaining" : {
+            "type" : "integer",
+            "format" : "int32"
           }
         }
       },

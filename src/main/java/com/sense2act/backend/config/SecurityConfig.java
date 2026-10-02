@@ -67,7 +67,9 @@ public class SecurityConfig {
                                 ErrorCode.FORBIDDEN, "无权限:当前角色不允许此操作")))
                 // 不注册为 Bean,避免被 Boot 自动加进 servlet 过滤器链跑两遍
                 .addFilterBefore(new InternalKeyFilter(props.internalKey(), objectMapper),
-                        UsernamePasswordAuthenticationFilter.class);
+                        UsernamePasswordAuthenticationFilter.class)
+                // SSE 流接口允许 ?token= 承载 JWT(§7),在认证链之前折叠成标准头
+                .addFilterBefore(new SseTokenParamFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 

@@ -122,15 +122,17 @@ id（wpr_ 前缀）、name（唯一，如"医疗AI"，semantic_match 的 detail.
 | judgment | TEXT | 外部服务最近一次上报的判断快照 |
 | error / started_at / finished_at | | |
 
-### investigation_steps（步骤留痕）
+### investigation_steps（步骤留痕，V4）
 
-investigation_id、seq（UNIQUE(investigation_id, seq)，即 SSE 事件 id）、round、type（question/tool_select/tool_call/reflection/status_change）、content（JSONB，含 event 名与载荷）。工具调用没有单独的表：外部服务把它作为 tool_call 类型的 step 上报。
+id（ist_ 前缀）、investigation_id、seq（从 1 起，UNIQUE(investigation_id, seq)，即 SSE 事件 id）、round、type（question/tool_select/tool_call/reflection/status_change，由 event 名映射）、content（JSONB，`{event, ...载荷}` 扁平存放，SSE 按 content.event 还原事件名、载荷作 data）、token_usage（该步消耗，累加进 investigations.token_used）、created_at。工具调用没有单独的表：外部服务把它作为 tool_call 类型的 step 上报。
 
-### questions（待确认问题）
+派生步骤：investigation_started（start 接口落，round=0）、budget_update（token_usage>0 的步骤提交后由后端补一条，载荷 {token_used, token_budget}）、investigation_stopped / investigation_failed（stop / TTL 清理落）。派生步骤同样可 SSE 补发——重连不丢预算与状态事件的语义由此成立。
 
-investigation_id、text、raised_in_round、status（open/clarified/unresolved/abandoned）、answer_summary、evidence_ids（JSONB）。
+### questions（待确认问题，V4）
 
-### evidences（证据）
+id（q_ 前缀）、investigation_id、text（≤1000）、raised_in_round、status（open/clarified/unresolved/abandoned）、answer_summary、evidence_ids（JSONB 数组，引用必须属于本调查的 evidences，未登记 → 42201）、created_at / updated_at。POST /internal/questions 建 open 问题；PATCH 推进状态与答案。
+
+### evidences（证据，V4 建表、E4-1 加登记 API）
 
 | 列 | 类型 | 说明 |
 | --- | --- | --- |
@@ -140,7 +142,7 @@ investigation_id、text、raised_in_round、status（open/clarified/unresolved/a
 | fetched_at | TIMESTAMPTZ | 系统获取时间，必填 |
 | content_hash / snapshot_key | | 快照防篡改 |
 | doc_id | FK | 来自本库时回指 |
-| investigation_id | FK | 由哪次调查采集 |
+| investigation_id | FK | 由哪次调查采集（E3 阶段仅作引用归属校验目标） |
 
 ### entities / events / event_entities / event_relations（事件图谱）
 
