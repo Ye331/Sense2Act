@@ -14,6 +14,14 @@ public class BusinessException extends RuntimeException {
         return new BusinessException(ErrorCode.BAD_REQUEST, message);
     }
 
+    public static BusinessException notFound(String message) {
+        return new BusinessException(ErrorCode.NOT_FOUND, message);
+    }
+
+    public static BusinessException conflict(String message) {
+        return new BusinessException(ErrorCode.CONFLICT, message);
+    }
+
     public ErrorCode errorCode() {
         return errorCode;
     }

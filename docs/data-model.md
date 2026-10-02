@@ -48,7 +48,7 @@ erDiagram
 | adapter | VARCHAR | 适配器名 |
 | schedule_cron | VARCHAR | 采集计划 |
 | config | JSONB | 适配器私有配置 |
-| enabled / health / last_run_at / last_run_status | | health: ok / degraded / down |
+| enabled / health / last_run_at / last_run_status / consecutive_failures | | health: ok / degraded / down;consecutive_failures 供 D3 降级阈值计数（成功清零） |
 
 抓取与解析在外部爬虫服务，本表只存配置与运行状态（到期判定在后端）。
 

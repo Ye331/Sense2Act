@@ -43,10 +43,20 @@ class InternalKeyConfiguredTest {
     }
 
     @Test
-    void 对key_过门卫后40401_证明校验通过() throws Exception {
-        mockMvc.perform(get("/api/v1/internal/ingest-queue")
+    void 对key_过门卫后未知路径40401_证明校验通过() throws Exception {
+        // ingest-queue 已在 E1-2 落地,改用真正不存在的内部路径验证"过门卫后正常路由"
+        mockMvc.perform(get("/api/v1/internal/not-implemented-yet")
                         .header("X-Internal-Key", "test-key-123"))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code").value(40401));
+    }
+
+    @Test
+    void 对key_领取队列_200() throws Exception {
+        mockMvc.perform(get("/api/v1/internal/ingest-queue")
+                        .header("X-Internal-Key", "test-key-123"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value(0))
+                .andExpect(jsonPath("$.data.items").isArray());
     }
 }
