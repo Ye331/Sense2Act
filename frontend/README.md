@@ -11,13 +11,14 @@ npm run build      # 类型检查 + 产物
 ```
 
 后端在 IDEA 或 `docker compose` 里跑在 8080 即可；同源代理，无需配置 CORS。全栈容器里由 nginx 提供同样的代理（`nginx.conf`，SSE 关缓冲）。
+两处代理都保留浏览器的原始 Host（Vite 不开 `changeOrigin`，nginx 用 `$http_host`）：后端按 Host 与 Origin 判断同源，Host 被改写时登录等 POST 会被当成跨域拒掉（403）。
 
 ## 结构
 
 ```
 src/api/client.ts            唯一的后端客户端：{code,message,data} 解包、JWT、401 回登录、快照/Markdown 文本响应、SSE
 src/services/investigations.ts  视图模型：investigation + signal + steps + report 拼成调查任务；步骤文案
-src/pages/                   页面（总览、信号、调查详情/实时时间线、报告、文档、事件图谱、信息源、系统管理）
+src/pages/                   页面（总览、信号（招投标 / 新闻）、调查详情/实时时间线、报告（Markdown 下载、打印 / 存为 PDF）、文档库、事件图谱、信息源（含采集配置）、系统管理）
 src/components/              通用组件
 ```
 
@@ -27,4 +28,5 @@ src/components/              通用组件
 - 全局通知：`GET /stream?token=` 订阅 `signal_created / report_ready / investigation_completed / source_degraded`，到达即刷新数据。
 - 调查详情：进行中的调查订阅 `GET /investigations/{id}/stream?token=`，Agent 每上报一条步骤，时间线实时更新；断线由 EventSource 带 `Last-Event-ID` 自动补发。
 - 步骤按 `cursor` 翻页读全；报告按 `investigation_id` 查询（一调查一报告）。
+- 新闻信号：命中 `news_event` 的信号按监测主体展示，详情逐篇列出归组的报道（来源 · 原文日期）。
 - 角色：系统管理与信息源写操作仅 admin 可见；后端独立鉴权。

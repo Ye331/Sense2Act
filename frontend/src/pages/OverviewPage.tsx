@@ -13,13 +13,16 @@ export function OverviewPage({ tasks }: { tasks: InvestigationTask[] }) {
   const [reports, setReports] = useState<Report[]>([])
   const [activities, setActivities] = useState<ActivityView[]>([])
   const [error, setError] = useState('')
+  const [loaded, setLoaded] = useState(false)
   useEffect(() => {
     let active = true
-    Promise.all([api.dashboard(), listSignals({ status: 'pending' }), listReports(), investigationService.listActivities(tasks)])
+    // 总览只展示最新 3 份报告：只取这 3 份的详情（报告总数来自看板统计）
+    Promise.all([api.dashboard(), listSignals({ status: 'pending' }), listReports(3), investigationService.listActivities(tasks)])
       .then(([totals, items, ready, recent]) => {
         if (active) { setSummary(totals); setSignals(items); setReports(ready); setActivities(recent) }
       })
       .catch(err => { if (active) setError(errorText(err)) })
+      .finally(() => { if (active) setLoaded(true) })
     return () => { active = false }
   }, [tasks])
   const pending = [...signals].sort((a, b) => score(b) - score(a))
@@ -47,14 +50,14 @@ export function OverviewPage({ tasks }: { tasks: InvestigationTask[] }) {
               <a className="ov-review-link" href={`#/signals/${signal.id}`} aria-label={`进入研判：${signal.document.title}`}>研判 <Icon name="arrow" size={14}/></a>
             </article>)}
             {pending.length > 4 && <a className="ov-more" href="#/signals">还有 {pending.length - 4} 条待研判信号，进入列表查看 →</a>}
-          </div> : <div className="ov-empty"><strong>待研判信号已处理完毕</strong><p>新信号到达后会显示在这里。</p><a href="#/signals">查看已处理信号 →</a></div>}
+          </div> : !loaded ? <div className="ov-empty"><p>正在加载待研判信号…</p></div> : <div className="ov-empty"><strong>待研判信号已处理完毕</strong><p>新信号到达后会显示在这里。</p><a href="#/signals">查看已处理信号 →</a></div>}
         </section>
         <section className="ov-reports" aria-labelledby="ov-reports-title">
           <div className="ov-section-head"><h2 id="ov-reports-title">最新报告</h2><a href="#/reports">全部报告 <Icon name="arrow" size={14}/></a></div>
           {latestReports.length ? <div className="ov-document-list">{latestReports.map(report => <article className="ov-document" key={report.id}>
             <Icon name="report" size={20}/><div className="ov-document-body"><h3><a href={`#/reports/${report.investigation_id}`}>{report.title}</a></h3><p>{report.summary}</p><div className="ov-document-meta"><span className={report.status === 'published' ? 'ov-published' : ''}>{report.status === 'published' ? '已发布' : '草稿'}</span><span>{report.claims.length} 条结论</span></div></div>
             <a className="ov-document-link" href={`#/reports/${report.investigation_id}`} aria-label={`查看报告：${report.title}`}>查看报告 <Icon name="arrow" size={14}/></a>
-          </article>)}</div> : <div className="ov-empty"><p>调查完成后，报告将显示在这里。</p><a href="#/tasks">查看调查任务 →</a></div>}
+          </article>)}</div> : !loaded ? <div className="ov-empty"><p>正在加载最新报告…</p></div> : <div className="ov-empty"><p>调查完成后，报告将显示在这里。</p><a href="#/tasks">查看调查任务 →</a></div>}
         </section>
       </div>
       <aside className="ov-followup" aria-label="调查跟进与业务动态">

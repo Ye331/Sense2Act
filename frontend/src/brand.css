@@ -467,3 +467,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .report-grid { display: block; }
   .panel { box-shadow: none; break-inside: avoid; }
 }
+
+/* 实时通知条目可点击跳转 */
+a.notification-item { color: inherit; text-decoration: none; }
+a.notification-item:hover b { text-decoration: underline; }
+/* 信息源表:cron 不折行 */
+.cron-value { white-space: nowrap; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 13px; color: var(--s2-secondary); }

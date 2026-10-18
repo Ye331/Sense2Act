@@ -34,6 +34,9 @@ const nav = [
 const titles: Record<string, string> = { overview: '情报总览', signals: '商机信号', tasks: '调查任务', reports: '调查报告', documents: '文档库', evidences: '证据详情', events: '事件图谱', organizations: '机构详情', sources: '信息源管理', admin: '系统管理' }
 const roleLabels: Record<string, string> = { admin: '管理员', analyst: '分析员', viewer: '访客' }
 const noticeLabels: Record<string, string> = { signal_created: '发现新信号', report_ready: '报告已生成', investigation_completed: '调查已完成', source_degraded: '信息源异常' }
+const noticeHref = (item: StreamEvent) => item.event === 'signal_created' ? `#/signals/${item.data.signal_id}`
+  : item.event === 'source_degraded' ? '#/sources'
+  : item.data.investigation_id ? `#/${item.event === 'report_ready' ? 'reports' : 'tasks'}/${item.data.investigation_id}` : '#/overview'
 
 function useHashRoute() {
   const [route, setRoute] = useState(() => window.location.hash || '#/overview')
@@ -82,7 +85,7 @@ export default function App() {
   const section = parts[0] || 'overview'
   const id = parts[1]
   const page = section === 'tasks' && id ? <DetailPage key={id} id={id} onChange={refresh}/>
-    : section === 'tasks' ? <TasksPage tasks={tasks} onCreated={task => { refresh(); window.location.hash = `#/tasks/${task.id}` }}/>
+    : section === 'tasks' ? <TasksPage tasks={tasks} onCreated={created => { refresh(); window.location.hash = `#/tasks/${created.investigation_id}` }}/>
     : section === 'documents' || section === 'signals' || section === 'evidences' ? <CataloguePage key={`${section}/${id || ''}/${revision}`} section={section} id={id} onChange={refresh}/>
     : section === 'reports' && id ? <ReportPage key={id} investigationId={id}/>
     : section === 'reports' ? <ReportsIndex tasks={tasks}/>
@@ -106,7 +109,7 @@ export default function App() {
         <div className="topbar-path"><span>SignalX</span><Icon name="chevron" size={13}/><strong>{section === 'tasks' && id ? '调查详情' : titles[section] || '情报总览'}</strong></div>
         <div className="topbar-right">
           <div className="notification-anchor"><button className="topbar-action notification-button" aria-label="通知" aria-expanded={notificationsOpen} onClick={() => setNotificationsOpen(!notificationsOpen)}><Icon name="activity" size={16}/>通知 {notifications.length ? <b>{notifications.length}</b> : null}</button>
-            {notificationsOpen && <div className="notification-popover"><strong>实时通知</strong>{notifications.length ? notifications.map(item => <div key={item.id} className="notification-item"><b>{noticeLabels[item.event] || item.event}</b><span>{String(item.data.title || item.data.name || item.data.report_id || item.data.investigation_id || item.data.signal_id || '')}</span></div>) : <p>暂无通知</p>}</div>}
+            {notificationsOpen && <div className="notification-popover"><strong>实时通知</strong>{notifications.length ? notifications.map(item => <a key={item.id} className="notification-item" href={noticeHref(item)} onClick={() => setNotificationsOpen(false)}><b>{noticeLabels[item.event] || item.event}</b><span>{String(item.data.title || item.data.name || tasks.find(task => task.id === item.data.investigation_id)?.title || item.data.investigation_id || item.data.signal_id || '')}</span></a>) : <p>暂无通知</p>}</div>}
           </div>
           <span className="topbar-divider"/>
           <button className="topbar-action user-button" title="退出登录" onClick={logout}><span className="avatar">{(roleLabels[user.role] || '用').slice(0, 1)}</span><span className="topbar-user">{user.name} · {roleLabels[user.role] || user.role}</span></button>

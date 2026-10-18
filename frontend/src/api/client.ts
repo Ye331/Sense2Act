@@ -66,6 +66,8 @@ export interface DocumentDetail extends DocumentItem { content_text?: string; ra
 export interface Hit { rule_type: string; rule_id?: string | null; rule_version?: number | null; weight: number; detail?: Record<string, unknown> }
 export interface Signal { id: string; document: { id: string; title: string; amount: string | null; publish_date: string | null }; org: Ref | null; hits: Hit[]; score: string; status: 'pending' | 'investigating' | 'confirmed' | 'dismissed'; investigation_id: string | null; created_at: string }
 export type InvestigationStatus = 'created' | 'investigating' | 'reporting' | 'completed' | 'failed' | 'stopped'
+/** POST /signals/{id}/investigate 的响应（契约 §4）：新建调查的 id 在 investigation_id。 */
+export interface InvestigateResult { signal_id: string; status: string; investigation_id: string }
 export interface Investigation { id: string; signal_id: string; status: InvestigationStatus; current_round: number; max_rounds: number; token_used: number; token_budget: number; cost_estimate: string; judgment: string | null; error: string | null; started_at: string | null; finished_at: string | null; created_at: string }
 export interface Question { id: string; text: string; raised_in_round: number; status: 'open' | 'clarified' | 'unresolved' | 'abandoned'; answer_summary: string | null; evidence_ids: string[] | null }
 export interface Step { seq: number; round: number; type: string; content: Record<string, any>; token_usage: number; created_at: string }
@@ -100,7 +102,7 @@ export const api = {
 
   signals: (query?: Query) => json<Page<Signal>>('GET', '/signals', { query }),
   signal: (signalId: string) => json<Signal>('GET', `/signals/${id(signalId)}`),
-  investigateSignal: (signalId: string) => json<Investigation>('POST', `/signals/${id(signalId)}/investigate`),
+  investigateSignal: (signalId: string) => json<InvestigateResult>('POST', `/signals/${id(signalId)}/investigate`),
   setSignalStatus: (signalId: string, status: 'confirmed' | 'dismissed', reason?: string) =>
     json<Signal>('PATCH', `/signals/${id(signalId)}/status`, { body: { status, ...(reason ? { reason } : {}) } }),
 

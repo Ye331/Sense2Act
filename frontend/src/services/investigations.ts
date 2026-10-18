@@ -48,6 +48,12 @@ export const signalSubject = (signal?: Signal) => {
   const news = newsHit(signal)
   return news ? String(news.detail?.subject_name || '监测主体') : signal?.org?.name || '采购单位未知'
 }
+/** 新闻信号的全部报道（rumor 线索）：线索 id 即平台文档 id。 */
+export interface NewsClue { clue_id: string; source: string; title: string; published_at: string }
+export const newsClues = (signal?: Pick<Signal, 'hits'>): NewsClue[] => {
+  const clues = (newsHit(signal)?.detail?.rumor as { clues?: NewsClue[] } | undefined)?.clues
+  return Array.isArray(clues) ? clues : []
+}
 /** 新闻信号归组的报道数（同一事件的多家来源）。 */
 export const reportCount = (signal?: Pick<Signal, 'hits'>) => {
   const ids = newsHit(signal)?.detail?.document_ids
@@ -82,9 +88,9 @@ function buildTask(investigation: Investigation, signal: Signal | undefined, ste
 
 export const listSignals = async (query: Record<string, string> = {}) => (await api.signals({ page_size: 100, ...query })).items
 export const listDocuments = async () => (await api.documents({ page_size: 100 })).items
-/** 报告列表项不含结论，页面需要结论数/证据数，统一取详情。 */
-export const listReports = async (): Promise<Report[]> =>
-  Promise.all((await api.reports({ page_size: 100 })).items.map(item => api.report(item.id)))
+/** 报告列表项不含结论，页面需要结论数/证据数，统一取详情；limit 只取最新几份（后端按创建时间倒序）。 */
+export const listReports = async (limit = 100): Promise<Report[]> =>
+  Promise.all((await api.reports({ page_size: limit })).items.map(item => api.report(item.id)))
 
 export const investigationService = {
   async listTasks(): Promise<InvestigationTask[]> {

@@ -92,7 +92,7 @@ Base URL：`/api/v1`。REST + SSE，JSON。接口文档由 springdoc-openapi 生
 }
 ```
 
-`POST /signals/{id}/investigate`：为信号建调查。已在调查中返回 40901，已忽略返回 42201。
+`POST /signals/{id}/investigate`：为信号建调查，响应 data 为 `{ "signal_id", "status", "investigation_id" }`。已在调查中返回 40901，已忽略返回 42201。
 
 `PATCH /signals/{id}/status`：`{ "status": "confirmed" | "dismissed", "reason": "..." }`。dismiss 必填 reason，写进 feedback_events。
 
