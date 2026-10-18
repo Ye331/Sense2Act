@@ -82,7 +82,7 @@ python -m sense2act investigate --envelope examples/ai_model_release/envelope.js
   --replay runs/recorded/llm_ai_model.json --seed examples/ai_model_release/evidence_seed.json `
   --event-id evt_ai_model --db data/ai.db
 
-python -m unittest discover -s tests -p "test_*.py"   # 全量测试(138 项,零网络)
+python -m unittest discover -s tests -p "test_*.py"   # 全量测试(475 项,零网络)
 ```
 
 ## 五、live 实测(真模型)
@@ -139,7 +139,7 @@ python -m sense2act capture --platform toutiao --url <文章URL> --event <已存
 | `sense2act/prompts.py` | 各槽位 SYSTEM_PROMPT(企业情报 rubric) |
 | `data/config/` | 域配置(词表/规则表/谱系表/假设种子/监测名单/官网档案)——换行业只换这里 |
 | `examples/` | 四套端到端 fixture(两套离线精调 + 两套真实数据) |
-| `tests/` | 138 项测试:单元(裁定规则/验票协议/硬限协议/适配器解析与 8 态/路由与谱系)+ 四事件 e2e |
+| `tests/` | 475 项测试:单元(裁定规则/验票协议/硬限协议/适配器解析与 8 态/路由与谱系)+ 四事件 e2e |
 
 ## 八、安全与隐私
 

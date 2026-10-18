@@ -2,18 +2,20 @@
 
 招投标商机发现的后端。链路：采集招标公告，产出信号，触发 Agent 调查，生成带证据链的报告，用户反馈再迭代信号规则。
 
+本目录是 Sense2Act monorepo 的后端组件；全栈启动、各组件分工和测试命令见根目录 [README](../README.md)。
+
 ## 范围
 
-本仓库只做后端平台：数据存储、采集、API、调查的状态管理与留痕。
+本目录只做后端平台：数据存储、采集、API、调查的状态管理与留痕。
 
-爬虫、信号发现和 agent loop 是三个独立的外部服务，不在这里实现。它们通过内部 HTTP API 接入，方向单向：它们调后端。后端不调用它们，也不关心它们的实现。外部服务没接入时后端照常运行，只是没有新文档、没有新信号，调查停在 created。
+采集、信号发现和 agent loop 是同仓库里三个独立的服务（`../collector`、`../signal-service`、`../agent`），不在这里实现。它们通过内部 HTTP API 接入，方向单向：它们调后端。后端不调用它们，也不关心它们的实现。某个服务没起来时后端照常运行，只是没有新文档、没有新信号，调查停在 created。
 
-| 环节 | 本仓库 | 外部服务 |
+| 环节 | 后端（本目录） | 接入服务 |
 | --- | --- | --- |
-| 采集 | 源配置管理、文档接入 API（去重/快照/机构归一/基线） | 爬虫服务 |
-| 信号 | 基线统计、信号落库、人工决策、自动触发 | 信号发现服务 |
-| 调查 | 状态机、留痕、SSE、预算记账 | Agent 调查服务 |
-| 报告 | 存储、查询、导出 | 报告生成（随 Agent 服务） |
+| 采集 | 源配置管理、文档接入 API（去重/快照/机构归一/基线） | `collector`（常驻采集） |
+| 信号 | 基线统计、信号落库、人工决策、自动触发 | `signal-service`（检测 worker） |
+| 调查 | 状态机、留痕、SSE、预算记账 | `agent`（调查 worker） |
+| 报告 | 存储、查询、导出 | 报告生成（随 agent） |
 | 反馈 | 反馈记录、回测数据集、规则版本管理 | 回测评估 |
 
 ## 文档
@@ -121,13 +123,15 @@ curl -s "http://127.0.0.1:8080/api/v1/documents?semantic=数据中台" -H "Autho
 mvn -B -ntp verify        # 单元 + Testcontainers 集成测试（需 Docker）
 ```
 
-改了接口后重新生成 OpenAPI 基线并提交（CI 在 PR 上跑 oasdiff 破坏性变更检查）：
+改了接口后重新生成 OpenAPI 基线并提交（根目录 CI `.github/workflows/ci.yml` 在 PR 上跑 oasdiff 破坏性变更检查）：
 
 ```bash
 mvn test -Dtest=OpenApiBaselineTest -DupdateOpenapi=true
 ```
 
 ## 服务器部署
+
+全栈（前端、采集、检测、Agent 一起）上服务器见根目录 [deploy/README.md](../deploy/README.md)。下面是只部署后端的方式：
 
 ```bash
 git pull
@@ -143,8 +147,7 @@ docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
 Backend/
 ├── AGENT.md                # 给 AI 编码助手的说明
 ├── docs/                   # architecture / api-design / data-model / backlog
-│   └── openapi/baseline.json   # 契约基线（oasdiff 闸门用）
-├── .github/workflows/ci.yml   # 构建+测试；PR 上契约破坏性检查
+│   └── openapi/baseline.json   # 契约基线（oasdiff 闸门用；CI 在仓库根目录 .github/）
 ├── scripts/                # 种子与演示脚本：seed_s3（灌库）、embedding_stub（D12 演示端点）、demo-s2
 │   └── deploy/             # nginx 配置示例等
 ├── docker-compose.yml          # 基础编排（本地 up 即用）

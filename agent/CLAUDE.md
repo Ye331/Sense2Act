@@ -1,7 +1,8 @@
 # CLAUDE.md · Sense2act 开发约定(新会话/新成员必读)
 
-> 仓库:企业情报调查 Agent(S1-S7 调查循环 + claim 三态台账 + 本地爬虫框架)。
-> 全局背景与文档地图见上级目录 `../CLAUDE.md`;权威边界说明见本仓库 README 第九节。
+> 本目录:Sense2Act monorepo 的调查 Agent(S1-S7 调查循环 + claim 三态台账 + 本地爬虫框架)。
+> 全栈架构见根目录 `../README.md`,跨组件字段映射见 `../docs/integration.md`;权威边界说明见本目录 README 第九节。
+> 采集服务 `../collector` 复用本目录的 `sense2act/crawler` 适配器:改适配器时两边的测试都要跑。
 
 ## 目录速览
 
@@ -13,13 +14,13 @@
 - `sense2act/crawler/` 本地爬虫:egress(唯一出网点+录制)/base/registry/service/adapters
 - `sense2act/browser_auto/` 浏览器捕获隔离通道(默认 dry-run,硬限协议强制)
 - `data/config/` 域配置(可信度规则/谱系表/词表/假设种子/平台规则/watchlist/别名/官网档案)
-- `examples/` 四套 fixture;`tests/` 138 项(_inspect.py 为台账诊断工具)
+- `examples/` 回放与演示样例(worker replay 用 tender_medical_ai 与 ai_model_release);`tests/` 475 项(_inspect.py 为台账诊断工具)
 
 ## 开发门禁
 
 1. 全量测试绿才提交:`python -m unittest discover -s tests -p "test_*.py"`(只增不减);
-2. 改循环机制(S1-S7/钩子/判决规则)前先读 `../舆情调查Agent架构.md` 与
-   `../交接文档-架构细化会话20260923.md` 的对应决策——20 条决策勿轻易推翻;
+2. 改循环机制(S1-S7/钩子/判决规则)前先读 README 第二、九节与相关代码里的决策注记——20 条架构决策
+   勿轻易推翻(原《舆情调查Agent架构》与 2026-09-23 交接文档不在本仓库,需要时向原作者索取);
 3. 改 prompt(prompts.py)后:跑真实样例→`--record` 录制固化→回归;
 4. live 结果异常:先 `python tests/_inspect.py <db>` 查账(claims/transitions/sections/
    判决/降级计数),不要凭感觉猜;
