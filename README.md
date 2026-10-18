@@ -80,7 +80,7 @@ cd signal-service && INTERNAL_API_KEY=local-dev-internal-key python -m bridge   
 | --- | --- |
 | Backend | `cd Backend && mvn -B verify`（Testcontainers，需 Docker） |
 | signal-service | `cd signal-service && python -m pytest -q`（Windows 加 `PYTHONUTF8=1`） |
-| agent | `cd agent && python -m unittest discover -s tests -p "test_*.py"` |
+| agent | `cd agent && pip install -r requirements.txt && python -m unittest discover -s tests -p "test_*.py"`（Windows 加 `PYTHONUTF8=1`） |
 | frontend | `cd frontend && npm run build`（含类型检查） |
 
 两个 bridge 各有契约测试（`signal-service/tests/test_bridge.py`、`agent/tests/test_bridge.py`），用假后端校验与后端一致的不变量。

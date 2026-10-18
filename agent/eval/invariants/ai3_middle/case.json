@@ -14,8 +14,8 @@
   "s6_opinion_max": 40,
   "llm_calls_max": 60
  },
- "enabled": true,
- "blocked_note": "",
+ "enabled": false,
+ "blocked_note": "录制文件 runs/recorded/sweep3_ai_middle.json 未随仓库提交（runs/ 被忽略），需 live 模式重录后放回 eval/ 并恢复 enabled",
  "golden_ref": "../../sweep3/ai3_middle/golden.json",
  "recorded_at": "2026-10-04 sweep3 live 录制",
  "pipeline_note": "改造①②+代码去重+corpus_bound 后;金标 16 条(c14 并入)"
