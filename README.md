@@ -35,14 +35,14 @@ flowchart LR
 
 ```
 Sense2Act/
-├── Backend/          Spring Boot 后端：数据、流程、契约（独立 git 仓库，文档在 Backend/docs）
+├── Backend/          Spring Boot 后端：数据、流程、契约（文档在 Backend/docs）
 ├── signal-service/   信号服务：招投标/新闻检测算法 + bridge/（后端检测 worker）+ /embed
 ├── agent/            Sense2act 调查 Agent：S1–S7 循环 + sense2act/bridge/（后端调查 worker）
 ├── frontend/         SignalX 工作台：React + Vite，直连后端
 ├── scripts/demo.py   全链路演示
 ├── docs/             跨组件文档
 ├── docker-compose.yml / .env.example
-└── _archive/         重构前的原始压缩包与后端构建产物（可删）
+└── _archive/         重构前的原始压缩包（不入库）
 ```
 
 ## 快速开始（全栈容器）
