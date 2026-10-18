@@ -42,13 +42,17 @@ _BUYER_RE = re.compile(r"采购人[:：]\s*([^\s<]+)")
 # 详情页字段(移植自 ccgp_spider.py,经真实页面校验)
 _BUDGET_RE = re.compile(
     r"预算金额[：:\s]*[￥¥]?\s*([0-9][0-9,，]*(?:\.[0-9]+)?)\s*(亿元|万元|万|元)")
+_CN_DT = r"20\d{2}年\d{1,2}月\d{1,2}日\s*\d{1,2}(?:[:：]|点)\d{2}"   # 时刻写作 08:35 或 09点00分
+# 正文条款优先、页首摘要表兜底:摘要表的"开标时间"偶有误填(2026-10-18 实抓湖北公告把
+# 投标"开始时间"填进了开标时间),正文"提交投标文件截止时间、开标时间和地点"一节才是准的
 _DEADLINE_RES = (
-    re.compile(r"投标截止时间[：:\s]+(20\d{2}年\d{1,2}月\d{1,2}日\s*\d{1,2}[:：]\d{2})"),
-    re.compile(r"提交投标文件截止时间[：:\s]+(20\d{2}年\d{1,2}月\d{1,2}日\s*\d{1,2}[:：]\d{2})"),
-    re.compile(r"开标时间[：:\s]+(20\d{2}年\d{1,2}月\d{1,2}日\s*\d{1,2}[:：]\d{2})"),
+    re.compile(rf"投标截止时间[：:\s]+({_CN_DT})"),
+    re.compile(rf"提交投标文件截止时间[：:\s]+({_CN_DT})"),
+    re.compile(rf"提交投标文件截止时间[^。]{{0,80}}?截止时间[：:\s]+({_CN_DT})"),
+    re.compile(rf"开标时间[：:\s]+({_CN_DT})"),
 )
 _CN_DT_RE = re.compile(
-    r"(20\d{2})年(\d{1,2})月(\d{1,2})日\s*(\d{1,2})[:：](\d{2})")
+    r"(20\d{2})年(\d{1,2})月(\d{1,2})日\s*(\d{1,2})(?:[:：]|点)(\d{2})")
 _DETAIL_NO_RE = re.compile(r"项目编号[：:\s]+([^\s]+)")
 _AGENCY_RE = re.compile(r"代理机构名称[：:\s]+(.{2,60}?)(?=\s*代理机构地址)")
 _CONTACT_RE = re.compile(r"项目联系人[：:\s]+([^\s]{2,30})")
@@ -231,10 +235,20 @@ class CcgpAdapter:
                             for item in result.items]
         return result
 
+    def harvest(self) -> AdapterResult:
+        """全量清单 + 8 态回执(不过滤,含地域/采购人/阶段)——供常驻采集(collector)。
+
+        与 sweep 同源,区别是失败不吞:列表被拦/改版/全部超时如实回失败态,
+        采集端据此回报源健康度;详情补抓由采集端按自己的礼貌上限决定。
+        """
+        items, failure = self._sweep_lists()
+        if failure:
+            return failure
+        return AdapterResult(status="success" if items else "empty", items=items)
+
     def sweep(self) -> list[dict]:
         """全量清单(不过滤,含地域/采购人/阶段)——供成果转储,不进 S3 回执。"""
-        items, _ = self._sweep_lists()
-        return items
+        return self.harvest().items
 
     # ------------------------------------------------------------------
 

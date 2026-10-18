@@ -1,0 +1,5 @@
+# 采集 worker:适配器与出网点复用 ../agent/sense2act(爬虫框架依赖与 agent 一致,不含模型 SDK)
+pydantic>=2.7
+lxml>=5.3
+trafilatura>=2.3
+beautifulsoup4>=4.12

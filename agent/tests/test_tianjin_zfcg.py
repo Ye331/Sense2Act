@@ -85,6 +85,18 @@ class TestTianjinZfcgAdapter(unittest.TestCase):
         self.assertEqual(len(r3.items), 1)
         self.assertEqual(r3.items[0]["dedup_key"], "tianjin_zfcg:1094165916")
 
+    def test_harvest_keeps_stage_fields_and_failure_states(self):
+        r = TianjinZfcgAdapter(http_get=ok_transport(TJ_OK)).harvest()
+        self.assertEqual(r.status, "success")
+        self.assertEqual(len(r.items), 3)                  # 跨栏目去重 + 跳过残缺条目
+        item = next(i for i in r.items if i["dedup_key"] == "tianjin_zfcg:1094165916")
+        self.assertEqual(item["stage"], "招标采购")
+        self.assertEqual(item["project_no"], "XCSD-2026-C-293")
+        for page, status in ((TJ_BLOCKED, "authentication_required"),
+                             (TJ_CHANGED, "parser_changed")):
+            self.assertEqual(TianjinZfcgAdapter(http_get=ok_transport(page)).harvest().status,
+                             status)
+
     def test_honest_empty_with_scanned_count(self):
         ad = TianjinZfcgAdapter(http_get=ok_transport(TJ_OK))
         r = ad.search("完全无关的词", 10)

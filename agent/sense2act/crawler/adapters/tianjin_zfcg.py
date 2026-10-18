@@ -72,10 +72,24 @@ class TianjinZfcgAdapter:
     platform = "tianjin_zfcg"
     adapter_version = "0.1.0"
 
+    # EvidenceItemLite 契约键(extra=forbid:阶段等转储字段不得流入 S3 回执)
+    _CONTRACT_KEYS = ("platform", "source", "url", "title", "content",
+                      "published_at", "author_type", "dedup_key")
+
     def __init__(self, http_get):
         self._http_get = http_get
 
     def search(self, query: str, limit: int) -> AdapterResult:
+        result = self.harvest()
+        if result.status not in ("success", "empty"):
+            return result
+        found = self._filter_by_query(result.items, query, limit)
+        found.items = [{k: item[k] for k in self._CONTRACT_KEYS} for item in found.items]
+        return found
+
+    def harvest(self) -> AdapterResult:
+        """首页全量清单 + 8 态回执(去重后不过滤,含阶段/编号)——供常驻采集;
+        search 在其上做词面过滤。"""
         try:
             resp = self._http_get(BASE_URL)
         except TimeoutError:
@@ -94,11 +108,15 @@ class TianjinZfcgAdapter:
         if code is not None and code >= 400:
             return AdapterResult(status="network_error", retryable=code >= 500,
                                  message=f"天津政采返回 HTTP {code}")
-        return self._parse(resp.text, query, limit)
+        return self._parse(resp.text)
+
+    def sweep(self) -> list[dict]:
+        """全量清单(去重后不过滤)——供采集成果转储/盘点,不进 S3 回执。"""
+        return self.harvest().items
 
     # ------------------------------------------------------------------
 
-    def _parse(self, page: str, query: str, limit: int) -> AdapterResult:
+    def _parse(self, page: str) -> AdapterResult:
         if any(marker in page for marker in _CHALLENGE_MARKERS):
             return AdapterResult(status="authentication_required", retryable=False,
                                  message="天津政采返回验证/拦截页,不对抗")
@@ -142,43 +160,9 @@ class TianjinZfcgAdapter:
                 "published_at": _parse_java_date(times[0] if times else None),
                 "author_type": "官方公告",
                 "dedup_key": f"tianjin_zfcg:{vid}",
+                **meta,                         # 转储字段:阶段/商机/编号/采购人
             })
-        return self._filter_by_query(items, query, limit)
-
-    def sweep(self) -> list[dict]:
-        """全量清单(去重后不过滤)——供采集成果转储/盘点,不进 S3 回执。"""
-        try:
-            resp = self._http_get(BASE_URL)
-        except Exception:
-            return []
-        if resp.status_code is None or resp.status_code >= 400:
-            return []
-        try:
-            tree = html.fromstring(resp.text)
-        except (ValueError, etree.LxmlError):
-            return []
-        items: list[dict] = []
-        seen: set[str] = set()
-        for node in tree.xpath(
-                '//ul[contains(@class, "txtList")]'
-                '//li/a[contains(@href, "viewer.do")]'):
-            href = node.get("href") or ""
-            vid = _viewer_id(href)
-            title = " ".join(" ".join(node.itertext()).split())
-            if not vid or not title or vid in seen:
-                continue
-            seen.add(vid)
-            times = node.xpath(
-                'following-sibling::span[contains(@class, "times")]/text()')
-            meta = parse_tender_meta(title)
-            items.append({
-                "title": title,
-                "url": href if href.startswith("http") else BASE_URL + href,
-                "published_at": _parse_java_date(times[0] if times else None),
-                "dedup_key": f"tianjin_zfcg:{vid}",
-                **meta,
-            })
-        return items
+        return AdapterResult(status="success" if items else "empty", items=items)
 
     @staticmethod
     def _filter_by_query(items: list[dict], query: str, limit: int

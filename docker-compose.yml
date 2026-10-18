@@ -1,7 +1,7 @@
 # Sense2Act 全栈:docker compose up -d --build
 #   前端      http://127.0.0.1:5173
 #   后端      http://127.0.0.1:8080(swagger-ui.html)
-# 数据流:文档 → 后端 → signal-worker 检测 → 信号(达阈值自动立项)→ agent 调查 → 报告 → 前端 SSE 实时呈现
+# 数据流:collector 采集 → 后端 → signal-worker 检测 → 信号(达阈值自动立项)→ agent 调查 → 报告 → 前端 SSE 实时呈现
 # 后端服务定义复用 Backend/docker-compose.yml(extends),这里只补接入所需的配置。
 services:
   postgres:
@@ -35,6 +35,23 @@ services:
       SIGNAL_COMPANY_PROFILE: ${SIGNAL_COMPANY_PROFILE:-}
     restart: unless-stopped
 
+  collector:
+    # 领取到期信息源(前端「信息源管理」配置)→ 抓取 → 推文档;适配器复用 agent 的爬虫框架
+    build:
+      context: collector
+      additional_contexts:
+        agent: agent
+    image: sense2act/collector
+    depends_on: [api]
+    environment:
+      BACKEND_URL: http://api:8080
+      INTERNAL_API_KEY: ${INTERNAL_API_KEY:-local-dev-internal-key}
+      COLLECTOR_POLL_SECONDS: ${COLLECTOR_POLL_SECONDS:-60}
+      COLLECTOR_REQUEST_INTERVAL: ${COLLECTOR_REQUEST_INTERVAL:-1}
+    volumes:
+      - collectordata:/app/data
+    restart: unless-stopped
+
   agent:
     build: agent
     depends_on: [api]
@@ -60,3 +77,4 @@ volumes:
   pgdata:
   snapshots:
   agentdata:
+  collectordata:

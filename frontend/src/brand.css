@@ -451,3 +451,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .button-danger:hover:not(:disabled) { background: #8b3c3a; border-color: #8b3c3a; }
 [role=status] { color: var(--s2-success-text); }
 .toast[role=status] { color: white; }
+
+/* 信息源采集配置:整行宽的 JSON 编辑框 */
+.management-form .field-wide { flex: 1 1 100%; max-width: none; }
+.field-hint { display: block; margin-top: 4px; font-weight: 400; color: var(--s2-helper); font-size: var(--s2-font-meta); overflow-wrap: anywhere; }
+.field textarea.code-input { width: 100%; min-height: 84px; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 13px; resize: vertical; }

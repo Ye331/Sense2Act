@@ -2,6 +2,23 @@
 
 后端契约（路径、状态、错误码）以 [Backend/docs/api-design.md](../Backend/docs/api-design.md) 为准；本文只记录**跨组件的字段约定**：谁写、谁读、怎么换算。
 
+## 0. 采集 → 文档（collector）
+
+`collector` 领取 `GET /internal/ingest-queue` 的到期源，按 `adapter` 抓取后推 `POST /internal/documents`。适配器条目 → 文档：
+
+| 适配器字段 | 文档字段 | 说明 |
+| --- | --- | --- |
+| `url` / `title` | `url` / `title` | 后端按 URL 归一与内容哈希去重 |
+| `published_at`（UTC） | `publish_date` | 换算为北京日历日 |
+| `buyer`（列表自带）或详情页"采购人" | `org_name` | 后端归一成 `org_id` |
+| 详情页预算 | `amount` | 万元/亿元换算为元，两位小数 |
+| 详情页投标截止 | `deadline` | 正文条款优先，页首摘要表兜底 |
+| `province` 或源配置 `region` | `region` | |
+| 源配置 `category` | `category` | 后端按"机构 + 品目"维护金额基线 |
+| 详情正文（取不到则标题 + 结构化后缀） | `content_text` | |
+| 详情页原文 | `raw_html` | 即文档快照；新闻检测从这里读原文发布时间 |
+| `platform`、`source`、`stage`、`author_type` 等 | 其余键进 `raw` | 新闻检测用 `raw.platform` / `raw.source_name` / `raw.author_type` |
+
 ## 1. 文档 → 检测（signal-service/bridge）
 
 `GET /internal/detection-queue` 的每条 `document` 转成检测输入 `Announcement`：

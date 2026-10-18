@@ -112,6 +112,15 @@ class TestYifangbaoAdapter(unittest.TestCase):
             YifangbaoAdapter(http_get=ok_transport({BASE: CHANGED}))
             .search("q", 10).status, "parser_changed")
 
+    def test_harvest_degrades_per_page_and_fails_only_when_all_fail(self):
+        routes = {BASE: WAF_CHALLENGE, CHANNEL_URL: CHANNEL_OK}
+        r = YifangbaoAdapter(http_get=ok_transport(routes), channels=(CHANNEL,)).harvest()
+        self.assertEqual(r.status, "success")              # 首页被挑战,频道页照收
+        self.assertEqual(len(r.items), 1)
+        self.assertIn("1 个页面失败", r.message)
+        blocked = YifangbaoAdapter(http_get=ok_transport({BASE: WAF_CHALLENGE})).harvest()
+        self.assertEqual(blocked.status, "authentication_required")
+
     def test_blank_query_rejected(self):
         ad = YifangbaoAdapter(http_get=ok_transport({BASE: HOME_OK}))
         r = ad.search("", 10)

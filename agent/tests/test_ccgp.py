@@ -107,6 +107,28 @@ class TestCcgpAdapter(unittest.TestCase):
         self.assertEqual(hospital["dedup_key"], "ccgp:27439617")
         self.assertIn("2026-10-04T02:00:00", hospital["published_at"])  # 10:00 京时 -> UTC
 
+    def test_harvest_reports_failure_instead_of_empty(self):
+        """常驻采集用的全量通道:成功带富字段;被拦/改版如实回失败态(sweep 才吞成空表)。"""
+        ok = CcgpAdapter(http_get=routed_transport(OK_ROUTES)).harvest()
+        self.assertEqual(ok.status, "success")
+        self.assertEqual({i["buyer"] for i in ok.items},
+                         {"吉林市城市照明建设管理中心", "某市第一医院"})
+        blocked = CcgpAdapter(http_get=routed_transport({LOCAL_URL: (200, LIST_BLOCKED)}))
+        self.assertEqual(blocked.harvest().status, "authentication_required")
+        changed = {LOCAL_URL: (200, LIST_CHANGED), CENTRAL_URL: (200, LIST_CHANGED)}
+        self.assertEqual(CcgpAdapter(http_get=routed_transport(changed)).harvest().status,
+                         "parser_changed")
+        self.assertEqual(CcgpAdapter(http_get=routed_transport(changed)).sweep(), [])
+
+    def test_body_deadline_beats_misfilled_summary_table(self):
+        """2026-10-18 实抓湖北公告:页首摘要表把投标"开始时间"误填进开标时间,正文条款才准。"""
+        page = """<html><body><table><tr><td>开标时间</td><td>2026年10月19日 00:00</td></tr></table>
+        <div id="noticeArea"><p>四、提交投标文件截止时间、开标时间和地点</p>
+        <p>1、开始时间：2026年10月19日00点00分（北京时间）</p>
+        <p>2、截止时间：2026年11月10日09点00分（北京时间）</p></div></body></html>"""
+        from sense2act.crawler.adapters.ccgp import parse_detail_fields
+        self.assertEqual(parse_detail_fields(page)["deadline"], "2026-11-10 09:00")
+
     def test_search_detail_enrichment_and_contract(self):
         ad = CcgpAdapter(http_get=routed_transport(OK_ROUTES))
         r = ad.search("医院", 10)

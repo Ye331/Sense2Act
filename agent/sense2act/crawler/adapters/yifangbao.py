@@ -94,23 +94,32 @@ class YifangbaoAdapter:
                             for i in result.items]
         return result
 
-    def sweep(self) -> list[dict]:
-        """全量清单(首页区块 + 注入的 zbzt 频道页,不过滤)——供成果转储。"""
+    def harvest(self) -> AdapterResult:
+        """全量清单 + 8 态回执(首页区块 + 注入的 zbzt 频道页,不过滤)——供常驻采集。
+
+        单页失败降级(其余页照收);全部页面失败才如实回首个失败态,不伪装成 empty。
+        """
         out: list[dict] = []
         seen: set[str] = set()
-        items, _ = self._fetch_page_items(BASE_URL, self._parse_home)
-        for it in items:
-            if it["dedup_key"] not in seen:
-                seen.add(it["dedup_key"])
-                out.append(it)
-        for path in self._channels:
-            url = urljoin(BASE_URL, path)
-            ch_items, _ = self._fetch_page_items(url, self._parse_channel)
-            for it in ch_items:
+        failures: list[AdapterResult] = []
+        pages = [(BASE_URL, self._parse_home)]
+        pages += [(urljoin(BASE_URL, path), self._parse_channel) for path in self._channels]
+        for url, parser in pages:
+            items, failure = self._fetch_page_items(url, parser)
+            if failure:
+                failures.append(failure)
+            for it in items:
                 if it["dedup_key"] not in seen:
                     seen.add(it["dedup_key"])
                     out.append(it)
-        return out
+        if failures and len(failures) == len(pages):
+            return failures[0]
+        return AdapterResult(status="success" if out else "empty", items=out,
+                             message=f"{len(failures)} 个页面失败已跳过" if failures else "")
+
+    def sweep(self) -> list[dict]:
+        """全量清单(首页区块 + 注入的 zbzt 频道页,不过滤)——供成果转储。"""
+        return self.harvest().items
 
     # ------------------------------------------------------------------
 
