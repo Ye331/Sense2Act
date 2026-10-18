@@ -13,6 +13,9 @@ import java.util.List;
  */
 public interface DocumentMapper extends BaseMapper<Document> {
 
+    /** URL/content_hash 并发重复由数据库判定，不使事务进入失败状态。 */
+    int insertIgnoreConflict(Document document);
+
     /** 关键词/无条件列表检索(ILIKE 子串匹配,支持中文;排序白名单已在上层校验)。 */
     List<Document> searchKeyword(@Param("patterns") List<String> patterns,
                                  @Param("docType") String docType, @Param("orgId") String orgId,

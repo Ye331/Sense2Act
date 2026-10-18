@@ -261,7 +261,7 @@ PUT 全量必填（缺字段 40001），即时生效于后续自动触发；max_
 
 ### 9.2 信号发现服务
 
-`GET /internal/detection-queue?limit=50`，一次给齐检测要用的全部输入：
+`GET /internal/detection-queue?limit=50`，一次给齐检测要用的全部输入。2026-10-14 新增 `rules`：启用规则的 id/version/type/params/weight/enabled；也可调用 `GET /internal/signal-rules` 单独读取启用规则（data 为数组，X-Internal-Key 认证，无需管理员凭据）。document.amount 固定为小数字符串：
 
 ```json
 { "items": [ {
@@ -296,7 +296,8 @@ PUT 全量必填（缺字段 40001），即时生效于后续自动触发；max_
 | `GET /internal/investigations?status=created` | 领取任务 |
 | `POST /internal/investigations/{id}/start` | CAS 占用，被占返回 40901 |
 | `GET /internal/investigations/{id}/context` | 信号和文档上下文、问题清单、证据摘要、预算余量 |
-| `POST /internal/investigations/{id}/steps` | `{event, round, payload, token_usage}`，超轮次返回 42201 |
+| `POST /internal/investigations/{id}/steps` | `{event, round, payload, token_usage, request_id?}`，超轮次/预算返回 42201 |
+| `GET /internal/investigations/{id}/steps?cursor=&limit=` | 与用户侧 steps 相同的游标格式，供 Agent 恢复已提交进度 |
 | `POST /internal/questions` | `{investigation_id, text, raised_in_round}` |
 | `PATCH /internal/questions/{id}` | `{status, answer_summary, evidence_ids}` |
 | `POST /internal/investigations/{id}/evidences` | 登记自取的证据：引本库文档传 `doc_id`，外部内容传 url/title/excerpt，后端抓快照算 hash |
@@ -325,6 +326,14 @@ ReportDraft：
 
 ### 9.4 约定
 
+2026-10-14 接入修复约定：
+
+- `steps.request_id` 为可选 1..100 字符稳定重试标识，同调查、同内容重试返回原 seq，不重复写步骤或累加预算；同 key 不同内容返回 40901。steps 查询新增可选 request_id 字段。
+- context 新增全量 `questions`，保留既有 `open_questions`。单 Agent 服务重启后先查询 investigating/reporting、context 与内部 steps；已提交报告只执行收尾，已终态任务不再写入。不支持多个 worker 同时接管一个调查，租约机制属后续范围。
+- 所有调查写入在同一调查行锁下校验状态和预算；问题只在 investigating 可修改，终态新写入返回 40901。
+- 每条 report claim 的 evidence_ids 必须非空且引用本调查已登记证据；缺失/空列表返回 42201。本库证据的文档必须有 publish_date 和可读取快照，否则登记返回 42201。
+- 全局事件日志与业务同事务提交，提交后广播；两个 SSE 流按持久游标有序补发。
+
 - 写接口都做不变量校验（状态机、轮次、预算、证据引用），非法写入 40901 / 42201。
 - SSE 由后端在写库时自动发布，外部服务不推也不能推。
 - 限流按 key 统计。
@@ -344,3 +353,5 @@ ReportDraft：
 | 2026-10-02 | 增补 | S6 交付：§9.3 evidences / report / complete / fail 落地（含义见表，无形状变更）；§6 报告查询 / 证据查询 / 导出三组只读接口与详情增量字段（signal_id/status/created_at）落地。均为新增，非破坏性 |
 | 2026-10-02 | 增补 | S7 交付：§6 反馈接口落地（feedback_events 的 action 词表增补 comment，纯增量）；§7 全局流 GET /stream、§8 信号规则 GET/POST/PATCH、看板 GET /dashboard/summary、事件图谱 GET /events* 落地。均为新增，非破坏性 |
 | 2026-10-02 | 增补 | S8 交付：§8 回测细化为 GET/POST /admin/backtests + /{id}/dataset + /{id}/result（新增，非破坏性）；内部接口超限 42901（限流为既有错误码的新触发点，对外部服务是新增保护非契约变更） |
+| 2026-10-14 | 接入修复，消费者需同步 | detection-queue.document.amount 从实现中的 JSON number 修正为契约定义的小数字符串；报告每条 claim 强制非空 evidence_ids；本库证据强制发布时间/可读取快照；终态问题写入返回 40901。按实际消费行为视为兼容性变更，合码/部署前接入方需同步 |
+| 2026-10-14 | 增量 | detection-queue 新增 rules；新增 GET /internal/signal-rules 与内部 steps 查询；steps 新增可选 request_id；context 新增 questions；OpenAPI 补认证声明与检测文档 DTO。既有路径/状态值保留 |

@@ -34,6 +34,8 @@ springdoc:
 
 # 应用配置:值一律来自环境变量,环境差异不进代码(见 .env.example)
 app:
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173,http://127.0.0.1:5173,http://localhost:3000,http://127.0.0.1:3000}
   jwt:
     # 默认值仅供本地开发;prod profile 会用无默认的 ${JWT_SECRET} 覆盖,弱/缺密钥直接拒绝启动
     secret: ${JWT_SECRET:local-dev-only-secret-0123456789abcdef-CHANGE-ME}

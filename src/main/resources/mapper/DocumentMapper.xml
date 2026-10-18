@@ -127,4 +127,13 @@
           AND d.id IN <foreach collection="ids" item="i" open="(" separator="," close=")">#{i}</foreach>
     </select>
 
+    <insert id="insertIgnoreConflict">
+        INSERT INTO documents (id, source_id, doc_type, title, content_text, org_id, amount,
+            publish_date, deadline, region, category, url, raw, content_hash, snapshot_key, signal_scanned)
+        VALUES (#{id}, #{sourceId}, #{docType}, #{title}, #{contentText}, #{orgId}, #{amount},
+            #{publishDate}, #{deadline}, #{region}, #{category}, #{url},
+            #{raw,typeHandler=com.sense2act.backend.common.mybatis.JsonbTypeHandler},
+            #{contentHash}, #{snapshotKey}, false)
+        ON CONFLICT DO NOTHING
+    </insert>
 </mapper>

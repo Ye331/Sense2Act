@@ -29,6 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(properties = {"app.internal-key=test-key", "app.internal-rate-limit-per-minute=5"})
 @AutoConfigureMockMvc
 @Testcontainers
+@org.springframework.test.annotation.DirtiesContext(classMode = org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER_CLASS)
 class RateLimitTest {
 
     @Container

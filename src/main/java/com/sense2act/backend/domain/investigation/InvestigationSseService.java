@@ -25,6 +25,14 @@ public class InvestigationSseService {
 
     public static final long HEARTBEAT_MS = 25_000;
 
+    @EventListener
+    public void closeConnections(org.springframework.context.event.ContextClosedEvent ignored) {
+        for (List<Conn> conns : byInvestigation.values()) {
+            for (Conn conn : conns) conn.emitter().complete();
+        }
+        byInvestigation.clear();
+    }
+
     /** 每个连接持一个"已发到的 seq",防止"补发查询中恰好又来实时事件"造成的重复推送。 */
     private record Conn(SseEmitter emitter, AtomicLong lastSeq) {
     }
@@ -46,13 +54,7 @@ public class InvestigationSseService {
         emitter.onCompletion(remove);
         emitter.onTimeout(remove);
         emitter.onError(e -> remove.run());
-        // 先注册再补发:补发期间提交的新事件由 listener 发,靠 lastSeq 去重
-        for (InvestigationStep s : stepMapper.selectList(new LambdaQueryWrapper<InvestigationStep>()
-                .eq(InvestigationStep::getInvestigationId, investigationId)
-                .gt(InvestigationStep::getSeq, from)
-                .orderByAsc(InvestigationStep::getSeq))) {
-            send(conn, s.getSeq(), eventName(s.getContent()), payload(s.getContent()));
-        }
+        catchUp(conn, investigationId);
         return emitter;
     }
 
@@ -63,21 +65,34 @@ public class InvestigationSseService {
             return;
         }
         for (Conn conn : conns) {
-            send(conn, event.seq(), event.eventName(), event.payload());
+            catchUp(conn, event.investigationId());
         }
     }
 
     /** 心跳:一行注释,EventSource 不会当事件派发(契约 §7)。 */
     @Scheduled(fixedRate = HEARTBEAT_MS)
     public void heartbeat() {
-        for (List<Conn> conns : byInvestigation.values()) {
+        for (Map.Entry<String, List<Conn>> entry : byInvestigation.entrySet()) {
+            List<Conn> conns = entry.getValue();
             for (Conn conn : conns) {
                 try {
+                    catchUp(conn, entry.getKey());
                     conn.emitter().send(SseEmitter.event().comment("hb"));
                 } catch (IOException | IllegalStateException e) {
                     conn.emitter().completeWithError(e);
                     conns.remove(conn);
                 }
+            }
+        }
+    }
+
+    private void catchUp(Conn conn, String investigationId) {
+        synchronized (conn) {
+            for (InvestigationStep s : stepMapper.selectList(new LambdaQueryWrapper<InvestigationStep>()
+                    .eq(InvestigationStep::getInvestigationId, investigationId)
+                    .gt(InvestigationStep::getSeq, conn.lastSeq().get())
+                    .orderByAsc(InvestigationStep::getSeq))) {
+                send(conn, s.getSeq(), eventName(s.getContent()), payload(s.getContent()));
             }
         }
     }

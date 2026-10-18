@@ -16,7 +16,7 @@ import urllib.request
 BASE = os.environ.get("BASE", "http://127.0.0.1:8080").rstrip("/")
 INTERNAL_KEY = os.environ.get("INTERNAL_API_KEY", "demo-internal-key-2026")
 ADMIN = ("admin@sense2act.local", os.environ.get("SEED_ADMIN_PASSWORD", "admin123"))
-ANALYST = ("analyst@sense2act.local", "analyst123")
+ANALYST = ("analyst@sense2act.local", os.environ.get("SEED_ANALYST_PASSWORD", "analyst123"))
 
 # 绕过系统代理,本地直连
 urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler({})))
@@ -40,7 +40,7 @@ def login(pair):
 
 
 def main():
-    ts = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+    ts = datetime.datetime.now().strftime("%Y%m%d%H%M%S%f")
     print("BASE =", BASE, " 实例键 =", ts)
     admin = login(ADMIN)
     analyst = login(ANALYST)
@@ -49,9 +49,9 @@ def main():
     r = call("GET", "/api/v1/sources?page_size=50", token=admin)
     source = next((s for s in r["data"]["items"] if s["enabled"]), None)
     if source is None:
-        r = call("POST", "/api/v1/sources", {"name": "演示源-" + ts, "type": "gov",
+        r = call("POST", "/api/v1/sources", {"name": "演示源-" + ts, "type": "web_page",
                                              "url": "http://demo.example/" + ts,
-                                             "adapter": "ccgp", "schedule_cron": "0 6 * * *",
+                                             "adapter": "ccgp", "schedule_cron": "0 0 6 * * *",
                                              "config": {}, "enabled": True}, token=admin)
         source = r["data"]
     print("① 源   %s %s" % (source["id"], source["name"]))
@@ -64,11 +64,13 @@ def main():
              "title": "某市第三人民医院区域影像云平台采购公告(演示%s)" % ts,
              "org_name": "某市第三人民医院", "amount": "3600000.00",
              "publish_date": "2026-09-28", "region": "华东/某省某市", "category": "医疗信息化",
-             "content_text": "拟建设区域影像云平台并接入基层医疗机构,预算 360 万元,含三年运维。"},
+             "content_text": "拟建设区域影像云平台并接入基层医疗机构,预算 360 万元,含三年运维。",
+             "raw_html": "<html><body>区域影像云平台采购公告：预算360万元，三年运维。</body></html>"},
             {"url": "http://demo.example/%s/policy" % ts, "doc_type": "policy",
              "title": "某市医学影像数字化三年行动计划(演示%s)" % ts,
              "publish_date": "2026-03-05", "region": "华东/某省某市", "category": "医疗信息化",
-             "content_text": "三年内实现区域内影像检查结果互认,基层医疗机构影像设备与云平台分批建设。"},
+             "content_text": "三年内实现区域内影像检查结果互认,基层医疗机构影像设备与云平台分批建设。",
+             "raw_html": "<html><body>医学影像数字化三年行动计划：区域影像检查结果互认。</body></html>"},
         ]}, internal=True)
     doc_annc, doc_policy = r["data"]["document_ids"]
     print("② 文档 accepted=%d:公告 %s / 政策 %s" % (r["data"]["accepted"], doc_annc, doc_policy))
@@ -105,7 +107,7 @@ def main():
             {"text": "本次采购属于《医学影像数字化三年行动计划》分批建设的第二批",
              "nature": "fact", "confidence": 0.92, "evidence_ids": [ev]},
             {"text": "预算约为同类项目均值的 3.9 倍,与区域平台级建设定位相符",
-             "nature": "inference", "confidence": 0.75}],
+             "nature": "inference", "confidence": 0.75, "evidence_ids": [ev]}],
         "action_suggestions": [
             {"text": "评估以联合体形式参与区域平台级标段", "priority": "high"},
             {"text": "跟踪第三批(基层机构)立项窗口", "priority": "medium"}],

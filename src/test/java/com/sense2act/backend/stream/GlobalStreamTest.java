@@ -3,6 +3,8 @@ package com.sense2act.backend.stream;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sense2act.backend.common.IdGen;
+import com.sense2act.backend.config.AppProperties;
+import com.sense2act.backend.support.TestDocuments;
 import com.sense2act.backend.domain.document.Document;
 import com.sense2act.backend.domain.document.DocumentMapper;
 import org.junit.jupiter.api.MethodOrderer;
@@ -51,6 +53,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         properties = "app.internal-key=test-key")
 @AutoConfigureMockMvc
 @Testcontainers
+@org.springframework.test.annotation.DirtiesContext(classMode = org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GlobalStreamTest {
@@ -71,8 +74,12 @@ class GlobalStreamTest {
     @Autowired
     DocumentMapper documentMapper;
 
+    @Autowired
+    AppProperties properties;
+
     String jwt;
     String invId;
+    String evidenceId;
     String docB;
 
     /** 全局事件自增 id 跨用例推进,断言续传只补漏。 */
@@ -96,6 +103,13 @@ class GlobalStreamTest {
         mockMvc.perform(post("/api/v1/internal/investigations/{id}/start", invId)
                         .header("X-Internal-Key", "test-key"))
                 .andExpect(status().isOk());
+        MvcResult evidence = mockMvc.perform(post("/api/v1/internal/investigations/{id}/evidences", invId)
+                        .header("X-Internal-Key", "test-key").contentType(MediaType.APPLICATION_JSON)
+                        .content(("{\"source_type\":\"announcement\",\"doc_id\":\"%s\","
+                                + "\"excerpt\":\"全局通知原文依据\"}").formatted(docB)))
+                .andExpect(status().isOk()).andReturn();
+        evidenceId = objectMapper.readTree(evidence.getResponse().getContentAsString(StandardCharsets.UTF_8))
+                .path("data").path("id").asText();
     }
 
     @Test
@@ -126,8 +140,9 @@ class GlobalStreamTest {
         // 开着流交报告并 complete → report_ready + investigation_completed 实时到达,id 递增
         mockMvc.perform(post("/api/v1/internal/investigations/{id}/report", invId)
                         .header("X-Internal-Key", "test-key").contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"title\":\"全局流验证报告\",\"claims\":[{\"text\":\"x\","
-                                + "\"nature\":\"fact\",\"confidence\":0.9}]}"))
+                        .content(("{\"title\":\"全局流验证报告\",\"claims\":[{\"text\":\"x\","
+                                + "\"nature\":\"fact\",\"confidence\":0.9,\"evidence_ids\":[\"%s\"]}]}")
+                                .formatted(evidenceId)))
                 .andExpect(status().isOk());
         mockMvc.perform(post("/api/v1/internal/investigations/{id}/complete", invId)
                         .header("X-Internal-Key", "test-key"))
@@ -198,6 +213,7 @@ class GlobalStreamTest {
         d.setRaw(Map.of("k", "v"));
         d.setContentHash("hash-" + key);
         d.setSignalScanned(true);
+        TestDocuments.snapshot(d, properties.snapshotDir());
         documentMapper.insert(d);
         return d.getId();
     }

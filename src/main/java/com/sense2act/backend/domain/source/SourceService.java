@@ -66,7 +66,7 @@ public class SourceService {
     public Source create(SourceReq req) {
         if (isBlank(req.name())) throw BusinessException.badRequest("name 必填");
         if (isBlank(req.url())) throw BusinessException.badRequest("url 必填");
-        if (!TYPES.contains(req.type())) throw BusinessException.badRequest("type 必须是 web_page/api/rss 之一");
+        if (req.type() == null || !TYPES.contains(req.type())) throw BusinessException.badRequest("type 必须是 web_page/api/rss 之一");
         validateCron(req.scheduleCron());
 
         Source s = new Source();

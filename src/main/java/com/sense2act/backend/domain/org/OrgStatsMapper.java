@@ -10,6 +10,10 @@ import org.apache.ibatis.annotations.Update;
  */
 public interface OrgStatsMapper extends BaseMapper<OrgStat> {
 
+    /** 插入文档前串行同一机构/类别，重算能看到上一条已提交文档。 */
+    @Update("SELECT pg_advisory_xact_lock(hashtextextended(#{orgId} || ':' || #{category}, 9703))")
+    void lockBaseline(@Param("orgId") String orgId, @Param("category") String category);
+
     @Update("""
             INSERT INTO org_stats (org_id, category, window_days, sample_count,
                                    amount_mean, amount_std, amount_p95, freq_mean_30d, last_doc_at, updated_at)

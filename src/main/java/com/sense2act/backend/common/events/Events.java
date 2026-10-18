@@ -11,11 +11,17 @@ public final class Events {
     }
 
     public static void publishAfterCommit(ApplicationEventPublisher publisher, Object event) {
+        publisher.publishEvent(new PendingEvent(event));
         if (TransactionSynchronizationManager.isSynchronizationActive()) {
             TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
                 @Override
                 public void afterCommit() {
-                    publisher.publishEvent(event);
+                    try {
+                        publisher.publishEvent(event);
+                    } catch (RuntimeException ex) {
+                        org.slf4j.LoggerFactory.getLogger(Events.class)
+                                .warn("事务已提交，实时通知失败；持久事件将在重连/心跳时补发", ex);
+                    }
                 }
             });
         } else {

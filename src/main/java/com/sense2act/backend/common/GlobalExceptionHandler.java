@@ -20,6 +20,12 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    /** 客户端已断开 SSE，响应不可再写，不尝试输出 JSON 错误包。 */
+    @ExceptionHandler(org.springframework.web.context.request.async.AsyncRequestNotUsableException.class)
+    public void clientDisconnected(org.springframework.web.context.request.async.AsyncRequestNotUsableException e) {
+        log.debug("流式客户端已断开: {}", e.getMessage());
+    }
+
     private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(BusinessException.class)

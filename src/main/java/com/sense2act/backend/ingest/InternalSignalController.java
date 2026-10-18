@@ -30,10 +30,12 @@ public class InternalSignalController {
         this.signalService = signalService;
     }
 
+    public record DetectionQueue(List<SignalService.QueueDoc> items) { }
+
     @GetMapping("/detection-queue")
-    public ApiResponse<Map<String, Object>> queue(@RequestParam(required = false) Integer limit) {
+    public ApiResponse<DetectionQueue> queue(@RequestParam(required = false) Integer limit) {
         List<SignalService.QueueDoc> items = signalService.detectionQueue(limit);
-        return ApiResponse.ok(Map.of("items", items));
+        return ApiResponse.ok(new DetectionQueue(items));
     }
 
     public record SignalPush(Map<String, String> document, List<Map<String, Object>> hits,

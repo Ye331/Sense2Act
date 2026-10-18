@@ -66,7 +66,7 @@ public class EvidenceService {
     @Transactional
     public EvidenceView register(String investigationId, String sourceType, String docId, String title,
                                  String url, String excerpt, String publishedAt) {
-        Investigation inv = investigationMapper.selectById(investigationId);
+        Investigation inv = investigationMapper.lockById(investigationId);
         if (inv == null) {
             throw BusinessException.notFound("调查不存在: " + investigationId);
         }
@@ -78,6 +78,9 @@ public class EvidenceService {
         }
         if (excerpt == null || excerpt.isBlank()) {
             throw BusinessException.badRequest("excerpt 必填(证据须带摘录)");
+        }
+        if (title != null && title.length() > 500 || url != null && url.length() > 1000) {
+            throw BusinessException.badRequest("title ≤500、url ≤1000 字符");
         }
 
         Evidence ev = new Evidence();
@@ -92,6 +95,13 @@ public class EvidenceService {
             Document doc = documentMapper.selectById(docId);
             if (doc == null) {
                 throw BusinessException.unprocessable("doc_id 引用的文档不存在: " + docId);
+            }
+            if (doc.getPublishDate() == null || doc.getSnapshotKey() == null) {
+                throw BusinessException.unprocessable("引用文档必须有发布时间和原文快照");
+            }
+            Path snapshot = snapshotDir.resolve(doc.getSnapshotKey()).normalize();
+            if (!snapshot.startsWith(snapshotDir) || !Files.isRegularFile(snapshot)) {
+                throw BusinessException.unprocessable("引用文档的原文快照不可读取");
             }
             ev.setDocId(doc.getId());
             ev.setTitle(title == null || title.isBlank() ? doc.getTitle() : title.strip());

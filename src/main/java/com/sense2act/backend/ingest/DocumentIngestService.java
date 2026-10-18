@@ -13,7 +13,10 @@ import com.sense2act.backend.domain.source.SourceMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.support.TransactionTemplate;
+import java.math.RoundingMode;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -26,7 +29,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HexFormat;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,8 +38,8 @@ import java.util.Set;
  * URL 归一 → content_hash 去重 → 机构归一(org_id)→ raw_html 快照 → 入库 → 重算 org_stats。
  * 单条失败跳过计入 failed,不阻塞批次其余条目。
  *
- * 条目按"能违反库约束的字段全部先验后写"处理(枚举/长度/日期/金额/去重),
- * 使 insert 实际不可能撞约束;单批一个事务,避免坏条目污染整个事务。
+ * 每条独立事务；数据库错误只回滚该条，响应统计只包含已提交结果。
+ * URL/content_hash 通过 ON CONFLICT 去重，允许并发重复推送。
  */
 @Service
 public class DocumentIngestService {
@@ -52,10 +54,13 @@ public class DocumentIngestService {
     private final OrgService orgService;
     private final OrgStatsMapper orgStatsMapper;
     private final Path snapshotDir;
+    private final TransactionTemplate itemTransaction;
 
     public DocumentIngestService(SourceMapper sourceMapper, DocumentMapper documentMapper,
                                  OrgService orgService, OrgStatsMapper orgStatsMapper,
-                                 AppProperties props) {
+                                 AppProperties props, PlatformTransactionManager transactionManager) {
+        this.itemTransaction = new TransactionTemplate(transactionManager);
+        this.itemTransaction.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
         this.sourceMapper = sourceMapper;
         this.documentMapper = documentMapper;
         this.orgService = orgService;
@@ -68,7 +73,6 @@ public class DocumentIngestService {
     public record BatchResult(int accepted, int duplicates, int failed, List<String> documentIds) {
     }
 
-    @Transactional
     public BatchResult push(String sourceId, List<Map<String, Object>> items) {
         Source source = sourceMapper.selectById(sourceId);
         if (source == null) {
@@ -85,29 +89,34 @@ public class DocumentIngestService {
         int duplicates = 0;
         int failed = 0;
         List<String> documentIds = new ArrayList<>();
-        Set<String> affected = new LinkedHashSet<>();   // "orgId\u0000category"
 
         for (Map<String, Object> item : items) {
             try {
-                Document doc = convert(source.getId(), item);
+                Document doc = itemTransaction.execute(tx -> {
+                    if (item == null) throw new IllegalArgumentException("条目不能为 null");
+                    Document converted = convert(source.getId(), item);
+                    if (converted == null) return null;
+                    if (converted.getOrgId() != null && converted.getCategory() != null) {
+                        orgStatsMapper.lockBaseline(converted.getOrgId(), converted.getCategory());
+                    }
+                    if (documentMapper.insertIgnoreConflict(converted) == 0) {
+                        return null;
+                    }
+                    if (converted.getOrgId() != null && converted.getCategory() != null) {
+                        orgStatsMapper.recompute(converted.getOrgId(), converted.getCategory());
+                    }
+                    return converted;
+                }); // execute 返回时该条已经提交，统计不会包含回滚数据
                 if (doc == null) {
                     duplicates++;
-                    continue;
-                }
-                documentMapper.insert(doc);
-                documentIds.add(doc.getId());
-                accepted++;
-                if (doc.getOrgId() != null && doc.getCategory() != null) {
-                    affected.add(doc.getOrgId() + "\u0000" + doc.getCategory());
+                } else {
+                    documentIds.add(doc.getId());
+                    accepted++;
                 }
             } catch (Exception e) {
                 failed++;
                 log.warn("文档条目入库失败 url={} 原因={}", str(item, "url"), e.getMessage());
             }
-        }
-        for (String pair : affected) {
-            int sep = pair.indexOf('\u0000');
-            orgStatsMapper.recompute(pair.substring(0, sep), pair.substring(sep + 1));
         }
         log.info("批量接入完成 source={} accepted={} duplicates={} failed={}",
                 sourceId, accepted, duplicates, failed);
@@ -211,7 +220,15 @@ public class DocumentIngestService {
         }
         try {
             BigDecimal v = new BigDecimal(amount.trim());
-            return v.signum() < 0 ? null : v;
+            if (v.signum() < 0) return null;
+            if (v.precision() - v.scale() > 16) {
+                throw new IllegalArgumentException("amount 超出 NUMERIC(18,2) 范围");
+            }
+            v = v.setScale(2, RoundingMode.HALF_UP);
+            if (v.precision() - v.scale() > 16) {
+                throw new IllegalArgumentException("amount 超出 NUMERIC(18,2) 范围");
+            }
+            return v;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("amount 非数字: " + amount);
         }
@@ -225,6 +242,7 @@ public class DocumentIngestService {
     }
 
     private static String str(Map<String, Object> item, String key) {
+        if (item == null) return null;
         Object v = item.get(key);
         if (v == null) {
             return null;

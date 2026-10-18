@@ -3,10 +3,15 @@ package com.sense2act.backend.domain.investigation;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Select;
 
 /** 调查表。signal_id 唯一约束兜底"一信号至多一调查"的并发(E2-4)。 */
 @Mapper
 public interface InvestigationMapper extends BaseMapper<Investigation> {
+
+    /** 所有调查写操作先锁同一行，状态检查、预算与步骤序号在同一事务内完成。 */
+    @Select("SELECT * FROM investigations WHERE id = #{id} FOR UPDATE")
+    Investigation lockById(String id);
 
     /**
      * D14 并发闸的事务级串行锁:并发领取的"先计数后 CAS"在 READ COMMITTED 下有竞态,取号前先过独木桥。

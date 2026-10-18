@@ -48,13 +48,20 @@ public class InternalInvestigationController {
 
     /** 契约 §9.3:{event, round, payload, token_usage};事件名映射见 §7,token_usage 累加进预算。 */
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-    public record StepPost(String event, Integer round, Map<String, Object> payload, Integer tokenUsage) {
+    public record StepPost(String event, Integer round, Map<String, Object> payload, Integer tokenUsage,
+                           String requestId) {
     }
 
     @PostMapping("/{id}/steps")
     public ApiResponse<InvestigationService.StepView> postStep(@PathVariable String id,
                                                                @RequestBody StepPost req) {
         return ApiResponse.ok(investigationService.appendStep(id, req.event(), req.round(),
-                req.payload(), req.tokenUsage()));
+                req.payload(), req.tokenUsage(), req.requestId()));
+    }
+
+    @GetMapping("/{id}/steps")
+    public ApiResponse<Map<String, Object>> steps(@PathVariable String id,
+            @RequestParam(required = false) Integer cursor, @RequestParam(required = false) Integer limit) {
+        return ApiResponse.ok(investigationService.steps(id, cursor, limit));
     }
 }

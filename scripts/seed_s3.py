@@ -10,6 +10,7 @@ E1-7 演示链路①(采集):空库一键灌入 10 个源 + 30+ 篇文档(含重
 (可选)先起 embedding 演示端点再灌库,语义检索有数据:
   python scripts/embedding_stub.py &   # 端口 8901,compose 里配 EMBEDDING_ENDPOINT=http://host.docker.internal:8901/embed
 """
+import html
 import json
 import os
 import sys
@@ -275,6 +276,10 @@ DOCS = [
 def push_docs(source_name_to_id):
     total = {"accepted": 0, "duplicates": 0, "failed": 0}
     for source_name, items in DOCS:
+        # 演示数据的原文快照；后续证据登记必须能回看原文。
+        items = [dict(item, raw_html=item.get("raw_html") or
+                      "<html><body>" + html.escape(item.get("content_text") or item["title"]) + "</body></html>")
+                 for item in items]
         r = call("POST", "/api/v1/internal/documents",
                  {"source_id": source_name_to_id[source_name], "items": items}, internal=True)
         d = r["data"]

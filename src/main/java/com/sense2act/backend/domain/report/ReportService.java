@@ -93,7 +93,7 @@ public class ReportService {
     /** draft.token_usage 只作对账参考:预算与 meta 一律以 steps 累计为准(D5),报告不改账。 */
     @Transactional
     public ReportView submit(String investigationId, Draft draft) {
-        Investigation inv = investigationMapper.selectById(investigationId);
+        Investigation inv = investigationMapper.lockById(investigationId);
         if (inv == null) {
             throw BusinessException.notFound("调查不存在: " + investigationId);
         }
@@ -197,6 +197,7 @@ public class ReportService {
         }
         List<String> allRefs = new ArrayList<>();
         for (DraftClaim c : draft.claims()) {
+            if (c == null) throw BusinessException.badRequest("claims 不能包含 null 条目");
             if (c.text() == null || c.text().isBlank()) {
                 throw BusinessException.badRequest("claim.text 必填");
             }
@@ -210,9 +211,10 @@ public class ReportService {
                     || c.confidence().compareTo(BigDecimal.ONE) > 0) {
                 throw BusinessException.badRequest("claim.confidence 需在 [0,1]");
             }
-            if (c.evidenceIds() != null) {
-                allRefs.addAll(c.evidenceIds());
+            if (c.evidenceIds() == null || c.evidenceIds().isEmpty()) {
+                throw BusinessException.unprocessable("每条 claim 必须引用至少一条已登记证据");
             }
+            allRefs.addAll(c.evidenceIds());
         }
         if (!allRefs.isEmpty()) {
             Set<String> registered = new LinkedHashSet<>(evidenceMapper.selectList(

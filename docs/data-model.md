@@ -126,6 +126,8 @@ id（wpr_ 前缀）、name（唯一，如"医疗AI"，semantic_match 的 detail.
 
 ### investigation_steps（步骤留痕，V4）
 
+V8 增补 request_id（VARCHAR(100)，可空）；非空时 UNIQUE(investigation_id, request_id)。Agent 使用稳定 key 重试同一步，只返回已存在记录，不能重复扣预算。步骤序号分配与预算/状态更新持同一调查行锁。
+
 id（ist_ 前缀）、investigation_id、seq（从 1 起，UNIQUE(investigation_id, seq)，即 SSE 事件 id）、round、type（question/tool_select/tool_call/reflection/status_change，由 event 名映射）、content（JSONB，`{event, ...载荷}` 扁平存放，SSE 按 content.event 还原事件名、载荷作 data）、token_usage（该步消耗，累加进 investigations.token_used）、created_at。工具调用没有单独的表：外部服务把它作为 tool_call 类型的 step 上报。
 
 派生步骤：investigation_started（start 接口落，round=0）、budget_update（token_usage>0 的步骤提交后由后端补一条，载荷 {token_used, token_budget}）、investigation_stopped / investigation_failed（stop / TTL 清理落）。派生步骤同样可 SSE 补发——重连不丢预算与状态事件的语义由此成立。

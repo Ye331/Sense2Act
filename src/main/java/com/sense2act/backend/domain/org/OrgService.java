@@ -109,7 +109,10 @@ public class OrgService {
         org.setId(IdGen.next("org"));
         org.setName(name);
         org.setAliases(List.of());
-        orgMapper.insert(org);
+        if (orgMapper.insertIgnoreConflict(org) == 0) {
+            return orgMapper.selectOne(new LambdaQueryWrapper<Organization>()
+                    .eq(Organization::getName, name)).getId();
+        }
         log.info("新建机构 {} = {}", org.getId(), name);
         return org.getId();
     }

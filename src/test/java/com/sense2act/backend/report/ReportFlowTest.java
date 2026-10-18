@@ -3,6 +3,8 @@ package com.sense2act.backend.report;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sense2act.backend.common.IdGen;
+import com.sense2act.backend.config.AppProperties;
+import com.sense2act.backend.support.TestDocuments;
 import com.sense2act.backend.domain.document.Document;
 import com.sense2act.backend.domain.document.DocumentMapper;
 import com.sun.net.httpserver.HttpServer;
@@ -47,6 +49,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(properties = "app.internal-key=test-key")
 @AutoConfigureMockMvc
 @Testcontainers
+@org.springframework.test.annotation.DirtiesContext(classMode = org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ReportFlowTest {
@@ -66,6 +69,9 @@ class ReportFlowTest {
 
     @Autowired
     DocumentMapper documentMapper;
+
+    @Autowired
+    AppProperties properties;
 
     private static final String SNAPSHOT = "<html>外部报道正文 SNAPSHOT-42</html>";
 
@@ -232,17 +238,17 @@ class ReportFlowTest {
         postReport(invA, "{\"title\":\"引用未登记证据\",\"claims\":[{\"text\":\"x\",\"nature\":\"fact\","
                 + "\"confidence\":0.5,\"evidence_ids\":[\"ev_NOPE\"]}]}", 42201);
         postReport(invA, "{\"title\":\"关系节点越界\",\"claims\":[{\"text\":\"x\",\"nature\":\"fact\","
-                        + "\"confidence\":0.5}],\"event_extraction\":{\"event\":{\"title\":\"e\",\"type\":\"policy\"},"
+                        + "\"confidence\":0.5,\"evidence_ids\":[\"" + evDoc + "\"]}],\"event_extraction\":{\"event\":{\"title\":\"e\",\"type\":\"policy\"},"
                         + "\"entities\":[{\"name\":\"n\",\"type\":\"org\"}],"
                         + "\"relations\":[{\"source\":\"entity:9\",\"target\":\"event\",\"relation\":\"参与\"}]}}",
                 40001);
         postReport(invA, "{\"title\":\"主体类型非法\",\"claims\":[{\"text\":\"x\",\"nature\":\"fact\","
-                        + "\"confidence\":0.5}],\"event_extraction\":{\"event\":{\"title\":\"e\",\"type\":\"policy\"},"
+                        + "\"confidence\":0.5,\"evidence_ids\":[\"" + evDoc + "\"]}],\"event_extraction\":{\"event\":{\"title\":\"e\",\"type\":\"policy\"},"
                         + "\"entities\":[{\"name\":\"n\",\"type\":\"vendor\"}]}}", 40001);
         postReport(invA, "{\"title\":\"引用不存在事件\",\"event_id\":\"evt_NOPE\",\"claims\":[{\"text\":\"x\","
-                + "\"nature\":\"fact\",\"confidence\":0.5}]}", 42201);
+                + "\"nature\":\"fact\",\"confidence\":0.5,\"evidence_ids\":[\"" + evDoc + "\"]}]}", 42201);
         postReport(invA, "{\"title\":\"优先级非法\",\"claims\":[{\"text\":\"x\",\"nature\":\"fact\","
-                + "\"confidence\":0.5}],\"action_suggestions\":[{\"text\":\"s\",\"priority\":\"urgent\"}]}", 40001);
+                + "\"confidence\":0.5,\"evidence_ids\":[\"" + evDoc + "\"]}],\"action_suggestions\":[{\"text\":\"s\",\"priority\":\"urgent\"}]}", 40001);
         assertThat(jdbcTemplate.queryForObject(
                 "SELECT count(*) FROM reports WHERE investigation_id = ?", Integer.class, invA)).isEqualTo(0);
 
@@ -255,7 +261,7 @@ class ReportFlowTest {
                 + "{\"text\":\"本次预算约为近半年同类项目均值的 4 倍\",\"nature\":\"inference\","
                 + "\"confidence\":0.8,\"evidence_ids\":[\"%s\"]},"
                 + "{\"text\":\"同市另有2家医院启动类似项目,可能是一轮建设潮的开始\",\"nature\":\"speculation\","
-                + "\"confidence\":0.6}],"
+                + "\"confidence\":0.6,\"evidence_ids\":[\"%s\"]}],"
                 + "\"action_suggestions\":["
                 + "{\"text\":\"评估参与方式:独立投标或联合既往合作方\",\"priority\":\"high\"},"
                 + "{\"text\":\"跟踪同市另外两家医院的立项进展\",\"priority\":\"medium\"}],"
@@ -269,7 +275,7 @@ class ReportFlowTest {
                 + "{\"source\":\"entity:0\",\"target\":\"event\",\"relation\":\"参与\"},"
                 + "{\"source\":\"entity:1\",\"target\":\"event\",\"relation\":\"佐证\"}]},"
                 + "\"token_usage\":41200}")
-                .formatted(evDoc, evExt, evExt);
+                .formatted(evDoc, evExt, evExt, evExt);
         MvcResult r = mockMvc.perform(post("/api/v1/internal/investigations/{id}/report", invA)
                         .header("X-Internal-Key", "test-key").contentType(MediaType.APPLICATION_JSON)
                         .content(draft))
@@ -281,7 +287,7 @@ class ReportFlowTest {
                 .andExpect(jsonPath("$.data.claims[0].evidences[0].id").value(evDoc))
                 .andExpect(jsonPath("$.data.claims[0].evidences[0].source_type").value("announcement"))
                 .andExpect(jsonPath("$.data.claims[1].evidences.length()").value(1))
-                .andExpect(jsonPath("$.data.claims[2].evidences").isEmpty())
+                .andExpect(jsonPath("$.data.claims[2].evidences.length()").value(1))
                 .andExpect(jsonPath("$.data.action_suggestions.length()").value(2))
                 .andExpect(jsonPath("$.data.meta.rounds").value(1))
                 .andExpect(jsonPath("$.data.meta.tool_calls").value(1))
@@ -308,7 +314,7 @@ class ReportFlowTest {
         assertThat(jdbcTemplate.queryForObject(
                 "SELECT count(*) FROM event_relations", Integer.class)).isEqualTo(2);
         assertThat(jdbcTemplate.queryForObject(
-                "SELECT count(*) FROM evidence_links", Integer.class)).isEqualTo(3);
+                "SELECT count(*) FROM evidence_links", Integer.class)).isEqualTo(4);
         // 主体幂等:同名再提交(被 40901 挡)之外,重复调查引用同名主体也按名复用 —— 这里核查 entities 无重复行
         assertThat(jdbcTemplate.queryForObject(
                 "SELECT count(*) FROM entities WHERE name = '某市人民医院'", Integer.class)).isEqualTo(1);
@@ -412,8 +418,7 @@ class ReportFlowTest {
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code").value(40401));
         mockMvc.perform(get("/api/v1/evidences/{id}/snapshot", evDoc).header("Authorization", viewer))
-                .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$.code").value(40401));   // 本库文档未存快照 → 无快照可回
+                .andExpect(status().isOk());   // 登记证据必须能读取原文快照
     }
 
     @Test
@@ -466,6 +471,7 @@ class ReportFlowTest {
         d.setRaw(Map.of("k", "v"));
         d.setContentHash("hash-" + key);
         d.setSignalScanned(true);
+        TestDocuments.snapshot(d, properties.snapshotDir());
         documentMapper.insert(d);
         return d.getId();
     }

@@ -3,6 +3,8 @@ package com.sense2act.backend.feedback;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sense2act.backend.common.IdGen;
+import com.sense2act.backend.config.AppProperties;
+import com.sense2act.backend.support.TestDocuments;
 import com.sense2act.backend.domain.document.Document;
 import com.sense2act.backend.domain.document.DocumentMapper;
 import org.junit.jupiter.api.MethodOrderer;
@@ -42,6 +44,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(properties = "app.internal-key=test-key")
 @AutoConfigureMockMvc
 @Testcontainers
+@org.springframework.test.annotation.DirtiesContext(classMode = org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class FeedbackBoardTest {
@@ -61,6 +64,9 @@ class FeedbackBoardTest {
 
     @Autowired
     DocumentMapper documentMapper;
+
+    @Autowired
+    AppProperties properties;
 
     String docA;
     String docB;
@@ -102,7 +108,7 @@ class FeedbackBoardTest {
                 + "\"claims\":["
                 + "{\"text\":\"本次采购为《数据平台建设三年规划》二期续建\",\"nature\":\"fact\","
                 + "\"confidence\":0.9,\"evidence_ids\":[\"%s\"]},"
-                + "{\"text\":\"预算约为近期同类均值 3 倍以上\",\"nature\":\"inference\",\"confidence\":0.7}],"
+                + "{\"text\":\"预算约为近期同类均值 3 倍以上\",\"nature\":\"inference\",\"confidence\":0.7,\"evidence_ids\":[\"%s\"]}],"
                 + "\"action_suggestions\":["
                 + "{\"text\":\"评估以联合体形式投标\",\"priority\":\"high\"},"
                 + "{\"text\":\"跟踪该规划三期立项动态\",\"priority\":\"medium\"}],"
@@ -111,7 +117,7 @@ class FeedbackBoardTest {
                 + "{\"name\":\"某市医保局\",\"type\":\"org\",\"role\":\"participant\"},"
                 + "{\"name\":\"数据平台建设三年规划\",\"type\":\"policy\",\"role\":\"scope\"}],"
                 + "\"relations\":[{\"source\":\"entity:0\",\"target\":\"event\",\"relation\":\"参与\"}]}}")
-                .formatted(evDoc);
+                .formatted(evDoc, evDoc);
         MvcResult ra = mockMvc.perform(post("/api/v1/internal/investigations/{id}/report", invA)
                         .header("X-Internal-Key", "test-key").contentType(MediaType.APPLICATION_JSON)
                         .content(draftA))
@@ -125,8 +131,13 @@ class FeedbackBoardTest {
             suggestionIds[i] = suggestions.get(i).path("id").asText();
         }
         // invB 草稿报告(不 complete → draft,用于 40901 闸门)
-        String draftB = "{\"title\":\"草稿报告:频率突增待证\",\"claims\":[{\"text\":\"x\",\"nature\":\"fact\","
-                + "\"confidence\":0.5}]}";
+        MvcResult evB = mockMvc.perform(post("/api/v1/internal/investigations/{id}/evidences", invB)
+                        .header("X-Internal-Key", "test-key").contentType(MediaType.APPLICATION_JSON)
+                        .content(("{\"source_type\":\"announcement\",\"doc_id\":\"%s\","
+                                + "\"excerpt\":\"草稿的原文依据\"}").formatted(docA)))
+                .andExpect(status().isOk()).andReturn();
+        String draftB = ("{\"title\":\"草稿报告:频率突增待证\",\"claims\":[{\"text\":\"x\",\"nature\":\"fact\","
+                + "\"confidence\":0.5,\"evidence_ids\":[\"%s\"]}]}").formatted(read(evB, "data.id"));
         MvcResult rb = mockMvc.perform(post("/api/v1/internal/investigations/{id}/report", invB)
                         .header("X-Internal-Key", "test-key").contentType(MediaType.APPLICATION_JSON)
                         .content(draftB))
@@ -390,6 +401,7 @@ class FeedbackBoardTest {
         d.setRaw(Map.of("k", "v"));
         d.setContentHash("hash-" + key);
         d.setSignalScanned(true);
+        TestDocuments.snapshot(d, properties.snapshotDir());
         documentMapper.insert(d);
         return d.getId();
     }

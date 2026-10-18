@@ -24,6 +24,8 @@
 - ID 用带前缀 ULID；金额字符串小数；时间 ISO 8601 带时区。
 - 用户接口 JWT，内部接口 `X-Internal-Key`。
 - 采集按 content_hash 和归一化 URL 去重，单条失败不阻塞批次。
+- 文档每条独立事务；调查写入先锁定同一调查行；全局通知日志与业务同事务提交、提交后广播。Agent 步骤可选 request_id 重试不能重复记账。
+- 报告每条 claim 必须有非空 evidence_ids；本库证据引用的文档必须有发布时间和可读取原文快照。机器规则读取经 /internal/signal-rules，不使用管理员凭据。
 - 报告响应固定带 disclaimer："本报告由AI生成，结论不替代人的自主判断"。
 
 ## 内部 API 是外部团队的契约

@@ -26,6 +26,12 @@ public class SignalRuleService {
         this.ruleMapper = ruleMapper;
     }
 
+    public List<RuleView> enabledRules() {
+        return ruleMapper.selectList(new LambdaQueryWrapper<SignalRule>()
+                        .eq(SignalRule::getEnabled, true).orderByAsc(SignalRule::getId))
+                .stream().map(SignalRuleService::view).toList();
+    }
+
     public List<RuleView> list() {
         return ruleMapper.selectList(new LambdaQueryWrapper<SignalRule>()
                         .orderByAsc(SignalRule::getName).orderByDesc(SignalRule::getVersion))

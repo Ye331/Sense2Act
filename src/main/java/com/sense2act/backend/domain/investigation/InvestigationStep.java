@@ -11,6 +11,10 @@ import java.util.Map;
 /** 调查步骤留痕(investigation_steps,E3-3)。seq 单调递增且即 SSE 事件 id;content = {event, ...载荷}。 */
 @TableName(value = "investigation_steps", autoResultMap = true)
 public class InvestigationStep {
+    private String requestId;
+
+    public String getRequestId() { return requestId; }
+    public void setRequestId(String requestId) { this.requestId = requestId; }
 
     public static final String TYPE_QUESTION = "question";
     public static final String TYPE_TOOL_SELECT = "tool_select";

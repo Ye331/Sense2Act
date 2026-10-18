@@ -1,6 +1,10 @@
 # Maven
 target/
 
+# Python 演示脚本缓存
+__pycache__/
+*.pyc
+
 # IDE
 .idea/
 *.iml

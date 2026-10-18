@@ -22,6 +22,8 @@
 - [docs/api-design.md](docs/api-design.md) API 定义，含外部服务的接入契约（内部 API）
 - [docs/data-model.md](docs/data-model.md) 数据库表设计
 - [docs/backlog.md](docs/backlog.md) 敏捷计划：史诗、用户故事与验收标准、DoD、冲刺安排
+- [docs/user-stories.md](docs/user-stories.md) 当前平台功能、角色用户故事与接入修复验收
+- [docs/team-integration.md](docs/team-integration.md) 团队对接分工、共享环境与联调顺序（附调用集合/空白环境模板）
 - AGENT.md 给 AI 编码助手的说明
 
 ## 技术栈
@@ -110,6 +112,10 @@ curl -s "http://127.0.0.1:8080/api/v1/documents?semantic=数据中台" -H "Autho
 ```
 
 ## 测试
+
+前端跨域联调：在 `.env` 设置 `CORS_ALLOWED_ORIGINS`（逗号分隔，例如 `http://localhost:5173`；生产填实际前端来源），或通过同源反代访问 API。配置不会跳过 JWT 认证，Swagger 已提供 JWT 与内部 key 的认证入口。
+
+接入团队请同步 2026-10-14 契约修复：检测队列金额为字符串，每条报告结论必须引用证据，本库证据必须有发布时间和原文快照。启用规则可从检测队列 `rules` 或 `/api/v1/internal/signal-rules` 获取。Agent 恢复可读取内部 steps，并给重试步骤带稳定 `request_id`；单工作进程先查询进度再恢复，勿同时多 worker 接管。
 
 ```bash
 mvn -B -ntp verify        # 单元 + Testcontainers 集成测试（需 Docker）

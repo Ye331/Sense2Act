@@ -17,6 +17,7 @@
 - 唯一例外（D12，数据面）：语义检索需要把查询文本换成向量，后端会向配置的 EMBEDDING_ENDPOINT 发起一次无状态出站调用（文本进、向量出），性质等同查数据库，不含模型与提示词资产；文档向量入库后也经同一端点补算，保证与查询同模型。端点不可用时语义检索降级，关键词兜底，不报错。线约：`POST` 请求体 `{"inputs": ["文本", ...]}`，响应 `{"embeddings": [[512 个 float], ...]}`（与 `documents.embedding vector(512)` 对齐），可选 `Authorization: Bearer <EMBEDDING_API_KEY>`；批量上限 32 条/次。本地演示可跑 `scripts/embedding_stub.py` 冒充该端点。
 - 后端给的是数据契约（JSON 格式定义），不是代码契约。没有插件、没有共享代码。
 - 不变量在后端强制：状态机流转、轮次和预算上限、证据引用校验都在 API 层做，外部服务写错了最多收到 4xx，不会弄脏数据。
+- 2026-10-14 接入修复：文档逐条事务隔离；调查所有写入持同一行锁；全局通知日志与业务同事务提交、提交后广播，SSE 按持久游标串行补发。单 Agent 重启通过状态列表/context/steps 恢复，steps 的可选 request_id 保证重试不重复记账；多 worker 租约仍不在本单实例原型范围内。
 
 | 外部服务 | 它做什么 | 用的接口（api-design.md §9） |
 | --- | --- | --- |
@@ -192,7 +193,7 @@ services:
 | 业界模式 | 本项目对应做法 | 取舍 |
 | --- | --- | --- |
 | 模块化单体（Spring Modulith / ArchUnit 边界测试） | 按 ingest / signals / agent / evidence / report / feedback 分包 | 结构本身已采用；边界验证测试作为 C 级增强（backlog E0-6，模块长全后启用） |
-| 事务性发件箱（transactional outbox） | SSE 事件可从 steps / signals 业务表按 Last-Event-ID 回放 | 不建 outbox 表——事件源即业务表，回放能力更强；只要求发布在事务提交后（afterCommit） |
+| 事务性发件箱（transactional outbox） | 调查步骤及 global_events 日志支持 Last-Event-ID 回放 | 不引入 broker/outbox 投递进程；global_events 与业务同事务提交，提交后广播，连接按持久游标补发 |
 | Agent 持久化执行 / 检查点（durable execution） | 外部服务无状态，全部状态在库，重启后从内部 API 重放恢复 | 等价的数据库变体，且把非确定性（LLM/工具）隔离在仓库边界外；不引入 Temporal / Restate |
 | 混合检索（BM25 + 向量 + RRF 融合） | keyword（GIN 全文）与 semantic（HNSW）双路，RRF 融合排序 | 纯 SQL 实现零新依赖（backlog E1-6） |
 | 契约即代码 / 破坏性变更门禁 | api-design §9 冻结 + §11 变更记录 | CI 跑 oasdiff 破坏性检测，把流程变成机器强制（backlog E0-2） |

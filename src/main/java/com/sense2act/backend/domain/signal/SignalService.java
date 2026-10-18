@@ -21,6 +21,7 @@ import com.sense2act.backend.domain.org.Organization;
 import com.sense2act.backend.domain.org.OrganizationMapper;
 import com.sense2act.backend.domain.policy.InvestigationPolicy;
 import com.sense2act.backend.domain.policy.PolicyService;
+import com.sense2act.backend.domain.rule.SignalRuleService;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
@@ -55,11 +56,13 @@ public class SignalService {
     private final FeedbackEventMapper feedbackEventMapper;
     private final PolicyService policyService;
     private final ApplicationEventPublisher eventPublisher;
+    private final SignalRuleService ruleService;
 
     public SignalService(SignalMapper signalMapper, DocumentMapper documentMapper,
                          OrganizationMapper organizationMapper, OrgStatsMapper orgStatsMapper,
                          InvestigationMapper investigationMapper, FeedbackEventMapper feedbackEventMapper,
-                         PolicyService policyService, ApplicationEventPublisher eventPublisher) {
+                         PolicyService policyService, ApplicationEventPublisher eventPublisher,
+                         SignalRuleService ruleService) {
         this.signalMapper = signalMapper;
         this.documentMapper = documentMapper;
         this.organizationMapper = organizationMapper;
@@ -68,14 +71,22 @@ public class SignalService {
         this.feedbackEventMapper = feedbackEventMapper;
         this.policyService = policyService;
         this.eventPublisher = eventPublisher;
+        this.ruleService = ruleService;
     }
 
     // ---------- E2-1 检测队列 ----------
 
     @com.fasterxml.jackson.databind.annotation.JsonNaming(
             com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy.class)
-    public record QueueDoc(Map<String, Object> document, Map<String, Object> orgStats, List<String> profiles) {
+    public record QueueDoc(QueueDocument document, Map<String, Object> orgStats, List<String> profiles,
+                           List<SignalRuleService.RuleView> rules) {
     }
+
+    @com.fasterxml.jackson.databind.annotation.JsonNaming(
+            com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy.class)
+    public record QueueDocument(String id, String docType, String title, String orgName,
+                                String amount, LocalDate publishDate, String region, String category,
+                                String contentText) { }
 
     /** 未扫描文档按入库先后吐给检测服务,一次带齐 org_stats 基线与启用画像。 */
     public List<QueueDoc> detectionQueue(Integer limit) {
@@ -103,19 +114,14 @@ public class SignalService {
                 : orgStatsMapper.selectList(new LambdaQueryWrapper<OrgStat>().in(OrgStat::getOrgId, orgIds)).stream()
                         .collect(java.util.stream.Collectors.toMap(s -> s.getOrgId() + "\n" + s.getCategory(), s -> s));
         List<String> profiles = policyService.enabledProfileNames();
+        List<SignalRuleService.RuleView> rules = ruleService.enabledRules();
 
         List<QueueDoc> items = new ArrayList<>(docs.size());
         for (Document d : docs) {
-            Map<String, Object> doc = new HashMap<>();
-            doc.put("id", d.getId());
-            doc.put("doc_type", d.getDocType());
-            doc.put("title", d.getTitle());
-            doc.put("org_name", d.getOrgId() == null ? null : orgNames.get(d.getOrgId()));
-            doc.put("amount", d.getAmount());
-            doc.put("publish_date", d.getPublishDate());
-            doc.put("region", d.getRegion());
-            doc.put("category", d.getCategory());
-            doc.put("content_text", d.getContentText());
+            QueueDocument doc = new QueueDocument(d.getId(), d.getDocType(), d.getTitle(),
+                    d.getOrgId() == null ? null : orgNames.get(d.getOrgId()),
+                    d.getAmount() == null ? null : d.getAmount().toPlainString(),
+                    d.getPublishDate(), d.getRegion(), d.getCategory(), d.getContentText());
             Map<String, Object> statsView = null;
             if (d.getOrgId() != null && d.getCategory() != null) {
                 OrgStat s = stats.get(d.getOrgId() + "\n" + d.getCategory());
@@ -129,7 +135,7 @@ public class SignalService {
                     statsView.put("freq_mean_30d", s.getFreqMean30d());
                 }
             }
-            items.add(new QueueDoc(doc, statsView, profiles));
+            items.add(new QueueDoc(doc, statsView, profiles, rules));
         }
         return items;
     }

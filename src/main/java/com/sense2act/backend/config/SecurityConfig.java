@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sense2act.backend.common.ApiResponse;
 import com.sense2act.backend.common.ErrorCode;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.DispatcherType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -21,6 +22,9 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.io.IOException;
 import java.util.List;
@@ -38,6 +42,7 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http, AppProperties props, ObjectMapper objectMapper)
             throws Exception {
         http.csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.configurationSource(corsConfigurationSource(props)))
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(eh -> eh
                         .authenticationEntryPoint((req, resp, ex) -> writeEnvelope(resp, objectMapper,
@@ -45,6 +50,7 @@ public class SecurityConfig {
                         .accessDeniedHandler((req, resp, ex) -> writeEnvelope(resp, objectMapper,
                                 ErrorCode.FORBIDDEN, "无权限:当前角色不允许此操作")))
                 .authorizeHttpRequests(auth -> auth
+                        .dispatcherTypeMatchers(DispatcherType.ASYNC, DispatcherType.ERROR).permitAll()
                         .requestMatchers("/actuator/health", "/actuator/health/**").permitAll()
                         .requestMatchers("/api/v1/auth/token").permitAll()
                         // 内部接口的认证完全由 InternalKeyFilter 负责,不过 Spring 授权层
@@ -75,6 +81,20 @@ public class SecurityConfig {
                                 props.internalRateLimitPerMinute() == null ? 0 : props.internalRateLimitPerMinute(),
                                 objectMapper), InternalKeyFilter.class);
         return http.build();
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource(AppProperties props) {
+        CorsConfiguration cors = new CorsConfiguration();
+        cors.setAllowedOrigins(props.cors() == null || props.cors().allowedOrigins() == null ? List.of()
+                : props.cors().allowedOrigins().stream().filter(s -> !s.isBlank()).map(String::trim).toList());
+        cors.setAllowedMethods(List.of("GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+        cors.setAllowedHeaders(List.of("Authorization", "Content-Type", "Last-Event-ID", "X-Internal-Key"));
+        cors.setExposedHeaders(List.of("Content-Disposition", "Retry-After"));
+        cors.setMaxAge(3600L);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/api/v1/**", cors);
+        return source;
     }
 
     @Bean

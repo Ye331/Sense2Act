@@ -129,11 +129,11 @@ public class InvestigationService {
     /** 领取:created → investigating(CAS)。D14 并发上限在领取时挡:先过事务级独木桥再计数,杜绝并发超卖。 */
     @Transactional
     public InvView start(String id) {
-        Investigation inv = mustGet(id);
+        investigationMapper.lockStartGate();
+        Investigation inv = mustGetLocked(id);
         if (!Investigation.STATUS_CREATED.equals(inv.getStatus())) {
             throw BusinessException.conflict("只有 created 状态可领取,当前: " + inv.getStatus());
         }
-        investigationMapper.lockStartGate();
         InvestigationPolicy policy = policyService.policies();
         long active = investigationMapper.selectCount(new LambdaQueryWrapper<Investigation>()
                 .in(Investigation::getStatus, Investigation.STATUS_INVESTIGATING, Investigation.STATUS_REPORTING));
@@ -191,11 +191,10 @@ public class InvestigationService {
         signalView.put("score", signal.getScore() == null ? null : signal.getScore().toPlainString());
         signalView.put("document", documentView.isEmpty() ? null : documentView);
 
-        List<QuestionView> open = questionMapper.selectList(new LambdaQueryWrapper<Question>()
-                        .eq(Question::getInvestigationId, id)
-                        .eq(Question::getStatus, Question.STATUS_OPEN)
-                        .orderByAsc(Question::getCreatedAt))
+        List<QuestionView> questions = questionMapper.selectList(new LambdaQueryWrapper<Question>()
+                        .eq(Question::getInvestigationId, id).orderByAsc(Question::getCreatedAt))
                 .stream().map(QuestionView::from).toList();
+        List<QuestionView> open = questions.stream().filter(q -> Question.STATUS_OPEN.equals(q.status())).toList();
         List<Map<String, Object>> evidences = evidenceMapper.selectList(
                         new LambdaQueryWrapper<Evidence>().eq(Evidence::getInvestigationId, id)
                                 .orderByDesc(Evidence::getFetchedAt))
@@ -212,7 +211,7 @@ public class InvestigationService {
                     return v;
                 }).toList();
         return new ContextView(InvView.from(inv), signalView, open, evidences,
-                inv.getTokenBudget() - inv.getTokenUsed());
+                inv.getTokenBudget() - inv.getTokenUsed(), questions);
     }
 
     // ---------- E3-3 步骤留痕,E3-5 预算 ----------
@@ -220,6 +219,15 @@ public class InvestigationService {
     @Transactional
     public StepView appendStep(String investigationId, String event, Integer round,
                                Map<String, Object> payload, Integer tokenUsage) {
+        return appendStep(investigationId, event, round, payload, tokenUsage, null);
+    }
+
+    @Transactional
+    public StepView appendStep(String investigationId, String event, Integer round,
+                               Map<String, Object> payload, Integer tokenUsage, String requestId) {
+        if (event == null || event.isBlank()) {
+            throw BusinessException.badRequest("event 必填");
+        }
         String type = TYPE_BY_EVENT.get(event);
         if (type == null) {
             throw BusinessException.badRequest("未知事件名: " + event + "(契约 §7)");
@@ -227,7 +235,26 @@ public class InvestigationService {
         if (!AGENT_EVENTS.contains(event)) {
             throw BusinessException.badRequest("事件 " + event + " 由后端接口产生,Agent 不可直接上报");
         }
-        Investigation inv = mustGet(investigationId);
+        Investigation inv = mustGetLocked(investigationId);
+        if (requestId != null) {
+            if (requestId.isBlank() || requestId.length() > 100) {
+                throw BusinessException.badRequest("request_id 必须为 1..100 字符");
+            }
+            InvestigationStep previous = stepMapper.selectOne(new LambdaQueryWrapper<InvestigationStep>()
+                    .eq(InvestigationStep::getInvestigationId, investigationId)
+                    .eq(InvestigationStep::getRequestId, requestId));
+            if (previous != null) {
+                Map<String, Object> content = new LinkedHashMap<>(payload == null ? Map.of() : payload);
+                content.put("event", event);
+                com.fasterxml.jackson.databind.ObjectMapper json = new com.fasterxml.jackson.databind.ObjectMapper();
+                if (!java.util.Objects.equals(previous.getRound(), round)
+                        || previous.getTokenUsage() != (tokenUsage == null ? 0 : tokenUsage)
+                        || !json.valueToTree(previous.getContent()).equals(json.valueToTree(content))) {
+                    throw BusinessException.conflict("request_id 已用于不同的步骤");
+                }
+                return StepView.from(previous);
+            }
+        }
         if (!Investigation.STATUS_INVESTIGATING.equals(inv.getStatus())) {
             throw BusinessException.conflict("只有 investigating 状态可写步骤,当前: " + inv.getStatus());
         }
@@ -241,11 +268,11 @@ public class InvestigationService {
         if (usage < 0) {
             throw BusinessException.badRequest("token_usage 不能为负");
         }
-        long newUsed = inv.getTokenUsed() + usage;
+        long newUsed = (long) inv.getTokenUsed() + usage;
         if (newUsed > inv.getTokenBudget()) {
             throw BusinessException.unprocessable("超出 token_budget: " + newUsed + " > " + inv.getTokenBudget());
         }
-        InvestigationStep step = writeStep(investigationId, round, type, event, payload, usage);
+        InvestigationStep step = writeStep(investigationId, round, type, event, payload, usage, requestId);
         if (round > inv.getCurrentRound()) {
             investigationMapper.update(null, new LambdaUpdateWrapper<Investigation>()
                     .set(Investigation::getCurrentRound, round)
@@ -345,7 +372,7 @@ public class InvestigationService {
         if (text.length() > 1000) {
             throw BusinessException.badRequest("text 过长(≤1000)");
         }
-        Investigation inv = mustGet(investigationId);
+        Investigation inv = mustGetLocked(investigationId);
         if (!Investigation.STATUS_INVESTIGATING.equals(inv.getStatus())) {
             throw BusinessException.conflict("只有 investigating 状态可提问,当前: " + inv.getStatus());
         }
@@ -378,6 +405,13 @@ public class InvestigationService {
         Question q = questionMapper.selectById(id);
         if (q == null) {
             throw BusinessException.notFound("问题不存在: " + id);
+        }
+        Investigation inv = mustGetLocked(q.getInvestigationId());
+        if (!Investigation.STATUS_INVESTIGATING.equals(inv.getStatus())) {
+            throw BusinessException.conflict("只有 investigating 状态可修改问题,当前: " + inv.getStatus());
+        }
+        if (answerSummary != null && answerSummary.length() > 2000) {
+            throw BusinessException.badRequest("answer_summary 过长(≤2000)");
         }
         if (evidenceIds != null) {
             validateEvidenceRefs(q.getInvestigationId(), evidenceIds);
@@ -420,7 +454,7 @@ public class InvestigationService {
     /** 停止:investigating/reporting → stopped;信号回退 pending(同一信号不可再开新调查,id 留作追溯)。 */
     @Transactional
     public InvView stop(String id) {
-        Investigation inv = mustGet(id);
+        Investigation inv = mustGetLocked(id);
         if (!Investigation.STATUS_INVESTIGATING.equals(inv.getStatus())
                 && !Investigation.STATUS_REPORTING.equals(inv.getStatus())) {
             throw BusinessException.conflict("只有 investigating/reporting 可停止,当前: " + inv.getStatus());
@@ -451,7 +485,11 @@ public class InvestigationService {
         List<Investigation> expired = investigationMapper.selectList(new LambdaQueryWrapper<Investigation>()
                 .eq(Investigation::getStatus, Investigation.STATUS_CREATED)
                 .lt(Investigation::getCreatedAt, cutoff));
-        for (Investigation inv : expired) {
+        for (Investigation candidate : expired) {
+            Investigation inv = mustGetLocked(candidate.getId());
+            if (!Investigation.STATUS_CREATED.equals(inv.getStatus()) || !inv.getCreatedAt().isBefore(cutoff)) {
+                continue;
+            }
             String message = "created 超过 TTL(" + props.investigation().createdTtl() + ")未领取,自动清理(D7)";
             int rows = investigationMapper.update(null, new LambdaUpdateWrapper<Investigation>()
                     .set(Investigation::getStatus, Investigation.STATUS_FAILED)
@@ -479,7 +517,7 @@ public class InvestigationService {
      */
     @Transactional
     public InvView complete(String id) {
-        Investigation inv = mustGet(id);
+        Investigation inv = mustGetLocked(id);
         if (Investigation.STATUS_REPORTING.equals(inv.getStatus())) {
             long reports = reportMapper.selectCount(new LambdaQueryWrapper<Report>()
                     .eq(Report::getInvestigationId, id));
@@ -522,7 +560,7 @@ public class InvestigationService {
         if (error == null || error.isBlank()) {
             throw BusinessException.badRequest("error 必填");
         }
-        Investigation inv = mustGet(id);
+        Investigation inv = mustGetLocked(id);
         if (Investigation.STATUS_COMPLETED.equals(inv.getStatus())
                 || Investigation.STATUS_FAILED.equals(inv.getStatus())
                 || Investigation.STATUS_STOPPED.equals(inv.getStatus())) {
@@ -563,6 +601,14 @@ public class InvestigationService {
         return price == null ? BigDecimal.ZERO : price;
     }
 
+    private Investigation mustGetLocked(String id) {
+        Investigation inv = investigationMapper.lockById(id);
+        if (inv == null) {
+            throw BusinessException.notFound("调查不存在: " + id);
+        }
+        return inv;
+    }
+
     private Investigation mustGet(String id) {
         Investigation inv = investigationMapper.selectById(id);
         if (inv == null) {
@@ -574,13 +620,19 @@ public class InvestigationService {
     /** 落一步:分配 seq → 插库 → 提交后发 SSE(事件名与载荷来自 content)。 */
     private InvestigationStep writeStep(String investigationId, int round, String type, String event,
                                         Map<String, Object> payload, int tokenUsage) {
+        return writeStep(investigationId, round, type, event, payload, tokenUsage, null);
+    }
+
+    private InvestigationStep writeStep(String investigationId, int round, String type, String event,
+                                        Map<String, Object> payload, int tokenUsage, String requestId) {
         Map<String, Object> content = new LinkedHashMap<>();
-        content.put("event", event);
         if (payload != null) {
             content.putAll(payload);
         }
+        content.put("event", event); // 保留字段不能被 Agent payload 覆盖
         InvestigationStep s = new InvestigationStep();
         s.setId(IdGen.next("ist"));
+        s.setRequestId(requestId);
         s.setInvestigationId(investigationId);
         s.setSeq(stepMapper.nextSeq(investigationId));
         s.setRound(round);
@@ -623,10 +675,10 @@ public class InvestigationService {
 
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public record StepView(Integer seq, Integer round, String type, Map<String, Object> content,
-                           Integer tokenUsage, OffsetDateTime createdAt) {
+                           Integer tokenUsage, OffsetDateTime createdAt, String requestId) {
         static StepView from(InvestigationStep s) {
             return new StepView(s.getSeq(), s.getRound(), s.getType(), s.getContent(), s.getTokenUsage(),
-                    s.getCreatedAt());
+                    s.getCreatedAt(), s.getRequestId());
         }
     }
 
@@ -648,6 +700,6 @@ public class InvestigationService {
     /** 领取后开工上下文(契约 §9.3):一次给齐信号/文档/问题/证据/预算。 */
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public record ContextView(InvView investigation, Map<String, Object> signal, List<QuestionView> openQuestions,
-                              List<Map<String, Object>> evidences, Integer budgetRemaining) {
+                              List<Map<String, Object>> evidences, Integer budgetRemaining, List<QuestionView> questions) {
     }
 }
