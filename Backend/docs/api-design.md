@@ -154,9 +154,9 @@ Base URL：`/api/v1`。REST + SSE，JSON。接口文档由 springdoc-openapi 生
 
 落地进度（S7，2026-10-02）：反馈接口已交付 —— 报告须 published（否则 40901）；三要素至少其一（40001），flag 仅支持 false_positive（40001）；建议必须属于本报告（42201），重复采纳幂等（已回填的不再重复写事件）；comment/flag 落 feedback_events（user 取自 JWT，action 词表增补 comment）；响应 data 为 `{ report_id, newly_adopted, comment_recorded, flagged }`。`GET /dashboard/summary`、`GET /events`（分页/详情/图）、`GET /admin/signal-rules`、`GET /stream` 同冲刺交付，形状见对应节。
 
-导出：md 直接返回；pdf 异步生成（202 + task_id）。
+导出：md 直接返回。pdf 不做真排版（OQ5 已决，见 backlog）：接口保留 202 + task_id 占位契约，但不会生成文件，也没有查询任务的接口；需要 PDF 时在前端报告页点「打印 / 存为 PDF」，由浏览器生成（打印样式只保留报告内容）。
 
-落地进度（S6）：`GET /reports`（investigation_id / date_from / date_to 筛选，分页）与详情已交付，详情即上方形状（另带 signal_id / status / created_at 增量字段）；`GET /evidences/{id}` 与 `/snapshot` 已交付；`GET /reports/{id}/export?format=md|pdf` 已交付（md 同步回 text/markdown，pdf 回 202 + task_id 占位，真排版 S8 视 OQ5）。反馈接口 `POST /reports/{id}/feedback` 属 E5（S7）。
+落地进度（S6）：`GET /reports`（investigation_id / date_from / date_to 筛选，分页）与详情已交付，详情即上方形状（另带 signal_id / status / created_at 增量字段）；`GET /evidences/{id}` 与 `/snapshot` 已交付；`GET /reports/{id}/export?format=md|pdf` 已交付（md 同步回 text/markdown，pdf 回 202 + task_id 占位；OQ5 已决不做真排版，见上）。反馈接口 `POST /reports/{id}/feedback` 属 E5（S7）。
 
 ## 7. SSE 事件协议
 

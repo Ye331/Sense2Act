@@ -459,3 +459,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 
 /* 文档库:非公告文档(新闻/政策)标题前的类型标签 */
 .doc-type-tag { display: inline-block; margin-right: 8px; padding: 1px 7px; border-radius: 4px; background: var(--s2-action-soft); color: var(--s2-action); font-size: var(--s2-font-meta); font-weight: 600; vertical-align: 1px; }
+
+/* 报告页打印:浏览器"存为 PDF"即可交付(OQ5 已决:后端不做 pdf 排版) */
+@media print {
+  .sidebar, .topbar, .back-link, .no-print, .toast { display: none !important; }
+  .app-shell, .workspace, .main-content { display: block; margin: 0; padding: 0; background: #fff; }
+  .report-grid { display: block; }
+  .panel { box-shadow: none; break-inside: avoid; }
+}
