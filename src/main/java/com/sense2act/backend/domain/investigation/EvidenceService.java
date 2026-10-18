@@ -63,9 +63,18 @@ public class EvidenceService {
 
     // ---------- E4-1 登记(内部) ----------
 
-    @Transactional
     public EvidenceView register(String investigationId, String sourceType, String docId, String title,
                                  String url, String excerpt, String publishedAt) {
+        return register(investigationId, sourceType, docId, title, url, excerpt, publishedAt, null);
+    }
+
+    /**
+     * snapshot 可选:Agent 采集时读到的原文。提供则以它为快照(哈希即 Agent 实际所见内容),
+     * 不再回源抓取 —— 反爬/限时页面回源常失败,且回源内容可能已与 Agent 所见不同。
+     */
+    @Transactional
+    public EvidenceView register(String investigationId, String sourceType, String docId, String title,
+                                 String url, String excerpt, String publishedAt, String agentSnapshot) {
         Investigation inv = investigationMapper.lockById(investigationId);
         if (inv == null) {
             throw BusinessException.notFound("调查不存在: " + investigationId);
@@ -123,11 +132,13 @@ public class EvidenceService {
             ev.setUrl(url.strip());
             ev.setTitle(title.strip());
             ev.setPublishedAt(published);
-            byte[] snapshot = fetchSnapshot(ev.getUrl());
-            String hash = sha256Hex(snapshot);
+            byte[] body = agentSnapshot != null && !agentSnapshot.isBlank()
+                    ? capturedSnapshot(agentSnapshot)
+                    : fetchSnapshot(ev.getUrl());
+            String hash = sha256Hex(body);
             ev.setContentHash(hash);
             ev.setSnapshotKey("ev_" + hash);
-            writeSnapshot(ev.getSnapshotKey(), snapshot);
+            writeSnapshot(ev.getSnapshotKey(), body);
         }
 
         evidenceMapper.insert(ev);
@@ -198,6 +209,15 @@ public class EvidenceService {
         }
         String cause = last == null ? "非 2xx 响应" : last.getMessage();
         throw BusinessException.unprocessable("快照抓取失败(" + (FETCH_RETRIES + 1) + " 次尝试," + cause + "): " + url);
+    }
+
+    private static byte[] capturedSnapshot(String snapshot) {
+        byte[] body = snapshot.getBytes(java.nio.charset.StandardCharsets.UTF_8);
+        if (body.length > MAX_SNAPSHOT_BYTES) {
+            throw BusinessException.unprocessable(
+                    "快照超过大小上限(" + body.length + " > " + MAX_SNAPSHOT_BYTES + ")");
+        }
+        return body;
     }
 
     private void writeSnapshot(String key, byte[] bytes) {

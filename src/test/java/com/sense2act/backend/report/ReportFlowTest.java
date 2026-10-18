@@ -210,6 +210,24 @@ class ReportFlowTest {
         assertThat(jdbcTemplate.queryForObject(
                 "SELECT count(*) FROM evidences WHERE investigation_id = ?", Integer.class, invA)).isEqualTo(2);
 
+        // 变体二带 snapshot:以 Agent 采集时读到的原文为快照,不回源(死端口照样登记,哈希即该原文)
+        String captured = "Agent 采集原文:两家医院同期立项";
+        MvcResult r3 = mockMvc.perform(post("/api/v1/internal/investigations/{id}/evidences", invA)
+                        .header("X-Internal-Key", "test-key").contentType(MediaType.APPLICATION_JSON)
+                        .content(("{\"source_type\":\"news\",\"url\":\"http://127.0.0.1:%d/ok\","
+                                        + "\"title\":\"采集快照\",\"excerpt\":\"两家医院同期立项\","
+                                        + "\"published_at\":\"2026-09-02T10:00:00+08:00\",\"snapshot\":\"%s\"}")
+                                .formatted(deadPort, captured)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.content_hash").value(sha256(captured.getBytes(StandardCharsets.UTF_8))))
+                .andReturn();
+        MvcResult capturedSnap = mockMvc.perform(get("/api/v1/evidences/{id}/snapshot", read(r3, "data.id"))
+                        .header("Authorization", "Bearer " + login("viewer@sense2act.local", "viewer123")))
+                .andExpect(status().isOk())
+                .andReturn();
+        assertThat(new String(capturedSnap.getResponse().getContentAsByteArray(), StandardCharsets.UTF_8))
+                .isEqualTo(captured);
+
         // 参数与鉴权闸门
         postEvidence(invA, "{\"source_type\":\"bogus\",\"excerpt\":\"x\",\"doc_id\":\"%s\"}".formatted(docB), 40001);
         postEvidence(invA, "{\"source_type\":\"web\",\"url\":\"http://127.0.0.1:%d/ok\"".formatted(okPort)

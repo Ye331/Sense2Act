@@ -268,7 +268,8 @@ PUT 全量必填（缺字段 40001），即时生效于后续自动触发；max_
   "document": {
     "id": "doc_01H...", "doc_type": "announcement", "title": "...",
     "org_name": "某市人民医院", "amount": "3250000.00", "publish_date": "2026-09-24",
-    "region": "...", "category": "医疗信息化", "content_text": "..." },
+    "region": "...", "category": "医疗信息化", "content_text": "...",
+    "org_id": "org_01H...", "url": "http://..." },
   "org_stats": { "category": "医疗信息化", "sample_count": 23, "amount_mean": 820000,
                  "amount_std": 410000, "amount_p95": 1900000, "freq_mean_30d": 0.4 },
   "profiles": ["医疗AI", "数据平台"] } ] }
@@ -300,7 +301,7 @@ PUT 全量必填（缺字段 40001），即时生效于后续自动触发；max_
 | `GET /internal/investigations/{id}/steps?cursor=&limit=` | 与用户侧 steps 相同的游标格式，供 Agent 恢复已提交进度 |
 | `POST /internal/questions` | `{investigation_id, text, raised_in_round}` |
 | `PATCH /internal/questions/{id}` | `{status, answer_summary, evidence_ids}` |
-| `POST /internal/investigations/{id}/evidences` | 登记自取的证据：引本库文档传 `doc_id`，外部内容传 url/title/excerpt，后端抓快照算 hash |
+| `POST /internal/investigations/{id}/evidences` | 登记自取的证据：引本库文档传 `doc_id`，外部内容传 url/title/excerpt，后端抓快照算 hash；可选 `snapshot` 传 Agent 采集时读到的原文，后端以它为快照（不回源） |
 | `POST /internal/investigations/{id}/report` | 提交 ReportDraft，claim 引用未登记证据返回 42201 |
 | `POST /internal/investigations/{id}/complete` | 报告提交后收尾 |
 | `POST /internal/investigations/{id}/fail` | `{error}` |
@@ -355,3 +356,4 @@ ReportDraft：
 | 2026-10-02 | 增补 | S8 交付：§8 回测细化为 GET/POST /admin/backtests + /{id}/dataset + /{id}/result（新增，非破坏性）；内部接口超限 42901（限流为既有错误码的新触发点，对外部服务是新增保护非契约变更） |
 | 2026-10-14 | 接入修复，消费者需同步 | detection-queue.document.amount 从实现中的 JSON number 修正为契约定义的小数字符串；报告每条 claim 强制非空 evidence_ids；本库证据强制发布时间/可读取快照；终态问题写入返回 40901。按实际消费行为视为兼容性变更，合码/部署前接入方需同步 |
 | 2026-10-14 | 增量 | detection-queue 新增 rules；新增 GET /internal/signal-rules 与内部 steps 查询；steps 新增可选 request_id；context 新增 questions；OpenAPI 补认证声明与检测文档 DTO。既有路径/状态值保留 |
+| 2026-10-17 | 增量 | 全链路接入：detection-queue.document 新增 org_id、url（检测服务取同单位历史、回溯原文）；evidences 新增可选 snapshot（Agent 所见原文即快照，反爬/限时页不再因回源失败被拒）。均为新增可选字段，非破坏性 |

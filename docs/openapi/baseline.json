@@ -2876,6 +2876,9 @@
           },
           "published_at" : {
             "type" : "string"
+          },
+          "snapshot" : {
+            "type" : "string"
           }
         }
       },
@@ -3885,6 +3888,12 @@
             "type" : "string"
           },
           "content_text" : {
+            "type" : "string"
+          },
+          "org_id" : {
+            "type" : "string"
+          },
+          "url" : {
             "type" : "string"
           }
         }

@@ -23,13 +23,13 @@ public class InternalEvidenceController {
 
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public record EvidencePost(String sourceType, String docId, String title, String url,
-                               String excerpt, String publishedAt) {
+                               String excerpt, String publishedAt, String snapshot) {
     }
 
     @PostMapping("/{id}/evidences")
     public ApiResponse<EvidenceService.EvidenceView> register(@PathVariable String id,
                                                               @RequestBody EvidencePost req) {
         return ApiResponse.ok(evidenceService.register(id, req.sourceType(), req.docId(), req.title(),
-                req.url(), req.excerpt(), req.publishedAt()));
+                req.url(), req.excerpt(), req.publishedAt(), req.snapshot()));
     }
 }

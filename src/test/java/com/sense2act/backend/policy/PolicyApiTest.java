@@ -200,9 +200,11 @@ class PolicyApiTest {
                         .header("X-Internal-Key", "test-key"))
                 .andExpect(status().isOk())
                 .andReturn();
-        String profiles = objectMapper.readTree(q.getResponse().getContentAsString(StandardCharsets.UTF_8))
-                .path("data").path("items").get(0).path("profiles").toString();
-        assertThat(profiles).contains(NEW_PROFILE);
+        var first = objectMapper.readTree(q.getResponse().getContentAsString(StandardCharsets.UTF_8))
+                .path("data").path("items").get(0);
+        assertThat(first.path("profiles").toString()).contains(NEW_PROFILE);
+        // 文档带 url(及有机构时的 org_id):检测服务据此回溯原文、取同单位历史;null 字段按全局 non_null 省略
+        assertThat(first.path("document").path("url").asText()).startsWith("http");
     }
 
     @Test
