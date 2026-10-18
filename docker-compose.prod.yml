@@ -1,0 +1,50 @@
+# 服务器部署(全栈、单域名),步骤见 deploy/README.md:
+#   cp deploy/prod.env.example .env       # 填强随机值;留空的必填项会让下面的命令直接报错
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+# 与本地相比:密钥与种子密码必须显式提供、postgres 不发布端口、前端只绑本机端口
+# (宿主机 nginx 终止 TLS 后反代进来,见 deploy/nginx.conf.example)、全部服务日志轮转。
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "50m"
+    max-file: "3"
+
+services:
+  postgres:
+    ports: !reset []
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?必须在 .env 设置强 POSTGRES_PASSWORD}
+    logging: *logging
+
+  api:
+    environment:
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:?必须在 .env 设置强 POSTGRES_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET:?必须在 .env 设置至少 32 字符的随机 JWT_SECRET}
+      INTERNAL_API_KEY: ${INTERNAL_API_KEY:?必须在 .env 设置随机 INTERNAL_API_KEY}
+      SEED_ADMIN_PASSWORD: ${SEED_ADMIN_PASSWORD:?必须在 .env 设置 SEED_ADMIN_PASSWORD}
+      SEED_ANALYST_PASSWORD: ${SEED_ANALYST_PASSWORD:?必须在 .env 设置 SEED_ANALYST_PASSWORD}
+      SEED_VIEWER_PASSWORD: ${SEED_VIEWER_PASSWORD:?必须在 .env 设置 SEED_VIEWER_PASSWORD}
+    logging: *logging
+
+  signal-api:
+    logging: *logging
+
+  signal-worker:
+    environment:
+      INTERNAL_API_KEY: ${INTERNAL_API_KEY:?必须在 .env 设置随机 INTERNAL_API_KEY}
+    logging: *logging
+
+  collector:
+    environment:
+      INTERNAL_API_KEY: ${INTERNAL_API_KEY:?必须在 .env 设置随机 INTERNAL_API_KEY}
+    logging: *logging
+
+  agent:
+    environment:
+      INTERNAL_API_KEY: ${INTERNAL_API_KEY:?必须在 .env 设置随机 INTERNAL_API_KEY}
+    logging: *logging
+
+  frontend:
+    ports: !override
+      - "127.0.0.1:${WEB_PORT:-8088}:80"
+    logging: *logging

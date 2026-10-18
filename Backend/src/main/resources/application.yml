@@ -16,6 +16,9 @@ spring:
 server:
   port: 8080
   shutdown: graceful
+  # 反代后面(TLS 终止在 nginx)按 X-Forwarded-Proto/Host 还原原始请求,否则浏览器 https 来源的
+  # POST(带 Origin)会被当成跨域拒掉;Tomcat RemoteIpValve 只信任内网/回环地址来的代理头
+  forward-headers-strategy: native
 
 management:
   endpoints:

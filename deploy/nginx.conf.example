@@ -1,0 +1,37 @@
+# Sense2Act 全栈(单域名)宿主机 nginx 示例:TLS 在这里终止,整站反代给前端容器,前端容器再把 /api 转给后端。
+# 证书以 Let's Encrypt 为例,域名与路径按实际替换;端口与 .env 的 WEB_PORT 一致。
+
+server {
+    listen 443 ssl;
+    http2 on;
+    server_name signalx.example.com;
+
+    ssl_certificate     /etc/letsencrypt/live/signalx.example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/signalx.example.com/privkey.pem;
+
+    # 批量推文档可能带 raw_html
+    client_max_body_size 20m;
+
+    location / {
+        proxy_pass http://127.0.0.1:8088;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        # 后端据此还原 https 来源;缺了这两行,浏览器的登录等 POST 会被当成跨域拒掉(403)
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Port $server_port;
+
+        # SSE(调查实时时间线、全局通知):关缓冲、长读超时、保持长连接
+        proxy_buffering off;
+        proxy_cache off;
+        proxy_read_timeout 24h;
+        proxy_set_header Connection "";
+    }
+}
+
+server {
+    listen 80;
+    server_name signalx.example.com;
+    return 301 https://$host$request_uri;
+}
