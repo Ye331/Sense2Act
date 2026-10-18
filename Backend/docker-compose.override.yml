@@ -1,0 +1,7 @@
+# 本地开发自动叠加(docker compose up 即生效):
+# 仅把 postgres 端口绑到本机回环,供 IDE 里直连 localhost:5432。
+# 服务器用 -f docker-compose.yml -f docker-compose.prod.yml 时不叠加本文件,postgres 不发布端口。
+services:
+  postgres:
+    ports:
+      - "127.0.0.1:5432:5432"

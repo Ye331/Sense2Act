@@ -1,0 +1,11 @@
+.git
+.github
+.idea
+target
+snapshots
+logs
+docs
+scripts
+.env
+.env.*
+*.md

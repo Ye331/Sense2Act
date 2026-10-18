@@ -1,0 +1,1350 @@
+{
+  "info": {
+    "_postman_id": "8821d912-4512-4788-92ad-5d9ef16b4f24",
+    "name": "Sense2Act 团队联调",
+    "description": "按 docs/team-integration.md 顺序联调。先导入并选择环境，填自己的可用凭据；示例信号默认0.60，需要前端人工开启调查。SSE 单独运行。",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "01 后端负责人：准备联调数据",
+      "item": [
+        {
+          "name": "检查服务健康",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/actuator/health",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "管理员登录",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/api/v1/auth/token",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{admin_email}}\",\n  \"password\": \"{{admin_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "const data = pm.response.json().data;",
+                  "pm.environment.set(\"admin_token\", data.token);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "建立联调信息源",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/api/v1/sources",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"团队联调-{{run_id}}\",\n  \"type\": \"web_page\",\n  \"url\": \"https://example.com/team/{{run_id}}\",\n  \"adapter\": \"team-demo\",\n  \"schedule_cron\": \"0 0 6 * * *\",\n  \"config\": {},\n  \"enabled\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.environment.set(\"run_id\", String(Date.now()));",
+                  "for (const key of [\"source_id\",\"document_id\",\"signal_id\",\"investigation_id\",\"question_id\",\"evidence_id\",\"report_id\"]) pm.environment.set(key, \"\");"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "const data = pm.response.json().data;",
+                  "pm.environment.set(\"source_id\", data.id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "02 前端：登录与页面接口",
+      "item": [
+        {
+          "name": "业务用户登录",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/api/v1/auth/token",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{login_email}}\",\n  \"password\": \"{{login_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "const data = pm.response.json().data;",
+                  "pm.environment.set(\"jwt_token\", data.token);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "当前用户",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/v1/users/me",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{jwt_token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "看板",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/v1/dashboard/summary",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{jwt_token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "文档列表",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/v1/documents?page=1&page_size=20",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{jwt_token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "信号列表",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/v1/signals?status=pending&page=1&page_size=20",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{jwt_token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "人工开启本次信号调查",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{base_url}}/api/v1/signals/{{signal_id}}/investigate",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{jwt_token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "const data = pm.response.json().data;",
+                  "pm.environment.set(\"investigation_id\", data.investigation_id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "调查详情",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/v1/investigations/{{investigation_id}}",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{jwt_token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "调查时间线分页",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/v1/investigations/{{investigation_id}}/steps",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{jwt_token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "报告详情",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/v1/reports/{{report_id}}",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{jwt_token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "报告 Markdown 下载",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/v1/reports/{{report_id}}/export?format=md",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{jwt_token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "事件图谱列表",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/v1/events?page=1&page_size=20",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{jwt_token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "03 爬虫：领取、提交、回报",
+      "item": [
+        {
+          "name": "读取到期源",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Internal-Key",
+                "value": "{{internal_api_key}}"
+              }
+            ],
+            "url": "{{base_url}}/api/v1/internal/ingest-queue",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "const data = pm.response.json().data;",
+                  "if (!pm.environment.get(\"source_id\") && data.items.length) pm.environment.set(\"source_id\", data.items[0].source_id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "提交带原文的文档（可重复验证去重）",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Internal-Key",
+                "value": "{{internal_api_key}}"
+              }
+            ],
+            "url": "{{base_url}}/api/v1/internal/documents",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source_id\": \"{{source_id}}\",\n  \"items\": [\n    {\n      \"url\": \"https://example.com/team/{{run_id}}/notice\",\n      \"doc_type\": \"announcement\",\n      \"title\": \"团队联调采购公告 {{run_id}}\",\n      \"org_name\": \"团队联调医院\",\n      \"amount\": \"3250000.00\",\n      \"publish_date\": \"{{publish_date}}\",\n      \"region\": \"华东/联调市\",\n      \"category\": \"医疗信息化\",\n      \"content_text\": \"团队联调采购AI辅助诊断系统，预算325万元。实例 {{run_id}}\",\n      \"raw_html\": \"<html><body>团队联调采购AI辅助诊断系统，预算325万元。实例 {{run_id}}</body></html>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (!pm.environment.get(\"run_id\")) pm.environment.set(\"run_id\", String(Date.now()));"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "const data = pm.response.json().data;",
+                  "if (data.document_ids.length) pm.environment.set(\"document_id\", data.document_ids[0]);",
+                  "for (const key of [\"accepted\",\"duplicates\",\"failed\"]) pm.environment.set(\"ingest_\"+key, String(data[key]));",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "回报抓取结果",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Internal-Key",
+                "value": "{{internal_api_key}}"
+              }
+            ],
+            "url": "{{base_url}}/api/v1/internal/ingest-runs",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source_id\": \"{{source_id}}\",\n  \"ok\": true,\n  \"stats\": {\n    \"fetched\": 1,\n    \"accepted\": {{ingest_accepted}},\n    \"duplicates\": {{ingest_duplicates}},\n    \"failed\": {{ingest_failed}}\n  },\n  \"errors\": []\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "04 检测服务：规则、原料、信号",
+      "item": [
+        {
+          "name": "读取启用规则",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Internal-Key",
+                "value": "{{internal_api_key}}"
+              }
+            ],
+            "url": "{{base_url}}/api/v1/internal/signal-rules",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "const data = pm.response.json().data;",
+                  "const rule = data.find(r => r.type === \"amount_anomaly\");",
+                  "if (rule) { pm.environment.set(\"rule_id\", rule.id); pm.environment.set(\"rule_version\", String(rule.version)); }",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "读取待检测文档",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Internal-Key",
+                "value": "{{internal_api_key}}"
+              }
+            ],
+            "url": "{{base_url}}/api/v1/internal/detection-queue?limit=50",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "const data = pm.response.json().data;",
+                  "if (!pm.environment.get(\"document_id\") && data.items.length) pm.environment.set(\"document_id\", data.items[0].document.id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "推送信号（默认等待人工调查）",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Internal-Key",
+                "value": "{{internal_api_key}}"
+              }
+            ],
+            "url": "{{base_url}}/api/v1/internal/signals",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"document\": {\n    \"id\": \"{{document_id}}\"\n  },\n  \"hits\": [\n    {\n      \"rule_type\": \"amount_anomaly\",\n      \"rule_id\": \"{{rule_id}}\",\n      \"rule_version\": {{rule_version}},\n      \"weight\": 0.6,\n      \"detail\": {\n        \"z\": 5.93\n      }\n    }\n  ],\n  \"score\": 0.6,\n  \"detector\": \"team-demo-{{run_id}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "const data = pm.response.json().data;",
+                  "pm.environment.set(\"signal_id\", data.signal_id); pm.environment.set(\"auto_investigated\", String(data.auto_investigated));",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "完成本次文档扫描",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Internal-Key",
+                "value": "{{internal_api_key}}"
+              }
+            ],
+            "url": "{{base_url}}/api/v1/internal/detection-scan-complete",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"document_ids\": [\n    \"{{document_id}}\"\n  ],\n  \"detector\": \"team-demo-{{run_id}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "05 Agent：领取至报告完成",
+      "item": [
+        {
+          "name": "查询待领取调查",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Internal-Key",
+                "value": "{{internal_api_key}}"
+              }
+            ],
+            "url": "{{base_url}}/api/v1/internal/investigations?status=created",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "const data = pm.response.json().data;",
+                  "const found = data.items.find(i => i.signal_id === pm.environment.get(\"signal_id\"));",
+                  "if (found) pm.environment.set(\"investigation_id\", found.id);",
+                  "else if (!pm.environment.get(\"investigation_id\") && data.items.length) pm.environment.set(\"investigation_id\", data.items[0].id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "开始调查（CAS 占用）",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Internal-Key",
+                "value": "{{internal_api_key}}"
+              }
+            ],
+            "url": "{{base_url}}/api/v1/internal/investigations/{{investigation_id}}/start",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "读取完整上下文",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Internal-Key",
+                "value": "{{internal_api_key}}"
+              }
+            ],
+            "url": "{{base_url}}/api/v1/internal/investigations/{{investigation_id}}/context",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "记录第一轮开始",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Internal-Key",
+                "value": "{{internal_api_key}}"
+              }
+            ],
+            "url": "{{base_url}}/api/v1/internal/investigations/{{investigation_id}}/steps",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"round_started\",\n  \"round\": 1,\n  \"payload\": {\n    \"round\": 1\n  },\n  \"token_usage\": 0,\n  \"request_id\": \"{{investigation_id}}-r1-start\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "创建问题",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Internal-Key",
+                "value": "{{internal_api_key}}"
+              }
+            ],
+            "url": "{{base_url}}/api/v1/internal/questions",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"investigation_id\": \"{{investigation_id}}\",\n  \"text\": \"这条采购公告是否有可核验的原文？\",\n  \"raised_in_round\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "const data = pm.response.json().data;",
+                  "pm.environment.set(\"question_id\", data.id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "记录提问事件",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Internal-Key",
+                "value": "{{internal_api_key}}"
+              }
+            ],
+            "url": "{{base_url}}/api/v1/internal/investigations/{{investigation_id}}/steps",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"questions_generated\",\n  \"round\": 1,\n  \"payload\": {\n    \"questions\": [\n      {\n        \"id\": \"{{question_id}}\",\n        \"text\": \"这条采购公告是否有可核验的原文？\",\n        \"status\": \"open\"\n      }\n    ]\n  },\n  \"token_usage\": 100,\n  \"request_id\": \"{{investigation_id}}-r1-questions\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "上报工具步骤（稳定 request_id 可重试）",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Internal-Key",
+                "value": "{{internal_api_key}}"
+              }
+            ],
+            "url": "{{base_url}}/api/v1/internal/investigations/{{investigation_id}}/steps",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"tool_completed\",\n  \"round\": 1,\n  \"payload\": {\n    \"tool\": \"document_search\",\n    \"ok\": true,\n    \"latency_ms\": 50,\n    \"result_summary\": \"找到本库采购公告\"\n  },\n  \"token_usage\": 1000,\n  \"request_id\": \"{{investigation_id}}-r1-tool1\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "登记本库证据",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Internal-Key",
+                "value": "{{internal_api_key}}"
+              }
+            ],
+            "url": "{{base_url}}/api/v1/internal/investigations/{{investigation_id}}/evidences",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source_type\": \"announcement\",\n  \"doc_id\": \"{{document_id}}\",\n  \"excerpt\": \"采购AI辅助诊断系统，预算325万元。\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "const data = pm.response.json().data;",
+                  "pm.environment.set(\"evidence_id\", data.id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "用证据回答问题",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Internal-Key",
+                "value": "{{internal_api_key}}"
+              }
+            ],
+            "url": "{{base_url}}/api/v1/internal/questions/{{question_id}}",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"clarified\",\n  \"answer_summary\": \"采购公告原文已保存，预算325万元。\",\n  \"evidence_ids\": [\n    \"{{evidence_id}}\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "提交有依据的报告",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Internal-Key",
+                "value": "{{internal_api_key}}"
+              }
+            ],
+            "url": "{{base_url}}/api/v1/internal/investigations/{{investigation_id}}/report",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"团队联调报告 {{run_id}}\",\n  \"summary\": \"采购公告原文可核验，后续由业务人员决定是否跟进。\",\n  \"claims\": [\n    {\n      \"text\": \"该公告采购AI辅助诊断系统，预算325万元。\",\n      \"nature\": \"fact\",\n      \"confidence\": 0.95,\n      \"evidence_ids\": [\n        \"{{evidence_id}}\"\n      ]\n    }\n  ],\n  \"action_suggestions\": [\n    {\n      \"text\": \"核验采购资格要求后评估参与方式\",\n      \"priority\": \"medium\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "const data = pm.response.json().data;",
+                  "pm.environment.set(\"report_id\", data.id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "完成调查并发布报告",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Internal-Key",
+                "value": "{{internal_api_key}}"
+              }
+            ],
+            "url": "{{base_url}}/api/v1/internal/investigations/{{investigation_id}}/complete",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "恢复时查询 investigating",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Internal-Key",
+                "value": "{{internal_api_key}}"
+              }
+            ],
+            "url": "{{base_url}}/api/v1/internal/investigations?status=investigating",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "恢复时查询 reporting",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Internal-Key",
+                "value": "{{internal_api_key}}"
+              }
+            ],
+            "url": "{{base_url}}/api/v1/internal/investigations?status=reporting",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "恢复时读取已提交步骤",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Internal-Key",
+                "value": "{{internal_api_key}}"
+              }
+            ],
+            "url": "{{base_url}}/api/v1/internal/investigations/{{investigation_id}}/steps?limit=50",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "06 前端：反馈与实时流（流单独发送）",
+      "item": [
+        {
+          "name": "提交报告反馈",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/api/v1/reports/{{report_id}}/feedback",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{jwt_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"comment\": \"团队联调已完成核验，实例 {{run_id}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "证据快照",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/v1/evidences/{{evidence_id}}/snapshot",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{jwt_token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"请求成功\", () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "全局 SSE（单独运行）",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/v1/stream?token={{jwt_token}}",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [],
+          "description": "长连接，单独手动发送并停止；不要放入整集合顺序运行。"
+        },
+        {
+          "name": "调查 SSE（单独运行）",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/v1/investigations/{{investigation_id}}/stream?token={{jwt_token}}",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [],
+          "description": "长连接，单独手动发送并停止；不要放入整集合顺序运行。"
+        }
+      ]
+    }
+  ]
+}

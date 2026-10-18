@@ -1,0 +1,20 @@
+# 服务器部署:
+#   git pull
+#   cp .env.example .env   # 并填 JWT_SECRET / INTERNAL_API_KEY / 强 POSTGRES_PASSWORD,改种子密码
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+#
+# 基础文件已含 restart: unless-stopped、API 仅绑 127.0.0.1(经 nginx 反代)、postgres 不发布端口;
+# 本文件只补日志轮转,防止磁盘被日志写爆。
+services:
+  api:
+    logging:
+      driver: json-file
+      options:
+        max-size: "50m"
+        max-file: "3"
+  postgres:
+    logging:
+      driver: json-file
+      options:
+        max-size: "50m"
+        max-file: "3"
