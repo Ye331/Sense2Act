@@ -1,0 +1,3403 @@
+[
+  {
+    "stage": "s1a",
+    "response": {
+      "signalType": "商机",
+      "reason": "信封 kind 为 tender,属公开招标公告:项目名称“海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告”,采购单位“桐庐县林业技术推广中心”,预算 246.195 万元,投标截止 2026-11-02 09:30,代理机构“海标工程管理有限公司”,构成潜在投标/合作机会。",
+      "selectedSeedLabels": [
+        "正常大额采购",
+        "真实经营动态"
+      ],
+      "basisGaps": [
+        "正文未抓取,摘要由列表与详情字段生成,需先补齐招标文件正文与具体服务范围、资格条件",
+        "该采购单位历史采购记录(amountHistory/noveltyHistory/frequencyHistory)均为空,需先补齐历史采购基线以判断本次预算与频次是否异常"
+      ]
+    }
+  },
+  {
+    "stage": "s1b",
+    "response": {
+      "claims": [
+        {
+          "id": "c1",
+          "text": "信封载明本次信号 kind 为 tender，即公开招标公告。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "信号类型是全部后续推理的地基，且由信封第一方证据直接核实。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c2",
+          "text": "信封载明项目编号为 330122261030090000005。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "项目编号是唯一锚定键，缺失将导致无法回溯与去重。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c3",
+          "text": "信封载明项目名称为“海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告”。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "项目名称界定了服务范围与年度跨度，是判断业务相关性的核心字段。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "海标工程管理有限公司",
+            "桐庐县"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c4",
+          "text": "信封载明采购方为桐庐县林业技术推广中心。",
+          "category": "实体",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "采购方身份是主体锚定与历史采购基线比对的前提。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "桐庐县林业技术推广中心"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c5",
+          "text": "信封载明本次采购预算金额为 2461952.0 元（246.195 万元）。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "金额是异常判定与假设区分的核心量化依据，直接卡住结论节。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c6",
+          "text": "信封载明公告发布日期为 2026-10-11。",
+          "category": "时效",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "发布时点决定时效衰减与投标窗口计算。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c7",
+          "text": "信封载明投标截止时间为 2026-11-02 09:30。",
+          "category": "时效",
+          "sectionIndex": 1,
+          "priority": 4,
+          "priorityReason": "投标截止是商机可行动窗口的硬边界，过期即失效。",
+          "hypothesisIds": [],
+          "validWindowDays": 22,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c8",
+          "text": "信封载明代理机构为海标工程管理有限公司。",
+          "category": "实体",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "代理机构是关联方锚定与后续接触路径的关键实体。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "海标工程管理有限公司"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c9",
+          "text": "信封载明来源链接为 https://www.ccgp.gov.cn/cggg/dfgg/gkzb/202610/t20261011_27467396.htm。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 2,
+          "priorityReason": "来源链接是证据可回溯性的凭据，但本身不驱动结论。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c10",
+          "text": "信封载明正文未抓取，摘要由列表与详情字段生成。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "该条直接限定了现有证据的完整度上限，是判断信息缺口的前提。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c11",
+          "text": "信封中 amountHistory、noveltyHistory、frequencyHistory 三项历史字段均为空（null）。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "历史基线缺失使本次金额与频次无法比对，直接限制异常判定能力。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c12",
+          "text": "信封中 amountAnomaly、frequencyAnomaly、noveltyAnomaly 三项异常标记字段均为空（null）。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 3,
+          "priorityReason": "异常标记为空意味着检测器未给出任何异常结论，需与解读中的定性区分。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c13",
+          "text": "解读将本信号定性为“商机”，理由为信封 kind 属公开招标公告，构成潜在投标/合作机会。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 3,
+          "priorityReason": "解读定性是结论节的直接输入，但其本身只是文本记载而非外部事实。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c14",
+          "text": "解读选中的假设种子标签为“正常大额采购”与“真实经营动态”。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 3,
+          "priorityReason": "种子标签决定了竞争假设的初始方向，是假设登记的来源。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c15",
+          "text": "解读登记的基础缺口包括：正文未抓取，需先补齐招标文件正文与具体服务范围、资格条件。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "该缺口是解锁服务范围与资格条件核实的前置条件。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c16",
+          "text": "解读登记的基础缺口包括：该采购单位历史采购记录（amountHistory/noveltyHistory/frequencyHistory）均为空，需先补齐历史采购基线以判断本次预算与频次是否异常。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "历史基线缺失是本次无法判定金额与频次是否异常的直接原因。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "桐庐县林业技术推广中心"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c17",
+          "text": "本次采购的代理机构“海标工程管理有限公司”与项目名称前缀中的“海标工程管理有限公司”为同一名称主体。",
+          "category": "实体",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "代理机构与项目名称前缀同名，是关联方识别与利益关系排查的锚点。",
+          "hypothesisIds": [
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "海标工程管理有限公司"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c18",
+          "text": "桐庐县林业技术推广中心与海标工程管理有限公司之间存在本次招标代理委托关系。",
+          "category": "关系",
+          "sectionIndex": 1,
+          "priority": 4,
+          "priorityReason": "采购方与代理机构的委托关系是关联方分析的核心边，且可由公告直接核实。",
+          "hypothesisIds": [
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": "协同",
+          "entityNames": [
+            "桐庐县林业技术推广中心",
+            "海标工程管理有限公司"
+          ],
+          "corpusBound": false
+        },
+        {
+          "id": "c19",
+          "text": "本次采购项目名称显示服务内容包含 2027 至 2028 年作业设计，以及 2026 至 2028 年检查验收及绩效评价。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "服务内容与年度跨度界定了业务实质，是判断采购合理性的基础。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "桐庐县"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c20",
+          "text": "本次采购项目名称显示其属于“杭州市‘三生共荣’中央财政国土绿化示范项目（桐庐县）”的组成部分。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 5,
+          "priorityReason": "是否隶属既定中央财政示范项目，是区分正常采购与异常输送的关键可区分 claim。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "桐庐县"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c21",
+          "text": "本次采购预算 246.195 万元与投标截止 2026-11-02 09:30 之间的时间窗口为自公告发布日 2026-10-11 起 22 天。",
+          "category": "时效",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "投标窗口长度决定商机可行动性，窗口过短会削弱正常竞争性采购的判断。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "validWindowDays": 22,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        }
+      ],
+      "hypotheses": [
+        {
+          "id": "h1",
+          "label": "正常大额采购",
+          "description": "本次采购属于既定中央财政国土绿化示范项目下的常规服务采购，预算与流程符合正常政府采购特征。可区分 claim：c20（是否隶属既定示范项目）——若隶属则为正常采购，若不隶属或无法对应既定规划则倾向异常；c5（金额）与 c11（历史基线缺失）共同决定金额是否可判定为异常。",
+          "claimIds": [
+            "c1",
+            "c3",
+            "c5",
+            "c10",
+            "c11",
+            "c12",
+            "c13",
+            "c14",
+            "c15",
+            "c16",
+            "c19",
+            "c20",
+            "c21"
+          ],
+          "op": "AND"
+        },
+        {
+          "id": "h2",
+          "label": "真实经营动态",
+          "description": "该公告反映采购方与代理机构的真实业务活动，代理委托关系真实存在。可区分 claim：c18（采购方与代理机构的委托关系）——若委托关系真实成立则支持真实经营动态，若代理机构与项目名称前缀同名系巧合或挂靠则倾向异常；c17（同名主体同一性）为辅助区分。若上述 claim 证据不足，需补充代理机构工商登记与既往代理业绩证据才能区分。",
+          "claimIds": [
+            "c1",
+            "c3",
+            "c4",
+            "c5",
+            "c10",
+            "c11",
+            "c12",
+            "c15",
+            "c16",
+            "c17",
+            "c18",
+            "c20"
+          ],
+          "op": "AND"
+        }
+      ],
+      "gaps": [
+        {
+          "text": "招标文件正文未抓取，需补齐正文以核实具体服务范围、资格条件与评标办法。",
+          "relatedClaimId": "c10"
+        },
+        {
+          "text": "桐庐县林业技术推广中心的历史采购记录（amountHistory/noveltyHistory/frequencyHistory）为空，需补齐历史采购基线以判断本次预算与频次是否异常。",
+          "relatedClaimId": "c11"
+        },
+        {
+          "text": "需核实本次采购是否确属“杭州市‘三生共荣’中央财政国土绿化示范项目（桐庐县）”的既定建设规划内容，以及对应的规划批复文件与年度实施计划。",
+          "relatedClaimId": "c20"
+        },
+        {
+          "text": "需核实海标工程管理有限公司的工商登记信息、既往代理业绩，以及其与桐庐县林业技术推广中心是否存在既往合作关系。",
+          "relatedClaimId": "c18"
+        },
+        {
+          "text": "需核实本次采购预算 246.195 万元的资金来源与预算批复依据。",
+          "relatedClaimId": "c5"
+        },
+        {
+          "text": "需核实本次公告的投标截止时间与开标安排是否与公告正文一致。",
+          "relatedClaimId": "c7"
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c1",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "公开招标公告",
+          "reason": "证据标题为信号层信封基础字段，正文摘要明确出现“公开招标公告”字样，与 claim 所述信封载明 kind 为 tender（公开招标公告）一致，使该断言更可能为真。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据为信号层信封基础字段，其摘要逐字包含“公开招标公告”，直接印证信封载明的信号类型为 tender（公开招标公告）。该证据谱系根为 signal_layer，属单一来源，故本意见仅为初步意见，最终由代码按独立来源规则裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c10",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "正文未抓取,摘要由列表与详情字段生成。",
+          "reason": "该证据原文直接载明正文未抓取、摘要由列表与详情字段生成，与 claim 表述一致。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据原文逐字包含“正文未抓取,摘要由列表与详情字段生成”，直接支持 claim；但该证据谱系根为 signal_layer 单源，最终独立性判定由代码作出。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c11",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 330122261030090000005;项目名称 海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告;采购方 桐庐县林业技术推广中心;预算金额 2461952.0 元;发布日期 2026-10-11;领域 (未标注)。",
+          "reason": "该证据仅列出招标信号基础字段（项目编号、名称、采购方、预算、发布日期等），未提及信封中 amountHistory、noveltyHistory、frequencyHistory 三项历史字段，也未说明其是否为空，无法改变 claim 的判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一证据为信号层信封基础字段，内容不涉及 amountHistory、noveltyHistory、frequencyHistory 三项历史字段的取值，既未确认其为空也未提供反例，故 claim 仍待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c12",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 330122261030090000005;项目名称 海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告;采购方 桐庐县林业技术推广中心;预算金额 2461952.0 元;发布日期 2026-10-11;领域 (未标注)。",
+          "reason": "该证据仅列出信封基础字段（项目编号、名称、采购方、预算、发布日期、领域），未提及 amountAnomaly、frequencyAnomaly、noveltyAnomaly 三项异常标记字段，无法证实或否证其是否为空。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一证据为信号层信封基础字段，未涉及三项异常标记字段的取值，claim 缺乏任何直接或间接支撑，维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c13",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "该证据原文明确出现“公开招标公告”字样，与 claim 所述“信封 kind 属公开招标公告”一致，且含预算金额、投标截止等要素，支持将其定性为潜在投标/合作机会。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一证据为信号层基础字段，其谱系根为 signal_layer，属单一来源；虽原文含“公开招标公告”支持该定性，但无独立来源印证，故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c14",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 330122261030090000005;项目名称 海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告;采购方 桐庐县林业技术推广中心;预算金额 2461952.0 元;发布日期 2026-10-11;领域 (未标注)。",
+          "reason": "该证据仅描述招标信号的基础字段（项目编号、名称、采购方、预算、发布日期等），未涉及任何“假设种子标签”的解读内容，也未出现“正常大额采购”或“真实经营动态”字样，无法改变 claim 为真或为假的可能性。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗中唯一证据为招标信号基础字段，与 claim 所述“解读选中的假设种子标签为‘正常大额采购’与‘真实经营动态’”无直接关联，既无支持也无矛盾信息，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c15",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "正文未抓取,摘要由列表与详情字段生成",
+          "reason": "该证据明确记载正文未抓取，与 claim 所称基础缺口为正文未抓取一致，使 claim 更可能为真。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一证据为信号层信封，明确记载正文未抓取，支持 claim 中正文缺口部分；但证据未涉及招标文件正文、具体服务范围、资格条件是否需补齐，该部分缺乏证据支撑，故综合意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c16",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 330122261030090000005;项目名称 海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告;采购方 桐庐县林业技术推广中心;预算金额 2461952.0 元;发布日期 2026-10-11;领域 (未标注)。",
+          "reason": "该证据仅给出项目编号、名称、采购方、预算金额、发布日期等基础字段，未涉及该采购单位历史采购记录（amountHistory/noveltyHistory/frequencyHistory）是否为空，也未涉及历史采购基线是否需补齐，故不改变 claim 的判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一证据为信号层信封基础字段，未包含任何关于历史采购记录（amountHistory/noveltyHistory/frequencyHistory）为空或需补齐历史采购基线的信息，claim 无法据此得到印证或否证，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c17",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "项目名称 海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "该证据在同一信封中同时出现项目名称前缀“海标工程管理有限公司”与字段“代理机构 海标工程管理有限公司”，两处名称字符串完全一致，使“同一名称主体”的断言更可能为真。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一证据为信号层信封，其项目名称前缀与代理机构字段名称字符串一致，方向支持；但该证据为单一来源（谱系根 signal_layer），无独立来源交叉印证，故仅能给出待证实意见。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c19",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "项目名称 海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "证据原文的项目名称逐字包含“2027至2028年作业设计和2026至2028年检查验收及绩效评价”，与 claim 所述服务内容年份区间一致。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据（信号层信封基础字段）的项目名称原文完整覆盖 claim 所述两个年份区间，方向为支持；但该证据谱系根为 signal_layer 且正文未抓取、摘要由列表与详情字段生成，属单一来源，最终是否成立由代码按独立来源规则裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c2",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "招标信号基础字段:项目编号 330122261030090000005;",
+          "reason": "该证据原文直接载明项目编号为 330122261030090000005,与 claim 所述一致,使 claim 更可能为真。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据 evt_tender_linlu_linye:E1 原文逐字载明“项目编号 330122261030090000005”,与 claim 文本完全吻合,故意见为已证实;但该证据谱系根为 signal_layer 单一来源,独立性由代码按规则裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c20",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "项目名称 海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "该证据的项目名称直接包含“杭州市‘三生共荣’中央财政国土绿化示范项目（桐庐县）”，且以“-”连接后续作业设计与检查验收内容，表明本次采购项目属于该示范项目的组成部分。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据（信号层信封基础字段）的项目名称字段明确显示本次采购项目为“杭州市‘三生共荣’中央财政国土绿化示范项目（桐庐县）”下的子项，直接支持 claim。但该证据谱系根为 signal_layer 单一来源，无独立来源交叉印证，故仅为意见，最终由代码按独立来源规则裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c21",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "预算金额 2461952.0 元;发布日期 2026-10-11",
+          "reason": "该证据同时给出预算 2461952.0 元（即 246.195 万元）、发布日期 2026-10-11 与投标截止 2026-11-02 09:30，与 claim 所述预算金额、公告发布日、投标截止时间一致，支持该时间窗口描述。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据（signal_layer 根）逐字给出预算 2461952.0 元、发布日期 2026-10-11、投标截止 2026-11-02 09:30，与 claim 的金额与两个日期节点一致；但该证据为单一来源，独立印证不足，最终以代码按独立来源规则判定为准。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c3",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "项目名称 海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "该证据的信封基础字段中项目名称与 claim 文本逐字一致，直接支持 claim 所述信封载明项目名称。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据为信号层信封基础字段，其项目名称字段与 claim 文本完全一致，逐字吻合，故意见为已证实；但该证据谱系根为 signal_layer 单一来源，独立性由代码按规则裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c4",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "采购方 桐庐县林业技术推广中心",
+          "reason": "该证据为信号层信封基础字段，明确载明采购方为桐庐县林业技术推广中心，与 claim 所述信封载明采购方一致，使 claim 更可能为真。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据为信号层信封基础字段，直接载明采购方为桐庐县林业技术推广中心，与 claim 文本一致，故意见为已证实；但该证据谱系根为 signal_layer 单一来源，最终是否成立由代码按独立来源规则裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c5",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "预算金额 2461952.0 元",
+          "reason": "该证据原文直接载明预算金额 2461952.0 元，与 claim 所述金额一致，使 claim 更可能为真。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据（信号层信封基础字段）原文明确载明“预算金额 2461952.0 元”，与 claim 的 2461952.0 元（246.195 万元）完全吻合，故意见为已证实；但该证据谱系根为 signal_layer 单一来源，最终独立性判定由代码作出。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c6",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "发布日期 2026-10-11",
+          "reason": "信封基础字段直接载明发布日期为 2026-10-11，与 claim 所述一致。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据为信号层信封基础字段，其原文明确载明“发布日期 2026-10-11”，与 claim 文本完全吻合；但该证据谱系根为 signal_layer 且正文未抓取、摘要由列表与详情字段生成，credibility 为中，最终是否成立由代码按独立来源规则裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c7",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "投标截止 2026-11-02 09:30",
+          "reason": "该证据原文直接载明投标截止时间为 2026-11-02 09:30，与 claim 所述信封载明投标截止时间一致，使 claim 更可能为真。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据 evt_tender_linlu_linye:E1 原文明确载有“投标截止 2026-11-02 09:30”，与 claim 文本完全吻合，故意见为已证实；但该证据谱系根为 signal_layer 且正文未抓取、摘要由列表与详情字段生成，credibility 为中，最终是否成立由代码按独立来源规则裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c8",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "代理机构 海标工程管理有限公司",
+          "reason": "该证据基础字段明确载明代理机构为海标工程管理有限公司，与 claim 一致。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据明确载明代理机构为海标工程管理有限公司，直接支持 claim；但仅单一来源，最终独立性由代码判定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c9",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 330122261030090000005;项目名称 海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告;采购方 桐庐县林业技术推广中心;预算金额 2461952.0 元;发布日期 2026-10-11;领域 (未标注)。",
+          "reason": "该证据仅给出项目编号、名称、采购方、预算、发布日期等信号层字段，未包含任何来源链接信息，无法证明或否证信封载明的 URL。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一证据为信号层基础字段，未涉及来源链接，claim 所述 URL 无任何证据支撑，维持待证实。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 1,
+      "mainTarget": "c18",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "c18 待证实：桐庐县林业技术推广中心与海标工程管理有限公司之间是否存在本次招标代理委托关系（当前仅有项目名称前缀同名这一间接线索，c17 已证实同名但未证实委托关系）。",
+          "acceptance": "需权威登记源记录级证据：在中国政府采购网（ccgp.gov.cn）该公告详情页正文或省级分网公告正文中，出现载明代理机构为“海标工程管理有限公司”且采购人为“桐庐县林业技术推广中心”的委托/代理条款原文（逐字连续片段），或出现代理机构联系人/联系方式字段与公告主体对应。",
+          "failover": "若详情页正文仍不可得（c10 已证实正文未抓取），改查浙江省政府采购网/桐庐县公共资源交易平台同编号（330122261030090000005）公告页，或代理机构工商登记信息中“招标代理”经营范围与既往代理业绩记录。"
+        },
+        {
+          "gap": "若第一环锚定委托关系成立，进一步确认该委托关系是否为本项目专属（而非同名主体的其他项目），以区分 h2“真实经营动态”与挂靠/巧合分支。",
+          "acceptance": "需页面正文级证据：公告正文中出现本项目名称（含“2027至2028年作业设计和2026至2028年检查验收及绩效评价”）与代理机构名称同段共现的委托条款原文。",
+          "failover": "若无法取得专属条款，退而登记代理机构在本项目编号下的代理记录作为间接证据，并在台账标注证据粒度不足。"
+        }
+      ],
+      "searchHints": [
+        "330122261030090000005 海标工程管理有限公司",
+        "桐庐县林业技术推广中心 海标工程管理有限公司 招标代理",
+        "杭州市三生共荣 中央财政国土绿化示范项目 桐庐县 公开招标公告 代理机构"
+      ],
+      "sideTargets": [
+        "c9",
+        "c17"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [
+        {
+          "id": "c22",
+          "text": "天津市第五中心医院在本次证据集中同时出现两个公开招标项目：新内科综合楼中心机房信息化基础设施网络安全建设项目（项目编号:XCSD-2026-A-482）与智能采血车项目（项目编号:YTZB2026ZC052）。",
+          "category": "同主体多项目并发",
+          "sectionIndex": 2,
+          "priority": 3,
+          "parent": null,
+          "entityNames": [
+            "天津市第五中心医院"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c23",
+          "text": "天津机电职业技术学院在本次证据集中同时出现两个公开招标项目：虚拟化超融合资源池采购项目（项目编号:TJBD-2026-A-195）与人工智能赋能专业群建设平台服务项目（项目编号:YFGP-2026-B-0232）。",
+          "category": "同主体多项目并发",
+          "sectionIndex": 2,
+          "priority": 3,
+          "parent": null,
+          "entityNames": [
+            "天津机电职业技术学院"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c24",
+          "text": "本次证据集中，天津市特种设备监督检验技术研究院、天津市计量监督检测科学研究院、天津市河东区疾病预防控制中心（天津市河东区卫生监督所）三个采购单位均发布检验检测类设备更新/购置项目，且均标注“阶段:招标采购”。",
+          "category": "同类采购模式",
+          "sectionIndex": 2,
+          "priority": 3,
+          "parent": null,
+          "entityNames": [
+            "天津市特种设备监督检验技术研究院",
+            "天津市计量监督检测科学研究院",
+            "天津市河东区疾病预防控制中心（天津市河东区卫生监督所）"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c25",
+          "text": "新昌县中医院体外心肺支持辅助设备公开招标公告（项目编号:330624261010120000070）与嘉兴技师学院数字化设计与智造（AIGC创意设计）实训室设备采购公开招标公告（项目编号:330400260520190）的投标截止时间均为 2026-11-02。",
+          "category": "时间共现",
+          "sectionIndex": 2,
+          "priority": 2,
+          "parent": null,
+          "entityNames": [
+            "新昌县中医院",
+            "嘉兴技师学院"
+          ],
+          "hypothesisLinks": []
+        }
+      ],
+      "cohorts": [
+        {
+          "name": "天津市属检验检测类事业单位设备更新采购圈",
+          "criteria": {
+            "region": "天津市",
+            "entityType": "检验检测/计量/疾控类事业单位",
+            "projectKeyword": "检验检测设备更新/购置",
+            "stage": "招标采购",
+            "source": "www.ccgp-tianjin.gov.cn"
+          },
+          "members": [
+            "天津市特种设备监督检验技术研究院",
+            "天津市计量监督检测科学研究院",
+            "天津市河东区疾病预防控制中心（天津市河东区卫生监督所）"
+          ]
+        },
+        {
+          "name": "天津市滨海新区医疗机构信息化与设备采购圈",
+          "criteria": {
+            "region": "天津市滨海新区",
+            "entityType": "医院",
+            "projectKeyword": "信息化基础设施网络安全建设/智能采血车",
+            "stage": "招标采购",
+            "source": "www.ccgp-tianjin.gov.cn"
+          },
+          "members": [
+            "天津市第五中心医院"
+          ]
+        },
+        {
+          "name": "天津市职业院校数字化与人工智能平台采购圈",
+          "criteria": {
+            "region": "天津市",
+            "entityType": "职业院校",
+            "projectKeyword": "虚拟化超融合资源池/人工智能赋能专业群建设平台",
+            "stage": "招标采购",
+            "source": "www.ccgp-tianjin.gov.cn"
+          },
+          "members": [
+            "天津机电职业技术学院"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c1",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "招标信号基础字段:项目编号 330122261030090000005;项目名称 海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "信封基础字段标题为“招标信号基础字段”，且项目名称载明“公开招标公告”，与 claim 所述 kind 为 tender（公开招标公告）一致。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E10",
+          "direction": "无关",
+          "quote": "杭州市公共资源交易中心上城分中心关于上城区综合行政执法局2026年行政执法车更新采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "该证据为另一采购项目的公开招标公告，与本次信号信封的 kind 字段无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "该证据为另一采购项目的公开招标公告，不涉及本次信号信封字段。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E12",
+          "direction": "无关",
+          "quote": "天津市特种设备监督检验技术研究院 天津市特种设备监督检验技术研究院特种设备安全检验检测设备更新项目（一） (项目编号:TZSB-01-2026-058)公开招标公告 | 阶段:招标采购 | 项目编号:TZSB-01-2026-058",
+          "reason": "该证据为天津另一采购项目的公开招标公告，与本次信号信封 kind 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E13",
+          "direction": "无关",
+          "quote": "天津市计量监督检测科学研究院 天津市计量监督检测科学研究院计量领域检验检测设备更新项目（第三批） (项目编号:PYGP-2026-A-0811)公开招标公告 | 阶段:招标采购 | 项目编号:PYGP-2026-A-0811",
+          "reason": "该证据为天津另一采购项目的公开招标公告，与本次信号信封 kind 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E14",
+          "direction": "无关",
+          "quote": "天津市河东区疾病预防控制中心（天津市河东区卫生监督所）微生物质谱仪等设备购置项目 (项目编号:BXZB2026-052)公开招标公告 | 阶段:招标采购 | 项目编号:BXZB2026-052",
+          "reason": "该证据为天津另一采购项目的公开招标公告，与本次信号信封 kind 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "天津市校企联合实验室专项“智能检测技术与系统仿真实验室”建设项目 (项目编号:0615-2641022100992)公开招标公告 | 阶段:招标采购 | 项目编号:0615-2641022100992",
+          "reason": "该证据为天津另一采购项目的公开招标公告，与本次信号信封 kind 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E16",
+          "direction": "无关",
+          "quote": "天津市中医药研究院附属医院 天津市中医药研究院附属医院医用气体采购项目 (项目编号:KPZB-202609ZCGK-0107)公开招标公告 | 阶段:招标采购 | 项目编号:KPZB-202609ZCGK-0107",
+          "reason": "该证据为天津另一采购项目的公开招标公告，与本次信号信封 kind 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E17",
+          "direction": "无关",
+          "quote": "天津市滨海新区太平镇人民政府机关 2026年度太平镇示范镇一期环卫服务项目 (项目编号:RSGS-2026-130)公开招标公告 | 阶段:招标采购 | 项目编号:RSGS-2026-130",
+          "reason": "该证据为天津另一采购项目的公开招标公告，与本次信号信封 kind 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院 天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告 | 阶段:招标采购 | 项目编号:XCSD-2026-A-482",
+          "reason": "该证据为天津另一采购项目的公开招标公告，与本次信号信封 kind 无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一直接指向本次信号信封的证据 E1 标题为“信号层信封基础字段”，其项目名称载明“公开招标公告”，与 claim 所述 kind 为 tender（公开招标公告）相符；其余证据均为其他项目的公开招标公告，不改变判断。但 E1 为内部检测、credibility 中，且无独立来源印证，最终由代码按独立来源规则裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c13",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "该证据标题与摘要均明确为“公开招标公告”，与 claim 所述“信封 kind 属公开招标公告”一致，支持该信号被定性为商机。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E10",
+          "direction": "无关",
+          "quote": "杭州市公共资源交易中心上城分中心关于上城区综合行政执法局2026年行政执法车更新采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "该证据为另一采购项目的公开招标公告，与本 claim 所指信号（桐庐县林业项目）无直接关联，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "该证据为另一采购项目的公开招标公告，与本 claim 所指信号无直接关联，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E12",
+          "direction": "无关",
+          "quote": "天津市特种设备监督检验技术研究院 天津市特种设备监督检验技术研究院特种设备安全检验检测设备更新项目（一） (项目编号:TZSB-01-2026-058)公开招标公告 | 阶段:招标采购 | 项目编号:TZSB-01-2026-058",
+          "reason": "该证据为另一采购项目的公开招标公告，与本 claim 所指信号无直接关联，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E13",
+          "direction": "无关",
+          "quote": "天津市计量监督检测科学研究院 天津市计量监督检测科学研究院计量领域检验检测设备更新项目（第三批） (项目编号:PYGP-2026-A-0811)公开招标公告 | 阶段:招标采购 | 项目编号:PYGP-2026-A-0811",
+          "reason": "该证据为另一采购项目的公开招标公告，与本 claim 所指信号无直接关联，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E14",
+          "direction": "无关",
+          "quote": "天津市河东区疾病预防控制中心（天津市河东区卫生监督所）微生物质谱仪等设备购置项目 (项目编号:BXZB2026-052)公开招标公告 | 阶段:招标采购 | 项目编号:BXZB2026-052",
+          "reason": "该证据为另一采购项目的公开招标公告，与本 claim 所指信号无直接关联，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "天津市校企联合实验室专项“智能检测技术与系统仿真实验室”建设项目 (项目编号:0615-2641022100992)公开招标公告 | 阶段:招标采购 | 项目编号:0615-2641022100992",
+          "reason": "该证据为另一采购项目的公开招标公告，与本 claim 所指信号无直接关联，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E16",
+          "direction": "无关",
+          "quote": "天津市中医药研究院附属医院 天津市中医药研究院附属医院医用气体采购项目 (项目编号:KPZB-202609ZCGK-0107)公开招标公告 | 阶段:招标采购 | 项目编号:KPZB-202609ZCGK-0107",
+          "reason": "该证据为另一采购项目的公开招标公告，与本 claim 所指信号无直接关联，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E17",
+          "direction": "无关",
+          "quote": "天津市滨海新区太平镇人民政府机关 2026年度太平镇示范镇一期环卫服务项目 (项目编号:RSGS-2026-130)公开招标公告 | 阶段:招标采购 | 项目编号:RSGS-2026-130",
+          "reason": "该证据为另一采购项目的公开招标公告，与本 claim 所指信号无直接关联，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院 天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告 | 阶段:招标采购 | 项目编号:XCSD-2026-A-482",
+          "reason": "该证据为另一采购项目的公开招标公告，与本 claim 所指信号无直接关联，不改变判断。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 直接载明该信号为“公开招标公告”，与 claim 所述定性理由一致；其余证据均为其他项目的公开招标公告，与本信号无直接关联，不构成矛盾。综合判断该 claim 成立。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c14",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 330122261030090000005;项目名称 海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "该证据仅描述招标信号基础字段与项目信息，未涉及任何“假设种子标签”的解读内容，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "天津市校企联合实验室专项“智能检测技术与系统仿真实验室”建设项目 (项目编号:0615-2641022100992)公开招标公告 | 阶段:招标采购 | 项目编号:0615-2641022100992",
+          "reason": "该证据为天津另一项目的招标公告，与“正常大额采购”“真实经营动态”标签解读无任何关联。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "两条证据均未涉及对假设种子标签“正常大额采购”与“真实经营动态”的解读内容，无法支持或反驳该 claim，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c15",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "正文未抓取,摘要由列表与详情字段生成",
+          "reason": "该证据明确记载正文未抓取，直接支持 claim 所述基础缺口。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "为其他项目的招标公告，与桐庐县林业项目正文缺口无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E17",
+          "direction": "无关",
+          "quote": "天津市滨海新区太平镇人民政府机关 2026年度太平镇示范镇一期环卫服务项目 (项目编号:RSGS-2026-130)公开招标公告 | 阶段:招标采购 | 项目编号:RSGS-2026-130",
+          "reason": "为其他地区其他项目的招标公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院 天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告 | 阶段:招标采购 | 项目编号:XCSD-2026-A-482",
+          "reason": "为其他项目的招标公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E21",
+          "direction": "无关",
+          "quote": "天津机电职业技术学院 天津机电职业技术学院人工智能赋能专业群建设平台服务项目 (项目编号:YFGP-2026-B-0232)公开招标公告 | 阶段:招标采购 | 项目编号:YFGP-2026-B-0232",
+          "reason": "为其他项目的招标公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E6",
+          "direction": "无关",
+          "quote": "华诚工程咨询集团有限公司关于钱江世纪城2026年度区级宣传服务政府采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "为其他项目的招标公告，与 claim 无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "仅 E1 直接记载正文未抓取，支持 claim 所述基础缺口；其余证据均为无关项目公告。缺口事实由单一来源支持，但该来源为内部检测信号层，claim 所述缺口成立。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c16",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 330122261030090000005;项目名称 海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告;采购方 桐庐县林业技术推广中心;预算金额 2461952.0 元;发布日期 2026-10-11;领域 (未标注)。",
+          "reason": "该证据仅给出项目编号、名称、采购方、预算金额、发布日期等基础字段，未涉及该采购单位历史采购记录（amountHistory/noveltyHistory/frequencyHistory）是否为空，也未涉及历史采购基线是否需补齐，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院 天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告 | 阶段:招标采购 | 项目编号:XCSD-2026-A-482",
+          "reason": "该证据为天津市第五中心医院信息化项目的招标公告，与桐庐县林业技术推广中心的历史采购记录字段无关，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E2",
+          "direction": "无关",
+          "quote": "海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告 | 阶段:招标采购 | 预算:246.195万元 | 投标截止:2026-11-02 09:30 | 项目编号:330122261030090000005",
+          "reason": "该证据仅重复公告标题、阶段、预算、投标截止与项目编号，未提及历史采购记录字段为空或需补齐历史采购基线，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E3",
+          "direction": "无关",
+          "quote": "杭州中易招标代理有限公司关于新昌县中医院体外心肺支持辅助设备的公开招标公告 | 阶段:招标采购 | 预算:120万元 | 投标截止:2026-11-02 13:30 | 项目编号:330624261010120000070",
+          "reason": "该证据为新昌县中医院设备采购公告，与 claim 所指采购单位的历史采购记录字段无关，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E4",
+          "direction": "无关",
+          "quote": "浙江求是招标代理有限公司关于嘉兴技师学院数字化设计与智造（AIGC创意设计）实训室设备采购的公开招标公告 | 阶段:招标采购 | 预算:251万元 | 投标截止:2026-11-02 09:30 | 项目编号:330400260520190000093",
+          "reason": "该证据为嘉兴技师学院实训室设备采购公告，与 claim 所指采购单位的历史采购记录字段无关，不改变 claim 判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内五条证据均为招标公告类基础字段或无关项目公告，无一条涉及该采购单位 amountHistory/noveltyHistory/frequencyHistory 是否为空，也无一条涉及是否需补齐历史采购基线，claim 缺乏任何证据支撑，维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c17",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "项目名称 海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "该证据同时给出项目名称前缀“海标工程管理有限公司”与末尾字段“代理机构 海标工程管理有限公司”，两处名称字符串一致，支持二者为同一名称主体。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E10",
+          "direction": "无关",
+          "quote": "杭州市公共资源交易中心上城分中心关于上城区综合行政执法局2026年行政执法车更新采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "该公告涉及上城区行政执法车更新采购，未出现“海标工程管理有限公司”，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "该公告代理机构为浙江明业项目管理有限公司，与“海标工程管理有限公司”无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E12",
+          "direction": "无关",
+          "quote": "天津市特种设备监督检验技术研究院 天津市特种设备监督检验技术研究院特种设备安全检验检测设备更新项目（一） (项目编号:TZSB-01-2026-058)公开招标公告 | 阶段:招标采购 | 项目编号:TZSB-01-2026-058",
+          "reason": "天津特种设备采购公告，未涉及“海标工程管理有限公司”。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E13",
+          "direction": "无关",
+          "quote": "天津市计量监督检测科学研究院 天津市计量监督检测科学研究院计量领域检验检测设备更新项目（第三批） (项目编号:PYGP-2026-A-0811)公开招标公告 | 阶段:招标采购 | 项目编号:PYGP-2026-A-0811",
+          "reason": "天津计量检测设备公告，未涉及“海标工程管理有限公司”。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E14",
+          "direction": "无关",
+          "quote": "天津市河东区疾病预防控制中心（天津市河东区卫生监督所）微生物质谱仪等设备购置项目 (项目编号:BXZB2026-052)公开招标公告 | 阶段:招标采购 | 项目编号:BXZB2026-052",
+          "reason": "天津疾控设备购置公告，未涉及“海标工程管理有限公司”。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "天津市校企联合实验室专项“智能检测技术与系统仿真实验室”建设项目 (项目编号:0615-2641022100992)公开招标公告 | 阶段:招标采购 | 项目编号:0615-2641022100992",
+          "reason": "天津实验室建设公告，未涉及“海标工程管理有限公司”。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E16",
+          "direction": "无关",
+          "quote": "天津市中医药研究院附属医院 天津市中医药研究院附属医院医用气体采购项目 (项目编号:KPZB-202609ZCGK-0107)公开招标公告 | 阶段:招标采购 | 项目编号:KPZB-202609ZCGK-0107",
+          "reason": "天津医用气体采购公告，未涉及“海标工程管理有限公司”。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E17",
+          "direction": "无关",
+          "quote": "天津市滨海新区太平镇人民政府机关 2026年度太平镇示范镇一期环卫服务项目 (项目编号:RSGS-2026-130)公开招标公告 | 阶段:招标采购 | 项目编号:RSGS-2026-130",
+          "reason": "天津环卫服务公告，未涉及“海标工程管理有限公司”。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院 天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告 | 阶段:招标采购 | 项目编号:XCSD-2026-A-482",
+          "reason": "天津医院信息化建设公告，未涉及“海标工程管理有限公司”。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "仅 E1 一条证据直接涉及该采购项目，其项目名称前缀与代理机构字段均为“海标工程管理有限公司”，名称字符串完全一致，支持同一名称主体；其余证据均为无关的其他地区采购公告。但 E1 为单一来源（lineage_root: signal_layer，正文未抓取、摘要由列表与详情字段生成），缺乏独立来源交叉印证，故该意见可能被独立来源规则否决。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c18",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E10",
+          "direction": "无关",
+          "quote": "杭州市公共资源交易中心上城分中心关于上城区综合行政执法局2026年行政执法车更新采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "该公告涉及上城区综合行政执法局行政执法车更新采购项目，与桐庐县林业技术推广中心及海标工程管理有限公司的招标代理委托关系无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "该公告涉及盈丰街道地下安全隐患检测服务项目，代理机构为浙江明业项目管理有限公司，与本案主体无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E12",
+          "direction": "无关",
+          "quote": "天津市特种设备监督检验技术研究院 天津市特种设备监督检验技术研究院特种设备安全检验检测设备更新项目（一） (项目编号:TZSB-01-2026-058)公开招标公告 | 阶段:招标采购 | 项目编号:TZSB-01-2026-058",
+          "reason": "该公告涉及天津市特种设备监督检验技术研究院设备更新项目，与本案主体无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E14",
+          "direction": "无关",
+          "quote": "天津市河东区疾病预防控制中心（天津市河东区卫生监督所）微生物质谱仪等设备购置项目 (项目编号:BXZB2026-052)公开招标公告 | 阶段:招标采购 | 项目编号:BXZB2026-052",
+          "reason": "该公告涉及天津市河东区疾病预防控制中心设备购置项目，与本案主体无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "天津市校企联合实验室专项“智能检测技术与系统仿真实验室”建设项目 (项目编号:0615-2641022100992)公开招标公告 | 阶段:招标采购 | 项目编号:0615-2641022100992",
+          "reason": "该公告涉及天津市校企联合实验室建设项目，与本案主体无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院 天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告 | 阶段:招标采购 | 项目编号:XCSD-2026-A-482",
+          "reason": "该公告涉及天津市第五中心医院信息化基础设施建设项目，与本案主体无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E19",
+          "direction": "无关",
+          "quote": "天津机电职业技术学院 天津机电职业技术学院虚拟化超融合资源池采购项目 (项目编号:TJBD-2026-A-195)公开招标公告 | 阶段:招标采购 | 项目编号:TJBD-2026-A-195",
+          "reason": "该公告涉及天津机电职业技术学院采购项目，与本案主体无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E2",
+          "direction": "支持",
+          "quote": "海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告 | 阶段:招标采购 | 预算:246.195万元 | 投标截止:2026-11-02 09:30 | 项目编号:330122261030090000005",
+          "reason": "该公告显示海标工程管理有限公司作为招标代理机构，就桐庐县相关国土绿化示范项目发布公开招标公告，表明其与桐庐县相关项目存在招标代理委托关系，支持claim。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E20",
+          "direction": "无关",
+          "quote": "天津市第五中心医院智能采血车项目(项目编号:YTZB2026ZC052)公开招标公告 | 阶段:招标采购 | 项目编号:YTZB2026ZC052",
+          "reason": "该公告涉及天津市第五中心医院智能采血车项目，与本案主体无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E21",
+          "direction": "无关",
+          "quote": "天津机电职业技术学院 天津机电职业技术学院人工智能赋能专业群建设平台服务项目 (项目编号:YFGP-2026-B-0232)公开招标公告 | 阶段:招标采购 | 项目编号:YFGP-2026-B-0232",
+          "reason": "该公告涉及天津机电职业技术学院平台服务项目，与本案主体无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅E2一条证据显示海标工程管理有限公司就桐庐县相关项目发布招标公告，可支持招标代理关系，但公告未直接载明委托方为桐庐县林业技术推广中心，且其余证据均与本案主体无关，缺乏独立来源印证，故综合意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c19",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "项目名称 海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "该证据的项目名称逐字包含“2027至2028年作业设计和2026至2028年检查验收及绩效评价”，与 claim 所述服务内容与年份区间一致。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E10",
+          "direction": "无关",
+          "quote": "杭州市公共资源交易中心上城分中心关于上城区综合行政执法局2026年行政执法车更新采购项目的公开招标公告",
+          "reason": "该证据为行政执法车更新采购项目，与 claim 所述林业作业设计及检查验收绩效评价项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告",
+          "reason": "该证据为地下安全隐患检测服务项目，与 claim 所述项目名称及服务内容无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E12",
+          "direction": "无关",
+          "quote": "天津市特种设备监督检验技术研究院特种设备安全检验检测设备更新项目（一） (项目编号:TZSB-01-2026-058)公开招标公告",
+          "reason": "该证据为天津特种设备检验检测设备更新项目，与 claim 所述项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E13",
+          "direction": "无关",
+          "quote": "天津市计量监督检测科学研究院计量领域检验检测设备更新项目（第三批） (项目编号:PYGP-2026-A-0811)公开招标公告",
+          "reason": "该证据为天津计量领域检验检测设备更新项目，与 claim 所述项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E14",
+          "direction": "无关",
+          "quote": "天津市河东区疾病预防控制中心（天津市河东区卫生监督所）微生物质谱仪等设备购置项目 (项目编号:BXZB2026-052)公开招标公告",
+          "reason": "该证据为天津疾控设备购置项目，与 claim 所述项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "天津市校企联合实验室专项“智能检测技术与系统仿真实验室”建设项目 (项目编号:0615-2641022100992)公开招标公告",
+          "reason": "该证据为天津校企联合实验室建设项目，与 claim 所述项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E16",
+          "direction": "无关",
+          "quote": "天津市中医药研究院附属医院医用气体采购项目 (项目编号:KPZB-202609ZCGK-0107)公开招标公告",
+          "reason": "该证据为天津医院医用气体采购项目，与 claim 所述项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E17",
+          "direction": "无关",
+          "quote": "天津市滨海新区太平镇人民政府机关 2026年度太平镇示范镇一期环卫服务项目 (项目编号:RSGS-2026-130)公开招标公告",
+          "reason": "该证据为天津环卫服务项目，与 claim 所述项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告",
+          "reason": "该证据为天津医院信息化基础设施网络安全建设项目，与 claim 所述项目无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "仅 E1 直接涉及 claim 所述项目，其项目名称逐字包含“2027至2028年作业设计和2026至2028年检查验收及绩效评价”，与 claim 完全吻合；其余证据均为其他地区其他类型项目，与 claim 无关。E1 为信号层信封基础字段（credibility 中），但 claim 仅陈述项目名称所显示的服务内容，属可核验的文本事实，故综合判定为已证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c2",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "招标信号基础字段:项目编号 330122261030090000005;",
+          "reason": "信号层信封基础字段直接载明项目编号为 330122261030090000005,与 claim 一致。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E12",
+          "direction": "无关",
+          "quote": "项目编号:TZSB-01-2026-058",
+          "reason": "该证据为天津特种设备项目,项目编号与 claim 所述编号无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E13",
+          "direction": "无关",
+          "quote": "项目编号:PYGP-2026-A-0811",
+          "reason": "该证据为天津计量项目,项目编号与 claim 所述编号无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E14",
+          "direction": "无关",
+          "quote": "项目编号:BXZB2026-052",
+          "reason": "该证据为天津河东疾控设备项目,项目编号与 claim 所述编号无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "项目编号:0615-2641022100992",
+          "reason": "该证据为天津校企联合实验室项目,项目编号与 claim 所述编号无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E16",
+          "direction": "无关",
+          "quote": "项目编号:KPZB-202609ZCGK-0107",
+          "reason": "该证据为天津中医药研究院医用气体项目,项目编号与 claim 所述编号无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E17",
+          "direction": "无关",
+          "quote": "项目编号:RSGS-2026-130",
+          "reason": "该证据为天津太平镇环卫服务项目,项目编号与 claim 所述编号无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "项目编号:XCSD-2026-A-482",
+          "reason": "该证据为天津第五中心医院信息化项目,项目编号与 claim 所述编号无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E19",
+          "direction": "无关",
+          "quote": "项目编号:TJBD-2026-A-195",
+          "reason": "该证据为天津机电职业技术学院采购项目,项目编号与 claim 所述编号无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E2",
+          "direction": "支持",
+          "quote": "项目编号:330122261030090000005",
+          "reason": "官方公告(ccgp)载明项目编号为 330122261030090000005,与 claim 一致。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1(信号层)与 E2(ccgp 官方公告)均逐字载明项目编号 330122261030090000005,与 claim 完全一致;其余证据为天津地区无关项目,不改变判断。注意 E1 与 E2 谱系根不同(signal_layer 与 ccgp),但 E1 自述正文未抓取、摘要由列表与详情字段生成,其独立性存疑,最终独立来源认定由代码裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c20",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "项目名称 海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "该信号层信封的项目名称直接包含“杭州市‘三生共荣’中央财政国土绿化示范项目（桐庐县）”，且采购方为桐庐县林业技术推广中心，表明本次采购属于该示范项目的组成部分。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E10",
+          "direction": "无关",
+          "quote": "杭州市公共资源交易中心上城分中心关于上城区综合行政执法局2026年行政执法车更新采购项目的公开招标公告",
+          "reason": "该证据为行政执法车更新采购项目，与“三生共荣”国土绿化示范项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告",
+          "reason": "该证据为地下安全隐患检测服务项目，与国土绿化示范项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E12",
+          "direction": "无关",
+          "quote": "天津市特种设备监督检验技术研究院特种设备安全检验检测设备更新项目（一） (项目编号:TZSB-01-2026-058)公开招标公告",
+          "reason": "该证据为天津特种设备检验检测设备更新项目，与杭州国土绿化示范项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E13",
+          "direction": "无关",
+          "quote": "天津市计量监督检测科学研究院计量领域检验检测设备更新项目（第三批） (项目编号:PYGP-2026-A-0811)公开招标公告",
+          "reason": "该证据为天津计量领域设备更新项目，与杭州国土绿化示范项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E14",
+          "direction": "无关",
+          "quote": "天津市河东区疾病预防控制中心（天津市河东区卫生监督所）微生物质谱仪等设备购置项目 (项目编号:BXZB2026-052)公开招标公告",
+          "reason": "该证据为天津疾控设备购置项目，与杭州国土绿化示范项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "天津市校企联合实验室专项“智能检测技术与系统仿真实验室”建设项目 (项目编号:0615-2641022100992)公开招标公告",
+          "reason": "该证据为天津实验室建设项目，与杭州国土绿化示范项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E16",
+          "direction": "无关",
+          "quote": "天津市中医药研究院附属医院医用气体采购项目 (项目编号:KPZB-202609ZCGK-0107)公开招标公告",
+          "reason": "该证据为天津医用气体采购项目，与杭州国土绿化示范项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E17",
+          "direction": "无关",
+          "quote": "天津市滨海新区太平镇人民政府机关 2026年度太平镇示范镇一期环卫服务项目 (项目编号:RSGS-2026-130)公开招标公告",
+          "reason": "该证据为天津环卫服务项目，与杭州国土绿化示范项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告",
+          "reason": "该证据为天津医院信息化建设项目，与杭州国土绿化示范项目无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一相关证据 E1 的项目名称逐字包含“杭州市‘三生共荣’中央财政国土绿化示范项目（桐庐县）”，且采购方为桐庐县林业技术推广中心，直接支持该采购属于该示范项目组成部分；其余证据均为其他地区无关项目。但 E1 为信号层信封（credibility 中，正文未抓取），且无独立来源印证，故仅为意见，最终由代码按独立来源规则裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c21",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "预算 246.195 万元;投标截止 2026-11-02 09:30",
+          "reason": "该证据同时给出预算 246.195 万元、投标截止 2026-11-02 09:30 与发布日期 2026-10-11，与 claim 的三项要素一致，支持时间窗口为 22 天的计算。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E10",
+          "direction": "无关",
+          "quote": "杭州市公共资源交易中心上城分中心关于上城区综合行政执法局2026年行政执法车更新采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "该证据为另一采购项目公告，未涉及本 claim 的预算、截止时间或公告日期。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "该证据为另一采购项目公告，未涉及本 claim 的预算、截止时间或公告日期。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E12",
+          "direction": "无关",
+          "quote": "天津市特种设备监督检验技术研究院 天津市特种设备监督检验技术研究院特种设备安全检验检测设备更新项目（一） (项目编号:TZSB-01-2026-058)公开招标公告 | 阶段:招标采购 | 项目编号:TZSB-01-2026-058",
+          "reason": "该证据为另一采购项目公告，未涉及本 claim 的预算、截止时间或公告日期。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E13",
+          "direction": "无关",
+          "quote": "天津市计量监督检测科学研究院 天津市计量监督检测科学研究院计量领域检验检测设备更新项目（第三批） (项目编号:PYGP-2026-A-0811)公开招标公告 | 阶段:招标采购 | 项目编号:PYGP-2026-A-0811",
+          "reason": "该证据为另一采购项目公告，未涉及本 claim 的预算、截止时间或公告日期。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E14",
+          "direction": "无关",
+          "quote": "天津市河东区疾病预防控制中心（天津市河东区卫生监督所）微生物质谱仪等设备购置项目 (项目编号:BXZB2026-052)公开招标公告 | 阶段:招标采购 | 项目编号:BXZB2026-052",
+          "reason": "该证据为另一采购项目公告，未涉及本 claim 的预算、截止时间或公告日期。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "天津市校企联合实验室专项“智能检测技术与系统仿真实验室”建设项目 (项目编号:0615-2641022100992)公开招标公告 | 阶段:招标采购 | 项目编号:0615-2641022100992",
+          "reason": "该证据为另一采购项目公告，未涉及本 claim 的预算、截止时间或公告日期。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E16",
+          "direction": "无关",
+          "quote": "天津市中医药研究院附属医院 天津市中医药研究院附属医院医用气体采购项目 (项目编号:KPZB-202609ZCGK-0107)公开招标公告 | 阶段:招标采购 | 项目编号:KPZB-202609ZCGK-0107",
+          "reason": "该证据为另一采购项目公告，未涉及本 claim 的预算、截止时间或公告日期。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E17",
+          "direction": "无关",
+          "quote": "天津市滨海新区太平镇人民政府机关 2026年度太平镇示范镇一期环卫服务项目 (项目编号:RSGS-2026-130)公开招标公告 | 阶段:招标采购 | 项目编号:RSGS-2026-130",
+          "reason": "该证据为另一采购项目公告，未涉及本 claim 的预算、截止时间或公告日期。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院 天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告 | 阶段:招标采购 | 项目编号:XCSD-2026-A-482",
+          "reason": "该证据为另一采购项目公告，未涉及本 claim 的预算、截止时间或公告日期。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "仅 E1 直接涉及本 claim 的预算、投标截止与公告发布日期，且三者与 claim 一致，2026-10-11 至 2026-11-02 为 22 天；其余证据均为无关的其他项目公告。E1 为单一来源（signal_layer），无独立来源交叉印证，故意见为已证实但可能被独立来源规则否决。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c3",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "项目名称 海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "该证据的项目名称字段与 claim 所述信封载明项目名称逐字一致，直接支持 claim。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E10",
+          "direction": "无关",
+          "quote": "杭州市公共资源交易中心上城分中心关于上城区综合行政执法局2026年行政执法车更新采购项目的公开招标公告",
+          "reason": "该证据为另一采购项目公告，与 claim 所述项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告",
+          "reason": "该证据为另一采购项目公告，与 claim 所述项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E12",
+          "direction": "无关",
+          "quote": "天津市特种设备监督检验技术研究院特种设备安全检验检测设备更新项目（一） (项目编号:TZSB-01-2026-058)公开招标公告",
+          "reason": "该证据为天津另一采购项目公告，与 claim 所述项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E13",
+          "direction": "无关",
+          "quote": "天津市计量监督检测科学研究院计量领域检验检测设备更新项目（第三批） (项目编号:PYGP-2026-A-0811)公开招标公告",
+          "reason": "该证据为天津另一采购项目公告，与 claim 所述项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E14",
+          "direction": "无关",
+          "quote": "天津市河东区疾病预防控制中心（天津市河东区卫生监督所）微生物质谱仪等设备购置项目 (项目编号:BXZB2026-052)公开招标公告",
+          "reason": "该证据为天津另一采购项目公告，与 claim 所述项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "天津市校企联合实验室专项“智能检测技术与系统仿真实验室”建设项目 (项目编号:0615-2641022100992)公开招标公告",
+          "reason": "该证据为天津另一采购项目公告，与 claim 所述项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E16",
+          "direction": "无关",
+          "quote": "天津市中医药研究院附属医院医用气体采购项目 (项目编号:KPZB-202609ZCGK-0107)公开招标公告",
+          "reason": "该证据为天津另一采购项目公告，与 claim 所述项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E17",
+          "direction": "无关",
+          "quote": "天津市滨海新区太平镇人民政府机关 2026年度太平镇示范镇一期环卫服务项目 (项目编号:RSGS-2026-130)公开招标公告",
+          "reason": "该证据为天津另一采购项目公告，与 claim 所述项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告",
+          "reason": "该证据为天津另一采购项目公告，与 claim 所述项目名称无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 的项目名称字段与 claim 所述信封载明项目名称逐字一致，构成直接支持；其余证据均为其他地区其他项目的公告，与 claim 无关。综合判断 claim 已证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c4",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "采购方 桐庐县林业技术推广中心",
+          "reason": "信号层信封基础字段直接载明采购方为桐庐县林业技术推广中心，与 claim 一致。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E2",
+          "direction": "无关",
+          "quote": "海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告 | 阶段:招标采购 | 预算:246.195万元 | 投标截止:2026-11-02 09:30 | 项目编号:330122261030090000005",
+          "reason": "该证据仅含项目名称、阶段、预算、投标截止与项目编号，未载明采购方，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E10",
+          "direction": "无关",
+          "quote": "杭州市公共资源交易中心上城分中心关于上城区综合行政执法局2026年行政执法车更新采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "为其他地区其他项目的公告，与桐庐县林业技术推广中心无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E12",
+          "direction": "无关",
+          "quote": "天津市特种设备监督检验技术研究院 天津市特种设备监督检验技术研究院特种设备安全检验检测设备更新项目（一） (项目编号:TZSB-01-2026-058)公开招标公告 | 阶段:招标采购 | 项目编号:TZSB-01-2026-058",
+          "reason": "天津项目公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E14",
+          "direction": "无关",
+          "quote": "天津市河东区疾病预防控制中心（天津市河东区卫生监督所）微生物质谱仪等设备购置项目 (项目编号:BXZB2026-052)公开招标公告 | 阶段:招标采购 | 项目编号:BXZB2026-052",
+          "reason": "天津项目公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "天津市校企联合实验室专项“智能检测技术与系统仿真实验室”建设项目 (项目编号:0615-2641022100992)公开招标公告 | 阶段:招标采购 | 项目编号:0615-2641022100992",
+          "reason": "天津项目公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院 天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告 | 阶段:招标采购 | 项目编号:XCSD-2026-A-482",
+          "reason": "天津项目公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E19",
+          "direction": "无关",
+          "quote": "天津机电职业技术学院 天津机电职业技术学院虚拟化超融合资源池采购项目 (项目编号:TJBD-2026-A-195)公开招标公告 | 阶段:招标采购 | 项目编号:TJBD-2026-A-195",
+          "reason": "天津项目公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E20",
+          "direction": "无关",
+          "quote": "天津市第五中心医院智能采血车项目(项目编号:YTZB2026ZC052)公开招标公告 | 阶段:招标采购 | 项目编号:YTZB2026ZC052",
+          "reason": "天津项目公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E21",
+          "direction": "无关",
+          "quote": "天津机电职业技术学院 天津机电职业技术学院人工智能赋能专业群建设平台服务项目 (项目编号:YFGP-2026-B-0232)公开招标公告 | 阶段:招标采购 | 项目编号:YFGP-2026-B-0232",
+          "reason": "天津项目公告，与 claim 无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "仅 evt_tender_linlu_linye:E1 直接载明采购方为桐庐县林业技术推广中心，与 claim 一致；其余证据为其他地区项目公告或未含采购方字段，均不改变判断。E1 为信号层内部检测（credibility 中），无独立来源交叉印证，但无任何矛盾证据。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c5",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "预算金额 2461952.0 元",
+          "reason": "信号层基础字段直接载明预算金额 2461952.0 元，与 claim 数值一致。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E2",
+          "direction": "支持",
+          "quote": "预算:246.195万元",
+          "reason": "官方公告载明预算 246.195 万元，与 claim 的 246.195 万元一致。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E3",
+          "direction": "无关",
+          "quote": "预算:120万元",
+          "reason": "该公告为新昌县中医院体外心肺支持辅助设备项目，与本次桐庐县林业项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E4",
+          "direction": "无关",
+          "quote": "预算:251万元",
+          "reason": "该公告为嘉兴技师学院实训室设备采购项目，与本次桐庐县林业项目无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 与 E2 均载明预算 2461952.0 元 / 246.195 万元，与 claim 一致；E3、E4 为其他项目，不构成反证。E1 与 E2 谱系根不同（signal_layer 与 ccgp），但 E1 摘要自述由列表与详情字段生成，独立性存疑，最终由代码按独立来源规则裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c7",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "投标截止 2026-11-02 09:30",
+          "reason": "信号层基础字段载明投标截止 2026-11-02 09:30，与 claim 一致。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E2",
+          "direction": "支持",
+          "quote": "投标截止:2026-11-02 09:30",
+          "reason": "官方公告载明投标截止 2026-11-02 09:30，与 claim 一致。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E3",
+          "direction": "无关",
+          "quote": "投标截止:2026-11-02 13:30",
+          "reason": "该证据为另一项目（新昌县中医院体外心肺支持辅助设备）的公告，与本案项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E4",
+          "direction": "无关",
+          "quote": "投标截止:2026-11-02 09:30",
+          "reason": "该证据为另一项目（嘉兴技师学院实训室设备采购）的公告，与本案项目无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 与 E2 均载明本案项目投标截止 2026-11-02 09:30，与 claim 一致；E3、E4 属其他项目，不构成印证或反驳。E1 与 E2 谱系根不同（signal_layer 与 ccgp），但 E1 摘要自述由列表与详情字段生成，其独立性存疑，最终由代码按独立来源规则裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c8",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "代理机构 海标工程管理有限公司",
+          "reason": "信号层字段直接载明代理机构为海标工程管理有限公司。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "涉及另一项目、另一代理机构，与本案信封代理机构无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E2",
+          "direction": "支持",
+          "quote": "海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "公告标题以海标工程管理有限公司作为代理机构署名，与 claim 一致。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E3",
+          "direction": "无关",
+          "quote": "杭州中易招标代理有限公司关于新昌县中医院体外心肺支持辅助设备的公开招标公告",
+          "reason": "另一项目、另一代理机构，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E4",
+          "direction": "无关",
+          "quote": "浙江求是招标代理有限公司关于嘉兴技师学院数字化设计与智造（AIGC创意设计）实训室设备采购的公开招标公告",
+          "reason": "另一项目、另一代理机构，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E6",
+          "direction": "无关",
+          "quote": "华诚工程咨询集团有限公司关于钱江世纪城2026年度区级宣传服务政府采购项目的公开招标公告",
+          "reason": "另一项目、另一代理机构，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E8",
+          "direction": "无关",
+          "quote": "新疆鸿联建设工程项目管理咨询有限公司关于第四师可克达拉职业技术学院质量提升项目（产教融合中心建设）的公开招标公告",
+          "reason": "另一项目、另一代理机构，不改变判断。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 信号层字段与 E2 官方公告标题均载明代理机构为海标工程管理有限公司，方向一致；其余证据涉及其他项目与代理机构，不构成矛盾。注意 E1 与 E2 谱系根不同（signal_layer 与 ccgp），但 E1 摘要自述由列表与详情字段生成，独立性存疑，最终由代码按独立来源规则裁定。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 主体与事件背景\n\n本次信号经信封载明其 kind 为 tender，即公开招标公告[c1]。信封载明项目编号为 330122261030090000005[c2]，项目名称为“海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告”[c3]。采购方为桐庐县林业技术推广中心[c4]。\n\n从项目名称看，本次采购项目属于“杭州市‘三生共荣’中央财政国土绿化示范项目（桐庐县）”的组成部分[c20]；其服务内容包含 2027 至 2028 年作业设计，以及 2026 至 2028 年检查验收及绩效评价[c19]。\n\n上述主体与项目背景要素均有多条证据支持，可作为后续研判的事实基线。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 2,
+      "mainTarget": "c14",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "c14 未决：解读选中的假设种子标签是否为“正常大额采购”与“真实经营动态”，需锚定解读侧种子标签的原始登记记录。",
+          "acceptance": "需解读记录/种子标签登记页正文级证据，逐字出现“正常大额采购”与“真实经营动态”两个标签及其与本次事件的绑定关系。",
+          "failover": "若解读侧无独立标签登记页，则改查信封/解读摘要字段中是否逐字出现该两标签；仍无则记为查不到，转 c16 历史基线缺口。"
+        },
+        {
+          "gap": "在锚定种子标签后，需确认该两标签与 h1/h2 的对应关系是否成立（即标签是否确为本次解读所选中，而非默认全集）。",
+          "acceptance": "需解读记录中标签选中状态字段级证据（选中/未选中标记），能一一对应到 h1“正常大额采购”与 h2“真实经营动态”。",
+          "failover": "若选中状态不可得，则退回 c16，改以历史采购基线（amountHistory/noveltyHistory/frequencyHistory）补齐来间接区分 h1 与 h2。"
+        }
+      ],
+      "searchHints": [
+        "解读 假设种子标签 正常大额采购 真实经营动态",
+        "evt_tender_linlu_linye 解读记录 标签选中",
+        "桐庐县林业技术推广中心 招标 解读 种子标签"
+      ],
+      "sideTargets": [
+        "c16",
+        "c11"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [],
+      "cohorts": []
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c14",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 330122261030090000005;项目名称 海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "该证据为招标信号基础字段，未出现“正常大额采购”或“真实经营动态”等假设种子标签，无法改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "天津市校企联合实验室专项“智能检测技术与系统仿真实验室”建设项目 (项目编号:0615-2641022100992)公开招标公告 | 阶段:招标采购 | 项目编号:0615-2641022100992",
+          "reason": "该证据为天津项目招标公告，与 claim 所述标签解读无关联。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E26",
+          "direction": "无关",
+          "quote": "[其他]• 2019第十二届中国（湖南）国际 种子 交易会 zhang264 [其他] 世纪... 公司主要 经营 范 (2023-04-17 17:50:56) [北京]一、院校简介 天津理工大学...",
+          "reason": "该证据为广告信息网站碎片内容，未涉及假设种子标签，无法改变 claim 判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "三条证据均未提及“正常大额采购”或“真实经营动态”标签，无任何证据支持或反驳该 claim，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c17",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "项目名称 海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "该证据同时出现项目名称前缀中的“海标工程管理有限公司”与末尾字段“代理机构 海标工程管理有限公司”，两处名称字符串完全一致，支持二者为同一名称主体。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E10",
+          "direction": "无关",
+          "quote": "杭州市公共资源交易中心上城分中心关于上城区综合行政执法局2026年行政执法车更新采购项目的公开招标公告",
+          "reason": "该证据涉及上城区行政执法车更新采购项目，未出现“海标工程管理有限公司”，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告",
+          "reason": "该证据涉及盈丰街道地下安全隐患检测服务项目，代理机构为浙江明业项目管理有限公司，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E12",
+          "direction": "无关",
+          "quote": "天津市特种设备监督检验技术研究院特种设备安全检验检测设备更新项目（一） (项目编号:TZSB-01-2026-058)公开招标公告",
+          "reason": "该证据为天津特种设备检验检测设备更新项目，未出现“海标工程管理有限公司”，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E13",
+          "direction": "无关",
+          "quote": "天津市计量监督检测科学研究院计量领域检验检测设备更新项目（第三批） (项目编号:PYGP-2026-A-0811)公开招标公告",
+          "reason": "该证据为天津计量领域检验检测设备更新项目，未出现“海标工程管理有限公司”，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E14",
+          "direction": "无关",
+          "quote": "天津市河东区疾病预防控制中心（天津市河东区卫生监督所）微生物质谱仪等设备购置项目 (项目编号:BXZB2026-052)公开招标公告",
+          "reason": "该证据为天津河东区疾控中心设备购置项目，未出现“海标工程管理有限公司”，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "天津市校企联合实验室专项“智能检测技术与系统仿真实验室”建设项目 (项目编号:0615-2641022100992)公开招标公告",
+          "reason": "该证据为天津校企联合实验室建设项目，未出现“海标工程管理有限公司”，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E16",
+          "direction": "无关",
+          "quote": "天津市中医药研究院附属医院医用气体采购项目 (项目编号:KPZB-202609ZCGK-0107)公开招标公告",
+          "reason": "该证据为天津中医药研究院附属医院医用气体采购项目，未出现“海标工程管理有限公司”，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E17",
+          "direction": "无关",
+          "quote": "天津市滨海新区太平镇人民政府机关 2026年度太平镇示范镇一期环卫服务项目 (项目编号:RSGS-2026-130)公开招标公告",
+          "reason": "该证据为天津太平镇环卫服务项目，未出现“海标工程管理有限公司”，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告",
+          "reason": "该证据为天津第五中心医院信息化基础设施建设项目，未出现“海标工程管理有限公司”，与 claim 无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "仅 E1 一条证据与 claim 相关，其项目名称前缀与代理机构字段均为“海标工程管理有限公司”，字符串完全一致，支持同一名称主体的判断；其余证据均不涉及该主体。但 E1 为单一来源（lineage_root=signal_layer），缺乏独立来源交叉印证，最终判决由代码按独立来源规则作出。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c18",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E10",
+          "direction": "无关",
+          "quote": "杭州市公共资源交易中心上城分中心关于上城区综合行政执法局2026年行政执法车更新采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "该公告涉及上城区行政执法车更新采购，未出现桐庐县林业技术推广中心或海标工程管理有限公司，与本次招标代理委托关系无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "该公告的代理机构为浙江明业项目管理有限公司，项目为盈丰街道地下安全隐患检测，与桐庐县林业技术推广中心及海标工程管理有限公司均无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E12",
+          "direction": "无关",
+          "quote": "天津市特种设备监督检验技术研究院 天津市特种设备监督检验技术研究院特种设备安全检验检测设备更新项目（一） (项目编号:TZSB-01-2026-058)公开招标公告 | 阶段:招标采购 | 项目编号:TZSB-01-2026-058",
+          "reason": "天津特种设备检验检测设备采购公告，主体与项目均与桐庐县林业技术推广中心、海标工程管理有限公司无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E14",
+          "direction": "无关",
+          "quote": "天津市河东区疾病预防控制中心（天津市河东区卫生监督所）微生物质谱仪等设备购置项目 (项目编号:BXZB2026-052)公开招标公告 | 阶段:招标采购 | 项目编号:BXZB2026-052",
+          "reason": "天津河东区疾控设备购置公告，未涉及桐庐县林业技术推广中心或海标工程管理有限公司。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "天津市校企联合实验室专项“智能检测技术与系统仿真实验室”建设项目 (项目编号:0615-2641022100992)公开招标公告 | 阶段:招标采购 | 项目编号:0615-2641022100992",
+          "reason": "天津校企联合实验室建设项目公告，与本案招标代理委托关系无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院 天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告 | 阶段:招标采购 | 项目编号:XCSD-2026-A-482",
+          "reason": "天津第五中心医院机房网络安全建设公告，未涉及桐庐县林业技术推广中心或海标工程管理有限公司。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E19",
+          "direction": "无关",
+          "quote": "天津机电职业技术学院 天津机电职业技术学院虚拟化超融合资源池采购项目 (项目编号:TJBD-2026-A-195)公开招标公告 | 阶段:招标采购 | 项目编号:TJBD-2026-A-195",
+          "reason": "天津机电职业技术学院采购公告，与本案委托关系无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E2",
+          "direction": "支持",
+          "quote": "海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "该公告显示海标工程管理有限公司作为招标代理机构，就桐庐县国土绿化示范项目发布招标公告，指向其与桐庐县相关林业项目之间存在本次招标代理委托关系，使 claim 更可能为真。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E20",
+          "direction": "无关",
+          "quote": "天津市第五中心医院智能采血车项目(项目编号:YTZB2026ZC052)公开招标公告 | 阶段:招标采购 | 项目编号:YTZB2026ZC052",
+          "reason": "天津第五中心医院智能采血车公告，与桐庐县林业技术推广中心及海标工程管理有限公司无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E21",
+          "direction": "无关",
+          "quote": "天津机电职业技术学院 天津机电职业技术学院人工智能赋能专业群建设平台服务项目 (项目编号:YFGP-2026-B-0232)公开招标公告 | 阶段:招标采购 | 项目编号:YFGP-2026-B-0232",
+          "reason": "天津机电职业技术学院平台服务公告，与本案委托关系无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅 E2 一条证据指向海标工程管理有限公司代理桐庐县国土绿化示范项目招标，可支持存在招标代理委托关系，但该证据未直接载明委托方为“桐庐县林业技术推广中心”，且其余证据均与本案无关，缺乏独立来源印证，故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c21",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "预算 246.195 万元;投标截止 2026-11-02 09:30",
+          "reason": "该证据同时给出预算 246.195 万元、投标截止 2026-11-02 09:30 与发布日期 2026-10-11，与 claim 的金额、截止时间及公告发布日一致，支持时间窗口自 2026-10-11 起 22 天的计算。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E10",
+          "direction": "无关",
+          "quote": "杭州市公共资源交易中心上城分中心关于上城区综合行政执法局2026年行政执法车更新采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "该证据为另一采购项目公告，未涉及本 claim 的预算金额、投标截止时间或公告发布日。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "该证据为另一采购项目公告，未涉及本 claim 的预算金额、投标截止时间或公告发布日。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E12",
+          "direction": "无关",
+          "quote": "天津市特种设备监督检验技术研究院 天津市特种设备监督检验技术研究院特种设备安全检验检测设备更新项目（一） (项目编号:TZSB-01-2026-058)公开招标公告 | 阶段:招标采购 | 项目编号:TZSB-01-2026-058",
+          "reason": "该证据为另一采购项目公告，未涉及本 claim 的预算金额、投标截止时间或公告发布日。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E13",
+          "direction": "无关",
+          "quote": "天津市计量监督检测科学研究院 天津市计量监督检测科学研究院计量领域检验检测设备更新项目（第三批） (项目编号:PYGP-2026-A-0811)公开招标公告 | 阶段:招标采购 | 项目编号:PYGP-2026-A-0811",
+          "reason": "该证据为另一采购项目公告，未涉及本 claim 的预算金额、投标截止时间或公告发布日。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E14",
+          "direction": "无关",
+          "quote": "天津市河东区疾病预防控制中心（天津市河东区卫生监督所）微生物质谱仪等设备购置项目 (项目编号:BXZB2026-052)公开招标公告 | 阶段:招标采购 | 项目编号:BXZB2026-052",
+          "reason": "该证据为另一采购项目公告，未涉及本 claim 的预算金额、投标截止时间或公告发布日。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "天津市校企联合实验室专项“智能检测技术与系统仿真实验室”建设项目 (项目编号:0615-2641022100992)公开招标公告 | 阶段:招标采购 | 项目编号:0615-2641022100992",
+          "reason": "该证据为另一采购项目公告，未涉及本 claim 的预算金额、投标截止时间或公告发布日。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E16",
+          "direction": "无关",
+          "quote": "天津市中医药研究院附属医院 天津市中医药研究院附属医院医用气体采购项目 (项目编号:KPZB-202609ZCGK-0107)公开招标公告 | 阶段:招标采购 | 项目编号:KPZB-202609ZCGK-0107",
+          "reason": "该证据为另一采购项目公告，未涉及本 claim 的预算金额、投标截止时间或公告发布日。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E17",
+          "direction": "无关",
+          "quote": "天津市滨海新区太平镇人民政府机关 2026年度太平镇示范镇一期环卫服务项目 (项目编号:RSGS-2026-130)公开招标公告 | 阶段:招标采购 | 项目编号:RSGS-2026-130",
+          "reason": "该证据为另一采购项目公告，未涉及本 claim 的预算金额、投标截止时间或公告发布日。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院 天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告 | 阶段:招标采购 | 项目编号:XCSD-2026-A-482",
+          "reason": "该证据为另一采购项目公告，未涉及本 claim 的预算金额、投标截止时间或公告发布日。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "仅 E1 与本 claim 直接相关，其原文同时载明预算 246.195 万元、投标截止 2026-11-02 09:30 与发布日期 2026-10-11，与 claim 的金额、截止时间及公告发布日一致，支持自 2026-10-11 起 22 天的时间窗口；其余证据均为无关的其他采购项目公告。E1 为唯一相关来源，其谱系根为 signal_layer，独立印证有限，故意见为已证实但可被代码按独立来源规则否决。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c3",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "项目名称 海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "信封基础字段中的项目名称与 claim 文本逐字一致，直接支持该断言。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E10",
+          "direction": "无关",
+          "quote": "杭州市公共资源交易中心上城分中心关于上城区综合行政执法局2026年行政执法车更新采购项目的公开招标公告",
+          "reason": "为另一项目的公告标题，与 claim 所述项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告",
+          "reason": "为另一项目的公告标题，与 claim 所述项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E12",
+          "direction": "无关",
+          "quote": "天津市特种设备监督检验技术研究院特种设备安全检验检测设备更新项目（一） (项目编号:TZSB-01-2026-058)公开招标公告",
+          "reason": "为另一项目的公告标题，与 claim 所述项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E13",
+          "direction": "无关",
+          "quote": "天津市计量监督检测科学研究院计量领域检验检测设备更新项目（第三批） (项目编号:PYGP-2026-A-0811)公开招标公告",
+          "reason": "为另一项目的公告标题，与 claim 所述项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E14",
+          "direction": "无关",
+          "quote": "天津市河东区疾病预防控制中心（天津市河东区卫生监督所）微生物质谱仪等设备购置项目 (项目编号:BXZB2026-052)公开招标公告",
+          "reason": "为另一项目的公告标题，与 claim 所述项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "天津市校企联合实验室专项“智能检测技术与系统仿真实验室”建设项目 (项目编号:0615-2641022100992)公开招标公告",
+          "reason": "为另一项目的公告标题，与 claim 所述项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E16",
+          "direction": "无关",
+          "quote": "天津市中医药研究院附属医院医用气体采购项目 (项目编号:KPZB-202609ZCGK-0107)公开招标公告",
+          "reason": "为另一项目的公告标题，与 claim 所述项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E17",
+          "direction": "无关",
+          "quote": "天津市滨海新区太平镇人民政府机关 2026年度太平镇示范镇一期环卫服务项目 (项目编号:RSGS-2026-130)公开招标公告",
+          "reason": "为另一项目的公告标题，与 claim 所述项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告",
+          "reason": "为另一项目的公告标题，与 claim 所述项目名称无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "仅 evt_tender_linlu_linye:E1 直接载明与 claim 完全一致的项目名称，其余证据均为其他项目公告，不构成独立印证；但该证据为信号层信封基础字段，与 claim 文本逐字吻合，故意见为已证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c6",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "发布日期 2026-10-11",
+          "reason": "信封基础字段直接载明发布日期为 2026-10-11，与 claim 一致。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E26",
+          "direction": "无关",
+          "quote": "[其他]• 2019第十二届中国（湖南）国际 种子 交易会 zhang264 [其他] 世纪... 公司主要 经营 范 (2023-04-17 17:50:56)",
+          "reason": "该证据为无关广告聚合内容，未涉及公告发布日期，不改变判断。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "信封基础字段明确载明发布日期 2026-10-11，与 claim 完全吻合；另一条证据无关。仅一条独立来源支持，意见为已证实。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 3,
+      "mainTarget": "c16",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "c16 声称解读登记的基础缺口为“该采购单位历史采购记录（amountHistory/noveltyHistory/frequencyHistory）均为空，需先补齐历史采购基线以判断本次预算与频次是否异常”，但该缺口登记本身尚未被证实。",
+          "acceptance": "需页面正文级证据：解读/信封详情页中明确出现“历史采购记录为空/需补齐历史采购基线”类登记文本，或明确列出 amountHistory/noveltyHistory/frequencyHistory 三项为空并标注为缺口。",
+          "failover": "若详情页无该登记文本，则转查 c11/c12（三项历史字段与三项异常标记字段是否均为 null），以字段级证据替代缺口登记证据。"
+        },
+        {
+          "gap": "若 c16 成立，则需补齐桐庐县林业技术推广中心的历史采购基线，以判断本次预算 246.195 万元与采购频次是否异常。",
+          "acceptance": "需权威登记源记录：中国政府采购网（ccgp.gov.cn）上该采购单位（桐庐县林业技术推广中心）既往采购公告/中标公告列表，至少覆盖可判定“频次是否异常”的连续时间窗。",
+          "failover": "若该单位无历史公告记录，则记录“历史基线确为空”这一事实本身，作为 c11/c16 的证实证据，并据此判定金额/频次异常不可判定。"
+        }
+      ],
+      "searchHints": [
+        "桐庐县林业技术推广中心 采购公告",
+        "ccgp.gov.cn 桐庐县林业技术推广中心 中标",
+        "330122261030090000005 历史采购"
+      ],
+      "sideTargets": [
+        "c11",
+        "c12"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 4,
+      "mainTarget": "c14",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "c14 未决：解读选中的假设种子标签是否为“正常大额采购”与“真实经营动态”，需锚定解读产物的标签字段原文。",
+          "acceptance": "需解读产物字段级证据：解读记录中假设种子标签字段的原文值，逐字可核（如标签数组原文），而非摘要转述。",
+          "failover": "若解读产物无标签字段或字段为空，则改查解读生成配置/规则文件，确认标签来源；仍无则将该 claim 标注为不可核并转下一环。"
+        },
+        {
+          "gap": "若标签确为“正常大额采购”与“真实经营动态”，需确认该标签选择是否由信封字段（kind=tender、预算 246.195 万元、历史字段为空）直接推导，以判断两假设的主导地位是否被标签选择本身锁定。",
+          "acceptance": "需规则/映射级证据：标签到信封字段的推导规则原文或解读日志中字段引用记录，能逐字对应 c1/c5/c11/c12。",
+          "failover": "若无法取得推导规则，则退回仅登记标签事实，不据此翻转假设，改由 c11/c12 历史字段空值证据链推进。"
+        }
+      ],
+      "searchHints": [
+        "解读 假设种子标签 正常大额采购 真实经营动态",
+        "解读产物 标签字段 原文",
+        "假设种子 标签 推导规则 信封字段"
+      ],
+      "sideTargets": [
+        "c11",
+        "c12"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [
+        {
+          "id": "c22",
+          "text": "巴中、烟台、巴音郭楞三个 dm79.com 子域名站点页面中均出现同一发布者标识“zhang264”与同一条“2019第十二届中国（湖南）国际种子交易会”信息。",
+          "category": "关联线索",
+          "sectionIndex": 2,
+          "priority": 3,
+          "parent": null,
+          "entityNames": [
+            "zhang264",
+            "bazhong.dm79.com",
+            "yt.dm79.com",
+            "bygl.dm79.com"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c23",
+          "text": "巴中、烟台、巴音郭楞三个 dm79.com 子域名站点页面中均出现同一主体名称“福建北峰通信科技股份”。",
+          "category": "关联线索",
+          "sectionIndex": 2,
+          "priority": 3,
+          "parent": null,
+          "entityNames": [
+            "福建北峰通信科技股份",
+            "bazhong.dm79.com",
+            "yt.dm79.com",
+            "bygl.dm79.com"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c24",
+          "text": "巴中、巴音郭楞两个 dm79.com 子域名站点页面中均出现同一主体名称“深圳市金源电子回收有限公司”。",
+          "category": "关联线索",
+          "sectionIndex": 2,
+          "priority": 3,
+          "parent": null,
+          "entityNames": [
+            "深圳市金源电子回收有限公司",
+            "bazhong.dm79.com",
+            "bygl.dm79.com"
+          ],
+          "hypothesisLinks": []
+        }
+      ],
+      "cohorts": [
+        {
+          "name": "dm79.com 同源镜像子域名站点",
+          "criteria": {
+            "域名根": "dm79.com",
+            "站点类型": "免费广告发布/信息发布站",
+            "特征": "不同城市子域名页面出现相同发布者标识与相同条目内容"
+          },
+          "members": [
+            "bazhong.dm79.com",
+            "yt.dm79.com",
+            "bygl.dm79.com"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c17",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "项目名称 海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "该证据同时出现项目名称前缀中的“海标工程管理有限公司”与末尾字段“代理机构 海标工程管理有限公司”，两处名称字符串完全一致，支持二者为同一名称主体。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E10",
+          "direction": "无关",
+          "quote": "杭州市公共资源交易中心上城分中心关于上城区综合行政执法局2026年行政执法车更新采购项目的公开招标公告",
+          "reason": "该证据涉及上城区行政执法车更新采购项目，未出现“海标工程管理有限公司”，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告",
+          "reason": "该证据涉及盈丰街道地下安全隐患检测服务项目，代理机构为浙江明业项目管理有限公司，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E12",
+          "direction": "无关",
+          "quote": "天津市特种设备监督检验技术研究院特种设备安全检验检测设备更新项目（一） (项目编号:TZSB-01-2026-058)公开招标公告",
+          "reason": "该证据为天津特种设备检验检测设备更新项目，未出现“海标工程管理有限公司”，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E13",
+          "direction": "无关",
+          "quote": "天津市计量监督检测科学研究院计量领域检验检测设备更新项目（第三批） (项目编号:PYGP-2026-A-0811)公开招标公告",
+          "reason": "该证据为天津计量领域检验检测设备更新项目，未出现“海标工程管理有限公司”，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E14",
+          "direction": "无关",
+          "quote": "天津市河东区疾病预防控制中心（天津市河东区卫生监督所）微生物质谱仪等设备购置项目 (项目编号:BXZB2026-052)公开招标公告",
+          "reason": "该证据为天津河东区疾控中心设备购置项目，未出现“海标工程管理有限公司”，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "天津市校企联合实验室专项“智能检测技术与系统仿真实验室”建设项目 (项目编号:0615-2641022100992)公开招标公告",
+          "reason": "该证据为天津校企联合实验室建设项目，未出现“海标工程管理有限公司”，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E16",
+          "direction": "无关",
+          "quote": "天津市中医药研究院附属医院医用气体采购项目 (项目编号:KPZB-202609ZCGK-0107)公开招标公告",
+          "reason": "该证据为天津中医药研究院附属医院医用气体采购项目，未出现“海标工程管理有限公司”，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E17",
+          "direction": "无关",
+          "quote": "天津市滨海新区太平镇人民政府机关 2026年度太平镇示范镇一期环卫服务项目 (项目编号:RSGS-2026-130)公开招标公告",
+          "reason": "该证据为天津太平镇环卫服务项目，未出现“海标工程管理有限公司”，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告",
+          "reason": "该证据为天津第五中心医院信息化基础设施建设项目，未出现“海标工程管理有限公司”，与 claim 无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "仅 E1 一条证据与 claim 相关，其项目名称前缀与代理机构字段均为“海标工程管理有限公司”，字符串完全一致，支持同一名称主体的判断；其余证据均不涉及该主体。但 E1 为单一来源（lineage_root=signal_layer），缺乏独立来源交叉印证，最终判决由代码按独立来源规则作出。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c18",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E10",
+          "direction": "无关",
+          "quote": "杭州市公共资源交易中心上城分中心关于上城区综合行政执法局2026年行政执法车更新采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "该公告涉及上城区行政执法车更新采购，未出现桐庐县林业技术推广中心或海标工程管理有限公司，与本次招标代理委托关系无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "该公告的代理机构为浙江明业项目管理有限公司，项目为盈丰街道地下安全隐患检测，与桐庐县林业技术推广中心及海标工程管理有限公司均无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E12",
+          "direction": "无关",
+          "quote": "天津市特种设备监督检验技术研究院 天津市特种设备监督检验技术研究院特种设备安全检验检测设备更新项目（一） (项目编号:TZSB-01-2026-058)公开招标公告 | 阶段:招标采购 | 项目编号:TZSB-01-2026-058",
+          "reason": "天津特种设备检验检测设备采购公告，与桐庐县林业技术推广中心、海标工程管理有限公司无关联。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E14",
+          "direction": "无关",
+          "quote": "天津市河东区疾病预防控制中心（天津市河东区卫生监督所）微生物质谱仪等设备购置项目 (项目编号:BXZB2026-052)公开招标公告 | 阶段:招标采购 | 项目编号:BXZB2026-052",
+          "reason": "天津疾控设备购置公告，未涉及本案主体，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "天津市校企联合实验室专项“智能检测技术与系统仿真实验室”建设项目 (项目编号:0615-2641022100992)公开招标公告 | 阶段:招标采购 | 项目编号:0615-2641022100992",
+          "reason": "天津校企联合实验室建设项目公告，与本案主体无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院 天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告 | 阶段:招标采购 | 项目编号:XCSD-2026-A-482",
+          "reason": "天津医院信息化建设项目公告，与本案主体无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E19",
+          "direction": "无关",
+          "quote": "天津机电职业技术学院 天津机电职业技术学院虚拟化超融合资源池采购项目 (项目编号:TJBD-2026-A-195)公开招标公告 | 阶段:招标采购 | 项目编号:TJBD-2026-A-195",
+          "reason": "天津机电职业技术学院采购公告，与本案主体无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E2",
+          "direction": "支持",
+          "quote": "海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "该公告显示海标工程管理有限公司作为招标代理机构，就桐庐县国土绿化示范项目发布公开招标公告，与桐庐县林业领域项目直接相关，支持存在本次招标代理委托关系。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E20",
+          "direction": "无关",
+          "quote": "天津市第五中心医院智能采血车项目(项目编号:YTZB2026ZC052)公开招标公告 | 阶段:招标采购 | 项目编号:YTZB2026ZC052",
+          "reason": "天津医院智能采血车采购公告，与本案主体无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E21",
+          "direction": "无关",
+          "quote": "天津机电职业技术学院 天津机电职业技术学院人工智能赋能专业群建设平台服务项目 (项目编号:YFGP-2026-B-0232)公开招标公告 | 阶段:招标采购 | 项目编号:YFGP-2026-B-0232",
+          "reason": "天津机电职业技术学院平台服务项目公告，与本案主体无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅 E2 一条证据显示海标工程管理有限公司代理桐庐县国土绿化示范项目招标，可间接支持存在代理委托关系，但公告未直接载明委托方为桐庐县林业技术推广中心，且其余证据均与本案主体无关，缺乏独立来源直接印证，故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c21",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "预算金额 2461952.0 元;发布日期 2026-10-11",
+          "reason": "该证据同时给出预算 2461952.0 元（即 246.195 万元）、发布日期 2026-10-11 与投标截止 2026-11-02 09:30，与 claim 的金额与时间窗口要素一致。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E10",
+          "direction": "无关",
+          "quote": "杭州市公共资源交易中心上城分中心关于上城区综合行政执法局2026年行政执法车更新采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "为其他地区其他项目的招标公告，未涉及本 claim 的预算金额与时间窗口。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "为其他项目的招标公告，未涉及本 claim 的预算金额与时间窗口。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E12",
+          "direction": "无关",
+          "quote": "天津市特种设备监督检验技术研究院特种设备安全检验检测设备更新项目（一） (项目编号:TZSB-01-2026-058)公开招标公告",
+          "reason": "为天津地区其他项目公告，未涉及本 claim 的预算金额与时间窗口。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E13",
+          "direction": "无关",
+          "quote": "天津市计量监督检测科学研究院计量领域检验检测设备更新项目（第三批） (项目编号:PYGP-2026-A-0811)公开招标公告",
+          "reason": "为天津地区其他项目公告，未涉及本 claim 的预算金额与时间窗口。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E14",
+          "direction": "无关",
+          "quote": "天津市河东区疾病预防控制中心（天津市河东区卫生监督所）微生物质谱仪等设备购置项目 (项目编号:BXZB2026-052)公开招标公告",
+          "reason": "为天津地区其他项目公告，未涉及本 claim 的预算金额与时间窗口。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "天津市校企联合实验室专项“智能检测技术与系统仿真实验室”建设项目 (项目编号:0615-2641022100992)公开招标公告",
+          "reason": "为天津地区其他项目公告，未涉及本 claim 的预算金额与时间窗口。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E16",
+          "direction": "无关",
+          "quote": "天津市中医药研究院附属医院医用气体采购项目 (项目编号:KPZB-202609ZCGK-0107)公开招标公告",
+          "reason": "为天津地区其他项目公告，未涉及本 claim 的预算金额与时间窗口。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E17",
+          "direction": "无关",
+          "quote": "天津市滨海新区太平镇人民政府机关 2026年度太平镇示范镇一期环卫服务项目 (项目编号:RSGS-2026-130)公开招标公告",
+          "reason": "为天津地区其他项目公告，未涉及本 claim 的预算金额与时间窗口。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告",
+          "reason": "为天津地区其他项目公告，未涉及本 claim 的预算金额与时间窗口。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一相关证据 E1 同时载明预算 2461952.0 元、发布日期 2026-10-11 与投标截止 2026-11-02 09:30，与 claim 的金额及时间窗口要素吻合；其余证据均为无关项目公告。注意 E1 为信号层单一来源，无独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c3",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "项目名称 海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "信封基础字段中的项目名称与 claim 文本逐字一致，直接支持该 claim。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E10",
+          "direction": "无关",
+          "quote": "杭州市公共资源交易中心上城分中心关于上城区综合行政执法局2026年行政执法车更新采购项目的公开招标公告",
+          "reason": "该证据为另一项目的招标公告，与 claim 所述项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告",
+          "reason": "该证据为另一项目的招标公告，与 claim 所述项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E12",
+          "direction": "无关",
+          "quote": "天津市特种设备监督检验技术研究院特种设备安全检验检测设备更新项目（一） (项目编号:TZSB-01-2026-058)公开招标公告",
+          "reason": "该证据为天津另一项目的招标公告，与 claim 所述项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E13",
+          "direction": "无关",
+          "quote": "天津市计量监督检测科学研究院计量领域检验检测设备更新项目（第三批） (项目编号:PYGP-2026-A-0811)公开招标公告",
+          "reason": "该证据为天津另一项目的招标公告，与 claim 所述项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E14",
+          "direction": "无关",
+          "quote": "天津市河东区疾病预防控制中心（天津市河东区卫生监督所）微生物质谱仪等设备购置项目 (项目编号:BXZB2026-052)公开招标公告",
+          "reason": "该证据为天津另一项目的招标公告，与 claim 所述项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "天津市校企联合实验室专项“智能检测技术与系统仿真实验室”建设项目 (项目编号:0615-2641022100992)公开招标公告",
+          "reason": "该证据为天津另一项目的招标公告，与 claim 所述项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E16",
+          "direction": "无关",
+          "quote": "天津市中医药研究院附属医院医用气体采购项目 (项目编号:KPZB-202609ZCGK-0107)公开招标公告",
+          "reason": "该证据为天津另一项目的招标公告，与 claim 所述项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E17",
+          "direction": "无关",
+          "quote": "天津市滨海新区太平镇人民政府机关 2026年度太平镇示范镇一期环卫服务项目 (项目编号:RSGS-2026-130)公开招标公告",
+          "reason": "该证据为天津另一项目的招标公告，与 claim 所述项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告",
+          "reason": "该证据为天津另一项目的招标公告，与 claim 所述项目名称无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "仅 evt_tender_linlu_linye:E1 直接载明与 claim 完全一致的项目名称，其余证据均为无关项目公告；E1 为信号层内部检测字段（credibility 中），其谱系根 signal_layer 与其余 ccgp 证据不同根，但独立来源印证有限，故意见为已证实，最终由代码按独立来源规则裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c6",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "发布日期 2026-10-11",
+          "reason": "信封基础字段直接载明发布日期为 2026-10-11，与 claim 一致。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E26",
+          "direction": "无关",
+          "quote": "[其他]• 2019第十二届中国（湖南）国际 种子 交易会 zhang264 [其他] 世纪... 公司主要 经营 范 (2023-04-17 17:50:56)",
+          "reason": "内容为无关广告信息，未涉及公告发布日期。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E27",
+          "direction": "无关",
+          "quote": "[其他]• 2019第十二届中国（湖南）国际 种子 交易会 zhang264",
+          "reason": "内容为无关广告信息，未涉及公告发布日期。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E28",
+          "direction": "无关",
+          "quote": "[其他]• 2019第十二届中国（湖南）国际 种子 交易会 zhang264",
+          "reason": "内容为无关广告信息，未涉及公告发布日期。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E29",
+          "direction": "无关",
+          "quote": "[其他]• 2019第十二届中国（湖南）国际 种子 交易会",
+          "reason": "内容为无关广告信息，未涉及公告发布日期。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一相关证据 E1 的信封基础字段逐字载明“发布日期 2026-10-11”，与 claim 完全一致；其余四条为无关广告内容，不构成反证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c8",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "代理机构 海标工程管理有限公司",
+          "reason": "信号层基础字段直接载明代理机构为海标工程管理有限公司。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "涉及另一代理机构与另一项目，与本案代理机构归属无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E2",
+          "direction": "支持",
+          "quote": "海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "官方公告标题以海标工程管理有限公司作为招标公告发布主体，指向其为代理机构。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E3",
+          "direction": "无关",
+          "quote": "杭州中易招标代理有限公司关于新昌县中医院体外心肺支持辅助设备的公开招标公告",
+          "reason": "另一项目另一代理机构，不改变本案判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E4",
+          "direction": "无关",
+          "quote": "浙江求是招标代理有限公司关于嘉兴技师学院数字化设计与智造（AIGC创意设计）实训室设备采购的公开招标公告",
+          "reason": "另一项目另一代理机构，不改变本案判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E6",
+          "direction": "无关",
+          "quote": "华诚工程咨询集团有限公司关于钱江世纪城2026年度区级宣传服务政府采购项目的公开招标公告",
+          "reason": "另一项目另一代理机构，不改变本案判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E8",
+          "direction": "无关",
+          "quote": "新疆鸿联建设工程项目管理咨询有限公司关于第四师可克达拉职业技术学院质量提升项目（产教融合中心建设）的公开招标公告",
+          "reason": "另一项目另一代理机构，不改变本案判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E27",
+          "direction": "无关",
+          "quote": "[其他]• 2019第十二届中国（湖南）国际 种子 交易会 zhang264 [北京]• 福建北峰通信科技股份***按公司 北峰通信 [苏州]• 深圳市金源电子回收有限公...",
+          "reason": "广告信息网站内容，与本案代理机构无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E29",
+          "direction": "无关",
+          "quote": "[其他]• 2019第十二届中国（湖南）国际 种子 交易会 [北京]• 福建北峰通信科技股份***按公司 北峰通信 [苏州]• 深圳市金源电子回收有限公司 xinjin...",
+          "reason": "广告信息网站内容，与本案代理机构无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 信号层字段与 E2 官方公告标题均载明海标工程管理有限公司，指向其为该项目的代理机构；其余证据涉及其他项目或其他代理机构，不构成矛盾。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 5,
+      "mainTarget": "c11",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "c11 声称信封中 amountHistory、noveltyHistory、frequencyHistory 三项历史字段均为空（null），但该 claim 目前无任何名下证据，无法确认信封原始字段的真实取值。",
+          "acceptance": "需信封原始字段级证据：能逐字展示 amountHistory、noveltyHistory、frequencyHistory 三个键的取值（null 或具体值）的原始 JSON/字段快照，或权威登记源（如 ccgp 公告详情页）中对应历史记录区块的页面正文级证据。",
+          "failover": "若信封原始字段快照不可得，则改查 c9 来源链接对应详情页，以页面正文级证据确认是否存在历史采购记录区块；若详情页亦不可达，则登记为证据通道受限并转 c12。"
+        },
+        {
+          "gap": "若 c11 查实（三项历史字段确为空），则 c16 所述“历史采购基线缺失”这一基础缺口的前提成立，需进一步确认该缺失是否导致本次预算与频次无法判定异常。",
+          "acceptance": "需权威登记源记录：采购单位（桐庐县林业技术推广中心）在 ccgp 或同级政府采购平台上的历史采购记录查询结果，能证明其历史记录为空或不存在可比基线。",
+          "failover": "若权威登记源无该单位历史记录查询入口，则改查代理机构海标工程管理有限公司的既往代理业绩，作为替代基线证据。"
+        }
+      ],
+      "searchHints": [
+        "330122261030090000005 amountHistory noveltyHistory frequencyHistory",
+        "桐庐县林业技术推广中心 历史采购记录 ccgp",
+        "t20261011_27467396 招标公告 历史字段"
+      ],
+      "sideTargets": [
+        "c12",
+        "c9"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [],
+      "cohorts": []
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 6,
+      "mainTarget": "c12",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "c12 待证实：信封中 amountAnomaly、frequencyAnomaly、noveltyAnomaly 三项异常标记字段是否均为空（null）。",
+          "acceptance": "需信封原始字段级证据（页面/接口返回的字段名与取值），能逐字确认三项异常标记字段存在且取值为 null；仅凭摘要转述不算查到。",
+          "failover": "若信封不暴露该三字段，则改查同源详情页/接口原始响应；仍无则将该 claim 标注为不可核验并转 c11/c16 的历史基线通道。"
+        },
+        {
+          "gap": "若三项异常标记确为空，需确认其空值语义：是“未计算”还是“计算后无异常”。",
+          "acceptance": "需权威登记源或平台字段说明级证据（字段定义/口径说明），能区分 null 的两种语义；无此证据则只登记事实、不下异常结论。",
+          "failover": "若无法取得字段口径说明，则退回 c16 的历史采购基线补齐路径，用外部基线替代平台标记判断异常。"
+        }
+      ],
+      "searchHints": [
+        "330122261030090000005 异常标记",
+        "ccgp.gov.cn 202610 t20261011_27467396 字段",
+        "桐庐县林业技术推广中心 采购 历史记录"
+      ],
+      "sideTargets": [
+        "c11",
+        "c9"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [],
+      "cohorts": []
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c1",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "招标信号基础字段:项目编号 330122261030090000005;项目名称 海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "信封基础字段标题为“招标信号基础字段”，且项目名称含“公开招标公告”，与 claim 所述 kind 为 tender（公开招标公告）一致。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E10",
+          "direction": "无关",
+          "quote": "杭州市公共资源交易中心上城分中心关于上城区综合行政执法局2026年行政执法车更新采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "该证据为另一采购项目的公告，与本次信号信封的 kind 字段无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "该证据为另一采购项目的公告，与本次信号信封的 kind 字段无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E12",
+          "direction": "无关",
+          "quote": "天津市特种设备监督检验技术研究院 天津市特种设备监督检验技术研究院特种设备安全检验检测设备更新项目（一） (项目编号:TZSB-01-2026-058)公开招标公告 | 阶段:招标采购 | 项目编号:TZSB-01-2026-058",
+          "reason": "该证据为另一采购项目的公告，与本次信号信封的 kind 字段无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E13",
+          "direction": "无关",
+          "quote": "天津市计量监督检测科学研究院 天津市计量监督检测科学研究院计量领域检验检测设备更新项目（第三批） (项目编号:PYGP-2026-A-0811)公开招标公告 | 阶段:招标采购 | 项目编号:PYGP-2026-A-0811",
+          "reason": "该证据为另一采购项目的公告，与本次信号信封的 kind 字段无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E14",
+          "direction": "无关",
+          "quote": "天津市河东区疾病预防控制中心（天津市河东区卫生监督所）微生物质谱仪等设备购置项目 (项目编号:BXZB2026-052)公开招标公告 | 阶段:招标采购 | 项目编号:BXZB2026-052",
+          "reason": "该证据为另一采购项目的公告，与本次信号信封的 kind 字段无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "天津市校企联合实验室专项“智能检测技术与系统仿真实验室”建设项目 (项目编号:0615-2641022100992)公开招标公告 | 阶段:招标采购 | 项目编号:0615-2641022100992",
+          "reason": "该证据为另一采购项目的公告，与本次信号信封的 kind 字段无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E16",
+          "direction": "无关",
+          "quote": "天津市中医药研究院附属医院 天津市中医药研究院附属医院医用气体采购项目 (项目编号:KPZB-202609ZCGK-0107)公开招标公告 | 阶段:招标采购 | 项目编号:KPZB-202609ZCGK-0107",
+          "reason": "该证据为另一采购项目的公告，与本次信号信封的 kind 字段无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E17",
+          "direction": "无关",
+          "quote": "天津市滨海新区太平镇人民政府机关 2026年度太平镇示范镇一期环卫服务项目 (项目编号:RSGS-2026-130)公开招标公告 | 阶段:招标采购 | 项目编号:RSGS-2026-130",
+          "reason": "该证据为另一采购项目的公告，与本次信号信封的 kind 字段无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院 天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告 | 阶段:招标采购 | 项目编号:XCSD-2026-A-482",
+          "reason": "该证据为另一采购项目的公告，与本次信号信封的 kind 字段无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "仅 E1 直接涉及本次信号信封基础字段，其标题为“招标信号基础字段”且项目名称为“公开招标公告”，支持 claim；其余证据均为其他项目的公告，与本次信封 kind 字段无关。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c13",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "该证据显示信封 kind 为公开招标公告，构成潜在投标/合作机会，支持将本信号定性为“商机”。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E10",
+          "direction": "无关",
+          "quote": "杭州市公共资源交易中心上城分中心关于上城区综合行政执法局2026年行政执法车更新采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "该证据为另一采购项目的公开招标公告，与本信号所指项目无关，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "该证据为另一采购项目的公开招标公告，与本信号所指项目无关，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E12",
+          "direction": "无关",
+          "quote": "天津市特种设备监督检验技术研究院 天津市特种设备监督检验技术研究院特种设备安全检验检测设备更新项目（一） (项目编号:TZSB-01-2026-058)公开招标公告 | 阶段:招标采购 | 项目编号:TZSB-01-2026-058",
+          "reason": "该证据为另一采购项目的公开招标公告，与本信号所指项目无关，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E13",
+          "direction": "无关",
+          "quote": "天津市计量监督检测科学研究院 天津市计量监督检测科学研究院计量领域检验检测设备更新项目（第三批） (项目编号:PYGP-2026-A-0811)公开招标公告 | 阶段:招标采购 | 项目编号:PYGP-2026-A-0811",
+          "reason": "该证据为另一采购项目的公开招标公告，与本信号所指项目无关，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E14",
+          "direction": "无关",
+          "quote": "天津市河东区疾病预防控制中心（天津市河东区卫生监督所）微生物质谱仪等设备购置项目 (项目编号:BXZB2026-052)公开招标公告 | 阶段:招标采购 | 项目编号:BXZB2026-052",
+          "reason": "该证据为另一采购项目的公开招标公告，与本信号所指项目无关，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "天津市校企联合实验室专项“智能检测技术与系统仿真实验室”建设项目 (项目编号:0615-2641022100992)公开招标公告 | 阶段:招标采购 | 项目编号:0615-2641022100992",
+          "reason": "该证据为另一采购项目的公开招标公告，与本信号所指项目无关，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E16",
+          "direction": "无关",
+          "quote": "天津市中医药研究院附属医院 天津市中医药研究院附属医院医用气体采购项目 (项目编号:KPZB-202609ZCGK-0107)公开招标公告 | 阶段:招标采购 | 项目编号:KPZB-202609ZCGK-0107",
+          "reason": "该证据为另一采购项目的公开招标公告，与本信号所指项目无关，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E17",
+          "direction": "无关",
+          "quote": "天津市滨海新区太平镇人民政府机关 2026年度太平镇示范镇一期环卫服务项目 (项目编号:RSGS-2026-130)公开招标公告 | 阶段:招标采购 | 项目编号:RSGS-2026-130",
+          "reason": "该证据为另一采购项目的公开招标公告，与本信号所指项目无关，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院 天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告 | 阶段:招标采购 | 项目编号:XCSD-2026-A-482",
+          "reason": "该证据为另一采购项目的公开招标公告，与本信号所指项目无关，不改变判断。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 显示本信号信封 kind 为公开招标公告，构成潜在投标/合作机会，支持“商机”定性；其余证据均为其他项目的公开招标公告，与本信号无关。综合后意见为已证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c15",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "正文未抓取,摘要由列表与详情字段生成",
+          "reason": "该证据明确记载正文未抓取，直接支持 claim 所述基础缺口。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "为其他项目的招标公告，与桐庐县林业项目正文缺口无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E17",
+          "direction": "无关",
+          "quote": "天津市滨海新区太平镇人民政府机关 2026年度太平镇示范镇一期环卫服务项目 (项目编号:RSGS-2026-130)公开招标公告 | 阶段:招标采购 | 项目编号:RSGS-2026-130",
+          "reason": "天津环卫项目公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院 天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告 | 阶段:招标采购 | 项目编号:XCSD-2026-A-482",
+          "reason": "天津医院信息化项目公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E21",
+          "direction": "无关",
+          "quote": "天津机电职业技术学院 天津机电职业技术学院人工智能赋能专业群建设平台服务项目 (项目编号:YFGP-2026-B-0232)公开招标公告 | 阶段:招标采购 | 项目编号:YFGP-2026-B-0232",
+          "reason": "天津职院项目公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E6",
+          "direction": "无关",
+          "quote": "华诚工程咨询集团有限公司关于钱江世纪城2026年度区级宣传服务政府采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "钱江世纪城宣传服务项目公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E35",
+          "direction": "无关",
+          "quote": "深圳市住房和建设局通知公告政策法规执法文书《深圳市住房公积金管理中心 2026 年辅助审计服务项目》招标公告03-13深圳市住房公积金管理中心关于公开招聘员额人员...",
+          "reason": "深圳公积金项目公告，与 claim 无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一相关证据 E1 明确记载“正文未抓取,摘要由列表与详情字段生成”，直接印证 claim 所述基础缺口；其余证据均为无关项目公告，不构成反证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c17",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "项目名称 海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "该证据同时出现项目名称前缀中的“海标工程管理有限公司”与末尾字段“代理机构 海标工程管理有限公司”，两处名称字符串完全一致，支持二者为同一名称主体。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E10",
+          "direction": "无关",
+          "quote": "杭州市公共资源交易中心上城分中心关于上城区综合行政执法局2026年行政执法车更新采购项目的公开招标公告",
+          "reason": "该证据涉及上城区行政执法车更新采购项目，未出现“海标工程管理有限公司”，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告",
+          "reason": "该证据涉及盈丰街道地下安全隐患检测服务项目，代理机构为浙江明业项目管理有限公司，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E12",
+          "direction": "无关",
+          "quote": "天津市特种设备监督检验技术研究院特种设备安全检验检测设备更新项目（一） (项目编号:TZSB-01-2026-058)公开招标公告",
+          "reason": "该证据为天津特种设备检验检测设备更新项目，未出现“海标工程管理有限公司”，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E13",
+          "direction": "无关",
+          "quote": "天津市计量监督检测科学研究院计量领域检验检测设备更新项目（第三批） (项目编号:PYGP-2026-A-0811)公开招标公告",
+          "reason": "该证据为天津计量领域检验检测设备更新项目，未出现“海标工程管理有限公司”，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E14",
+          "direction": "无关",
+          "quote": "天津市河东区疾病预防控制中心（天津市河东区卫生监督所）微生物质谱仪等设备购置项目 (项目编号:BXZB2026-052)公开招标公告",
+          "reason": "该证据为天津河东区疾控中心设备购置项目，未出现“海标工程管理有限公司”，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "天津市校企联合实验室专项“智能检测技术与系统仿真实验室”建设项目 (项目编号:0615-2641022100992)公开招标公告",
+          "reason": "该证据为天津校企联合实验室建设项目，未出现“海标工程管理有限公司”，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E16",
+          "direction": "无关",
+          "quote": "天津市中医药研究院附属医院医用气体采购项目 (项目编号:KPZB-202609ZCGK-0107)公开招标公告",
+          "reason": "该证据为天津中医药研究院附属医院医用气体采购项目，未出现“海标工程管理有限公司”，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E17",
+          "direction": "无关",
+          "quote": "天津市滨海新区太平镇人民政府机关 2026年度太平镇示范镇一期环卫服务项目 (项目编号:RSGS-2026-130)公开招标公告",
+          "reason": "该证据为天津太平镇环卫服务项目，未出现“海标工程管理有限公司”，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告",
+          "reason": "该证据为天津第五中心医院信息化基础设施建设项目，未出现“海标工程管理有限公司”，与 claim 无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "仅 E1 一条证据与 claim 相关，其项目名称前缀与代理机构字段均为“海标工程管理有限公司”，字符串完全一致，支持同一名称主体的判断；其余证据均不涉及该主体。但 E1 为单一来源（lineage_root=signal_layer），缺乏独立来源交叉印证，最终判决由代码按独立来源规则作出。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c18",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E10",
+          "direction": "无关",
+          "quote": "杭州市公共资源交易中心上城分中心关于上城区综合行政执法局2026年行政执法车更新采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "该公告涉及上城区行政执法车更新采购，未出现桐庐县林业技术推广中心或海标工程管理有限公司，与本次招标代理委托关系无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "该公告的代理机构为浙江明业项目管理有限公司，项目为盈丰街道地下安全隐患检测，与桐庐县林业技术推广中心及海标工程管理有限公司均无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E12",
+          "direction": "无关",
+          "quote": "天津市特种设备监督检验技术研究院 天津市特种设备监督检验技术研究院特种设备安全检验检测设备更新项目（一） (项目编号:TZSB-01-2026-058)公开招标公告 | 阶段:招标采购 | 项目编号:TZSB-01-2026-058",
+          "reason": "天津特种设备检验检测设备采购公告，与桐庐县林业技术推广中心、海标工程管理有限公司无关联。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E14",
+          "direction": "无关",
+          "quote": "天津市河东区疾病预防控制中心（天津市河东区卫生监督所）微生物质谱仪等设备购置项目 (项目编号:BXZB2026-052)公开招标公告 | 阶段:招标采购 | 项目编号:BXZB2026-052",
+          "reason": "天津疾控设备购置公告，未涉及本案主体，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "天津市校企联合实验室专项“智能检测技术与系统仿真实验室”建设项目 (项目编号:0615-2641022100992)公开招标公告 | 阶段:招标采购 | 项目编号:0615-2641022100992",
+          "reason": "天津校企联合实验室建设项目公告，与本案主体无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院 天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告 | 阶段:招标采购 | 项目编号:XCSD-2026-A-482",
+          "reason": "天津第五中心医院信息化项目公告，与本案主体无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E19",
+          "direction": "无关",
+          "quote": "天津机电职业技术学院 天津机电职业技术学院虚拟化超融合资源池采购项目 (项目编号:TJBD-2026-A-195)公开招标公告 | 阶段:招标采购 | 项目编号:TJBD-2026-A-195",
+          "reason": "天津机电职业技术学院采购公告，与本案主体无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E2",
+          "direction": "支持",
+          "quote": "海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "该公告显示海标工程管理有限公司作为招标代理机构，就桐庐县国土绿化示范项目发布公开招标公告，与桐庐县林业技术推广中心存在本次招标代理委托关系的主张方向一致。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E20",
+          "direction": "无关",
+          "quote": "天津市第五中心医院智能采血车项目(项目编号:YTZB2026ZC052)公开招标公告 | 阶段:招标采购 | 项目编号:YTZB2026ZC052",
+          "reason": "天津第五中心医院智能采血车项目公告，与本案主体无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E21",
+          "direction": "无关",
+          "quote": "天津机电职业技术学院 天津机电职业技术学院人工智能赋能专业群建设平台服务项目 (项目编号:YFGP-2026-B-0232)公开招标公告 | 阶段:招标采购 | 项目编号:YFGP-2026-B-0232",
+          "reason": "天津机电职业技术学院平台服务项目公告，与本案主体无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅 E2 一条证据显示海标工程管理有限公司就桐庐县国土绿化示范项目发布招标公告，可支持代理关系方向，但公告标题未直接载明委托方为桐庐县林业技术推广中心，且其余证据均与本案主体无关，缺乏独立来源印证，故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c19",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "项目名称 海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "该证据的项目名称逐字包含“2027至2028年作业设计和2026至2028年检查验收及绩效评价”，与 claim 所述服务内容一致。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E10",
+          "direction": "无关",
+          "quote": "杭州市公共资源交易中心上城分中心关于上城区综合行政执法局2026年行政执法车更新采购项目的公开招标公告",
+          "reason": "该证据为行政执法车更新采购项目，与 claim 所述桐庐县国土绿化示范项目服务内容无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告",
+          "reason": "该证据为地下安全隐患检测服务项目，与 claim 所述服务内容无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E12",
+          "direction": "无关",
+          "quote": "天津市特种设备监督检验技术研究院特种设备安全检验检测设备更新项目（一） (项目编号:TZSB-01-2026-058)公开招标公告",
+          "reason": "该证据为特种设备检验检测设备更新项目，与 claim 所述服务内容无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E13",
+          "direction": "无关",
+          "quote": "天津市计量监督检测科学研究院计量领域检验检测设备更新项目（第三批） (项目编号:PYGP-2026-A-0811)公开招标公告",
+          "reason": "该证据为计量领域检验检测设备更新项目，与 claim 所述服务内容无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E14",
+          "direction": "无关",
+          "quote": "天津市河东区疾病预防控制中心（天津市河东区卫生监督所）微生物质谱仪等设备购置项目 (项目编号:BXZB2026-052)公开招标公告",
+          "reason": "该证据为微生物质谱仪等设备购置项目，与 claim 所述服务内容无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "天津市校企联合实验室专项“智能检测技术与系统仿真实验室”建设项目 (项目编号:0615-2641022100992)公开招标公告",
+          "reason": "该证据为实验室建设项目，与 claim 所述服务内容无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E16",
+          "direction": "无关",
+          "quote": "天津市中医药研究院附属医院医用气体采购项目 (项目编号:KPZB-202609ZCGK-0107)公开招标公告",
+          "reason": "该证据为医用气体采购项目，与 claim 所述服务内容无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E17",
+          "direction": "无关",
+          "quote": "天津市滨海新区太平镇人民政府机关 2026年度太平镇示范镇一期环卫服务项目 (项目编号:RSGS-2026-130)公开招标公告",
+          "reason": "该证据为环卫服务项目，与 claim 所述服务内容无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告",
+          "reason": "该证据为机房信息化基础设施网络安全建设项目，与 claim 所述服务内容无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "仅 evt_tender_linlu_linye:E1 直接支持 claim，其项目名称逐字包含“2027至2028年作业设计和2026至2028年检查验收及绩效评价”；其余证据均为其他地区其他类型采购项目，与 claim 无关。E1 为信号层信封基础字段（credibility 中），且正文未抓取、摘要由列表与详情字段生成，独立来源印证有限，但就现有卷宗而言 claim 与证据一致。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c3",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "项目名称 海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "信封基础字段中的项目名称与 claim 文本逐字一致，直接支持该断言。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E10",
+          "direction": "无关",
+          "quote": "杭州市公共资源交易中心上城分中心关于上城区综合行政执法局2026年行政执法车更新采购项目的公开招标公告",
+          "reason": "为另一项目的公告标题，与本案项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告",
+          "reason": "为另一项目的公告标题，与本案项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E12",
+          "direction": "无关",
+          "quote": "天津市特种设备监督检验技术研究院特种设备安全检验检测设备更新项目（一） (项目编号:TZSB-01-2026-058)公开招标公告",
+          "reason": "为天津另一项目的公告标题，与本案项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E13",
+          "direction": "无关",
+          "quote": "天津市计量监督检测科学研究院计量领域检验检测设备更新项目（第三批） (项目编号:PYGP-2026-A-0811)公开招标公告",
+          "reason": "为天津另一项目的公告标题，与本案项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E14",
+          "direction": "无关",
+          "quote": "天津市河东区疾病预防控制中心（天津市河东区卫生监督所）微生物质谱仪等设备购置项目 (项目编号:BXZB2026-052)公开招标公告",
+          "reason": "为天津另一项目的公告标题，与本案项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E15",
+          "direction": "无关",
+          "quote": "天津市校企联合实验室专项“智能检测技术与系统仿真实验室”建设项目 (项目编号:0615-2641022100992)公开招标公告",
+          "reason": "为天津另一项目的公告标题，与本案项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E16",
+          "direction": "无关",
+          "quote": "天津市中医药研究院附属医院医用气体采购项目 (项目编号:KPZB-202609ZCGK-0107)公开招标公告",
+          "reason": "为天津另一项目的公告标题，与本案项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E17",
+          "direction": "无关",
+          "quote": "天津市滨海新区太平镇人民政府机关 2026年度太平镇示范镇一期环卫服务项目 (项目编号:RSGS-2026-130)公开招标公告",
+          "reason": "为天津另一项目的公告标题，与本案项目名称无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E18",
+          "direction": "无关",
+          "quote": "天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告",
+          "reason": "为天津另一项目的公告标题，与本案项目名称无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "仅 evt_tender_linlu_linye:E1 直接载明与 claim 完全一致的项目名称，其余证据均为其他地区其他项目的公告标题，不构成独立印证；但 E1 为信号层信封基础字段，与 claim 文本逐字吻合，故意见为已证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c8",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_linlu_linye:E1",
+          "direction": "支持",
+          "quote": "代理机构 海标工程管理有限公司",
+          "reason": "信号层基础字段直接载明代理机构为海标工程管理有限公司，与 claim 一致。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E11",
+          "direction": "无关",
+          "quote": "浙江明业项目管理有限公司关于盈丰街道2026年地下安全隐患检测服务政府采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "涉及另一项目与另一代理机构，与本案信封代理机构无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E2",
+          "direction": "支持",
+          "quote": "海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告",
+          "reason": "官方公告标题以海标工程管理有限公司作为招标公告发布主体，与 claim 一致。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E3",
+          "direction": "无关",
+          "quote": "杭州中易招标代理有限公司关于新昌县中医院体外心肺支持辅助设备的公开招标公告",
+          "reason": "涉及其他代理机构与其他项目，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E4",
+          "direction": "无关",
+          "quote": "浙江求是招标代理有限公司关于嘉兴技师学院数字化设计与智造（AIGC创意设计）实训室设备采购的公开招标公告",
+          "reason": "涉及其他代理机构与其他项目，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E6",
+          "direction": "无关",
+          "quote": "华诚工程咨询集团有限公司关于钱江世纪城2026年度区级宣传服务政府采购项目的公开招标公告",
+          "reason": "涉及其他代理机构与其他项目，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E8",
+          "direction": "无关",
+          "quote": "新疆鸿联建设工程项目管理咨询有限公司关于第四师可克达拉职业技术学院质量提升项目（产教融合中心建设）的公开招标公告",
+          "reason": "涉及其他代理机构与其他项目，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E27",
+          "direction": "无关",
+          "quote": "[其他]• 2019第十二届中国（湖南）国际 种子 交易会 zhang264 [北京]• 福建北峰通信科技股份***按公司 北峰通信 [苏州]• 深圳市金源电子回收有限公...",
+          "reason": "广告信息页内容与本案代理机构无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E29",
+          "direction": "无关",
+          "quote": "[其他]• 2019第十二届中国（湖南）国际 种子 交易会 [北京]• 福建北峰通信科技股份***按公司 北峰通信 [苏州]• 深圳市金源电子回收有限公司 xinjin...",
+          "reason": "广告信息页内容与本案代理机构无关。"
+        },
+        {
+          "evidenceId": "evt_tender_linlu_linye:E37",
+          "direction": "无关",
+          "quote": "谙瀚咨询管理(上海)有限公司2020-08-2. ..  深圳市知鸟云科技有限公司2020-08-29 泛华普益基金销售有限公司2020-08-28 泛华普益基金销售有限公司广州分公司202....",
+          "reason": "企业黄页列表内容与本案代理机构无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 信号层字段直接载明“代理机构 海标工程管理有限公司”，E2 官方公告标题亦以海标工程管理有限公司为发布主体，二者谱系根不同（signal_layer 与 ccgp），构成独立印证；其余证据与本案无关。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 动态时间线与关联方\n\n**关联方与代理委托关系。** 桐庐县林业技术推广中心与海标工程管理有限公司之间存在本次招标代理委托关系 [2][10][11][12][14]。本次采购的代理机构“海标工程管理有限公司”与项目名称前缀中的“海标工程管理有限公司”为同一名称主体 [1][10][11][12][13]。信封载明代理机构为海标工程管理有限公司 [1][2][11][3][4]。\n\n**时间线。** 信封载明公告发布日期为 2026-10-11 [1][26][27][28][29]；信封载明投标截止时间为 2026-11-02 09:30 [1][2][3][4]。本次采购预算 246.195 万元与投标截止 2026-11-02 09:30 之间的时间窗口为自公告发布日 2026-10-11 起 22 天 [1][10][11][12][13]。\n\n**待核实事项。** 信封载明来源链接为 https://www.ccgp.gov.cn/cggg/dfgg/gkzb/202610/t20261011_27467396.htm，该来源链接目前尚未核实 [1]。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 核心事实\n\n本次采购的信封载明预算金额为 2461952.0 元（246.195 万元）[1][2][3][4]。\n\n信封载明正文未抓取，摘要由列表与详情字段生成 [1]。解读登记的基础缺口包括：正文未抓取，需先补齐招标文件正文与具体服务范围、资格条件 [1][5][6][7][8]。\n\n关于历史字段，目前尚未核实：信封中 amountHistory、noveltyHistory、frequencyHistory 三项历史字段是否均为空（null）[1]；相应地，该采购单位历史采购记录是否为空、是否需先补齐历史采购基线以判断本次预算与频次是否异常，亦尚未核实 [1][6][2][3][4]。\n\n关于异常标记字段，目前尚未核实：信封中 amountAnomaly、frequencyAnomaly、noveltyAnomaly 三项异常标记字段是否均为空（null）[1]。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 结论\n\n本信号被解读定性为“商机”，理由为信封 kind 属公开招标公告，构成潜在投标/合作机会 [1][2][3][4][5]。\n\n解读选中的假设种子标签为“正常大额采购”与“真实经营动态”，该点目前尚未核实 [1][6][7]。\n\n上述两项假设在台账中均记为已证实 9 项、被反驳 0 项、待证实分别为 4 项与 3 项，得分均为 9，均已浮现且尚未裁定，均处于主导状态。其中“正常大额采购”的可区分 claim 为 c20（是否隶属既定示范项目）与 c5（金额）、c11（历史基线缺失）；“真实经营动态”的可区分 claim 为 c18（采购方与代理机构的委托关系），c17（同名主体同一性）为辅助区分。若相关 claim 证据不足，需补充代理机构工商登记与既往代理业绩证据才能区分。"
+    }
+  },
+  {
+    "stage": "s7_recommend",
+    "response": {
+      "items": [
+        {
+          "action": "立即补齐招标文件正文，核实具体服务范围、资格条件与评标办法，据此判断是否具备投标/联合体参与的资格门槛。",
+          "rationale": "c15 已证实登记的基础缺口为“正文未抓取，需先补齐招标文件正文与具体服务范围、资格条件”；c10 已证实“正文未抓取，摘要由列表与详情字段生成”，说明现有信息不足以支撑参与决策。本建议依赖主导假设“正常大额采购”（h1）成立，即本次采购属既定中央财政国土绿化示范项目下的常规服务采购；若后续核查发现不隶属既定规划，则参与价值需重新评估。",
+          "basisClaimIds": [
+            "c15",
+            "c10"
+          ],
+          "hypothesisLabel": "正常大额采购"
+        },
+        {
+          "action": "补充核查采购单位桐庐县林业技术推广中心的历史采购基线（amountHistory/noveltyHistory/frequencyHistory），以判断本次 246.195 万元预算与采购频次是否异常，再决定投入力度。",
+          "rationale": "c16 为待证实，其内容为“该采购单位历史采购记录（amountHistory/noveltyHistory/frequencyHistory）均为空，需先补齐历史采购基线以判断本次预算与频次是否异常”；c11、c12 亦为待证实，分别指向三项历史字段与三项异常标记字段均为空。因此本建议以“历史基线缺失”为前提，属补充核查动作，结论待基线补齐后方可判定。",
+          "basisClaimIds": [
+            "c16",
+            "c11",
+            "c12"
+          ],
+          "hypothesisLabel": "正常大额采购"
+        },
+        {
+          "action": "按公告载明的投标截止时间 2026-11-02 09:30 倒排投标准备节点，在自公告发布日 2026-10-11 起 22 天窗口内完成报名、答疑与文件编制。",
+          "rationale": "c21 已证实“本次采购预算 246.195 万元与投标截止 2026-11-02 09:30 之间的时间窗口为自公告发布日 2026-10-11 起 22 天”；c6、c7 分别证实公告发布日期与投标截止时间。时间窗口有限，需据此安排资源。本建议依赖主导假设“正常大额采购”（h1）与“真实经营动态”（h2）成立，即该公告为真实有效的公开招标活动。",
+          "basisClaimIds": [
+            "c21",
+            "c6",
+            "c7"
+          ],
+          "hypothesisLabel": "正常大额采购"
+        },
+        {
+          "action": "围绕代理机构海标工程管理有限公司与采购方的委托关系及既往代理业绩做补充核查，评估其作为对接渠道的可靠性，并跟踪该项目后续标段与验收评价环节的衍生机会。",
+          "rationale": "c18 已证实“桐庐县林业技术推广中心与海标工程管理有限公司之间存在本次招标代理委托关系”，c17 已证实代理机构与项目名称前缀为同一名称主体，c8 已证实代理机构为海标工程管理有限公司；但 h2 的可区分 claim 说明中提示“若代理机构与项目名称前缀同名系巧合或挂靠则倾向异常”，故仍需补充工商登记与既往代理业绩证据。c19 已证实服务内容包含 2027 至 2028 年作业设计及 2026 至 2028 年检查验收及绩效评价，可作为后续机会跟踪方向。",
+          "basisClaimIds": [
+            "c18",
+            "c17",
+            "c8",
+            "c19"
+          ],
+          "hypothesisLabel": "真实经营动态"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,153 @@
+{
+ "dataset_id": "sense2act-bench",
+ "version": "0.5",
+ "created_at": "2026-10-11",
+ "description": "企业情报调查基准:真实上游信号回灌案例集,金标=人工核对冻结的三态应然终态(非参考文本);评测零 LLM 评委,判决可机器复核",
+ "scale": {
+  "cases": 9,
+  "golden_claims": 166,
+  "domains": {
+   "供应链风险": 1,
+   "医疗信息化": 1,
+   "竞品动态": 2,
+   "(未标注)": 5
+  },
+  "kinds": {
+   "rumor": 3,
+   "tender": 6
+  }
+ },
+ "strata": {
+  "by_claim_kind": "每案例 meta.claims_corpus/world;金标条目 claim_kind=corpus(复述型)/world(世界断言),分层 A_w 评测器切片可算",
+  "by_difficulty": "案例 meta.difficulty:线索数/线索源同源度/历史基线污染率(模拟样本占比)/干扰项(fake_url、multi_repost)",
+  "by_source": "offline_tuned(金标=e2e 断言)/real(真实信号 live 录制)"
+ },
+ "golden_protocol": {
+  "method": "atomic-manual + mechanical-derive(受控合成法:原子层人工核对冻结,粗/细档机械派生)",
+  "qc_v05": "全量人工核对(历史件,核对人未记录)",
+  "qc_planned": "v1.0 起抽样 1/3 + 一致性统计(照 DRBench 91.3%/kappa 协议格式)",
+  "claim_kind_rule": "REPORTING_MARKERS 14 词 + note 自证/复述兜底(与评测器 _is_reporting 同口径)"
+ },
+ "compatibility": {
+  "aligner": ">=AV2(双闸+要素化)",
+  "case_paths": "相对仓库根解析;录制件 .meta.json 旁车随案例自带",
+  "shared_dependencies": [
+   "examples/ai_model_release/envelope.json",
+   "examples/ai_model_release/evidence_seed.json",
+   "examples/supplier_b/envelope.json",
+   "examples/supplier_b/evidence_seed.json",
+   "examples/supplier_b/refresh_plan.json",
+   "examples/supplier_b/responses.json",
+   "examples/tender_medical_ai/envelope.json",
+   "examples/tender_medical_ai/evidence_seed.json",
+   "examples/tender_medical_ai/responses.json",
+   "examples/upstream_topk/agent_top_k_samples.json",
+   "examples/xhs_opensource/envelope.json",
+   "examples/xhs_opensource/evidence_seed.json"
+  ],
+  "note": "examples/ 共享冻结 fixture 保持引用未拷贝(supplier_b responses 与 e2e 测试共用,防分叉);v1.0 发布时打包"
+ },
+ "invariants": {
+  "over": 0,
+  "flip": 0,
+  "statement": "任何 agent 在本数据集上过度断言>0 或反转>0 即判负(认识论底线,非优化目标)"
+ },
+ "differentiation": [
+  "真实上游信号(非全合成私域)",
+  "三态认识论金标(过度断言维度 DRBench 无)",
+  "零 LLM 评委+判决核对证书可机器复核"
+ ],
+ "cases": [
+  {
+   "case_id": "supplier_b",
+   "origin": "eval/cases",
+   "kind": "rumor",
+   "domain": "供应链风险",
+   "n_golden": 6,
+   "n_corpus": 0,
+   "n_world": 6,
+   "responses": "共享引用"
+  },
+  {
+   "case_id": "tender_medical_ai",
+   "origin": "eval/cases",
+   "kind": "tender",
+   "domain": "医疗信息化",
+   "n_golden": 4,
+   "n_corpus": 0,
+   "n_world": 4,
+   "responses": "共享引用"
+  },
+  {
+   "case_id": "ai_model_release",
+   "origin": "eval/cases",
+   "kind": "rumor",
+   "domain": "竞品动态",
+   "n_golden": 18,
+   "n_corpus": 17,
+   "n_world": 1,
+   "responses": "本地自带"
+  },
+  {
+   "case_id": "xhs_opensource",
+   "origin": "eval/cases",
+   "kind": "rumor",
+   "domain": "竞品动态",
+   "n_golden": 20,
+   "n_corpus": 16,
+   "n_world": 4,
+   "responses": "本地自带"
+  },
+  {
+   "case_id": "topkg_0",
+   "origin": "eval/topk",
+   "kind": null,
+   "domain": null,
+   "n_golden": 37,
+   "n_corpus": 37,
+   "n_world": 0,
+   "responses": "本地自带"
+  },
+  {
+   "case_id": "topkg_1",
+   "origin": "eval/topk",
+   "kind": null,
+   "domain": null,
+   "n_golden": 18,
+   "n_corpus": 17,
+   "n_world": 1,
+   "responses": "本地自带"
+  },
+  {
+   "case_id": "topkg_2",
+   "origin": "eval/topk",
+   "kind": null,
+   "domain": null,
+   "n_golden": 21,
+   "n_corpus": 21,
+   "n_world": 0,
+   "responses": "本地自带"
+  },
+  {
+   "case_id": "topkg_3",
+   "origin": "eval/topk",
+   "kind": null,
+   "domain": null,
+   "n_golden": 18,
+   "n_corpus": 16,
+   "n_world": 2,
+   "responses": "本地自带"
+  },
+  {
+   "case_id": "topkg_4",
+   "origin": "eval/topk",
+   "kind": null,
+   "domain": null,
+   "n_golden": 24,
+   "n_corpus": 24,
+   "n_world": 0,
+   "responses": "本地自带"
+  }
+ ],
+ "layout": "eval/bench/<case_id>/{case.json, golden.json, responses.json[+meta]};derived/;qc/;MANIFEST.json"
+}

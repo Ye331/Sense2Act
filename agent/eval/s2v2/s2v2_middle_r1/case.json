@@ -1,0 +1,18 @@
+{
+ "case_id": "s2v2_middle_r1",
+ "title": "S2 停与换纪律验证 r1",
+ "source": "real",
+ "envelope": "examples/ai_model_release/envelope.json",
+ "responses": "runs/recorded/exp_s2v2_middle_r1.json",
+ "seed": "examples/ai_model_release/evidence_seed.json",
+ "event_id": "evt_s2v2_middle_r1",
+ "run_args": {
+  "max_rounds": 6
+ },
+ "budget": {
+  "s6_opinion_max": 40,
+  "llm_calls_max": 60
+ },
+ "enabled": true,
+ "blocked_note": ""
+}

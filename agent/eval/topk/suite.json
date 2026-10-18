@@ -1,0 +1,15 @@
+{
+ "suite_id": "topk-tender-bench",
+ "variant": "中",
+ "default_budget": {
+  "s6_opinion_max": 40,
+  "llm_calls_max": 60
+ },
+ "cases": [
+  "topkg_0",
+  "topkg_1",
+  "topkg_2",
+  "topkg_3",
+  "topkg_4"
+ ]
+}

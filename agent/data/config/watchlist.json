@@ -1,0 +1,8 @@
+[
+  {"company_id": "comp_b", "credit_code": "91330100MA27X0000B",
+   "canonical_name": "B新能源科技有限公司", "focus": "供应链风险", "poll_interval_h": 24},
+  {"company_id": "comp_a", "credit_code": "91330100MA27X0000A",
+   "canonical_name": "A汽车股份有限公司", "focus": "竞品动态", "poll_interval_h": 24},
+  {"company_id": "hosp_1", "credit_code": "1233000047000000X1",
+   "canonical_name": "XX市第一人民医院", "focus": "商机监测", "poll_interval_h": 48}
+]

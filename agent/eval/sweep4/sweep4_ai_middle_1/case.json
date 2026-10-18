@@ -1,0 +1,17 @@
+{
+ "case_id": "sweep4_ai_middle_1",
+ "title": "讯飞 sweep4-middle(新管道基线:双闸+去重+改造①②+disc on)",
+ "source": "real",
+ "envelope": "examples/ai_model_release/envelope.json",
+ "responses": "runs/recorded/sweep4_ai_middle_1.json",
+ "seed": "examples/ai_model_release/evidence_seed.json",
+ "event_id": "evt_sweep4_ai_middle_1",
+ "golden_ref": "../../sweep3/ai3_middle/golden.json",
+ "recorded_at": "2026-10-05 sweep4 live",
+ "pipeline_note": "新管道基线(dedup+改造①②+disc on+对齐器双闸 floor0.30+类型闸)",
+ "run_args": {
+  "max_rounds": 6,
+  "assoc": "entity_text"
+ },
+ "enabled": true
+}

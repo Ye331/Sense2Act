@@ -1,0 +1,1156 @@
+[
+  {
+    "stage": "s1a",
+    "response": {
+      "signalType": "商机",
+      "reason": "信封 kind 为 tender,含公开招标公告:项目名称『天津市滨海新区大港医院 天津市滨海新区大港医院CT影像设备维保项目 (项目编号ZYGP20260902)公开招标公告』,采购单位『天津市滨海新区大港医院』,金额 499.0 万元,领域『医学影像与PACS』;relevance 解释称『项目与企业业务画像的语义相似度为 0.632,达到准入阈值 0.600』,构成潜在投标/合作机会。同时 frequencyAnomaly 解释称『截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.25 次,比值 8.00,频率异常得分 0.875』,采购节奏明显抬升,值得优先跟进。",
+      "selectedSeedLabels": [
+        "真实经营动态",
+        "新方向扩张",
+        "正常大额采购"
+      ],
+      "basisGaps": [
+        "该采购单位历史金额基线含 4 个模拟样本(amountAnomaly 解释:『历史基线含 4 个模拟样本,不代表真实历史证据充分』),需先补齐真实历史采购金额基线。",
+        "该采购单位历史项目基线含 4 个模拟样本(noveltyAnomaly 解释:『历史基线含 4 个模拟样本,不代表真实历史证据充分』),需先补齐真实历史项目基线。",
+        "contentSourceNote 载明『基于本条记录已有字段生成,未抓取官方正文,未补造金额、参数或中标结果』,需先获取官方招标正文以核实金额、参数与资格条件。"
+      ]
+    }
+  },
+  {
+    "stage": "s1b",
+    "response": {
+      "claims": [
+        {
+          "id": "c1",
+          "text": "信封载明本次信号 kind 为 tender，项目编号为 R-47f03243aabe9985。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "信封基础字段，是全部后续推理的地基，可由第一方证据直接核实。",
+          "hypothesisIds": [],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c2",
+          "text": "信封载明采购方为『天津市滨海新区大港医院』。",
+          "category": "实体",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "采购主体身份归属，是频率与金额基线比较的锚点实体。",
+          "hypothesisIds": [],
+          "entityNames": [
+            "天津市滨海新区大港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c3",
+          "text": "信封载明项目名称为『天津市滨海新区大港医院 天津市滨海新区大港医院CT影像设备维保项目 (项目编号ZYGP20260902)公开招标公告』，领域为『医学影像与PACS』。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "项目标的与领域是判断业务相关性的基础事实。",
+          "hypothesisIds": [],
+          "entityNames": [
+            "天津市滨海新区大港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c4",
+          "text": "信封载明本项目金额为 4990000.0 元（499.0 万元），发布日期为 2026-09-01。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "金额与日期是金额异常与时效判断的核心可核实字段，被多条假设依赖。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c5",
+          "text": "信封 contentSourceNote 载明『基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果』。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "该记载直接限定全部金额与参数证据的可靠性边界，卡住结论节。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c6",
+          "text": "信封 amountAnomaly 解释载明『本项目金额 499.0 万元，为该采购单位过去 5 条有效金额中位数(4499.7 万元)的 0.11 倍，金额异常得分 0.000』。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "检测器数字断言固化为 claim，是金额方向判断的可区分证据。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [
+            "天津市滨海新区大港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c7",
+          "text": "信封 amountAnomaly 解释载明『历史基线含 4 个模拟样本，不代表真实历史证据充分』。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "直接削弱金额基线可信度，是结论节能否成立的关键限定。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c8",
+          "text": "信封 frequencyAnomaly 解释载明『截至当天近 30 天该采购单位采购 2 次，已完整观测的 4 个历史窗口平均 0.25 次，比值 8.00，频率异常得分 0.875』。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 5,
+          "priorityReason": "检测器数字断言固化为 claim，是采购节奏抬升判断的可区分证据。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [
+            "天津市滨海新区大港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c9",
+          "text": "信封 noveltyAnomaly 解释载明该采购单位历史最相似项目为『天津市滨海新区大港医院 天津市滨海新区大港医院医用耗材等物资(不含检验试剂)采购及相关配送服务 (项目编号ZYGP20260736)公开招标公告』(2026-08-04)，相似度 0.847，比较基数 5 个历史项目，新颖性异常得分 0.153。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 4,
+          "priorityReason": "最相似历史项目与相似度是判断本次采购是否属新方向的可区分证据。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [
+            "天津市滨海新区大港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c10",
+          "text": "信封 noveltyAnomaly 解释载明『历史基线含 4 个模拟样本，不代表真实历史证据充分』。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 4,
+          "priorityReason": "限定新颖性基线可信度，影响新方向扩张判断。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c11",
+          "text": "信封 relevance 解释载明『项目与企业业务画像的语义相似度为 0.632，达到准入阈值 0.600』。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "相关性得分是商机定性的直接依据，可核实且影响跟进优先级。",
+          "hypothesisIds": [],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c12",
+          "text": "信封 companyProfile 载明企业业务画像为『医疗AI、医学影像、辅助诊断、智慧医院、医院信息化、医疗大模型、医院数据平台、HIS、PACS、电子病历』。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 3,
+          "priorityReason": "业务画像字段是相关性判断的比较基准，属信封基础字段。",
+          "hypothesisIds": [],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c13",
+          "text": "信封载明 sourceUrl 为『https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/627115111/2721/zhaobiao』。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 2,
+          "priorityReason": "来源链接是溯源字段，可核实但业务影响有限。",
+          "hypothesisIds": [],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c14",
+          "text": "解读将本信号定性为『商机』，理由为信封 kind 为 tender 且含公开招标公告，构成潜在投标/合作机会。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 4,
+          "priorityReason": "解读定性是结论节的直接输入，属记载型断言。",
+          "hypothesisIds": [],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c15",
+          "text": "解读登记了三个假设种子标签：『真实经营动态』『新方向扩张』『正常大额采购』。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 3,
+          "priorityReason": "种子标签是假设登记的记载，供假设层对齐。",
+          "hypothesisIds": [],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c16",
+          "text": "解读 basisGaps 载明需先补齐真实历史采购金额基线、真实历史项目基线，并获取官方招标正文以核实金额、参数与资格条件。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 4,
+          "priorityReason": "缺口登记直接决定结论节能否闭合，属可核实的记载型断言。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c17",
+          "text": "本次采购的采购方『天津市滨海新区大港医院』与历史最相似项目（项目编号ZYGP20260736）的采购方为同一采购单位。",
+          "category": "关系",
+          "sectionIndex": 1,
+          "priority": 4,
+          "priorityReason": "同一采购单位关系是频率与新颖性基线比较成立的前提，可独立核实。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "relationType": "关联交易",
+          "entityNames": [
+            "天津市滨海新区大港医院"
+          ],
+          "corpusBound": false
+        },
+        {
+          "id": "c18",
+          "text": "截至 2026-09-01 前的近 30 天窗口内，该采购单位采购频次为 2 次，处于高于历史平均水平的抬升状态。",
+          "category": "时效",
+          "sectionIndex": 1,
+          "priority": 5,
+          "priorityReason": "带时间窗口的状态断言，是采购节奏异常判断的核心，时效衰减快。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": 30,
+          "refreshCycleDays": 30,
+          "entityNames": [
+            "天津市滨海新区大港医院"
+          ],
+          "corpusBound": false
+        },
+        {
+          "id": "c19",
+          "text": "解读同时给出『频率异常得分 0.875（偏高）』与『金额异常得分 0.000（金额仅为历史中位数 0.11 倍）』两个方向相反的异常信号。",
+          "category": "矛盾",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "频次与金额方向相反的异常并存，是区分正常采购与异常输送的关键可区分证据。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [
+            "天津市滨海新区大港医院"
+          ],
+          "corpusBound": true
+        }
+      ],
+      "hypotheses": [
+        {
+          "id": "h1",
+          "label": "正常大额采购",
+          "description": "本次 CT 影像设备维保采购属采购单位常规维保需求下的正常公开招标，金额低于历史中位数可由维保类项目标的规模较小解释；频次抬升属正常采购节奏波动。可区分证据：c6（金额仅为历史中位数 0.11 倍）、c8（近 30 天频次为历史窗口均值 8 倍）、c9（最相似项目为耗材配送而非影像维保）、c19（频次与金额异常方向相反）。",
+          "claimIds": [
+            "c4",
+            "c6",
+            "c8",
+            "c9",
+            "c19"
+          ],
+          "op": "AND"
+        },
+        {
+          "id": "h2",
+          "label": "异常输送/非正常采购",
+          "description": "本次采购在采购节奏显著抬升的同时金额远低于历史中位数，可能指向非正常采购安排。该假设目前仅有检测器层面的间接信号，尚无可区分的方向性证据：需要补充官方招标正文（资格条件、评分办法、是否单一来源或限制性条款）、真实历史采购金额与项目基线（剔除模拟样本）、以及中标结果与供应商关联关系，才能与 h1 区分。",
+          "claimIds": [
+            "c5",
+            "c6",
+            "c7",
+            "c8",
+            "c10",
+            "c19"
+          ],
+          "op": "AND"
+        }
+      ],
+      "gaps": [
+        {
+          "text": "官方招标正文（项目编号ZYGP20260902）中的预算金额、技术参数、资格条件与评分办法具体是什么？",
+          "relatedClaimId": "c5"
+        },
+        {
+          "text": "该采购单位剔除 4 个模拟样本后的真实历史采购金额基线是多少？",
+          "relatedClaimId": "c7"
+        },
+        {
+          "text": "该采购单位剔除 4 个模拟样本后的真实历史项目基线（项目数量、领域分布）是什么？",
+          "relatedClaimId": "c10"
+        },
+        {
+          "text": "近 30 天内该采购单位的另一次采购是哪一项目、金额与领域为何？",
+          "relatedClaimId": "c8"
+        },
+        {
+          "text": "本次采购是否属于该采购单位既定建设规划或年度维保计划？",
+          "relatedClaimId": "c19"
+        },
+        {
+          "text": "本次采购的最终中标方是谁，与采购单位或历史供应商是否存在关联关系？",
+          "relatedClaimId": "c17"
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c1",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_3:E1",
+          "direction": "支持",
+          "quote": "招标信号基础字段:项目编号 R-47f03243aabe9985;",
+          "reason": "信封基础字段直接载明项目编号 R-47f03243aabe9985,与 claim 的项目编号一致;但该证据未出现 kind 为 tender 的表述,仅部分支持。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 499.0 万元",
+          "reason": "仅涉及金额异常检测,不涉及信号 kind 或项目编号。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次",
+          "reason": "仅涉及频率异常检测,不涉及信号 kind 或项目编号。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为",
+          "reason": "仅涉及新颖性检测,不涉及信号 kind 或项目编号。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.632",
+          "reason": "仅涉及相关性检测,不涉及信号 kind 或项目编号。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅 E1 载明项目编号 R-47f03243aabe9985,与 claim 一致;但所有证据均未出现信封 kind 为 tender 的表述,且全部证据同根(signal_layer),不构成独立印证,故综合意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c11",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_3:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-47f03243aabe9985;项目名称 天津市滨海新区大港医院 天津市滨海新区大港医院CT影像设备维保项目 (项目编号ZYGP20260902)公开招标公告",
+          "reason": "该证据仅载明信封基础字段(项目编号、名称、采购方、预算、发布日期、领域),未涉及 relevance 解释或语义相似度数值,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 499.0 万元,为该采购单位过去 5 条有效金额中位数(4499.7 万元)的 0.11 倍,金额异常得分 0.000",
+          "reason": "该证据为金额异常检测结果,与 relevance 语义相似度及准入阈值无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.25 次,比值 8.00,频率异常得分 0.875",
+          "reason": "该证据为频率异常检测结果,不涉及语义相似度或阈值。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『天津市滨海新区大港医院 天津市滨海新区大港医院医用耗材等物资(不含检验试剂)采购及相关配送服务 (项目编号ZYGP20260736)公开招标公告』(2026-08-04),相似度 0.847(比较基数 5 个历史项目),新颖性异常得分 0.153",
+          "reason": "该证据为新颖性检测结果,其相似度 0.847 是历史项目间比较,与 claim 所述项目对企业业务画像的 0.632 相似度无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E5",
+          "direction": "支持",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.632,达到准入阈值 0.600",
+          "reason": "该证据原文逐字载明语义相似度 0.632 与准入阈值 0.600,与 claim 表述一致,直接支持 claim。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一直接相关的证据 evt_topkg2_3:E5 原文与 claim 表述完全一致,载明『项目与企业业务画像的语义相似度为 0.632,达到准入阈值 0.600』;其余四条证据均为信封基础字段或其他检测器结果,与 claim 无关。但需注意全部证据谱系根均为 signal_layer,属同一上游,不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c12",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_3:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-47f03243aabe9985;项目名称 天津市滨海新区大港医院 天津市滨海新区大港医院CT影像设备维保项目 (项目编号ZYGP20260902)公开招标公告;采购方 天津市滨海新区大港医院;预算金额 4990000.0 元;发布日期 2026-09-01;领域 医学影像与PACS。",
+          "reason": "该证据仅载明招标信号基础字段(项目编号、名称、采购方、预算、发布日期、领域),未提及信封 companyProfile 或企业业务画像的具体条目,不改变 claim 真伪判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 499.0 万元,为该采购单位过去 5 条有效金额中位数(4499.7 万元)的 0.11 倍,金额异常得分 0.000。",
+          "reason": "该证据为金额异常检测结果,与企业业务画像内容无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.25 次,比值 8.00,频率异常得分 0.875。",
+          "reason": "该证据为频率异常检测结果,不涉及企业业务画像。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『天津市滨海新区大港医院 天津市滨海新区大港医院医用耗材等物资(不含检验试剂)采购及相关配送服务 (项目编号ZYGP20260736)公开招标公告』(2026-08-04),相似度 0.847(比较基数 5 个历史项目),新颖性异常得分 0.153。",
+          "reason": "该证据为新颖性检测结果,未涉及企业业务画像条目。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.632,达到准入阈值 0.600。",
+          "reason": "该证据仅给出项目与企业业务画像的语义相似度评分,未列出画像的具体条目内容,无法印证或否证 claim 所列条目。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内五条证据均为信号层基础字段与检测器评分,均未载明信封 companyProfile 中企业业务画像的具体条目(医疗AI、医学影像、辅助诊断、智慧医院、医院信息化、医疗大模型、医院数据平台、HIS、PACS、电子病历),无任何证据直接支持或反驳该 claim,故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c13",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_3:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-47f03243aabe9985;项目名称 天津市滨海新区大港医院 天津市滨海新区大港医院CT影像设备维保项目 (项目编号ZYGP20260902)公开招标公告;采购方 天津市滨海新区大港医院;预算金额 4990000.0 元;发布日期 2026-09-01;领域 医学影像与PACS。",
+          "reason": "该证据仅列示信号层基础字段(项目编号、名称、采购方、预算、发布日期、领域),未出现任何 sourceUrl 或信封 URL 信息,不能改变 claim 关于信封载明 sourceUrl 的判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 499.0 万元,为该采购单位过去 5 条有效金额中位数(4499.7 万元)的 0.11 倍,金额异常得分 0.000。",
+          "reason": "该证据讨论金额异常检测得分,与信封是否载明特定 sourceUrl 无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.25 次,比值 8.00,频率异常得分 0.875。",
+          "reason": "该证据讨论频率异常检测,与 sourceUrl 字段内容无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『天津市滨海新区大港医院 天津市滨海新区大港医院医用耗材等物资(不含检验试剂)采购及相关配送服务 (项目编号ZYGP20260736)公开招标公告』(2026-08-04),相似度 0.847(比较基数 5 个历史项目),新颖性异常得分 0.153。",
+          "reason": "该证据讨论新颖性检测,未涉及信封 sourceUrl 字段。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.632,达到准入阈值 0.600。",
+          "reason": "该证据讨论相关性检测得分,与信封是否载明特定 sourceUrl 无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内五条证据均为信号层基础字段与异常检测结果,无一条包含信封 sourceUrl 字段或其取值,无法对 claim 所述 URL 是否载明作出支持或反驳,故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c14",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_3:E1",
+          "direction": "支持",
+          "quote": "项目名称 天津市滨海新区大港医院 天津市滨海新区大港医院CT影像设备维保项目 (项目编号ZYGP20260902)公开招标公告",
+          "reason": "信封基础字段明确项目为公开招标公告，kind 为 tender 的定性有直接依据，构成潜在投标/合作机会。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 499.0 万元,为该采购单位过去 5 条有效金额中位数(4499.7 万元)的 0.11 倍,金额异常得分 0.000",
+          "reason": "金额异常检测只反映金额偏离历史基线，不改变该信号是否为招标商机的判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.25 次,比值 8.00,频率异常得分 0.875",
+          "reason": "频率异常检测反映采购频次偏离，与信号是否构成商机无直接关系。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为",
+          "reason": "新颖性检测反映与历史项目的相似度，不改变招标公告本身构成商机的定性。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E5",
+          "direction": "支持",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.632,达到准入阈值 0.600",
+          "reason": "相关性达到准入阈值，支持该招标公告对企业构成潜在投标/合作机会的定性。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "信封基础字段明确为公开招标公告（tender），相关性检测达到准入阈值，支持将本信号定性为商机；其余检测器证据与商机定性无直接关联。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c15",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_3:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-47f03243aabe9985;项目名称 天津市滨海新区大港医院 天津市滨海新区大港医院CT影像设备维保项目 (项目编号ZYGP20260902)公开招标公告",
+          "reason": "该证据仅描述招标信号基础字段,未提及任何假设种子标签,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 499.0 万元,为该采购单位过去 5 条有效金额中位数(4499.7 万元)的 0.11 倍,金额异常得分 0.000。",
+          "reason": "该证据仅涉及金额异常检测结果,未提及假设种子标签。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.25 次,比值 8.00,频率异常得分 0.875。",
+          "reason": "该证据仅涉及频率异常检测结果,未提及假设种子标签。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『天津市滨海新区大港医院 天津市滨海新区大港医院医用耗材等物资(不含检验试剂)采购及相关配送服务 (项目编号ZYGP20260736)公开招标公告』(2026-08-04),相似度 0.847",
+          "reason": "该证据仅涉及新颖性检测结果,未提及假设种子标签。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.632,达到准入阈值 0.600。",
+          "reason": "该证据仅涉及相关性检测结果,未提及假设种子标签。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "全部五条证据均为信号层检测记录,内容涉及招标基础字段与金额、频率、新颖性、相关性检测,均未提及『真实经营动态』『新方向扩张』『正常大额采购』三个假设种子标签,无法证实或推翻 claim,故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c16",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_3:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-47f03243aabe9985;项目名称 天津市滨海新区大港医院 天津市滨海新区大港医院CT影像设备维保项目 (项目编号ZYGP20260902)公开招标公告;采购方 天津市滨海新区大港医院;预算金额 4990000.0 元;发布日期 2026-09-01;领域 医学影像与PACS。",
+          "reason": "该证据仅给出招标信号基础字段(项目编号、名称、采购方、预算、发布日期、领域),未涉及 basisGaps 是否载明需补齐真实历史采购金额基线、真实历史项目基线或获取官方招标正文,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E2",
+          "direction": "支持",
+          "quote": "历史基线含 4 个模拟样本,不代表真实历史证据充分。",
+          "reason": "该证据自述历史基线含模拟样本、不代表真实历史证据充分,与 claim 所称需先补齐真实历史采购金额基线相印证。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.25 次,比值 8.00,频率异常得分 0.875。",
+          "reason": "该证据仅涉及频率异常检测得分,未提及 basisGaps 内容或需补齐基线、获取招标正文的要求。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E4",
+          "direction": "支持",
+          "quote": "历史基线含 4 个模拟样本,不代表真实历史证据充分。",
+          "reason": "该证据同样自述历史基线含模拟样本、不代表真实历史证据充分,支持 claim 中需补齐真实历史项目基线的说法。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.632,达到准入阈值 0.600。",
+          "reason": "该证据仅涉及相关性检测得分,未涉及 basisGaps 载明的补齐基线或获取官方招标正文要求。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "E2、E4 自述历史基线含模拟样本、不代表真实历史证据充分,可支持 claim 中需补齐真实历史金额/项目基线的部分;但所有证据均未载明 basisGaps 原文,亦无任何证据涉及需获取官方招标正文以核实金额、参数与资格条件,且证据谱系根同为 signal_layer,不构成独立印证,故综合意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c19",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_3:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-47f03243aabe9985;项目名称 天津市滨海新区大港医院 天津市滨海新区大港医院CT影像设备维保项目 (项目编号ZYGP20260902)公开招标公告;采购方 天津市滨海新区大港医院;预算金额 4990000.0 元;发布日期 2026-09-01;领域 医学影像与PACS。",
+          "reason": "仅给出项目基础字段与预算金额,未涉及任何异常得分,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E2",
+          "direction": "支持",
+          "quote": "本项目金额 499.0 万元,为该采购单位过去 5 条有效金额中位数(4499.7 万元)的 0.11 倍,金额异常得分 0.000。",
+          "reason": "直接给出『金额异常得分 0.000』及『0.11 倍』,与 claim 所述金额侧信号一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E3",
+          "direction": "支持",
+          "quote": "频率异常得分 0.875。",
+          "reason": "直接给出『频率异常得分 0.875』,与 claim 所述频率侧信号一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E4",
+          "direction": "无关",
+          "quote": "新颖性异常得分 0.153。",
+          "reason": "该证据讲的是新颖性得分,与 claim 所指的频率/金额两个信号无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E5",
+          "direction": "无关",
+          "quote": "项目与企业业务画像的语义相似度为 0.632,达到准入阈值 0.600。",
+          "reason": "该证据讲的是相关性得分,与 claim 所指的频率/金额两个信号无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E2 与 E3 分别逐字给出『金额异常得分 0.000』(金额为历史中位数 0.11 倍)与『频率异常得分 0.875』,两个方向相反的异常信号同时成立,claim 描述与证据一致。注意 E2、E3 同属 signal_layer 谱系根,不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c2",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_3:E1",
+          "direction": "支持",
+          "quote": "采购方 天津市滨海新区大港医院",
+          "reason": "信封基础字段直接载明采购方为『天津市滨海新区大港医院』，与 claim 一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E2",
+          "direction": "无关",
+          "quote": "天津市滨海新区大港医院 的采购项目",
+          "reason": "该证据讨论金额异常检测，虽提及采购单位名称，但不改变对信封采购方字段的判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E3",
+          "direction": "无关",
+          "quote": "天津市滨海新区大港医院 的采购项目",
+          "reason": "该证据讨论频率异常检测，与信封采购方字段是否载明无直接关系。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E4",
+          "direction": "无关",
+          "quote": "天津市滨海新区大港医院 的采购项目",
+          "reason": "该证据讨论新颖性检测，不改变对采购方字段的判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E5",
+          "direction": "无关",
+          "quote": "天津市滨海新区大港医院 的采购项目",
+          "reason": "该证据讨论相关性检测，与信封采购方字段无直接关系。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 信封基础字段逐字载明『采购方 天津市滨海新区大港医院』，直接支持 claim；其余证据为检测器评分，不改变该字段判断。注意 E1-E5 谱系根同为 signal_layer，非独立来源。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c3",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_3:E1",
+          "direction": "支持",
+          "quote": "项目名称 天津市滨海新区大港医院 天津市滨海新区大港医院CT影像设备维保项目 (项目编号ZYGP20260902)公开招标公告",
+          "reason": "信封基础字段逐字载明项目名称与领域，与 claim 完全一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 499.0 万元",
+          "reason": "仅涉及金额异常评分，不改变项目名称与领域字段的判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次",
+          "reason": "仅涉及采购频率异常，与信封项目名称/领域字段无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为",
+          "reason": "仅涉及新颖性评分，不改变 claim 所述字段。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.632",
+          "reason": "仅涉及相关性评分，不改变项目名称与领域字段。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 信封基础字段逐字载明项目名称与领域，与 claim 一致；E2–E5 为异常检测评分，与字段真伪无关。但全部证据同根（signal_layer），不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c4",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_3:E1",
+          "direction": "支持",
+          "quote": "预算金额 4990000.0 元;发布日期 2026-09-01",
+          "reason": "信封基础字段直接载明金额 4990000.0 元与发布日期 2026-09-01，与 claim 完全一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E2",
+          "direction": "支持",
+          "quote": "本项目金额 499.0 万元",
+          "reason": "金额异常检测复述本项目金额为 499.0 万元，与 claim 的 499.0 万元一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次",
+          "reason": "仅涉及采购频率异常，不涉及金额或发布日期。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为",
+          "reason": "仅涉及项目新颖性/相似度，不涉及金额或发布日期。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E5",
+          "direction": "无关",
+          "quote": "项目与企业业务画像的语义相似度为 0.632",
+          "reason": "仅涉及业务相关性评分，不涉及金额或发布日期。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 信封基础字段逐字载明预算金额 4990000.0 元与发布日期 2026-09-01，E2 亦复述金额 499.0 万元，与 claim 一致；其余证据与金额/日期无关。但 E1、E2 同根（signal_layer），不构成独立来源印证，最终以代码独立来源规则为准。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c5",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_3:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-47f03243aabe9985;项目名称 天津市滨海新区大港医院 天津市滨海新区大港医院CT影像设备维保项目 (项目编号ZYGP20260902)公开招标公告",
+          "reason": "该证据仅列示信号层基础字段,未涉及信封 contentSourceNote 的内容,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 499.0 万元,为该采购单位过去 5 条有效金额中位数(4499.7 万元)的 0.11 倍,金额异常得分 0.000。",
+          "reason": "金额异常检测与 contentSourceNote 是否载明未抓取官方正文无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.25 次,比值 8.00,频率异常得分 0.875。",
+          "reason": "频率异常检测不涉及信封 contentSourceNote 字段内容。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『天津市滨海新区大港医院 天津市滨海新区大港医院医用耗材等物资(不含检验试剂)采购及相关配送服务 (项目编号ZYGP20260736)公开招标公告』(2026-08-04),相似度 0.847",
+          "reason": "新颖性检测与 claim 所述 contentSourceNote 载明内容无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.632,达到准入阈值 0.600。",
+          "reason": "相关性检测不涉及信封 contentSourceNote 字段,不改变 claim 判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内五条证据均为信号层基础字段与检测器输出,均未包含信封 contentSourceNote 字段的原文或任何关于『未抓取官方正文、未补造金额、参数或中标结果』的记载,无法印证或否证 claim,故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c6",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_3:E1",
+          "direction": "支持",
+          "quote": "预算金额 4990000.0 元",
+          "reason": "信封基础字段载明预算金额 4990000.0 元，即 499.0 万元，与 claim 所述本项目金额一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E2",
+          "direction": "支持",
+          "quote": "本项目金额 499.0 万元,为该采购单位过去 5 条有效金额中位数(4499.7 万元)的 0.11 倍,金额异常得分 0.000",
+          "reason": "该证据原文逐字包含 claim 所引述的 amountAnomaly 解释全文。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次",
+          "reason": "该证据为频率异常检测，不涉及金额异常解释内容。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为",
+          "reason": "该证据为新颖性检测，不涉及金额异常解释内容。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.632",
+          "reason": "该证据为相关性检测，不涉及金额异常解释内容。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "evt_topkg2_3:E2 原文逐字载明 claim 所引述的 amountAnomaly 解释，evt_topkg2_3:E1 的预算金额 4990000.0 元与之相互印证；其余证据与金额异常解释无关。注意 E1 与 E2 同根（signal_layer），不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c7",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_3:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-47f03243aabe9985;项目名称 天津市滨海新区大港医院 天津市滨海新区大港医院CT影像设备维保项目 (项目编号ZYGP20260902)公开招标公告",
+          "reason": "该证据仅列示信封基础字段,未涉及 amountAnomaly 解释文本,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E2",
+          "direction": "支持",
+          "quote": "历史基线含 4 个模拟样本,不代表真实历史证据充分。",
+          "reason": "该证据原文逐字包含 claim 所述解释语句,直接支持 claim 为真。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次",
+          "reason": "该证据为频率异常检测内容,未载明 amountAnomaly 解释语句。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为",
+          "reason": "该证据为新颖性检测内容,虽含相似表述但非 amountAnomaly 解释,不直接改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.632",
+          "reason": "该证据为相关性检测内容,未涉及 amountAnomaly 解释语句。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "证据 evt_topkg2_3:E2 原文逐字包含 claim 所述『历史基线含 4 个模拟样本,不代表真实历史证据充分』,直接印证该解释载明于 amountAnomaly 检测输出中;其余证据与该解释语句无关。注意 E2 与 E4 同根(signal_layer),不构成独立印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c8",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_3:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-47f03243aabe9985;项目名称 天津市滨海新区大港医院 天津市滨海新区大港医院CT影像设备维保项目 (项目编号ZYGP20260902)公开招标公告",
+          "reason": "该证据仅载明项目基础字段,未涉及频率异常解释内容。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 499.0 万元,为该采购单位过去 5 条有效金额中位数(4499.7 万元)的 0.11 倍,金额异常得分 0.000。",
+          "reason": "该证据为金额异常检测,与频率异常解释无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E3",
+          "direction": "支持",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.25 次,比值 8.00,频率异常得分 0.875。",
+          "reason": "该证据原文与 claim 所述频率异常解释数值完全一致,直接支持 claim。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『天津市滨海新区大港医院 天津市滨海新区大港医院医用耗材等物资(不含检验试剂)采购及相关配送服务 (项目编号ZYGP20260736)公开招标公告』(2026-08-04),相似度 0.847",
+          "reason": "该证据为新颖性检测,与频率异常解释无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.632,达到准入阈值 0.600。",
+          "reason": "该证据为相关性检测,与频率异常解释无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "证据 evt_topkg2_3:E3 原文逐字载明频率异常解释的全部数值(近 30 天 2 次、4 个历史窗口平均 0.25 次、比值 8.00、得分 0.875),与 claim 完全吻合;其余证据为其他检测器或基础字段,不改变判断。需注意该证据谱系根为 signal_layer,与 claim 同源,独立性有限。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c9",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_3:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-47f03243aabe9985;项目名称 天津市滨海新区大港医院 天津市滨海新区大港医院CT影像设备维保项目 (项目编号ZYGP20260902)公开招标公告",
+          "reason": "该证据描述的是 CT 影像设备维保项目的基础字段，未涉及新颖性检测的最相似项目、相似度、比较基数或新颖性异常得分，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 499.0 万元,为该采购单位过去 5 条有效金额中位数(4499.7 万元)的 0.11 倍,金额异常得分 0.000。",
+          "reason": "该证据为金额异常检测结果，与 claim 所述新颖性检测内容无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.25 次,比值 8.00,频率异常得分 0.875。",
+          "reason": "该证据为频率异常检测结果，与 claim 所述新颖性检测内容无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E4",
+          "direction": "支持",
+          "quote": "该采购单位历史最相似项目为『天津市滨海新区大港医院 天津市滨海新区大港医院医用耗材等物资(不含检验试剂)采购及相关配送服务 (项目编号ZYGP20260736)公开招标公告』(2026-08-04),相似度 0.847(比较基数 5 个历史项目),新颖性异常得分 0.153。",
+          "reason": "该证据逐字载明 claim 所述的最相似项目名称、项目编号、日期、相似度 0.847、比较基数 5 个历史项目及新颖性异常得分 0.153，直接支持 claim。"
+        },
+        {
+          "evidenceId": "evt_topkg2_3:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.632,达到准入阈值 0.600。",
+          "reason": "该证据为相关性检测结果，与 claim 所述新颖性检测内容无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "证据 evt_topkg2_3:E4 逐字载明 claim 全部要素（最相似项目名称与编号、日期 2026-08-04、相似度 0.847、比较基数 5、新颖性异常得分 0.153），其余证据为其他检测器结果，不构成矛盾。注意该证据谱系根为 signal_layer，属内部检测单一来源，独立性由代码按规则裁定。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 1,
+      "mainTarget": "c18",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "c18 声称『截至 2026-09-01 前的近 30 天窗口内，该采购单位采购频次为 2 次，处于高于历史平均水平的抬升状态』，但该结论目前仅由信封 frequencyAnomaly 解释（c8）间接支撑，缺少可独立核验的采购单位采购记录清单。",
+          "acceptance": "需权威登记源（政府采购/公共资源交易平台）记录级证据：列出该采购单位在 2026-08-02 至 2026-09-01 窗口内的逐条采购公告（含项目编号、发布日期、采购人名称），条数可数且与『2 次』一致或给出实际条数。",
+          "failover": "若权威平台无法检索到该单位窗口内记录，则退回到信封 sourceUrl 指向的详情页做 explore 深查，取页面正文级证据；若仍不可得，则标注 c18 为不可独立核验并转查 c17。"
+        },
+        {
+          "gap": "c18 的『高于历史平均水平的抬升状态』依赖历史窗口均值（c8 载明『已完整观测的 4 个历史窗口平均 0.25 次』），但该历史基线是否含模拟样本、窗口如何切分未获独立确认。",
+          "acceptance": "需权威登记源记录级证据：给出该采购单位更长时间跨度（如近 2-3 年）的采购公告逐条清单，使历史窗口均值可被独立重算，并明确其中是否含模拟/非真实样本。",
+          "failover": "若历史清单不可得，则仅保留『窗口内条数』这一可核验部分，将『抬升状态』降级为待证并转查 c17。"
+        }
+      ],
+      "searchHints": [
+        "天津市滨海新区大港医院 采购公告 2026年8月",
+        "天津市滨海新区大港医院 招标 2026-09-01",
+        "大港医院 政府采购 采购意向 公开招标"
+      ],
+      "sideTargets": [
+        "c17",
+        "c9"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 2,
+      "mainTarget": "c5",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "c5 声称信封 contentSourceNote 载明『基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果』，但该字段原文尚未被独立核验；需先锚定该 note 字段是否确实存在于信封记录中。",
+          "acceptance": "需信封记录字段级证据：能逐字复现 contentSourceNote 字段原文『基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果』，或证明该字段不存在/表述不同。",
+          "failover": "若信封记录中无该字段或无法取得字段级原文，则改以 c13 的 sourceUrl 页面正文为锚，核验页面是否含官方招标正文，从而反推 c5 的『未抓取官方正文』是否成立。"
+        },
+        {
+          "gap": "在锚定 c5 字段后，需核验『未抓取官方正文』这一实质断言：即 sourceUrl 指向的页面是否包含官方招标正文（金额、参数、资格条件、评分办法）。",
+          "acceptance": "需页面正文级证据：sourceUrl 页面正文中是否出现官方招标公告正文要素（如资格条件、评分办法、参数、中标结果）；若页面仅有字段摘要而无正文，则 c5 成立。",
+          "failover": "若 sourceUrl 页面不可访问或为动态渲染无法取正文，则改查权威登记源（如政府采购网/公共资源交易平台）是否存在该项目编号 ZYGP20260902 的官方公告正文，以判定『未抓取官方正文』是否属实。"
+        },
+        {
+          "gap": "若官方正文确实存在且可获取，则需进一步核验 c5 后半句『未补造金额、参数或中标结果』：官方正文中的金额、参数、中标结果是否与信封字段一致。",
+          "acceptance": "需权威登记源记录：官方公告正文中的金额、参数、中标结果与信封 c4（4990000.0 元）、c3（项目名称/编号）逐项比对结果。",
+          "failover": "若官方正文中无中标结果（尚未开标），则仅比对金额与参数，中标结果部分标注为『官方正文未载明』，不据此判定 c5 真伪。"
+        }
+      ],
+      "searchHints": [
+        "ZYGP20260902 天津市滨海新区大港医院 CT影像设备维保项目 公开招标公告",
+        "天津市滨海新区大港医院 CT影像设备维保 4990000 招标",
+        "qiye.qianlima.com infoDetail 627115111 2721 zhaobiao"
+      ],
+      "sideTargets": [
+        "c13",
+        "c17"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 3,
+      "mainTarget": "c17",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "c17 待证实：本次采购的采购方『天津市滨海新区大港医院』与历史最相似项目（项目编号ZYGP20260736）的采购方是否为同一采购单位。",
+          "acceptance": "需权威登记源记录或官方招标公告正文级证据，能逐字显示两个项目编号（R-47f03243aabe9985 / ZYGP20260902 与 ZYGP20260736）对应的采购人名称均为『天津市滨海新区大港医院』。",
+          "failover": "若官方正文不可得，退而求其次以千里马详情页正文级证据（sourceUrl 指向的 infoDetail 页面）比对两项目采购人字段；若仍不可得，标注为无法证实并转入 c18 的频次口径核查。"
+        },
+        {
+          "gap": "在锚定同一采购单位身份后，核实该单位在 2026-08-04（ZYGP20260736）与 2026-09-01（ZYGP20260902）两个项目之间的采购行为是否构成同一主体的连续采购序列。",
+          "acceptance": "需页面正文级证据，显示两个项目公告的采购人、发布日期、项目编号字段可对应同一采购单位，且时间间隔与 c8 所述『近 30 天采购 2 次』窗口一致。",
+          "failover": "若两项目采购人字段不一致或无法对应，则 c17 证伪，转而核查 c18 的频次统计口径是否包含非同一采购单位记录。"
+        }
+      ],
+      "searchHints": [
+        "天津市滨海新区大港医院 ZYGP20260736 采购人",
+        "ZYGP20260902 大港医院 CT影像设备维保 采购人",
+        "天津市滨海新区大港医院 公开招标公告 采购单位"
+      ],
+      "sideTargets": [
+        "c18",
+        "c13"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 主体与事件背景\n\n本次信号的信封载明 kind 为 tender，项目编号为 R-47f03243aabe9985 [1][2][3][4][5]。采购方为『天津市滨海新区大港医院』[1][2][3][4][5]。项目名称为『天津市滨海新区大港医院 天津市滨海新区大港医院CT影像设备维保项目 (项目编号ZYGP20260902)公开招标公告』，领域为『医学影像与PACS』[1][2][3][4][5]。\n\n信封 relevance 解释载明『项目与企业业务画像的语义相似度为 0.632，达到准入阈值 0.600』[5][1][2][3][4]。\n\n关于企业业务画像，信封 companyProfile 载明为『医疗AI、医学影像、辅助诊断、智慧医院、医院信息化、医疗大模型、医院数据平台、HIS、PACS、电子病历』，该条目前尚未核实 [1][2][3][4][5]。信封所载 sourceUrl 为『https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/627115111/2721/zhaobiao』，该条目前尚未核实 [1][2][3][4][5]。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 动态时间线与关联方\n\n### 一、采购频次\n\n信封 frequencyAnomaly 解释载明『截至当天近 30 天该采购单位采购 2 次，已完整观测的 4 个历史窗口平均 0.25 次，比值 8.00，频率异常得分 0.875』[1][2][3][4][5]。\n\n关于截至 2026-09-01 前的近 30 天窗口内该采购单位采购频次为 2 次、处于高于历史平均水平的抬升状态，目前尚未核实。\n\n### 二、关联方与历史相似项目\n\n信封 noveltyAnomaly 解释载明该采购单位历史最相似项目为『天津市滨海新区大港医院 天津市滨海新区大港医院医用耗材等物资(不含检验试剂)采购及相关配送服务 (项目编号ZYGP20260736)公开招标公告』(2026-08-04)，相似度 0.847，比较基数 5 个历史项目，新颖性异常得分 0.153[4][1][2][3][5]。\n\n关于本次采购的采购方『天津市滨海新区大港医院』与历史最相似项目（项目编号ZYGP20260736）的采购方为同一采购单位，目前尚未核实。\n\n### 证据引用\n\n- [1] E3\n- [2] E1\n- [3] E2\n- [4] E4\n- [5] E5"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 核心事实\n\n本项目为天津市滨海新区大港医院 天津市滨海新区大港医院CT影像设备维保项目（项目编号ZYGP20260902）公开招标公告。信封载明本项目金额为 4990000.0 元（499.0 万元），发布日期为 2026-09-01 [1][2][3][4][5]。\n\n信封 amountAnomaly 解释载明『本项目金额 499.0 万元，为该采购单位过去 5 条有效金额中位数(4499.7 万元)的 0.11 倍，金额异常得分 0.000』[1][2][3][4][5]。同时，信封 amountAnomaly 解释载明『历史基线含 4 个模拟样本，不代表真实历史证据充分』[2][1][3][4][5]。\n\n解读同时给出『频率异常得分 0.875（偏高）』与『金额异常得分 0.000（金额仅为历史中位数 0.11 倍）』两个方向相反的异常信号 [2][3][1][4][5]。\n\n关于信封 contentSourceNote 载明『基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果』，目前尚未核实 [1][2][3][4][5]。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 结论\n\n解读将本信号定性为『商机』，理由为信封 kind 为 tender 且含公开招标公告，构成潜在投标/合作机会 [1][2][3][4][5]。\n\n解读 basisGaps 载明需先补齐真实历史采购金额基线、真实历史项目基线，并获取官方招标正文以核实金额、参数与资格条件 [1][2][3][4][5]。\n\n解读登记了三个假设种子标签：『真实经营动态』『新方向扩张』『正常大额采购』；该登记内容目前尚未核实 [1][2][3][4][5]。\n\n在假设竞争层面，『正常大额采购』已浮现并处于主导地位（verified 5、contradicted 0、pending 0，score 5），其可区分证据包括：金额仅为历史中位数 0.11 倍、近 30 天频次为历史窗口均值 8 倍、最相似项目为耗材配送而非影像维保、频次与金额异常方向相反。『异常输送/非正常采购』亦已浮现但非主导（verified 4、contradicted 0、pending 1，score 4），该假设目前仅有检测器层面的间接信号，尚无可区分的方向性证据；需补充官方招标正文（资格条件、评分办法、是否单一来源或限制性条款）、真实历史采购金额与项目基线（剔除模拟样本）、以及中标结果与供应商关联关系，才能与『正常大额采购』区分。\n\n本信号对应信封标题为：天津市滨海新区大港医院 天津市滨海新区大港医院CT影像设备维保项目 (项目编号ZYGP20260902)公开招标公告。"
+    }
+  },
+  {
+    "stage": "s7_recommend",
+    "response": {
+      "items": [
+        {
+          "action": "优先补齐官方招标正文与真实历史基线后再决定是否投入投标资源：调取项目编号ZYGP20260902的官方招标公告正文，核实资格条件、评分办法、是否含单一来源或限制性条款，并剔除模拟样本重建该采购单位的真实历史采购金额与项目基线。",
+          "rationale": "解读 basisGaps 已明确需先补齐真实历史采购金额基线、真实历史项目基线，并获取官方招标正文以核实金额、参数与资格条件；同时金额异常解释自述历史基线含 4 个模拟样本，不代表真实历史证据充分，故当前金额与频次异常均不足以支撑投标决策。此为对两个竞争假设均不预设结论的前置核查动作。",
+          "basisClaimIds": [
+            "c16",
+            "c7",
+            "c5"
+          ],
+          "hypothesisLabel": "正常大额采购"
+        },
+        {
+          "action": "以『医学影像与PACS』领域匹配为切入点评估参与方式：围绕本次CT影像设备维保标的，评估以影像设备维保配套的影像质控、PACS/影像数据平台或辅助诊断软件等企业业务画像内能力参与的技术可行性与合规路径，形成参与/不参与的内部评估结论。",
+          "rationale": "本次信号已被定性为商机，理由为信封 kind 为 tender 且含公开招标公告，构成潜在投标/合作机会；项目领域为『医学影像与PACS』，与企业业务画像中的医学影像、PACS 等方向存在语义关联（相似度 0.632，达到准入阈值 0.600）。需注意 companyProfile 与相似度依据的 claim 尚为待证实状态，本建议以该画像成立为前提。",
+          "basisClaimIds": [
+            "c14",
+            "c3",
+            "c11",
+            "c12"
+          ],
+          "hypothesisLabel": "正常大额采购"
+        },
+        {
+          "action": "跟踪同一采购单位的后续采购机会并建立该采购单位维保/耗材类项目的持续监测：将天津市滨海新区大港医院列入重点跟踪名单，跟踪其后续招标公告与中标结果，重点比对本次CT影像设备维保项目与既往医用耗材等物资采购及配送服务项目在供应商与采购安排上的关联。",
+          "rationale": "该采购单位历史最相似项目为医用耗材等物资(不含检验试剂)采购及相关配送服务项目（相似度 0.847），且近 30 天采购频次处于高于历史平均水平的抬升状态（频率异常得分 0.875），存在后续机会与关联关系核查价值；但频次抬升与同一采购单位两项 claim 尚为待证实，本建议以该两项成立为前提。",
+          "basisClaimIds": [
+            "c9",
+            "c8",
+            "c18",
+            "c17"
+          ],
+          "hypothesisLabel": "异常输送/非正常采购"
+        },
+        {
+          "action": "对本次采购设置风险缓释与再评估触发条件：在官方正文与真实基线补齐前，不将本次信号作为确定性商机纳入资源承诺；若核实发现限制性条款、单一来源安排或中标方与采购方存在未披露关联关系，则升级为异常输送假设并暂停参与。",
+          "rationale": "解读同时给出方向相反的两个异常信号——频率异常得分 0.875（偏高）与金额异常得分 0.000（金额仅为历史中位数 0.11 倍），两假设均无被证伪证据，异常输送假设目前仅有检测器层面的间接信号、尚无可区分的方向性证据，故应以触发条件方式缓释风险而非直接决策。",
+          "basisClaimIds": [
+            "c19",
+            "c6",
+            "c16"
+          ],
+          "hypothesisLabel": "异常输送/非正常采购"
+        }
+      ]
+    }
+  }
+]

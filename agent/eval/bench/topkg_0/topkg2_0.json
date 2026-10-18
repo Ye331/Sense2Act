@@ -1,0 +1,2354 @@
+[
+  {
+    "stage": "s1a",
+    "response": {
+      "signalType": "商机",
+      "reason": "信号为招标信号(kind=tender),项目为『天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告』,采购单位天津市肿瘤医院空港医院,金额 627.0 万元;relevance 解释称『项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600』,企业画像含『医疗AI、医学影像、辅助诊断、智慧医院、医院信息化、医疗大模型、医院数据平台、HIS、PACS、电子病历』,与数智化病理系统采购方向匹配,构成潜在投标/合作机会。同时 amountAnomaly 解释『本项目金额 627.0 万元,为该采购单位过去 10 条有效金额中位数(21.9 万元)的 28.63 倍,金额异常得分 1.000』,frequencyAnomaly 解释『截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.75 次,比值 2.67,频率异常得分 0.625』,提示该采购单位近期采购活跃度与单笔规模均高于自身历史基线,需在跟进时核实。",
+      "selectedSeedLabels": [
+        "真实经营动态",
+        "正常大额采购",
+        "新方向扩张"
+      ],
+      "basisGaps": [
+        "该采购单位历史金额基线含 8 个模拟样本(amountAnomaly 解释:『历史基线含 8 个模拟样本,不代表真实历史证据充分』),需先补齐真实历史采购金额基线",
+        "该采购单位历史项目基线含 8 个模拟样本(noveltyAnomaly 解释:『历史基线含 8 个模拟样本,不代表真实历史证据充分』),需先补齐真实历史项目基线",
+        "contentSourceNote 说明『基于本条记录已有字段生成,未抓取官方正文,未补造金额、参数或中标结果』,需先获取官方招标正文以核实金额、参数与资格条件"
+      ]
+    }
+  },
+  {
+    "stage": "s1b",
+    "response": {
+      "claims": [
+        {
+          "id": "c1",
+          "text": "信号信封载明项目编号为 R-c67b890aeb583592。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 3,
+          "priorityReason": "信封基础字段，是后续所有推理的地基，可由信封证据直接核实。",
+          "hypothesisIds": [],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c2",
+          "text": "信号信封载明采购方为天津市肿瘤医院空港医院。",
+          "category": "实体",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "采购方身份是全部异常基线与关联方分析的锚点，被多条假设依赖。",
+          "hypothesisIds": [
+            "h1",
+            "h2",
+            "h3"
+          ],
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c3",
+          "text": "信号信封载明本项目金额为 6270000.0 元（627.0 万元）。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "金额是金额异常判定的直接输入，卡住结论节且被多条假设依赖。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c4",
+          "text": "信号信封载明本项目发布日期为 2026-09-09。",
+          "category": "时效",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "发布日期决定时效衰减与投标窗口，属时间线基础事实。",
+          "hypothesisIds": [],
+          "validWindowDays": 30,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c5",
+          "text": "信号信封载明项目名称为『天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告』，项目编号为 SHGP-2026-A536。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "项目名称与编号是官方正文核实的检索键，被多条假设依赖。",
+          "hypothesisIds": [
+            "h1",
+            "h2",
+            "h3"
+          ],
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c6",
+          "text": "信号信封的 contentSourceNote 载明『基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果』。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "该记载限定了全部金额与参数证据的可靠性边界，直接影响结论强度。",
+          "hypothesisIds": [
+            "h1",
+            "h2",
+            "h3"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c7",
+          "text": "信号信封载明本项目领域为『其他』，项目摘要为『天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告；采购单位：天津市肿瘤医院空港医院；领域：其他』。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 2,
+          "priorityReason": "摘要为信封字段复述，信息增量有限，仅作背景锚定。",
+          "hypothesisIds": [],
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c8",
+          "text": "信号信封载明来源链接为 https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/629601584/2714/zhaobiao。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 2,
+          "priorityReason": "来源链接是查证入口，但本身不构成业务断言。",
+          "hypothesisIds": [],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c9",
+          "text": "信号信封载明企业业务画像包含『医疗AI、医学影像、辅助诊断、智慧医院、医院信息化、医疗大模型、医院数据平台、HIS、PACS、电子病历』。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 3,
+          "priorityReason": "画像字段是相关性判定与商机定性的输入，被 h3 依赖。",
+          "hypothesisIds": [
+            "h3"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c10",
+          "text": "解读文本将本信号定性为『商机』，理由为项目方向与企业画像匹配，构成潜在投标/合作机会。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 3,
+          "priorityReason": "解读定性是结论节的起点，但其为解读层产物而非外部事实。",
+          "hypothesisIds": [
+            "h3"
+          ],
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c11",
+          "text": "amountAnomaly 解释载明『本项目金额 627.0 万元，为该采购单位过去 10 条有效金额中位数(21.9 万元)的 28.63 倍，金额异常得分 1.000』。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "该数字断言是金额异常的核心依据，卡住结论节并被 h1、h2 依赖。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c12",
+          "text": "amountAnomaly 解释载明『历史基线含 8 个模拟样本，不代表真实历史证据充分』。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "该记载直接削弱金额异常的证据基础，是区分正常大额采购与异常输送的关键。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c13",
+          "text": "frequencyAnomaly 解释载明『截至当天近 30 天该采购单位采购 2 次，已完整观测的 4 个历史窗口平均 0.75 次，比值 2.67，频率异常得分 0.625』。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "频次异常与金额异常同时出现，是异常输送假设的组成证据。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c14",
+          "text": "noveltyAnomaly 解释载明该采购单位历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』(2026-06-29)，相似度 0.885，比较基数 10 个历史项目，新颖性异常得分 0.115。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 4,
+          "priorityReason": "最相似历史项目是关联方与时间线分析的关键锚点，被 h2、h3 依赖。",
+          "hypothesisIds": [
+            "h2",
+            "h3"
+          ],
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c15",
+          "text": "noveltyAnomaly 解释载明『历史基线含 8 个模拟样本，不代表真实历史证据充分』。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "该记载削弱新颖性基线的证据充分性，影响新方向扩张假设的可信度。",
+          "hypothesisIds": [
+            "h3"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c16",
+          "text": "relevance 解释载明『项目与企业业务画像的语义相似度为 0.647，达到准入阈值 0.600』。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 4,
+          "priorityReason": "相关性得分是商机定性的直接依据，卡住结论节。",
+          "hypothesisIds": [
+            "h3"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c17",
+          "text": "解读文本登记了三个假设种子标签：『真实经营动态』、『正常大额采购』、『新方向扩张』。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 3,
+          "priorityReason": "种子标签是竞争假设的来源，决定后续查证方向。",
+          "hypothesisIds": [
+            "h1",
+            "h2",
+            "h3"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c18",
+          "text": "解读文本的 basisGaps 载明需先补齐真实历史采购金额基线、真实历史项目基线，并获取官方招标正文以核实金额、参数与资格条件。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 4,
+          "priorityReason": "该记载明确了证据缺口，是区分各竞争假设的查证路线图。",
+          "hypothesisIds": [
+            "h1",
+            "h2",
+            "h3"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c19",
+          "text": "信号信封载明 amountHistory 的 historicalMedianAmountYuan 为 218965.55 元、amountRatio 为 28.634641385368614、historyCount 为 10、simulatedHistoryCount 为 8。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "历史中位数与模拟样本数是金额异常判定的原始字段，被 h1、h2 依赖。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c20",
+          "text": "信号信封载明 frequencyHistory 的 windowDays 为 30、recentCount 为 2、historicalWindowAverageCount 为 0.75、frequencyRatio 为 2.6666666666666665、historicalWindowsUsed 为 4。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 3,
+          "priorityReason": "频次历史原始字段支撑频率异常判定，但证据基础较薄。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c21",
+          "text": "信号信封载明 noveltyHistory 的 historyCount 为 10、simulatedHistoryCount 为 8、maxHistorySimilarity 为 0.8853666186332703。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 3,
+          "priorityReason": "新颖性历史原始字段支撑相似度判定，但含模拟样本。",
+          "hypothesisIds": [
+            "h3"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c22",
+          "text": "信号信封载明 rumor 字段为空（null）。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 2,
+          "priorityReason": "无传闻字段，排除传闻类线索，信息增量有限。",
+          "hypothesisIds": [],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c23",
+          "text": "信号信封载明 eventId 为空字符串。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 1,
+          "priorityReason": "空字段，仅作完整性核对，无业务含义。",
+          "hypothesisIds": [],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c24",
+          "text": "信号信封载明 amountAnomaly 的 basisSufficient 为 true、frequencyAnomaly 的 basisSufficient 为 true、noveltyAnomaly 的 basisSufficient 为 true、relevance 的 basisSufficient 为 true。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 3,
+          "priorityReason": "各检测器自评证据充分性，与模拟样本说明存在张力，需交叉核对。",
+          "hypothesisIds": [
+            "h1",
+            "h2",
+            "h3"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c25",
+          "text": "信号信封载明 amountAnomaly 的 score 为 0.9999001206028643、frequencyAnomaly 的 score 为 0.625、noveltyAnomaly 的 score 为 0.11463338136672974、relevance 的 score 为 0.6469710469245911。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 3,
+          "priorityReason": "各检测器得分的原始取值，是异常判定的量化输入。",
+          "hypothesisIds": [
+            "h1",
+            "h2",
+            "h3"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c26",
+          "text": "信号信封载明 mostSimilarProject 的 dataOrigin 为 real、publishDate 为 2026-06-29、projectId 为 R-f456d19c850a03af。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "最相似项目的真实来源与日期是时间线关联的锚点。",
+          "hypothesisIds": [
+            "h2",
+            "h3"
+          ],
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c27",
+          "text": "信号信封载明 kind 为 tender，signalType 定性为『商机』。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 3,
+          "priorityReason": "信号类型决定后续处理路径，是分类地基。",
+          "hypothesisIds": [],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c28",
+          "text": "信号信封载明 sourceUrl 指向千里马招标网（qiye.qianlima.com）的招标信息详情页。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 2,
+          "priorityReason": "来源平台属性影响证据等级，但非业务断言。",
+          "hypothesisIds": [],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c29",
+          "text": "信号信封载明本项目采购内容为数智化病理系统，采购方式为公开招标。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "采购内容与方式是判断业务方向与投标可行性的核心事实。",
+          "hypothesisIds": [
+            "h3"
+          ],
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c30",
+          "text": "信号信封载明本项目采购单位为天津市肿瘤医院空港医院，与最相似历史项目（R-f456d19c850a03af）的采购单位相同。",
+          "category": "关系",
+          "sectionIndex": 1,
+          "priority": 4,
+          "priorityReason": "同一采购单位的重复采购关系是判断采购模式与关联方的关键。",
+          "hypothesisIds": [
+            "h2",
+            "h3"
+          ],
+          "relationType": "关联交易",
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c31",
+          "text": "信号信封载明本项目金额 627.0 万元与历史中位数 21.9 万元之间存在 28.63 倍的量级差异，且近 30 天采购频次比值 2.67，两项异常同时出现。",
+          "category": "矛盾",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "金额与频次双异常同时出现，是区分正常大额采购与异常输送的核心可区分 claim。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c32",
+          "text": "信号信封载明本项目发布日期 2026-09-09 与最相似历史项目发布日期 2026-06-29 相隔约 72 天。",
+          "category": "时效",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "两次采购的时间间隔是判断采购节奏是否异常的时间线证据。",
+          "hypothesisIds": [
+            "h2"
+          ],
+          "validWindowDays": 90,
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c33",
+          "text": "信号信封载明本项目金额 627.0 万元，而最相似历史项目（大型设备物联网和医疗设备全生命周期管理软件采购项目）的金额未在信封中给出。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 3,
+          "priorityReason": "指出关键对比字段缺失，是金额异常判定证据链的缺口。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c34",
+          "text": "信号信封载明本项目采购内容为数智化病理系统，与企业画像中的『医疗AI、医学影像、辅助诊断、智慧医院、医院信息化、医疗大模型、医院数据平台、HIS、PACS、电子病历』存在语义重叠。",
+          "category": "关系",
+          "sectionIndex": 3,
+          "priority": 4,
+          "priorityReason": "采购内容与画像的语义重叠是商机定性的直接依据，被 h3 依赖。",
+          "hypothesisIds": [
+            "h3"
+          ],
+          "relationType": "协同",
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c35",
+          "text": "信号信封载明本项目采购单位天津市肿瘤医院空港医院在近 30 天内采购 2 次，历史 4 个窗口平均 0.75 次。",
+          "category": "时效",
+          "sectionIndex": 1,
+          "priority": 4,
+          "priorityReason": "近期采购活跃度是频率异常判定的时间窗口证据，被 h1、h2 依赖。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": 30,
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c36",
+          "text": "信号信封载明本项目金额 627.0 万元，为该采购单位过去 10 条有效金额中位数 21.9 万元的 28.63 倍，金额异常得分 1.000，且历史基线含 8 个模拟样本。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "金额异常的核心量化断言，同时标注模拟样本局限，卡住结论节。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c37",
+          "text": "信号信封载明本项目采购单位天津市肿瘤医院空港医院的历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』，相似度 0.885。",
+          "category": "关系",
+          "sectionIndex": 1,
+          "priority": 4,
+          "priorityReason": "最相似项目关系是判断采购方向延续性的关键，被 h2、h3 依赖。",
+          "hypothesisIds": [
+            "h2",
+            "h3"
+          ],
+          "relationType": "关联交易",
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c38",
+          "text": "信号信封载明本项目采购单位天津市肿瘤医院空港医院的历史金额基线含 8 个模拟样本，历史项目基线含 8 个模拟样本，均不代表真实历史证据充分。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "模拟样本占比高直接削弱全部异常判定的证据基础，是区分各假设的关键。",
+          "hypothesisIds": [
+            "h1",
+            "h2",
+            "h3"
+          ],
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c39",
+          "text": "信号信封载明本项目采购单位天津市肿瘤医院空港医院的历史金额基线含 8 个模拟样本，历史项目基线含 8 个模拟样本，均不代表真实历史证据充分。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "模拟样本占比高直接削弱全部异常判定的证据基础，是区分各假设的关键。",
+          "hypothesisIds": [
+            "h1",
+            "h2",
+            "h3"
+          ],
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": true
+        }
+      ],
+      "hypotheses": [
+        {
+          "id": "h1",
+          "label": "正常大额采购",
+          "description": "本次采购为采购单位基于真实业务需求的正常大额采购，金额与频次异常可由项目性质（数智化病理系统属大型信息化项目）解释。可区分 claim：c31（金额与频次双异常同时出现）——若官方正文证实项目规模与预算合理，则支持本假设；若正文缺失或预算与规模不符，则支持异常输送假设。",
+          "claimIds": [
+            "c3",
+            "c11",
+            "c12",
+            "c13",
+            "c19",
+            "c20",
+            "c31",
+            "c33",
+            "c36",
+            "c38"
+          ],
+          "op": "AND"
+        },
+        {
+          "id": "h2",
+          "label": "异常输送",
+          "description": "本次采购金额显著偏离历史基线且近期频次异常，可能存在异常利益输送。可区分 claim：c31（金额与频次双异常同时出现）与 c30（同一采购单位重复采购关系）——若官方正文显示采购需求与金额匹配、且历史项目金额同样量级，则支持正常采购；若正文缺失、金额与需求不匹配或存在关联方中标，则支持本假设。",
+          "claimIds": [
+            "c3",
+            "c11",
+            "c12",
+            "c13",
+            "c19",
+            "c20",
+            "c30",
+            "c31",
+            "c33",
+            "c36",
+            "c38"
+          ],
+          "op": "AND"
+        },
+        {
+          "id": "h3",
+          "label": "新方向扩张",
+          "description": "采购单位正从设备管理类项目向数智化病理系统等新方向扩张，本次采购是新方向布局的体现。可区分 claim：c34（采购内容与企业画像语义重叠）与 c37（最相似项目为设备管理类）——若官方正文显示采购内容确为数智化病理系统且与既往项目方向不同，则支持本假设；若正文显示仍为设备管理类延伸，则支持正常采购假设。",
+          "claimIds": [
+            "c9",
+            "c10",
+            "c14",
+            "c15",
+            "c16",
+            "c21",
+            "c29",
+            "c34",
+            "c37"
+          ],
+          "op": "AND"
+        }
+      ],
+      "gaps": [
+        {
+          "text": "官方招标正文中本项目金额、预算构成与采购需求参数的具体内容是什么？",
+          "relatedClaimId": "c3"
+        },
+        {
+          "text": "该采购单位过去 10 条有效金额中，8 个模拟样本对应的真实历史采购金额分别是多少？",
+          "relatedClaimId": "c12"
+        },
+        {
+          "text": "该采购单位历史 4 个完整观测窗口的具体起止时间与各窗口采购次数分别是多少？",
+          "relatedClaimId": "c13"
+        },
+        {
+          "text": "最相似历史项目（R-f456d19c850a03af）的实际中标金额与中标方是谁？",
+          "relatedClaimId": "c14"
+        },
+        {
+          "text": "本项目是否存在关联方参与投标或中标，投标人名单与资格条件是什么？",
+          "relatedClaimId": "c30"
+        },
+        {
+          "text": "本项目采购内容（数智化病理系统）与既往设备管理类项目在技术方向上的具体差异是什么？",
+          "relatedClaimId": "c34"
+        },
+        {
+          "text": "该采购单位近 30 天内另一次采购的项目名称、金额与内容是什么？",
+          "relatedClaimId": "c35"
+        },
+        {
+          "text": "本项目是否属于该采购单位既定建设规划或年度预算安排？",
+          "relatedClaimId": "c31"
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c1",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "支持",
+          "quote": "招标信号基础字段:项目编号 R-c67b890aeb583592;",
+          "reason": "该证据原文直接载明项目编号为 R-c67b890aeb583592,与 claim 完全一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 627.0 万元",
+          "reason": "该证据讨论金额异常检测,未涉及项目编号字段,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次",
+          "reason": "该证据讨论采购频率异常,未涉及项目编号字段。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为",
+          "reason": "该证据讨论新颖性检测,未涉及项目编号字段。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647",
+          "reason": "该证据讨论相关性检测,未涉及项目编号字段。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 原文逐字载明项目编号 R-c67b890aeb583592,与 claim 一致;其余证据均为检测器评分,与项目编号字段无关。但需注意 E1 与 E2-E5 同属 signal_layer 谱系根,不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c10",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "支持",
+          "quote": "招标信号基础字段:项目编号 R-c67b890aeb583592;项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告;采购方 天津市肿瘤医院空港医院;预算金额 6270000.0 元;发布日期 2026-09-09;领域 其他。",
+          "reason": "该证据确认存在公开招标公告及采购方、预算、发布日期等基础字段，是『潜在投标/合作机会』定性的前提事实。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 627.0 万元,为该采购单位过去 10 条有效金额中位数(21.9 万元)的 28.63 倍,金额异常得分 1.000。",
+          "reason": "金额异常检测只说明金额相对历史基线偏高，不涉及项目方向与企业画像是否匹配，也不改变『商机』定性。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.75 次,比值 2.67,频率异常得分 0.625。",
+          "reason": "频率异常检测反映采购频次变化，与项目方向和企业画像匹配与否无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』(2026-06-29),相似度 0.885(比较基数 10 个历史项目),新颖性异常得分 0.115。",
+          "reason": "新颖性检测描述与历史项目的相似程度，不直接支持或否定『商机』定性。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "支持",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "reason": "该证据直接给出项目与企业业务画像的语义相似度并达到准入阈值，正是 claim 所述『项目方向与企业画像匹配』的依据。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "E1 确认招标公告存在，E5 提供项目方向与企业画像匹配（相似度 0.647 达阈值）的依据，二者均支持该定性；但全部证据同根于 signal_layer，属同一上游，不构成独立来源印证，且 E5 仅为语义相似度阈值判定，未直接给出『商机』结论，故综合意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c11",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "支持",
+          "quote": "预算金额 6270000.0 元",
+          "reason": "信封基础字段载明预算金额 6270000.0 元，与 claim 所述『本项目金额 627.0 万元』一致，间接支持该金额数值。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "支持",
+          "quote": "本项目金额 627.0 万元,为该采购单位过去 10 条有效金额中位数(21.9 万元)的 28.63 倍,金额异常得分 1.000",
+          "reason": "该证据原文与 claim 引述的解释文字逐字一致，直接支持 claim 所述内容。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次",
+          "reason": "该证据为频率异常检测，不涉及金额异常解释的数值，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为",
+          "reason": "该证据为新颖性检测，与金额异常解释内容无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647",
+          "reason": "该证据为相关性检测，与金额异常解释内容无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E2 原文与 claim 引述的金额异常解释文字逐字一致，E1 的预算金额 6270000.0 元亦与 627.0 万元吻合，claim 所述解释载明内容得到直接印证；其余证据为其他检测器输出，不改变判断。需注意 E2 自述历史基线含 8 个模拟样本，但该点不影响 claim 所陈述的『解释载明』这一事实本身。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c12",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-c67b890aeb583592;项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告",
+          "reason": "该证据仅为信号层基础字段,未涉及 amountAnomaly 的解释文本。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "支持",
+          "quote": "历史基线含 8 个模拟样本,不代表真实历史证据充分。",
+          "reason": "该证据原文逐字包含 claim 所述解释语句,直接支持 claim。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.75 次,比值 2.67,频率异常得分 0.625。",
+          "reason": "该证据为频率异常检测,未载明 amountAnomaly 的解释文本。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』(2026-06-29),相似度 0.885(比较基数 10 个历史项目),新颖性异常得分 0.115。",
+          "reason": "该证据为新颖性检测,虽含相似表述但非 amountAnomaly 解释,不直接证明 claim 所指对象。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "reason": "该证据为相关性检测,未涉及 amountAnomaly 的解释文本。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "证据 evt_topkg2_0:E2 原文逐字载明『历史基线含 8 个模拟样本,不代表真实历史证据充分』,与 claim 表述一致;其余证据为其他检测器输出,不改变判断。但需注意所有证据同根于 signal_layer,不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c13",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-c67b890aeb583592;项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告",
+          "reason": "该证据仅给出项目基础字段,未涉及频率异常解释内容。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 627.0 万元,为该采购单位过去 10 条有效金额中位数(21.9 万元)的 28.63 倍,金额异常得分 1.000",
+          "reason": "该证据为金额异常检测,与频率异常解释无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "支持",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.75 次,比值 2.67,频率异常得分 0.625",
+          "reason": "该证据原文与 claim 所述频率异常解释逐字一致,直接支持。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』(2026-06-29),相似度 0.885",
+          "reason": "该证据为新颖性检测,与频率异常解释无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600",
+          "reason": "该证据为相关性检测,与频率异常解释无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "证据 evt_topkg2_0:E3 原文与 claim 所述频率异常解释逐字一致,其余证据不涉及该内容;但所有证据同根于 signal_layer,不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c14",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-c67b890aeb583592;项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告",
+          "reason": "该证据仅载明信号层基础字段(项目编号、名称、采购方、预算、发布日期、领域),未涉及新颖性检测的最相似历史项目、相似度、比较基数或新颖性异常得分,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 627.0 万元,为该采购单位过去 10 条有效金额中位数(21.9 万元)的 28.63 倍,金额异常得分 1.000。",
+          "reason": "该证据为金额异常检测结果,与 claim 所述新颖性检测的最相似项目、相似度 0.885、比较基数 10、新颖性异常得分 0.115 无对应关系。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.75 次,比值 2.67,频率异常得分 0.625。",
+          "reason": "该证据为频率异常检测结果,不包含 claim 所主张的新颖性检测要素。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "支持",
+          "quote": "该采购单位历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』(2026-06-29),相似度 0.885(比较基数 10 个历史项目),新颖性异常得分 0.115。",
+          "reason": "该证据原文逐项载明 claim 所述的最相似历史项目名称与编号、日期 2026-06-29、相似度 0.885、比较基数 10 个历史项目、新颖性异常得分 0.115,与 claim 文本一致,使 claim 更可能为真。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "reason": "该证据为相关性检测结果,与 claim 的新颖性检测内容无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一直接对应 claim 的证据 evt_topkg2_0:E4 逐字载明最相似项目名称与编号、日期、相似度 0.885、比较基数 10、新颖性异常得分 0.115,与 claim 完全吻合;其余证据为金额、频率、相关性检测及基础字段,均不涉及该断言。但全部证据同根(signal_layer),不构成独立来源印证,最终判决由代码按独立来源规则作出。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c16",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-c67b890aeb583592;项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告",
+          "reason": "该证据仅载明项目基础字段,未涉及相关性检测的语义相似度数值或准入阈值。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 627.0 万元,为该采购单位过去 10 条有效金额中位数(21.9 万元)的 28.63 倍,金额异常得分 1.000",
+          "reason": "该证据为金额异常检测结果,与 claim 所述相关性解释中的相似度与阈值无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.75 次,比值 2.67,频率异常得分 0.625",
+          "reason": "该证据为频率异常检测结果,不涉及语义相似度 0.647 或阈值 0.600。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』(2026-06-29),相似度 0.885(比较基数 10 个历史项目),新颖性异常得分 0.115",
+          "reason": "该证据为新颖性检测结果,其相似度 0.885 指向历史项目比较,与 claim 所述 0.647 及阈值 0.600 无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "支持",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600",
+          "reason": "该证据原文逐字载明语义相似度 0.647 与准入阈值 0.600,与 claim 表述一致,直接支持 claim。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一直接相关的证据 evt_topkg2_0:E5 原文逐字载明『项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600』,与 claim 完全吻合;其余四条证据分别涉及基础字段、金额异常、频率异常与新颖性检测,均不改变判断。需注意全部证据同根于 signal_layer,不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c17",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-c67b890aeb583592;项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告",
+          "reason": "该证据仅登记招标基础字段,未提及任何假设种子标签,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 627.0 万元,为该采购单位过去 10 条有效金额中位数(21.9 万元)的 28.63 倍,金额异常得分 1.000",
+          "reason": "金额异常检测与『真实经营动态』『正常大额采购』『新方向扩张』三个标签的登记事实无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.75 次,比值 2.67,频率异常得分 0.625",
+          "reason": "频率异常检测未涉及假设种子标签的登记情况。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』(2026-06-29),相似度 0.885",
+          "reason": "新颖性检测结果不涉及解读文本是否登记了三个假设种子标签。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600",
+          "reason": "相关性检测与 claim 所述标签登记事实无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内五条证据均为信号层检测记录,无一条提及『真实经营动态』『正常大额采购』『新方向扩张』三个假设种子标签的登记情况,无法证实或证伪该 claim,故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c18",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-c67b890aeb583592;项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告;采购方 天津市肿瘤医院空港医院;预算金额 6270000.0 元;发布日期 2026-09-09;领域 其他。",
+          "reason": "该证据仅给出信号层信封基础字段(项目编号、名称、采购方、预算、发布日期),未涉及解读文本的 basisGaps 内容,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "支持",
+          "quote": "历史基线含 8 个模拟样本,不代表真实历史证据充分。",
+          "reason": "该证据自述历史基线含模拟样本、不代表真实历史证据充分,与 claim 所称需先补齐真实历史采购金额基线相呼应,使 claim 更可能为真。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "频率异常得分 0.625。(评分 0.625;历史依据充分)。",
+          "reason": "该证据仅报告频率异常检测得分,未涉及 basisGaps 或真实历史基线、官方招标正文的缺口,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "支持",
+          "quote": "历史基线含 8 个模拟样本,不代表真实历史证据充分。",
+          "reason": "该证据同样自述历史基线含模拟样本、不代表真实历史证据充分,与 claim 所称需先补齐真实历史项目基线相呼应,使 claim 更可能为真。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "reason": "该证据仅报告相关性检测得分,未涉及 basisGaps 所列基线或官方招标正文核实需求,不改变 claim 判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "五条证据均来自同一谱系根 signal_layer,属同一上游,不构成独立印证;其中 E2、E4 自述历史基线含模拟样本、不代表真实历史证据充分,间接支持 claim 关于需补齐真实历史基线的说法,但无任何证据直接载明 basisGaps 的具体内容或官方招标正文核实需求,故综合意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c19",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-c67b890aeb583592;项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告;采购方 天津市肿瘤医院空港医院;预算金额 6270000.0 元;发布日期 2026-09-09;领域 其他。",
+          "reason": "该证据仅载明项目编号、名称、采购方、预算金额、发布日期与领域等基础字段,未出现 amountHistory、historicalMedianAmountYuan、amountRatio、historyCount、simulatedHistoryCount 等字段,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "支持",
+          "quote": "本项目金额 627.0 万元,为该采购单位过去 10 条有效金额中位数(21.9 万元)的 28.63 倍",
+          "reason": "该证据给出历史中位数 21.9 万元(即 219000 元量级,与 218965.55 元一致)、比值 28.63(与 28.634641385368614 一致)、历史条数 10,并另载明含 8 个模拟样本,与 claim 所列各字段数值相符。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.75 次,比值 2.67,频率异常得分 0.625。",
+          "reason": "该证据为频率异常检测结果,未涉及 amountHistory 的金额中位数、比值、历史条数与模拟样本数,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』(2026-06-29),相似度 0.885(比较基数 10 个历史项目),新颖性异常得分 0.115。",
+          "reason": "该证据为新颖性检测结果,仅提及比较基数 10 个历史项目,未载明 amountHistory 各字段数值,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "reason": "该证据为相关性检测结果,与 amountHistory 字段数值无关,不改变 claim 判断。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E2 逐项复现了 claim 所述数值:历史中位数 21.9 万元(218965.55 元量级)、比值 28.63(28.634641385368614)、历史条数 10、模拟样本 8 个;其余证据为频率、新颖性、相关性检测及基础字段,与 claim 无关。但全部证据谱系根均为 signal_layer,属同一上游,不构成独立印证,故该意见可能被独立来源规则否决。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c2",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "支持",
+          "quote": "采购方 天津市肿瘤医院空港医院",
+          "reason": "信封基础字段直接载明采购方为天津市肿瘤医院空港医院，与 claim 一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测",
+          "reason": "仅涉及金额异常评分，不涉及采购方字段。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测",
+          "reason": "仅涉及采购频率异常，不涉及采购方字段。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测",
+          "reason": "仅涉及新颖性评分，不涉及采购方字段。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测",
+          "reason": "仅涉及语义相关性评分，不涉及采购方字段。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 信封基础字段逐字载明采购方为天津市肿瘤医院空港医院，直接支持 claim；其余证据均为检测器评分，与采购方字段无关。但所有证据同根于 signal_layer，不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c20",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-c67b890aeb583592;项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告;采购方 天津市肿瘤医院空港医院;预算金额 6270000.0 元;发布日期 2026-09-09;领域 其他。",
+          "reason": "该证据仅载明项目编号、名称、采购方、预算、发布日期与领域等基础字段,未涉及 frequencyHistory 的 windowDays、recentCount、historicalWindowAverageCount、frequencyRatio、historicalWindowsUsed 任何取值,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 627.0 万元,为该采购单位过去 10 条有效金额中位数(21.9 万元)的 28.63 倍,金额异常得分 1.000。",
+          "reason": "该证据为金额异常检测,给出金额倍数与得分,未提及 frequencyHistory 各字段取值,与 claim 无直接关联。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "支持",
+          "quote": "截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.75 次,比值 2.67,频率异常得分 0.625。",
+          "reason": "该证据逐项对应 claim 所述 frequencyHistory:近 30 天(即 windowDays 为 30)、采购 2 次(recentCount 为 2)、4 个历史窗口平均 0.75 次(historicalWindowsUsed 为 4、historicalWindowAverageCount 为 0.75)、比值 2.67(与 frequencyRatio 2.6666666666666665 一致),使 claim 更可能为真。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』(2026-06-29),相似度 0.885(比较基数 10 个历史项目),新颖性异常得分 0.115。",
+          "reason": "该证据为新颖性检测,涉及相似项目与相似度,未涉及 frequencyHistory 字段取值,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "reason": "该证据为相关性检测,仅给出语义相似度与阈值,未涉及 frequencyHistory 字段取值,不改变 claim 判断。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一涉及 frequencyHistory 的证据 evt_topkg2_0:E3 逐项给出近 30 天、2 次、4 个历史窗口平均 0.75 次、比值 2.67,与 claim 所列 windowDays=30、recentCount=2、historicalWindowAverageCount=0.75、frequencyRatio≈2.6667、historicalWindowsUsed=4 完全吻合;其余证据仅涉金额、新颖性、相关性与基础字段,不构成矛盾。但全部证据同根于 signal_layer,不构成独立来源印证,故仅为意见,最终由代码裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c21",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-c67b890aeb583592;项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告",
+          "reason": "该证据仅列示信号信封的基础字段(项目编号、名称、采购方、预算、发布日期、领域),未涉及 noveltyHistory 的 historyCount、simulatedHistoryCount 或 maxHistorySimilarity 任何一项,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "历史基线含 8 个模拟样本,不代表真实历史证据充分。",
+          "reason": "该证据为金额异常检测,仅提及模拟样本数量 8,未给出 historyCount=10 或 maxHistorySimilarity=0.8853666186332703,与 claim 的三项数值无直接对应。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.75 次,比值 2.67,频率异常得分 0.625。",
+          "reason": "该证据为频率异常检测,涉及历史窗口数与频次,未载明 noveltyHistory 的 historyCount、simulatedHistoryCount 或 maxHistorySimilarity。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "支持",
+          "quote": "相似度 0.885(比较基数 10 个历史项目)",
+          "reason": "该证据给出比较基数 10 个历史项目与相似度 0.885,与 claim 中 historyCount=10、maxHistorySimilarity≈0.8853666186332703 一致(原文仅保留三位小数),使 claim 更可能为真;但未直接给出 simulatedHistoryCount=8 的字段名。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "reason": "该证据为相关性检测,给出语义相似度 0.647,与 noveltyHistory 的三项数值无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅 evt_topkg2_0:E4 以『比较基数 10 个历史项目』与『相似度 0.885』部分印证 historyCount 与 maxHistorySimilarity,但无任何证据逐字载明 noveltyHistory 字段名及 simulatedHistoryCount=8,且全部证据同根于 signal_layer,不构成独立印证,故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c22",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-c67b890aeb583592;项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告;采购方 天津市肿瘤医院空港医院;预算金额 6270000.0 元;发布日期 2026-09-09;领域 其他。",
+          "reason": "该证据仅列示信号层信封的基础字段(项目编号、名称、采购方、预算、发布日期、领域),未提及 rumor 字段,无法证明其为空(null)。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 627.0 万元,为该采购单位过去 10 条有效金额中位数(21.9 万元)的 28.63 倍,金额异常得分 1.000。",
+          "reason": "该证据描述金额异常检测结果,与信封 rumor 字段是否为空无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.75 次,比值 2.67,频率异常得分 0.625。",
+          "reason": "该证据描述频率异常检测结果,与信封 rumor 字段是否为空无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』(2026-06-29),相似度 0.885(比较基数 10 个历史项目),新颖性异常得分 0.115。",
+          "reason": "该证据描述新颖性检测结果,与信封 rumor 字段是否为空无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "reason": "该证据描述相关性检测结果,与信封 rumor 字段是否为空无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内五条证据均为信号层基础字段与检测器输出,无一条提及或展示信封的 rumor 字段内容,无法证实或证伪该 claim,故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c23",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-c67b890aeb583592;项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告;采购方 天津市肿瘤医院空港医院;预算金额 6270000.0 元;发布日期 2026-09-09;领域 其他。",
+          "reason": "该证据仅列出信号信封的基础字段(项目编号、名称、采购方、预算、发布日期、领域),未提及 eventId 字段及其取值,无法判断 eventId 是否为空字符串。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 627.0 万元,为该采购单位过去 10 条有效金额中位数(21.9 万元)的 28.63 倍,金额异常得分 1.000。",
+          "reason": "该证据描述金额异常检测结果,与 eventId 字段取值无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.75 次,比值 2.67,频率异常得分 0.625。",
+          "reason": "该证据描述频率异常检测结果,与 eventId 字段取值无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』(2026-06-29),相似度 0.885(比较基数 10 个历史项目),新颖性异常得分 0.115。",
+          "reason": "该证据描述新颖性检测结果,与 eventId 字段取值无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "reason": "该证据描述相关性检测结果,与 eventId 字段取值无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内五条证据均为信号层基础字段与各检测器输出,均未载明 eventId 字段及其取值,无任何证据支持或否定『eventId 为空字符串』,故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c24",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-c67b890aeb583592;项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告",
+          "reason": "该证据仅载明信号信封的基础字段(项目编号、名称、采购方、预算、发布日期、领域),未涉及 amountAnomaly、frequencyAnomaly、noveltyAnomaly、relevance 各检测项的 basisSufficient 取值,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "支持",
+          "quote": "历史依据充分)。",
+          "reason": "金额异常检测证据末尾载明『历史依据充分』,与 claim 中 amountAnomaly 的 basisSufficient 为 true 一致,使该部分更可能为真。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "支持",
+          "quote": "历史依据充分)。",
+          "reason": "频率异常检测证据末尾载明『历史依据充分』,与 claim 中 frequencyAnomaly 的 basisSufficient 为 true 一致,使该部分更可能为真。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "支持",
+          "quote": "历史依据充分)。",
+          "reason": "新颖性检测证据末尾载明『历史依据充分』,与 claim 中 noveltyAnomaly 的 basisSufficient 为 true 一致,使该部分更可能为真。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "支持",
+          "quote": "历史依据充分)。",
+          "reason": "相关性检测证据末尾载明『历史依据充分』,与 claim 中 relevance 的 basisSufficient 为 true 一致,使该部分更可能为真。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "四条检测器证据(E2-E5)分别对应 claim 所列 amountAnomaly、frequencyAnomaly、noveltyAnomaly、relevance 四项,均在原文中载明『历史依据充分』,与 basisSufficient 为 true 相符;E1 为基础字段,不涉及该断言。需注意 E2、E4 原文同时提示历史基线含模拟样本,且全部证据谱系根同为 signal_layer,独立性有限,故本意见可能被代码按独立来源规则否决。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c25",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-c67b890aeb583592;项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告;采购方 天津市肿瘤医院空港医院;预算金额 6270000.0 元;发布日期 2026-09-09;领域 其他。",
+          "reason": "该证据仅载明项目基础字段,未涉及 amountAnomaly、frequencyAnomaly、noveltyAnomaly、relevance 四项 score 数值,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "支持",
+          "quote": "(评分 0.9999001206028643;历史依据充分)",
+          "reason": "该证据原文给出金额异常评分 0.9999001206028643,与 claim 中 amountAnomaly 的 score 完全一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "支持",
+          "quote": "(评分 0.625;历史依据充分)",
+          "reason": "该证据原文给出频率异常得分 0.625,与 claim 中 frequencyAnomaly 的 score 一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "支持",
+          "quote": "(评分 0.11463338136672974;历史依据充分)",
+          "reason": "该证据原文给出新颖性异常评分 0.11463338136672974,与 claim 中 noveltyAnomaly 的 score 一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "支持",
+          "quote": "(评分 0.6469710469245911;历史依据充分)",
+          "reason": "该证据原文给出相关性评分 0.6469710469245911,与 claim 中 relevance 的 score 一致。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "四条检测器证据分别逐字给出 claim 所列四项 score 数值,与 claim 完全吻合;但五条证据谱系根同为 signal_layer,属同一上游,不构成独立来源印证,最终判决由代码按独立来源规则作出。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c26",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-c67b890aeb583592;项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告;采购方 天津市肿瘤医院空港医院;预算金额 6270000.0 元;发布日期 2026-09-09;领域 其他。",
+          "reason": "该证据载明的是项目编号 R-c67b890aeb583592、发布日期 2026-09-09，与 claim 所述 projectId R-f456d19c850a03af、publishDate 2026-06-29 均不同，且未提及 mostSimilarProject 或 dataOrigin，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 627.0 万元,为该采购单位过去 10 条有效金额中位数(21.9 万元)的 28.63 倍,金额异常得分 1.000。",
+          "reason": "该证据仅涉及金额异常检测，未涉及 mostSimilarProject 的 dataOrigin、publishDate 或 projectId。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.75 次,比值 2.67,频率异常得分 0.625。",
+          "reason": "该证据仅涉及频率异常检测，未涉及 claim 所述信封字段。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "该采购单位历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』(2026-06-29),相似度 0.885(比较基数 10 个历史项目),新颖性异常得分 0.115。",
+          "reason": "该证据虽提及最相似项目及其日期 2026-06-29，但未载明 mostSimilarProject 的 dataOrigin 为 real，也未给出 projectId R-f456d19c850a03af，无法直接印证或否证 claim 的完整字段组合。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "reason": "该证据仅涉及相关性检测得分，未涉及 claim 所述信封字段。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内五条证据均来自 signal_layer 同一谱系根，且无一条载明 mostSimilarProject 的 dataOrigin 为 real 或 projectId 为 R-f456d19c850a03af；E4 仅出现日期 2026-06-29 与最相似项目描述，不足以完整印证 claim 的三项字段，故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c27",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "支持",
+          "quote": "招标信号基础字段:项目编号 R-c67b890aeb583592;项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告",
+          "reason": "该证据标题为『信号层信封基础字段』，内容为招标信号信封字段，与 claim 所述『信号信封载明 kind 为 tender』方向一致，但原文未逐字出现 kind 或 tender 字样，仅能间接支持。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 627.0 万元",
+          "reason": "仅涉及金额异常检测得分，不涉及信封 kind 或 signalType 定性。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次",
+          "reason": "仅涉及频率异常检测，不涉及信封 kind 或 signalType 定性。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为",
+          "reason": "仅涉及新颖性检测，不涉及信封 kind 或 signalType 定性。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647",
+          "reason": "仅涉及相关性检测得分，不涉及信封 kind 或 signalType 定性。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "全部证据谱系根均为 signal_layer，属同一上游，不构成独立印证；且无一条证据原文逐字载明 kind 为 tender 或 signalType 定性为『商机』，claim 关键字段缺乏直接证据支撑，故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c28",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-c67b890aeb583592;项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告",
+          "reason": "该证据仅列示信号层基础字段（项目编号、名称、采购方、预算、发布日期、领域），未提及 sourceUrl 或千里马招标网，无法改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 627.0 万元,为该采购单位过去 10 条有效金额中位数(21.9 万元)的 28.63 倍,金额异常得分 1.000",
+          "reason": "金额异常检测与信封 sourceUrl 指向何处无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.75 次,比值 2.67,频率异常得分 0.625",
+          "reason": "频率异常检测与 sourceUrl 字段内容无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』(2026-06-29),相似度 0.885",
+          "reason": "新颖性检测不涉及信封 sourceUrl 字段。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600",
+          "reason": "相关性检测与 sourceUrl 指向的站点无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "全部五条证据均来自 signal_layer 同一谱系根，且内容只涉及基础字段与四类异常检测得分，无一条提及 sourceUrl 或千里马招标网（qiye.qianlima.com），claim 缺乏任何直接证据支撑，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c29",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "支持",
+          "quote": "项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告",
+          "reason": "信封基础字段同时载明项目名称为数智化病理系统采购项目、且为公开招标公告，直接支持 claim 的两项内容。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 627.0 万元",
+          "reason": "仅涉及金额异常评分，不改变对采购内容与采购方式的判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次",
+          "reason": "仅涉及采购频率异常，与采购内容及采购方式无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为",
+          "reason": "仅涉及新颖性相似度，不改变对采购内容与采购方式的判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647",
+          "reason": "仅涉及业务相关性评分，与采购内容及采购方式无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "信封基础字段逐字载明项目名称为数智化病理系统采购项目、且为公开招标公告，直接印证 claim 两项内容；其余四条为异常检测评分，不改变判断。注意全部证据同根于 signal_layer，不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c3",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "支持",
+          "quote": "预算金额 6270000.0 元",
+          "reason": "信号层信封基础字段直接载明预算金额 6270000.0 元，与 claim 所述金额一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "支持",
+          "quote": "本项目金额 627.0 万元",
+          "reason": "金额异常检测器复述本项目金额为 627.0 万元，与 claim 的 6270000.0 元（627.0 万元）一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次",
+          "reason": "该证据只涉及采购频率异常，不涉及项目金额，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为",
+          "reason": "该证据只涉及项目新颖性/相似度，不涉及金额，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647",
+          "reason": "该证据只涉及业务相关性评分，不涉及金额，不改变 claim 判断。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 信封基础字段与 E2 金额异常检测器均载明金额 6270000.0 元 / 627.0 万元，与 claim 一致；但两者谱系根同为 signal_layer，属同一上游，不构成独立来源印证，故仅为意见。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c30",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "支持",
+          "quote": "采购方 天津市肿瘤医院空港医院",
+          "reason": "信封基础字段载明采购方为天津市肿瘤医院空港医院，直接支持 claim 中本项目采购单位的断言。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 627.0 万元",
+          "reason": "仅涉及金额异常检测，不涉及采购单位是否与历史项目相同。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次",
+          "reason": "仅涉及采购频率异常，不改变对采购单位同一性的判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "该采购单位历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』(2026-06-29),相似度 0.885",
+          "reason": "该证据给出的是历史最相似项目及其相似度，但未载明 claim 所指历史项目 R-f456d19c850a03af 的采购单位，无法据此确认两者采购单位相同。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647",
+          "reason": "仅涉及业务画像相关性评分，与采购单位同一性无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "E1 支持本项目采购单位为天津市肿瘤医院空港医院，但卷宗内无任何证据载明最相似历史项目 R-f456d19c850a03af 的采购单位，claim 的对比部分缺乏证据支撑，故只能待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c31",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "支持",
+          "quote": "预算金额 6270000.0 元",
+          "reason": "信封基础字段载明本项目金额 6270000.0 元（即 627.0 万元），与 claim 所述金额一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "支持",
+          "quote": "本项目金额 627.0 万元,为该采购单位过去 10 条有效金额中位数(21.9 万元)的 28.63 倍",
+          "reason": "该检测器原文同时给出 627.0 万元、21.9 万元中位数与 28.63 倍，直接支撑 claim 的金额量级差异部分。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "支持",
+          "quote": "近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.75 次,比值 2.67",
+          "reason": "该检测器原文给出近 30 天频次比值 2.67，直接支撑 claim 的频次比值部分。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "相似度 0.885(比较基数 10 个历史项目),新颖性异常得分 0.115",
+          "reason": "新颖性检测涉及最相似历史项目与相似度，不涉及金额倍数或频次比值，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600",
+          "reason": "相关性检测涉及语义相似度阈值，与金额量级差异及频次比值无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 载明金额 6270000.0 元，E2 载明 627.0 万元为中位数 21.9 万元的 28.63 倍，E3 载明近 30 天频次比值 2.67，claim 的两项异常数值均被逐字印证；但全部证据谱系根同为 signal_layer，属同一上游，不构成独立来源印证，最终判决由代码按独立来源规则作出。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c32",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "支持",
+          "quote": "发布日期 2026-09-09",
+          "reason": "信封基础字段直接载明本项目发布日期 2026-09-09，与 claim 所述本项目发布日期一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 627.0 万元",
+          "reason": "仅涉及金额异常检测，未涉及任何发布日期或时间间隔信息。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次",
+          "reason": "仅涉及采购频率异常，未涉及发布日期或时间间隔。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "支持",
+          "quote": "该采购单位历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』(2026-06-29)",
+          "reason": "载明最相似历史项目发布日期为 2026-06-29，与 claim 所述一致，支撑 72 天间隔的计算基础。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "项目与企业业务画像的语义相似度为 0.647",
+          "reason": "仅涉及相关性语义相似度，未涉及发布日期或时间间隔。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 载明本项目发布日期 2026-09-09，E4 载明最相似历史项目发布日期 2026-06-29，两者相隔 72 天，与 claim 一致；其余证据与日期无关。但 E1 与 E4 同属 signal_layer 谱系根，非独立来源，最终判决由代码按独立来源规则作出。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c33",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "支持",
+          "quote": "预算金额 6270000.0 元",
+          "reason": "信封基础字段载明本项目预算金额 6270000.0 元，即 627.0 万元，支持 claim 前半句。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "支持",
+          "quote": "本项目金额 627.0 万元",
+          "reason": "检测器复述本项目金额 627.0 万元，与本 claim 金额一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "频率异常得分 0.625",
+          "reason": "仅涉及采购频率异常，不涉及本项目金额或历史项目信封金额。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "支持",
+          "quote": "该采购单位历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』(2026-06-29),相似度 0.885",
+          "reason": "确认最相似历史项目即大型设备物联网和医疗设备全生命周期管理软件采购项目，且该处未给出其金额，支持 claim 后半句。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "项目与企业业务画像的语义相似度为 0.647",
+          "reason": "仅涉及业务相关性评分，与金额陈述无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "信封基础字段与金额异常检测均载明本项目金额 627.0 万元；新颖性检测确认最相似历史项目为大型设备物联网和医疗设备全生命周期管理软件采购项目且未给出其金额。全部证据同根于 signal_layer，仅构成单一来源，最终独立性判定交由代码。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c34",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "支持",
+          "quote": "项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告",
+          "reason": "信封载明采购内容为『数智化病理系统』，与 claim 所述『信号信封载明本项目采购内容为数智化病理系统』一致，使该断言更可能为真。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 627.0 万元,为该采购单位过去 10 条有效金额中位数(21.9 万元)的 28.63 倍,金额异常得分 1.000",
+          "reason": "仅涉及金额异常评分，不涉及采购内容与企业画像的语义重叠，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.75 次,比值 2.67,频率异常得分 0.625",
+          "reason": "仅涉及采购频率异常，与采购内容语义重叠无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』(2026-06-29),相似度 0.885",
+          "reason": "仅涉及与历史项目的新颖性比较，未涉及本项目采购内容与企业画像的语义重叠。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "支持",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600",
+          "reason": "该检测直接给出项目与企业业务画像的语义相似度 0.647 并达到准入阈值，支持『存在语义重叠』这一断言。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "E1 载明采购内容为『数智化病理系统』，E5 给出与企业业务画像语义相似度 0.647 达阈值，二者支持 claim；但 E5 未逐字列出企业画像的具体标签（『医疗AI、医学影像、辅助诊断、智慧医院、医院信息化、医疗大模型、医院数据平台、HIS、PACS、电子病历』），且全部证据同根于 signal_layer，不构成独立来源印证，故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c35",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-c67b890aeb583592;项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告;采购方 天津市肿瘤医院空港医院;预算金额 6270000.0 元;发布日期 2026-09-09;领域 其他。",
+          "reason": "仅载明项目基础字段与采购方，未涉及近30天采购次数或历史窗口均值。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 627.0 万元,为该采购单位过去 10 条有效金额中位数(21.9 万元)的 28.63 倍,金额异常得分 1.000。",
+          "reason": "该证据讨论金额异常，与采购频次/窗口均值无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "支持",
+          "quote": "截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.75 次,比值 2.67,频率异常得分 0.625。",
+          "reason": "逐字给出近30天2次与4个历史窗口平均0.75次，与claim数值一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』(2026-06-29),相似度 0.885(比较基数 10 个历史项目),新颖性异常得分 0.115。",
+          "reason": "该证据讨论项目相似度与新颖性，不涉及采购频次统计。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "reason": "该证据讨论语义相关性，与频次/窗口均值无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一直接相关的证据 evt_topkg2_0:E3 逐字载明近30天采购2次、4个历史窗口平均0.75次，与claim完全吻合；其余证据不涉及该统计量。但全部证据同根（lineage_root 均为 signal_layer），不构成独立来源印证，最终以代码独立来源规则为准。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c36",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "支持",
+          "quote": "预算金额 6270000.0 元",
+          "reason": "信封基础字段载明预算金额 6270000.0 元，即 627.0 万元，支持 claim 中金额部分。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "支持",
+          "quote": "本项目金额 627.0 万元,为该采购单位过去 10 条有效金额中位数(21.9 万元)的 28.63 倍,金额异常得分 1.000。历史基线含 8 个模拟样本,不代表真实历史证据充分。",
+          "reason": "该检测器原文逐项复现 claim 的金额、倍数、得分与模拟样本数，直接支持。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次",
+          "reason": "频率异常检测与 claim 所述金额异常及历史基线构成无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为",
+          "reason": "新颖性检测不涉及 claim 的金额倍数或金额异常得分。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647",
+          "reason": "相关性检测与 claim 的金额异常断言无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 与 E2 均逐字载明 627.0 万元、中位数 21.9 万元、28.63 倍、金额异常得分 1.000 及 8 个模拟样本，claim 各要素均有原文支撑；但 E1、E2 同根 signal_layer，非独立来源，最终由代码按独立来源规则裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c37",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-c67b890aeb583592;项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告;采购方 天津市肿瘤医院空港医院;预算金额 6270000.0 元;发布日期 2026-09-09;领域 其他。",
+          "reason": "该证据仅载明本项目基础字段(项目编号、名称、采购方、预算、发布日期),未涉及历史最相似项目及其相似度,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 627.0 万元,为该采购单位过去 10 条有效金额中位数(21.9 万元)的 28.63 倍,金额异常得分 1.000。",
+          "reason": "该证据讨论金额异常,与历史最相似项目及相似度 0.885 无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.75 次,比值 2.67,频率异常得分 0.625。",
+          "reason": "该证据讨论采购频率异常,不涉及历史最相似项目或相似度。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "支持",
+          "quote": "该采购单位历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』(2026-06-29),相似度 0.885",
+          "reason": "该证据逐字给出历史最相似项目名称、项目编号与相似度 0.885,与 claim 所述内容一致,使 claim 更可能为真。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "reason": "该证据讨论项目与企业业务画像的语义相似度,与历史最相似项目及 0.885 相似度无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E4 逐字载明历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』且相似度 0.885,与 claim 完全吻合;其余证据不涉及该断言。注意 E1-E5 谱系根同为 signal_layer,不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c38",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-c67b890aeb583592;项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告;采购方 天津市肿瘤医院空港医院;预算金额 6270000.0 元;发布日期 2026-09-09;领域 其他。",
+          "reason": "该证据仅载明项目基础字段与采购单位，未涉及历史金额基线或模拟样本数量，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "支持",
+          "quote": "历史基线含 8 个模拟样本,不代表真实历史证据充分。",
+          "reason": "该证据原文直接出现与 claim 一致的表述，支持 claim 中关于历史金额基线含 8 个模拟样本且不代表真实历史证据充分的断言。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.75 次,比值 2.67,频率异常得分 0.625。",
+          "reason": "该证据为频率异常检测，未提及历史金额基线或模拟样本，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "支持",
+          "quote": "历史基线含 8 个模拟样本,不代表真实历史证据充分。",
+          "reason": "该证据原文同样出现与 claim 一致的表述，支持 claim 中关于历史项目基线含 8 个模拟样本且不代表真实历史证据充分的断言。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "reason": "该证据为相关性检测，未涉及历史金额基线或模拟样本，不改变 claim 判断。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E2 与 E4 原文均逐字载明历史基线含 8 个模拟样本且不代表真实历史证据充分，与 claim 表述一致；但两条证据谱系根同为 signal_layer，属同一上游，不构成独立印证，故本意见可能被代码按独立来源规则否决。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c4",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "支持",
+          "quote": "发布日期 2026-09-09",
+          "reason": "信封基础字段直接载明发布日期为 2026-09-09，与 claim 一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测",
+          "reason": "仅涉及金额异常评分，不涉及发布日期。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测",
+          "reason": "仅涉及采购频率异常，不涉及发布日期。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测",
+          "reason": "仅涉及新颖性相似度，不涉及发布日期。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测",
+          "reason": "仅涉及业务相关性语义相似度，不涉及发布日期。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一直接载明发布日期的证据 E1 与 claim 完全一致；其余证据均为检测器评分，与发布日期无关。但所有证据同根（signal_layer），不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c5",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "支持",
+          "quote": "项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告",
+          "reason": "信封基础字段逐字载明项目名称与项目编号 SHGP-2026-A536，与 claim 完全一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 627.0 万元",
+          "reason": "仅涉及金额异常评分，不改变对项目名称与编号的判定。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次",
+          "reason": "仅涉及采购频率异常，与名称/编号断言无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为",
+          "reason": "仅涉及新颖性相似度，不改变名称/编号判定。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647",
+          "reason": "仅涉及业务相关性评分，与名称/编号断言无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 信封基础字段逐字载明项目名称与项目编号 SHGP-2026-A536，与 claim 一致；E2-E5 为异常检测评分，不改变该判定。但全部证据同根于 signal_layer，不构成独立来源印证，最终以代码独立来源规则为准。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c6",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-c67b890aeb583592;项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告",
+          "reason": "该证据仅列示信号信封的基础字段(项目编号、名称、采购方、预算、发布日期、领域),未出现 contentSourceNote 字段或其载明内容,不能证明也不能否证 claim 所述的信封字段声明。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 627.0 万元,为该采购单位过去 10 条有效金额中位数(21.9 万元)的 28.63 倍,金额异常得分 1.000。",
+          "reason": "该证据是金额异常检测器的输出,与 contentSourceNote 是否载明『未抓取官方正文、未补造金额』无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.75 次,比值 2.67,频率异常得分 0.625。",
+          "reason": "该证据是频率异常检测器的输出,不涉及信封的 contentSourceNote 字段内容。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』(2026-06-29),相似度 0.885",
+          "reason": "该证据是新颖性检测器的输出,与 claim 所指的 contentSourceNote 载明内容无关联。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "reason": "该证据是相关性检测器的输出,不改变对 contentSourceNote 是否载明该声明的判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内五条证据均为信号层基础字段与检测器输出,均未包含 contentSourceNote 字段或其载明文本,无法直接印证或否证 claim;且五条证据同根(signal_layer),不构成独立来源,故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c7",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "支持",
+          "quote": "领域 其他。摘要:天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告；采购单位：天津市肿瘤医院空港医院；领域：其他",
+          "reason": "该证据原文直接载明领域为『其他』，且摘要文字与 claim 所述摘要逐字一致，直接支持 claim。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 627.0 万元",
+          "reason": "该证据只涉及金额异常检测，不涉及信封领域字段或摘要内容，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次",
+          "reason": "该证据只涉及采购频率异常，与领域字段和摘要无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为",
+          "reason": "该证据只涉及新颖性检测，不涉及 claim 所述字段。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647",
+          "reason": "该证据只涉及相关性评分，不涉及领域字段或摘要内容。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 原文逐字载明『领域 其他』及与 claim 一致的摘要文本，直接支持；其余证据均为检测器评分，与 claim 所述字段无关。但 E1 与其余证据同根（lineage_root 均为 signal_layer），独立来源有限，最终以代码独立来源规则判定为准。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c8",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-c67b890aeb583592;项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告;采购方 天津市肿瘤医院空港医院;预算金额 6270000.0 元;发布日期 2026-09-09;领域 其他。",
+          "reason": "该证据仅列示信号层基础字段(项目编号、名称、采购方、金额、发布日期、领域),未出现任何来源链接或 URL,不能证明或否证 claim 所述的信封来源链接。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 627.0 万元,为该采购单位过去 10 条有效金额中位数(21.9 万元)的 28.63 倍,金额异常得分 1.000。",
+          "reason": "该证据讨论金额异常检测得分,与信封是否载明特定来源链接无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.75 次,比值 2.67,频率异常得分 0.625。",
+          "reason": "该证据讨论采购频率异常,与来源链接字段无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』(2026-06-29),相似度 0.885",
+          "reason": "该证据讨论新颖性检测与相似项目,不涉及来源链接。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "reason": "该证据讨论业务相关性得分,与信封来源链接字段无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内五条证据均为信号层基础字段与检测器评分,均未包含或引用 claim 所述来源链接 https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/629601584/2714/zhaobiao,无任何证据可支持或反驳该断言,故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c9",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_0:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-c67b890aeb583592;项目名称 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告",
+          "reason": "该证据仅载明项目编号、名称、采购方、预算、发布日期与领域，未提及企业业务画像的任何构成项，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 627.0 万元,为该采购单位过去 10 条有效金额中位数(21.9 万元)的 28.63 倍,金额异常得分 1.000",
+          "reason": "金额异常检测与业务画像字段是否载明无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 2 次,已完整观测的 4 个历史窗口平均 0.75 次,比值 2.67,频率异常得分 0.625",
+          "reason": "频率异常检测与业务画像字段是否载明无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』(2026-06-29),相似度 0.885",
+          "reason": "新颖性检测未涉及业务画像字段清单。"
+        },
+        {
+          "evidenceId": "evt_topkg2_0:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600",
+          "reason": "该证据只给出项目与业务画像的语义相似度数值，未列出画像包含的具体字段，无法证实或否证 claim 所列字段清单。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "五条证据均来自同一谱系根 signal_layer，且内容为信号层基础字段与异常检测评分，均未载明企业业务画像的具体字段清单，claim 所列『医疗AI、医学影像、辅助诊断、智慧医院、医院信息化、医疗大模型、医院数据平台、HIS、PACS、电子病历』在卷宗中无任何证据支撑，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 1,
+      "mainTarget": "c6",
+      "action": "explore",
+      "gapChain": [
+        {
+          "gap": "信号信封 contentSourceNote 是否载明『基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果』——即本信号是否确为未抓取官方正文的字段生成物。",
+          "acceptance": "需信号信封原文级证据：contentSourceNote 字段的逐字文本，须与 c6 引文完全一致方可判为证实；若文本不同或字段缺失，则判为证伪并记录实际文本。",
+          "failover": "若信封内无法定位该字段，则转向 c28/c8 的来源链接，点进千里马招标网详情页核实是否存在官方正文抓取痕迹。"
+        },
+        {
+          "gap": "来源链接 https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/629601584/2714/zhaobiao 对应的详情页是否含官方招标正文（金额、参数、资格条件），还是仅有字段摘要。",
+          "acceptance": "需页面正文级证据：详情页可见的正文段落文本，能判定是否含官方招标公告正文（含预算金额、技术参数、资格条件等要素）；仅有字段列表或摘要卡片不算查到。",
+          "failover": "若详情页需登录或不可达，则改查天津市肿瘤医院空港医院官方渠道或政府采购平台对项目编号 SHGP-2026-A536 的公告记录。"
+        },
+        {
+          "gap": "官方正文（若存在）中本项目金额与采购内容是否与信封字段（627.0 万元、数智化病理系统）一致，以判定 c31 双异常在『正常大额采购』与『异常输送』两假设下的符号。",
+          "acceptance": "需权威登记源记录或官方公告正文级证据：能逐字比对预算金额与采购标的名称；若正文缺失，则记录『官方正文不可得』作为区分两假设的证据状态。",
+          "failover": "若官方正文不可得，则回退至 c18 所列 basisGaps 的补齐路径，标注真实历史基线缺口未闭合，不强行推断。"
+        }
+      ],
+      "searchHints": [
+        "SHGP-2026-A536 数智化病理系统 招标公告",
+        "天津市肿瘤医院空港医院 数智化病理系统 采购项目 预算",
+        "qiye.qianlima.com infoDetail 629601584 2714 zhaobiao"
+      ],
+      "sideTargets": [
+        "c28",
+        "c8",
+        "c26"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 核心事实\n\n信号信封载明，本项目采购内容为数智化病理系统，采购方式为公开招标 [1][2][3][4][5]。本项目金额为 6270000.0 元（627.0 万元）[1][2][3][4][5]。\n\n金额维度方面，信号信封载明 amountHistory 的 historicalMedianAmountYuan 为 218965.55 元、amountRatio 为 28.634641385368614、historyCount 为 10、simulatedHistoryCount 为 8 [2][1][3][4][5]。amountAnomaly 解释载明『本项目金额 627.0 万元，为该采购单位过去 10 条有效金额中位数(21.9 万元)的 28.63 倍，金额异常得分 1.000』[1][2][3][4][5]。信号信封载明 amountAnomaly 的 score 为 0.9999001206028643 [2][3][4][5][1]。\n\n频次维度方面，信号信封载明 frequencyHistory 的 windowDays 为 30、recentCount 为 2、historicalWindowAverageCount 为 0.75、frequencyRatio 为 2.6666666666666665、historicalWindowsUsed 为 4 [3][1][2][4][5]。frequencyAnomaly 解释载明『截至当天近 30 天该采购单位采购 2 次，已完整观测的 4 个历史窗口平均 0.75 次，比值 2.67，频率异常得分 0.625』[3][1][2][4][5]。信号信封载明 frequencyAnomaly 的 score 为 0.625 [2][3][4][5][1]。\n\n就金额与频次两项异常的关系，存在矛盾口径：信号信封载明本项目金额 627.0 万元与历史中位数 21.9 万元之间存在 28.63 倍的量级差异，且近 30 天采购频次比值 2.67，两项异常同时出现 [1][2][3][4][5]。\n\n新颖度维度方面，信号信封载明 noveltyHistory 的 historyCount 为 10、simulatedHistoryCount 为 8、maxHistorySimilarity 为 0.8853666186332703 [4][1][2][3][5]。信号信封载明 noveltyAnomaly 的 score 为 0.11463338136672974、relevance 的 score 为 0.6469710469245911 [2][3][4][5][1]。信号信封载明本项目金额 627.0 万元，而最相似历史项目（大型设备物联网和医疗设备全生命周期管理软件采购项目）的金额未在信封中给出 [1][2][4][3][5]。\n\n基线充分性方面，amountAnomaly 解释载明『历史基线含 8 个模拟样本，不代表真实历史证据充分』[2][1][3][4][5]。信号信封载明本项目采购单位天津市肿瘤医院空港医院的历史金额基线含 8 个模拟样本，历史项目基线含 8 个模拟样本，均不代表真实历史证据充分 [2][4][1][3][5]。信号信封载明 amountAnomaly 的 basisSufficient 为 true、frequencyAnomaly 的 basisSufficient 为 true、noveltyAnomaly 的 basisSufficient 为 true、relevance 的 basisSufficient 为 true [2][3][4][5][1]。\n\n综上，信号信封载明本项目金额 627.0 万元，为该采购单位过去 10 条有效金额中位数 21.9 万元的 28.63 倍，金额异常得分 1.000，且历史基线含 8 个模拟样本 [1][2][3][4][5]。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 2,
+      "mainTarget": "c6",
+      "action": "explore",
+      "gapChain": [
+        {
+          "gap": "c6 声称 contentSourceNote 载明『基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果』，但该字段本身尚未被独立核实；需先确认信号信封中是否确实存在该 contentSourceNote 字段及其原文。",
+          "acceptance": "需信封字段级证据：能逐字复现 contentSourceNote 的完整原文，或确认该字段不存在/内容与 c6 表述不一致。",
+          "failover": "若信封中无 contentSourceNote 字段，则 c6 直接证伪，转查 c28/c8 的来源链接可达性。"
+        },
+        {
+          "gap": "在确认 contentSourceNote 存在后，需核实其所述『未抓取官方正文』是否属实——即来源链接 https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/629601584/2714/zhaobiao 是否可访问、页面是否含官方招标正文（金额、参数、资格条件）。",
+          "acceptance": "需页面正文级证据：详情页可打开并含招标公告正文（含项目编号 SHGP-2026-A536、金额 627.0 万元或资格条件等可核对字段）；若页面为空壳/需登录/仅字段摘要，则记为『未抓取官方正文』成立。",
+          "failover": "若详情页不可达，改用权威登记源（如天津市政府采购网/中国招标投标公共服务平台）检索项目编号 SHGP-2026-A536 以获取正文级证据。"
+        },
+        {
+          "gap": "若取得官方正文，需核对正文中的金额、采购内容与资格条件是否与信封字段（c3 金额 627.0 万元、c29 数智化病理系统、c5 项目编号）一致，以判定 c6『未补造金额、参数或中标结果』是否成立。",
+          "acceptance": "需权威登记源记录级证据：正文金额与 c3 一致或存在可解释差异，且无中标结果字段被信封补造。",
+          "failover": "若正文与信封字段冲突，记录冲突点并转由用户裁决口径（问人）。"
+        }
+      ],
+      "searchHints": [
+        "SHGP-2026-A536 数智化病理系统 招标公告",
+        "天津市肿瘤医院空港医院 数智化病理系统 采购项目 627",
+        "qiye.qianlima.com infoDetail 629601584 2714 zhaobiao"
+      ],
+      "sideTargets": [
+        "c28",
+        "c8"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 3,
+      "mainTarget": "c6",
+      "action": "explore",
+      "gapChain": [
+        {
+          "gap": "c6 待证实：信号信封的 contentSourceNote 是否载明『基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果』——即信封自述其内容生成方式与未抓取官方正文的声明是否属实。",
+          "acceptance": "需信封原始字段级证据：contentSourceNote 字段的逐字原文（页面正文级或原始 JSON 字段级证据），能完整复现该声明文本。",
+          "failover": "若信封原始字段不可得，则改由 c28/c8 的 sourceUrl 指向的详情页正文反证是否曾抓取官方正文（见下一环）。"
+        },
+        {
+          "gap": "sourceUrl（https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/629601584/2714/zhaobiao）指向的千里马招标网详情页是否载有官方招标正文（金额、参数、资格条件），以判定 c6 所述『未抓取官方正文』是否成立。",
+          "acceptance": "需页面正文级证据：详情页可见的招标公告正文片段（含金额或参数或资格条件任一项），或明确显示正文缺失/需登录的页面状态证据。",
+          "failover": "若详情页不可达或需登录，则转向官方登记源（政府采购网/招标公告发布平台）以项目编号 SHGP-2026-A536 检索正文，作为 c6 与 c18 basisGaps 的替代证据。"
+        }
+      ],
+      "searchHints": [
+        "SHGP-2026-A536 数智化病理系统 招标公告",
+        "天津市肿瘤医院空港医院 数智化病理系统 采购项目 正文",
+        "qiye.qianlima.com infoDetail 629601584 2714 zhaobiao"
+      ],
+      "sideTargets": [
+        "c28",
+        "c8"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 主体与事件背景\n\n信号信封载明采购方为天津市肿瘤医院空港医院 [1][2][3][4][5]。信号信封载明项目名称为『天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告』，项目编号为 SHGP-2026-A536 [1][2][3][4][5]。信号信封载明本项目领域为『其他』，项目摘要为『天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告；采购单位：天津市肿瘤医院空港医院；领域：其他』 [1][2][3][4][5]。信号信封载明项目编号为 R-c67b890aeb583592 [1][2][3][4][5]。信号信封载明 kind 为 tender，signalType 定性为『商机』 [1][2][3][4][5]。\n\n信号信封的 contentSourceNote 载明『基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果』，该表述目前尚未核实 [1][2][3][4][5]。信号信封载明企业业务画像包含『医疗AI、医学影像、辅助诊断、智慧医院、医院信息化、医疗大模型、医院数据平台、HIS、PACS、电子病历』，该表述目前尚未核实 [1][2][3][4][5]。信号信封载明 rumor 字段为空（null），该表述目前尚未核实 [1][2][3][4][5]。信号信封载明 sourceUrl 指向千里马招标网（qiye.qianlima.com）的招标信息详情页，该表述目前尚未核实 [1][2][3][4][5]。信号信封载明来源链接为 https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/629601584/2714/zhaobiao，该表述目前尚未核实 [1][2][3][4][5]。信号信封载明 eventId 为空字符串，该表述目前尚未核实 [1][2][3][4][5]。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 动态时间线与关联方\n\n信号信封载明，本项目采购单位为天津市肿瘤医院空港医院，本项目发布日期为 2026-09-09 [1][2][3][4][5]。\n\n在关联方维度，信号信封载明本项目采购单位天津市肿瘤医院空港医院，与最相似历史项目（R-f456d19c850a03af）的采购单位相同 [1][2][3][4][5]。信号信封载明本项目采购单位天津市肿瘤医院空港医院的历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』，相似度 0.885 [4][1][2][3][5]。\n\n在时间线维度，信号信封载明本项目发布日期 2026-09-09 与最相似历史项目发布日期 2026-06-29 相隔约 72 天 [1][4][2][3][5]。\n\n在采购频次维度，信号信封载明本项目采购单位天津市肿瘤医院空港医院在近 30 天内采购 2 次，历史 4 个窗口平均 0.75 次 [3][1][2][4][5]。\n\n在异常解释维度，noveltyAnomaly 解释载明该采购单位历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』(2026-06-29)，相似度 0.885，比较基数 10 个历史项目，新颖性异常得分 0.115 [4][1][2][3][5]。\n\n关于最相似历史项目的来源与标识信息，信号信封载明 mostSimilarProject 的 dataOrigin 为 real、publishDate 为 2026-06-29、projectId 为 R-f456d19c850a03af，该条信息目前尚未核实 [1][2][3][4][5]。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 结论\n\n本项目信号信封载明采购项目为「天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告」。信号信封载明本项目采购内容为数智化病理系统，与企业画像中的『医疗AI、医学影像、辅助诊断、智慧医院、医院信息化、医疗大模型、医院数据平台、HIS、PACS、电子病历』存在语义重叠 [1][2][3][4][5]。\n\nrelevance 解释载明『项目与企业业务画像的语义相似度为 0.647，达到准入阈值 0.600』 [1][2][3][4][5]。解读文本将本信号定性为『商机』，理由为项目方向与企业画像匹配，构成潜在投标/合作机会 [1][2][3][4][5]。\n\n解读文本的 basisGaps 载明需先补齐真实历史采购金额基线、真实历史项目基线，并获取官方招标正文以核实金额、参数与资格条件 [1][2][3][4][5]。\n\n解读文本登记了三个假设种子标签：『真实经营动态』、『正常大额采购』、『新方向扩张』；上述假设种子标签目前尚未核实 [1][2][3][4][5]。\n\n假设评估方面，台账登记三个假设：『正常大额采购』（verified 10、contradicted 0、pending 0、score 10，已浮现，非主导）、『异常输送』（verified 11、contradicted 0、pending 0、score 11，已浮现，主导）、『新方向扩张』（verified 8、contradicted 0、pending 1、score 8，已浮现，非主导）。上述假设的成立与否均取决于官方招标正文等尚未获取的材料，目前尚未核实。"
+    }
+  },
+  {
+    "stage": "s7_recommend",
+    "response": {
+      "items": [
+        {
+          "action": "优先补齐官方招标正文与真实历史基线后再决定是否投入投标资源：调取项目编号 SHGP-2026-A536 的官方招标公告正文，核实预算金额、技术参数与资格条件；同时向采购单位或公开渠道核实天津市肿瘤医院空港医院真实历史采购金额与项目清单，替换含 8 个模拟样本的基线。",
+          "rationale": "当前金额异常（627.0 万元为中位数 21.9 万元的 28.63 倍）与频次异常（近 30 天 2 次、比值 2.67）同时出现，但历史基线含 8 个模拟样本、不代表真实历史证据充分，且未抓取官方正文；在正文与真实基线补齐前，无法区分『正常大额采购』与『异常输送』，故本建议为后续一切动作的前置条件。",
+          "basisClaimIds": [
+            "c11",
+            "c12",
+            "c13",
+            "c18",
+            "c31",
+            "c36",
+            "c38",
+            "c6"
+          ],
+          "hypothesisLabel": "异常输送"
+        },
+        {
+          "action": "以『新方向扩张』为假设做定向商机跟踪：围绕数智化病理系统（医疗AI、医学影像、辅助诊断、医院信息化、PACS 等语义重叠方向）准备能力与案例材料，跟踪该采购单位后续同类招标公告与答疑澄清，评估参与方式（独立投标或与病理信息化专业厂商联合）。",
+          "rationale": "本项目采购内容为数智化病理系统，与企业画像存在语义重叠且语义相似度 0.647 达到准入阈值 0.600，解读文本已定性为『商机』；但该假设尚有 1 条 claim 待证实，且历史最相似项目为设备管理类（相似度 0.885），故本建议以跟踪与材料准备为主，是否投标取决于正文核实结果。",
+          "basisClaimIds": [
+            "c10",
+            "c16",
+            "c29",
+            "c34",
+            "c37",
+            "c14"
+          ],
+          "hypothesisLabel": "新方向扩张"
+        },
+        {
+          "action": "针对同一采购单位建立重复采购与关联方监测：持续跟踪天津市肿瘤医院空港医院近 30 天第 2 次采购的另一次项目及本次项目的中标结果、中标人信息，核查是否存在与既往项目（R-f456d19c850a03af）相同的供应商或关联方中标。",
+          "rationale": "本项目与最相似历史项目采购单位相同、发布日期相隔约 72 天，且近 30 天采购频次比值 2.67，构成重复采购关系；主导假设『异常输送』的可区分 claim 明确以『存在关联方中标』为支持条件，故需以中标结果核查作为风险缓释与假设验证动作。",
+          "basisClaimIds": [
+            "c30",
+            "c32",
+            "c35",
+            "c13",
+            "c31"
+          ],
+          "hypothesisLabel": "异常输送"
+        },
+        {
+          "action": "补充核查信号来源与字段完整性：核实来源链接（千里马招标网详情页）与项目编号 R-c67b890aeb583592、eventId 为空、rumor 为空等字段状态，确认是否存在未采集到的官方渠道信息或舆情线索，再更新台账。",
+          "rationale": "来源链接、eventId、rumor 等字段处于待证实状态，contentSourceNote 载明未抓取官方正文、未补造金额参数或中标结果；在来源与字段完整性未确认前，任何基于本信号的结论都可能存在缺口，故列为补充核查项。",
+          "basisClaimIds": [
+            "c1",
+            "c22",
+            "c23",
+            "c28",
+            "c8",
+            "c6"
+          ],
+          "hypothesisLabel": "正常大额采购"
+        }
+      ]
+    }
+  }
+]

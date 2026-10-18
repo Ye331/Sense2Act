@@ -1,0 +1,18 @@
+{
+  "5": [
+    {
+      "draft_id": "C4",
+      "new_status": "矛盾",
+      "evidence": {
+        "platform": "official_website",
+        "source": "gsxt",
+        "url": "https://gsxt.gov.cn/change",
+        "title": "工商变更公示",
+        "content": "国家企业信用信息公示系统显示:A汽车股份有限公司 新增对另一电池制造企业的投资;B新能源科技有限公司 被列入经营异常名录。",
+        "lineage_root": "gsxt",
+        "author_type": "官方",
+        "credibility": "高"
+      }
+    }
+  ]
+}

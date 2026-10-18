@@ -1,0 +1,13 @@
+{
+  "suite_id": "eval-v1",
+  "variant": "中",
+  "weights": {"miss": 1, "over": 2, "flip": 2},
+  "align": {"text_sim_threshold": 0.60, "suspicious_threshold": 0.45},
+  "default_budget": {"s6_opinion_max": 40, "llm_calls_max": 60},
+  "cases": [
+    "supplier_b",
+    "tender_medical_ai",
+    "ai_model_release",
+    "xhs_opensource"
+  ]
+}

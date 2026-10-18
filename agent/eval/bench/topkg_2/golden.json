@@ -1,0 +1,160 @@
+{
+ "case_id": "topkg_2",
+ "event_id": "evt_topkg2_2",
+ "verified": true,
+ "verified_date": "2026-10-06",
+ "source": "TopK 信号2 重录(挂账修复后);corpus_bound 机械派生金标",
+ "claims": [
+  {
+   "draft_id": "c1",
+   "text": "信封载明项目编号为 R-d748c0de48ea423c。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c10",
+   "text": "信封 noveltyAnomaly.explanation 载明最相似项目为『【模拟】密云区中医医院2025年度设备购置采购项目公开招标公告（2025年10月第1期）』(2025-10-29/模拟样本)，相似度 0.736。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "elements": [
+    "2025-10-29",
+    "『【模拟】密云区中医医院"
+   ],
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c12",
+   "text": "信封 relevance.explanation 载明『项目与企业业务画像的语义相似度为 0.608，达到准入阈值 0.600。』",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c13",
+   "text": "信封 companyProfile 载明企业业务画像含『医学影像、辅助诊断、智慧医院、医院信息化、PACS』等方向。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c14",
+   "text": "解读将本信号定性为『商机』，理由为信封 kind 为 tender 属公开招标公告，且业务画像与 domain『医学影像与PACS』匹配，构成潜在投标/合作机会。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c15",
+   "text": "解读登记了三个假设种子标签：『真实经营动态』『正常大额采购』『新方向扩张』。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c16",
+   "text": "解读 basisGaps 载明需先补齐真实历史采购金额基线、真实历史项目基线，并获取官方招标正文以核实金额与参数。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c17",
+   "text": "信封 amountHistory 载明历史中位金额为 339600.0 元、金额比值为 4.652532391048292、历史条数为 5、模拟历史条数为 4。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c18",
+   "text": "信封 frequencyHistory 载明窗口天数为 30、近期次数为 1、历史窗口平均次数为 0.5、频率比值为 2.0、已用历史窗口数为 4。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c19",
+   "text": "信封 noveltyHistory 载明历史条数为 5、模拟历史条数为 4、最大历史相似度为 0.7355057001113892。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c2",
+   "text": "信封载明采购方为北京市密云区中医医院。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c20",
+   "text": "信封 sourceUrl 载明为『https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/631986562/128/zhaobiao』。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c21",
+   "text": "信封 rumor 字段为 null，未登记任何传闻线索。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c22",
+   "text": "信封 amountAnomaly、frequencyAnomaly、noveltyAnomaly、relevance 四项的 basisSufficient 均标注为 true。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c3",
+   "text": "信封载明项目名称为『DR数字化摄影机采购项目公开招标公告』，领域为『医学影像与PACS』。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c4",
+   "text": "信封载明本项目金额为 1580000.0 元。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c5",
+   "text": "信封载明公告发布日期为 2026-09-17。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c6",
+   "text": "信封 contentSourceNote 载明『基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果。』",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c7",
+   "text": "信封 amountAnomaly.explanation 载明『本项目金额 158.0 万元，为该采购单位过去 5 条有效金额中位数(34.0 万元)的 4.65 倍，金额异常得分 0.704。』",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c8",
+   "text": "信封 amountAnomaly.explanation 载明『历史基线含 4 个模拟样本，不代表真实历史证据充分。』",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c9",
+   "text": "信封 frequencyAnomaly.explanation 载明『截至当天近 30 天该采购单位采购 1 次，已完整观测的 4 个历史窗口平均 0.5 次，比值 2.00，频率异常得分 0.500。』",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  }
+ ]
+}

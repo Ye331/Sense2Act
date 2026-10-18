@@ -1,0 +1,31 @@
+detector:
+  relevance_threshold: 0.60
+  min_history_count: 3
+  amount_ratio_scale: 3.0
+  frequency_window: 30
+  frequency_history_windows: 4
+
+embedding:
+  model_name: BAAI/bge-small-zh-v1.5
+  revision: 7999e1d3359715c523056ef9478215996d62a620
+  local_path: .models/bge-small-zh-v1.5
+  batch_size: 32
+  cpu_threads: 4
+
+priority_weights:
+  amount: 0.5
+  novelty: 0.5
+  frequency: 0.0
+
+# 仅用于内部优先级描述，不是自动调查的最低门槛。
+thresholds:
+  high: 0.75
+  medium: 0.55
+display:
+  top_k: 10
+buyer_aliases:
+  北京市大兴区卫生健康委员会（本级）: 北京市大兴区卫生健康委员会
+
+# 后端接入(python -m bridge):后端未配置关注画像时用此画像判断相关性
+bridge:
+  company_profile: 医疗信息化与医疗AI解决方案提供商,关注医院AI辅助诊断、影像AI、智慧医院与医疗数据平台建设项目

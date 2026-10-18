@@ -1,0 +1,24 @@
+{
+  "kind": "rumor",
+  "event_id": "evt_supplier_b",
+  "rumor": {
+    "subjectName": "B公司",
+    "subjectCreditCode": "91330100MA27X0000B",
+    "summary": "自媒体@产业内幕君2026爆料:头部新能源车企A公司的核心电池供应商B公司资金链断裂、拖欠三个月工资、创始人失联",
+    "source": "weibo.com",
+    "signalTime": "2026-09-22",
+    "watchFocus": "供应链风险",
+    "clues": [
+      {
+        "clueId": "k1",
+        "source": "weibo.com",
+        "platform": "weibo",
+        "title": "供应商暴雷爆料",
+        "content": "@产业内幕君2026 爆料:B公司资金链断裂,自 2026 年 7 月起拖欠员工三个月工资,创始人已失联,并附所谓员工讨薪截图。",
+        "url": "https://weibo.com/example/1",
+        "publishedAt": "2026-09-22",
+        "authorType": "自媒体"
+      }
+    ]
+  }
+}

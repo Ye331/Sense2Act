@@ -1,0 +1,587 @@
+{
+  "schema_version": "0.1-draft",
+  "purpose": "agent_integration_test",
+  "status": "prepared",
+  "dispatched": false,
+  "source_result_file": "data/signals.csv",
+  "replay_period": {
+    "start": "2026-09-01",
+    "end": "2026-09-22"
+  },
+  "selection": {
+    "method": "从 is_signal=true 的每日 Top-K 结果中，按 priority_score 降序、project_id 升序取前 5 条",
+    "available_signal_count": 7,
+    "sample_count": 5,
+    "ranking_scope": "daily"
+  },
+  "conventions": {
+    "date_format": "YYYY-MM-DD",
+    "amount_currency": "CNY",
+    "missing_value": null,
+    "numeric_values": "number",
+    "boolean_values": "boolean"
+  },
+  "limitations": [
+    "候选公告来自真实导出记录；金额、语义与频率历史含模拟样本，依据完整度不等同于真实历史证据充分。",
+    "Top-K 按每日排名入选，不要求达到中或高优先级阈值。",
+    "project_summary 根据原始字段生成，未抓取公告正文；原始链接保留自输入记录，未在线核验。",
+    "最相似历史为模拟项目时 source_url 为 null。此结构为测试草案，尚未替换现有 trigger_agent 接口。"
+  ],
+  "signals": [
+    {
+      "project": {
+        "project_id": "R-c67b890aeb583592",
+        "procurement_project_id": "R-c67b890aeb583592",
+        "title": "天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告",
+        "buyer": "天津市肿瘤医院空港医院",
+        "publish_date": "2026-09-09",
+        "amount_yuan": 6270000.0,
+        "category": "其他",
+        "project_summary": "天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告；采购单位：天津市肿瘤医院空港医院；领域：其他",
+        "project_number": "SHGP-2026-A536",
+        "region": "天津 / 天津 / 红桥区",
+        "data_origin": "real",
+        "project_event": "new_project",
+        "first_announcement_id": "R-c67b890aeb583592",
+        "project_first_seen": "2026-09-09",
+        "project_match_method": "采购单位+项目编号",
+        "is_project_update": false
+      },
+      "scores": {
+        "relevance_score": 0.6469710469245911,
+        "amount_score": 0.9999001206028643,
+        "novelty_score": 0.11463338136672974,
+        "frequency_score": 0.625,
+        "priority_score": 0.557266750984797,
+        "partial_score": null,
+        "weights": {
+          "amount": 0.5,
+          "novelty": 0.5,
+          "frequency": 0.0
+        }
+      },
+      "historical_context": {
+        "history_cutoff": "2026-09-08",
+        "history_size": 1409,
+        "history_announcement_count": 1427,
+        "real_history_count": 318,
+        "simulated_history_count": 1091,
+        "buyer_simulated_history_count": 8,
+        "amount": {
+          "historical_median_amount_yuan": 218965.55,
+          "amount_ratio": 28.634641385368614,
+          "history_count": 10,
+          "simulated_history_count": 8,
+          "reliable": true,
+          "status": "可比较"
+        },
+        "novelty": {
+          "history_count": 10,
+          "simulated_history_count": 8,
+          "max_history_similarity": 0.8853666186332703,
+          "reliable": true,
+          "most_similar_project": {
+            "project_id": "R-f456d19c850a03af",
+            "title": "天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告",
+            "publish_date": "2026-06-29",
+            "data_origin": "real",
+            "source_url": "https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/609456888/2716/zhaobiao"
+          }
+        },
+        "frequency": {
+          "window_days": 30,
+          "recent_count": 2,
+          "historical_window_average_count": 0.75,
+          "frequency_ratio": 2.6666666666666665,
+          "historical_windows_used": 4,
+          "reliable": true,
+          "includes_detection_day": true
+        }
+      },
+      "trigger": {
+        "detection_date": "2026-09-09",
+        "relevance_pass": true,
+        "relevance_threshold": 0.6,
+        "evidence_status": "sufficient",
+        "priority_confidence": "充分",
+        "priority_eligible": true,
+        "min_history_count": 3,
+        "top_k": 10,
+        "daily_rank": 1,
+        "is_signal": true,
+        "priority_label": "中优先级",
+        "medium_priority_threshold": 0.55,
+        "high_priority_threshold": 0.75,
+        "signal_reason": "项目与企业业务画像的语义相似度为 0.647，达到准入阈值 0.600。\n演示基线包含该单位 8 个模拟采购项目（非真实采购事实），其中有效金额样本 8 个、语义样本 8 个；依据完整度包含模拟样本，不代表真实历史证据充分。\n本项目金额 627.0 万元，为该采购单位过去 10 条有效金额中位数（21.9 万元）的 28.63 倍，金额变化得分 1.000。\n该单位过去 10 个项目中，最相似的是“天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告”，相似度 0.885，新颖性得分 0.115。\n截至当天的 30 天采购 2 次，已完整观测的历史窗口平均 0.75 次，比值 2.67。\n当前历史跨度有限，频率指标仅供参考，Priority 权重为 0%。\nPriority Score 为 0.557，当天完整依据候选排名 1，依据完整度：充分。\n进入当日 Top-K，是值得进一步调查的信号；仍需核实需求、预算与采购条件。",
+        "reasons": [
+          "项目与企业业务画像的语义相似度为 0.647，达到准入阈值 0.600。",
+          "演示基线包含该单位 8 个模拟采购项目（非真实采购事实），其中有效金额样本 8 个、语义样本 8 个；依据完整度包含模拟样本，不代表真实历史证据充分。",
+          "本项目金额 627.0 万元，为该采购单位过去 10 条有效金额中位数（21.9 万元）的 28.63 倍，金额变化得分 1.000。",
+          "该单位过去 10 个项目中，最相似的是“天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告”，相似度 0.885，新颖性得分 0.115。",
+          "截至当天的 30 天采购 2 次，已完整观测的历史窗口平均 0.75 次，比值 2.67。",
+          "当前历史跨度有限，频率指标仅供参考，Priority 权重为 0%。",
+          "Priority Score 为 0.557，当天完整依据候选排名 1，依据完整度：充分。",
+          "进入当日 Top-K，是值得进一步调查的信号；仍需核实需求、预算与采购条件。"
+        ]
+      },
+      "sources": {
+        "source_url": "https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/629601584/2714/zhaobiao",
+        "source_file": "商机信息导出20260922.xls",
+        "source_sheet": "商机信息导出",
+        "source_row": 75,
+        "content_source_type": "根据原始字段生成",
+        "content_source_note": "基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果。",
+        "link_verification_status": "not_checked"
+      },
+      "scoring_context": {
+        "embedding_model": "BAAI/bge-small-zh-v1.5",
+        "embedding_revision": "7999e1d3359715c523056ef9478215996d62a620",
+        "company_profile_used": "医疗AI、医学影像、辅助诊断、智慧医院、医院信息化、医疗大模型、医院数据平台、HIS、PACS、电子病历"
+      }
+    },
+    {
+      "project": {
+        "project_id": "R-dc5ff0e21e0c9c13",
+        "procurement_project_id": "R-dc5ff0e21e0c9c13",
+        "title": "北京大学第一医院2025年医疗设备更新项目医学影像科X射线计算机体层摄影设备(CT)采购项目公开招标公告",
+        "buyer": "北京大学第一医院",
+        "publish_date": "2026-09-07",
+        "amount_yuan": 20000000.0,
+        "category": "医学影像与PACS",
+        "project_summary": "北京大学第一医院2025年医疗设备更新项目医学影像科X射线计算机体层摄影设备(CT)采购项目公开招标公告；采购单位：北京大学第一医院；领域：医学影像与PACS",
+        "project_number": "0701-264106030238",
+        "region": "北京 / 北京 / 西城区",
+        "data_origin": "real",
+        "project_event": "new_project",
+        "first_announcement_id": "R-dc5ff0e21e0c9c13",
+        "project_first_seen": "2026-09-07",
+        "project_match_method": "采购单位+项目编号",
+        "is_project_update": false
+      },
+      "scores": {
+        "relevance_score": 0.6605595350265503,
+        "amount_score": 0.8994400619510877,
+        "novelty_score": 0.06915056705474854,
+        "frequency_score": 0.19444444444444448,
+        "priority_score": 0.48429531450291813,
+        "partial_score": null,
+        "weights": {
+          "amount": 0.5,
+          "novelty": 0.5,
+          "frequency": 0.0
+        }
+      },
+      "historical_context": {
+        "history_cutoff": "2026-09-06",
+        "history_size": 1400,
+        "history_announcement_count": 1417,
+        "real_history_count": 309,
+        "simulated_history_count": 1091,
+        "buyer_simulated_history_count": 66,
+        "amount": {
+          "historical_median_amount_yuan": 2534531.73,
+          "amount_ratio": 7.891003992283814,
+          "history_count": 83,
+          "simulated_history_count": 63,
+          "reliable": true,
+          "status": "可比较"
+        },
+        "novelty": {
+          "history_count": 87,
+          "simulated_history_count": 66,
+          "max_history_similarity": 0.9308494329452515,
+          "reliable": true,
+          "most_similar_project": {
+            "project_id": "R-a3c736d744c92740",
+            "title": "北京大学第一医院2025年医疗设备更新项目医学影像科数字X线机(DR)采购项目公开招标公告",
+            "publish_date": "2026-07-16",
+            "data_origin": "real",
+            "source_url": "https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/614532915/3315/zhaobiao"
+          }
+        },
+        "frequency": {
+          "window_days": 30,
+          "recent_count": 9,
+          "historical_window_average_count": 7.25,
+          "frequency_ratio": 1.2413793103448276,
+          "historical_windows_used": 4,
+          "reliable": true,
+          "includes_detection_day": true
+        }
+      },
+      "trigger": {
+        "detection_date": "2026-09-07",
+        "relevance_pass": true,
+        "relevance_threshold": 0.6,
+        "evidence_status": "sufficient",
+        "priority_confidence": "充分",
+        "priority_eligible": true,
+        "min_history_count": 3,
+        "top_k": 10,
+        "daily_rank": 1,
+        "is_signal": true,
+        "priority_label": "普通候选",
+        "medium_priority_threshold": 0.55,
+        "high_priority_threshold": 0.75,
+        "signal_reason": "项目与企业业务画像的语义相似度为 0.661，达到准入阈值 0.600。\n演示基线包含该单位 66 个模拟采购项目（非真实采购事实），其中有效金额样本 63 个、语义样本 66 个；依据完整度包含模拟样本，不代表真实历史证据充分。\n本项目金额 2000.0 万元，为该采购单位过去 83 条有效金额中位数（253.5 万元）的 7.89 倍，金额变化得分 0.899。\n该单位过去 87 个项目中，最相似的是“北京大学第一医院2025年医疗设备更新项目医学影像科数字X线机(DR)采购项目公开招标公告”，相似度 0.931，新颖性得分 0.069。\n截至当天的 30 天采购 9 次，已完整观测的历史窗口平均 7.25 次，比值 1.24。\n当前历史跨度有限，频率指标仅供参考，Priority 权重为 0%。\nPriority Score 为 0.484，当天完整依据候选排名 1，依据完整度：充分。\n进入当日 Top-K，是值得进一步调查的信号；仍需核实需求、预算与采购条件。",
+        "reasons": [
+          "项目与企业业务画像的语义相似度为 0.661，达到准入阈值 0.600。",
+          "演示基线包含该单位 66 个模拟采购项目（非真实采购事实），其中有效金额样本 63 个、语义样本 66 个；依据完整度包含模拟样本，不代表真实历史证据充分。",
+          "本项目金额 2000.0 万元，为该采购单位过去 83 条有效金额中位数（253.5 万元）的 7.89 倍，金额变化得分 0.899。",
+          "该单位过去 87 个项目中，最相似的是“北京大学第一医院2025年医疗设备更新项目医学影像科数字X线机(DR)采购项目公开招标公告”，相似度 0.931，新颖性得分 0.069。",
+          "截至当天的 30 天采购 9 次，已完整观测的历史窗口平均 7.25 次，比值 1.24。",
+          "当前历史跨度有限，频率指标仅供参考，Priority 权重为 0%。",
+          "Priority Score 为 0.484，当天完整依据候选排名 1，依据完整度：充分。",
+          "进入当日 Top-K，是值得进一步调查的信号；仍需核实需求、预算与采购条件。"
+        ]
+      },
+      "sources": {
+        "source_url": "https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/628756298/3315/zhaobiao",
+        "source_file": "商机信息导出20260922.xls",
+        "source_sheet": "商机信息导出",
+        "source_row": 86,
+        "content_source_type": "根据原始字段生成",
+        "content_source_note": "基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果。",
+        "link_verification_status": "not_checked"
+      },
+      "scoring_context": {
+        "embedding_model": "BAAI/bge-small-zh-v1.5",
+        "embedding_revision": "7999e1d3359715c523056ef9478215996d62a620",
+        "company_profile_used": "医疗AI、医学影像、辅助诊断、智慧医院、医院信息化、医疗大模型、医院数据平台、HIS、PACS、电子病历"
+      }
+    },
+    {
+      "project": {
+        "project_id": "R-d748c0de48ea423c",
+        "procurement_project_id": "R-d748c0de48ea423c",
+        "title": "DR数字化摄影机采购项目公开招标公告",
+        "buyer": "北京市密云区中医医院",
+        "publish_date": "2026-09-17",
+        "amount_yuan": 1580000.0,
+        "category": "医学影像与PACS",
+        "project_summary": "DR数字化摄影机采购项目公开招标公告；采购单位：北京市密云区中医医院；领域：医学影像与PACS",
+        "project_number": "11011826210200014763-XM001",
+        "region": "北京 / 北京 / 密云区",
+        "data_origin": "real",
+        "project_event": "new_project",
+        "first_announcement_id": "R-d748c0de48ea423c",
+        "project_first_seen": "2026-09-17",
+        "project_match_method": "采购单位+项目编号",
+        "is_project_update": false
+      },
+      "scores": {
+        "relevance_score": 0.6084825992584229,
+        "amount_score": 0.70403402986169,
+        "novelty_score": 0.26449429988861084,
+        "frequency_score": 0.5,
+        "priority_score": 0.4842641648751504,
+        "partial_score": null,
+        "weights": {
+          "amount": 0.5,
+          "novelty": 0.5,
+          "frequency": 0.0
+        }
+      },
+      "historical_context": {
+        "history_cutoff": "2026-09-16",
+        "history_size": 1438,
+        "history_announcement_count": 1464,
+        "real_history_count": 347,
+        "simulated_history_count": 1091,
+        "buyer_simulated_history_count": 4,
+        "amount": {
+          "historical_median_amount_yuan": 339600.0,
+          "amount_ratio": 4.652532391048292,
+          "history_count": 5,
+          "simulated_history_count": 4,
+          "reliable": true,
+          "status": "可比较"
+        },
+        "novelty": {
+          "history_count": 5,
+          "simulated_history_count": 4,
+          "max_history_similarity": 0.7355057001113892,
+          "reliable": true,
+          "most_similar_project": {
+            "project_id": "SIM-3c5dc17f1ca4-0001",
+            "title": "【模拟】密云区中医医院2025年度设备购置采购项目公开招标公告（2025年10月第1期）",
+            "publish_date": "2025-10-29",
+            "data_origin": "simulated",
+            "source_url": null
+          }
+        },
+        "frequency": {
+          "window_days": 30,
+          "recent_count": 1,
+          "historical_window_average_count": 0.5,
+          "frequency_ratio": 2.0,
+          "historical_windows_used": 4,
+          "reliable": true,
+          "includes_detection_day": true
+        }
+      },
+      "trigger": {
+        "detection_date": "2026-09-17",
+        "relevance_pass": true,
+        "relevance_threshold": 0.6,
+        "evidence_status": "sufficient",
+        "priority_confidence": "充分",
+        "priority_eligible": true,
+        "min_history_count": 3,
+        "top_k": 10,
+        "daily_rank": 1,
+        "is_signal": true,
+        "priority_label": "普通候选",
+        "medium_priority_threshold": 0.55,
+        "high_priority_threshold": 0.75,
+        "signal_reason": "项目与企业业务画像的语义相似度为 0.608，达到准入阈值 0.600。\n演示基线包含该单位 4 个模拟采购项目（非真实采购事实），其中有效金额样本 4 个、语义样本 4 个；依据完整度包含模拟样本，不代表真实历史证据充分。\n本项目金额 158.0 万元，为该采购单位过去 5 条有效金额中位数（34.0 万元）的 4.65 倍，金额变化得分 0.704。\n该单位过去 5 个项目中，最相似的是“【模拟】密云区中医医院2025年度设备购置采购项目公开招标公告（2025年10月第1期）”，相似度 0.736，新颖性得分 0.264。\n截至当天的 30 天采购 1 次，已完整观测的历史窗口平均 0.50 次，比值 2.00。\n当前历史跨度有限，频率指标仅供参考，Priority 权重为 0%。\nPriority Score 为 0.484，当天完整依据候选排名 1，依据完整度：充分。\n进入当日 Top-K，是值得进一步调查的信号；仍需核实需求、预算与采购条件。",
+        "reasons": [
+          "项目与企业业务画像的语义相似度为 0.608，达到准入阈值 0.600。",
+          "演示基线包含该单位 4 个模拟采购项目（非真实采购事实），其中有效金额样本 4 个、语义样本 4 个；依据完整度包含模拟样本，不代表真实历史证据充分。",
+          "本项目金额 158.0 万元，为该采购单位过去 5 条有效金额中位数（34.0 万元）的 4.65 倍，金额变化得分 0.704。",
+          "该单位过去 5 个项目中，最相似的是“【模拟】密云区中医医院2025年度设备购置采购项目公开招标公告（2025年10月第1期）”，相似度 0.736，新颖性得分 0.264。",
+          "截至当天的 30 天采购 1 次，已完整观测的历史窗口平均 0.50 次，比值 2.00。",
+          "当前历史跨度有限，频率指标仅供参考，Priority 权重为 0%。",
+          "Priority Score 为 0.484，当天完整依据候选排名 1，依据完整度：充分。",
+          "进入当日 Top-K，是值得进一步调查的信号；仍需核实需求、预算与采购条件。"
+        ]
+      },
+      "sources": {
+        "source_url": "https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/631986562/128/zhaobiao",
+        "source_file": "商机信息导出20260922.xls",
+        "source_sheet": "商机信息导出",
+        "source_row": 40,
+        "content_source_type": "根据原始字段生成",
+        "content_source_note": "基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果。",
+        "link_verification_status": "not_checked"
+      },
+      "scoring_context": {
+        "embedding_model": "BAAI/bge-small-zh-v1.5",
+        "embedding_revision": "7999e1d3359715c523056ef9478215996d62a620",
+        "company_profile_used": "医疗AI、医学影像、辅助诊断、智慧医院、医院信息化、医疗大模型、医院数据平台、HIS、PACS、电子病历"
+      }
+    },
+    {
+      "project": {
+        "project_id": "R-47f03243aabe9985",
+        "procurement_project_id": "R-47f03243aabe9985",
+        "title": "天津市滨海新区大港医院 天津市滨海新区大港医院CT影像设备维保项目 (项目编号ZYGP20260902)公开招标公告",
+        "buyer": "天津市滨海新区大港医院",
+        "publish_date": "2026-09-01",
+        "amount_yuan": 4990000.0,
+        "category": "医学影像与PACS",
+        "project_summary": "天津市滨海新区大港医院 天津市滨海新区大港医院CT影像设备维保项目 (项目编号ZYGP20260902)公开招标公告；采购单位：天津市滨海新区大港医院；领域：医学影像与PACS",
+        "project_number": "ZYGP20260902",
+        "region": "天津 / 天津 / 滨海新区",
+        "data_origin": "real",
+        "project_event": "new_project",
+        "first_announcement_id": "R-47f03243aabe9985",
+        "project_first_seen": "2026-09-01",
+        "project_match_method": "采购单位+项目编号",
+        "is_project_update": false
+      },
+      "scores": {
+        "relevance_score": 0.6323931813240051,
+        "amount_score": 0.0,
+        "novelty_score": 0.15326696634292603,
+        "frequency_score": 0.875,
+        "priority_score": 0.07663348317146301,
+        "partial_score": null,
+        "weights": {
+          "amount": 0.5,
+          "novelty": 0.5,
+          "frequency": 0.0
+        }
+      },
+      "historical_context": {
+        "history_cutoff": "2026-08-31",
+        "history_size": 1373,
+        "history_announcement_count": 1385,
+        "real_history_count": 282,
+        "simulated_history_count": 1091,
+        "buyer_simulated_history_count": 4,
+        "amount": {
+          "historical_median_amount_yuan": 44996792.5,
+          "amount_ratio": 0.11089679336588269,
+          "history_count": 5,
+          "simulated_history_count": 4,
+          "reliable": true,
+          "status": "可比较"
+        },
+        "novelty": {
+          "history_count": 5,
+          "simulated_history_count": 4,
+          "max_history_similarity": 0.846733033657074,
+          "reliable": true,
+          "most_similar_project": {
+            "project_id": "R-c4efd4e0adf447dc",
+            "title": "天津市滨海新区大港医院 天津市滨海新区大港医院医用耗材等物资(不含检验试剂)采购及相关配送服务 (项目编号ZYGP20260736)公开招标公告",
+            "publish_date": "2026-08-04",
+            "data_origin": "real",
+            "source_url": "https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/619617108/2721/zhaobiao"
+          }
+        },
+        "frequency": {
+          "window_days": 30,
+          "recent_count": 2,
+          "historical_window_average_count": 0.25,
+          "frequency_ratio": 8.0,
+          "historical_windows_used": 4,
+          "reliable": true,
+          "includes_detection_day": true
+        }
+      },
+      "trigger": {
+        "detection_date": "2026-09-01",
+        "relevance_pass": true,
+        "relevance_threshold": 0.6,
+        "evidence_status": "sufficient",
+        "priority_confidence": "充分",
+        "priority_eligible": true,
+        "min_history_count": 3,
+        "top_k": 10,
+        "daily_rank": 1,
+        "is_signal": true,
+        "priority_label": "普通候选",
+        "medium_priority_threshold": 0.55,
+        "high_priority_threshold": 0.75,
+        "signal_reason": "项目与企业业务画像的语义相似度为 0.632，达到准入阈值 0.600。\n演示基线包含该单位 4 个模拟采购项目（非真实采购事实），其中有效金额样本 4 个、语义样本 4 个；依据完整度包含模拟样本，不代表真实历史证据充分。\n本项目金额 499.0 万元，为该采购单位过去 5 条有效金额中位数（4499.7 万元）的 0.11 倍，金额变化得分 0.000。\n该单位过去 5 个项目中，最相似的是“天津市滨海新区大港医院 天津市滨海新区大港医院医用耗材等物资(不含检验试剂)采购及相关配送服务 (项目编号ZYGP20260736)公开招标公告”，相似度 0.847，新颖性得分 0.153。\n截至当天的 30 天采购 2 次，已完整观测的历史窗口平均 0.25 次，比值 8.00。\n当前历史跨度有限，频率指标仅供参考，Priority 权重为 0%。\nPriority Score 为 0.077，当天完整依据候选排名 1，依据完整度：充分。\n进入当日 Top-K，是值得进一步调查的信号；仍需核实需求、预算与采购条件。",
+        "reasons": [
+          "项目与企业业务画像的语义相似度为 0.632，达到准入阈值 0.600。",
+          "演示基线包含该单位 4 个模拟采购项目（非真实采购事实），其中有效金额样本 4 个、语义样本 4 个；依据完整度包含模拟样本，不代表真实历史证据充分。",
+          "本项目金额 499.0 万元，为该采购单位过去 5 条有效金额中位数（4499.7 万元）的 0.11 倍，金额变化得分 0.000。",
+          "该单位过去 5 个项目中，最相似的是“天津市滨海新区大港医院 天津市滨海新区大港医院医用耗材等物资(不含检验试剂)采购及相关配送服务 (项目编号ZYGP20260736)公开招标公告”，相似度 0.847，新颖性得分 0.153。",
+          "截至当天的 30 天采购 2 次，已完整观测的历史窗口平均 0.25 次，比值 8.00。",
+          "当前历史跨度有限，频率指标仅供参考，Priority 权重为 0%。",
+          "Priority Score 为 0.077，当天完整依据候选排名 1，依据完整度：充分。",
+          "进入当日 Top-K，是值得进一步调查的信号；仍需核实需求、预算与采购条件。"
+        ]
+      },
+      "sources": {
+        "source_url": "https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/627115111/2721/zhaobiao",
+        "source_file": "商机信息导出20260922.xls",
+        "source_sheet": "商机信息导出",
+        "source_row": 116,
+        "content_source_type": "根据原始字段生成",
+        "content_source_note": "基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果。",
+        "link_verification_status": "not_checked"
+      },
+      "scoring_context": {
+        "embedding_model": "BAAI/bge-small-zh-v1.5",
+        "embedding_revision": "7999e1d3359715c523056ef9478215996d62a620",
+        "company_profile_used": "医疗AI、医学影像、辅助诊断、智慧医院、医院信息化、医疗大模型、医院数据平台、HIS、PACS、电子病历"
+      }
+    },
+    {
+      "project": {
+        "project_id": "R-bab072bbcb24e1c3",
+        "procurement_project_id": "R-bab072bbcb24e1c3",
+        "title": "[询比采购]北京通用航天医院LIS系统信创改造项目采购公告",
+        "buyer": "北京通用航天医院",
+        "publish_date": "2026-09-11",
+        "amount_yuan": 980000.0,
+        "category": "电子病历与临床系统",
+        "project_summary": "[询比采购]北京通用航天医院LIS系统信创改造项目采购公告；采购单位：北京通用航天医院；领域：电子病历与临床系统",
+        "project_number": "GT(采)20260870",
+        "region": "北京 / 北京 / 丰台区",
+        "data_origin": "real",
+        "project_event": "new_project",
+        "first_announcement_id": "R-bab072bbcb24e1c3",
+        "project_first_seen": "2026-09-11",
+        "project_match_method": "采购单位+项目编号",
+        "is_project_update": false
+      },
+      "scores": {
+        "relevance_score": 0.6010652184486389,
+        "amount_score": 0.0,
+        "novelty_score": 0.10913431644439697,
+        "frequency_score": 0.0,
+        "priority_score": 0.054567158222198486,
+        "partial_score": null,
+        "weights": {
+          "amount": 0.5,
+          "novelty": 0.5,
+          "frequency": 0.0
+        }
+      },
+      "historical_context": {
+        "history_cutoff": "2026-09-10",
+        "history_size": 1420,
+        "history_announcement_count": 1440,
+        "real_history_count": 329,
+        "simulated_history_count": 1091,
+        "buyer_simulated_history_count": 29,
+        "amount": {
+          "historical_median_amount_yuan": 1511391.84,
+          "amount_ratio": 0.6484089526379869,
+          "history_count": 11,
+          "simulated_history_count": 9,
+          "reliable": true,
+          "status": "可比较"
+        },
+        "novelty": {
+          "history_count": 36,
+          "simulated_history_count": 29,
+          "max_history_similarity": 0.890865683555603,
+          "reliable": true,
+          "most_similar_project": {
+            "project_id": "R-bf48429c8763915d",
+            "title": "[询比采购]北京通用航天医院单机医疗设备数据采集信创交互系统项目采购公告",
+            "publish_date": "2026-07-21",
+            "data_origin": "real",
+            "source_url": "https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/615640844/3318/zhaobiao"
+          }
+        },
+        "frequency": {
+          "window_days": 30,
+          "recent_count": 3,
+          "historical_window_average_count": 3.0,
+          "frequency_ratio": 1.0,
+          "historical_windows_used": 4,
+          "reliable": true,
+          "includes_detection_day": true
+        }
+      },
+      "trigger": {
+        "detection_date": "2026-09-11",
+        "relevance_pass": true,
+        "relevance_threshold": 0.6,
+        "evidence_status": "sufficient",
+        "priority_confidence": "充分",
+        "priority_eligible": true,
+        "min_history_count": 3,
+        "top_k": 10,
+        "daily_rank": 1,
+        "is_signal": true,
+        "priority_label": "普通候选",
+        "medium_priority_threshold": 0.55,
+        "high_priority_threshold": 0.75,
+        "signal_reason": "项目与企业业务画像的语义相似度为 0.601，达到准入阈值 0.600。\n演示基线包含该单位 29 个模拟采购项目（非真实采购事实），其中有效金额样本 9 个、语义样本 29 个；依据完整度包含模拟样本，不代表真实历史证据充分。\n本项目金额 98.0 万元，为该采购单位过去 11 条有效金额中位数（151.1 万元）的 0.65 倍，金额变化得分 0.000。\n该单位过去 36 个项目中，最相似的是“[询比采购]北京通用航天医院单机医疗设备数据采集信创交互系统项目采购公告”，相似度 0.891，新颖性得分 0.109。\n截至当天的 30 天采购 3 次，已完整观测的历史窗口平均 3.00 次，比值 1.00。\n当前历史跨度有限，频率指标仅供参考，Priority 权重为 0%。\nPriority Score 为 0.055，当天完整依据候选排名 1，依据完整度：充分。\n进入当日 Top-K，是值得进一步调查的信号；仍需核实需求、预算与采购条件。",
+        "reasons": [
+          "项目与企业业务画像的语义相似度为 0.601，达到准入阈值 0.600。",
+          "演示基线包含该单位 29 个模拟采购项目（非真实采购事实），其中有效金额样本 9 个、语义样本 29 个；依据完整度包含模拟样本，不代表真实历史证据充分。",
+          "本项目金额 98.0 万元，为该采购单位过去 11 条有效金额中位数（151.1 万元）的 0.65 倍，金额变化得分 0.000。",
+          "该单位过去 36 个项目中，最相似的是“[询比采购]北京通用航天医院单机医疗设备数据采集信创交互系统项目采购公告”，相似度 0.891，新颖性得分 0.109。",
+          "截至当天的 30 天采购 3 次，已完整观测的历史窗口平均 3.00 次，比值 1.00。",
+          "当前历史跨度有限，频率指标仅供参考，Priority 权重为 0%。",
+          "Priority Score 为 0.055，当天完整依据候选排名 1，依据完整度：充分。",
+          "进入当日 Top-K，是值得进一步调查的信号；仍需核实需求、预算与采购条件。"
+        ]
+      },
+      "sources": {
+        "source_url": "https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/630465763/3318/zhaobiao",
+        "source_file": "商机信息导出20260922.xls",
+        "source_sheet": "商机信息导出",
+        "source_row": 60,
+        "content_source_type": "根据原始字段生成",
+        "content_source_note": "基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果。",
+        "link_verification_status": "not_checked"
+      },
+      "scoring_context": {
+        "embedding_model": "BAAI/bge-small-zh-v1.5",
+        "embedding_revision": "7999e1d3359715c523056ef9478215996d62a620",
+        "company_profile_used": "医疗AI、医学影像、辅助诊断、智慧医院、医院信息化、医疗大模型、医院数据平台、HIS、PACS、电子病历"
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "kind": "tender",
+  "event_id": "evt_tender_medai",
+  "tender": {
+    "projectId": "MEDAI-2026-001",
+    "projectName": "XX市第一人民医院AI辅助诊断系统采购项目",
+    "purchaser": "XX市第一人民医院",
+    "amountYuan": 4800000,
+    "publishedDate": "2026-09-20",
+    "domain": "医疗信息化",
+    "projectSummary": "XX市第一人民医院公开招标采购AI辅助诊断系统,预算480万元,含影像辅助诊断与临床决策支持模块。",
+    "amountAnomaly": {
+      "score": 0.91,
+      "explanation": "本次采购金额为该院历史采购中位数的4.2倍",
+      "basisSufficient": true
+    },
+    "frequencyAnomaly": {
+      "score": 0.62,
+      "explanation": "近90天该院采购频次为历史均值的2.3倍",
+      "basisSufficient": true
+    },
+    "noveltyAnomaly": {
+      "score": 0.83,
+      "explanation": "与该院历史最相似项目相似度仅0.3,属首次出现的AI辅助诊断采购方向",
+      "basisSufficient": true
+    },
+    "relevance": {
+      "score": 0.9,
+      "explanation": "与本企业医疗AI产品线高度匹配",
+      "basisSufficient": true
+    }
+  }
+}

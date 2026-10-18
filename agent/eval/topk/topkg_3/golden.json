@@ -1,0 +1,134 @@
+{
+ "case_id": "topkg_3",
+ "event_id": "evt_topkg2_3",
+ "verified": true,
+ "verified_date": "2026-10-06",
+ "source": "TopK 信号3 重录(挂账修复后);corpus_bound 机械派生金标",
+ "claims": [
+  {
+   "draft_id": "c1",
+   "text": "信封载明本次信号 kind 为 tender，项目编号为 R-47f03243aabe9985。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c11",
+   "text": "信封 relevance 解释载明『项目与企业业务画像的语义相似度为 0.632，达到准入阈值 0.600』。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c12",
+   "text": "信封 companyProfile 载明企业业务画像为『医疗AI、医学影像、辅助诊断、智慧医院、医院信息化、医疗大模型、医院数据平台、HIS、PACS、电子病历』。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c13",
+   "text": "信封载明 sourceUrl 为『https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/627115111/2721/zhaobiao』。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c14",
+   "text": "解读将本信号定性为『商机』，理由为信封 kind 为 tender 且含公开招标公告，构成潜在投标/合作机会。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c15",
+   "text": "解读登记了三个假设种子标签：『真实经营动态』『新方向扩张』『正常大额采购』。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c16",
+   "text": "解读 basisGaps 载明需先补齐真实历史采购金额基线、真实历史项目基线，并获取官方招标正文以核实金额、参数与资格条件。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c17",
+   "text": "本次采购的采购方『天津市滨海新区大港医院』与历史最相似项目（项目编号ZYGP20260736）的采购方为同一采购单位。",
+   "golden_status": "待证实",
+   "note": "世界断言,无官方正文",
+   "elements": [
+    "ZYGP20260736",
+    "天津市滨海新区大港医院"
+   ]
+  },
+  {
+   "draft_id": "c18",
+   "text": "截至 2026-09-01 前的近 30 天窗口内，该采购单位采购频次为 2 次，处于高于历史平均水平的抬升状态。",
+   "golden_status": "待证实",
+   "note": "世界断言,无官方正文"
+  },
+  {
+   "draft_id": "c19",
+   "text": "解读同时给出『频率异常得分 0.875（偏高）』与『金额异常得分 0.000（金额仅为历史中位数 0.11 倍）』两个方向相反的异常信号。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c2",
+   "text": "信封载明采购方为『天津市滨海新区大港医院』。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c3",
+   "text": "信封载明项目名称为『天津市滨海新区大港医院 天津市滨海新区大港医院CT影像设备维保项目 (项目编号ZYGP20260902)公开招标公告』，领域为『医学影像与PACS』。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "elements": [
+    "ZYGP20260902",
+    "『天津市滨海新区大港医院"
+   ]
+  },
+  {
+   "draft_id": "c4",
+   "text": "信封载明本项目金额为 4990000.0 元（499.0 万元），发布日期为 2026-09-01。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "elements": [
+    "4990000.0",
+    "2026-09-01"
+   ]
+  },
+  {
+   "draft_id": "c5",
+   "text": "信封 contentSourceNote 载明『基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果』。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c6",
+   "text": "信封 amountAnomaly 解释载明『本项目金额 499.0 万元，为该采购单位过去 5 条有效金额中位数(4499.7 万元)的 0.11 倍，金额异常得分 0.000』。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c7",
+   "text": "信封 amountAnomaly 解释载明『历史基线含 4 个模拟样本，不代表真实历史证据充分』。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c8",
+   "text": "信封 frequencyAnomaly 解释载明『截至当天近 30 天该采购单位采购 2 次，已完整观测的 4 个历史窗口平均 0.25 次，比值 8.00，频率异常得分 0.875』。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c9",
+   "text": "信封 noveltyAnomaly 解释载明该采购单位历史最相似项目为『天津市滨海新区大港医院 天津市滨海新区大港医院医用耗材等物资(不含检验试剂)采购及相关配送服务 (项目编号ZYGP20260736)公开招标公告』(2026-08-04)，相似度 0.847，比较基数 5 个历史项目，新颖性异常得分 0.153。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "elements": [
+    "ZYGP20260736",
+    "2026-08-04",
+    "『天津市滨海新区大港医院"
+   ]
+  }
+ ]
+}

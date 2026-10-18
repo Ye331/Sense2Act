@@ -1,0 +1,29 @@
+{
+  "case_id": "xhs_opensource",
+  "event_id": "evt_xhs_llm",
+  "verified": false,
+  "source": "草拟:依'信封自证/语料内可核对/单源实质断言'三类裁定,待人工核对",
+  "note": "金标草拟口径:c1-c16 为信封元数据/线索内容/解读记录的复述型 claim,语料内可直接核对故为已证实;c17-c20(发布方关系/供应依赖/竞争关系/preview 时效)为实质世界断言,语料仅极客公园一文两发的同源转载,正确终态=待证实(同源谱系折算后孤证不立——本样例即'连续正确拒绝单源证实'的回归样本)。S5 派生 claim 未入账,无 system_extra。人工核对后将 verified 置 true 冻结。",
+  "claims": [
+    {"draft_id": "c1", "text": "信号信封 kind 为 rumor,watchFocus 为竞品动态", "golden_status": "已证实", "category": "事实", "note": "信封自证"},
+    {"draft_id": "c2", "text": "信封主体名为'小红书',subjectCreditCode 为空字符串", "golden_status": "已证实", "category": "实体", "note": "信封自证"},
+    {"draft_id": "c3", "text": "信封 summary 称小红书在海外开源发布 dots3-note preview(MoE 架构)", "golden_status": "已证实", "category": "事实", "note": "摘要复述自证;实质发布断言由 c17 承载"},
+    {"draft_id": "c4", "text": "信封 signalTime 为 2026-08-21,source 为 toutiao.com", "golden_status": "已证实", "category": "时效", "note": "信封自证"},
+    {"draft_id": "c5", "text": "线索 k1 标题为'小红书悄悄开源发布了自己的大模型…',publishedAt 为 2026-08-21", "golden_status": "已证实", "category": "事实", "note": "语料内可核对"},
+    {"draft_id": "c6", "text": "线索 k2 标题为'小红书悄悄开源发布了自己的大模型…',publishedAt 为 2026-08-20", "golden_status": "已证实", "category": "事实", "note": "语料内可核对"},
+    {"draft_id": "c7", "text": "k1 与 k2 标题完全相同且均标注来源 toutiao(同题转载)", "golden_status": "已证实", "category": "矛盾", "note": "陈述本身可核对为真;category=矛盾指重复线索,与三态正交"},
+    {"draft_id": "c8", "text": "k1 正文署名'极客公园',发布时间 2026-08-21 14:16", "golden_status": "已证实", "category": "事实", "note": "语料内可核对"},
+    {"draft_id": "c9", "text": "k2 正文署名'极客公园',作者连冉、编辑靖宇,发布时间 2026-08-20 14:31", "golden_status": "已证实", "category": "事实", "note": "语料内可核对"},
+    {"draft_id": "c10", "text": "k2 正文称'长期依赖外部模型,不是最好的选择'", "golden_status": "已证实", "category": "事实", "note": "语料内可核对(引述复述)"},
+    {"draft_id": "c11", "text": "k1 正文称'前几天,我们注意小红书在海外发布了一款大模型 dots3-note preview'", "golden_status": "已证实", "category": "事实", "note": "语料内可核对"},
+    {"draft_id": "c12", "text": "k1 正文称该模型'采用 Mo'(原文截断,架构表述不完整)", "golden_status": "已证实", "category": "事实", "note": "语料内可核对"},
+    {"draft_id": "c13", "text": "解读将本信号定性为'竞情'", "golden_status": "已证实", "category": "事实", "note": "解读记录复述"},
+    {"draft_id": "c14", "text": "解读 basisGaps 指出仅两篇同源报道、缺小红书官方信源", "golden_status": "已证实", "category": "事实", "note": "解读记录复述"},
+    {"draft_id": "c15", "text": "解读 basisGaps 指出 subjectCreditCode 缺失、工商身份未核验", "golden_status": "已证实", "category": "实体", "note": "解读记录复述"},
+    {"draft_id": "c16", "text": "解读选定的假设种子标签为'真实经营动态'、'新方向扩张'、'竞对放风'", "golden_status": "已证实", "category": "事实", "note": "解读记录复述"},
+    {"draft_id": "c17", "text": "小红书与 dots3-note preview 之间存在发布方与发布物的关联关系", "golden_status": "待证实", "category": "关系", "note": "实质关系断言:同源转载孤证,无官方仓库/公告,正确终态=待证实(正确拒绝单源证实)"},
+    {"draft_id": "c18", "text": "小红书与既有基础模型提供方之间存在模型供应依赖关系", "golden_status": "待证实", "category": "关系", "note": "实质关系断言:单一引述且依赖对端主体不明,待证实"},
+    {"draft_id": "c19", "text": "小红书与既有基础模型提供方在模型底座层面构成竞争关系", "golden_status": "待证实", "category": "关系", "note": "实质关系断言:源自标题修辞,对手主体不明,待证实"},
+    {"draft_id": "c20", "text": "截至 2026-08-21,dots3-note preview 处于 preview 阶段、未见正式版发布", "golden_status": "待证实", "category": "时效", "note": "实质时效断言:单源报道,待证实"}
+  ]
+}

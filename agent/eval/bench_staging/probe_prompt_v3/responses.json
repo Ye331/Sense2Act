@@ -1,0 +1,1577 @@
+[
+  {
+    "stage": "s1a",
+    "response": {
+      "signalType": "竞情",
+      "reason": "信封 kind 为 rumor,rumor.summary 称\"待核实线索:某化工大模型由中国科学院大连化学物理研究所联合科大讯飞、阿里云发布\",主体为科大讯飞,属竞争对手动态类信号;watchFocus 要求\"核实联合研发关系是否属实;确认发布时间与官方信源\",clues 中唯一线索来源为新华网、标题\"我国化工行业首个大模型发布新版本\",内容仅提及\"中国科学院大连化学物理研究所工作人员在使用应用智能化工大模型3.0Pro的中试装置开展试验工作\",未直接证实科大讯飞的联合研发关系,故定性为竞情并需进一步核实。",
+      "selectedSeedLabels": [
+        "真实经营动态",
+        "市场误读",
+        "信源讹传"
+      ],
+      "basisGaps": [
+        "该线索未直接证实科大讯飞与大连化学物理研究所的联合研发关系,需先补齐官方信源与发布时间的核实基线"
+      ]
+    }
+  },
+  {
+    "stage": "s1b",
+    "response": {
+      "claims": [
+        {
+          "id": "c-envelope-01",
+          "text": "信封 evt_SIG_20261003_0002 载明:kind 为 rumor,主体为科大讯飞,subjectCreditCode 为空,tender 为 null,来源为 toutiao.com,signalTime 为 2026-10-03T10:00:00+08:00。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 3,
+          "priorityReason": "信封基础字段复述,是全部推理的地基,但本身不含外部世界信息。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "科大讯飞"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c-envelope-02",
+          "text": "信封 rumor.summary 称\"待核实线索:某化工大模型由中国科学院大连化学物理研究所联合科大讯飞、阿里云发布\",watchFocus 为\"核实联合研发关系是否属实;确认发布时间与官方信源\"。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "信封自述的核心待核实断言,直接决定后续外部核实方向。",
+          "hypothesisIds": [
+            "h-joint",
+            "h-misread",
+            "h-distort"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "科大讯飞",
+            "中国科学院大连化学物理研究所",
+            "阿里云"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c-clue-01",
+          "text": "线索 clue-0001 载明:来源为新华网,平台为 toutiao,标题为\"我国化工行业首个大模型发布新版本\",publishedAt 为 2026-10-03T09:00:00+08:00,authorType 为媒体。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "唯一线索卡的记载型复述,是时间线与信源核实的起点。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "新华网"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c-clue-02",
+          "text": "线索 clue-0001 内容称\"9月2日,中国科学院大连化学物理研究所工作人员在使用应用智能化工大模型3.0Pro的中试装置开展试验工作\"。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "线索正文唯一实质内容,是判断发布事件与使用主体的直接依据。",
+          "hypothesisIds": [
+            "h-joint",
+            "h-misread"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "中国科学院大连化学物理研究所"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c-interp-01",
+          "text": "解读将本信号定性为\"竞情\",理由为信封 kind 为 rumor 且主体为科大讯飞,属竞争对手动态类信号,并指出线索未直接证实科大讯飞的联合研发关系。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 3,
+          "priorityReason": "解读定性复述,决定信号归类与后续核实优先级。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "科大讯飞"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c-interp-02",
+          "text": "解读登记了三个假设种子标签:\"真实经营动态\"、\"市场误读\"、\"信源讹传\"。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 2,
+          "priorityReason": "假设种子标签的复述,为假设登记提供依据。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c-time-01",
+          "text": "线索 clue-0001 的发布时间 2026-10-03T09:00:00+08:00 早于信封 signalTime 2026-10-03T10:00:00+08:00 一小时,线索正文所述试验时间为 9月2日。",
+          "category": "时效",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "时间线差异是判断信源传播链与时效衰减的基础。",
+          "hypothesisIds": [],
+          "validWindowDays": 30,
+          "refreshCycleDays": 7,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c-world-01",
+          "text": "新华网等官方信源确实在 2026 年 9 月至 10 月间发布过\"我国化工行业首个大模型发布新版本\"的报道,且该报道未被更正或撤销。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "发布事件真实性是全部假设的公共前提,若为假则整条信号作废。",
+          "hypothesisIds": [
+            "h-joint",
+            "h-misread",
+            "h-distort"
+          ],
+          "validWindowDays": 90,
+          "refreshCycleDays": 14,
+          "relationType": null,
+          "entityNames": [
+            "新华网"
+          ],
+          "corpusBound": false
+        },
+        {
+          "id": "c-world-02",
+          "text": "中国科学院大连化学物理研究所与科大讯飞之间存在真实的联合研发或协同关系,并有独立于本线索的官方信源(如双方官网、公告、专利或论文)佐证。",
+          "category": "关系",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "联合研发关系真伪是本次调查的核心待核实断言,直接决定竞情判断。",
+          "hypothesisIds": [
+            "h-joint",
+            "h-misread",
+            "h-distort"
+          ],
+          "validWindowDays": 180,
+          "refreshCycleDays": 30,
+          "relationType": "协同",
+          "entityNames": [
+            "中国科学院大连化学物理研究所",
+            "科大讯飞"
+          ],
+          "corpusBound": false
+        },
+        {
+          "id": "c-world-03",
+          "text": "科大讯飞在 2024 至 2026 年间有参与科研机构联合发布行业大模型的既往公开记录与行为 pattern。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 4,
+          "priorityReason": "主体既往行为 pattern 是判断本次联合关系可信度的关键外部证据。",
+          "hypothesisIds": [
+            "h-joint",
+            "h-misread"
+          ],
+          "validWindowDays": 365,
+          "refreshCycleDays": 60,
+          "relationType": null,
+          "entityNames": [
+            "科大讯飞"
+          ],
+          "corpusBound": false
+        },
+        {
+          "id": "c-world-04",
+          "text": "若该化工大模型确由科大讯飞参与发布,则对本企业在化工行业大模型市场的份额或客户获取构成可量化的竞争压力。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 4,
+          "priorityReason": "影响与后果断言决定本信号是否值得投入后续调查资源。",
+          "hypothesisIds": [
+            "h-joint"
+          ],
+          "validWindowDays": 180,
+          "refreshCycleDays": 30,
+          "relationType": null,
+          "entityNames": [
+            "科大讯飞"
+          ],
+          "corpusBound": false
+        },
+        {
+          "id": "c-world-05",
+          "text": "阿里云是否同样参与该化工大模型的联合发布,并有独立信源佐证其参与角色。",
+          "category": "关系",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "阿里云参与与否影响竞争格局判断,是联合关系核实的重要分支。",
+          "hypothesisIds": [
+            "h-joint",
+            "h-distort"
+          ],
+          "validWindowDays": 180,
+          "refreshCycleDays": 30,
+          "relationType": "协同",
+          "entityNames": [
+            "阿里云",
+            "中国科学院大连化学物理研究所"
+          ],
+          "corpusBound": false
+        },
+        {
+          "id": "c-world-06",
+          "text": "该\"智能化工大模型3.0Pro\"的发布主体与知识产权归属在官方渠道有明确记载,且与信封所称联合方一致。",
+          "category": "实体",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "发布主体身份归属是区分真实动态与信源讹传的可区分断言。",
+          "hypothesisIds": [
+            "h-joint",
+            "h-distort"
+          ],
+          "validWindowDays": 180,
+          "refreshCycleDays": 30,
+          "relationType": null,
+          "entityNames": [
+            "中国科学院大连化学物理研究所",
+            "科大讯飞",
+            "阿里云"
+          ],
+          "corpusBound": false
+        }
+      ],
+      "hypotheses": [
+        {
+          "id": "h-joint",
+          "label": "真实经营动态",
+          "description": "科大讯飞确实与中国科学院大连化学物理研究所联合研发并发布了该化工大模型,属真实经营动态。成立条件:存在独立官方信源证实联合研发关系。可区分 claim:c-world-02(联合关系真伪)与 c-world-06(发布主体归属)——若为真则支持本假设,若为假则削弱。",
+          "claimIds": [
+            "c-world-02",
+            "c-world-06",
+            "c-world-01",
+            "c-world-03"
+          ],
+          "op": "AND"
+        },
+        {
+          "id": "h-misread",
+          "label": "市场误读",
+          "description": "该大模型确由大连化物所发布,但科大讯飞并未实际参与联合研发,系市场将\"使用\"或\"合作\"误读为\"联合发布\"。成立条件:官方发布信息中不含科大讯飞为联合方。可区分 claim:c-world-02(联合关系真伪)——若科大讯飞无联合关系则支持本假设。",
+          "claimIds": [
+            "c-world-02",
+            "c-world-03"
+          ],
+          "op": "AND"
+        },
+        {
+          "id": "h-distort",
+          "label": "信源讹传",
+          "description": "该线索本身为讹传或标题党,所称\"联合科大讯飞、阿里云发布\"在原始信源中并不存在,或发布事件本身被夸大。成立条件:原始信源无此表述或事件未真实发生。可区分 claim:c-world-01(发布事件真实性)与 c-world-06(发布主体归属)——若原始信源无联合方表述则支持本假设。",
+          "claimIds": [
+            "c-world-01",
+            "c-world-06",
+            "c-world-05"
+          ],
+          "op": "AND"
+        }
+      ],
+      "gaps": [
+        {
+          "text": "新华网原始报道的完整正文与官方链接是什么?是否明确提及科大讯飞、阿里云为联合发布方?",
+          "relatedClaimId": "c-world-01"
+        },
+        {
+          "text": "中国科学院大连化学物理研究所官网或官方公众号是否发布过该大模型的发布公告?公告中列明的合作方有哪些?",
+          "relatedClaimId": "c-world-02"
+        },
+        {
+          "text": "科大讯飞官方渠道(官网、公告、公众号)是否披露过与大连化物所在化工大模型上的合作?",
+          "relatedClaimId": "c-world-02"
+        },
+        {
+          "text": "阿里云是否在任何官方渠道确认参与该化工大模型的联合发布?",
+          "relatedClaimId": "c-world-05"
+        },
+        {
+          "text": "该\"智能化工大模型3.0Pro\"的发布时间、发布地点、发布主体与知识产权归属的官方记载是什么?",
+          "relatedClaimId": "c-world-06"
+        },
+        {
+          "text": "该线索是否被其他权威媒体转载或更正?是否存在撤销或辟谣记录?",
+          "relatedClaimId": "c-world-01"
+        },
+        {
+          "text": "本企业在化工行业大模型市场的现有份额与主要客户分布如何?该发布事件在什么条件下构成实质竞争压力?",
+          "relatedClaimId": "c-world-04"
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-clue-01",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E2",
+          "direction": "支持",
+          "quote": "主要来源 toutiao.com;信号识别时间 2026-10-03T10:00:00+08:00",
+          "reason": "该信封元数据确认线索主要来源为 toutiao.com,且信号识别时间与 claim 所述 publishedAt 2026-10-03 同日,与 claim 中平台为 toutiao、时间为 2026-10-03 的要素一致,使 claim 更可能为真。但该证据未提及来源为新华网、标题及 authorType 为媒体,故仅部分支持。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一证据为信号层信封元数据,仅能印证平台(toutiao)与时间(2026-10-03)两项要素,未能印证来源为新华网、标题及 authorType 为媒体;且该证据为单一来源,无独立来源交叉印证,故综合意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-clue-02",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E2",
+          "direction": "无关",
+          "quote": "事件摘要:待核实线索:某化工大模型由中国科学院大连化学物理研究所联合科大讯飞、阿里云发布。",
+          "reason": "该证据仅记录线索的信封元数据与监测重点(核实联合研发关系、发布时间与官方信源),未涉及9月2日中试装置试验工作这一具体事实,不改变该 claim 的判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一证据为信号层信封元数据,未包含对9月2日中试装置试验工作的任何直接描述或印证,claim 仍待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-envelope-01",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E2",
+          "direction": "支持",
+          "quote": "rumor 信封元数据:监测主体 科大讯飞;统一信用代码 (未提供);事件摘要:待核实线索:某化工大模型由中国科学院大连化学物理研究所联合科大讯飞、阿里云发布。;主要来源 toutiao.com;信号识别时间 2026-10-03T10:00:00+08:00",
+          "reason": "该证据为信号层信封元数据,载明 kind 为 rumor、主体为科大讯飞、统一信用代码未提供(即 subjectCreditCode 为空)、来源 toutiao.com、信号识别时间 2026-10-03T10:00:00+08:00,与 claim 各项字段一致;tender 为 null 未在该证据中直接出现,但其余字段均获印证。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据为信号层信封元数据,其 kind、主体、统一信用代码(未提供)、来源、signalTime 均与 claim 描述一致,支持 claim 成立;tender 为 null 一项未在证据原文中直接体现,但无相反证据。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-envelope-02",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E2",
+          "direction": "支持",
+          "quote": "事件摘要:待核实线索:某化工大模型由中国科学院大连化学物理研究所联合科大讯飞、阿里云发布。",
+          "reason": "该证据原文逐字包含 claim 所引述的信封摘要内容,并载明监测重点为\"核实联合研发关系是否属实;确认发布时间与官方信源\",与 claim 描述一致,使 claim(信封 rumor.summary 如此表述)更可能为真。但该证据仅为信号层信封元数据,未提供任何官方信源或独立印证,不能证明联合研发关系本身属实。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一证据为信号层信封元数据,仅能证明信封摘要与监测重点的表述存在,不能证实\"联合研发关系\"这一事实本身;线索标注为\"待核实\",且无官方信源或独立来源印证,故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-interp-01",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E2",
+          "direction": "支持",
+          "quote": "rumor 信封元数据:监测主体 科大讯飞;统一信用代码 (未提供);事件摘要:待核实线索:某化工大模型由中国科学院大连化学物理研究所联合科大讯飞、阿里云发布。;主要来源 toutiao.com;信号识别时间 2026-10-03T10:00:00+08:00;监测重点:核实联合研发关系是否属实;确认发布时间与官方信源。;线索 1 条。",
+          "reason": "该证据原文明确显示信封 kind 为 rumor、监测主体为科大讯飞,且监测重点为核实联合研发关系是否属实,与 claim 所述解读定性及'线索未直接证实联合研发关系'一致。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一证据为信号层信封元数据,其内容与 claim 的解读描述一致,但仅能证明该解读所依据的信封属性与线索状态,尚不足以独立证实解读本身成立;且证据谱系根为 signal_layer,无独立来源交叉印证,故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-interp-02",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E2",
+          "direction": "无关",
+          "quote": "rumor 信封元数据:监测主体 科大讯飞;统一信用代码 (未提供);事件摘要:待核实线索:某化工大模型由中国科学院大连化学物理研究所联合科大讯飞、阿里云发布。;主要来源 toutiao.com;信号识别时间 2026-10-03T10:00:00+08:00;监测重点:核实联合研发关系是否属实;确认发布时间与官方信源。;线索 1 条。",
+          "reason": "该证据为信号层信封元数据,内容仅涉及监测主体、事件摘要与核实重点,未提及任何关于解读登记假设种子标签的信息,不改变 claim 成立与否的判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一证据为信号层信封元数据,未涉及解读登记的三个假设种子标签,无法支持或反驳该 claim,故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-time-01",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E2",
+          "direction": "支持",
+          "quote": "信号识别时间 2026-10-03T10:00:00+08:00",
+          "reason": "该证据给出信封 signalTime 为 2026-10-03T10:00:00+08:00,与 claim 所述信封时间一致,支持 claim 中关于 signalTime 的部分;但证据未提及线索发布时间 2026-10-03T09:00:00+08:00,也未提及线索正文所述试验时间为 9月2日,故仅部分支持。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一证据仅能印证信封 signalTime 为 2026-10-03T10:00:00+08:00,无法印证线索发布时间 2026-10-03T09:00:00+08:00 及线索正文所述试验时间为 9月2日,claim 整体仍待证实。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 1,
+      "mainTarget": "c-world-02",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "中国科学院大连化学物理研究所与科大讯飞之间是否存在真实的联合研发或协同关系(独立于本线索的官方信源)",
+          "acceptance": "需权威登记源或双方官方渠道记录级证据:大连化物所官网/官方公众号发布稿、科大讯飞官网或公告、或双方共同署名的专利/论文,正文中同时出现两方主体且表述为联合研发/联合发布;仅第三方媒体转述不算",
+          "failover": "若双方官方渠道均无联合表述,则转向查该大模型发布主体与知识产权归属(c-world-06),以官方发布稿中的署名单位清单作为判定依据"
+        },
+        {
+          "gap": "该\"智能化工大模型3.0Pro\"的发布主体与知识产权归属在官方渠道的明确记载,及其与信封所称联合方(大连化物所、科大讯飞、阿里云)是否一致",
+          "acceptance": "需页面正文级证据:官方发布稿或登记源中列明发布单位/著作权人清单,可逐字比对是否含科大讯飞",
+          "failover": "若官方发布稿不可得,则退而查新华网原始报道正文,核对是否出现\"联合科大讯飞、阿里云发布\"表述,以判定是否为信源讹传(c-world-01)"
+        }
+      ],
+      "searchHints": [
+        "中国科学院大连化学物理研究所 科大讯飞 智能化工大模型 联合发布",
+        "智能化工大模型3.0Pro 发布单位 知识产权",
+        "科大讯飞 大连化物所 合作 大模型 官方公告"
+      ],
+      "sideTargets": [
+        "c-world-06",
+        "c-world-05"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [],
+      "cohorts": []
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-clue-01",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E2",
+          "direction": "支持",
+          "quote": "主要来源 toutiao.com;信号识别时间 2026-10-03T10:00:00+08:00",
+          "reason": "信封元数据载明主要来源为 toutiao.com，信号识别时间与 claim 所述 publishedAt 同日，与 claim 中平台为 toutiao、发布时间为 2026-10-03 的要素一致，使 claim 更可能为真。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E9",
+          "direction": "无关",
+          "quote": "“不断发展壮大的金砖合作机制为新兴市场和发展中国家拓展发展空间、提升国际话语权提供了重要平台。”",
+          "reason": "该证据内容为金砖合作机制相关访谈，未涉及新华网、toutiao 平台、化工大模型标题或发布时间等 claim 要素，不改变判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅信封元数据在来源平台与时间上与 claim 部分吻合，尚无独立来源逐字印证标题、来源为新华网及 authorType 为媒体等全部要素，故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-clue-02",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E2",
+          "direction": "无关",
+          "quote": "事件摘要:待核实线索:某化工大模型由中国科学院大连化学物理研究所联合科大讯飞、阿里云发布。",
+          "reason": "该信封仅提及大连化物所联合科大讯飞、阿里云发布某化工大模型的待核实线索，未涉及9月2日中试装置使用应用智能化工大模型3.0Pro开展试验工作的具体内容，不改变本 claim 的判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E12",
+          "direction": "无关",
+          "quote": "今年的中国国庆假期与澳大利亚维多利亚州学校假期重叠，不少澳大利亚人选择开启中国之旅。",
+          "reason": "内容为澳大利亚赴华旅游报道，与本 claim 所述中试装置试验工作无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E4",
+          "direction": "无关",
+          "quote": "10月10日，工业和信息化部会同公安部、生态环境部、市场监管总局联合发布《关于进一步加强汽车产品创新设计和研发测试验证有关管理工作的通知（征求意见稿）》。",
+          "reason": "内容为汽车产品设计研发测试管理通知，与本 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E9",
+          "direction": "无关",
+          "quote": "“不断发展壮大的金砖合作机制为新兴市场和发展中国家拓展发展空间、提升国际话语权提供了重要平台。”",
+          "reason": "内容为金砖合作机制采访，与本 claim 无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内唯一相关证据 E2 仅为待核实线索的信封元数据，未提供9月2日中试装置使用应用智能化工大模型3.0Pro开展试验工作的任何直接佐证；其余证据均与本 claim 无关，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-envelope-02",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E2",
+          "direction": "支持",
+          "quote": "事件摘要:待核实线索:某化工大模型由中国科学院大连化学物理研究所联合科大讯飞、阿里云发布。",
+          "reason": "该证据原文逐字包含 claim 所述的信封摘要内容与监测重点,证明信封 rumor.summary 与 watchFocus 的表述确实存在,但仅为待核实线索,不构成对联合研发关系本身的独立印证。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E3",
+          "direction": "无关",
+          "quote": "水利部和中国气象局10月11日18时联合发布蓝色山洪灾害气象预警",
+          "reason": "内容为山洪灾害气象预警,与化工大模型联合研发关系及发布时间、官方信源无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E4",
+          "direction": "无关",
+          "quote": "10月10日，工业和信息化部会同公安部、生态环境部、市场监管总局联合发布《关于进一步加强汽车产品创新设计和研发测试验证有关管理工作的通知（征求意见稿）》。",
+          "reason": "内容为汽车产品设计研发测试验证管理通知,与化工大模型联合研发关系无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E9",
+          "direction": "无关",
+          "quote": "“不断发展壮大的金砖合作机制为新兴市场和发展中国家拓展发展空间、提升国际话语权提供了重要平台。”",
+          "reason": "内容为金砖合作机制与全球治理的访谈,与化工大模型联合研发关系无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一相关证据 E2 仅复述信封中的待核实线索与监测重点,属同一信号层来源,未提供任何独立信源证实中国科学院大连化学物理研究所联合科大讯飞、阿里云发布化工大模型,亦未确认发布时间与官方信源;其余证据均与 claim 无关。故综合意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-interp-01",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E2",
+          "direction": "支持",
+          "quote": "rumor 信封元数据:监测主体 科大讯飞;统一信用代码 (未提供);事件摘要:待核实线索:某化工大模型由中国科学院大连化学物理研究所联合科大讯飞、阿里云发布。;主要来源 toutiao.com;信号识别时间 2026-10-03T10:00:00+08:00;监测重点:核实联合研发关系是否属实;确认发布时间与官方信源。;线索 1 条。",
+          "reason": "该证据原文明确显示信封 kind 为 rumor、监测主体为科大讯飞,且监测重点为核实联合研发关系是否属实,与 claim 所述定性理由及'线索未直接证实联合研发关系'一致。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E4",
+          "direction": "无关",
+          "quote": "10月10日，工业和信息化部会同公安部、生态环境部、市场监管总局联合发布《关于进一步加强汽车产品创新设计和研发测试验证有关管理工作的通知（征求意见稿）》。",
+          "reason": "该证据内容为汽车产品设计研发测试验证管理通知,与科大讯飞竞情信号定性无关,不改变判断。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一相关证据 evt_probe_prompt_v3:E2 原文直接支持 claim 关于 rumor 信封、科大讯飞主体及线索未直接证实联合研发关系的表述;另一条证据与主题无关。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-time-01",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E2",
+          "direction": "支持",
+          "quote": "信号识别时间 2026-10-03T10:00:00+08:00",
+          "reason": "该证据给出信封 signalTime 为 2026-10-03T10:00:00+08:00,与 claim 所述信封时间一致,支持 claim 中关于 signalTime 的部分。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E4",
+          "direction": "无关",
+          "quote": "10月10日，工业和信息化部会同公安部、生态环境部、市场监管总局联合发布《关于进一步加强汽车产品创新设计和研发测试验证有关管理工作的通知（征求意见稿）》。",
+          "reason": "该证据内容为汽车产品设计验证管理通知,与线索发布时间、信封 signalTime 及试验时间无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "证据 E2 仅能印证信封 signalTime 为 2026-10-03T10:00:00+08:00,但卷宗中没有任何证据给出线索 clue-0001 的发布时间 2026-10-03T09:00:00+08:00,也没有证据提及线索正文所述试验时间为 9月2日;claim 中这两项关键断言缺乏证据支撑,故综合意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-world-02",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E3",
+          "direction": "无关",
+          "quote": "水利部和中国气象局10月11日18时联合发布蓝色山洪灾害气象预警",
+          "reason": "该证据内容为山洪灾害气象预警，与中科院大连化物所和科大讯飞的联合研发关系无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E4",
+          "direction": "无关",
+          "quote": "10月10日，工业和信息化部会同公安部、生态环境部、市场监管总局联合发布《关于进一步加强汽车产品创新设计和研发测试验证有关管理工作的通知（征求意见稿）》。",
+          "reason": "该证据内容为汽车产品设计研发测试管理通知，与所涉两机构的合作关系无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E9",
+          "direction": "无关",
+          "quote": "印度尼西亚大学东盟—中国研究中心研究员拉伊汉·罗诺迪普罗日前在接受记者采访时表示",
+          "reason": "该证据内容为金砖合作机制与全球南方国家治理的访谈，与所涉两机构的合作关系无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "三条证据均与中科院大连化物所和科大讯飞的联合研发或协同关系无关，未提供任何支持或反驳该关系的独立官方信源，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-world-03",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E10",
+          "direction": "无关",
+          "quote": "代号为“欧亚-反恐-2026”的上合组织成员国主管机关联合反恐演习在白俄罗斯明斯克市举行",
+          "reason": "该证据讲的是上合组织联合反恐演习，与科大讯飞是否参与科研机构联合发布行业大模型无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E3",
+          "direction": "无关",
+          "quote": "水利部和中国气象局10月11日18时联合发布蓝色山洪灾害气象预警",
+          "reason": "该证据讲的是水利部与气象局联合发布山洪预警，与科大讯飞无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E4",
+          "direction": "无关",
+          "quote": "工业和信息化部会同公安部、生态环境部、市场监管总局联合发布《关于进一步加强汽车产品创新设计和研发测试验证有关管理工作的通知（征求意见稿）》",
+          "reason": "该证据讲的是四部门联合发布汽车管理通知，与科大讯飞无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "三条证据均与科大讯飞参与科研机构联合发布行业大模型这一断言无关，无任何证据支持或反驳该 claim，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-world-04",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E4",
+          "direction": "无关",
+          "quote": "10月10日，工业和信息化部会同公安部、生态环境部、市场监管总局联合发布《关于进一步加强汽车产品创新设计和研发测试验证有关管理工作的通知（征求意见稿）》。",
+          "reason": "该证据内容为汽车产品设计研发测试验证管理通知，与化工大模型是否由科大讯飞参与发布及本企业市场份额、客户获取的竞争压力无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E9",
+          "direction": "无关",
+          "quote": "“不断发展壮大的金砖合作机制为新兴市场和发展中国家拓展发展空间、提升国际话语权提供了重要平台。”",
+          "reason": "该证据内容为金砖合作机制与全球南方国家治理参与，与化工大模型发布主体及本企业竞争压力无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "两条证据均与claim主题无关，未提供任何关于科大讯飞是否参与发布化工大模型或本企业竞争压力的信息，claim仍待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-world-05",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E3",
+          "direction": "无关",
+          "quote": "水利部和中国气象局10月11日18时联合发布蓝色山洪灾害气象预警",
+          "reason": "该证据内容为山洪灾害气象预警，与阿里云是否参与化工大模型联合发布及其参与角色完全无关，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E4",
+          "direction": "无关",
+          "quote": "10月10日，工业和信息化部会同公安部、生态环境部、市场监管总局联合发布《关于进一步加强汽车产品创新设计和研发测试验证有关管理工作的通知（征求意见稿）》",
+          "reason": "该证据内容为汽车产品设计研发测试验证管理通知，与阿里云参与化工大模型联合发布无关，不改变判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "两条证据均与 claim 主题（阿里云是否参与该化工大模型联合发布及独立信源佐证其角色）无关，卷宗中不存在任何直接或间接指向该主张的证据，故无法证实也无法证伪，维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-world-06",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E3",
+          "direction": "无关",
+          "quote": "水利部和中国气象局10月11日18时联合发布蓝色山洪灾害气象预警",
+          "reason": "该证据内容为山洪灾害气象预警，与智能化工大模型3.0Pro的发布主体、知识产权归属及信封所称联合方均无关联。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E4",
+          "direction": "无关",
+          "quote": "10月10日，工业和信息化部会同公安部、生态环境部、市场监管总局联合发布《关于进一步加强汽车产品创新设计和研发测试验证有关管理工作的通知（征求意见稿）》。",
+          "reason": "该证据内容为汽车产品设计及测试验证管理通知，与智能化工大模型3.0Pro的发布主体、知识产权归属及联合方无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E6",
+          "direction": "无关",
+          "quote": "汽车贸易、出口管制、商品降税、知识产权保护合作……会上谈的，都是中欧经贸的焦点问题。",
+          "reason": "该证据涉及中欧经贸磋商中的知识产权保护合作议题，并非智能化工大模型3.0Pro的发布主体或知识产权归属记载，不改变claim判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E8",
+          "direction": "无关",
+          "quote": "双方围绕贸易和投资平衡、出口管制、知识产权、世贸组织改革等议题开展对等、专业、建设性的会谈，形成16项成果共识。",
+          "reason": "该证据为中欧经贸磋商成果，未涉及智能化工大模型3.0Pro的发布主体、知识产权归属或信封所称联合方，与claim无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "四条证据均与智能化工大模型3.0Pro的发布主体、知识产权归属及信封所称联合方无关，无任何证据支持或反驳该claim，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 2,
+      "mainTarget": "c-world-01",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "c-world-01 断言\"新华网等官方信源确实在 2026 年 9 月至 10 月间发布过'我国化工行业首个大模型发布新版本'的报道,且该报道未被更正或撤销\",需在语料外找到该报道的原始发布记录。",
+          "acceptance": "需权威登记源记录或官方媒体页面正文级证据:能定位到新华网(或同级官方媒体)域名下、标题与\"我国化工行业首个大模型发布新版本\"一致的报道页面,含可核对的发布时间与正文,而非仅转载摘要或聚合页标题。",
+          "failover": "若新华网域名下查无此报道,改查同题报道的其他官方媒体源(如央媒、行业主管部门网站),并同步记录\"官方源无此报道\"这一否定性结果,用于支撑 h-distort。"
+        },
+        {
+          "gap": "该报道正文中是否出现\"联合科大讯飞、阿里云发布\"或等义表述,以及发布主体与知识产权归属如何记载。",
+          "acceptance": "需页面正文级证据:报道原文中可直接引用的连续片段,明确写出发布主体(大连化物所)与联合方名单;若正文不含科大讯飞,则需能逐字引用不含该主体的相关段落。",
+          "failover": "若正文不可得(付费墙/已下线),改查该报道的官方转载版本或发布方官网通稿,并在证据登记中标注来源层级降级。"
+        },
+        {
+          "gap": "该报道是否被更正、撤销或存在后续澄清。",
+          "acceptance": "需权威登记源记录:官方媒体或发布主体的更正/撤稿声明,或可证明截至采集时点该报道仍在线且未被更正的页面状态证据。",
+          "failover": "若无法确认更正状态,如实标注为未决,不以此条单独裁定 c-world-01。"
+        }
+      ],
+      "searchHints": [
+        "我国化工行业首个大模型发布新版本 新华网",
+        "智能化工大模型3.0Pro 发布 大连化学物理研究所",
+        "化工大模型 科大讯飞 阿里云 联合发布 2026"
+      ],
+      "sideTargets": [
+        "c-world-06",
+        "c-world-05"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [],
+      "cohorts": []
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-clue-01",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E2",
+          "direction": "支持",
+          "quote": "主要来源 toutiao.com;信号识别时间 2026-10-03T10:00:00+08:00",
+          "reason": "信封元数据载明主要来源为 toutiao.com，信号识别时间与 claim 所述 publishedAt 同日，与 claim 中平台为 toutiao、发布时间为 2026-10-03 的要素一致，使 claim 更可能为真。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E9",
+          "direction": "无关",
+          "quote": "“不断发展壮大的金砖合作机制为新兴市场和发展中国家拓展发展空间、提升国际话语权提供了重要平台。”",
+          "reason": "该证据内容为金砖合作机制相关采访，未涉及新华网、toutiao 平台、化工大模型标题或发布时间等 claim 要素，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E19",
+          "direction": "无关",
+          "quote": "国家发展改革委国家信息中心10月10日发布多项先行指标。",
+          "reason": "该证据内容为经济先行指标发布，与 claim 所述线索元数据要素无关，不改变判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅 evt_probe_prompt_v3:E2 对 claim 的平台与时间要素构成支持，其余两条证据与 claim 无关；且 E2 为信号层信封元数据，未直接载明来源为新华网、标题原文及 authorType 为媒体，独立来源不足，故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-clue-02",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E2",
+          "direction": "无关",
+          "quote": "事件摘要:待核实线索:某化工大模型由中国科学院大连化学物理研究所联合科大讯飞、阿里云发布。",
+          "reason": "该信封仅提及化工大模型的联合发布关系，未涉及9月2日中试装置使用应用智能化工大模型3.0Pro开展试验工作的具体内容，不改变本 claim 的判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E12",
+          "direction": "无关",
+          "quote": "今年的中国国庆假期与澳大利亚维多利亚州学校假期重叠，不少澳大利亚人选择开启中国之旅。",
+          "reason": "内容为澳大利亚赴华旅游报道，与本 claim 所述中试装置试验工作无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E4",
+          "direction": "无关",
+          "quote": "10月10日，工业和信息化部会同公安部、生态环境部、市场监管总局联合发布《关于进一步加强汽车产品创新设计和研发测试验证有关管理工作的通知（征求意见稿）》。",
+          "reason": "内容为汽车产品研发测试管理通知，与本 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E9",
+          "direction": "无关",
+          "quote": "“不断发展壮大的金砖合作机制为新兴市场和发展中国家拓展发展空间、提升国际话语权提供了重要平台。”",
+          "reason": "内容为金砖合作机制访谈，与本 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E15",
+          "direction": "无关",
+          "quote": "10月10日，第三次新疆综合科学考察成果在乌鲁木齐发布。",
+          "reason": "内容为新疆科考成果发布，与本 claim 无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内唯一涉及化工大模型的证据（E2）仅提及联合发布关系，未包含9月2日中试装置使用应用智能化工大模型3.0Pro开展试验工作的任何信息；其余证据均与本 claim 无关。无证据支持亦无证据反驳，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-envelope-02",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E2",
+          "direction": "支持",
+          "quote": "事件摘要:待核实线索:某化工大模型由中国科学院大连化学物理研究所联合科大讯飞、阿里云发布。",
+          "reason": "该证据原文逐字包含 claim 所述 rumor 信封摘要与监测重点，直接印证信封内容本身存在，但不构成对联合研发关系真实性的独立核实。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E3",
+          "direction": "无关",
+          "quote": "水利部和中国气象局10月11日18时联合发布蓝色山洪灾害气象预警",
+          "reason": "内容为山洪灾害气象预警，与化工大模型联合发布线索无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E4",
+          "direction": "无关",
+          "quote": "10月10日，工业和信息化部会同公安部、生态环境部、市场监管总局联合发布《关于进一步加强汽车产品创新设计和研发测试验证有关管理工作的通知（征求意见稿）》。",
+          "reason": "内容为汽车产品管理通知，与化工大模型联合发布线索无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E9",
+          "direction": "无关",
+          "quote": "印度尼西亚大学东盟—中国研究中心研究员拉伊汉·罗诺迪普罗日前在接受记者采访时表示",
+          "reason": "内容为金砖合作机制访谈，与化工大模型联合发布线索无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E15",
+          "direction": "无关",
+          "quote": "10月10日，第三次新疆综合科学考察成果在乌鲁木齐发布。",
+          "reason": "内容为新疆科考成果发布，与化工大模型联合发布线索无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E17",
+          "direction": "无关",
+          "quote": "据中国海事局网站消息，三亚海事局发布航行警告，10月12日至10月20日，每日7时至9时，南海部分海域进行军事训练，禁止驶入。",
+          "reason": "内容为南海军事训练航行警告，与化工大模型联合发布线索无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一相关证据 E2 仅复述信封自身的待核实线索与监测重点，属同根信号层元数据，未提供任何独立来源证实中国科学院大连化学物理研究所联合科大讯飞、阿里云发布化工大模型这一事实，也无发布时间与官方信源，故只能维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-world-01",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E19",
+          "direction": "无关",
+          "quote": "国家发展改革委国家信息中心10月10日发布多项先行指标。",
+          "reason": "该证据仅提及国家信息中心10月10日发布多项先行指标，内容为经济回升向好态势，未涉及化工行业大模型新版本发布，也未涉及新华网等官方信源的报道及其是否被更正或撤销，不改变本 claim 的判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗中唯一证据与 claim 主题无关，既未印证也未否定\"新华网等官方信源在2026年9月至10月间发布过我国化工行业首个大模型发布新版本的报道且未被更正或撤销\"，故只能维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-world-02",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E3",
+          "direction": "无关",
+          "quote": "水利部和中国气象局10月11日18时联合发布蓝色山洪灾害气象预警",
+          "reason": "内容为山洪灾害气象预警，与中科院大连化物所和科大讯飞的联合研发关系无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E4",
+          "direction": "无关",
+          "quote": "10月10日，工业和信息化部会同公安部、生态环境部、市场监管总局联合发布《关于进一步加强汽车产品创新设计和研发测试验证有关管理工作的通知（征求意见稿）》。",
+          "reason": "内容为汽车产品设计研发测试验证管理通知，与本案双方关系无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E9",
+          "direction": "无关",
+          "quote": "印度尼西亚大学东盟—中国研究中心研究员拉伊汉·罗诺迪普罗日前在接受记者采访时表示",
+          "reason": "内容为金砖合作机制与全球南方治理的访谈，与本案双方关系无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E15",
+          "direction": "无关",
+          "quote": "10月10日，第三次新疆综合科学考察成果在乌鲁木齐发布。",
+          "reason": "内容为新疆综合科学考察成果，与本案双方关系无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "四条证据均为央视新闻转载的无关报道，谱系根同为 news.cctv.com，既无支持也无矛盾信息，无法对中科院大连化物所与科大讯飞联合研发关系及其独立官方信源作出判断，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-world-03",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E10",
+          "direction": "无关",
+          "quote": "代号为“欧亚-反恐-2026”的上合组织成员国主管机关联合反恐演习在白俄罗斯明斯克市举行",
+          "reason": "内容为上合组织联合反恐演习，未涉及科大讯飞或行业大模型，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E3",
+          "direction": "无关",
+          "quote": "水利部和中国气象局10月11日18时联合发布蓝色山洪灾害气象预警",
+          "reason": "内容为山洪灾害气象预警，与科大讯飞及行业大模型无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E4",
+          "direction": "无关",
+          "quote": "工业和信息化部会同公安部、生态环境部、市场监管总局联合发布《关于进一步加强汽车产品创新设计和研发测试验证有关管理工作的通知（征求意见稿）》",
+          "reason": "内容为汽车产品管理通知，未涉及科大讯飞或行业大模型。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E15",
+          "direction": "无关",
+          "quote": "第三次新疆综合科学考察成果在乌鲁木齐发布",
+          "reason": "内容为新疆科考成果，与科大讯飞及行业大模型无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E16",
+          "direction": "无关",
+          "quote": "《中共中央国务院关于发展新质生产力的意见》公开发布",
+          "reason": "内容为新质生产力政策文件，未提及科大讯飞或行业大模型。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内五条证据均未涉及科大讯飞参与科研机构联合发布行业大模型的任何记录，全部为无关证据，无法支持或推翻该 claim，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-world-06",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E3",
+          "direction": "无关",
+          "quote": "水利部和中国气象局10月11日18时联合发布蓝色山洪灾害气象预警",
+          "reason": "内容为山洪灾害气象预警，未涉及任何大模型发布主体或知识产权归属信息。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E4",
+          "direction": "无关",
+          "quote": "10月10日，工业和信息化部会同公安部、生态环境部、市场监管总局联合发布《关于进一步加强汽车产品创新设计和研发测试验证有关管理工作的通知（征求意见稿）》。",
+          "reason": "内容为汽车产品设计研发测试管理通知，与智能化工大模型3.0Pro的发布主体及知识产权归属无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E6",
+          "direction": "无关",
+          "quote": "汽车贸易、出口管制、商品降税、知识产权保护合作……会上谈的，都是中欧经贸的焦点问题。",
+          "reason": "仅泛泛提及知识产权保护合作议题，未涉及该大模型的发布主体或知识产权归属。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E8",
+          "direction": "无关",
+          "quote": "双方围绕贸易和投资平衡、出口管制、知识产权、世贸组织改革等议题开展对等、专业、建设性的会谈，形成16项成果共识。",
+          "reason": "内容为中欧经贸磋商成果，未提及该大模型及其发布主体或知识产权归属。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E18",
+          "direction": "无关",
+          "quote": "10月10日，国务院新闻办举行“开局起步‘十五五’”系列主题新闻发布会，介绍推进就业和社会保障高质量发展有关情况。",
+          "reason": "内容为就业和社会保障发布会，与该大模型发布主体及知识产权归属无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内五条证据均为无关的山洪预警、汽车管理通知、中欧经贸磋商及就业发布会报道，无一条涉及“智能化工大模型3.0Pro”的发布主体、知识产权归属或信封所称联合方，claim 缺乏任何支撑证据，维持待证实。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 3,
+      "mainTarget": "c-world-06",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "该\"智能化工大模型3.0Pro\"的发布主体与知识产权归属在官方渠道是否有明确记载,且与信封所称联合方(中国科学院大连化学物理研究所联合科大讯飞、阿里云)一致。",
+          "acceptance": "需权威登记源记录或发布方官网/官方公告页面正文级证据,能逐字读出发布主体名称与联合方名单;若仅有媒体转述而无发布方原始页面,不算查到。",
+          "failover": "若官方渠道无发布主体记载,则转向查该模型的软件著作权/专利登记或发布会实录,以登记权利人反推发布主体。"
+        },
+        {
+          "gap": "在锚定发布主体后,该主体名单中是否出现科大讯飞(即联合方表述是否存在于原始发布信息中)。",
+          "acceptance": "需发布方原始页面正文级证据,逐字含\"科大讯飞\"且语境为联合研发/联合发布;若原始页面仅出现大连化物所而无科大讯飞,则本环以否定结论验收。",
+          "failover": "若原始页面不可得,改查科大讯飞官网/公告中是否有对应发布记录,以反向佐证。"
+        }
+      ],
+      "searchHints": [
+        "智能化工大模型3.0Pro 发布",
+        "大连化学物理研究所 化工大模型 发布主体",
+        "科大讯飞 化工大模型 联合发布"
+      ],
+      "sideTargets": [
+        "c-world-05"
+      ],
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [],
+      "cohorts": []
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-clue-01",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E2",
+          "direction": "支持",
+          "quote": "主要来源 toutiao.com;信号识别时间 2026-10-03T10:00:00+08:00",
+          "reason": "该信封元数据表明线索来源平台为 toutiao.com，且信号识别时间与 claim 所述 publishedAt 同日，与 claim 中平台为 toutiao 的记载方向一致。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E9",
+          "direction": "无关",
+          "quote": "“不断发展壮大的金砖合作机制为新兴市场和发展中国家拓展发展空间、提升国际话语权提供了重要平台。”",
+          "reason": "该证据内容为金砖合作机制相关访谈，与 clue-0001 的来源、平台、标题、发布时间、作者类型等元数据无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E19",
+          "direction": "无关",
+          "quote": "国家发展改革委国家信息中心10月10日发布多项先行指标。",
+          "reason": "该证据内容为经济先行指标发布，与 claim 所述线索元数据无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E22",
+          "direction": "无关",
+          "quote": "国家发展改革委国家信息中心，10月10日发布多项先行指标。",
+          "reason": "该证据内容为稳投资政策与经济指标，与 claim 所述线索元数据无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅 E2 信号层信封元数据在平台与时间上与 claim 部分吻合，但未逐字载明来源为新华网、标题及 authorType 为媒体；其余证据与 claim 无关，缺乏独立来源印证，故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-clue-02",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E2",
+          "direction": "支持",
+          "quote": "事件摘要:待核实线索:某化工大模型由中国科学院大连化学物理研究所联合科大讯飞、阿里云发布。",
+          "reason": "该信封元数据提及中国科学院大连化学物理研究所与化工大模型，与 claim 所述主体及主题相关，但未直接确认9月2日中试装置试验细节，仅提供部分支持。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E12",
+          "direction": "无关",
+          "quote": "今年的中国国庆假期与澳大利亚维多利亚州学校假期重叠，不少澳大利亚人选择开启中国之旅。",
+          "reason": "内容为澳大利亚赴华旅游报道，与 claim 所述大连化物所大模型试验无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E4",
+          "direction": "无关",
+          "quote": "10月10日，工业和信息化部会同公安部、生态环境部、市场监管总局联合发布《关于进一步加强汽车产品创新设计和研发测试验证有关管理工作的通知（征求意见稿）》。",
+          "reason": "内容为汽车产品管理通知，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E9",
+          "direction": "无关",
+          "quote": "“不断发展壮大的金砖合作机制为新兴市场和发展中国家拓展发展空间、提升国际话语权提供了重要平台。”",
+          "reason": "内容为金砖合作机制采访，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E15",
+          "direction": "无关",
+          "quote": "10月10日，第三次新疆综合科学考察成果在乌鲁木齐发布。",
+          "reason": "内容为新疆科考成果，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E21",
+          "direction": "无关",
+          "quote": "校园餐如何管得更严？直播间卖食品，出了问题谁负责？",
+          "reason": "内容为食品安全法修订征求意见，与 claim 无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一相关证据 E2 仅为待核实线索的信封元数据，未提供9月2日中试装置试验的直接证据，且无独立来源印证，故 claim 仍待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-interp-02",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E2",
+          "direction": "无关",
+          "quote": "rumor 信封元数据:监测主体 科大讯飞;统一信用代码 (未提供);事件摘要:待核实线索:某化工大模型由中国科学院大连化学物理研究所联合科大讯飞、阿里云发布。;主要来源 toutiao.com;信号识别时间 2026-10-03T10:00:00+08:00;监测重点:核实联合研发关系是否属实;确认发布时间与官方信源。;线索 1 条。",
+          "reason": "该证据为信号层信封元数据,内容涉及联合研发关系核实,未提及任何假设种子标签,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E21",
+          "direction": "无关",
+          "quote": "校园餐如何管得更严？直播间卖食品，出了问题谁负责？昨天，市场监管总局就《中华人民共和国食品安全法（修订草案征求意见稿）》向社会公开征求意见。",
+          "reason": "该证据为食品安全法修订草案征求意见的新闻报道,与解读登记的三个假设种子标签无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "两条证据均未涉及解读登记的三个假设种子标签,无证据支持或反驳该 claim,故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-world-01",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E19",
+          "direction": "无关",
+          "quote": "国家发展改革委国家信息中心10月10日发布多项先行指标。",
+          "reason": "该证据仅涉及国家信息中心发布先行指标，未提及化工行业大模型或新华网报道，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E22",
+          "direction": "无关",
+          "quote": "国家发展改革委国家信息中心，10月10日发布多项先行指标。数据显示，我国经济回升向好态势持续巩固，我们首先来看投资。",
+          "reason": "该证据内容为经济先行指标与投资政策，与化工行业大模型报道是否发布、是否被更正撤销无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "两条证据均来自同一谱系根 news.cctv.com，且内容均不涉及 claim 所指的化工行业大模型报道，无法支持或反驳该 claim，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-world-03",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E10",
+          "direction": "无关",
+          "quote": "代号为“欧亚-反恐-2026”的上合组织成员国主管机关联合反恐演习在白俄罗斯明斯克市举行",
+          "reason": "内容为上合组织联合反恐演习，未涉及科大讯飞或行业大模型，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E3",
+          "direction": "无关",
+          "quote": "水利部和中国气象局10月11日18时联合发布蓝色山洪灾害气象预警",
+          "reason": "内容为山洪灾害气象预警，与科大讯飞及行业大模型无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E4",
+          "direction": "无关",
+          "quote": "工业和信息化部会同公安部、生态环境部、市场监管总局联合发布《关于进一步加强汽车产品创新设计和研发测试验证有关管理工作的通知（征求意见稿）》",
+          "reason": "内容为汽车产品管理通知，未涉及科大讯飞或行业大模型。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E15",
+          "direction": "无关",
+          "quote": "第三次新疆综合科学考察成果在乌鲁木齐发布",
+          "reason": "内容为新疆科考成果，与科大讯飞及行业大模型无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E16",
+          "direction": "无关",
+          "quote": "《中共中央国务院关于发展新质生产力的意见》公开发布",
+          "reason": "内容为新质生产力政策文件，未提及科大讯飞或行业大模型。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E21",
+          "direction": "无关",
+          "quote": "此次发布的《征求意见稿》，涉及人工智能监管、网络食品经营等多个方面的修订内容",
+          "reason": "虽提及人工智能监管，但为食品安全法修订，未涉及科大讯飞或行业大模型联合发布记录。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "全部六条证据均未提及科大讯飞或科研机构联合发布行业大模型，无任何证据支持或反驳该 claim，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-world-04",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E4",
+          "direction": "无关",
+          "quote": "10月10日，工业和信息化部会同公安部、生态环境部、市场监管总局联合发布《关于进一步加强汽车产品创新设计和研发测试验证有关管理工作的通知（征求意见稿）》。",
+          "reason": "该证据内容为汽车产品设计研发测试验证管理通知，与科大讯飞是否参与发布化工大模型及本企业化工行业大模型市场份额、客户获取的竞争压力均无关联。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E9",
+          "direction": "无关",
+          "quote": "“不断发展壮大的金砖合作机制为新兴市场和发展中国家拓展发展空间、提升国际话语权提供了重要平台。”",
+          "reason": "该证据内容为金砖合作机制与全球南方国家治理参与，与化工大模型发布主体及市场竞争压力无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E21",
+          "direction": "无关",
+          "quote": "此次发布的《征求意见稿》，涉及人工智能监管、网络食品经营等多个方面的修订内容。",
+          "reason": "该证据内容为食品安全法修订草案征求意见，虽提及人工智能监管，但未涉及科大讯飞、化工大模型或本企业市场份额与客户获取，不改变判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "三条证据均与claim核心事实（科大讯飞参与发布化工大模型及其对本企业化工行业大模型市场份额或客户获取的可量化竞争压力）无关，未提供任何支持或矛盾信息，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-world-06",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E3",
+          "direction": "无关",
+          "quote": "水利部和中国气象局10月11日18时联合发布蓝色山洪灾害气象预警",
+          "reason": "内容为山洪灾害气象预警，与智能化工大模型3.0Pro的发布主体及知识产权归属无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E4",
+          "direction": "无关",
+          "quote": "10月10日，工业和信息化部会同公安部、生态环境部、市场监管总局联合发布《关于进一步加强汽车产品创新设计和研发测试验证有关管理工作的通知（征求意见稿）》。",
+          "reason": "内容为汽车产品设计及测试验证管理通知，未涉及该大模型的发布主体或知识产权归属。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E6",
+          "direction": "无关",
+          "quote": "汽车贸易、出口管制、商品降税、知识产权保护合作……会上谈的，都是中欧经贸的焦点问题。",
+          "reason": "虽提及知识产权保护合作，但属中欧经贸议题，与该大模型发布主体及权属记载无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E8",
+          "direction": "无关",
+          "quote": "双方围绕贸易和投资平衡、出口管制、知识产权、世贸组织改革等议题开展对等、专业、建设性的会谈，形成16项成果共识。",
+          "reason": "内容为中欧经贸磋商成果，未涉及该大模型的发布主体或知识产权归属。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E18",
+          "direction": "无关",
+          "quote": "10月10日，国务院新闻办举行“开局起步‘十五五’”系列主题新闻发布会，介绍推进就业和社会保障高质量发展有关情况。",
+          "reason": "内容为就业和社会保障发布会，与该大模型发布主体及权属无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E21",
+          "direction": "无关",
+          "quote": "此次发布的《征求意见稿》，涉及人工智能监管、网络食品经营等多个方面的修订内容。",
+          "reason": "虽提及人工智能监管，但为食品安全法修订草案，未涉及该大模型的发布主体或知识产权归属。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "全部六条证据均未提及“智能化工大模型3.0Pro”的发布主体、知识产权归属或信封所称联合方，无任何证据支持或反驳该 claim，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 4,
+      "mainTarget": "c-world-02",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "c-world-02 需要独立于本线索的官方信源证实大连化物所与科大讯飞存在真实联合研发/协同关系;当前台账该条名下证据数为 4,尚无任何独立官方登记源记录。",
+          "acceptance": "需权威登记源记录级证据:双方官网新闻/公告页正文、或国家知识产权局专利登记页、或 CNKI/万方收录论文的作者单位署名页,正文中同时出现\"中国科学院大连化学物理研究所\"与\"科大讯飞\"且表述为联合研发/联合发布/共同署名。",
+          "failover": "若官网与专利均无联合署名记录,则改查大连化物所官网该大模型发布页的完整合作方名单,以\"名单中是否含科大讯飞\"作为替代验收口径。"
+        },
+        {
+          "gap": "若第一环锚定到联合署名记录,需进一步确认该记录对应的发布主体与知识产权归属,以区分 h-joint 与 h-misread。",
+          "acceptance": "需页面正文级证据:发布主体落款单位、或专利申请人/著作权人字段,明确列出科大讯飞为联合方之一;仅出现\"使用\"\"合作\"\"技术支持\"等非联合发布表述不算查到。",
+          "failover": "若仅能查到科大讯飞为技术提供方而非联合发布方,则将该结果登记为对 h-misread 的支持证据,并转查 c-world-06 的发布主体归属。"
+        }
+      ],
+      "searchHints": [
+        "中国科学院大连化学物理研究所 科大讯飞 联合 智能化工大模型",
+        "智能化工大模型3.0Pro 发布 合作单位",
+        "大连化物所 科大讯飞 专利 共同申请人"
+      ],
+      "sideTargets": [
+        "c-world-06",
+        "c-world-05"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [],
+      "cohorts": []
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-envelope-02",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E2",
+          "direction": "支持",
+          "quote": "事件摘要:待核实线索:某化工大模型由中国科学院大连化学物理研究所联合科大讯飞、阿里云发布。",
+          "reason": "该证据原文逐字包含 claim 所述 rumor 信封摘要与监测重点,直接印证信封内容本身存在,但仅为待核实线索,不构成对联合研发关系真实性的独立证实。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E3",
+          "direction": "无关",
+          "quote": "水利部和中国气象局10月11日18时联合发布蓝色山洪灾害气象预警",
+          "reason": "内容为山洪灾害气象预警,与化工大模型联合发布无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E4",
+          "direction": "无关",
+          "quote": "10月10日，工业和信息化部会同公安部、生态环境部、市场监管总局联合发布《关于进一步加强汽车产品创新设计和研发测试验证有关管理工作的通知（征求意见稿）》。",
+          "reason": "内容为汽车产品设计研发测试管理通知,与化工大模型联合发布无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E9",
+          "direction": "无关",
+          "quote": "印度尼西亚大学东盟—中国研究中心研究员拉伊汉·罗诺迪普罗日前在接受记者采访时表示",
+          "reason": "内容为金砖合作机制访谈,与化工大模型联合发布无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E15",
+          "direction": "无关",
+          "quote": "10月10日，第三次新疆综合科学考察成果在乌鲁木齐发布。",
+          "reason": "内容为新疆科考成果发布,与化工大模型联合发布无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E17",
+          "direction": "无关",
+          "quote": "三亚海事局发布航行警告，10月12日至10月20日，每日7时至9时，南海部分海域进行军事训练，禁止驶入。",
+          "reason": "内容为南海军事训练航行警告,与化工大模型联合发布无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E23",
+          "direction": "无关",
+          "quote": "为纪念新中国恢复联合国合法席位55周年，中央广播电视总台华语环球节目中心策划制作的五集纪录片《和合之声》即将播出。",
+          "reason": "内容为纪录片播出预告,与化工大模型联合发布无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一相关证据 E2 仅复述 rumor 信封中的待核实线索与监测重点,属同一信号层来源,未提供任何官方信源或独立印证;其余证据均与 claim 无关。联合研发关系是否属实、发布时间与官方信源均未获证实,故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c-world-02",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3:E3",
+          "direction": "无关",
+          "quote": "水利部和中国气象局10月11日18时联合发布蓝色山洪灾害气象预警",
+          "reason": "内容为山洪灾害气象预警，与中科院大连化物所和科大讯飞的联合研发关系无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E4",
+          "direction": "无关",
+          "quote": "10月10日，工业和信息化部会同公安部、生态环境部、市场监管总局联合发布",
+          "reason": "内容为汽车产品设计研发测试验证管理通知，与本案双方关系无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E9",
+          "direction": "无关",
+          "quote": "印度尼西亚大学东盟—中国研究中心研究员拉伊汉·罗诺迪普罗日前在接受记者采访时表示",
+          "reason": "内容为金砖合作机制与全球南方治理的访谈，与本案双方关系无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E15",
+          "direction": "无关",
+          "quote": "第三次新疆综合科学考察成果在乌鲁木齐发布",
+          "reason": "内容为新疆科考成果，与本案双方关系无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3:E23",
+          "direction": "无关",
+          "quote": "为纪念新中国恢复联合国合法席位55周年，中央广播电视总台华语环球节目中心策划制作的五集纪录片《和合之声》即将播出",
+          "reason": "内容为纪录片播出预告，与本案双方关系无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内五条证据均为央视新闻类内容，无一涉及中国科学院大连化学物理研究所与科大讯飞的联合研发或协同关系，也未提供任何独立官方信源佐证，故该 claim 仍待证实。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 5,
+      "mainTarget": "c-world-02",
+      "action": "explore",
+      "gapChain": [
+        {
+          "gap": "锚定\"智能化工大模型3.0Pro\"的官方发布主体名单,确认发布方中是否列有科大讯飞",
+          "acceptance": "需权威登记源或发布方官网正文级证据:页面正文明确列出发布/联合发布单位名单,且名单中科大讯飞出现或明确不出现",
+          "failover": "若官网无发布公告,改查大连化物所官方新闻栏目与地方政府/园区通稿,仍无则转查 c-world-06 的知识产权登记口径"
+        },
+        {
+          "gap": "在锚定发布主体后,核查科大讯飞侧是否存在与之对应的联合研发/协同关系记录(官网新闻、公告、专利共同申请人、论文共同署名)",
+          "acceptance": "需双方任一侧官方渠道的正文级记录,或专利/论文登记页中双方共同署名条目,能直接指向该化工大模型或同一研发项目",
+          "failover": "若双方均无对应记录,则本 claim 按证伪方向登记,并转查 c-world-05(阿里云参与角色)以区分 h-misread 与 h-distort"
+        }
+      ],
+      "searchHints": [
+        "智能化工大模型3.0Pro 发布 联合",
+        "大连化学物理研究所 科大讯飞 化工大模型",
+        "科大讯飞 中国科学院大连化学物理研究所 合作"
+      ],
+      "sideTargets": [
+        "c-world-06",
+        "c-world-05"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 6,
+      "mainTarget": "c-world-01",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "c-world-01 未决:新华网等官方信源是否确实在 2026 年 9 月至 10 月间发布过\"我国化工行业首个大模型发布新版本\"的报道,且未被更正或撤销。",
+          "acceptance": "需权威登记源记录或新华网官网页面正文级证据:能定位到该报道的原始页面(标题、发布时间、正文),或权威转载/索引记录;仅第三方转述不算查到。",
+          "failover": "若新华网官网检索不到,改查其官方客户端/公众号历史发布记录或权威转载源(如人民网、科技日报)的原文页面;仍无则记为查不到,转 c-world-06 的发布主体归属路径。"
+        },
+        {
+          "gap": "若 c-world-01 成立,该报道正文是否含\"联合科大讯飞、阿里云发布\"表述,以区分 h-joint 与 h-distort。",
+          "acceptance": "需该报道正文级证据:正文中是否出现科大讯飞/阿里云作为联合发布方或参与方的原文表述;出现即支持 h-joint,不出现即支持 h-distort。",
+          "failover": "若正文不可得,退而查该报道的官方摘要/导语级证据;仍不可得则转 c-world-02 的独立官方信源路径。"
+        }
+      ],
+      "searchHints": [
+        "我国化工行业首个大模型发布新版本 新华网",
+        "智能化工大模型3.0Pro 发布 大连化学物理研究所",
+        "化工大模型 科大讯飞 阿里云 联合发布"
+      ],
+      "sideTargets": [
+        "c-world-05"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 主体与事件背景\n\n本信号信封（evt_SIG_20261003_0002）载明：kind 为 rumor，主体为科大讯飞，subjectCreditCode 为空，tender 为 null，来源为 toutiao.com，signalTime 为 2026-10-03T10:00:00+08:00 [1]。\n\n信封 rumor.summary 称\"待核实线索:某化工大模型由中国科学院大连化学物理研究所联合科大讯飞、阿里云发布\"，watchFocus 为\"核实联合研发关系是否属实;确认发布时间与官方信源\" [2]。\n\n解读将本信号定性为\"竞情\"，理由为信封 kind 为 rumor 且主体为科大讯飞，属竞争对手动态类信号，并指出线索未直接证实科大讯飞的联合研发关系 [3]。\n\n解读登记了三个假设种子标签：\"真实经营动态\"、\"市场误读\"、\"信源讹传\"；该登记事项目前尚未核实 [4]。\n\n---\n\n**引用证据**\n\n[1] 信封 evt_SIG_20261003_0002 载明:kind 为 rumor,主体为科大讯飞,subjectCreditCode 为空,tender 为 null,来源为 toutiao.com,signalTime 为 2026-10-03T10:00:00+08:00。\n\n[2] 信封 rumor.summary 称\"待核实线索:某化工大模型由中国科学院大连化学物理研究所联合科大讯飞、阿里云发布\",watchFocus 为\"核实联合研发关系是否属实;确认发布时间与官方信源\"。\n\n[3] 解读将本信号定性为\"竞情\",理由为信封 kind 为 rumor 且主体为科大讯飞,属竞争对手动态类信号,并指出线索未直接证实科大讯飞的联合研发关系。\n\n[4] 解读登记了三个假设种子标签:\"真实经营动态\"、\"市场误读\"、\"信源讹传\"。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 动态时间线与关联方\n\n本节仅就线索 clue-0001 的登记信息与时间关系作忠实投影,不涉及其他节内容。\n\n**线索登记信息(已证实)。** 线索 clue-0001 载明:来源为新华网,平台为 toutiao,标题为\"我国化工行业首个大模型发布新版本\",publishedAt 为 2026-10-03T09:00:00+08:00,authorType 为媒体 [1][2][3][4]。\n\n**时间关系(已证实)。** 线索 clue-0001 的发布时间 2026-10-03T09:00:00+08:00 早于信封 signalTime 2026-10-03T10:00:00+08:00 一小时,线索正文所述试验时间为 9月2日 [1][5]。\n\n**关联方行为 pattern(待证实)。** 关于科大讯飞在 2024 至 2026 年间有参与科研机构联合发布行业大模型的既往公开记录与行为 pattern,目前尚未核实 [6][5][7][8][9]。该断言与本节所列已证实的时间线信息相互独立,不因线索登记信息成立而获得支持。\n\n**本节小结。** 可确证者限于线索 clue-0001 的登记字段与发布时间相对信封 signalTime 的先后关系;涉及关联方既往行为 pattern 的部分仍处待证实状态,不作事实表述。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 核心事实\n\n本节仅就本线索项下各待核实断言作忠实投影,不作跨节综合。\n\n**一、线索内容本身(已证实)**\n\n线索 clue-0001 内容称\"9月2日,中国科学院大连化学物理研究所工作人员在使用应用智能化工大模型3.0Pro的中试装置开展试验工作\"[1][2][3][4][5]。该表述为线索原文内容,已证实。\n\n**二、发布事件真实性(待证实)**\n\n关于新华网等官方信源是否确实在 2026 年 9 月至 10 月间发布过\"我国化工行业首个大模型发布新版本\"的报道,且该报道未被更正或撤销,目前尚未核实[6][7]。\n\n**三、联合研发关系(待证实)**\n\n关于中国科学院大连化学物理研究所与科大讯飞之间是否存在真实的联合研发或协同关系,并有独立于本线索的官方信源(如双方官网、公告、专利或论文)佐证,目前尚未核实[3][4][5][8][9]。\n\n**四、阿里云参与角色(待证实)**\n\n关于阿里云是否同样参与该化工大模型的联合发布,并有独立信源佐证其参与角色,目前尚未核实[3][4]。\n\n**五、发布主体与知识产权归属(待证实)**\n\n关于该\"智能化工大模型3.0Pro\"的发布主体与知识产权归属是否在官方渠道有明确记载,且与信封所称联合方一致,目前尚未核实[3][4][10][11][12]。\n\n**六、待核实线索原文**\n\n信封所载待核实线索为:\"某化工大模型由中国科学院大连化学物理研究所联合科大讯飞、阿里云发布。\"\n\n**证据引用对照**\n\n[1] E2 [2] E12 [3] E4 [4] E9 [5] E15 [6] E19 [7] E22 [8] E3 [9] E23 [10] E6 [11] E8 [12] E18"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 结论\n\n关于本企业在化工行业大模型市场的竞争压力判断，目前尚不具备可核实的事实基础。\n\n本节所涉核心断言为：若该化工大模型确由科大讯飞参与发布，则对本企业在化工行业大模型市场的份额或客户获取构成可量化的竞争压力。该断言目前尚未核实 [1][2][3]。其成立与否，取决于科大讯飞是否实际参与该化工大模型的发布这一前置事实，而该前置事实本身仍处于待核实状态。\n\n在现有台账中，围绕该线索存在三种并行假设，均未完成裁定：其一为“真实经营动态”，即科大讯飞确实与中国科学院大连化学物理研究所联合研发并发布了该化工大模型；其二为“市场误读”，即该大模型确由大连化物所发布，但科大讯飞并未实际参与联合研发，系市场将“使用”或“合作”误读为“联合发布”；其三为“信源讹传”，即该线索本身为讹传或标题党，所称“联合科大讯飞、阿里云发布”在原始信源中并不存在，或发布事件本身被夸大。三种假设的验证状态分别为：待证实 4 项、待证实 2 项、待证实 3 项，均无已证实或已矛盾记录，且均未完成裁定，亦无占优假设。\n\n因此，在联合关系真伪与发布主体归属得到独立官方信源证实之前，不宜就本企业所面临的竞争压力作出量化判断。后续应优先核实该化工大模型的发布主体构成及科大讯飞的实际参与方式，以区分上述三种假设。\n\n**引用说明**\n\n[1] E4（对应 claim c-world-04 证据）\n[2] E9（对应 claim c-world-04 证据）\n[3] E21（对应 claim c-world-04 证据）\n\n注：本节仅就“结论”节内容起草，未综合其他节信息；上述证据序号对应给定证据列表中的位置，其原文摘录未在本次输入中提供，故未作逐字引用。"
+    }
+  },
+  {
+    "stage": "s7_recommend",
+    "response": {
+      "items": [
+        {
+          "action": "补充核查:优先调取新华网原始报道全文与大连化物所、科大讯飞、阿里云三方官方渠道(官网/公众号/公告)关于\"智能化工大模型3.0Pro\"的发布信息,逐字比对是否出现\"联合科大讯飞、阿里云发布\"表述及发布主体、知识产权归属记载,以判定 c-world-02 与 c-world-06 的真伪。",
+          "rationale": "当前三个竞争假设均未裁决(verified 0 / contradicted 0),可区分 claim c-world-02(联合关系真伪)与 c-world-06(发布主体归属)全部为待证实,而 c-envelope-02 的 watchFocus 本身即要求\"核实联合研发关系是否属实;确认发布时间与官方信源\"。在联合关系与发布主体归属未定前,任何竞争判断都缺乏依据,故本项为最高优先级的前置核查。",
+          "basisClaimIds": [
+            "c-envelope-02",
+            "c-world-02",
+            "c-world-06"
+          ],
+          "hypothesisLabel": "真实经营动态"
+        },
+        {
+          "action": "跟踪后续机会:以\"智能化工大模型3.0Pro\"及大连化物所中试装置场景为关键词建立持续监测,记录该模型后续版本发布、落地试验与生态合作方名单变化,并同步跟踪阿里云在该模型中的参与角色是否被独立信源确认。",
+          "rationale": "c-clue-02 已证实该模型已进入中试装置试验使用阶段,c-time-01 已证实线索正文所述试验时间为 9月2日,说明该模型存在真实的应用落地场景;但 c-world-05(阿里云参与角色)仍为待证实,联合方名单尚不完整。监测重点含\"竞品动态\"与\"商机监测\",需在信息补齐前保持跟踪而非即时定性。",
+          "basisClaimIds": [
+            "c-clue-02",
+            "c-time-01",
+            "c-world-05"
+          ],
+          "hypothesisLabel": "市场误读"
+        },
+        {
+          "action": "风险缓释:在联合关系未证实前,内部情报台账对该信号维持 rumor 定性、不纳入科大讯飞化工行业竞争动作的正式统计口径;若后续核查证实联合关系,再启动对本企业化工行业大模型客户获取与份额影响的量化评估。",
+          "rationale": "c-envelope-01 已证实信封 kind 为 rumor 且 subjectCreditCode 为空、tender 为 null;c-interp-01 已证实解读指出线索未直接证实科大讯飞的联合研发关系。c-world-04(竞争压力可量化)为待证实,故当前不宜按已成立的竞争动作处理,以免误判。",
+          "basisClaimIds": [
+            "c-envelope-01",
+            "c-interp-01",
+            "c-world-04"
+          ],
+          "hypothesisLabel": "信源讹传"
+        },
+        {
+          "action": "评估参与方式与联合伙伴:核查科大讯飞既往参与科研机构联合发布行业大模型的公开记录与行为模式,据此评估本企业是否需要在化工行业大模型方向寻求同类科研机构或云厂商联合,并形成候选伙伴清单供决策层讨论。",
+          "rationale": "c-world-03(科大讯飞 2024 至 2026 年联合发布行业大模型的既往记录与行为 pattern)为待证实,本建议以该前提成立为条件;c-interp-02 登记的\"真实经营动态\"假设种子亦为待证实。在前提未证实前,本项仅作为情景预案准备,不构成对联合必要性的结论。",
+          "basisClaimIds": [
+            "c-world-03",
+            "c-interp-02"
+          ],
+          "hypothesisLabel": "真实经营动态"
+        }
+      ]
+    }
+  }
+]

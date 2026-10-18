@@ -1,0 +1,22 @@
+{
+  "qichacha.com": "gsxt",
+  "tianyancha.com": "gsxt",
+  "aiqicha.baidu.com": "gsxt",
+  "qixin.com": "gsxt",
+  "qixin.com.cn": "gsxt",
+  "shuidi.cn": "gsxt",
+  "wenshu.court.gov.cn": "wenshu",
+  "zxgk.court.gov.cn": "zxgk",
+  "rsj.gov.cn": "rsj",
+  "ccgp.gov.cn": "ccgp",
+  "www.ccgp.gov.cn": "ccgp",
+  "www.ccgp-tianjin.gov.cn": "ccgp",
+  "ggzy.gov.cn": "ggzy",
+  "sse.com.cn": "exchange",
+  "szse.cn": "exchange",
+  "www.xmfh.com.cn": "company_web",
+  "新华网": "xinhuanet.com",
+  "news.xinhuanet.com": "xinhuanet.com",
+  "www.xinhuanet.com": "xinhuanet.com",
+  "note": "同源谱系:企查查/天眼查/爱企查/启信宝均为公示系统下游,S6 判独立性时同谱系只计一条,否则交叉印证系统性虚高(企业域最重要的正确性补丁)。新华网中文名与官网域名为同一机构(2026-10-10 实测:线索卡 source=新华网 与爬取 xinhuanet.com 各自成根,独立性虚高风险),折叠至 xinhuanet.com。"
+}

@@ -1,0 +1,22 @@
+{
+ "case_id": "xhs_opensource",
+ "title": "小红书开源大模型传闻(真实数据)",
+ "source": "real",
+ "envelope": "examples/xhs_opensource/envelope.json",
+ "responses": "eval/cases/xhs_opensource/responses.json",
+ "seed": "examples/xhs_opensource/evidence_seed.json",
+ "event_id": "evt_xhs_llm",
+ "run_args": {
+  "max_rounds": 6,
+  "assoc": "entity_text"
+ },
+ "budget": {
+  "s6_opinion_max": 40,
+  "llm_calls_max": 60
+ },
+ "enabled": true,
+ "blocked_note": "",
+ "golden_ref": "../../cases/xhs_opensource/golden.json",
+ "recorded_at": "2026-10-01 录制件冻结入库",
+ "pipeline_note": "三轮 live 迭代后录制(去重上线前)"
+}

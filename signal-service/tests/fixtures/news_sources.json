@@ -1,0 +1,42 @@
+[
+  {
+    "evidenceId": "cnt_529bde6be6bacbadbe1a7148",
+    "title": "华为鸿蒙 HarmonyOS 7 小艺 AI 快捷栏功能上线时间公布，预计 10 月底分批推送",
+    "source": "other",
+    "url": "https://www.ithome.com/1/012/006.htm",
+    "content": "IT之家\n10 月 12 日消息，在今年 9 月 7 日的\nHarmonyOS\n7 | HUAWEI Mate XT 2 及全场景新品发布会上，\n鸿蒙\n7 操作系统正式发布。\n据介绍，鸿蒙 7 系统搭载 Harmony Intelligence 智能架构，支持系统级智能体小艺，可将四层记忆架构、应用 Skills、云端 / 端侧大模型、多端协同无缝融合。\n值得一提的是，在发布会现场，华为还剧透了全新功能 —— 小艺 AI 快捷栏。官方 PPT 页面显示，该功能开启后，小艺将在",
+    "hasFullContent": false,
+    "sourceName": "IT之家",
+    "publication": {
+      "status": "verified",
+      "value": "2026-10-12T17:26:08+08:00",
+      "raw": "2026/10/12 17:26:08",
+      "precision": "second",
+      "sourceUrl": "https://www.ithome.com/1/012/006.htm",
+      "locator": "header.time",
+      "responseSha256": "c0dc796dc91756bca8bf2b8d3d9714c4141ef2924dbcbf93af6415cf593bba7d"
+    },
+    "publishedAt": "2026-10-12T09:26:08Z",
+    "publishedCalendarDate": "2026-10-12"
+  },
+  {
+    "evidenceId": "cnt_7c80ebcda0b158873d4fd6d2",
+    "title": "荣耀 WIN2 系列手机开启预约，最高配 16GB+1TB",
+    "source": "other",
+    "url": "https://www.ithome.com/1/012/001.htm",
+    "content": "感谢IT之家网友\n华南吴彦祖\n、\nAutumn_Dream\n的线索投递！\nIT之家\n10 月 12 日消息，荣耀 WIN2 系列手机现已在京东开启预约，新品提供快开黑、指定赢、红蓝 Buff 三种配色，\n价格暂未公布\n。\n京东\n荣耀 WIN2 系列手机\n待公布\n立即预约\n商品页显示，\n荣耀 WIN2 系列手机提供 12GB+256GB、16GB+256GB、12GB+512GB、16GB+512GB 和 16GB+1TB 五种内存 / 存储空间组合\n。该系列机型采用了横向矩阵",
+    "hasFullContent": false,
+    "sourceName": "IT之家",
+    "publication": {
+      "status": "verified",
+      "value": "2026-10-12T17:20:02+08:00",
+      "raw": "2026/10/12 17:20:02",
+      "precision": "second",
+      "sourceUrl": "https://www.ithome.com/1/012/001.htm",
+      "locator": "header.time",
+      "responseSha256": "b02869f63a8d9397dc40a3c2dc0e4bd79f20adb01e72853bade26ec22074f38e"
+    },
+    "publishedAt": "2026-10-12T09:20:02Z",
+    "publishedCalendarDate": "2026-10-12"
+  }
+]

@@ -1,0 +1,22 @@
+{
+ "case_id": "ai3_middle",
+ "title": "讯飞 sweep3-middle(改造①②落地后 live 录制:D(c)/cost 进 S2 + 矛盾重述拦截)",
+ "source": "real",
+ "envelope": "examples/ai_model_release/envelope.json",
+ "responses": "runs/recorded/sweep3_ai_middle.json",
+ "seed": "examples/ai_model_release/evidence_seed.json",
+ "event_id": "evt_sweep3_ai_middle",
+ "run_args": {
+  "max_rounds": 6,
+  "assoc": "entity_text"
+ },
+ "budget": {
+  "s6_opinion_max": 40,
+  "llm_calls_max": 60
+ },
+ "enabled": true,
+ "blocked_note": "",
+ "golden_ref": "../../sweep3/ai3_middle/golden.json",
+ "recorded_at": "2026-10-04 sweep3 live 录制",
+ "pipeline_note": "改造①②+代码去重+corpus_bound 后;金标 16 条(c14 并入)"
+}

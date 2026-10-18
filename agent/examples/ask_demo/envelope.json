@@ -1,0 +1,33 @@
+{
+  "kind": "rumor",
+  "event_id": "evt_ask_demo",
+  "rumor": {
+    "subjectName": "华辰精密制造有限公司",
+    "summary": "两路独立线索对华辰精密的经营方向给出相反叙事:一路称其拿下大订单正在扩产,另一路显示其近一月无新增招聘岗位且撤线。",
+    "source": "demo.mixed-signals",
+    "signalTime": "2026-10-09",
+    "watchFocus": "订单真实性、产能扩张与收缩口径、用工变化",
+    "clues": [
+      {
+        "clueId": "k1",
+        "source": "caijing-bbs.example.com",
+        "platform": "forum",
+        "title": "网友爆料:华辰精密拿下年度大订单,车间正在招人",
+        "content": "据某财经论坛网友帖子,华辰精密制造有限公司近期被传拿下某央企年度框架大订单,装配车间正在紧急招聘一线工人,上游供应商已收到备货通知。",
+        "url": "https://caijing-bbs.example.com/thread/88121",
+        "publishedAt": "2026-10-08",
+        "authorType": "自媒体"
+      },
+      {
+        "clueId": "k2",
+        "source": "jobs-platform.example.com",
+        "platform": "jobs",
+        "title": "华辰精密招聘主页:近 30 天无新增岗位",
+        "content": "招聘平台企业主页显示,华辰精密制造有限公司近 30 天无任何新增招聘岗位,且两条装配线招聘标注已关闭,与扩产传闻方向相反。",
+        "url": "https://jobs-platform.example.com/company/huachen",
+        "publishedAt": "2026-10-09",
+        "authorType": "官方"
+      }
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+{
+ "case_id": "ai2_coarse",
+ "event_id": "evt_sweep2_coarse",
+ "verified": true,
+ "verified_date": "2026-10-04",
+ "source": "粗档金标由原子层按合并组机械派生(A/B 组全组同态,零不确定派生;D 组保可区分性不合并)",
+ "claims": [
+  {
+   "draft_id": "GA",
+   "text": "信号信封自证:kind=rumor 且 subjectName=科大讯飞;source=toutiao.com,signalTime=2026-09-03,watchFocus=竞品动态;subjectCreditCode 为空;tender 字段为 null;解读定性为竞情,种子标签为真实经营动态与新方向扩张;摘要载明化物所联合讯飞、阿里云发布 3.0Pro(复述)。",
+   "golden_status": "已证实",
+   "note": "A 组合并:c1+c2+c3+c4+c19+c20,全组同态派生"
+  },
+  {
+   "draft_id": "GB1",
+   "text": "线索 k3 载明:新华社沈阳8月31日电(记者胡喆、王莹)8月31日,由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布。(线索 k4 为同稿转载,载明同一内容;按篇合并)",
+   "golden_status": "已证实",
+   "note": "B1 组=k3/k4 新华社稿"
+  },
+  {
+   "draft_id": "GB2",
+   "text": "线索 k1 与 k2 的 publishedAt 均为 2026-09-03,内容均载明\"9月2日,中国科学院大连化学物理研究所工作人员在使用应用智能化工大模型3.0Pro的中试装置开展试验工作\";正文未完整载明联合研发方名单(截断)。",
+   "golden_status": "已证实",
+   "note": "B2 组合并:M2+c15(截断)"
+  },
+  {
+   "draft_id": "GB3",
+   "text": "线索 k1、k2、k3、k4 的 source 均为 toutiao.com,platform 均为 toutiao,authorType 均为\"媒体\";四线索标题同题,且 3.0Pro 被表述为国内化工行业首个大模型的迭代升级版本;署名来源不完全一致(k3/k4 新华社,k1 新华网,k2 光明网)。",
+   "golden_status": "已证实",
+   "note": "B3 组合并:c8+M3+c17,全组同态派生"
+  },
+  {
+   "draft_id": "GB4",
+   "text": "线索 k3/k4 的发布时间(2026-08-31 16:16 与 16:00)早于线索 k1/k2 的发布时间(2026-09-03)与信封 signalTime(2026-09-03)。",
+   "golden_status": "已证实",
+   "note": "B4 组合并:c10+c18(时间线)"
+  },
+  {
+   "draft_id": "GD1",
+   "text": "智能化工大模型3.0Pro 由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发。",
+   "golden_status": "待证实",
+   "note": "D 组不合并(保可区分性)"
+  },
+  {
+   "draft_id": "GD2",
+   "text": "智能化工大模型3.0Pro 于 2026-08-31 正式对外发布。",
+   "golden_status": "待证实",
+   "note": "D 组不合并"
+  },
+  {
+   "draft_id": "GD3",
+   "text": "科大讯飞与阿里云同为中国科学院大连化学物理研究所智能化工大模型3.0Pro 的联合研发方,二者在该项目上构成同一阵营的协同方。",
+   "golden_status": "待证实",
+   "note": "D 组不合并"
+  }
+ ]
+}

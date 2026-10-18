@@ -1,0 +1,25 @@
+{
+  "signal_id": "SIG-20261003-0002",
+  "company_id": "C-0001",
+  "kind": "rumor",
+  "payload": {
+    "subject_name": "科大讯飞",
+    "subject_credit_code": "",
+    "summary": "待核实线索:某化工大模型由中国科学院大连化学物理研究所联合科大讯飞、阿里云发布。",
+    "source": "toutiao.com",
+    "signal_time": "2026-10-03T10:00:00+08:00",
+    "watch_focus": "核实联合研发关系是否属实;确认发布时间与官方信源。",
+    "clues": [
+      {
+        "clue_id": "clue-0001",
+        "source": "新华网",
+        "platform": "toutiao",
+        "title": "我国化工行业首个大模型发布新版本",
+        "content": "9月2日,中国科学院大连化学物理研究所工作人员在使用应用智能化工大模型3.0Pro的中试装置开展试验工作。",
+        "url": "https://example.org/news/clue-0001",
+        "published_at": "2026-10-03T09:00:00+08:00",
+        "author_type": "媒体"
+      }
+    ]
+  }
+}

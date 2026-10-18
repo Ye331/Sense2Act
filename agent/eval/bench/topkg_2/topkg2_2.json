@@ -1,0 +1,1481 @@
+[
+  {
+    "stage": "s1a",
+    "response": {
+      "signalType": "商机",
+      "reason": "信封 kind 为 tender,属公开招标公告;tender.projectName 为『DR数字化摄影机采购项目公开招标公告』,purchaser 为『北京市密云区中医医院』,amountYuan 为 1580000.0,relevance.explanation 称『项目与企业业务画像的语义相似度为 0.608,达到准入阈值 0.600』,且 companyProfile 含『医学影像、辅助诊断、智慧医院、医院信息化、PACS』,与 domain『医学影像与PACS』匹配,构成潜在投标/合作机会。同时 amountAnomaly.explanation 指出『本项目金额 158.0 万元,为该采购单位过去 5 条有效金额中位数(34.0 万元)的 4.65 倍』,frequencyAnomaly.explanation 指出『比值 2.00』,noveltyAnomaly.explanation 指出最相似项目为模拟样本『相似度 0.736』,故需以竞争假设并行校验其真实性与性质。",
+      "selectedSeedLabels": [
+        "真实经营动态",
+        "正常大额采购",
+        "新方向扩张"
+      ],
+      "basisGaps": [
+        "该采购单位历史金额基线含 4 个模拟样本(amountAnomaly.explanation:『历史基线含 4 个模拟样本,不代表真实历史证据充分』),需先补齐真实历史采购金额基线",
+        "该采购单位历史项目基线含 4 个模拟样本(noveltyAnomaly.explanation:『历史基线含 4 个模拟样本,不代表真实历史证据充分』),需先补齐真实历史项目基线",
+        "contentSourceNote 载明『基于本条记录已有字段生成,未抓取官方正文,未补造金额、参数或中标结果』,需先获取官方招标正文以核实金额与参数"
+      ]
+    }
+  },
+  {
+    "stage": "s1b",
+    "response": {
+      "claims": [
+        {
+          "id": "c1",
+          "text": "信封载明项目编号为 R-d748c0de48ea423c。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 3,
+          "priorityReason": "信封基础字段，可由信封证据直接核实，是后续推理的地基。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c2",
+          "text": "信封载明采购方为北京市密云区中医医院。",
+          "category": "实体",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "采购方身份是全部异常基线与关联方分析的主体锚点，被多条假设依赖。",
+          "hypothesisIds": [
+            "h1",
+            "h2",
+            "h3"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "北京市密云区中医医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c3",
+          "text": "信封载明项目名称为『DR数字化摄影机采购项目公开招标公告』，领域为『医学影像与PACS』。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 3,
+          "priorityReason": "项目名称与领域决定业务相关性判断，是商机定性的基础。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c4",
+          "text": "信封载明本项目金额为 1580000.0 元。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "金额是金额异常判定的直接输入，卡住结论节且被多条假设依赖。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c5",
+          "text": "信封载明公告发布日期为 2026-09-17。",
+          "category": "时效",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "发布日期决定时效衰减与时间线定位，是动态时间线的起点。",
+          "hypothesisIds": [],
+          "validWindowDays": 30,
+          "refreshCycleDays": 7,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c6",
+          "text": "信封 contentSourceNote 载明『基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果。』",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "该记载直接限定全部金额与参数的可核实性边界，卡住结论节。",
+          "hypothesisIds": [
+            "h1",
+            "h2",
+            "h3"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c7",
+          "text": "信封 amountAnomaly.explanation 载明『本项目金额 158.0 万元，为该采购单位过去 5 条有效金额中位数(34.0 万元)的 4.65 倍，金额异常得分 0.704。』",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "检测器数字断言固化为 claim，是金额异常假设的核心可区分证据。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "北京市密云区中医医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c8",
+          "text": "信封 amountAnomaly.explanation 载明『历史基线含 4 个模拟样本，不代表真实历史证据充分。』",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "该记载直接削弱金额异常结论的证据基础，是假设可区分性的关键。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c9",
+          "text": "信封 frequencyAnomaly.explanation 载明『截至当天近 30 天该采购单位采购 1 次，已完整观测的 4 个历史窗口平均 0.5 次，比值 2.00，频率异常得分 0.500。』",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "检测器数字断言固化为 claim，是频率异常判定的直接依据。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "validWindowDays": 30,
+          "refreshCycleDays": 7,
+          "relationType": null,
+          "entityNames": [
+            "北京市密云区中医医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c10",
+          "text": "信封 noveltyAnomaly.explanation 载明最相似项目为『【模拟】密云区中医医院2025年度设备购置采购项目公开招标公告（2025年10月第1期）』(2025-10-29/模拟样本)，相似度 0.736。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 4,
+          "priorityReason": "最相似项目及其模拟属性决定新颖性判定可信度，属时间线与关联方证据。",
+          "hypothesisIds": [
+            "h3"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "北京市密云区中医医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c11",
+          "text": "信封 noveltyAnomaly.explanation 载明『历史基线含 4 个模拟样本，不代表真实历史证据充分。』",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "该记载削弱新颖性结论的证据基础，影响新方向扩张假设的可区分性。",
+          "hypothesisIds": [
+            "h3"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c12",
+          "text": "信封 relevance.explanation 载明『项目与企业业务画像的语义相似度为 0.608，达到准入阈值 0.600。』",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "相关性得分是商机定性的直接依据，且仅略高于阈值，需核实。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c13",
+          "text": "信封 companyProfile 载明企业业务画像含『医学影像、辅助诊断、智慧医院、医院信息化、PACS』等方向。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 3,
+          "priorityReason": "业务画像是相关性判断的比对基准，属主体背景。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c14",
+          "text": "解读将本信号定性为『商机』，理由为信封 kind 为 tender 属公开招标公告，且业务画像与 domain『医学影像与PACS』匹配，构成潜在投标/合作机会。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 4,
+          "priorityReason": "解读定性是结论节的直接输入，决定后续查证方向。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c15",
+          "text": "解读登记了三个假设种子标签：『真实经营动态』『正常大额采购』『新方向扩张』。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 3,
+          "priorityReason": "假设种子标签是竞争假设登记的直接来源。",
+          "hypothesisIds": [
+            "h1",
+            "h2",
+            "h3"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c16",
+          "text": "解读 basisGaps 载明需先补齐真实历史采购金额基线、真实历史项目基线，并获取官方招标正文以核实金额与参数。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 4,
+          "priorityReason": "该记载直接指出证据缺口，是查证规划与假设可区分性的依据。",
+          "hypothesisIds": [
+            "h1",
+            "h2",
+            "h3"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c17",
+          "text": "信封 amountHistory 载明历史中位金额为 339600.0 元、金额比值为 4.652532391048292、历史条数为 5、模拟历史条数为 4。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "历史基线数值是金额异常判定的直接输入，且模拟样本占比高影响可信度。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "北京市密云区中医医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c18",
+          "text": "信封 frequencyHistory 载明窗口天数为 30、近期次数为 1、历史窗口平均次数为 0.5、频率比值为 2.0、已用历史窗口数为 4。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 3,
+          "priorityReason": "频率基线数值是频率异常判定的直接输入。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "validWindowDays": 30,
+          "refreshCycleDays": 7,
+          "relationType": null,
+          "entityNames": [
+            "北京市密云区中医医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c19",
+          "text": "信封 noveltyHistory 载明历史条数为 5、模拟历史条数为 4、最大历史相似度为 0.7355057001113892。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 3,
+          "priorityReason": "新颖性基线数值是新颖性异常判定的直接输入，模拟样本占比高。",
+          "hypothesisIds": [
+            "h3"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "北京市密云区中医医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c20",
+          "text": "信封 sourceUrl 载明为『https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/631986562/128/zhaobiao』。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 2,
+          "priorityReason": "来源链接是查证入口，但本身不构成实质断言。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c21",
+          "text": "信封 rumor 字段为 null，未登记任何传闻线索。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 2,
+          "priorityReason": "传闻字段为空，排除传闻类假设，属背景信息。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c22",
+          "text": "信封 amountAnomaly、frequencyAnomaly、noveltyAnomaly、relevance 四项的 basisSufficient 均标注为 true。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 3,
+          "priorityReason": "basisSufficient 标注与模拟样本占比存在张力，需核实其判定口径。",
+          "hypothesisIds": [
+            "h1",
+            "h2",
+            "h3"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        }
+      ],
+      "hypotheses": [
+        {
+          "id": "h1",
+          "label": "真实经营动态",
+          "description": "该招标公告反映采购方真实的经营/采购动态，金额与频率异常可由真实需求解释。可区分 claim：c7（金额为中位数 4.65 倍）与 c8（历史基线含 4 个模拟样本）——若补齐真实历史基线后金额比仍显著偏高，则支持本假设；若真实基线本身即接近 158 万元，则金额异常消失，本假设被削弱。",
+          "claimIds": [
+            "c2",
+            "c4",
+            "c6",
+            "c7",
+            "c8",
+            "c9",
+            "c17",
+            "c18",
+            "c22"
+          ],
+          "op": "AND"
+        },
+        {
+          "id": "h2",
+          "label": "正常大额采购",
+          "description": "本次采购属采购方既定设备购置规划内的正常大额采购，非异常输送。可区分 claim：c6（未抓取官方正文，未补造金额、参数或中标结果）与 c7（金额为中位数 4.65 倍）——若官方正文证实金额与参数属常规设备购置且与既定规划一致，则支持本假设；若正文缺失或金额与规划不符，则本假设被削弱。",
+          "claimIds": [
+            "c2",
+            "c4",
+            "c6",
+            "c7",
+            "c8",
+            "c17",
+            "c22"
+          ],
+          "op": "AND"
+        },
+        {
+          "id": "h3",
+          "label": "新方向扩张",
+          "description": "采购方在医学影像与PACS方向出现新的采购方向扩张。可区分 claim：c10（最相似项目为模拟样本，相似度 0.736）与 c11（历史基线含 4 个模拟样本）——若补齐真实历史项目基线后仍无同类项目，则支持新方向扩张；若存在真实同类项目，则本假设被削弱。",
+          "claimIds": [
+            "c2",
+            "c6",
+            "c10",
+            "c11",
+            "c16",
+            "c19",
+            "c22"
+          ],
+          "op": "AND"
+        }
+      ],
+      "gaps": [
+        {
+          "text": "官方招标正文中载明的项目金额、设备参数与中标结果分别是什么？",
+          "relatedClaimId": "c6"
+        },
+        {
+          "text": "该采购单位真实（非模拟）的历史采购金额基线是多少，中位数是否确为 34.0 万元？",
+          "relatedClaimId": "c17"
+        },
+        {
+          "text": "该采购单位真实（非模拟）的历史采购项目基线有哪些，是否存在与本次同类的 DR 或医学影像设备采购？",
+          "relatedClaimId": "c19"
+        },
+        {
+          "text": "本次采购是否属于采购方既定建设规划或年度设备购置计划？",
+          "relatedClaimId": "c4"
+        },
+        {
+          "text": "该采购单位近 30 天及历史窗口的真实采购频次是多少？",
+          "relatedClaimId": "c18"
+        },
+        {
+          "text": "该采购单位与本次项目相关的关联方（招标代理、潜在供应商）分别是谁？",
+          "relatedClaimId": "c2"
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c1",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_2:E1",
+          "direction": "支持",
+          "quote": "招标信号基础字段:项目编号 R-d748c0de48ea423c;",
+          "reason": "该证据原文直接载明项目编号为 R-d748c0de48ea423c,与 claim 一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 158.0 万元",
+          "reason": "仅涉及金额异常评分,未涉及项目编号。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 1 次",
+          "reason": "仅涉及采购频率异常,未涉及项目编号。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为",
+          "reason": "仅涉及新颖性相似度,未涉及项目编号。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.608",
+          "reason": "仅涉及语义相关性评分,未涉及项目编号。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一直接载明项目编号的证据 E1 与 claim 完全一致;其余证据均不涉及编号字段,不构成矛盾。但 E1 与其余证据同根(signal_layer),独立来源不足,该意见可能被代码按独立来源规则否决。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c10",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_2:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-d748c0de48ea423c;项目名称 DR数字化摄影机采购项目公开招标公告;采购方 北京市密云区中医医院;预算金额 1580000.0 元;发布日期 2026-09-17;领域 医学影像与PACS。",
+          "reason": "该证据仅载明项目基础字段，未涉及 noveltyAnomaly.explanation 的最相似项目与相似度内容。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 158.0 万元,为该采购单位过去 5 条有效金额中位数(34.0 万元)的 4.65 倍,金额异常得分 0.704。",
+          "reason": "该证据为金额异常检测结果，与 claim 所述新颖性解释字段内容无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 1 次,已完整观测的 4 个历史窗口平均 0.5 次,比值 2.00,频率异常得分 0.500。",
+          "reason": "该证据为频率异常检测结果，不涉及最相似项目与相似度。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E4",
+          "direction": "支持",
+          "quote": "该采购单位历史最相似项目为『【模拟】密云区中医医院2025年度设备购置采购项目公开招标公告（2025年10月第1期）』(2025-10-29/模拟样本),相似度 0.736",
+          "reason": "该证据逐字载明最相似项目名称、日期/样本标注与相似度 0.736，与 claim 内容一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.608,达到准入阈值 0.600。",
+          "reason": "该证据为业务画像相关性检测，与新颖性解释字段无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一直接相关的证据 evt_topkg2_2:E4 逐字载明最相似项目『【模拟】密云区中医医院2025年度设备购置采购项目公开招标公告（2025年10月第1期）』(2025-10-29/模拟样本)及相似度 0.736，与 claim 完全吻合；其余证据均不涉及该字段。注意该证据谱系根为 signal_layer，属单一来源。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c12",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_2:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-d748c0de48ea423c;项目名称 DR数字化摄影机采购项目公开招标公告;采购方 北京市密云区中医医院;预算金额 1580000.0 元;发布日期 2026-09-17;领域 医学影像与PACS。",
+          "reason": "该证据仅载明信号层基础字段,未涉及 relevance.explanation 或语义相似度数值,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 158.0 万元,为该采购单位过去 5 条有效金额中位数(34.0 万元)的 4.65 倍,金额异常得分 0.704。",
+          "reason": "该证据为金额异常检测结果,与信封 relevance.explanation 的语义相似度表述无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 1 次,已完整观测的 4 个历史窗口平均 0.5 次,比值 2.00,频率异常得分 0.500。",
+          "reason": "该证据为频率异常检测结果,不涉及相关性解释字段。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『【模拟】密云区中医医院2025年度设备购置采购项目公开招标公告（2025年10月第1期）』(2025-10-29/模拟样本),相似度 0.736(比较基数 5 个历史项目),新颖性异常得分 0.264。",
+          "reason": "该证据为新颖性检测结果,其相似度 0.736 指向历史项目比较,与 claim 所述 0.608 的准入阈值表述无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E5",
+          "direction": "支持",
+          "quote": "项目与企业业务画像的语义相似度为 0.608,达到准入阈值 0.600。",
+          "reason": "该证据原文与 claim 所述内容一致,直接支持 claim 为真。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "证据 evt_topkg2_2:E5 原文逐字载明『项目与企业业务画像的语义相似度为 0.608,达到准入阈值 0.600。』,与 claim 文本一致;其余证据与相关性解释字段无关。注意该证据谱系根为 signal_layer,若与其他同根证据合并则独立性受限,最终由代码按独立来源规则裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c13",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_2:E1",
+          "direction": "无关",
+          "quote": "领域 医学影像与PACS",
+          "reason": "该证据仅载明单条招标信号的领域字段为『医学影像与PACS』,并未载明信封 companyProfile 中企业业务画像的具体方向清单,不能证明或否证 claim 所述画像包含『医学影像、辅助诊断、智慧医院、医院信息化、PACS』等方向。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测",
+          "reason": "该证据只涉及金额异常检测得分,与 companyProfile 业务画像内容无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测",
+          "reason": "该证据只涉及频率异常检测得分,与 companyProfile 业务画像内容无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测",
+          "reason": "该证据只涉及新颖性检测得分,与 companyProfile 业务画像内容无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E5",
+          "direction": "无关",
+          "quote": "项目与企业业务画像的语义相似度为 0.608,达到准入阈值 0.600",
+          "reason": "该证据仅给出项目与企业业务画像的语义相似度评分,未逐字载明画像所含方向清单,无法印证 claim 中列举的『医学影像、辅助诊断、智慧医院、医院信息化、PACS』。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内五条证据均来自 signal_layer 同一谱系根,内容为招标信号基础字段与四类检测器评分,均未载明信封 companyProfile 中企业业务画像的方向清单;E5 虽提及『企业业务画像』但只给出相似度数值,未列出具体方向,故无法证实或否证 claim,维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c14",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_2:E1",
+          "direction": "支持",
+          "quote": "项目名称 DR数字化摄影机采购项目公开招标公告",
+          "reason": "信封字段显示项目为公开招标公告且领域为医学影像与PACS，支撑『商机』定性的两项理由。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测",
+          "reason": "金额异常检测只反映金额偏离历史基线，不改变该信号是否为公开招标商机的判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测",
+          "reason": "频率异常检测描述采购频次偏离，与信封 kind 及业务画像匹配无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测",
+          "reason": "新颖性得分反映与历史项目相似度，不改变商机定性本身。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E5",
+          "direction": "支持",
+          "quote": "项目与企业业务画像的语义相似度为 0.608,达到准入阈值 0.600",
+          "reason": "相关性检测显示业务画像匹配达到准入阈值，支撑『业务画像与 domain 匹配』这一理由。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 证实信封 kind 为公开招标公告且领域为医学影像与PACS，E5 证实业务画像语义相似度达到准入阈值，claim 的两项理由均有证据支撑；其余检测器证据与商机定性无直接关联。注意 E1 与 E5 同根于 signal_layer，独立性有限。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c15",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_2:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-d748c0de48ea423c;项目名称 DR数字化摄影机采购项目公开招标公告;采购方 北京市密云区中医医院;预算金额 1580000.0 元;发布日期 2026-09-17;领域 医学影像与PACS。",
+          "reason": "该证据仅描述招标信号基础字段，未提及任何假设种子标签，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E2",
+          "direction": "无关",
+          "quote": "北京市密云区中医医院 的采购项目『DR数字化摄影机采购项目公开招标公告』触发金额异常检测:本项目金额 158.0 万元,为该采购单位过去 5 条有效金额中位数(34.0 万元)的 4.65 倍,金额异常得分 0.704。",
+          "reason": "金额异常检测结果与是否登记三个假设种子标签无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E3",
+          "direction": "无关",
+          "quote": "北京市密云区中医医院 的采购项目『DR数字化摄影机采购项目公开招标公告』触发频率异常检测:截至当天近 30 天该采购单位采购 1 次,已完整观测的 4 个历史窗口平均 0.5 次,比值 2.00,频率异常得分 0.500。",
+          "reason": "频率异常检测结果与假设种子标签登记无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E4",
+          "direction": "无关",
+          "quote": "北京市密云区中医医院 的采购项目『DR数字化摄影机采购项目公开招标公告』触发新颖性检测:该采购单位历史最相似项目为『【模拟】密云区中医医院2025年度设备购置采购项目公开招标公告（2025年10月第1期）』(2025-10-29/模拟样本),相似度 0.736(比较基数 5 个历史项目),新颖性异常得分 0.264。",
+          "reason": "新颖性检测结果未涉及假设种子标签，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E5",
+          "direction": "无关",
+          "quote": "北京市密云区中医医院 的采购项目『DR数字化摄影机采购项目公开招标公告』触发相关性检测:项目与企业业务画像的语义相似度为 0.608,达到准入阈值 0.600。",
+          "reason": "相关性检测结果与是否登记三个假设种子标签无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "全部五条证据均为信号层检测结果，均未提及『真实经营动态』『正常大额采购』『新方向扩张』三个假设种子标签的登记情况，无法支持或反驳该 claim，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c16",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_2:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-d748c0de48ea423c;项目名称 DR数字化摄影机采购项目公开招标公告;采购方 北京市密云区中医医院;预算金额 1580000.0 元;发布日期 2026-09-17;领域 医学影像与PACS。",
+          "reason": "仅给出招标信号基础字段,未涉及 basisGaps 或需补齐基线、获取招标正文的要求。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E2",
+          "direction": "支持",
+          "quote": "历史基线含 4 个模拟样本,不代表真实历史证据充分。",
+          "reason": "该证据自述历史基线含模拟样本、不代表真实历史证据充分,与 claim 所称需先补齐真实历史采购金额基线一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E3",
+          "direction": "无关",
+          "quote": "频率异常得分 0.500。(评分 0.5;历史依据充分)。",
+          "reason": "仅涉及频率异常检测,未提及金额基线或招标正文核实。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E4",
+          "direction": "支持",
+          "quote": "历史基线含 4 个模拟样本,不代表真实历史证据充分。",
+          "reason": "同样自述历史基线含模拟样本、不代表真实历史证据充分,支持需补齐真实历史项目基线的主张。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E5",
+          "direction": "无关",
+          "quote": "项目与企业业务画像的语义相似度为 0.608,达到准入阈值 0.600。",
+          "reason": "仅涉及相关性检测得分,与 basisGaps 所述补齐基线及获取招标正文无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "证据 E2、E4 自述历史基线含模拟样本、不代表真实历史证据充分,支持需补齐真实历史基线的方向;但无任何证据涉及获取官方招标正文以核实金额与参数,亦无证据直接载明 basisGaps 的具体要求,故综合意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c17",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_2:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-d748c0de48ea423c;项目名称 DR数字化摄影机采购项目公开招标公告;采购方 北京市密云区中医医院;预算金额 1580000.0 元;发布日期 2026-09-17;领域 医学影像与PACS。",
+          "reason": "该证据仅给出项目基础字段与预算金额，未涉及 amountHistory 的历史中位金额、金额比值、历史条数或模拟历史条数，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E2",
+          "direction": "支持",
+          "quote": "本项目金额 158.0 万元,为该采购单位过去 5 条有效金额中位数(34.0 万元)的 4.65 倍",
+          "reason": "该证据载明历史中位数为 34.0 万元（即 340000 元，与 claim 的 339600.0 元量级一致）、金额比值为 4.65 倍（与 claim 的 4.652532391048292 一致）、历史条数为 5，直接支持 claim 中的三项数值。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 1 次,已完整观测的 4 个历史窗口平均 0.5 次,比值 2.00,频率异常得分 0.500。",
+          "reason": "该证据讨论的是频率异常（采购次数与历史窗口），与 claim 的金额历史中位数、金额比值、历史条数无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E4",
+          "direction": "无关",
+          "quote": "相似度 0.736(比较基数 5 个历史项目),新颖性异常得分 0.264。",
+          "reason": "该证据讨论的是新颖性检测与相似度，虽提及 5 个历史项目，但未涉及金额中位数、金额比值或模拟历史条数，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E5",
+          "direction": "无关",
+          "quote": "项目与企业业务画像的语义相似度为 0.608,达到准入阈值 0.600。",
+          "reason": "该证据讨论的是相关性语义相似度，与 claim 的金额历史统计数值无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅 evt_topkg2_2:E2 一条证据支持 claim 中的历史中位数（34.0 万元）、金额比值（4.65 倍）与历史条数（5 条），但该证据未载明 claim 中的精确值 339600.0 与 4.652532391048292，也未提及模拟历史条数为 4；其余证据均与 claim 无关。支持性证据仅一条且谱系根同为 signal_layer，缺乏独立来源印证，故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c18",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_2:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-d748c0de48ea423c;项目名称 DR数字化摄影机采购项目公开招标公告;采购方 北京市密云区中医医院;预算金额 1580000.0 元;发布日期 2026-09-17;领域 医学影像与PACS。",
+          "reason": "该证据仅列示项目基础字段,未涉及 frequencyHistory 的窗口天数、次数、均值或比值。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 158.0 万元,为该采购单位过去 5 条有效金额中位数(34.0 万元)的 4.65 倍,金额异常得分 0.704。",
+          "reason": "该证据讨论金额异常,与频率历史字段无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E3",
+          "direction": "支持",
+          "quote": "截至当天近 30 天该采购单位采购 1 次,已完整观测的 4 个历史窗口平均 0.5 次,比值 2.00",
+          "reason": "该证据逐项给出窗口天数 30、近期次数 1、历史窗口平均 0.5、比值 2.00、已用历史窗口数 4,与 claim 完全一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『【模拟】密云区中医医院2025年度设备购置采购项目公开招标公告（2025年10月第1期）』(2025-10-29/模拟样本),相似度 0.736(比较基数 5 个历史项目),新颖性异常得分 0.264。",
+          "reason": "该证据讨论新颖性相似度,不涉及频率历史字段。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.608,达到准入阈值 0.600。",
+          "reason": "该证据讨论相关性语义相似度,与频率历史字段无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一直接涉及 frequencyHistory 的证据 evt_topkg2_2:E3 逐项复述了窗口天数 30、近期次数 1、历史窗口平均 0.5、比值 2.00、已用历史窗口数 4,与 claim 完全吻合;其余证据均不涉及该字段。但所有证据同根(signal_layer),不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c19",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_2:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-d748c0de48ea423c;项目名称 DR数字化摄影机采购项目公开招标公告;采购方 北京市密云区中医医院;预算金额 1580000.0 元;发布日期 2026-09-17;领域 医学影像与PACS。",
+          "reason": "该证据仅列示信号层基础字段,未涉及 noveltyHistory 的历史条数、模拟历史条数或最大历史相似度。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E2",
+          "direction": "无关",
+          "quote": "历史基线含 4 个模拟样本,不代表真实历史证据充分。",
+          "reason": "该证据为金额异常检测,虽提及 4 个模拟样本,但未载明历史条数为 5、模拟历史条数为 4 或最大历史相似度 0.7355057001113892。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E3",
+          "direction": "无关",
+          "quote": "已完整观测的 4 个历史窗口平均 0.5 次",
+          "reason": "该证据为频率异常检测,涉及历史窗口次数,与 noveltyHistory 的条数及相似度字段无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E4",
+          "direction": "矛盾",
+          "quote": "相似度 0.736(比较基数 5 个历史项目)",
+          "reason": "该证据称比较基数为 5 个历史项目、相似度为 0.736,与 claim 所述最大历史相似度 0.7355057001113892 不一致(0.736 与 0.7355057001113892 不符),且未载明模拟历史条数为 4。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E5",
+          "direction": "无关",
+          "quote": "项目与企业业务画像的语义相似度为 0.608,达到准入阈值 0.600。",
+          "reason": "该证据为相关性检测的语义相似度,与 noveltyHistory 字段无关。"
+        }
+      ],
+      "verdict": "矛盾",
+      "reason": "唯一涉及新颖性历史基线的证据 evt_topkg2_2:E4 给出的相似度为 0.736、比较基数为 5 个历史项目,与 claim 所述最大历史相似度 0.7355057001113892 不符,且无证据载明模拟历史条数为 4;其余证据均不涉及 noveltyHistory 字段。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c2",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_2:E1",
+          "direction": "支持",
+          "quote": "采购方 北京市密云区中医医院",
+          "reason": "信封基础字段直接载明采购方为北京市密云区中医医院，与 claim 一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E2",
+          "direction": "无关",
+          "quote": "北京市密云区中医医院 的采购项目『DR数字化摄影机采购项目公开招标公告』触发金额异常检测",
+          "reason": "仅涉及金额异常评分，不改变对采购方名称的判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E3",
+          "direction": "无关",
+          "quote": "北京市密云区中医医院 的采购项目『DR数字化摄影机采购项目公开招标公告』触发频率异常检测",
+          "reason": "仅涉及频率异常评分，不改变对采购方名称的判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E4",
+          "direction": "无关",
+          "quote": "北京市密云区中医医院 的采购项目『DR数字化摄影机采购项目公开招标公告』触发新颖性检测",
+          "reason": "仅涉及新颖性评分，不改变对采购方名称的判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E5",
+          "direction": "无关",
+          "quote": "北京市密云区中医医院 的采购项目『DR数字化摄影机采购项目公开招标公告』触发相关性检测",
+          "reason": "仅涉及相关性评分，不改变对采购方名称的判断。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "信封基础字段明确载明采购方为北京市密云区中医医院，其余证据为检测器评分，不构成反证；但所有证据同根于 signal_layer，独立来源不足，最终以代码按独立来源规则判定为准。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c20",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_2:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-d748c0de48ea423c;项目名称 DR数字化摄影机采购项目公开招标公告;采购方 北京市密云区中医医院;预算金额 1580000.0 元;发布日期 2026-09-17;领域 医学影像与PACS。",
+          "reason": "该证据仅列示信号层基础字段,未出现任何 sourceUrl 或 URL 字符串,不能证明也不能否证 claim 所述信封 sourceUrl。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E2",
+          "direction": "无关",
+          "quote": "北京市密云区中医医院 的采购项目『DR数字化摄影机采购项目公开招标公告』触发金额异常检测:本项目金额 158.0 万元,为该采购单位过去 5 条有效金额中位数(34.0 万元)的 4.65 倍,金额异常得分 0.704。",
+          "reason": "该证据讨论金额异常检测,与信封 sourceUrl 字段的取值无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E3",
+          "direction": "无关",
+          "quote": "北京市密云区中医医院 的采购项目『DR数字化摄影机采购项目公开招标公告』触发频率异常检测:截至当天近 30 天该采购单位采购 1 次,已完整观测的 4 个历史窗口平均 0.5 次,比值 2.00,频率异常得分 0.500。",
+          "reason": "该证据讨论频率异常检测,不涉及 sourceUrl 字段。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E4",
+          "direction": "无关",
+          "quote": "北京市密云区中医医院 的采购项目『DR数字化摄影机采购项目公开招标公告』触发新颖性检测:该采购单位历史最相似项目为『【模拟】密云区中医医院2025年度设备购置采购项目公开招标公告（2025年10月第1期）』(2025-10-29/模拟样本),相似度 0.736(比较基数 5 个历史项目),新颖性异常得分 0.264。",
+          "reason": "该证据讨论新颖性检测,未提及 sourceUrl。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E5",
+          "direction": "无关",
+          "quote": "北京市密云区中医医院 的采购项目『DR数字化摄影机采购项目公开招标公告』触发相关性检测:项目与企业业务画像的语义相似度为 0.608,达到准入阈值 0.600。",
+          "reason": "该证据讨论相关性检测,与信封 sourceUrl 字段无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内五条证据均为信号层检测记录,均未出现 claim 所述的 sourceUrl 字符串『https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/631986562/128/zhaobiao』,既无支持也无矛盾证据,故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c21",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_2:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-d748c0de48ea423c;项目名称 DR数字化摄影机采购项目公开招标公告;采购方 北京市密云区中医医院;预算金额 1580000.0 元;发布日期 2026-09-17;领域 医学影像与PACS。",
+          "reason": "该证据仅列出信号层信封的基础字段,未涉及 rumor 字段的取值,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E2",
+          "direction": "无关",
+          "quote": "北京市密云区中医医院 的采购项目『DR数字化摄影机采购项目公开招标公告』触发金额异常检测:本项目金额 158.0 万元,为该采购单位过去 5 条有效金额中位数(34.0 万元)的 4.65 倍,金额异常得分 0.704。",
+          "reason": "金额异常检测结果与 rumor 字段是否为 null 无逻辑关联。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E3",
+          "direction": "无关",
+          "quote": "北京市密云区中医医院 的采购项目『DR数字化摄影机采购项目公开招标公告』触发频率异常检测:截至当天近 30 天该采购单位采购 1 次,已完整观测的 4 个历史窗口平均 0.5 次,比值 2.00,频率异常得分 0.500。",
+          "reason": "频率异常检测结果不涉及 rumor 字段登记情况。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E4",
+          "direction": "无关",
+          "quote": "北京市密云区中医医院 的采购项目『DR数字化摄影机采购项目公开招标公告』触发新颖性检测:该采购单位历史最相似项目为『【模拟】密云区中医医院2025年度设备购置采购项目公开招标公告（2025年10月第1期）』(2025-10-29/模拟样本),相似度 0.736(比较基数 5 个历史项目),新颖性异常得分 0.264。",
+          "reason": "新颖性检测结果与 rumor 字段是否为空无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E5",
+          "direction": "无关",
+          "quote": "北京市密云区中医医院 的采购项目『DR数字化摄影机采购项目公开招标公告』触发相关性检测:项目与企业业务画像的语义相似度为 0.608,达到准入阈值 0.600。",
+          "reason": "相关性检测结果不提供 rumor 字段取值的任何信息。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内 5 条证据均为信号层基础字段与检测器评分,均未涉及信封 rumor 字段的登记内容,无法证实或推翻 claim,故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c22",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_2:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-d748c0de48ea423c;项目名称 DR数字化摄影机采购项目公开招标公告;采购方 北京市密云区中医医院;预算金额 1580000.0 元;发布日期 2026-09-17;领域 医学影像与PACS。",
+          "reason": "该证据仅给出信封基础字段,未涉及 amountAnomaly、frequencyAnomaly、noveltyAnomaly、relevance 四项的 basisSufficient 标注。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E2",
+          "direction": "支持",
+          "quote": "历史依据充分",
+          "reason": "金额异常检测器输出中明确标注“历史依据充分”,对应 amountAnomaly 的 basisSufficient 为 true。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E3",
+          "direction": "支持",
+          "quote": "历史依据充分",
+          "reason": "频率异常检测器输出中明确标注“历史依据充分”,对应 frequencyAnomaly 的 basisSufficient 为 true。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E4",
+          "direction": "支持",
+          "quote": "历史依据充分",
+          "reason": "新颖性检测器输出中明确标注“历史依据充分”,对应 noveltyAnomaly 的 basisSufficient 为 true。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E5",
+          "direction": "支持",
+          "quote": "历史依据充分",
+          "reason": "相关性检测器输出中明确标注“历史依据充分”,对应 relevance 的 basisSufficient 为 true。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "四条检测器证据(E2-E5)分别在各自输出中标注“历史依据充分”,与 claim 所述四项 basisSufficient 均为 true 一致;E1 为基础字段,不改变判断。但四条证据同根(signal_layer),不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c3",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_2:E1",
+          "direction": "支持",
+          "quote": "项目名称 DR数字化摄影机采购项目公开招标公告;采购方 北京市密云区中医医院;预算金额 1580000.0 元;发布日期 2026-09-17;领域 医学影像与PACS。",
+          "reason": "信封基础字段直接载明项目名称与领域，与 claim 完全一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E2",
+          "direction": "无关",
+          "quote": "北京市密云区中医医院 的采购项目『DR数字化摄影机采购项目公开招标公告』触发金额异常检测",
+          "reason": "仅涉及金额异常评分，不改变对项目名称与领域字段的判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E3",
+          "direction": "无关",
+          "quote": "北京市密云区中医医院 的采购项目『DR数字化摄影机采购项目公开招标公告』触发频率异常检测",
+          "reason": "仅涉及频率异常评分，与信封字段内容无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E4",
+          "direction": "无关",
+          "quote": "北京市密云区中医医院 的采购项目『DR数字化摄影机采购项目公开招标公告』触发新颖性检测",
+          "reason": "仅涉及新颖性评分，不改变对项目名称与领域字段的判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E5",
+          "direction": "无关",
+          "quote": "北京市密云区中医医院 的采购项目『DR数字化摄影机采购项目公开招标公告』触发相关性检测",
+          "reason": "仅涉及业务相关性评分，与信封字段内容无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 信封基础字段逐字载明项目名称『DR数字化摄影机采购项目公开招标公告』与领域『医学影像与PACS』，与 claim 一致；其余证据均为检测器评分，不改变该判断。但全部证据同根于 signal_layer，不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c4",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_2:E1",
+          "direction": "支持",
+          "quote": "预算金额 1580000.0 元",
+          "reason": "该证据直接载明本项目预算金额为 1580000.0 元，与 claim 所述金额一致，使 claim 更可能为真。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E2",
+          "direction": "支持",
+          "quote": "本项目金额 158.0 万元",
+          "reason": "158.0 万元即 1580000.0 元，与 claim 金额一致，构成对 claim 的印证。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测",
+          "reason": "该证据仅涉及采购频率异常，未涉及项目金额，不改变 claim 的判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测",
+          "reason": "该证据仅涉及项目新颖性/相似度，未涉及项目金额，不改变 claim 的判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测",
+          "reason": "该证据仅涉及业务画像相关性，未涉及项目金额，不改变 claim 的判断。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 直接载明预算金额 1580000.0 元，E2 以 158.0 万元复述同一金额，均支持 claim；其余证据与金额无关。但需注意 E1、E2 谱系根同为 signal_layer，可能非独立来源，最终由代码按独立来源规则裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c5",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_2:E1",
+          "direction": "支持",
+          "quote": "发布日期 2026-09-17",
+          "reason": "信封基础字段直接载明发布日期为 2026-09-17，与 claim 一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测",
+          "reason": "仅涉及金额异常评分，不涉及公告发布日期。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测",
+          "reason": "仅涉及采购频率异常，不涉及发布日期。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测",
+          "reason": "仅涉及新颖性相似度，不涉及发布日期。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测",
+          "reason": "仅涉及业务相关性相似度，不涉及发布日期。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一直接涉及发布日期的证据 evt_topkg2_2:E1 逐字载明『发布日期 2026-09-17』，与 claim 完全一致；其余证据均为检测器评分，与发布日期无关。注意 E1 与各检测器同根（signal_layer），不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c6",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_2:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-d748c0de48ea423c;项目名称 DR数字化摄影机采购项目公开招标公告;采购方 北京市密云区中医医院;预算金额 1580000.0 元;发布日期 2026-09-17;领域 医学影像与PACS。",
+          "reason": "该证据仅列示信号层基础字段，未涉及信封 contentSourceNote 的内容，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E2",
+          "direction": "无关",
+          "quote": "北京市密云区中医医院 的采购项目『DR数字化摄影机采购项目公开招标公告』触发金额异常检测:本项目金额 158.0 万元,为该采购单位过去 5 条有效金额中位数(34.0 万元)的 4.65 倍,金额异常得分 0.704。",
+          "reason": "金额异常检测与 contentSourceNote 是否载明该表述无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E3",
+          "direction": "无关",
+          "quote": "北京市密云区中医医院 的采购项目『DR数字化摄影机采购项目公开招标公告』触发频率异常检测:截至当天近 30 天该采购单位采购 1 次,已完整观测的 4 个历史窗口平均 0.5 次,比值 2.00,频率异常得分 0.500。",
+          "reason": "频率异常检测与 contentSourceNote 内容无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E4",
+          "direction": "无关",
+          "quote": "北京市密云区中医医院 的采购项目『DR数字化摄影机采购项目公开招标公告』触发新颖性检测:该采购单位历史最相似项目为『【模拟】密云区中医医院2025年度设备购置采购项目公开招标公告（2025年10月第1期）』(2025-10-29/模拟样本),相似度 0.736(比较基数 5 个历史项目),新颖性异常得分 0.264。",
+          "reason": "新颖性检测与 contentSourceNote 内容无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E5",
+          "direction": "无关",
+          "quote": "北京市密云区中医医院 的采购项目『DR数字化摄影机采购项目公开招标公告』触发相关性检测:项目与企业业务画像的语义相似度为 0.608,达到准入阈值 0.600。",
+          "reason": "相关性检测与 contentSourceNote 内容无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "五条证据均为信号层基础字段与检测器输出，均未包含或引用信封 contentSourceNote 的原文，无法证实或推翻 claim 所述表述，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c7",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_2:E1",
+          "direction": "支持",
+          "quote": "预算金额 1580000.0 元",
+          "reason": "该证据载明预算金额 1580000.0 元，与 claim 中『本项目金额 158.0 万元』一致，间接支持金额数值部分。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E2",
+          "direction": "支持",
+          "quote": "本项目金额 158.0 万元,为该采购单位过去 5 条有效金额中位数(34.0 万元)的 4.65 倍,金额异常得分 0.704。",
+          "reason": "该证据原文与 claim 引述的 explanation 内容逐字一致，直接支持 claim。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 1 次,已完整观测的 4 个历史窗口平均 0.5 次,比值 2.00,频率异常得分 0.500。",
+          "reason": "该证据涉及频率异常检测，与 claim 所述金额异常 explanation 无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为",
+          "reason": "该证据涉及新颖性检测，不改变对金额异常 explanation 文本的判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.608,达到准入阈值 0.600。",
+          "reason": "该证据涉及相关性检测，与 claim 所述金额异常 explanation 无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "evt_topkg2_2:E2 原文与 claim 引述的 explanation 逐字一致，直接印证该信封字段内容；E1 的预算金额 1580000.0 元亦与 158.0 万元吻合。其余证据涉及频率、新颖性、相关性检测，与 claim 无关。需注意 E2 自述历史基线含 4 个模拟样本，但 claim 仅陈述信封字段载明的内容，该文本本身已被证据直接证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c8",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_2:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-d748c0de48ea423c;项目名称 DR数字化摄影机采购项目公开招标公告;采购方 北京市密云区中医医院;预算金额 1580000.0 元;发布日期 2026-09-17;领域 医学影像与PACS。",
+          "reason": "该证据仅载明信号层基础字段,未涉及 amountAnomaly.explanation 的内容,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E2",
+          "direction": "支持",
+          "quote": "历史基线含 4 个模拟样本,不代表真实历史证据充分。",
+          "reason": "该证据原文逐字包含 claim 所指的 explanation 文本,直接支持 claim 为真。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E3",
+          "direction": "无关",
+          "quote": "频率异常得分 0.500。(评分 0.5;历史依据充分)。",
+          "reason": "该证据为频率异常检测,未载明 amountAnomaly.explanation 文本。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E4",
+          "direction": "无关",
+          "quote": "新颖性异常得分 0.264。历史基线含 4 个模拟样本,不代表真实历史证据充分。",
+          "reason": "该证据为新颖性检测,虽含相同措辞,但并非 amountAnomaly.explanation 字段的载明内容,不直接证明 claim 所指字段。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E5",
+          "direction": "无关",
+          "quote": "项目与企业业务画像的语义相似度为 0.608,达到准入阈值 0.600。",
+          "reason": "该证据为相关性检测,未涉及 amountAnomaly.explanation。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "证据 evt_topkg2_2:E2 原文逐字载明『历史基线含 4 个模拟样本,不代表真实历史证据充分。』,与 claim 文本一致,故该 claim 已证实。其余证据与 amountAnomaly.explanation 字段无直接关联。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c9",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_2:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-d748c0de48ea423c;项目名称 DR数字化摄影机采购项目公开招标公告;采购方 北京市密云区中医医院;预算金额 1580000.0 元;发布日期 2026-09-17;领域 医学影像与PACS。",
+          "reason": "该证据仅载明项目基础字段，未涉及 frequencyAnomaly.explanation 的具体数值内容。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 158.0 万元,为该采购单位过去 5 条有效金额中位数(34.0 万元)的 4.65 倍,金额异常得分 0.704。",
+          "reason": "该证据为金额异常检测，与 claim 所述频率异常 explanation 的数值无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E3",
+          "direction": "支持",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 1 次,已完整观测的 4 个历史窗口平均 0.5 次,比值 2.00,频率异常得分 0.500。",
+          "reason": "该证据原文与 claim 所述 frequencyAnomaly.explanation 的数值逐项一致（近30天1次、4个历史窗口平均0.5次、比值2.00、得分0.500）。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『【模拟】密云区中医医院2025年度设备购置采购项目公开招标公告（2025年10月第1期）』(2025-10-29/模拟样本),相似度 0.736(比较基数 5 个历史项目),新颖性异常得分 0.264。",
+          "reason": "该证据为新颖性检测，与频率异常 explanation 的数值无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_2:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.608,达到准入阈值 0.600。",
+          "reason": "该证据为相关性检测，与频率异常 explanation 的数值无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一直接涉及频率异常 explanation 的证据 evt_topkg2_2:E3 原文与 claim 数值逐项吻合；其余证据为其他检测器或基础字段，不改变判断。但全部证据同根（lineage_root 均为 signal_layer），不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 1,
+      "mainTarget": "c6",
+      "action": "explore",
+      "gapChain": [
+        {
+          "gap": "c6 声称『基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果』，即官方招标正文尚未获取，导致 c4（金额 1580000.0 元）、c3（项目名称与领域）等核心事实缺乏官方源支撑。",
+          "acceptance": "需页面正文级证据：在 sourceUrl 指向的详情页（https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/631986562/128/zhaobiao）取得正文，正文中可逐字读到项目名称、采购单位、预算/最高限价金额与公告日期字段。",
+          "failover": "若详情页正文不可得或需登录，则改查权威登记源（政府采购网/公共资源交易平台）以项目编号 R-d748c0de48ea423c 或项目名称检索同一公告的官方发布页。"
+        },
+        {
+          "gap": "官方正文若取得，需核实其载明金额是否与信封 c4 的 1580000.0 元一致，以及是否载明设备参数（DR 数字化摄影机）与采购方式。",
+          "acceptance": "需权威登记源记录：官方公告正文中金额字段与 c4 逐字一致或给出差异值，并含设备名称/数量/技术参数段落。",
+          "failover": "若官方正文金额缺失，则退而记录『官方正文未载明金额』这一否定性证据，用于削弱『正常大额采购』假设。"
+        },
+        {
+          "gap": "官方正文若载明采购依据（如年度设备购置规划、预算批复文号），可区分『正常大额采购』与『新方向扩张』。",
+          "acceptance": "需页面正文级证据：正文中出现规划/批复/立项依据的原文表述，或明确无此类表述。",
+          "failover": "若正文无规划依据表述，则记录为缺失证据，不据此推断，转由 c19/c13 侧证。"
+        }
+      ],
+      "searchHints": [
+        "R-d748c0de48ea423c 招标公告",
+        "北京市密云区中医医院 DR数字化摄影机采购项目 公开招标公告",
+        "密云区中医医院 2026 设备购置 招标 158万"
+      ],
+      "sideTargets": [
+        "c20",
+        "c4"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 2,
+      "mainTarget": "c6",
+      "action": "explore",
+      "gapChain": [
+        {
+          "gap": "c6 载明『基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果。』——需确认 sourceUrl 指向的详情页是否存在可抓取的官方招标正文（含金额 1580000.0 元与 DR 设备参数）。",
+          "acceptance": "需页面正文级证据：sourceUrl 详情页返回的正文中可逐字定位到项目名称、采购方、金额或设备参数中至少一项，且与信封字段一致或可对照。",
+          "failover": "若详情页为登录墙/动态渲染不可达，则改查权威登记源（政府采购网/公共资源交易平台）以项目编号 R-d748c0de48ea423c 或项目名称检索同一公告。"
+        },
+        {
+          "gap": "若正文可达，需核实正文所载金额与参数是否属采购方既定设备购置规划内的常规采购（对应假设『正常大额采购』），而非仅信封字段自证。",
+          "acceptance": "需权威登记源记录：官方公告正文或采购意向公开/预算批复文件中出现与本项目对应的设备购置条目或金额条目。",
+          "failover": "若权威源无对应条目，则记录为『正文缺失/规划不符』，作为削弱『正常大额采购』的证据，转查 c19 历史基线以区分其余假设。"
+        }
+      ],
+      "searchHints": [
+        "北京市密云区中医医院 DR数字化摄影机采购项目 公开招标公告",
+        "R-d748c0de48ea423c 招标公告 正文",
+        "密云区中医医院 2026 设备购置 采购意向"
+      ],
+      "sideTargets": [
+        "c20",
+        "c19"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 3,
+      "mainTarget": "c6",
+      "action": "停",
+      "gapChain": [
+        {
+          "gap": "c6 声称『基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果』，需以官方招标正文核实金额 1580000.0 元与设备参数是否与正文一致。",
+          "acceptance": "需官方招标正文页面正文级证据（含项目编号 R-d748c0de48ea423c 与采购方北京市密云区中医医院的对应正文），能逐字比对金额与参数。",
+          "failover": "若官方正文不可达，则改查权威登记源（政府采购公告登记记录）以确认金额与参数；仍不可得则标注该缺口为不可闭合。"
+        },
+        {
+          "gap": "在正文缺失前提下，需确认 c6 所述『未抓取官方正文』这一状态本身是否可被外部证据推翻或证实。",
+          "acceptance": "需权威登记源记录或来源页面正文级证据，显示该记录是否附有官方正文链接或抓取标记。",
+          "failover": "若无法获得，则维持 c6 未决状态，不再重复投入调用。"
+        }
+      ],
+      "searchHints": [
+        "密云区中医医院 DR数字化摄影机采购项目 公开招标公告",
+        "R-d748c0de48ea423c 招标公告 正文",
+        "北京市密云区中医医院 1580000 元 设备采购"
+      ],
+      "sideTargets": [
+        "c20",
+        "c19"
+      ],
+      "questionPackage": null,
+      "stopReason": "证据通道已穷尽：主目标 c6 已连续 2 轮（第 1、2 轮，均为 explore）名下证据数无增长，按纪律本轮禁止再选 c6；其余未决 claim（c13、c15、c19、c20、c21）disc 的 plus/minus 均为 0、ratio 均为 0.0，澄清它们不能翻转任何假设的主导地位，期望价值低于调用成本；且事件连续 3 轮无任何新增证据。",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 主体与事件背景\n\n本事件对应信封标签为『DR数字化摄影机采购项目公开招标公告』。\n\n信封载明项目编号为 R-d748c0de48ea423c [1][2][3][4][5]。信封载明采购方为北京市密云区中医医院 [1][2][3][4][5]。信封载明项目名称为『DR数字化摄影机采购项目公开招标公告』，领域为『医学影像与PACS』 [1][2][3][4][5]。\n\n关于企业业务画像，信封 companyProfile 载明企业业务画像含『医学影像、辅助诊断、智慧医院、医院信息化、PACS』等方向，该表述目前尚未核实 [1][2][3][4][5]。关于传闻线索，信封 rumor 字段为 null、未登记任何传闻线索，该表述目前尚未核实 [1][2][3][4][5]。\n\n以上主体与项目标识信息均来自信封字段登记，未涉及官方正文核验。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 动态时间线与关联方\n\n本节依据台账信封（envelope）所载信息，就公告时间线与关联项目情况作如下投影。\n\n**一、公告时间线**\n\n信封载明公告发布日期为 2026-09-17 [1][2][3][4][5]。该日期为信封字段所载，构成本次事件时间线的基准点。\n\n**二、关联项目与相似度**\n\n信封 noveltyAnomaly.explanation 载明，最相似项目为『【模拟】密云区中医医院2025年度设备购置采购项目公开招标公告（2025年10月第1期）』（2025-10-29/模拟样本），相似度 0.736 [4][1][2][3][5]。需注意，该最相似项目在信封中被标注为模拟样本，其与本次公告的关联性判断受此标注约束。\n\n**三、来源链接**\n\n关于信封 sourceUrl 载明为『https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/631986562/128/zhaobiao』一事，目前尚未核实 [1][2][3][4][5]。该字段内容仅见于信封记录，尚待进一步核验，本节不作事实认定。\n\n**四、小结**\n\n就本节所涉时间线与关联方信息而言：公告发布日期（2026-09-17）与最相似项目及其相似度（0.736）两项已由信封载明；来源链接一项目前尚未核实。上述内容均限于信封字段所载范围，未引入信封之外的核验结论。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 核心事实\n\n本项目为「DR数字化摄影机采购项目公开招标公告」[1][2][3][4][5]。\n\n**金额。** 信封载明本项目金额为 1580000.0 元 [1][2][3][4][5]。信封 amountAnomaly.explanation 载明『本项目金额 158.0 万元，为该采购单位过去 5 条有效金额中位数(34.0 万元)的 4.65 倍，金额异常得分 0.704。』[1][2][3][4][5] 信封 amountHistory 载明历史中位金额为 339600.0 元、金额比值为 4.652532391048292、历史条数为 5、模拟历史条数为 4 [2][1][3][4][5]。信封 amountAnomaly.explanation 同时载明『历史基线含 4 个模拟样本，不代表真实历史证据充分。』[2][1][3][4][5]\n\n**频率。** 信封 frequencyAnomaly.explanation 载明『截至当天近 30 天该采购单位采购 1 次，已完整观测的 4 个历史窗口平均 0.5 次，比值 2.00，频率异常得分 0.500。』[3][1][2][4][5] 信封 frequencyHistory 载明窗口天数为 30、近期次数为 1、历史窗口平均次数为 0.5、频率比值为 2.0、已用历史窗口数为 4 [3][1][2][4][5]。\n\n**相关性。** 信封 relevance.explanation 载明『项目与企业业务画像的语义相似度为 0.608，达到准入阈值 0.600。』[5][1][2][3][4]\n\n**新异性。** 信封 noveltyHistory 载明历史条数为 5、模拟历史条数为 4、最大历史相似度为 0.7355057001113892；该条内容目前尚未核实 [4][1][2][3][5]。\n\n**数据基础。** 信封 amountAnomaly、frequencyAnomaly、noveltyAnomaly、relevance 四项的 basisSufficient 均标注为 true [2][3][4][5][1]。信封 contentSourceNote 载明『基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果。』；该条内容目前尚未核实 [1][2][3][4][5]。\n\n**待核实事项。** 上述金额、频率、相关性、新异性各项数值均取自信封字段，官方正文尚未抓取，相关口径有待进一步核实 [1][2][3][4][5]。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 结论\n\n解读将本信号定性为『商机』，理由为信封 kind 为 tender 属公开招标公告，且业务画像与 domain『医学影像与PACS』匹配，构成潜在投标/合作机会 [1][5][2][3][4]。\n\n解读 basisGaps 载明需先补齐真实历史采购金额基线、真实历史项目基线，并获取官方招标正文以核实金额与参数 [2][4][1][3][5]。\n\n解读登记了三个假设种子标签：『真实经营动态』『正常大额采购』『新方向扩张』；该登记目前尚未核实 [1][2][3][4][5]。\n\n其中，『真实经营动态』为当前主导假设（verified 8、contradicted 0、pending 1、score 8）；『正常大额采购』（verified 6、contradicted 0、pending 1、score 6）与『新方向扩张』（verified 5、contradicted 0、pending 2、score 5）为非主导假设。上述假设的可区分 claim 及验证条件如下：『真实经营动态』对应 c7（金额为中位数 4.65 倍）与 c8（历史基线含 4 个模拟样本），若补齐真实历史基线后金额比仍显著偏高则支持本假设，若真实基线本身即接近 158 万元则金额异常消失、本假设被削弱；『正常大额采购』对应 c6（未抓取官方正文，未补造金额、参数或中标结果）与 c7，若官方正文证实金额与参数属常规设备购置且与既定规划一致则支持本假设，若正文缺失或金额与规划不符则本假设被削弱；『新方向扩张』对应 c10（最相似项目为模拟样本，相似度 0.736）与 c11（历史基线含 4 个模拟样本），若补齐真实历史项目基线后仍无同类项目则支持新方向扩张，若存在真实同类项目则本假设被削弱。"
+    }
+  },
+  {
+    "stage": "s7_recommend",
+    "response": {
+      "items": [
+        {
+          "action": "优先补齐真实历史采购金额基线与真实历史项目基线：向采购方（北京市密云区中医医院）公开渠道及第三方招投标数据库调取剔除模拟样本后的真实历史采购金额与同类项目记录，再重新计算金额比值与相似度，以判定 158 万元是否仍属异常。",
+          "rationale": "现有金额异常结论建立在含 4 个模拟样本的历史基线上，c8 明确『历史基线含 4 个模拟样本，不代表真实历史证据充分。』，c16 亦载明需先补齐真实历史采购金额基线、真实历史项目基线。在真实基线补齐前，c7 的 4.65 倍金额比与 c10 的 0.736 相似度均不足以支撑或排除主导假设，故此项为最高优先级的前置核查。",
+          "basisClaimIds": [
+            "c7",
+            "c8",
+            "c16",
+            "c17"
+          ],
+          "hypothesisLabel": "真实经营动态"
+        },
+        {
+          "action": "获取官方招标正文，核实本项目金额、设备参数与采购规划归属：通过 sourceUrl 指向的千里马页面及采购方官方发布渠道取得公告正文，逐项比对 158 万元金额、DR 设备参数是否属既定设备购置规划，并跟踪后续中标结果。",
+          "rationale": "c6 载明『基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果。』，c16 亦要求获取官方招标正文以核实金额与参数。在正文缺失情况下，无法区分『真实经营动态』与『正常大额采购』，也无法确认金额与既定规划是否一致，故须以正文核实作为参与决策的前置条件。",
+          "basisClaimIds": [
+            "c6",
+            "c16",
+            "c4",
+            "c5"
+          ],
+          "hypothesisLabel": "正常大额采购"
+        },
+        {
+          "action": "评估以投标或联合体方式参与本项目的可行性：结合企业业务画像中的『医学影像、辅助诊断、智慧医院、医院信息化、PACS』方向，评估自身 DR 设备供货或 PACS 配套能力，确定独立投标或与设备厂商组成联合体的参与路径，并同步跟踪该采购单位后续同类招标机会。",
+          "rationale": "c14 已证实本信号被定性为『商机』，理由为信封 kind 为 tender 属公开招标公告，且业务画像与 domain『医学影像与PACS』匹配，构成潜在投标/合作机会；c12 载明语义相似度 0.608 达到准入阈值 0.600。前提说明：企业业务画像具体方向（c13）尚为待证实，参与方式评估须以画像核实结果为准，本建议不代替企业投标决策。",
+          "basisClaimIds": [
+            "c14",
+            "c12",
+            "c3",
+            "c13"
+          ],
+          "hypothesisLabel": "新方向扩张"
+        },
+        {
+          "action": "将本采购单位纳入商机监测名单并设置风险缓释跟踪项：持续监测该采购单位后续 30 天窗口内的采购频次与金额变化，同时跟踪竞品在该单位 DR/PACS 项目上的投标动态，若官方正文或后续公告出现与既定规划不符的情形，及时升级核查。",
+          "rationale": "c9 载明『截至当天近 30 天该采购单位采购 1 次，已完整观测的 4 个历史窗口平均 0.5 次，比值 2.00，频率异常得分 0.500。』，c18 载明频率比值 2.0、已用历史窗口数为 4，频次抬升需持续观测；监测重点含『供应链风险』『竞品动态』『商机监测』。前提说明：c19（noveltyHistory 历史条数与模拟条数）尚为待证实，相似度基线结论待其核实后更新。",
+          "basisClaimIds": [
+            "c9",
+            "c18",
+            "c2",
+            "c19"
+          ],
+          "hypothesisLabel": "真实经营动态"
+        }
+      ]
+    }
+  }
+]

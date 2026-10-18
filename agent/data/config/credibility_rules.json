@@ -1,0 +1,16 @@
+{
+  "authoritative_roots": ["gsxt", "wenshu", "zxgk", "rsj", "ccgp", "ggzy", "exchange"],
+  "tiers": {
+    "高": ["gsxt", "wenshu", "zxgk", "rsj", "ccgp", "ggzy", "exchange"],
+    "中": ["signal_layer", "internal_history", "hosp_web", "wjw", "ccompany_web",
+           "company_web",
+           "cctv_news", "south_weekend", "sogou_wechat",
+           "www.toutiao.com", "toutiao.com", "www.cctv.com", "cctv.com",
+           "www.infzm.com", "infzm.com", "mp.weixin.qq.com", "weixin.sogou.com",
+           "www.yfbzb.com"],
+    "低": []
+  },
+  "default_tier": "低",
+  "single_source_exception_blocklist": ["独立于", "独立信源", "为主", "中位", "基线", "趋势", "相比", "既定", "延续性", "不存在", "未曾"],
+  "note": "权威登记源=公示系统(gsxt)/裁判文书(wenshu)/执行信息公开(zxgk)/人社(rsj)/政府采购网(ccgp)/公共资源交易(ggzy)/交易所公告(exchange)。S6 单源例外与反方压制仅对这些根生效;规则表随版本演进,不写死代码常量。single_source_exception_blocklist(2026-10-16 发现四)=单源例外谓词负清单:claim 含比较/依赖性谓词时,单一权威根不足以裁定(证据形态超出单份文件所能承载),不适用单源例外,须走独立根>=2 慢路;宁窄勿宽——错拦=晚点证实(保守方向),漏拦=过度断言。www.yfbzb.com=乙方宝商业聚合(独立根,中档):转载政采/公共资源公告,与 ccgp 持同一公告时按独立源计(不折叠)——故不进权威根、不入 R6 默认扇出,防独立性虚高。"
+}

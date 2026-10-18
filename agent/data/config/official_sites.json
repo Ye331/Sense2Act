@@ -1,0 +1,16 @@
+{
+  "厦门大学附属第一医院": {
+    "domains": ["www.xmfh.com.cn"],
+    "aliases": ["厦大附一", "厦门大学第一附属医院", "第一医院"],
+    "news_paths": ["/yydt/xwgg.htm", "/yydt/xxgk1/tzgg.htm"],
+    "item_xpath": null,
+    "note": "2026-10-04 实测:经典 SSR(博达系CMS);列表条目=info/1730/N.htm 锚点带 title;日期在详情页(trafilatura/htmldate 可抽,中文日期有效)"
+  },
+  "_schema": {
+    "domains": "官网域名列表(source/谱系用裸域)",
+    "aliases": "名称路由别名(与档案名一起参与查询词匹配)",
+    "news_paths": "新闻/公告列表路径;空则走启发式(根页找『新闻/公告/动态』栏目)",
+    "item_xpath": "可选条目选择器;null=通用启发式(title 锚点或含数字详情链)",
+    "note": "新增用户企业=复制一份改域名/路径;域名需同步 source_lineage.json 加 company_web 映射"
+  }
+}

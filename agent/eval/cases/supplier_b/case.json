@@ -1,0 +1,21 @@
+{
+ "case_id": "supplier_b",
+ "title": "供应商B 资金链断裂传闻(离线精调:三成因翻转/H0→H1/同源折算)",
+ "source": "offline_tuned",
+ "envelope": "examples/supplier_b/envelope.json",
+ "responses": "examples/supplier_b/responses.json",
+ "seed": "examples/supplier_b/evidence_seed.json",
+ "refresh_plan": "examples/supplier_b/refresh_plan.json",
+ "event_id": "evt_supplier_b",
+ "run_args": {
+  "max_rounds": 6
+ },
+ "budget": {
+  "s6_opinion_max": 40,
+  "llm_calls_max": 60
+ },
+ "enabled": true,
+ "blocked_note": "",
+ "recorded_at": "2026-10-01 冻结入库",
+ "pipeline_note": "离线两套=建套件 fixture;真实两套=三轮 live 迭代后录制(去重上线前)"
+}

@@ -1,0 +1,143 @@
+{
+ "case_id": "topkg_1",
+ "event_id": "evt_topkg2_1",
+ "verified": true,
+ "verified_date": "2026-10-06",
+ "source": "TopK 信号1 重录(挂账修复后);corpus_bound 机械派生金标",
+ "claims": [
+  {
+   "draft_id": "c1",
+   "text": "信封载明本次招标项目编号为 R-dc5ff0e21e0c9c13。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c10",
+   "text": "信封 noveltyAnomaly.explanation 载明『该采购单位历史最相似项目为『北京大学第一医院2025年医疗设备更新项目医学影像科数字X线机(DR)采购项目公开招标公告』(2026-07-16),相似度 0.931(比较基数 87 个历史项目),新颖性异常得分 0.069。』",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "elements": [
+    "2026-07-16",
+    "『北京大学"
+   ],
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c12",
+   "text": "信封 relevance.explanation 载明『项目与企业业务画像的语义相似度为 0.661,达到准入阈值 0.600。』",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c13",
+   "text": "信封 companyProfile 载明企业业务画像包含『医疗AI、医学影像、辅助诊断、智慧医院、医院信息化、医疗大模型、医院数据平台、HIS、PACS、电子病历』。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c14",
+   "text": "解读将本信号定性为『商机』，理由为招标信号且语义相似度达到准入阈值、业务方向与项目领域匹配。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c15",
+   "text": "解读登记了三个假设种子标签：『正常大额采购』『真实经营动态』『新方向扩张』。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c16",
+   "text": "解读 basisGaps 载明需先补齐真实历史采购金额基线以核实 7.89 倍金额异常，因历史基线含 63 个模拟样本。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c17",
+   "text": "解读 basisGaps 载明需先获取官方招标正文以核实金额、参数与采购需求，因 contentSourceNote 载明未抓取官方正文。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c18",
+   "text": "本次采购金额 2000 万元与同采购单位历史最相似项目（DR 采购项目，2026-07-16 发布）在时间上相隔约两个月，且同属『2025年医疗设备更新项目』系列。",
+   "golden_status": "待证实",
+   "note": "世界断言,无官方正文",
+   "elements": [
+    "2000",
+    "2026-07-16"
+   ],
+   "claim_kind": "world"
+  },
+  {
+   "draft_id": "c19",
+   "text": "信封同时呈现金额异常得分 0.899（高）与频率异常得分 0.194（低），两项异常方向不一致。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c2",
+   "text": "信封载明本次采购的采购方为北京大学第一医院。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c3",
+   "text": "信封载明本次采购金额为 20000000.0 元（2000 万元）。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c4",
+   "text": "信封载明本次公告发布日期为 2026-09-07。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c5",
+   "text": "信封载明本次采购项目名称为『北京大学第一医院2025年医疗设备更新项目医学影像科X射线计算机体层摄影设备(CT)采购项目公开招标公告』，领域为医学影像与PACS。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c6",
+   "text": "信封 contentSourceNote 载明『基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果。』",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c7",
+   "text": "信封 amountAnomaly.explanation 载明『本项目金额 2000.0 万元,为该采购单位过去 83 条有效金额中位数(253.5 万元)的 7.89 倍,金额异常得分 0.899。』",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c8",
+   "text": "信封 amountAnomaly.explanation 载明『历史基线含 63 个模拟样本,不代表真实历史证据充分。』",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c9",
+   "text": "信封 frequencyAnomaly.explanation 载明『截至当天近 30 天该采购单位采购 9 次,已完整观测的 4 个历史窗口平均 7.25 次,比值 1.24,频率异常得分 0.194。』",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  }
+ ]
+}

@@ -1,0 +1,20 @@
+# 密钥（各组件的 .env.example 入库，.env 永不入库）
+.env
+.env.*
+!.env.example
+
+# 重构前原始包，本地保留不入库
+_archive/
+
+# 依赖与构建/缓存产物（各组件另有自己的 .gitignore）
+node_modules/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# IDE / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db

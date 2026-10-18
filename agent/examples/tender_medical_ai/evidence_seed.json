@@ -1,0 +1,63 @@
+{
+  "_note": "证据编号:E1-E4=信封检测器解释(R0,谱系根 signal_layer) E5,E6=R1 E7,E8=R2(私域历史基线工具+政采网) E9,E10=R3。检测器解释与私域历史库在同一本台账折算独立根=检测-调查置信贯通。",
+  "batches": [
+    {
+      "keys": ["医院 智慧医院 三期 规划"],
+      "items": [
+        {
+          "platform": "official_website", "source": "hosp_web",
+          "url": "https://hosp1.example.gov.cn/news/plan",
+          "title": "医院官网:智慧医院建设三期规划发布",
+          "content": "XX市第一人民医院 官网新闻:《智慧医院建设三年规划(2024-2026)》发布,其中第三阶段(2026年)明确建设AI辅助诊断平台,与本次采购项目内容对应。",
+          "publishedAt": "2026-01-15", "authorType": "官方"
+        },
+        {
+          "platform": "official_website", "source": "wjw",
+          "url": "https://wjw.example.gov.cn/pifu",
+          "title": "市卫健委:智慧医院三期建设批复",
+          "content": "市卫健委公示批复文件:原则同意 XX市第一人民医院 智慧医院三期建设方案,建设内容包括AI辅助诊断系统采购。",
+          "publishedAt": "2026-02-20", "authorType": "官方"
+        }
+      ]
+    },
+    {
+      "keys": ["同市 医院 AI辅助诊断 招标"],
+      "items": [
+        {
+          "platform": "official_website", "source": "ccgp",
+          "url": "https://ccgp.gov.cn/hosp2",
+          "title": "市第二人民医院AI辅助诊断系统采购招标公告",
+          "content": "中国政府采购网公示:XX市第二人民医院 AI辅助诊断系统采购项目公开招标公告,预算520万元,2026-09-18发布。",
+          "publishedAt": "2026-09-18", "authorType": "官方"
+        },
+        {
+          "platform": "ggzy", "source": "ggzy",
+          "url": "https://ggzy.gov.cn/hosp3",
+          "title": "市公共资源交易:市第三人民医院智能影像采购公告",
+          "content": "市公共资源交易中心公示:XX市第三人民医院 智能影像AI辅助诊断系统采购项目招标公告,预算460万元,2026-09-11发布。",
+          "publishedAt": "2026-09-11", "authorType": "官方"
+        }
+      ]
+    }
+  ],
+  "history": {
+    "XX市第一人民医院": {
+      "items": [
+        {
+          "platform": "internal_history", "source": "internal_history",
+          "url": "",
+          "title": "内部历史库:该院历史采购与中标记录",
+          "content": "内部历史库:XX市第一人民医院 2021年智慧化一期、2023年二期项目均由 X智汇科技有限公司 中标;近三年采购金额中位数114万元,最大单笔380万元。",
+          "publishedAt": "2026-09-21", "authorType": "内部数据"
+        },
+        {
+          "platform": "official_website", "source": "ccgp",
+          "url": "https://ccgp.gov.cn/hosp1-phase2",
+          "title": "中国政府采购网:二期项目中标公告",
+          "content": "中国政府采购网公示:XX市第一人民医院 智慧医院二期项目中标公告,中标人 X智汇科技有限公司,金额320万元。",
+          "publishedAt": "2023-11-02", "authorType": "官方"
+        }
+      ]
+    }
+  }
+}

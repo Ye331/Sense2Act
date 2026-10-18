@@ -1,0 +1,20 @@
+{
+ "case_id": "ai2_coarse",
+ "title": "讯飞 sweep2-coarse(①②迭代后 live 录制)",
+ "source": "real",
+ "envelope": "examples/ai_model_release/envelope.json",
+ "responses": "runs/recorded/sweep2_ai_coarse.json",
+ "seed": "examples/ai_model_release/evidence_seed.json",
+ "event_id": "evt_sweep2_coarse",
+ "run_args": {
+  "max_rounds": 6
+ },
+ "budget": {
+  "s6_opinion_max": 40,
+  "llm_calls_max": 60
+ },
+ "enabled": true,
+ "blocked_note": "",
+ "recorded_at": "2026-10-04 sweep2 live",
+ "pipeline_note": "corpus_bound 自证例外+同稿合并 rubric 后(代码去重上线前)"
+}

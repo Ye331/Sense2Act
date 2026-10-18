@@ -1,0 +1,18 @@
+{
+ "suite_id": "s2v2-stop-discipline",
+ "variant": "中",
+ "weights": {
+  "miss": 1,
+  "over": 2,
+  "flip": 2
+ },
+ "default_budget": {
+  "s6_opinion_max": 40,
+  "llm_calls_max": 60
+ },
+ "cases": [
+  "s2v2_middle_r1",
+  "s2v2_middle_r2",
+  "s2v2_middle_r3"
+ ]
+}

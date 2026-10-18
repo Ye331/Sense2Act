@@ -1,0 +1,21 @@
+{
+ "case_id": "tender_medical_ai",
+ "title": "医疗AI招标异常(离线精调:多跳扩圈/权威源贯通)",
+ "source": "offline_tuned",
+ "envelope": "examples/tender_medical_ai/envelope.json",
+ "responses": "examples/tender_medical_ai/responses.json",
+ "seed": "examples/tender_medical_ai/evidence_seed.json",
+ "event_id": "evt_tender_medai",
+ "run_args": {
+  "max_rounds": 6
+ },
+ "budget": {
+  "s6_opinion_max": 40,
+  "llm_calls_max": 60
+ },
+ "enabled": true,
+ "blocked_note": "",
+ "golden_ref": "../../cases/tender_medical_ai/golden.json",
+ "recorded_at": "2026-09 离线 fixture(建套件时冻结)",
+ "pipeline_note": "离线精调管道(e2e 同源冻结)"
+}

@@ -1,0 +1,22 @@
+{
+ "case_id": "ai_model_release",
+ "title": "讯飞化工大模型发布(真实数据)",
+ "source": "real",
+ "envelope": "examples/ai_model_release/envelope.json",
+ "responses": "eval/cases/ai_model_release/responses.json",
+ "seed": "examples/ai_model_release/evidence_seed.json",
+ "event_id": "evt_ai_model",
+ "run_args": {
+  "max_rounds": 6,
+  "assoc": "entity_text"
+ },
+ "budget": {
+  "s6_opinion_max": 40,
+  "llm_calls_max": 60
+ },
+ "enabled": true,
+ "blocked_note": "",
+ "golden_ref": "../../cases/ai_model_release/golden.json",
+ "recorded_at": "2026-10-01 录制件冻结入库",
+ "pipeline_note": "三轮 live 迭代后录制(去重上线前)"
+}

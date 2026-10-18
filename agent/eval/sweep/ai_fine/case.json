@@ -1,0 +1,20 @@
+{
+ "case_id": "ai_fine",
+ "title": "讯飞化工大模型 sweep-细(真实数据 live 录制)",
+ "source": "real",
+ "envelope": "examples/ai_model_release/envelope.json",
+ "responses": "runs/recorded/sweep_ai_fine.json",
+ "seed": "examples/ai_model_release/evidence_seed.json",
+ "event_id": "evt_sweep_ai_fine",
+ "run_args": {
+  "max_rounds": 6
+ },
+ "budget": {
+  "s6_opinion_max": 40,
+  "llm_calls_max": 60
+ },
+ "enabled": true,
+ "blocked_note": "",
+ "recorded_at": "2026-10-03 sweep1 live",
+ "pipeline_note": "粒度三档首录(反漂白 rubric 入基座;无去重)"
+}

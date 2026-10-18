@@ -1,0 +1,1572 @@
+[
+  {
+    "stage": "s1a",
+    "response": {
+      "signalType": "商机",
+      "reason": "信封 kind 为 tender,项目为『[询比采购]北京通用航天医院LIS系统信创改造项目采购公告』,采购单位北京通用航天医院,金额 98.0 万元,领域为电子病历与临床系统;relevance 解释称『项目与企业业务画像的语义相似度为 0.601,达到准入阈值 0.600』,companyProfile 含『电子病历』『医院信息化』等,构成潜在投标/合作机会。金额与频率异常得分均为 0.000,noveltyAnomaly 得分 0.109,与历史最相似项目相似度 0.891,属该单位既有信息化采购序列的延续,未见负面或异动迹象。",
+      "selectedSeedLabels": [
+        "真实经营动态",
+        "新方向扩张",
+        "正常大额采购"
+      ],
+      "basisGaps": [
+        "该采购单位历史金额基线含 9 个模拟样本、新颖性基线含 29 个模拟样本,不代表真实历史证据充分,需先补齐真实历史采购基线",
+        "contentSourceNote 说明『基于本条记录已有字段生成,未抓取官方正文,未补造金额、参数或中标结果』,需先获取官方采购公告正文以核实金额与参数"
+      ]
+    }
+  },
+  {
+    "stage": "s1b",
+    "response": {
+      "claims": [
+        {
+          "id": "c1",
+          "text": "信封载明项目编号为 R-bab072bbcb24e1c3。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 3,
+          "priorityReason": "信封基础字段，是后续所有推理的地基，可由信封证据直接核实。",
+          "hypothesisIds": [],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c2",
+          "text": "信封载明项目名称为『[询比采购]北京通用航天医院LIS系统信创改造项目采购公告』。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 3,
+          "priorityReason": "信封基础字段，界定事件主体与采购标的，可由信封证据直接核实。",
+          "hypothesisIds": [],
+          "entityNames": [
+            "北京通用航天医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c3",
+          "text": "信封载明采购方为北京通用航天医院。",
+          "category": "实体",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "采购方身份是全部历史基线与关联方分析的锚点，被多条假设依赖。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [
+            "北京通用航天医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c4",
+          "text": "信封载明本项目金额为 980000.0 元。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "金额是金额异常判断与商机价值评估的核心事实，可由信封证据直接核实。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c5",
+          "text": "信封载明本项目发布日期为 2026-09-11。",
+          "category": "时效",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "发布日期决定时效窗口与投标节奏，是时间线类断言的起点。",
+          "hypothesisIds": [],
+          "validWindowDays": 30,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c6",
+          "text": "信封载明本项目领域为电子病历与临床系统，内容摘要为『[询比采购]北京通用航天医院LIS系统信创改造项目采购公告；采购单位：北京通用航天医院；领域：电子病历与临床系统』。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 3,
+          "priorityReason": "领域与摘要界定事件背景，是相关性判断的输入。",
+          "hypothesisIds": [],
+          "entityNames": [
+            "北京通用航天医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c7",
+          "text": "信封 contentSourceNote 载明『基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果。』",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "该记载直接限定全部金额与参数类 claim 的证据强度，是核实边界的关键。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c8",
+          "text": "信封 amountHistory 载明该采购单位过去 11 条有效金额中位数为 1511391.84 元，本项目金额为其 0.6484089526379869 倍。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "该数字断言是金额异常得分为 0 的直接依据，需独立核实基线真实性。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "entityNames": [
+            "北京通用航天医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c9",
+          "text": "信封 amountAnomaly 解释称『本项目金额 98.0 万元,为该采购单位过去 11 条有效金额中位数(151.1 万元)的 0.65 倍,金额异常得分 0.000』。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "检测器数字断言，固化后用于区分正常采购与异常输送假设。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "entityNames": [
+            "北京通用航天医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c10",
+          "text": "信封 amountHistory 载明历史基线含 9 个模拟样本，amountAnomaly 解释称『历史基线含 9 个模拟样本,不代表真实历史证据充分』。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "该记载直接削弱金额基线的证据充分性，卡住结论节并被 h1、h2 依赖。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [
+            "北京通用航天医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c11",
+          "text": "信封 frequencyAnomaly 解释称『截至当天近 30 天该采购单位采购 3 次,已完整观测的 4 个历史窗口平均 3 次,比值 1.00,频率异常得分 0.000』。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 4,
+          "priorityReason": "频率数字断言，是判断采购节奏是否异常的可区分证据。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "entityNames": [
+            "北京通用航天医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c12",
+          "text": "信封 noveltyHistory 载明该采购单位历史最相似项目为『[询比采购]北京通用航天医院单机医疗设备数据采集信创交互系统项目采购公告』(2026-07-21)，相似度 0.890865683555603，比较基数 36 个历史项目。",
+          "category": "关系",
+          "sectionIndex": 1,
+          "priority": 4,
+          "priorityReason": "该相似关系是判断本次采购是否属既有序列延续的关键，被 h2 依赖。",
+          "hypothesisIds": [
+            "h2"
+          ],
+          "relationType": "协同",
+          "entityNames": [
+            "北京通用航天医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c13",
+          "text": "信封 noveltyHistory 载明新颖性基线含 29 个模拟样本，noveltyAnomaly 解释称『历史基线含 29 个模拟样本,不代表真实历史证据充分』。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "该记载削弱新颖性基线的证据充分性，卡住结论节并被 h2 依赖。",
+          "hypothesisIds": [
+            "h2"
+          ],
+          "entityNames": [
+            "北京通用航天医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c14",
+          "text": "信封 relevance 解释称『项目与企业业务画像的语义相似度为 0.601,达到准入阈值 0.600』。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "相关性得分是商机定性的直接依据，且仅略高于阈值，需核实。",
+          "hypothesisIds": [
+            "h2"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c15",
+          "text": "信封 companyProfile 载明企业业务画像包含『医疗AI、医学影像、辅助诊断、智慧医院、医院信息化、医疗大模型、医院数据平台、HIS、PACS、电子病历』。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 3,
+          "priorityReason": "业务画像是相关性判断与投标可行性评估的输入。",
+          "hypothesisIds": [
+            "h2"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c16",
+          "text": "解读将本信号定性为『商机』，理由为『信封 kind 为 tender』且『构成潜在投标/合作机会』。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 3,
+          "priorityReason": "解读定性是结论节的起点，但其为解读文本自身复述，证据强度有限。",
+          "hypothesisIds": [],
+          "entityNames": [
+            "北京通用航天医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c17",
+          "text": "解读称『金额与频率异常得分均为 0.000,noveltyAnomaly 得分 0.109,与历史最相似项目相似度 0.891,属该单位既有信息化采购序列的延续,未见负面或异动迹象』。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 4,
+          "priorityReason": "该定性结论依赖模拟样本基线，其成立与否直接决定结论节走向。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [
+            "北京通用航天医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c18",
+          "text": "解读 basisGaps 载明『该采购单位历史金额基线含 9 个模拟样本、新颖性基线含 29 个模拟样本,不代表真实历史证据充分,需先补齐真实历史采购基线』。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 5,
+          "priorityReason": "该缺口直接否定现有基线的证据充分性，卡住结论节并被 h1、h2 依赖。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [
+            "北京通用航天医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c19",
+          "text": "解读 basisGaps 载明『contentSourceNote 说明基于本条记录已有字段生成,未抓取官方正文,未补造金额、参数或中标结果,需先获取官方采购公告正文以核实金额与参数』。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 5,
+          "priorityReason": "该缺口限定全部金额与参数类 claim 的可核实性上限，卡住结论节。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c20",
+          "text": "信封 sourceUrl 载明来源为『https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/630465763/3318/zhaobiao』。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 2,
+          "priorityReason": "来源链接是核实路径，但本身不构成业务事实。",
+          "hypothesisIds": [],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c21",
+          "text": "信封 noveltyHistory 载明最相似项目 projectId 为 R-bf48429c8763915d，dataOrigin 为 real，sourceUrl 为『https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/615640844/3318/zhaobiao』。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "该记载标明最相似项目为真实样本，是新颖性基线中少数非模拟证据。",
+          "hypothesisIds": [
+            "h2"
+          ],
+          "entityNames": [
+            "北京通用航天医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c22",
+          "text": "信封 frequencyHistory 载明窗口为 30 天，recentCount 为 3，historicalWindowAverageCount 为 3.0，historicalWindowsUsed 为 4。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "频率基线的原始取值，支撑频率异常判断。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "entityNames": [
+            "北京通用航天医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c23",
+          "text": "信封 rumor 字段为 null，即本信号未附带任何传闻类线索。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 2,
+          "priorityReason": "该字段取值排除传闻维度，缩小调查范围。",
+          "hypothesisIds": [],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c24",
+          "text": "解读 selectedSeedLabels 载明所选假设种子标签为『真实经营动态』『新方向扩张』『正常大额采购』。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 3,
+          "priorityReason": "种子标签决定假设登记方向，是假设可区分性设计的输入。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        }
+      ],
+      "hypotheses": [
+        {
+          "id": "h1",
+          "label": "正常采购（金额与频率均无异常）",
+          "description": "本次采购金额 98.0 万元低于该单位历史中位数 151.1 万元，频率比值 1.00，检测器金额与频率异常得分均为 0.000，符合该单位常规信息化采购节奏。可区分 claim：c9（金额为中位数 0.65 倍）、c11（频率比值 1.00）——若真实历史基线被补齐后金额或频率出现显著偏离，则该假设被削弱。",
+          "claimIds": [
+            "c4",
+            "c8",
+            "c9",
+            "c11",
+            "c22"
+          ],
+          "op": "AND"
+        },
+        {
+          "id": "h2",
+          "label": "既有信息化采购序列的延续（非新方向扩张）",
+          "description": "本次 LIS 系统信创改造项目与该单位 2026-07-21 发布的『单机医疗设备数据采集信创交互系统项目』相似度 0.891，属同一单位既有医院信息化采购序列的延续，而非新方向扩张。可区分 claim：c12（最相似项目及相似度）、c14（相关性 0.601 仅略高于阈值 0.600）——若官方正文显示标的范围、技术栈或供应商要求与既有序列显著不同，则该假设被削弱。",
+          "claimIds": [
+            "c12",
+            "c14",
+            "c15",
+            "c21"
+          ],
+          "op": "AND"
+        },
+        {
+          "id": "h3",
+          "label": "基线证据不足导致异常判定不可靠",
+          "description": "金额基线含 9 个模拟样本、新颖性基线含 29 个模拟样本，且未抓取官方正文，现有『无异常』结论建立在模拟样本之上，不足以支撑结论。可区分 claim：c10（金额基线含 9 个模拟样本）、c13（新颖性基线含 29 个模拟样本）、c19（未抓取官方正文）——若补齐真实历史采购基线与官方公告正文后异常得分仍为 0，则该假设被削弱。需要补充的证据类型：该采购单位真实历史采购记录（金额、时间、标的）与官方采购公告正文。",
+          "claimIds": [
+            "c7",
+            "c10",
+            "c13",
+            "c18",
+            "c19"
+          ],
+          "op": "AND"
+        }
+      ],
+      "gaps": [
+        {
+          "text": "北京通用航天医院 LIS 系统信创改造项目的官方采购公告正文在哪里，其载明的金额、参数、投标资格与截止时间是什么？",
+          "relatedClaimId": "c7"
+        },
+        {
+          "text": "北京通用航天医院过去 11 条有效金额采购记录中，哪些是真实样本、哪些是模拟样本，真实历史金额中位数是多少？",
+          "relatedClaimId": "c10"
+        },
+        {
+          "text": "北京通用航天医院 36 个历史项目中 29 个模拟样本对应的真实项目是什么，真实新颖性基线如何？",
+          "relatedClaimId": "c13"
+        },
+        {
+          "text": "本次 LIS 系统信创改造项目与 2026-07-21『单机医疗设备数据采集信创交互系统项目』在标的范围、技术栈、预算来源上是否属于同一建设规划？",
+          "relatedClaimId": "c12"
+        },
+        {
+          "text": "本次采购的预算来源与立项审批文件是什么，是否已纳入该单位年度信息化建设规划？",
+          "relatedClaimId": "c17"
+        },
+        {
+          "text": "该采购单位近 30 天 3 次采购分别是什么项目，是否与本次项目存在关联方重叠？",
+          "relatedClaimId": "c11"
+        },
+        {
+          "text": "本项目是否存在已公开的中标结果或中标候选人，中标方是谁？",
+          "relatedClaimId": "c7"
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c1",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_4:E1",
+          "direction": "支持",
+          "quote": "招标信号基础字段:项目编号 R-bab072bbcb24e1c3;",
+          "reason": "该证据原文直接载明项目编号为 R-bab072bbcb24e1c3,与 claim 完全一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 98.0 万元",
+          "reason": "仅涉及金额异常检测,未提及项目编号,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 3 次",
+          "reason": "仅涉及频率异常检测,未提及项目编号。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为",
+          "reason": "仅涉及新颖性检测,未提及项目编号。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.601",
+          "reason": "仅涉及相关性检测,未提及项目编号。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一直接涉及项目编号的证据 E1 逐字载明项目编号 R-bab072bbcb24e1c3,与 claim 一致;其余证据均为检测器评分,与编号无关。但 E1 与各检测器同属 signal_layer 谱系根,独立性有限,最终以代码独立来源规则为准。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c10",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_4:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-bab072bbcb24e1c3;项目名称 [询比采购]北京通用航天医院LIS系统信创改造项目采购公告;采购方 北京通用航天医院;预算金额 980000.0 元;发布日期 2026-09-11;领域 电子病历与临床系统。",
+          "reason": "该证据仅载明项目基础字段,未涉及 amountHistory 或 amountAnomaly 的内容,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E2",
+          "direction": "支持",
+          "quote": "历史基线含 9 个模拟样本,不代表真实历史证据充分。",
+          "reason": "该证据原文逐字包含 claim 所述『历史基线含 9 个模拟样本,不代表真实历史证据充分』,直接支持 claim。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 3 次,已完整观测的 4 个历史窗口平均 3 次,比值 1.00,频率异常得分 0.000。",
+          "reason": "该证据为频率异常检测内容,未涉及 amountHistory 或 amountAnomaly 的表述。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『[询比采购]北京通用航天医院单机医疗设备数据采集信创交互系统项目采购公告』(2026-07-21),相似度 0.891(比较基数 36 个历史项目),新颖性异常得分 0.109。",
+          "reason": "该证据为新颖性检测内容,虽含『历史基线含 29 个模拟样本』但非 amountHistory 的 9 个模拟样本,与 claim 无直接关联。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.601,达到准入阈值 0.600。",
+          "reason": "该证据为相关性检测内容,未涉及 amountHistory 或 amountAnomaly 的表述。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "证据 evt_topkg2_4:E2 原文逐字包含 claim 所述『历史基线含 9 个模拟样本,不代表真实历史证据充分』,直接印证 claim 内容;其余证据与 claim 无关。注意该证据谱系根为 signal_layer,与 claim 所述 amountHistory/amountAnomaly 同源,独立性由代码按规则判定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c11",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_4:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-bab072bbcb24e1c3;项目名称 [询比采购]北京通用航天医院LIS系统信创改造项目采购公告;采购方 北京通用航天医院;预算金额 980000.0 元;发布日期 2026-09-11;领域 电子病历与临床系统。",
+          "reason": "该证据仅给出项目基础字段,未涉及频率异常检测的数值,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 98.0 万元,为该采购单位过去 11 条有效金额中位数(151.1 万元)的 0.65 倍,金额异常得分 0.000。",
+          "reason": "该证据描述的是金额异常检测,与 claim 所述频率异常检测无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E3",
+          "direction": "支持",
+          "quote": "截至当天近 30 天该采购单位采购 3 次,已完整观测的 4 个历史窗口平均 3 次,比值 1.00,频率异常得分 0.000。",
+          "reason": "该证据原文与 claim 所述频率异常解释逐字一致,直接支持 claim。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『[询比采购]北京通用航天医院单机医疗设备数据采集信创交互系统项目采购公告』(2026-07-21),相似度 0.891(比较基数 36 个历史项目),新颖性异常得分 0.109。",
+          "reason": "该证据描述的是新颖性检测,与 claim 所述频率异常检测无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.601,达到准入阈值 0.600。",
+          "reason": "该证据描述的是相关性检测,与 claim 所述频率异常检测无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "证据 evt_topkg2_4:E3 原文与 claim 所述频率异常解释逐字一致,直接印证 claim;其余证据为其他检测器或基础字段,不构成矛盾。注意该证据谱系根为 signal_layer,与 claim 同源,独立性有限。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c12",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_4:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-bab072bbcb24e1c3;项目名称 [询比采购]北京通用航天医院LIS系统信创改造项目采购公告;采购方 北京通用航天医院;预算金额 980000.0 元;发布日期 2026-09-11;领域 电子病历与临床系统。",
+          "reason": "该证据仅给出本项目基础字段,未涉及 noveltyHistory 信封内容,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 98.0 万元,为该采购单位过去 11 条有效金额中位数(151.1 万元)的 0.65 倍,金额异常得分 0.000。",
+          "reason": "金额异常检测与 noveltyHistory 的最相似项目及相似度无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 3 次,已完整观测的 4 个历史窗口平均 3 次,比值 1.00,频率异常得分 0.000。",
+          "reason": "频率异常检测不涉及最相似项目名称、日期、相似度或比较基数。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E4",
+          "direction": "支持",
+          "quote": "该采购单位历史最相似项目为『[询比采购]北京通用航天医院单机医疗设备数据采集信创交互系统项目采购公告』(2026-07-21),相似度 0.891(比较基数 36 个历史项目),新颖性异常得分 0.109。",
+          "reason": "该证据直接载明最相似项目名称、日期 2026-07-21、比较基数 36 个历史项目,与 claim 一致;相似度 0.891 为 claim 中 0.890865683555603 的四舍五入表述,方向为支持。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.601,达到准入阈值 0.600。",
+          "reason": "相关性检测针对业务画像语义相似度,与 noveltyHistory 的最相似项目记录无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一直接相关的证据 evt_topkg2_4:E4 逐项印证了 claim 的最相似项目名称、日期(2026-07-21)、比较基数(36 个历史项目)与相似度(0.891 即 0.890865683555603 的截断/四舍五入),其余证据均不涉及该字段。注意该证据谱系根为 signal_layer,与 claim 来源同根,不构成独立印证,故本意见可能被代码按独立来源规则否决。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c13",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_4:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-bab072bbcb24e1c3;项目名称 [询比采购]北京通用航天医院LIS系统信创改造项目采购公告",
+          "reason": "该证据仅载明项目基础字段,未涉及 noveltyHistory 或 noveltyAnomaly 的内容。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E2",
+          "direction": "无关",
+          "quote": "历史基线含 9 个模拟样本,不代表真实历史证据充分。",
+          "reason": "该证据为金额异常检测,其模拟样本数为 9,与 claim 所述新颖性基线的 29 个模拟样本无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E3",
+          "direction": "无关",
+          "quote": "频率异常得分 0.000。(评分 0.0;历史依据充分)。",
+          "reason": "该证据为频率异常检测,未涉及新颖性基线或模拟样本数量。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E4",
+          "direction": "支持",
+          "quote": "历史基线含 29 个模拟样本,不代表真实历史证据充分。",
+          "reason": "该证据原文同时出现 29 个模拟样本与『不代表真实历史证据充分』的表述,与 claim 所述内容一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E5",
+          "direction": "无关",
+          "quote": "项目与企业业务画像的语义相似度为 0.601,达到准入阈值 0.600。",
+          "reason": "该证据为相关性检测,未涉及新颖性基线或模拟样本数量。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅 evt_topkg2_4:E4 一条证据直接支持 claim,其余证据与 claim 内容无关;支持性证据来源单一,缺乏独立来源印证,故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c14",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_4:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-bab072bbcb24e1c3;项目名称 [询比采购]北京通用航天医院LIS系统信创改造项目采购公告",
+          "reason": "该证据仅列示信号层基础字段,未涉及语义相似度或准入阈值,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 98.0 万元,为该采购单位过去 11 条有效金额中位数(151.1 万元)的 0.65 倍,金额异常得分 0.000",
+          "reason": "该证据讨论金额异常检测,与语义相似度 0.601 及阈值 0.600 无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 3 次,已完整观测的 4 个历史窗口平均 3 次,比值 1.00,频率异常得分 0.000",
+          "reason": "该证据讨论频率异常检测,与 claim 所述相似度数值无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『[询比采购]北京通用航天医院单机医疗设备数据采集信创交互系统项目采购公告』(2026-07-21),相似度 0.891(比较基数 36 个历史项目),新颖性异常得分 0.109",
+          "reason": "该证据给出的是历史项目相似度 0.891,与 claim 所述 0.601 及准入阈值 0.600 不是同一指标,不改变判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E5",
+          "direction": "支持",
+          "quote": "项目与企业业务画像的语义相似度为 0.601,达到准入阈值 0.600",
+          "reason": "该证据原文与 claim 表述一致,直接支持 claim 所述内容。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "证据 evt_topkg2_4:E5 原文明确记载『项目与企业业务画像的语义相似度为 0.601,达到准入阈值 0.600』,与 claim 表述一致;其余证据与语义相似度无关。但该证据谱系根为 signal_layer,与 claim 同源,不构成独立来源印证,最终判决由代码按独立来源规则作出。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c15",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_4:E1",
+          "direction": "无关",
+          "quote": "领域 电子病历与临床系统",
+          "reason": "该证据仅载明单个采购项目的编号、名称、采购方、金额、发布日期与领域，未载明任何 companyProfile 信封内容，无法证明或否证 claim 所述业务画像字段集合。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测",
+          "reason": "该证据为金额异常检测结果，与 companyProfile 是否载明所列业务画像字段无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测",
+          "reason": "该证据为频率异常检测结果，不涉及 companyProfile 内容。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测",
+          "reason": "该证据为新颖性检测结果，不涉及 companyProfile 内容。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E5",
+          "direction": "无关",
+          "quote": "项目与企业业务画像的语义相似度为 0.601",
+          "reason": "该证据仅给出项目与企业业务画像的语义相似度评分，未逐字载明业务画像包含哪些字段，不能证明 claim 所列字段集合存在。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内五条证据均来自 signal_layer 同一谱系根，且内容为采购信号基础字段与检测器评分，均未载明 companyProfile 信封中业务画像的具体字段清单，claim 所述字段集合无任何证据直接支撑，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c16",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_4:E1",
+          "direction": "支持",
+          "quote": "招标信号基础字段:项目编号 R-bab072bbcb24e1c3;项目名称 [询比采购]北京通用航天医院LIS系统信创改造项目采购公告",
+          "reason": "该证据显示信封 kind 为招标/采购公告(tender),与 claim 所述『信封 kind 为 tender』一致,使该定性更可能为真。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 98.0 万元,为该采购单位过去 11 条有效金额中位数(151.1 万元)的 0.65 倍,金额异常得分 0.000",
+          "reason": "金额异常检测结果不涉及信封 kind 或商机定性,不改变判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 3 次,已完整观测的 4 个历史窗口平均 3 次,比值 1.00,频率异常得分 0.000",
+          "reason": "频率异常检测结果与信封 kind 及商机定性无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『[询比采购]北京通用航天医院单机医疗设备数据采集信创交互系统项目采购公告』(2026-07-21),相似度 0.891",
+          "reason": "新颖性检测结果不涉及信封 kind 或商机定性。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E5",
+          "direction": "支持",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.601,达到准入阈值 0.600",
+          "reason": "相关性达到准入阈值,支持『构成潜在投标/合作机会』的判断。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 显示信封 kind 为招标采购公告(tender),E5 显示相关性达到准入阈值,支持『构成潜在投标/合作机会』;其余检测器证据与定性无关。综合支持该 claim。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c17",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_4:E1",
+          "direction": "支持",
+          "quote": "项目名称 [询比采购]北京通用航天医院LIS系统信创改造项目采购公告;采购方 北京通用航天医院;预算金额 980000.0 元",
+          "reason": "确认项目存在、采购方与金额,为 claim 所述解读提供基础事实。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E2",
+          "direction": "支持",
+          "quote": "金额异常得分 0.000",
+          "reason": "直接印证 claim 中『金额异常得分均为 0.000』。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E3",
+          "direction": "支持",
+          "quote": "频率异常得分 0.000",
+          "reason": "直接印证 claim 中『频率异常得分均为 0.000』。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E4",
+          "direction": "支持",
+          "quote": "相似度 0.891(比较基数 36 个历史项目),新颖性异常得分 0.109",
+          "reason": "直接印证 claim 中 noveltyAnomaly 0.109 与相似度 0.891。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E5",
+          "direction": "无关",
+          "quote": "项目与企业业务画像的语义相似度为 0.601,达到准入阈值 0.600",
+          "reason": "相关性得分不在 claim 引述的指标之列,不改变判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "各检测器数值与 claim 引述一致,但全部证据同根于 signal_layer,不构成独立来源印证;且『属既有信息化采购序列的延续,未见负面或异动迹象』为解读性结论,证据仅显示各异常得分低,未直接证明序列延续性,故仅能待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c18",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_4:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-bab072bbcb24e1c3;项目名称 [询比采购]北京通用航天医院LIS系统信创改造项目采购公告;采购方 北京通用航天医院;预算金额 980000.0 元;发布日期 2026-09-11;领域 电子病历与临床系统。",
+          "reason": "该证据仅载明项目基础字段,未涉及 basisGaps 或模拟样本基线内容。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E2",
+          "direction": "支持",
+          "quote": "历史基线含 9 个模拟样本,不代表真实历史证据充分。",
+          "reason": "逐字包含 claim 所述『9 个模拟样本』与『不代表真实历史证据充分』表述。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 3 次,已完整观测的 4 个历史窗口平均 3 次,比值 1.00,频率异常得分 0.000。",
+          "reason": "该证据为频率异常检测,未提及模拟样本基线或 basisGaps。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E4",
+          "direction": "支持",
+          "quote": "历史基线含 29 个模拟样本,不代表真实历史证据充分。",
+          "reason": "逐字包含 claim 所述『29 个模拟样本』与『不代表真实历史证据充分』表述。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.601,达到准入阈值 0.600。",
+          "reason": "该证据为相关性检测,未涉及模拟样本基线或 basisGaps。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E2 与 E4 逐字载明『历史基线含 9 个模拟样本』与『历史基线含 29 个模拟样本,不代表真实历史证据充分』,与 claim 所述 basisGaps 内容一致;但两证据同根(signal_layer),不构成独立印证,最终由代码按独立来源规则裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c19",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_4:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-bab072bbcb24e1c3;项目名称 [询比采购]北京通用航天医院LIS系统信创改造项目采购公告;采购方 北京通用航天医院;预算金额 980000.0 元;发布日期 2026-09-11;领域 电子病历与临床系统。",
+          "reason": "该证据仅载明信号层基础字段,未涉及 basisGaps 或 contentSourceNote 的任何内容,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 98.0 万元,为该采购单位过去 11 条有效金额中位数(151.1 万元)的 0.65 倍,金额异常得分 0.000。",
+          "reason": "金额异常检测结果与 basisGaps 是否载明 contentSourceNote 说明无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 3 次,已完整观测的 4 个历史窗口平均 3 次,比值 1.00,频率异常得分 0.000。",
+          "reason": "频率异常检测结果与 claim 所述 basisGaps 内容无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『[询比采购]北京通用航天医院单机医疗设备数据采集信创交互系统项目采购公告』(2026-07-21),相似度 0.891(比较基数 36 个历史项目),新颖性异常得分 0.109。",
+          "reason": "新颖性检测结果不涉及 basisGaps 或 contentSourceNote 说明。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.601,达到准入阈值 0.600。",
+          "reason": "相关性检测结果与 claim 所述 basisGaps 内容无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内五条证据均为信号层基础字段与检测器评分,无一条涉及 basisGaps 或 contentSourceNote 的原文内容,无法证实或推翻 claim 所述解读,故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c2",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_4:E1",
+          "direction": "支持",
+          "quote": "项目名称 [询比采购]北京通用航天医院LIS系统信创改造项目采购公告",
+          "reason": "信封基础字段直接载明项目名称与 claim 完全一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E2",
+          "direction": "支持",
+          "quote": "的采购项目『[询比采购]北京通用航天医院LIS系统信创改造项目采购公告』触发金额异常检测",
+          "reason": "检测器引用同一项目名称,间接印证信封载明的名称。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E3",
+          "direction": "支持",
+          "quote": "的采购项目『[询比采购]北京通用航天医院LIS系统信创改造项目采购公告』触发频率异常检测",
+          "reason": "检测器引用同一项目名称,间接印证信封载明的名称。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E4",
+          "direction": "支持",
+          "quote": "的采购项目『[询比采购]北京通用航天医院LIS系统信创改造项目采购公告』触发新颖性检测",
+          "reason": "检测器引用同一项目名称,间接印证信封载明的名称。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E5",
+          "direction": "支持",
+          "quote": "的采购项目『[询比采购]北京通用航天医院LIS系统信创改造项目采购公告』触发相关性检测",
+          "reason": "检测器引用同一项目名称,间接印证信封载明的名称。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "全部证据均逐字载明同一项目名称,与 claim 文本一致;但所有证据谱系根均为 signal_layer,属同一上游,不构成独立来源印证,故该意见可能被代码按独立来源规则否决。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c20",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_4:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-bab072bbcb24e1c3;项目名称 [询比采购]北京通用航天医院LIS系统信创改造项目采购公告;采购方 北京通用航天医院;预算金额 980000.0 元;发布日期 2026-09-11;领域 电子病历与临床系统。",
+          "reason": "该证据仅描述信号层基础字段,未出现任何 sourceUrl 或来源网址,不能证明或否证 claim 所述信封 sourceUrl 内容。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E2",
+          "direction": "无关",
+          "quote": "北京通用航天医院 的采购项目『[询比采购]北京通用航天医院LIS系统信创改造项目采购公告』触发金额异常检测:本项目金额 98.0 万元,为该采购单位过去 11 条有效金额中位数(151.1 万元)的 0.65 倍,金额异常得分 0.000。",
+          "reason": "该证据讨论金额异常检测,与信封 sourceUrl 是否载明该来源网址无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E3",
+          "direction": "无关",
+          "quote": "北京通用航天医院 的采购项目『[询比采购]北京通用航天医院LIS系统信创改造项目采购公告』触发频率异常检测:截至当天近 30 天该采购单位采购 3 次,已完整观测的 4 个历史窗口平均 3 次,比值 1.00,频率异常得分 0.000。",
+          "reason": "该证据讨论频率异常检测,不涉及 sourceUrl 字段内容。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E4",
+          "direction": "无关",
+          "quote": "北京通用航天医院 的采购项目『[询比采购]北京通用航天医院LIS系统信创改造项目采购公告』触发新颖性检测:该采购单位历史最相似项目为『[询比采购]北京通用航天医院单机医疗设备数据采集信创交互系统项目采购公告』(2026-07-21),相似度 0.891(比较基数 36 个历史项目),新颖性异常得分 0.109。",
+          "reason": "该证据讨论新颖性检测,与信封 sourceUrl 载明内容无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E5",
+          "direction": "无关",
+          "quote": "北京通用航天医院 的采购项目『[询比采购]北京通用航天医院LIS系统信创改造项目采购公告』触发相关性检测:项目与企业业务画像的语义相似度为 0.601,达到准入阈值 0.600。",
+          "reason": "该证据讨论相关性检测,不涉及 sourceUrl 字段,无法印证或否证 claim。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内五条证据均为信号层检测记录,无一条包含信封 sourceUrl 字段或其载明来源网址,claim 所述内容缺乏任何证据支撑,故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c21",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_4:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-bab072bbcb24e1c3;项目名称 [询比采购]北京通用航天医院LIS系统信创改造项目采购公告",
+          "reason": "该证据给出的是项目编号 R-bab072bbcb24e1c3 等基础字段，未涉及信封 noveltyHistory 的 projectId、dataOrigin 或 sourceUrl，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 98.0 万元,为该采购单位过去 11 条有效金额中位数(151.1 万元)的 0.65 倍,金额异常得分 0.000",
+          "reason": "金额异常检测内容与信封 noveltyHistory 字段无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 3 次,已完整观测的 4 个历史窗口平均 3 次,比值 1.00,频率异常得分 0.000",
+          "reason": "频率异常检测内容与信封 noveltyHistory 字段无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E4",
+          "direction": "矛盾",
+          "quote": "该采购单位历史最相似项目为『[询比采购]北京通用航天医院单机医疗设备数据采集信创交互系统项目采购公告』(2026-07-21),相似度 0.891(比较基数 36 个历史项目),新颖性异常得分 0.109",
+          "reason": "该证据描述新颖性检测的最相似项目，但未给出 projectId 为 R-bf48429c8763915d，也未提及 dataOrigin 为 real 或该 sourceUrl，与 claim 所述信封 noveltyHistory 内容不符。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.601,达到准入阈值 0.600",
+          "reason": "相关性检测内容与信封 noveltyHistory 字段无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内五条证据均为信号层检测输出，未出现 claim 所述信封 noveltyHistory 中的 projectId R-bf48429c8763915d、dataOrigin real 及 sourceUrl，其中 E4 虽涉及最相似项目但未给出该 projectId，无法印证 claim，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c22",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_4:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-bab072bbcb24e1c3;项目名称 [询比采购]北京通用航天医院LIS系统信创改造项目采购公告;采购方 北京通用航天医院;预算金额 980000.0 元;发布日期 2026-09-11;领域 电子病历与临床系统。",
+          "reason": "该证据仅列示项目基础字段,未涉及 frequencyHistory 信封的窗口、计数等字段。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 98.0 万元,为该采购单位过去 11 条有效金额中位数(151.1 万元)的 0.65 倍,金额异常得分 0.000。",
+          "reason": "该证据为金额异常检测,与频率信封字段无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E3",
+          "direction": "支持",
+          "quote": "截至当天近 30 天该采购单位采购 3 次,已完整观测的 4 个历史窗口平均 3 次,比值 1.00,频率异常得分 0.000。",
+          "reason": "该证据载明近 30 天 3 次、4 个历史窗口平均 3 次,与 claim 所述窗口 30 天、recentCount 3、historicalWindowAverageCount 3.0、historicalWindowsUsed 4 一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『[询比采购]北京通用航天医院单机医疗设备数据采集信创交互系统项目采购公告』(2026-07-21),相似度 0.891(比较基数 36 个历史项目),新颖性异常得分 0.109。",
+          "reason": "该证据为新颖性检测,不涉及 frequencyHistory 字段。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.601,达到准入阈值 0.600。",
+          "reason": "该证据为相关性检测,与频率信封字段无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一涉及频率信封的证据 evt_topkg2_4:E3 逐项吻合 claim 所述窗口 30 天、recentCount 3、historicalWindowAverageCount 3.0、historicalWindowsUsed 4;其余证据与频率字段无关。但该证据谱系根均为 signal_layer,独立来源有限,最终以代码独立来源规则为准。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c23",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_4:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-bab072bbcb24e1c3;项目名称 [询比采购]北京通用航天医院LIS系统信创改造项目采购公告;采购方 北京通用航天医院;预算金额 980000.0 元;发布日期 2026-09-11;领域 电子病历与临床系统。",
+          "reason": "该证据仅列出信封基础字段(项目编号、名称、采购方、预算、发布日期、领域),未提及 rumor 字段,无法证明 rumor 是否为 null。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 98.0 万元,为该采购单位过去 11 条有效金额中位数(151.1 万元)的 0.65 倍,金额异常得分 0.000。",
+          "reason": "该证据描述金额异常检测结果,与 rumor 字段是否存在无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 3 次,已完整观测的 4 个历史窗口平均 3 次,比值 1.00,频率异常得分 0.000。",
+          "reason": "该证据描述频率异常检测结果,与 rumor 字段是否存在无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『[询比采购]北京通用航天医院单机医疗设备数据采集信创交互系统项目采购公告』(2026-07-21),相似度 0.891(比较基数 36 个历史项目),新颖性异常得分 0.109。",
+          "reason": "该证据描述新颖性检测结果,与 rumor 字段是否存在无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.601,达到准入阈值 0.600。",
+          "reason": "该证据描述相关性检测结果,与 rumor 字段是否存在无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内五条证据均为信号层基础字段与检测器输出,均未涉及信封 rumor 字段的内容或取值,无法证实或否证 claim 所述 rumor 为 null,故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c24",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_4:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-bab072bbcb24e1c3;项目名称 [询比采购]北京通用航天医院LIS系统信创改造项目采购公告;采购方 北京通用航天医院;预算金额 980000.0 元;发布日期 2026-09-11;领域 电子病历与临床系统。",
+          "reason": "该证据仅载明信号层基础字段(项目编号、名称、采购方、预算、发布日期、领域),未出现 selectedSeedLabels 或任何种子标签内容,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 98.0 万元,为该采购单位过去 11 条有效金额中位数(151.1 万元)的 0.65 倍,金额异常得分 0.000。",
+          "reason": "该证据为金额异常检测结果,未涉及所选假设种子标签,与 claim 无关联。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 3 次,已完整观测的 4 个历史窗口平均 3 次,比值 1.00,频率异常得分 0.000。",
+          "reason": "该证据为频率异常检测结果,未提及 selectedSeedLabels 或种子标签,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『[询比采购]北京通用航天医院单机医疗设备数据采集信创交互系统项目采购公告』(2026-07-21),相似度 0.891(比较基数 36 个历史项目),新颖性异常得分 0.109。",
+          "reason": "该证据为新颖性检测结果,未载明所选假设种子标签,与 claim 无关联。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.601,达到准入阈值 0.600。",
+          "reason": "该证据为相关性检测结果,未出现 selectedSeedLabels 或『真实经营动态』『新方向扩张』『正常大额采购』等标签,不改变 claim 判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内 5 条证据均为信号层基础字段与检测器评分,无一条载明 selectedSeedLabels 或所选假设种子标签的具体内容,claim 所述标签无法由现有证据印证,亦无证据反驳,故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c3",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_4:E1",
+          "direction": "支持",
+          "quote": "采购方 北京通用航天医院",
+          "reason": "信封基础字段直接载明采购方为北京通用航天医院，与 claim 一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E2",
+          "direction": "无关",
+          "quote": "北京通用航天医院 的采购项目",
+          "reason": "金额异常检测仅涉及金额基线，不改变对采购方字段的判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E3",
+          "direction": "无关",
+          "quote": "北京通用航天医院 的采购项目",
+          "reason": "频率异常检测仅涉及采购频次，不改变对采购方字段的判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E4",
+          "direction": "无关",
+          "quote": "北京通用航天医院 的采购项目",
+          "reason": "新颖性检测仅涉及历史相似度，不改变对采购方字段的判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E5",
+          "direction": "无关",
+          "quote": "北京通用航天医院 的采购项目",
+          "reason": "相关性检测仅涉及业务画像语义相似度，不改变对采购方字段的判断。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 信封基础字段逐字载明采购方为北京通用航天医院，直接支持 claim；其余证据均为检测器评分，与采购方字段无直接关联。但需注意全部证据同根于 signal_layer，不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c4",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_4:E1",
+          "direction": "支持",
+          "quote": "预算金额 980000.0 元",
+          "reason": "信封基础字段直接载明预算金额 980000.0 元，与 claim 所述金额一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E2",
+          "direction": "支持",
+          "quote": "本项目金额 98.0 万元",
+          "reason": "金额异常检测器复述本项目金额为 98.0 万元，即 980000.0 元，与 claim 一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测",
+          "reason": "该证据只涉及采购频率，不涉及项目金额。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测",
+          "reason": "该证据只涉及项目新颖性/相似度，不涉及项目金额。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E5",
+          "direction": "无关",
+          "quote": "项目与企业业务画像的语义相似度为 0.601",
+          "reason": "该证据只涉及业务相关性评分，不涉及项目金额。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 信封基础字段与 E2 金额检测器均载明本项目金额为 980000.0 元（98.0 万元），方向一致；但两者谱系根同为 signal_layer，属同一上游，不构成独立来源印证，故仅为意见。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c5",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_4:E1",
+          "direction": "支持",
+          "quote": "发布日期 2026-09-11",
+          "reason": "信封基础字段直接载明发布日期为 2026-09-11，与 claim 一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测",
+          "reason": "仅涉及金额异常评分，不涉及发布日期。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测",
+          "reason": "仅涉及采购频率异常，不涉及发布日期。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测",
+          "reason": "仅涉及新颖性相似度，不涉及发布日期。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测",
+          "reason": "仅涉及业务画像相关性，不涉及发布日期。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一直接载明发布日期的证据 evt_topkg2_4:E1 与 claim 完全一致，其余证据均不涉及该字段；但全部证据同根（signal_layer），不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c6",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_4:E1",
+          "direction": "支持",
+          "quote": "领域 电子病历与临床系统。摘要:[询比采购]北京通用航天医院LIS系统信创改造项目采购公告；采购单位：北京通用航天医院；领域：电子病历与临床系统",
+          "reason": "信封基础字段直接载明领域为电子病历与临床系统，且摘要原文与 claim 所述内容一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 98.0 万元",
+          "reason": "仅涉及金额异常评分，不改变信封领域与摘要字段的判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 3 次",
+          "reason": "仅涉及采购频率，与信封领域及摘要内容无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为",
+          "reason": "仅涉及新颖性相似度，不改变信封字段判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.601",
+          "reason": "仅涉及业务画像相关性评分，与信封领域及摘要字段无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 信封基础字段逐字载明领域为电子病历与临床系统，摘要内容与 claim 完全一致；其余证据均为检测器评分，不改变该字段判断。但所有证据同根于 signal_layer，不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c7",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_4:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-bab072bbcb24e1c3;项目名称 [询比采购]北京通用航天医院LIS系统信创改造项目采购公告;采购方 北京通用航天医院;预算金额 980000.0 元;发布日期 2026-09-11;领域 电子病历与临床系统。",
+          "reason": "该证据仅列示信号层基础字段,未涉及信封 contentSourceNote 的内容,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E2",
+          "direction": "无关",
+          "quote": "北京通用航天医院 的采购项目『[询比采购]北京通用航天医院LIS系统信创改造项目采购公告』触发金额异常检测:本项目金额 98.0 万元,为该采购单位过去 11 条有效金额中位数(151.1 万元)的 0.65 倍,金额异常得分 0.000。",
+          "reason": "该证据讨论金额异常检测,与信封 contentSourceNote 是否载明该表述无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E3",
+          "direction": "无关",
+          "quote": "北京通用航天医院 的采购项目『[询比采购]北京通用航天医院LIS系统信创改造项目采购公告』触发频率异常检测:截至当天近 30 天该采购单位采购 3 次,已完整观测的 4 个历史窗口平均 3 次,比值 1.00,频率异常得分 0.000。",
+          "reason": "该证据讨论频率异常检测,与 claim 所述信封字段内容无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E4",
+          "direction": "无关",
+          "quote": "北京通用航天医院 的采购项目『[询比采购]北京通用航天医院LIS系统信创改造项目采购公告』触发新颖性检测:该采购单位历史最相似项目为『[询比采购]北京通用航天医院单机医疗设备数据采集信创交互系统项目采购公告』(2026-07-21),相似度 0.891(比较基数 36 个历史项目),新颖性异常得分 0.109。",
+          "reason": "该证据讨论新颖性检测,未提及信封 contentSourceNote,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E5",
+          "direction": "无关",
+          "quote": "北京通用航天医院 的采购项目『[询比采购]北京通用航天医院LIS系统信创改造项目采购公告』触发相关性检测:项目与企业业务画像的语义相似度为 0.601,达到准入阈值 0.600。",
+          "reason": "该证据讨论相关性检测,与信封 contentSourceNote 的表述无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内五条证据均为信号层基础字段与检测器输出,均未包含或引用信封 contentSourceNote 的原文,无法证实或否证 claim 所述字段内容,故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c8",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_4:E1",
+          "direction": "无关",
+          "quote": "预算金额 980000.0 元",
+          "reason": "该证据仅给出预算金额 980000.0 元，未载明 amountHistory 中位数或倍数关系，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E2",
+          "direction": "支持",
+          "quote": "本项目金额 98.0 万元,为该采购单位过去 11 条有效金额中位数(151.1 万元)的 0.65 倍",
+          "reason": "该证据直接载明过去 11 条有效金额中位数 151.1 万元及本项目金额为其 0.65 倍，与 claim 的中位数与倍数表述一致（claim 给出更精确数值）。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 3 次",
+          "reason": "该证据涉及频率异常检测，与金额中位数及倍数无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为",
+          "reason": "该证据涉及新颖性检测，与金额中位数及倍数无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E5",
+          "direction": "无关",
+          "quote": "项目与企业业务画像的语义相似度为 0.601",
+          "reason": "该证据涉及相关性检测，与金额中位数及倍数无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E2 直接载明过去 11 条有效金额中位数 151.1 万元及本项目金额为其 0.65 倍，与 claim 数值一致；其余证据与金额中位数及倍数无关。但 E2 自述历史基线含 9 个模拟样本，且全部证据同根于 signal_layer，不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c9",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_4:E1",
+          "direction": "支持",
+          "quote": "预算金额 980000.0 元",
+          "reason": "该证据给出预算金额 980000.0 元,与 claim 中『本项目金额 98.0 万元』一致,间接支持 claim 所述金额部分。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E2",
+          "direction": "支持",
+          "quote": "本项目金额 98.0 万元,为该采购单位过去 11 条有效金额中位数(151.1 万元)的 0.65 倍,金额异常得分 0.000",
+          "reason": "该证据原文逐字包含 claim 所引述的完整表述,直接支持 claim。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 3 次",
+          "reason": "该证据讨论频率异常检测,与 claim 关于金额异常信封内容的断言无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为",
+          "reason": "该证据讨论新颖性检测,不涉及金额异常信封内容。"
+        },
+        {
+          "evidenceId": "evt_topkg2_4:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.601",
+          "reason": "该证据讨论相关性检测,与 claim 的金额异常表述无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "证据 evt_topkg2_4:E2 原文逐字包含 claim 所引述的金额异常信封表述,evt_topkg2_4:E1 的预算金额 980000.0 元与之吻合;其余证据与 claim 无关。claim 所述信封内容得到直接印证。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 1,
+      "mainTarget": "c19",
+      "action": "explore",
+      "gapChain": [
+        {
+          "gap": "缺少官方采购公告正文，无法核实本项目金额（98.0 万元）与标的参数是否与信封字段一致",
+          "acceptance": "需页面正文级证据：官方采购公告正文中可逐字读到项目名称、采购单位、预算/最高限价金额与标的范围描述",
+          "failover": "若正文页不可达或需登录，改查同源镜像/转载页正文，仍不可得则降级为仅核实来源页元数据并标注正文缺失"
+        },
+        {
+          "gap": "缺少该采购单位真实历史采购记录（金额、时间、标的），无法验证『金额为中位数 0.65 倍、频率比值 1.00』是否在真实基线下仍成立",
+          "acceptance": "需权威登记源记录：该采购单位至少 3 条真实（dataOrigin 为 real）历史采购公告，含金额与发布日期字段",
+          "failover": "若权威登记源不可得，改以同平台该单位历史公告列表页为替代证据源，并明确标注其非权威登记源"
+        },
+        {
+          "gap": "缺少最相似项目 R-bf48429c8763915d 的正文，无法判断本次标的范围与技术栈是否与既有序列一致",
+          "acceptance": "需页面正文级证据：该最相似项目公告正文中的标的范围、技术栈或供应商资格要求描述",
+          "failover": "若该历史项目正文已下线，改以本次公告正文与既有序列其他项目的字段级比对替代，并标注比对基数不足"
+        }
+      ],
+      "searchHints": [
+        "北京通用航天医院 LIS系统信创改造项目 采购公告",
+        "北京通用航天医院 采购 历史公告 金额",
+        "北京通用航天医院 单机医疗设备数据采集信创交互系统项目"
+      ],
+      "sideTargets": [
+        "c7",
+        "c20",
+        "c21"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 2,
+      "mainTarget": "c19",
+      "action": "explore",
+      "gapChain": [
+        {
+          "gap": "c19 声称解读 basisGaps 载明『contentSourceNote 说明基于本条记录已有字段生成,未抓取官方正文,未补造金额、参数或中标结果,需先获取官方采购公告正文以核实金额与参数』——需确认该表述是否确为解读 basisGaps 原文，以及其指向的官方正文缺口是否真实存在。",
+          "acceptance": "需解读 basisGaps 字段级原文证据（逐字含『未抓取官方正文』与『需先获取官方采购公告正文以核实金额与参数』），或信封 contentSourceNote 字段级原文（对应 c7）。",
+          "failover": "若解读 basisGaps 无此原文，则 c19 证伪，转查 c7（contentSourceNote 原文）以确认缺口表述的真实归属。"
+        },
+        {
+          "gap": "在确认缺口表述后，需锚定官方采购公告正文的可达来源：c20 载明 sourceUrl 为『https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/630465763/3318/zhaobiao』，需点进该详情页确认是否存在官方公告正文（金额 980000.0 元、参数、采购方式）。",
+          "acceptance": "需页面正文级证据：详情页正文中可逐字读到本项目金额、采购方式或技术参数条目；若仅有字段摘要而无正文，则记为『未抓取官方正文』成立。",
+          "failover": "若该 URL 不可达或仅返回字段摘要，则改查权威登记源（如政府采购/招标公告登记平台）中项目编号 R-bab072bbcb24e1c3 或项目名『[询比采购]北京通用航天医院LIS系统信创改造项目采购公告』的公告记录。"
+        },
+        {
+          "gap": "若取得官方正文，需比对其金额与参数是否与信封字段（c4 金额 980000.0 元、c6 领域『电子病历与临床系统』）一致，以判定『未补造金额、参数或中标结果』是否成立。",
+          "acceptance": "需官方正文级证据中金额与参数条目与信封字段逐项对照结果（一致/不一致/正文缺失）。",
+          "failover": "若官方正文不可得，则本环降级为『缺口确认』，仅保留 c19/c7 的字段级证实，不再追金额参数比对。"
+        }
+      ],
+      "searchHints": [
+        "北京通用航天医院 LIS系统信创改造项目 采购公告",
+        "R-bab072bbcb24e1c3",
+        "北京通用航天医院 询比采购 电子病历与临床系统"
+      ],
+      "sideTargets": [
+        "c7",
+        "c20"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 3,
+      "mainTarget": "c19",
+      "action": "explore",
+      "gapChain": [
+        {
+          "gap": "c19 声称解读 basisGaps 载明『contentSourceNote 说明基于本条记录已有字段生成,未抓取官方正文,未补造金额、参数或中标结果,需先获取官方采购公告正文以核实金额与参数』——需锚定官方采购公告正文的可访问入口（sourceUrl 指向的详情页是否可打开、是否含正文）。",
+          "acceptance": "需页面正文级证据：打开 c20 所载 sourceUrl（https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/630465763/3318/zhaobiao）后，页面正文中可逐字读到项目名称、采购单位、金额或参数等公告正文内容，而非仅有字段摘要。",
+          "failover": "若详情页不可访问或仅返回字段摘要，则改查该采购单位在权威登记源（如政府采购网/公共资源交易平台）的公告正文，或转向 c21 所载最相似项目 sourceUrl 做同源比对。"
+        },
+        {
+          "gap": "在锚定正文入口后，需核实官方正文中的金额与参数是否与信封字段（c4 金额 980000.0 元、c6 领域与摘要）一致，以判定 c19『未抓取官方正文』这一缺口是否可被补齐。",
+          "acceptance": "需权威登记源记录或页面正文级证据：正文中金额、标的范围、技术参数与信封字段逐项可比对，且能明确标注一致或不一致。",
+          "failover": "若正文缺失金额或参数，则记录为『正文未载明』，并将该缺口回填至 c19 的验收结论，不再重复深查同一 URL。"
+        }
+      ],
+      "searchHints": [
+        "北京通用航天医院 LIS系统信创改造项目 采购公告",
+        "北京通用航天医院 询比采购 公告 正文",
+        "630465763 招标 详情"
+      ],
+      "sideTargets": [
+        "c20",
+        "c21"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 主体与事件背景\n\n本信号对应信封标题为『[询比采购]北京通用航天医院LIS系统信创改造项目采购公告』[1][2][3][4][5]。信封载明采购方为北京通用航天医院[1][2][3][4][5]，项目编号为 R-bab072bbcb24e1c3[1][2][3][4][5]，项目名称为『[询比采购]北京通用航天医院LIS系统信创改造项目采购公告』[1][2][3][4][5]。信封同时载明本项目领域为电子病历与临床系统，内容摘要为『[询比采购]北京通用航天医院LIS系统信创改造项目采购公告；采购单位：北京通用航天医院；领域：电子病历与临床系统』[1][2][3][4][5]。\n\n关于企业业务画像，信封 companyProfile 载明企业业务画像包含『医疗AI、医学影像、辅助诊断、智慧医院、医院信息化、医疗大模型、医院数据平台、HIS、PACS、电子病历』[1][2][3][4][5]，该条目前尚未核实。\n\n关于传闻类线索，信封 rumor 字段为 null，即本信号未附带任何传闻类线索[1][2][3][4][5]，该条目前尚未核实。\n\n本节所依据的台账另列有三项待研判假设：其一为『正常采购（金额与频率均无异常）』，其二为『既有信息化采购序列的延续（非新方向扩张）』，其三为『基线证据不足导致异常判定不可靠』；上述假设的可区分 claim 与证据状态详见相应章节，本节不作展开。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 动态时间线与关联方\n\n本项目发布日期为 2026-09-11 [1][2][3][4][5]。\n\n在频率维度上，信封 frequencyAnomaly 解释称『截至当天近 30 天该采购单位采购 3 次，已完整观测的 4 个历史窗口平均 3 次，比值 1.00，频率异常得分 0.000』[3][1][2][4][5]。与之对应，信封 frequencyHistory 载明窗口为 30 天，recentCount 为 3，historicalWindowAverageCount 为 3.0，historicalWindowsUsed 为 4 [3][1][2][4][5]。\n\n在关联方维度上，信封 noveltyHistory 载明该采购单位历史最相似项目为『[询比采购]北京通用航天医院单机医疗设备数据采集信创交互系统项目采购公告』(2026-07-21)，相似度 0.890865683555603，比较基数 36 个历史项目 [4][1][2][3][5]。\n\n关于该最相似项目的标识与来源，目前尚未核实：信封 noveltyHistory 载明最相似项目 projectId 为 R-bf48429c8763915d，dataOrigin 为 real，sourceUrl 为『https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/615640844/3318/zhaobiao』[4][1][2][3][5]。\n\n关于本项目来源地址，目前尚未核实：信封 sourceUrl 载明来源为『https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/630465763/3318/zhaobiao』[1][2][3][4][5]。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 核心事实\n\n本项目为询比采购，标的为北京通用航天医院LIS系统信创改造项目。信封载明本项目金额为 980000.0 元 [1][2][3][4][5]。\n\n金额基线方面，信封 amountHistory 载明该采购单位过去 11 条有效金额中位数为 1511391.84 元，本项目金额为其 0.6484089526379869 倍 [2][1][3][4][5]；amountAnomaly 解释称『本项目金额 98.0 万元,为该采购单位过去 11 条有效金额中位数(151.1 万元)的 0.65 倍,金额异常得分 0.000』 [1][2][3][4][5]。同时，amountHistory 载明历史基线含 9 个模拟样本，amountAnomaly 解释称『历史基线含 9 个模拟样本,不代表真实历史证据充分』 [2][1][3][4][5]。\n\n新颖性基线方面，信封 noveltyHistory 载明新颖性基线含 29 个模拟样本，noveltyAnomaly 解释称『历史基线含 29 个模拟样本,不代表真实历史证据充分』 [4][1][2][3][5]。\n\n相关性方面，信封 relevance 解释称『项目与企业业务画像的语义相似度为 0.601,达到准入阈值 0.600』 [5][1][2][3][4]。\n\n关于内容来源，信封 contentSourceNote 载明『基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果。』该项目前尚未核实 [1][2][3][4][5]。\n\n综上，本项目金额、金额异常得分、相关性得分及基线样本构成均有信封字段记载；其中基线含模拟样本、未抓取官方正文等情形，对现有『无异常』判定的支撑程度尚待进一步核实。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 结论\n\n本信号对应信封为「[询比采购]北京通用航天医院LIS系统信创改造项目采购公告」。解读将本信号定性为「商机」，理由为「信封 kind 为 tender」且「构成潜在投标/合作机会」[1][5][2][3][4]。\n\n解读称「金额与频率异常得分均为 0.000，noveltyAnomaly 得分 0.109，与历史最相似项目相似度 0.891，属该单位既有信息化采购序列的延续，未见负面或异动迹象」[1][2][3][4][5]。\n\n解读 basisGaps 载明「该采购单位历史金额基线含 9 个模拟样本、新颖性基线含 29 个模拟样本，不代表真实历史证据充分，需先补齐真实历史采购基线」[2][4][1][3][5]。\n\n关于 contentSourceNote 的说明，目前尚未核实。解读 basisGaps 载明「contentSourceNote 说明基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果，需先获取官方采购公告正文以核实金额与参数」[1][2][3][4][5]，该表述有待进一步核实。\n\n关于所选假设种子标签，目前尚未核实。解读 selectedSeedLabels 载明所选假设种子标签为「真实经营动态」「新方向扩张」「正常大额采购」[1][2][3][4][5]，该表述有待进一步核实。\n\n综合上述假设评估：主导假设为「正常采购（金额与频率均无异常）」（已证实 5 项、矛盾 0 项、待证实 0 项）；「既有信息化采购序列的延续（非新方向扩张）」（已证实 2 项、矛盾 0 项、待证实 2 项）；「基线证据不足导致异常判定不可靠」（已证实 3 项、矛盾 0 项、待证实 2 项）。后两项假设均提出削弱条件：若官方正文显示标的范围、技术栈或供应商要求与既有序列显著不同，则「既有信息化采购序列的延续」假设被削弱；若补齐真实历史采购基线与官方公告正文后异常得分仍为 0，则「基线证据不足导致异常判定不可靠」假设被削弱。需补充的证据类型为：该采购单位真实历史采购记录（金额、时间、标的）与官方采购公告正文。"
+    }
+  },
+  {
+    "stage": "s7_recommend",
+    "response": {
+      "items": [
+        {
+          "action": "优先补齐官方采购公告正文与真实历史采购基线后再决定是否投入投标资源：先获取本项目官方公告正文核实金额与参数，并调取北京通用航天医院真实历史采购记录（金额、时间、标的），替换现有模拟样本基线。",
+          "rationale": "现有『无异常』结论建立在模拟样本之上：金额基线含 9 个模拟样本、新颖性基线含 29 个模拟样本，且未抓取官方正文，故异常判定可靠性存疑。在补齐真实基线与正文前，不宜据现有得分直接决策。",
+          "basisClaimIds": [
+            "c10",
+            "c13",
+            "c18",
+            "c19",
+            "c7"
+          ],
+          "hypothesisLabel": "基线证据不足导致异常判定不可靠"
+        },
+        {
+          "action": "以既有信息化采购序列为切入点评估参与方式：对照 2026-07-21『单机医疗设备数据采集信创交互系统项目』的标的范围、技术栈与供应商要求，判断本项目 LIS 系统信创改造是否可由同一能力线承接，并据此确定自投或联合伙伴。",
+          "rationale": "本项目与该单位既有项目相似度 0.891，属既有医院信息化采购序列的延续；但相关性 0.601 仅略高于准入阈值 0.600，需先核实标的范围与技术栈是否与既有序列一致，再决定参与方式。",
+          "basisClaimIds": [
+            "c12",
+            "c14",
+            "c17",
+            "c6"
+          ],
+          "hypothesisLabel": "既有信息化采购序列的延续（非新方向扩张）"
+        },
+        {
+          "action": "按常规商机节奏跟踪后续机会：将本项目纳入商机监测清单，跟踪其后续澄清、答疑与结果公告，并同步监测该采购单位后续信息化采购发布节奏，作为判断序列延续性的验证点。",
+          "rationale": "本信号被定性为商机，且金额与频率异常得分均为 0.000、频率比值 1.00，符合该单位常规信息化采购节奏，可按常规商机流程跟踪；同时监测重点包含商机监测与竞品动态。",
+          "basisClaimIds": [
+            "c16",
+            "c17",
+            "c11",
+            "c9"
+          ],
+          "hypothesisLabel": "正常采购（金额与频率均无异常）"
+        },
+        {
+          "action": "补充核查供应链与竞品风险：核实本项目信创改造涉及的软硬件供应链约束与潜在竞品参与情况，评估是否存在交付或合规风险，并据此形成风险缓释预案。",
+          "rationale": "监测重点包含供应链风险与竞品动态；现有台账未抓取官方正文，未补造金额、参数或中标结果，供应链与竞品信息缺口需通过补充核查填补。",
+          "basisClaimIds": [
+            "c19",
+            "c7",
+            "c6"
+          ],
+          "hypothesisLabel": "基线证据不足导致异常判定不可靠"
+        }
+      ]
+    }
+  }
+]

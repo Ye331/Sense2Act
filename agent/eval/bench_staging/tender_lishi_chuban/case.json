@@ -1,0 +1,41 @@
+{
+ "case_id": "tender_lishi_chuban",
+ "title": "中国历史研究院《(新编)中国通史》纂修工程出版服务项目",
+ "source": "real",
+ "envelope": "eval/bench_staging/tender_lishi_chuban/envelope.json",
+ "responses": "eval/bench_staging/tender_lishi_chuban/responses.json",
+ "event_id": "evt_tender_lishi_chuban",
+ "run_args": {
+  "max_rounds": 6,
+  "assoc": "entity_text"
+ },
+ "budget": {
+  "s6_opinion_max": 40,
+  "llm_calls_max": 60
+ },
+ "enabled": false,
+ "blocked_note": "金标草拟待人工核对(核对完成置 enabled=true 与 verified=true)",
+ "recorded_at": "2026-10-11 bench 回灌首批 live",
+ "pipeline_note": "双闸+去重+disc on+rumor/tender 现行为(无 P0-1 改造)",
+ "meta": {
+  "kind": "tender",
+  "domain": "出版与文化服务",
+  "difficulty": {
+   "n_clues": null,
+   "clue_sources": null,
+   "same_source_ratio": null,
+   "history_pollution": null,
+   "distractors": null
+  },
+  "claims_total": 15,
+  "claims_corpus": 14,
+  "claims_world": 1,
+  "qc": {
+   "verified": false,
+   "checked_by": null,
+   "checked_at": null,
+   "protocol": "draft(系统建议终态待人工独立核对)",
+   "origin_suite": "bench 回灌首批(2026-10-11)"
+  }
+ }
+}

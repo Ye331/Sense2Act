@@ -1,0 +1,27 @@
+{
+ "suite_id": "exp-p16-wave",
+ "variant": "中",
+ "weights": {
+  "miss": 1,
+  "over": 2,
+  "flip": 2
+ },
+ "default_budget": {
+  "s6_opinion_max": 40,
+  "llm_calls_max": 60
+ },
+ "cases": [
+  "coarse_on_r1",
+  "coarse_on_r2",
+  "coarse_on_r3",
+  "middle_on_r1",
+  "middle_on_r2",
+  "middle_on_r3",
+  "fine_on_r1",
+  "fine_on_r2",
+  "fine_on_r3",
+  "middle_off_r1",
+  "middle_off_r2",
+  "middle_off_r3"
+ ]
+}

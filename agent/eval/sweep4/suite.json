@@ -1,0 +1,15 @@
+{
+ "suite_id": "sweep4-new-pipeline-baseline",
+ "variant": "中",
+ "default_budget": {
+  "s6_opinion_max": 40,
+  "llm_calls_max": 60
+ },
+ "cases": [
+  "sweep4_ai_coarse",
+  "sweep4_ai_middle_1",
+  "sweep4_ai_middle_2",
+  "sweep4_ai_middle_3",
+  "sweep4_ai_fine"
+ ]
+}

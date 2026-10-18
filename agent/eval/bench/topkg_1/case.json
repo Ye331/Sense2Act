@@ -1,0 +1,40 @@
+{
+ "case_id": "topkg_1",
+ "title": "TopK[1] 北京大学第一医院2025年医疗设备更新项目医学影像科X射线计算机体层摄影设备(C",
+ "source": "real",
+ "envelope_batch": "examples/upstream_topk/agent_top_k_samples.json",
+ "signal_index": 1,
+ "responses": "eval/bench/topkg_1/topkg2_1.json",
+ "event_id": "evt_topkg2_1",
+ "recorded_at": "2026-10-06 TopK live",
+ "pipeline_note": "tender 无种子+信封证据挂账修复后(轮0裁定 corpus_bound)",
+ "run_args": {
+  "assoc": "entity_text",
+  "max_rounds": 6
+ },
+ "enabled": true,
+ "meta": {
+  "domain": "医学影像与PACS",
+  "kind": "tender",
+  "difficulty": {
+   "n_clues": null,
+   "clue_sources": null,
+   "same_source_ratio": 1.0,
+   "history_pollution": null,
+   "distractors": null
+  },
+  "claims_total": 18,
+  "claims_corpus": 17,
+  "claims_world": 1,
+  "qc": {
+   "verified": true,
+   "checked_by": null,
+   "protocol": "atomic-full(历史件迁移)",
+   "checked_at": null,
+   "origin_suite": "eval/topk"
+  },
+  "upstream_project_id": "R-dc5ff0e21e0c9c13",
+  "upstream_buyer": "北京大学第一医院",
+  "upstream_title": "北京大学第一医院2025年医疗设备更新项目医学影像科X射线计算机体层摄影设备(CT)采购项目公开招标公告"
+ }
+}

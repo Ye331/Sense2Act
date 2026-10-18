@@ -1,0 +1,24 @@
+{
+  "signal_id": "SIG-20261003-0001",
+  "company_id": "C-0001",
+  "kind": "tender",
+  "payload": {
+    "project_id": "R-c67b890aeb583592",
+    "procurement_project_id": "PRJ-SHGP-2026-A536",
+    "title": "天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告",
+    "buyer": "天津市肿瘤医院空港医院",
+    "publish_date": "2026-10-03",
+    "amount_yuan": 6270000,
+    "project_summary": "天津市肿瘤医院空港医院数智化病理系统采购项目公开招标公告;采购单位:天津市肿瘤医院空港医院;正文缺失,摘要由公告字段生成。",
+    "source_url": "https://example.org/announcement/R-c67b890aeb583592",
+    "signal_reason": "项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。\n金额依据:历史截止日 2026-10-02;该采购单位过去 10 条有效金额中位数 21.9 万元,本项目金额 627.0 万元,为中位数的 28.63 倍,样本数 10(其中模拟样本 8,不代表真实历史证据充分)。\n新颖性依据:历史截止日 2026-10-02;样本数 10,最大相似度 0.885,对照项目:天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目,链接 https://example.org/announcement/R-f456d19c850a03af。\n频率依据:统计窗口 30 天,近期项目数 2,历史窗口均值 0.75,比值 2.67。",
+    "relevance_score": 0.65,
+    "amount_score": 0.8,
+    "novelty_score": 0.3,
+    "frequency_score": 0.6,
+    "amount_reliable": true,
+    "novelty_reliable": true,
+    "frequency_reliable": true,
+    "category": "医疗设备"
+  }
+}

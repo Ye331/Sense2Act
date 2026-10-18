@@ -1,0 +1,19 @@
+{
+ "case_id": "ai3_middle",
+ "title": "讯飞 sweep3-middle(迭代+去重管道)",
+ "source": "real",
+ "envelope": "examples/ai_model_release/envelope.json",
+ "responses": "runs/recorded/sweep3_ai_middle.json",
+ "seed": "examples/ai_model_release/evidence_seed.json",
+ "event_id": "evt_sweep3_middle",
+ "run_args": {
+  "max_rounds": 6,
+  "assoc": "entity_text"
+ },
+ "budget": {
+  "s6_opinion_max": 40,
+  "llm_calls_max": 60
+ },
+ "enabled": true,
+ "blocked_note": ""
+}

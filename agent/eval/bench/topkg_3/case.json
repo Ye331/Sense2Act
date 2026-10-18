@@ -1,0 +1,40 @@
+{
+ "case_id": "topkg_3",
+ "title": "TopK[3] 天津市滨海新区大港医院 天津市滨海新区大港医院CT影像设备维保项目 (项目编号Z",
+ "source": "real",
+ "envelope_batch": "examples/upstream_topk/agent_top_k_samples.json",
+ "signal_index": 3,
+ "responses": "eval/bench/topkg_3/topkg2_3.json",
+ "event_id": "evt_topkg2_3",
+ "recorded_at": "2026-10-06 TopK live",
+ "pipeline_note": "tender 无种子+信封证据挂账修复后(轮0裁定 corpus_bound)",
+ "run_args": {
+  "assoc": "entity_text",
+  "max_rounds": 6
+ },
+ "enabled": true,
+ "meta": {
+  "domain": "医学影像与PACS",
+  "kind": "tender",
+  "difficulty": {
+   "n_clues": null,
+   "clue_sources": null,
+   "same_source_ratio": 1.0,
+   "history_pollution": null,
+   "distractors": null
+  },
+  "claims_total": 18,
+  "claims_corpus": 16,
+  "claims_world": 2,
+  "qc": {
+   "verified": true,
+   "checked_by": null,
+   "protocol": "atomic-full(历史件迁移)",
+   "checked_at": null,
+   "origin_suite": "eval/topk"
+  },
+  "upstream_project_id": "R-47f03243aabe9985",
+  "upstream_buyer": "天津市滨海新区大港医院",
+  "upstream_title": "天津市滨海新区大港医院 天津市滨海新区大港医院CT影像设备维保项目 (项目编号ZYGP20260902)公开招标公告"
+ }
+}

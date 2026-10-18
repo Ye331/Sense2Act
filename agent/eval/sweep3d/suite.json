@@ -1,0 +1,31 @@
+{
+ "suite_id": "sweep3d-disc-ab",
+ "variant": "中",
+ "weights": {
+  "miss": 1,
+  "over": 2,
+  "flip": 2
+ },
+ "default_budget": {
+  "s6_opinion_max": 40,
+  "llm_calls_max": 60
+ },
+ "cases": [
+  "sweep3d_on_1",
+  "sweep3d_on_2",
+  "sweep3d_on_3",
+  "sweep3d_off_1",
+  "sweep3d_off_2",
+  "sweep3d_off_3",
+  "sweep3d_on_4",
+  "sweep3d_on_5",
+  "sweep3d_on_6",
+  "sweep3d_on_7",
+  "sweep3d_on_8",
+  "sweep3d_off_4",
+  "sweep3d_off_5",
+  "sweep3d_off_6",
+  "sweep3d_off_7",
+  "sweep3d_off_8"
+ ]
+}

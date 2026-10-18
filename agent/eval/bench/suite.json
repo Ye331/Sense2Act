@@ -1,0 +1,28 @@
+{
+ "suite_id": "sense2act-bench-v05",
+ "variant": "中",
+ "weights": {
+  "miss": 1,
+  "over": 2,
+  "flip": 2
+ },
+ "default_budget": {
+  "s6_opinion_max": 40,
+  "llm_calls_max": 60
+ },
+ "cases": [
+  "supplier_b",
+  "tender_medical_ai",
+  "ai_model_release",
+  "xhs_opensource",
+  "topkg_0",
+  "topkg_1",
+  "topkg_2",
+  "topkg_3",
+  "topkg_4"
+ ],
+ "require": {
+  "over": 0,
+  "flip": 0
+ }
+}

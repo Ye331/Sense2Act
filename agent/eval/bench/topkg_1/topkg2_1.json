@@ -1,0 +1,1223 @@
+[
+  {
+    "stage": "s1a",
+    "response": {
+      "signalType": "商机",
+      "reason": "该信号为招标信号(kind=tender),采购单位为北京大学第一医院,项目为医学影像科X射线计算机体层摄影设备(CT)采购项目公开招标,金额2000万元;relevance.explanation 显示『项目与企业业务画像的语义相似度为 0.661,达到准入阈值 0.600』,且 companyProfile 含『医学影像、辅助诊断、PACS』等与本项目领域『医学影像与PACS』匹配的业务方向,构成潜在投标/合作机会。同时 amountAnomaly.explanation 指出『本项目金额 2000.0 万元,为该采购单位过去 83 条有效金额中位数(253.5 万元)的 7.89 倍』,属大额采购,需关注其成因。",
+      "selectedSeedLabels": [
+        "正常大额采购",
+        "真实经营动态",
+        "新方向扩张"
+      ],
+      "basisGaps": [
+        "该采购单位历史金额基线含 63 个模拟样本(amountAnomaly.explanation:『历史基线含 63 个模拟样本,不代表真实历史证据充分』),需先补齐真实历史采购金额基线以核实 7.89 倍金额异常",
+        "该采购单位新颖性比较基数含 66 个模拟样本(noveltyAnomaly.explanation:『历史基线含 66 个模拟样本,不代表真实历史证据充分』),需先补齐真实历史项目基线以核实与DR项目 0.931 相似度的判定",
+        "contentSourceNote 载明『基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果』,需先获取官方招标正文以核实金额、参数与采购需求"
+      ]
+    }
+  },
+  {
+    "stage": "s1b",
+    "response": {
+      "claims": [
+        {
+          "id": "c1",
+          "text": "信封载明本次招标项目编号为 R-dc5ff0e21e0c9c13。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 3,
+          "priorityReason": "项目编号是全部后续核验与关联的锚点，可由信封第一方证据直接核实。",
+          "hypothesisIds": [],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c2",
+          "text": "信封载明本次采购的采购方为北京大学第一医院。",
+          "category": "实体",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "采购方身份决定历史基线与关联方核验对象，是金额/频次异常判断的地基。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [
+            "北京大学第一医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c3",
+          "text": "信封载明本次采购金额为 20000000.0 元（2000 万元）。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "金额是金额异常结论的直接依据，且被多条假设依赖，需优先核实。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [
+            "北京大学第一医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c4",
+          "text": "信封载明本次公告发布日期为 2026-09-07。",
+          "category": "时效",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "发布日期决定时效窗口与时间线排序，是频次窗口计算的基准。",
+          "hypothesisIds": [],
+          "validWindowDays": 30,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c5",
+          "text": "信封载明本次采购项目名称为『北京大学第一医院2025年医疗设备更新项目医学影像科X射线计算机体层摄影设备(CT)采购项目公开招标公告』，领域为医学影像与PACS。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "项目名称与领域决定业务相关性判定与相似项目比对口径。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [
+            "北京大学第一医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c6",
+          "text": "信封 contentSourceNote 载明『基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果。』",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "该记载限定了全部金额与参数证据的效力边界，直接影响可核实性判断。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c7",
+          "text": "信封 amountAnomaly.explanation 载明『本项目金额 2000.0 万元,为该采购单位过去 83 条有效金额中位数(253.5 万元)的 7.89 倍,金额异常得分 0.899。』",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "该数字断言是金额异常结论的核心量化依据，被多条假设依赖。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [
+            "北京大学第一医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c8",
+          "text": "信封 amountAnomaly.explanation 载明『历史基线含 63 个模拟样本,不代表真实历史证据充分。』",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "该记载直接削弱金额异常结论的证据基础，是区分真实异常与基线失真假设的关键。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c9",
+          "text": "信封 frequencyAnomaly.explanation 载明『截至当天近 30 天该采购单位采购 9 次,已完整观测的 4 个历史窗口平均 7.25 次,比值 1.24,频率异常得分 0.194。』",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "频次比值是判断是否存在集中采购/异常输送的量化依据。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [
+            "北京大学第一医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c10",
+          "text": "信封 noveltyAnomaly.explanation 载明『该采购单位历史最相似项目为『北京大学第一医院2025年医疗设备更新项目医学影像科数字X线机(DR)采购项目公开招标公告』(2026-07-16),相似度 0.931(比较基数 87 个历史项目),新颖性异常得分 0.069。』",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 4,
+          "priorityReason": "相似项目与相似度是判断本次采购是否属于既定建设规划序列的关键比对依据。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [
+            "北京大学第一医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c11",
+          "text": "信封 noveltyAnomaly.explanation 载明『历史基线含 66 个模拟样本,不代表真实历史证据充分。』",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "该记载削弱相似度判定的证据基础，影响新颖性结论可信度。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c12",
+          "text": "信封 relevance.explanation 载明『项目与企业业务画像的语义相似度为 0.661,达到准入阈值 0.600。』",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "相关性得分是商机定性的直接依据，决定是否进入投标评估。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c13",
+          "text": "信封 companyProfile 载明企业业务画像包含『医疗AI、医学影像、辅助诊断、智慧医院、医院信息化、医疗大模型、医院数据平台、HIS、PACS、电子病历』。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 3,
+          "priorityReason": "业务画像是相关性匹配的比对基准，决定商机定性是否成立。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c14",
+          "text": "解读将本信号定性为『商机』，理由为招标信号且语义相似度达到准入阈值、业务方向与项目领域匹配。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 3,
+          "priorityReason": "解读定性是结论节的起点，需与后续核实结果对照。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "entityNames": [
+            "北京大学第一医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c15",
+          "text": "解读登记了三个假设种子标签：『正常大额采购』『真实经营动态』『新方向扩张』。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 3,
+          "priorityReason": "种子标签决定竞争假设的构成与后续区分性核验方向。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c16",
+          "text": "解读 basisGaps 载明需先补齐真实历史采购金额基线以核实 7.89 倍金额异常，因历史基线含 63 个模拟样本。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 4,
+          "priorityReason": "该缺口直接决定金额异常结论能否成立，是解锁结论节的前置条件。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c17",
+          "text": "解读 basisGaps 载明需先获取官方招标正文以核实金额、参数与采购需求，因 contentSourceNote 载明未抓取官方正文。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 5,
+          "priorityReason": "官方正文缺失使全部金额与参数断言停留在信封自证层面，是最高优先级的核实缺口。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c18",
+          "text": "本次采购金额 2000 万元与同采购单位历史最相似项目（DR 采购项目，2026-07-16 发布）在时间上相隔约两个月，且同属『2025年医疗设备更新项目』系列。",
+          "category": "关系",
+          "sectionIndex": 1,
+          "priority": 4,
+          "priorityReason": "该关联是区分『既定建设规划序列』与『孤立异常大额采购』的可区分 claim。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "relationType": "协同",
+          "entityNames": [
+            "北京大学第一医院"
+          ],
+          "corpusBound": false
+        },
+        {
+          "id": "c19",
+          "text": "信封同时呈现金额异常得分 0.899（高）与频率异常得分 0.194（低），两项异常方向不一致。",
+          "category": "矛盾",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "双指标方向不一致是判断异常成因（单笔大额 vs 集中输送）的可区分信号。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [
+            "北京大学第一医院"
+          ],
+          "corpusBound": true
+        }
+      ],
+      "hypotheses": [
+        {
+          "id": "h1",
+          "label": "正常大额采购（既定设备更新规划内的真实采购）",
+          "description": "本次 CT 采购属于北京大学第一医院『2025年医疗设备更新项目』既定序列，金额偏高源于 CT 设备单价本身高于历史中位数所覆盖的品类，而非异常输送。可区分 claim：c18（与 DR 项目同属更新项目系列且时间相邻）——若官方正文证实同属该更新项目批次，则支持本假设；c10 相似度 0.931 亦指向同一规划序列。",
+          "claimIds": [
+            "c2",
+            "c3",
+            "c5",
+            "c7",
+            "c10",
+            "c12",
+            "c13",
+            "c14",
+            "c18"
+          ],
+          "op": "AND"
+        },
+        {
+          "id": "h2",
+          "label": "异常大额采购（金额异常由非规划性因素驱动）",
+          "description": "2000 万元相对历史中位数 253.5 万元的 7.89 倍偏离并非品类差异可解释，可能存在拆分规避、参数定制或定向输送。可区分 claim：c8 与 c11（历史基线含 63/66 个模拟样本，基线本身不真实）——若补齐真实基线后 7.89 倍偏离消失，则本假设被削弱；c19（金额异常高而频率异常低）——若官方正文显示采购需求含大量配套服务或多次分包，则支持本假设。需要补充的证据类型：官方招标正文中的技术参数、预算构成与分包情况。",
+          "claimIds": [
+            "c2",
+            "c3",
+            "c5",
+            "c7",
+            "c8",
+            "c9",
+            "c11",
+            "c16",
+            "c17",
+            "c19"
+          ],
+          "op": "AND"
+        }
+      ],
+      "gaps": [
+        {
+          "text": "官方招标正文中的预算构成、技术参数与是否分包，具体是什么？",
+          "relatedClaimId": "c17"
+        },
+        {
+          "text": "北京大学第一医院真实（非模拟）历史采购金额基线是多少，7.89 倍偏离在真实基线下是否仍成立？",
+          "relatedClaimId": "c8"
+        },
+        {
+          "text": "本次 CT 采购与 2026-07-16 发布的 DR 采购项目是否属于同一批次设备更新规划？",
+          "relatedClaimId": "c18"
+        },
+        {
+          "text": "近 30 天该采购单位 9 次采购的具体项目分别是什么，是否集中于同一领域或同一供应商？",
+          "relatedClaimId": "c9"
+        },
+        {
+          "text": "本次采购的投标人资格条件与评标办法是否含指向性条款？",
+          "relatedClaimId": "c5"
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c1",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_1:E1",
+          "direction": "支持",
+          "quote": "招标信号基础字段:项目编号 R-dc5ff0e21e0c9c13;",
+          "reason": "该证据直接载明项目编号为 R-dc5ff0e21e0c9c13,与 claim 完全一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 2000.0 万元",
+          "reason": "仅涉及金额异常检测,未涉及项目编号。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 9 次",
+          "reason": "仅涉及频率异常检测,未涉及项目编号。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为",
+          "reason": "仅涉及新颖性检测,未涉及项目编号。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.661",
+          "reason": "仅涉及相关性检测,未涉及项目编号。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一直接载明项目编号的证据 E1 与 claim 文本完全一致;其余证据均为检测器输出,不涉及编号,不构成矛盾。但 E1 与其余证据同根(signal_layer),独立来源不足,最终判决由代码裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c10",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_1:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-dc5ff0e21e0c9c13;项目名称 北京大学第一医院2025年医疗设备更新项目医学影像科X射线计算机体层摄影设备(CT)采购项目公开招标公告",
+          "reason": "该证据仅载明信号层基础字段(项目编号、名称、采购方、预算、发布日期、领域),未涉及 noveltyAnomaly.explanation 的内容,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 2000.0 万元,为该采购单位过去 83 条有效金额中位数(253.5 万元)的 7.89 倍,金额异常得分 0.899。",
+          "reason": "该证据为金额异常检测结果,与 claim 所述新颖性异常 explanation 字段无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 9 次,已完整观测的 4 个历史窗口平均 7.25 次,比值 1.24,频率异常得分 0.194。",
+          "reason": "该证据为频率异常检测结果,不涉及新颖性异常 explanation 内容。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E4",
+          "direction": "支持",
+          "quote": "该采购单位历史最相似项目为『北京大学第一医院2025年医疗设备更新项目医学影像科数字X线机(DR)采购项目公开招标公告』(2026-07-16),相似度 0.931(比较基数 87 个历史项目),新颖性异常得分 0.069。",
+          "reason": "该证据原文与 claim 所述 noveltyAnomaly.explanation 内容逐字一致(最相似项目、日期、相似度 0.931、比较基数 87、新颖性异常得分 0.069),直接支持 claim。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.661,达到准入阈值 0.600。",
+          "reason": "该证据为相关性检测结果,与 claim 所述新颖性异常 explanation 无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一直接相关的证据 evt_topkg2_1:E4 原文与 claim 所述 noveltyAnomaly.explanation 内容逐字吻合,其余证据均为其他检测器结果或基础字段,不构成矛盾;但该证据谱系根为 signal_layer,与 claim 来源同根,不构成独立印证,最终判决由代码按独立来源规则作出。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c12",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_1:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-dc5ff0e21e0c9c13;项目名称 北京大学第一医院2025年医疗设备更新项目医学影像科X射线计算机体层摄影设备(CT)采购项目公开招标公告",
+          "reason": "该证据仅载明信号层基础字段(编号、名称、采购方、预算、发布日期、领域),未涉及 relevance.explanation 或语义相似度数值,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 2000.0 万元,为该采购单位过去 83 条有效金额中位数(253.5 万元)的 7.89 倍,金额异常得分 0.899。",
+          "reason": "该证据为金额异常检测结果,与信封 relevance.explanation 的语义相似度数值无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 9 次,已完整观测的 4 个历史窗口平均 7.25 次,比值 1.24,频率异常得分 0.194。",
+          "reason": "该证据为频率异常检测结果,不涉及相关性检测的相似度与阈值。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『北京大学第一医院2025年医疗设备更新项目医学影像科数字X线机(DR)采购项目公开招标公告』(2026-07-16),相似度 0.931(比较基数 87 个历史项目),新颖性异常得分 0.069。",
+          "reason": "该证据为新颖性检测结果,其相似度 0.931 是历史项目间比较,与 claim 所述项目与企业业务画像的语义相似度 0.661 无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E5",
+          "direction": "支持",
+          "quote": "项目与企业业务画像的语义相似度为 0.661,达到准入阈值 0.600。",
+          "reason": "该证据原文逐字载明 claim 所述内容,直接支持 claim 为真。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "evt_topkg2_1:E5 原文逐字包含 claim 所述『项目与企业业务画像的语义相似度为 0.661,达到准入阈值 0.600。』,其余证据与相关性检测无关。但需注意全部证据谱系根均为 signal_layer,属同一上游,不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c13",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_1:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-dc5ff0e21e0c9c13;项目名称 北京大学第一医院2025年医疗设备更新项目医学影像科X射线计算机体层摄影设备(CT)采购项目公开招标公告",
+          "reason": "该证据仅载明招标信号基础字段(项目编号、名称、采购方、预算、发布日期、领域),未涉及信封 companyProfile 或企业业务画像内容,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 2000.0 万元,为该采购单位过去 83 条有效金额中位数(253.5 万元)的 7.89 倍,金额异常得分 0.899",
+          "reason": "金额异常检测与 companyProfile 是否载明业务画像字段无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 9 次,已完整观测的 4 个历史窗口平均 7.25 次,比值 1.24,频率异常得分 0.194",
+          "reason": "频率异常检测不涉及企业业务画像内容。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『北京大学第一医院2025年医疗设备更新项目医学影像科数字X线机(DR)采购项目公开招标公告』(2026-07-16),相似度 0.931",
+          "reason": "新颖性检测与 claim 所述信封字段内容无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.661,达到准入阈值 0.600",
+          "reason": "该证据仅给出项目与企业业务画像的语义相似度评分,未列出画像具体字段,无法证明或否证 claim 所列字段清单。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内五条证据均为信号层检测记录,未包含信封 companyProfile 的原文或字段清单,无法核实 claim 所列业务画像字段,故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c14",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_1:E1",
+          "direction": "支持",
+          "quote": "招标信号基础字段:项目编号 R-dc5ff0e21e0c9c13;项目名称 北京大学第一医院2025年医疗设备更新项目医学影像科X射线计算机体层摄影设备(CT)采购项目公开招标公告",
+          "reason": "该证据确认信号为公开招标公告，且领域为医学影像与PACS，支撑『招标信号』与『业务方向与项目领域匹配』的定性。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 2000.0 万元,为该采购单位过去 83 条有效金额中位数(253.5 万元)的 7.89 倍,金额异常得分 0.899",
+          "reason": "金额异常检测不涉及『商机』定性所依据的招标信号与语义相似度阈值，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 9 次,已完整观测的 4 个历史窗口平均 7.25 次,比值 1.24,频率异常得分 0.194",
+          "reason": "频率异常检测与『商机』定性理由无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『北京大学第一医院2025年医疗设备更新项目医学影像科数字X线机(DR)采购项目公开招标公告』(2026-07-16),相似度 0.931",
+          "reason": "新颖性检测针对历史项目相似度，不涉及本 claim 的定性理由。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E5",
+          "direction": "支持",
+          "quote": "项目与企业业务画像的语义相似度为 0.661,达到准入阈值 0.600",
+          "reason": "该证据直接支撑『语义相似度达到准入阈值』这一理由。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 确认信号为公开招标公告且领域为医学影像与PACS，E5 确认语义相似度 0.661 达到准入阈值 0.600，两项理由均获证据支撑；E2/E3/E4 与定性理由无关。注意 E1 与 E5 同根（lineage_root 均为 signal_layer），不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c15",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_1:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-dc5ff0e21e0c9c13;项目名称 北京大学第一医院2025年医疗设备更新项目医学影像科X射线计算机体层摄影设备(CT)采购项目公开招标公告",
+          "reason": "该证据仅描述招标信号基础字段,未涉及任何假设种子标签的登记内容。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 2000.0 万元,为该采购单位过去 83 条有效金额中位数(253.5 万元)的 7.89 倍,金额异常得分 0.899",
+          "reason": "金额异常检测结果与是否登记三个假设种子标签无直接关联。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 9 次,已完整观测的 4 个历史窗口平均 7.25 次,比值 1.24,频率异常得分 0.194",
+          "reason": "频率异常检测结果不涉及假设种子标签的登记。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『北京大学第一医院2025年医疗设备更新项目医学影像科数字X线机(DR)采购项目公开招标公告』(2026-07-16),相似度 0.931",
+          "reason": "新颖性检测结果与假设种子标签登记无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.661,达到准入阈值 0.600",
+          "reason": "相关性检测结果不涉及假设种子标签的登记。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗中五条证据均为信号层检测器输出(基础字段、金额异常、频率异常、新颖性、相关性),无一条提及或印证『正常大额采购』『真实经营动态』『新方向扩张』三个假设种子标签的登记,claim 缺乏证据支撑,维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c16",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_1:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-dc5ff0e21e0c9c13;项目名称 北京大学第一医院2025年医疗设备更新项目医学影像科X射线计算机体层摄影设备(CT)采购项目公开招标公告;采购方 北京大学第一医院;预算金额 20000000.0 元;发布日期 2026-09-07;领域 医学影像与PACS。",
+          "reason": "仅提供项目基础字段与预算金额,未涉及 basisGaps、历史采购金额基线或 63 个模拟样本,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E2",
+          "direction": "支持",
+          "quote": "历史基线含 63 个模拟样本,不代表真实历史证据充分。",
+          "reason": "该证据同时载明 7.89 倍金额异常与历史基线含 63 个模拟样本,直接支撑 claim 所述需先补齐真实历史采购金额基线以核实 7.89 倍金额异常。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 9 次,已完整观测的 4 个历史窗口平均 7.25 次,比值 1.24,频率异常得分 0.194。",
+          "reason": "内容为频率异常检测,与金额异常、历史采购金额基线及 63 个模拟样本无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E4",
+          "direction": "无关",
+          "quote": "历史基线含 66 个模拟样本,不代表真实历史证据充分。",
+          "reason": "虽提及模拟样本,但针对新颖性检测且样本数为 66,与 claim 所指金额异常的 63 个模拟样本基线无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.661,达到准入阈值 0.600。",
+          "reason": "内容为相关性检测,不涉及金额异常或历史采购金额基线。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "证据 evt_topkg2_1:E2 逐字载明 7.89 倍金额异常及历史基线含 63 个模拟样本、不代表真实历史证据充分,与 claim 表述一致;其余证据不改变判断。但该证据谱系根为 signal_layer,独立来源有限,最终以代码按独立来源规则判定为准。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c17",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_1:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-dc5ff0e21e0c9c13;项目名称 北京大学第一医院2025年医疗设备更新项目医学影像科X射线计算机体层摄影设备(CT)采购项目公开招标公告;采购方 北京大学第一医院;预算金额 20000000.0 元;发布日期 2026-09-07;领域 医学影像与PACS。",
+          "reason": "该证据仅给出信号层基础字段与摘要,未涉及 basisGaps 或 contentSourceNote 是否载明需获取官方招标正文,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 2000.0 万元,为该采购单位过去 83 条有效金额中位数(253.5 万元)的 7.89 倍,金额异常得分 0.899。",
+          "reason": "该证据讨论金额异常检测得分,未提及 basisGaps 或 contentSourceNote 的内容,与 claim 所述事实无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 9 次,已完整观测的 4 个历史窗口平均 7.25 次,比值 1.24,频率异常得分 0.194。",
+          "reason": "该证据讨论频率异常检测,未涉及 basisGaps 或 contentSourceNote,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『北京大学第一医院2025年医疗设备更新项目医学影像科数字X线机(DR)采购项目公开招标公告』(2026-07-16),相似度 0.931(比较基数 87 个历史项目),新颖性异常得分 0.069。",
+          "reason": "该证据讨论新颖性检测,未提及 basisGaps 或 contentSourceNote,与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.661,达到准入阈值 0.600。",
+          "reason": "该证据讨论相关性检测得分,未涉及 basisGaps 或 contentSourceNote 是否载明需获取官方招标正文,不改变 claim 判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内五条证据均为信号层基础字段与检测器评分,无一条提及 basisGaps 或 contentSourceNote 的内容,claim 所述『basisGaps 载明需先获取官方招标正文』与『contentSourceNote 载明未抓取官方正文』均无证据支撑,故只能维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c19",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_1:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-dc5ff0e21e0c9c13;项目名称 北京大学第一医院2025年医疗设备更新项目医学影像科X射线计算机体层摄影设备(CT)采购项目公开招标公告;采购方 北京大学第一医院;预算金额 20000000.0 元;发布日期 2026-09-07;领域 医学影像与PACS。",
+          "reason": "仅给出信封基础字段,未涉及任何异常得分,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E2",
+          "direction": "支持",
+          "quote": "金额异常得分 0.899",
+          "reason": "直接给出金额异常得分 0.899,与 claim 所述金额异常得分 0.899(高)一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E3",
+          "direction": "支持",
+          "quote": "频率异常得分 0.194",
+          "reason": "直接给出频率异常得分 0.194,与 claim 所述频率异常得分 0.194(低)一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E4",
+          "direction": "无关",
+          "quote": "新颖性异常得分 0.069",
+          "reason": "该证据只涉及新颖性异常得分,与金额/频率两项异常方向是否一致无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E5",
+          "direction": "无关",
+          "quote": "项目与企业业务画像的语义相似度为 0.661,达到准入阈值 0.600",
+          "reason": "该证据只涉及相关性得分,不涉及金额或频率异常得分。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E2 与 E3 分别逐字给出金额异常得分 0.899 与频率异常得分 0.194,与 claim 所述两项数值及高低方向完全吻合,故两项异常方向不一致的断言成立。E1、E4、E5 不涉及该两项得分,不改变判断。注意 E2、E3 同属 signal_layer 谱系根,不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c2",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_1:E1",
+          "direction": "支持",
+          "quote": "采购方 北京大学第一医院",
+          "reason": "信封基础字段直接载明采购方为北京大学第一医院，与 claim 一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E2",
+          "direction": "无关",
+          "quote": "北京大学第一医院 的采购项目",
+          "reason": "该证据讨论金额异常检测，未涉及信封载明的采购方字段，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E3",
+          "direction": "无关",
+          "quote": "北京大学第一医院 的采购项目",
+          "reason": "该证据讨论频率异常检测，与采购方字段无直接关系。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E4",
+          "direction": "无关",
+          "quote": "北京大学第一医院 的采购项目",
+          "reason": "该证据讨论新颖性检测，不涉及采购方字段。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E5",
+          "direction": "无关",
+          "quote": "北京大学第一医院 的采购项目",
+          "reason": "该证据讨论相关性检测，与采购方字段无直接关系。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 信封基础字段逐字载明采购方为北京大学第一医院，直接支持 claim；其余证据均为检测器评分，不改变该字段判断。但 E1 与其余证据同根（signal_layer），独立来源有限，最终以代码独立来源规则为准。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c3",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_1:E1",
+          "direction": "支持",
+          "quote": "预算金额 20000000.0 元",
+          "reason": "信封基础字段直接载明预算金额 20000000.0 元，与 claim 所述 2000 万元一致，使 claim 更可能为真。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E2",
+          "direction": "支持",
+          "quote": "本项目金额 2000.0 万元",
+          "reason": "金额异常检测器复述本项目金额为 2000.0 万元，与 claim 金额一致，构成对同一金额的独立表述。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测",
+          "reason": "该证据仅涉及采购频率异常，不涉及采购金额，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测",
+          "reason": "该证据仅涉及项目新颖性/相似度，不涉及采购金额，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E5",
+          "direction": "无关",
+          "quote": "项目与企业业务画像的语义相似度为 0.661",
+          "reason": "该证据仅涉及业务相关性评分，不涉及采购金额，不改变 claim 判断。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 信封基础字段与 E2 金额检测器均载明金额为 20000000.0 元（2000.0 万元），与 claim 一致；但两者谱系根同为 signal_layer，属同一上游，不构成独立来源印证，故仅为意见，最终由代码按独立来源规则裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c4",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_1:E1",
+          "direction": "支持",
+          "quote": "发布日期 2026-09-07",
+          "reason": "信封基础字段直接载明发布日期为 2026-09-07，与 claim 一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测",
+          "reason": "金额异常检测不涉及公告发布日期。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测",
+          "reason": "频率异常检测不涉及公告发布日期。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测",
+          "reason": "新颖性检测不涉及公告发布日期。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测",
+          "reason": "相关性检测不涉及公告发布日期。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一直接载明发布日期的证据 E1 与 claim 完全一致；其余证据均为检测器评分，与发布日期无关。但 E1 与其余证据同根（signal_layer），独立来源有限，最终由代码按独立来源规则裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c5",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_1:E1",
+          "direction": "支持",
+          "quote": "项目名称 北京大学第一医院2025年医疗设备更新项目医学影像科X射线计算机体层摄影设备(CT)采购项目公开招标公告",
+          "reason": "信封基础字段逐字载明项目名称与领域，与 claim 完全一致。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 2000.0 万元",
+          "reason": "仅涉及金额异常评分，不改变对项目名称与领域字段的判断。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 9 次",
+          "reason": "仅涉及采购频率异常，与信封载明的名称/领域无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为",
+          "reason": "仅涉及新颖性评分，不改变名称与领域字段的真假。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.661",
+          "reason": "仅涉及业务相关性评分，与 claim 所述名称/领域无直接关系。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 逐字载明项目名称与领域，与 claim 一致；其余证据均为检测器评分，不构成反驳。但全部证据同根于 signal_layer，不构成独立来源印证，最终以代码独立来源规则为准。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c6",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_1:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-dc5ff0e21e0c9c13;项目名称 北京大学第一医院2025年医疗设备更新项目医学影像科X射线计算机体层摄影设备(CT)采购项目公开招标公告;采购方 北京大学第一医院;预算金额 20000000.0 元;发布日期 2026-09-07;领域 医学影像与PACS。",
+          "reason": "该证据仅列示信号层基础字段,未包含任何 contentSourceNote 文本,不能证明或否证 claim 所述信封字段内容。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 2000.0 万元,为该采购单位过去 83 条有效金额中位数(253.5 万元)的 7.89 倍,金额异常得分 0.899。",
+          "reason": "金额异常检测结果与信封 contentSourceNote 是否载明该声明无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 9 次,已完整观测的 4 个历史窗口平均 7.25 次,比值 1.24,频率异常得分 0.194。",
+          "reason": "频率异常检测结果不涉及 contentSourceNote 字段内容。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『北京大学第一医院2025年医疗设备更新项目医学影像科数字X线机(DR)采购项目公开招标公告』(2026-07-16),相似度 0.931(比较基数 87 个历史项目),新颖性异常得分 0.069。",
+          "reason": "新颖性检测结果与 claim 所述信封字段文本无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.661,达到准入阈值 0.600。",
+          "reason": "相关性检测结果不涉及 contentSourceNote 字段内容。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内五条证据均为信号层基础字段与检测器评分,无一条包含信封 contentSourceNote 的原文或对其内容的描述,无法核实 claim 所引述的字段文本,故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c7",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_1:E1",
+          "direction": "支持",
+          "quote": "预算金额 20000000.0 元",
+          "reason": "该证据载明预算金额 20000000.0 元,即 2000.0 万元,与 claim 中『本项目金额 2000.0 万元』一致,支持 claim 的金额部分。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E2",
+          "direction": "支持",
+          "quote": "本项目金额 2000.0 万元,为该采购单位过去 83 条有效金额中位数(253.5 万元)的 7.89 倍,金额异常得分 0.899。",
+          "reason": "该证据原文与 claim 所引述的 explanation 内容逐字一致,直接支持 claim。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 9 次,已完整观测的 4 个历史窗口平均 7.25 次,比值 1.24,频率异常得分 0.194。",
+          "reason": "该证据描述频率异常检测,与 claim 所述金额异常 explanation 内容无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『北京大学第一医院2025年医疗设备更新项目医学影像科数字X线机(DR)采购项目公开招标公告』(2026-07-16),相似度 0.931(比较基数 87 个历史项目),新颖性异常得分 0.069。",
+          "reason": "该证据描述新颖性检测,与 claim 所述金额异常 explanation 内容无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.661,达到准入阈值 0.600。",
+          "reason": "该证据描述相关性检测,与 claim 所述金额异常 explanation 内容无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E2 原文与 claim 引述的 explanation 逐字一致,直接印证 claim;E1 的预算金额 2000.0 万元与 claim 金额一致。E3/E4/E5 为其他检测器输出,与 claim 无关。注意 E1 与 E2 同属 signal_layer 谱系根,不构成独立来源,但 claim 本身即是对该信封字段内容的陈述,故意见为已证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c8",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_1:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-dc5ff0e21e0c9c13;项目名称 北京大学第一医院2025年医疗设备更新项目医学影像科X射线计算机体层摄影设备(CT)采购项目公开招标公告",
+          "reason": "该证据仅载明信号层基础字段,未涉及 amountAnomaly.explanation 的内容。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E2",
+          "direction": "支持",
+          "quote": "历史基线含 63 个模拟样本,不代表真实历史证据充分。",
+          "reason": "该证据原文逐字包含 claim 所指的 explanation 语句,直接支持 claim 为真。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:截至当天近 30 天该采购单位采购 9 次",
+          "reason": "该证据为频率异常检测,未涉及 amountAnomaly.explanation 的内容。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E4",
+          "direction": "无关",
+          "quote": "历史基线含 66 个模拟样本,不代表真实历史证据充分。",
+          "reason": "该证据属新颖性检测,其样本数为 66 而非 63,与 claim 所指 amountAnomaly.explanation 的 63 个模拟样本无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.661",
+          "reason": "该证据为相关性检测,未涉及 amountAnomaly.explanation 的内容。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "证据 evt_topkg2_1:E2 原文逐字包含 claim 所述语句『历史基线含 63 个模拟样本,不代表真实历史证据充分。』,直接印证该 claim;其余证据均不涉及该 explanation 字段。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c9",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_topkg2_1:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 R-dc5ff0e21e0c9c13;项目名称 北京大学第一医院2025年医疗设备更新项目医学影像科X射线计算机体层摄影设备(CT)采购项目公开招标公告",
+          "reason": "该证据仅载明项目基础字段,未涉及 frequencyAnomaly.explanation 的具体数值。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:本项目金额 2000.0 万元,为该采购单位过去 83 条有效金额中位数(253.5 万元)的 7.89 倍,金额异常得分 0.899。",
+          "reason": "该证据为金额异常检测,与 claim 所述频率异常 explanation 无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E3",
+          "direction": "支持",
+          "quote": "截至当天近 30 天该采购单位采购 9 次,已完整观测的 4 个历史窗口平均 7.25 次,比值 1.24,频率异常得分 0.194。",
+          "reason": "该证据原文与 claim 引述的 explanation 内容逐字一致,直接支持 claim。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:该采购单位历史最相似项目为『北京大学第一医院2025年医疗设备更新项目医学影像科数字X线机(DR)采购项目公开招标公告』(2026-07-16),相似度 0.931(比较基数 87 个历史项目),新颖性异常得分 0.069。",
+          "reason": "该证据为新颖性检测,与频率异常 explanation 无关。"
+        },
+        {
+          "evidenceId": "evt_topkg2_1:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.661,达到准入阈值 0.600。",
+          "reason": "该证据为相关性检测,与频率异常 explanation 无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E3 原文与 claim 引述的 frequencyAnomaly.explanation 逐字一致,其余证据不涉及该字段。但 E3 与 claim 同源于 signal_layer 信封,属同一上游,不构成独立印证。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 1,
+      "mainTarget": "c17",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "c17 载明『解读 basisGaps 载明需先获取官方招标正文以核实金额、参数与采购需求，因 contentSourceNote 载明未抓取官方正文。』——缺口为官方招标正文本身尚未获取，需先锚定该公告的官方发布载体（发布平台与公告唯一标识）。",
+          "acceptance": "需权威登记源记录：在官方招标发布平台（如政府采购/公共资源交易平台）检索到与信封载明项目名称『北京大学第一医院2025年医疗设备更新项目医学影像科X射线计算机体层摄影设备(CT)采购项目公开招标公告』及发布日期 2026-09-07 一致的公告条目，取得其官方 URL 与公告编号。",
+          "failover": "若官方平台检索不到该公告条目，则改查采购单位（北京大学第一医院）官方渠道或其上级主管单位的公告转载页，仍无则记录为『官方正文不可得』并转入 c18 的关系核证。"
+        },
+        {
+          "gap": "在锚定官方公告条目后，正文中是否载明本次采购金额为 20000000.0 元（2000 万元），以及预算构成/分包情况。",
+          "acceptance": "需页面正文级证据：官方公告正文中逐字出现预算金额或最高限价字段，可与 c3/c7 的 2000 万元比对；若含分包或配套服务，需正文级列出各包金额。",
+          "failover": "若正文仅给出总预算而无分包明细，则退而记录『金额已核实、构成未明』，并将分包问题留给后续轮次或问人裁决。"
+        },
+        {
+          "gap": "正文中是否载明技术参数与采购需求，用以判断 2000 万元偏离历史中位数 253.5 万元的 7.89 倍是否可由 CT 品类单价与配套需求解释。",
+          "acceptance": "需页面正文级证据：官方公告正文中出现 CT 设备技术参数/采购需求条目（如探测器排数、球管、配套服务年限等），足以支撑或否定『品类差异可解释金额偏离』。",
+          "failover": "若正文不含参数细节，则改查同采购单位同系列（『2025年医疗设备更新项目』）其他设备公告的参数与金额，作为品类单价的替代锚点。"
+        }
+      ],
+      "searchHints": [
+        "北京大学第一医院2025年医疗设备更新项目 医学影像科 X射线计算机体层摄影设备(CT) 公开招标公告",
+        "北京大学第一医院 CT 采购项目 预算金额 2000万元 招标公告",
+        "北京大学第一医院 2025年医疗设备更新项目 公开招标 公告"
+      ],
+      "sideTargets": [
+        "c18",
+        "c6"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 核心事实\n\n本次采购金额为 20000000.0 元（2000 万元），该金额载于信封 [1][2][3][4][5]。\n\n信封 amountAnomaly.explanation 载明『本项目金额 2000.0 万元,为该采购单位过去 83 条有效金额中位数(253.5 万元)的 7.89 倍,金额异常得分 0.899。』[1][2][3][4][5] 同一字段另载明『历史基线含 63 个模拟样本,不代表真实历史证据充分。』[1][2][3][4][5]\n\n信封 frequencyAnomaly.explanation 载明『截至当天近 30 天该采购单位采购 9 次,已完整观测的 4 个历史窗口平均 7.25 次,比值 1.24,频率异常得分 0.194。』[1][2][3][4][5]\n\n信封 relevance.explanation 载明『项目与企业业务画像的语义相似度为 0.661,达到准入阈值 0.600。』[1][2][3][4][5]\n\n就异常指标的方向，信封同时呈现金额异常得分 0.899（高）与频率异常得分 0.194（低），两项异常方向不一致 [1][2][3][4][5]。\n\n上述各项均为信封字段所载内容，其对应的官方正文证据目前尚未核实。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 2,
+      "mainTarget": "c18",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "c18 断言本次 CT 采购与同采购单位历史最相似项目（DR 采购项目，2026-07-16 发布）同属『2025年医疗设备更新项目』系列，但该断言目前仅由信封 noveltyAnomaly.explanation 的相似度 0.931 间接支撑，缺少官方正文级证据确认两者同属同一批次/同一立项序列。",
+          "acceptance": "需页面正文级证据：官方招标公告正文（或权威登记源记录）中同时出现本次 CT 项目与 DR 项目所属的同一『2025年医疗设备更新项目』批次标识、同一立项批复编号或同一采购计划编号，且能逐字引用该标识原文。",
+          "failover": "若官方正文未载明批次/立项编号，则退一步查采购单位同期发布的『2025年医疗设备更新项目』系列其他子项目公告列表，以列表级证据判断本次 CT 是否在该系列内；若仍不可得，则将该 claim 标注为『证据不足，无法证实』并转查 c17 的官方正文缺口。"
+        },
+        {
+          "gap": "若上一环锚定本次 CT 项目确属该更新项目系列，则需进一步确认该系列内 CT 品类是否本身即为高单价品类，以判断 2000 万元金额是否可由品类差异解释（对应假设『正常大额采购』与『异常大额采购』的区分）。",
+          "acceptance": "需页面正文级证据：官方正文或权威登记源中该系列内其他影像设备（CT/DR/MR 等）子项目的预算金额记录，能逐字引用金额与品类对应关系。",
+          "failover": "若无法获取同系列其他子项目金额，则记录为缺口，不以此环结论替代 c18 本身的证实/证伪判定。"
+        }
+      ],
+      "searchHints": [
+        "北京大学第一医院 2025年医疗设备更新项目 医学影像科 CT 采购项目 公开招标公告",
+        "北京大学第一医院 2025年医疗设备更新项目 医学影像科 数字X线机 DR 采购项目 公开招标公告",
+        "北京大学第一医院 医疗设备更新项目 立项 批次 采购计划"
+      ],
+      "sideTargets": [
+        "c17",
+        "c10"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 3,
+      "mainTarget": "c17",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "c17 待证实：解读 basisGaps 载明需先获取官方招标正文以核实金额、参数与采购需求，因 contentSourceNote 载明未抓取官方正文。缺口为官方招标正文本身尚未取得。",
+          "acceptance": "需权威登记源记录：取得该采购项目官方招标公告正文（页面正文级证据），能逐字读到项目编号 R-dc5ff0e21e0c9c13、采购方、预算金额与采购需求段落。",
+          "failover": "若官方正文不可得，退而取省级以上政府采购平台或招标代理机构发布的同编号公告转载页，仍须为页面正文级证据；若仅能取到标题级索引，则记为未查到并转入 c18 的系列归属核验。"
+        },
+        {
+          "gap": "在官方正文中核实预算金额是否确为 20000000.0 元（2000 万元），以及是否载明分包、配套服务或预算构成，用以检验 c19 金额异常高而频率异常低的矛盾。",
+          "acceptance": "需页面正文级证据：正文中出现预算/最高限价金额字段，且能读到是否含分包或配套服务的表述原文。",
+          "failover": "若正文只给金额不给构成，则仅登记金额核实结果，分包问题标注为未决，不据此翻转假设。"
+        },
+        {
+          "gap": "在官方正文中核实采购需求与技术参数是否指向 CT 设备本体，以及是否载明与『2025年医疗设备更新项目』系列的归属关系，用以检验 c18。",
+          "acceptance": "需页面正文级证据：正文中出现设备名称、技术参数段落或项目系列名称原文。",
+          "failover": "若正文无系列归属表述，则 c18 维持待证实，改由历史公告序列比对路径另行处理。"
+        }
+      ],
+      "searchHints": [
+        "北京大学第一医院2025年医疗设备更新项目医学影像科X射线计算机体层摄影设备(CT)采购项目公开招标公告",
+        "R-dc5ff0e21e0c9c13",
+        "北京大学第一医院 CT 采购 预算 2000万 招标公告"
+      ],
+      "sideTargets": [
+        "c6",
+        "c18"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 主体与事件背景\n\n本次采购的采购方为北京大学第一医院[c2]。信封载明本次采购项目名称为『北京大学第一医院2025年医疗设备更新项目医学影像科X射线计算机体层摄影设备(CT)采购项目公开招标公告』，领域为医学影像与PACS[c5]。信封载明本次招标项目编号为 R-dc5ff0e21e0c9c13[c1]。\n\n关于信封 contentSourceNote 载明『基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果。』一节，目前尚未核实[c6]。关于信封 companyProfile 载明企业业务画像包含『医疗AI、医学影像、辅助诊断、智慧医院、医院信息化、医疗大模型、医院数据平台、HIS、PACS、电子病历』一节，目前尚未核实[c13]。\n\n本节所涉主体与项目标识信息均来自信封字段，官方招标正文尚未获取，相关金额、参数与中标结果均未在现有记录中出现。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 动态时间线与关联方\n\n本次公告发布日期为 2026-09-07，该日期由信封载明 [1][2][3][4][5]。\n\n信封 noveltyAnomaly.explanation 载明：『该采购单位历史最相似项目为『北京大学第一医院2025年医疗设备更新项目医学影像科数字X线机(DR)采购项目公开招标公告』(2026-07-16)，相似度 0.931（比较基数 87 个历史项目），新颖性异常得分 0.069。』[1][2][3][4][5]\n\n关于本次采购金额 2000 万元与同采购单位历史最相似项目（DR 采购项目，2026-07-16 发布）在时间上相隔约两个月、且同属『2025年医疗设备更新项目』系列这一关联判断，目前尚未核实，本节不作事实认定。\n\n本节所涉两条假设口径并列如下：其一，正常大额采购（既定设备更新规划内的真实采购），其可区分 claim 指向与 DR 项目同属更新项目系列且时间相邻，若官方正文证实同属该更新项目批次则支持该假设，相似度 0.931 亦指向同一规划序列；其二，异常大额采购（金额异常由非规划性因素驱动），其可区分 claim 涉及历史基线含 63/66 个模拟样本、基线本身不真实，以及金额异常高而频率异常低，需补充官方招标正文中的技术参数、预算构成与分包情况予以检验。上述两条假设均处于待验证状态，本节仅作口径并列，不作倾向性认定。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 结论\n\n本信号被解读定性为『商机』，理由为招标信号且语义相似度达到准入阈值、业务方向与项目领域匹配 [1][5][2][3][4]。解读登记了三个假设种子标签：『正常大额采购』『真实经营动态』『新方向扩张』；该登记事项目前尚未核实 [1][2][3][4][5]。\n\n解读 basisGaps 载明需先补齐真实历史采购金额基线以核实 7.89 倍金额异常，因历史基线含 63 个模拟样本 [2][1][3][4][5]。\n\n解读 basisGaps 载明需先获取官方招标正文以核实金额、参数与采购需求，因 contentSourceNote 载明未抓取官方正文；该事项目前尚未核实 [1][2][3][4][5]。\n\n在假设层面，『异常大额采购（金额异常由非规划性因素驱动）』为当前主导假设（score 8，verified 8，contradicted 0，pending 1），其描述指出 2000 万元相对历史中位数 253.5 万元的 7.89 倍偏离并非品类差异可解释，可能存在拆分规避、参数定制或定向输送；可区分 claim 包括 c8 与 c11（历史基线含 63/66 个模拟样本，基线本身不真实）以及 c19（金额异常高而频率异常低），需要补充的证据类型为官方招标正文中的技术参数、预算构成与分包情况。『正常大额采购（既定设备更新规划内的真实采购）』为非主导假设（score 7，verified 7，contradicted 0，pending 2），其描述指出本次 CT 采购属于北京大学第一医院『2025年医疗设备更新项目』既定序列，金额偏高源于 CT 设备单价本身高于历史中位数所覆盖的品类，而非异常输送；可区分 claim 包括 c18（与 DR 项目同属更新项目系列且时间相邻）与 c10 相似度 0.931。上述两项假设均标注 emerged 为真，且 contradicted 均为 0。"
+    }
+  },
+  {
+    "stage": "s7_recommend",
+    "response": {
+      "items": [
+        {
+          "action": "优先补齐官方招标正文与真实历史金额基线：获取本次 CT 采购项目的官方招标公告正文（技术参数、预算构成、分包情况），并剔除 63 个模拟样本后重建该采购单位真实历史采购金额中位数，以核实 7.89 倍金额偏离是否成立。",
+          "rationale": "两条主导/竞争假设的分歧点均落在同一证据缺口上：c16 已证实『需先补齐真实历史采购金额基线以核实 7.89 倍金额异常，因历史基线含 63 个模拟样本』，c8 已证实『历史基线含 63 个模拟样本,不代表真实历史证据充分』，c7 已证实 7.89 倍偏离与 0.899 金额异常得分；c17（待证实）指向需获取官方招标正文以核实金额、参数与采购需求，c6（待证实）载明未抓取官方正文。在基线未净化、正文未获取前，『异常大额采购』与『正常大额采购』均无法定论，故本项为最高优先级的前置核查动作。",
+          "basisClaimIds": [
+            "c16",
+            "c8",
+            "c7",
+            "c17",
+            "c6"
+          ],
+          "hypothesisLabel": "异常大额采购（金额异常由非规划性因素驱动）"
+        },
+        {
+          "action": "核实本次 CT 采购与同单位 DR 采购项目是否同属『2025年医疗设备更新项目』同一批次：调取该更新项目的立项/批次文件或官方公告序列，确认两项目是否共享同一预算来源与采购计划，据此判断 2000 万元金额是否属既定规划内的品类差异。",
+          "rationale": "c18（待证实）载明本次采购与 DR 采购项目『在时间上相隔约两个月，且同属『2025年医疗设备更新项目』系列』，c10 已证实历史最相似项目即该 DR 项目且相似度 0.931。若官方正文证实同属该更新项目批次，则支持『正常大额采购』假设；若不能证实，则『异常大额采购』假设的相对优势维持。本建议依赖待证实结论 c18，其成立与否直接决定假设取舍，故须在 rationale 中注明该前提。",
+          "basisClaimIds": [
+            "c18",
+            "c10",
+            "c5"
+          ],
+          "hypothesisLabel": "正常大额采购（既定设备更新规划内的真实采购）"
+        },
+        {
+          "action": "针对金额异常高（0.899）与频率异常低（0.194）方向不一致的情形，补充核查是否存在分包或配套服务构成：在官方正文中逐项比对预算构成与分包条款，判断 2000 万元是否为单包金额或含多次分包/配套服务，以解释两项异常指标的方向背离。",
+          "rationale": "c19 已证实『信封同时呈现金额异常得分 0.899（高）与频率异常得分 0.194（低），两项异常方向不一致』，c9 已证实近 30 天采购 9 次、比值 1.24、频率异常得分 0.194。『异常大额采购』假设的可区分 claim c19 明确指向：若官方正文显示采购需求含大量配套服务或多次分包，则支持该假设。本项为对该可区分 claim 的直接取证动作。",
+          "basisClaimIds": [
+            "c19",
+            "c9",
+            "c3"
+          ],
+          "hypothesisLabel": "异常大额采购（金额异常由非规划性因素驱动）"
+        },
+        {
+          "action": "在核查结论落地前，按商机监测口径做低强度跟踪而非投入实质资源：将本项目纳入医学影像与 PACS 方向的机会跟踪清单，待官方正文与真实基线补齐后再评估参与方式与联合伙伴；同时按供应链风险与竞品动态监测重点，跟踪该采购单位后续公告序列及同类项目投标主体变化。",
+          "rationale": "c14 已证实本信号被定性为『商机』，理由为招标信号且语义相似度达到准入阈值、业务方向与项目领域匹配；c12 已证实语义相似度 0.661 达到准入阈值 0.600；c5 已证实项目领域为医学影像与PACS。但 c13（企业业务画像含医疗AI、医学影像等）与 c15（三个假设种子标签）均为待证实，业务匹配度的企业侧依据尚未坐实，故建议限定为跟踪与后续评估，不代替企业决策。",
+          "basisClaimIds": [
+            "c14",
+            "c12",
+            "c5",
+            "c13",
+            "c15"
+          ],
+          "hypothesisLabel": "正常大额采购（既定设备更新规划内的真实采购）"
+        }
+      ]
+    }
+  }
+]

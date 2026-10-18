@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+data/*.db
+data/*.db-journal
+data/*.db-wal
+runs/
+.env
+data/browser_capture_state.json
+
+# 评测产物(确定性生成,跑 evaluate 即重出,不入库)
+eval/out/
+eval/report.md
+eval/report.json
+eval/*/report*.md
+eval/*/report*.json
+data/worker/

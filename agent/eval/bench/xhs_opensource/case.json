@@ -1,0 +1,45 @@
+{
+ "case_id": "xhs_opensource",
+ "title": "小红书开源大模型传闻(真实数据)",
+ "source": "real",
+ "envelope": "examples/xhs_opensource/envelope.json",
+ "responses": "eval/bench/xhs_opensource/responses.json",
+ "seed": "examples/xhs_opensource/evidence_seed.json",
+ "event_id": "evt_xhs_llm",
+ "run_args": {
+  "max_rounds": 6
+ },
+ "budget": {
+  "s6_opinion_max": 40,
+  "llm_calls_max": 60
+ },
+ "enabled": true,
+ "blocked_note": "",
+ "recorded_at": "2026-10-01 冻结入库",
+ "pipeline_note": "离线两套=建套件 fixture;真实两套=三轮 live 迭代后录制(去重上线前)",
+ "meta": {
+  "domain": "竞品动态",
+  "kind": "rumor",
+  "difficulty": {
+   "n_clues": 2,
+   "clue_sources": [
+    "toutiao.com"
+   ],
+   "same_source_ratio": 1.0,
+   "history_pollution": null,
+   "distractors": [
+    "multi_repost"
+   ]
+  },
+  "claims_total": 20,
+  "claims_corpus": 16,
+  "claims_world": 4,
+  "qc": {
+   "verified": false,
+   "checked_by": null,
+   "protocol": "atomic-full(历史件迁移)",
+   "checked_at": null,
+   "origin_suite": "eval/cases"
+  }
+ }
+}

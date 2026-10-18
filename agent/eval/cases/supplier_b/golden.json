@@ -1,0 +1,27 @@
+{
+  "case_id": "supplier_b",
+  "event_id": "evt_supplier_b",
+  "verified": true,
+  "source": "tests/test_e2e_supplier_b.py::test_claim_final_matrix(e2e 回归断言)",
+  "note": "认识论核心场景:三成因翻转 + H0→H1 假设翻转 + 同源折算。金标终态与 e2e 断言逐条对应;C5 为 S5 派生 claim。",
+  "claims": [
+    {"draft_id": "C1", "text": "B新能源科技有限公司自2026年7月起拖欠员工工资",
+     "golden_status": "矛盾", "category": "事实",
+     "note": "爆料账号身份被证伪、官方登记与执行信息反证,终判矛盾"},
+    {"draft_id": "C2", "text": "爆料账号'产业内幕君2026'的运营者是B公司前高管",
+     "golden_status": "待证实", "category": "实体",
+     "note": "单一媒体报道,孤证非权威,维持待证实"},
+    {"draft_id": "C3", "text": "B公司截至2026-09-22工商登记状态为存续且无破产审查记录",
+     "golden_status": "已证实", "category": "时效",
+     "note": "权威登记源(国家企业信用信息公示系统)单源例外"},
+    {"draft_id": "C4", "text": "A汽车股份有限公司与B公司存在核心供应关系",
+     "golden_status": "矛盾", "category": "关系",
+     "note": "第5轮工商变更公示(权威反证)触发矛盾翻转:供应关系已转移"},
+    {"draft_id": "C5", "text": "爆料账号矩阵与C汽车销售集团存在协同关联",
+     "golden_status": "已证实", "category": "关系",
+     "note": "S5 派生 claim;独立根≥2 支持,H1(竞争抹黑)胜出"},
+    {"draft_id": "C6", "text": "A汽车股份有限公司截至2026-09-19未就供应商问题发布公告",
+     "golden_status": "矛盾", "category": "时效",
+     "note": "时效翻转:新证据显示公告已发布,原'未公告'断言被推翻"}
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "suite_id": "sweep-ai-20261003",
+  "variant": "中",
+  "weights": {
+    "miss": 1,
+    "over": 2,
+    "flip": 2
+  },
+  "default_budget": {
+    "s6_opinion_max": 40,
+    "llm_calls_max": 60
+  },
+  "cases": [
+    "ai_coarse",
+    "ai_middle",
+    "ai_fine"
+  ]
+}

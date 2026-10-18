@@ -1,0 +1,1248 @@
+[
+  {
+    "stage": "s1a",
+    "response": {
+      "signalType": "竞情",
+      "reason": "信封 kind 为 rumor,watchFocus 字段明确标注为\"竞品动态\",summary 描述\"竞品动态:小红书在海外开源发布大模型 dots3-note preview,采用 MoE 架构,总参数 280B、激活参数 16B,支持 512K 上下文,具备文本与多模态能力——内容平台下场造底座\",clues 标题为\"小红书悄悄开源发布了自己的大模型，内容平台也要造底座\",属于竞争对手(小红书)技术/产品动态,故定性为竞情。",
+      "selectedSeedLabels": [
+        "真实经营动态",
+        "新方向扩张",
+        "竞对放风"
+      ],
+      "basisGaps": [
+        "该信号仅有媒体转述的两条同源报道(toutiao.com/极客公园),缺少小红书官方开源仓库、模型卡或发布公告等一手信源,需先补齐官方发布证据以确认 dots3-note preview 的真实存在与参数口径",
+        "信封未提供 subjectCreditCode,主体工商身份未核验,需先补齐小红书运营主体的统一社会信用代码等身份基线"
+      ]
+    }
+  },
+  {
+    "stage": "s1b",
+    "response": {
+      "claims": [
+        {
+          "id": "c1",
+          "text": "信号信封 kind 为 rumor，eventId 为 evt_xhs_llm，watchFocus 为\"竞品动态\"。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "信封基础字段，是全部后续推理的地基，可由信封证据直接核实。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": []
+        },
+        {
+          "id": "c2",
+          "text": "信封 rumor.subjectName 为\"小红书\"，subjectCreditCode 为空字符串。",
+          "category": "实体",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "主体身份基线缺失，直接影响实体锚定与后续核验路径。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "小红书"
+          ]
+        },
+        {
+          "id": "c3",
+          "text": "信封 summary 称：小红书在海外开源发布大模型 dots3-note preview，采用 MoE 架构，总参数 280B、激活参数 16B，支持 512K 上下文，具备文本与多模态能力。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "核心事实断言，参数口径与发布行为是全部假设的依赖点，且为竞品动态时效敏感。",
+          "hypothesisIds": [
+            "h1",
+            "h2",
+            "h3"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "小红书",
+            "dots3-note preview"
+          ]
+        },
+        {
+          "id": "c4",
+          "text": "信封 signalTime 为 2026-08-21，source 为 toutiao.com。",
+          "category": "时效",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "信号时间锚点，决定时效衰减与时间线定位。",
+          "hypothesisIds": [],
+          "validWindowDays": 30,
+          "refreshCycleDays": 7,
+          "relationType": null,
+          "entityNames": []
+        },
+        {
+          "id": "c5",
+          "text": "线索 k1 标题为\"小红书悄悄开源发布了自己的大模型，内容平台也要造底座\"，publishedAt 为 2026-08-21，authorType 为\"媒体\"，来源平台为 toutiao。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "单条线索的元数据，用于时间线与信源层级判定。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "小红书"
+          ]
+        },
+        {
+          "id": "c6",
+          "text": "线索 k2 标题为\"小红书悄悄开源发布了自己的大模型，内容平台也要造底座\"，publishedAt 为 2026-08-20，authorType 为\"媒体\"，来源平台为 toutiao。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "与 k1 同标题不同日期，是判断同源转载还是独立报道的关键。",
+          "hypothesisIds": [
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "小红书"
+          ]
+        },
+        {
+          "id": "c7",
+          "text": "k1 与 k2 标题完全相同，均为\"小红书悄悄开源发布了自己的大模型，内容平台也要造底座\"，且均标注来源 toutiao.com。",
+          "category": "矛盾",
+          "sectionIndex": 1,
+          "priority": 4,
+          "priorityReason": "两条线索标题一致而日期不同，指向同源转载可能，直接影响信源独立性与证据强度。",
+          "hypothesisIds": [
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "小红书"
+          ]
+        },
+        {
+          "id": "c8",
+          "text": "k1 正文署名为\"极客公园\"，发布时间为 2026-08-21 14:16。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "原始署名媒体是判断转载链条与一手性的依据。",
+          "hypothesisIds": [
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "极客公园"
+          ]
+        },
+        {
+          "id": "c9",
+          "text": "k2 正文署名为\"极客公园\"，作者为连冉，编辑为靖宇，发布时间为 2026-08-20 14:31。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "署名与作者信息可用于追溯同一稿件的转载路径。",
+          "hypothesisIds": [
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "极客公园",
+            "连冉",
+            "靖宇"
+          ]
+        },
+        {
+          "id": "c10",
+          "text": "k2 正文称\"长期依赖外部模型，不是最好的选择。\"",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 3,
+          "priorityReason": "该表述是报道对小红书自研动机的定性，是判断\"新方向扩张\"假设的直接文本依据。",
+          "hypothesisIds": [
+            "h3"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "小红书"
+          ]
+        },
+        {
+          "id": "c11",
+          "text": "k1 正文称\"前几天，我们注意小红书在海外发布了一款大模型 dots3-note preview。\"",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "发布行为与时间模糊表述（\"前几天\"）是核实发布时点的关键，且为唯一一手转述来源。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "小红书",
+            "dots3-note preview"
+          ]
+        },
+        {
+          "id": "c12",
+          "text": "k1 正文称该模型\"采用 Mo\"（原文在\"Mo\"处截断，未完整给出架构表述）。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 2,
+          "priorityReason": "线索正文截断，架构描述不完整，仅能作为待补全的证据片段。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "dots3-note preview"
+          ]
+        },
+        {
+          "id": "c13",
+          "text": "解读将本信号定性为\"竞情\"，理由为信封 kind 为 rumor、watchFocus 标注为\"竞品动态\"。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 4,
+          "priorityReason": "定性结论决定后续调查方向与假设空间，是结论节的锚点。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": []
+        },
+        {
+          "id": "c14",
+          "text": "解读登记的 basisGaps 指出：该信号仅有媒体转述的两条同源报道（toutiao.com/极客公园），缺少小红书官方开源仓库、模型卡或发布公告等一手信源。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 5,
+          "priorityReason": "直接卡住结论节，是全部假设能否成立的前置条件。",
+          "hypothesisIds": [
+            "h1",
+            "h2",
+            "h3"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "小红书",
+            "极客公园"
+          ]
+        },
+        {
+          "id": "c15",
+          "text": "解读登记的 basisGaps 指出：信封未提供 subjectCreditCode，主体工商身份未核验。",
+          "category": "实体",
+          "sectionIndex": 3,
+          "priority": 4,
+          "priorityReason": "主体身份未锚定，影响实体归属类 claim 的可核实性。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "小红书"
+          ]
+        },
+        {
+          "id": "c16",
+          "text": "解读选定的假设种子标签为\"真实经营动态\"、\"新方向扩张\"、\"竞对放风\"。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 3,
+          "priorityReason": "假设种子集合是竞争假设登记的直接输入。",
+          "hypothesisIds": [
+            "h1",
+            "h2",
+            "h3"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": []
+        },
+        {
+          "id": "c17",
+          "text": "小红书与 dots3-note preview 之间存在发布方与发布物的关联关系。",
+          "category": "关系",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "发布主体归属是核心事实，若归属不成立则整个信号失效。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": "承继",
+          "entityNames": [
+            "小红书",
+            "dots3-note preview"
+          ]
+        },
+        {
+          "id": "c18",
+          "text": "小红书作为内容平台，与既有基础模型提供方之间存在模型供应依赖关系（报道称\"长期依赖外部模型\"）。",
+          "category": "关系",
+          "sectionIndex": 0,
+          "priority": 3,
+          "priorityReason": "供应依赖关系是判断自研动机与\"新方向扩张\"假设的背景前提。",
+          "hypothesisIds": [
+            "h3"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": "供应",
+          "entityNames": [
+            "小红书"
+          ]
+        },
+        {
+          "id": "c19",
+          "text": "小红书与既有基础模型提供方在模型底座层面构成竞争关系（\"内容平台也要造底座\"）。",
+          "category": "关系",
+          "sectionIndex": 0,
+          "priority": 3,
+          "priorityReason": "竞争关系定性决定本信号在竞情框架下的解读方向。",
+          "hypothesisIds": [
+            "h3"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": "竞争",
+          "entityNames": [
+            "小红书"
+          ]
+        },
+        {
+          "id": "c20",
+          "text": "截至 2026-08-21，dots3-note preview 处于 preview 阶段，尚未见正式版发布信息。",
+          "category": "时效",
+          "sectionIndex": 2,
+          "priority": 3,
+          "priorityReason": "preview 阶段状态具有时效性，随官方后续发布将快速失效。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "validWindowDays": 30,
+          "refreshCycleDays": 7,
+          "relationType": null,
+          "entityNames": [
+            "dots3-note preview"
+          ]
+        }
+      ],
+      "hypotheses": [
+        {
+          "id": "h1",
+          "label": "真实经营动态",
+          "description": "小红书确实在海外开源发布了 dots3-note preview 大模型，参数与能力口径属实。可区分 claim：c3（参数与发布口径）、c11（发布行为与\"前几天\"时点）、c17（发布主体归属）、c20（preview 阶段状态）——若官方仓库/模型卡存在则方向为正，若查无实据则方向为负。",
+          "claimIds": [
+            "c3",
+            "c11",
+            "c17",
+            "c20"
+          ],
+          "op": "AND"
+        },
+        {
+          "id": "h2",
+          "label": "竞对放风",
+          "description": "该信号为未经官方确认的媒体转述/放风，两条线索同源转载而非独立信源。可区分 claim：c6（k2 日期 2026-08-20）、c7（两线索标题完全相同）、c8（k1 署名极客公园）、c9（k2 署名极客公园及作者连冉）、c14（缺一手信源）——若两线索实为同一稿件转载且无官方发布，方向为正；若存在独立一手信源，方向为负。",
+          "claimIds": [
+            "c6",
+            "c7",
+            "c8",
+            "c9",
+            "c14"
+          ],
+          "op": "AND"
+        },
+        {
+          "id": "h3",
+          "label": "新方向扩张",
+          "description": "小红书从内容平台向模型底座层扩张，意在摆脱对外部模型的长期依赖。可区分 claim：c10（\"长期依赖外部模型，不是最好的选择。\"）、c18（供应依赖关系）、c19（底座层竞争关系）——若报道动机表述与依赖关系成立，方向为正；若小红书仅为模型应用方而非底座自研方，方向为负。",
+          "claimIds": [
+            "c10",
+            "c18",
+            "c19"
+          ],
+          "op": "AND"
+        }
+      ],
+      "gaps": [
+        {
+          "text": "小红书官方开源仓库、模型卡或发布公告在哪里？dots3-note preview 是否真实存在？",
+          "relatedClaimId": "c3"
+        },
+        {
+          "text": "dots3-note preview 的具体发布时点是什么？k1 所称\"前几天\"对应哪一天？",
+          "relatedClaimId": "c11"
+        },
+        {
+          "text": "k1 与 k2 是否为同一篇极客公园稿件的转载？是否存在独立于极客公园的第二信源？",
+          "relatedClaimId": "c7"
+        },
+        {
+          "text": "小红书运营主体的统一社会信用代码是什么？subjectCreditCode 为何为空？",
+          "relatedClaimId": "c2"
+        },
+        {
+          "text": "dots3-note preview 的 MoE 架构、280B 总参数、16B 激活参数、512K 上下文、多模态能力等口径由谁给出、能否被官方材料印证？",
+          "relatedClaimId": "c3"
+        },
+        {
+          "text": "小红书此前长期依赖哪些外部模型提供方？该依赖关系是否有公开可核实的依据？",
+          "relatedClaimId": "c18"
+        },
+        {
+          "text": "k1 正文在\"采用 Mo\"处截断，完整原文表述是什么？",
+          "relatedClaimId": "c12"
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 1,
+      "mainTarget": "c3",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "缺少小红书官方开源仓库/模型卡/发布公告等一手信源，无法验证 c3 所述\"海外开源发布 dots3-note preview，采用 MoE 架构，总参数 280B、激活参数 16B，支持 512K 上下文，具备文本与多模态能力\"的口径。",
+          "acceptance": "需权威登记源记录级证据：在官方开源仓库（如 Hugging Face 组织页/模型卡）或小红书官方发布公告中，出现与 dots3-note preview 对应的模型条目，且模型卡正文可读到架构（MoE）、总参数 280B、激活参数 16B、512K 上下文、文本与多模态能力等字段。",
+          "failover": "若官方仓库与公告均查无该模型条目，则记录\"查无一手信源\"，c3 方向转为负，转查 c14（缺一手信源）与 c7（两线索同源转载）以支撑\"竞对放风\"假设。"
+        },
+        {
+          "gap": "若已锚定官方模型条目，仍需确认发布主体归属，即 c17 所称\"小红书与 dots3-note preview 之间存在发布方与发布物的关联关系\"。",
+          "acceptance": "需页面正文级证据：官方仓库组织页/模型卡或发布公告正文中，明确将 dots3-note preview 标注为小红书（或其海外主体）发布，含发布方名称与模型名的同页共现。",
+          "failover": "若模型条目存在但发布方标注为第三方或个人账号，则 c17 方向为负，转查 c15（subjectCreditCode 缺失、主体工商身份未核验）以厘清主体口径。"
+        },
+        {
+          "gap": "c20 所称\"截至 2026-08-21，dots3-note preview 处于 preview 阶段，尚未见正式版发布信息\"缺少官方版本状态证据。",
+          "acceptance": "需权威登记源记录级证据：官方仓库/模型卡或公告中标注的版本状态字段（preview 或正式版）及对应日期，可判定 2026-08-21 时点状态。",
+          "failover": "若官方源未标注版本状态，则 c20 标注为\"无法判定\"，不驱动结论，转由 c11（\"前几天\"时点）与 c4（signalTime 2026-08-21）交叉核对时间线。"
+        }
+      ],
+      "searchHints": [
+        "dots3-note preview 小红书 开源",
+        "dots3-note preview MoE 280B 16B 512K",
+        "小红书 海外 大模型 开源 模型卡"
+      ],
+      "sideTargets": [
+        "c14",
+        "c17",
+        "c20"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [
+        {
+          "id": "c21",
+          "text": "截至 2026-08-21，公开可检索范围内未见小红书官方开源仓库、模型卡或发布公告等一手信源对 dots3-note preview 的发布予以确认。",
+          "category": "信源核验",
+          "sectionIndex": 2,
+          "priority": 5,
+          "parent": "c14",
+          "entityNames": [
+            "小红书",
+            "dots3-note preview"
+          ],
+          "hypothesisLinks": [
+            "真实经营动态",
+            "竞对放风"
+          ]
+        },
+        {
+          "id": "c22",
+          "text": "截至 2026-08-21，公开可检索范围内未见 dots3-note preview 的模型权重、模型卡或技术报告等可下载/可查阅的发布物。",
+          "category": "发布物核验",
+          "sectionIndex": 2,
+          "priority": 5,
+          "parent": "c3",
+          "entityNames": [
+            "dots3-note preview"
+          ],
+          "hypothesisLinks": [
+            "真实经营动态"
+          ]
+        },
+        {
+          "id": "c23",
+          "text": "截至 2026-08-21，公开可检索范围内未见小红书就 dots3-note preview 发布的官方公告或官方账号声明。",
+          "category": "官方口径核验",
+          "sectionIndex": 2,
+          "priority": 4,
+          "parent": "c14",
+          "entityNames": [
+            "小红书",
+            "dots3-note preview"
+          ],
+          "hypothesisLinks": [
+            "真实经营动态",
+            "竞对放风"
+          ]
+        },
+        {
+          "id": "c24",
+          "text": "k1 与 k2 两篇报道的标题完全相同，均为\"小红书悄悄开源发布了自己的大模型，内容平台也要造底座\"，署名同为\"极客公园\"，发布时间分别为 2026-08-21 14:16 与 2026-08-20 14:31。",
+          "category": "同源报道核验",
+          "sectionIndex": 2,
+          "priority": 4,
+          "parent": "c7",
+          "entityNames": [
+            "极客公园",
+            "toutiao.com"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c25",
+          "text": "k1 正文在\"采用 Mo\"处截断，未完整给出 dots3-note preview 的架构表述；该架构表述在现有证据中无完整原文可核。",
+          "category": "原文完整性核验",
+          "sectionIndex": 2,
+          "priority": 3,
+          "parent": "c12",
+          "entityNames": [
+            "dots3-note preview"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c26",
+          "text": "现有证据中未见 dots3-note preview 的发布主体注册地、发布渠道所在司法辖区等可核信息，\"海外发布\"的具体落点未在原文中给出。",
+          "category": "发布落点核验",
+          "sectionIndex": 2,
+          "priority": 4,
+          "parent": "c11",
+          "entityNames": [
+            "小红书",
+            "dots3-note preview"
+          ],
+          "hypothesisLinks": [
+            "新方向扩张"
+          ]
+        },
+        {
+          "id": "c27",
+          "text": "现有证据中未见小红书所\"长期依赖\"的外部模型提供方的具体名称，供应关系的一端主体未在原文中给出。",
+          "category": "关系主体核验",
+          "sectionIndex": 2,
+          "priority": 4,
+          "parent": "c18",
+          "relationType": "供应",
+          "entityNames": [
+            "小红书"
+          ],
+          "hypothesisLinks": [
+            "真实经营动态"
+          ]
+        },
+        {
+          "id": "c28",
+          "text": "现有证据中未见小红书与既有基础模型提供方在模型底座层面构成竞争的具体对手名称，竞争关系的一端主体未在原文中给出。",
+          "category": "关系主体核验",
+          "sectionIndex": 2,
+          "priority": 4,
+          "parent": "c19",
+          "relationType": "竞争",
+          "entityNames": [
+            "小红书"
+          ],
+          "hypothesisLinks": [
+            "竞对放风"
+          ]
+        },
+        {
+          "id": "c29",
+          "text": "现有证据中未见小红书（信封 subjectName）的工商登记名称与统一社会信用代码，主体工商身份未核验。",
+          "category": "主体身份核验",
+          "sectionIndex": 2,
+          "priority": 5,
+          "parent": "c15",
+          "entityNames": [
+            "小红书"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c30",
+          "text": "截至 2026-08-21，公开可检索范围内未见 dots3-note preview 的正式版（非 preview）发布信息。",
+          "category": "版本状态核验",
+          "sectionIndex": 2,
+          "priority": 3,
+          "parent": "c20",
+          "entityNames": [
+            "dots3-note preview"
+          ],
+          "hypothesisLinks": [
+            "真实经营动态"
+          ]
+        }
+      ],
+      "cohorts": [
+        {
+          "name": "内容平台自研/开源基础模型主体圈",
+          "criteria": {
+            "描述": "以内容社区/内容平台为主业，且公开信息中出现自研或开源基础模型（含 preview 阶段）动作的主体",
+            "纳入条件": [
+              "主业为内容平台或内容社区",
+              "公开信息中出现自研或开源基础模型动作"
+            ],
+            "排除条件": [
+              "无自研或开源基础模型公开动作"
+            ]
+          },
+          "members": [
+            "小红书"
+          ]
+        },
+        {
+          "name": "同源转述报道圈（本信号）",
+          "criteria": {
+            "描述": "同一标题、同一署名媒体、同一来源平台，仅发布时间不同的转述报道",
+            "纳入条件": [
+              "标题完全相同",
+              "署名媒体相同",
+              "来源平台相同"
+            ],
+            "排除条件": [
+              "标题或署名媒体不同"
+            ]
+          },
+          "members": [
+            "toutiao.com/极客公园 2026-08-21 14:16 报道",
+            "toutiao.com/极客公园 2026-08-20 14:31 报道"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c10",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_xhs_llm:E3",
+          "direction": "无关",
+          "quote": "长期完全依赖外部模型，并不是一个稳妥的选择。",
+          "reason": "该证据原文表述为\"长期完全依赖外部模型，并不是一个稳妥的选择\"，与 claim 所引\"长期依赖外部模型，不是最好的选择。\"文字不一致，不能作为该引语的直接出处；且该证据与 E4 同根（lineage_root 均为 toutiao.com），不构成独立印证。"
+        },
+        {
+          "evidenceId": "evt_xhs_llm:E4",
+          "direction": "支持",
+          "quote": "长期依赖外部模型，不是最好的选择。",
+          "reason": "该证据原文逐字包含 claim 所引语句\"长期依赖外部模型，不是最好的选择。\"，直接支持 claim 关于正文引语的断言。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E4 原文逐字包含 claim 所引语句，可确认该引语存在；但 E3 与 E4 同根（toutiao.com），仅为同一上游的不同版本转载，不构成独立来源，故印证强度有限。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c11",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_xhs_llm:E3",
+          "direction": "支持",
+          "quote": "前几天，我们注意小红书在海外发布了一款大模型 dots3-note preview。",
+          "reason": "该证据原文逐字包含 claim 所引述的句子，直接印证 k1 正文确有该表述。"
+        },
+        {
+          "evidenceId": "evt_xhs_llm:E4",
+          "direction": "支持",
+          "quote": "前几天，我们注意小红书在海外发布了一款大模型 dots3-note preview。",
+          "reason": "同一句引文再次出现，支持 claim 关于 k1 正文表述的断言；但谱系根同为 toutiao.com，与 E3 非独立来源。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "两条证据均逐字包含 claim 所引述的原文句子，claim 仅断言 k1 正文存在该表述，故可证实；但两证据同根（toutiao.com），不构成独立印证，最终独立性判定交由代码。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c12",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_xhs_llm:E3",
+          "direction": "支持",
+          "quote": "这款模型采用 MoE 架构，总参数 280B、激活参数 16B，支持 512K 上下文",
+          "reason": "该证据原文出现\"采用 MoE 架构\"的完整表述，与 claim 所述 k1 正文在\"Mo\"处截断的片段一致，支持该截断表述确有对应原文。"
+        },
+        {
+          "evidenceId": "evt_xhs_llm:E4",
+          "direction": "支持",
+          "quote": "这款模型采用 MoE 架构，总参数 280B、激活参数 16B，支持 512K 上下文",
+          "reason": "同为\"采用 MoE 架构\"的完整表述，与 claim 所述截断片段\"采用 Mo\"吻合，支持该 claim。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "两条证据均含\"采用 MoE 架构\"原文，可印证 k1 正文\"采用 Mo\"处截断的表述；但两证据 lineage_root 同为 toutiao.com，属同根转载，不构成独立来源，最终以代码按独立来源规则判定为准。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c14",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_xhs_llm:E3",
+          "direction": "支持",
+          "quote": "小红书悄悄开源发布了自己的大模型，内容平台也要造底座 2026-08-21 14:16·极客公园",
+          "reason": "该证据为极客公园媒体转述报道，lineage_root 为 toutiao.com，属媒体转述来源，未提供小红书官方开源仓库、模型卡或发布公告等一手信源，与 claim 所述'仅有媒体转述的两条同源报道'相符。"
+        },
+        {
+          "evidenceId": "evt_xhs_llm:E4",
+          "direction": "支持",
+          "quote": "小红书悄悄开源发布了自己的大模型，内容平台也要造底座 2026-08-20 14:31·极客公园",
+          "reason": "该证据同为极客公园媒体转述报道，lineage_root 亦为 toutiao.com，与 E3 同根，构成同源转载，同样缺少官方一手信源，支持 claim 关于信源谱系的判断。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "两条证据均为极客公园媒体转述、lineage_root 同为 toutiao.com，属同源报道，卷宗中未见小红书官方开源仓库、模型卡或发布公告等一手信源，claim 对 basisGaps 的描述与证据一致。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c15",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_xhs_llm:E3",
+          "direction": "无关",
+          "quote": "小红书悄悄开源发布了自己的大模型，内容平台也要造底座 2026-08-21 14:16·极客公园",
+          "reason": "该证据通篇讨论小红书开源大模型 dots3-note preview 的架构、参数与生态意义，未涉及任何解读登记、basisGaps、subjectCreditCode 或主体工商身份核验的内容，不改变 claim 成立与否的判断。"
+        },
+        {
+          "evidenceId": "evt_xhs_llm:E4",
+          "direction": "无关",
+          "quote": "小红书悄悄开源发布了自己的大模型，内容平台也要造底座 2026-08-20 14:31·极客公园",
+          "reason": "该证据与 E3 同源（lineage_root 均为 toutiao.com），内容同样围绕小红书开源大模型展开，未提及 basisGaps、subjectCreditCode 或工商身份核验，对 claim 无支持或矛盾作用。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "两条证据均为小红书开源大模型的媒体报道，与 claim 所述“解读登记的 basisGaps 指出信封未提供 subjectCreditCode、主体工商身份未核验”无任何交集，既不能印证也不能否证该断言；且两证据同根（toutiao.com），即便相关也不构成独立来源。故综合意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c17",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_xhs_llm:E3",
+          "direction": "支持",
+          "quote": "前几天，我们注意小红书在海外发布了一款大模型 dots3-note preview。",
+          "reason": "该证据明确表述小红书发布 dots3-note preview，直接支撑发布方与发布物的关联。"
+        },
+        {
+          "evidenceId": "evt_xhs_llm:E4",
+          "direction": "支持",
+          "quote": "前几天，我们注意小红书在海外发布了一款大模型 dots3-note preview。",
+          "reason": "同一表述再次出现，方向为支持；但两条证据 lineage_root 同为 toutiao.com，属同根转载，不构成独立印证。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "两条证据均指向小红书发布 dots3-note preview，方向一致为支持，但谱系根相同（toutiao.com），系同一上游转载，缺乏独立来源印证，故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c18",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_xhs_llm:E3",
+          "direction": "支持",
+          "quote": "对一个体量足够大的平台而言，长期完全依赖外部模型，并不是一个稳妥的选择。",
+          "reason": "该表述以'长期完全依赖外部模型'描述小红书此前状态，间接印证其与外部模型提供方存在供应依赖关系。"
+        },
+        {
+          "evidenceId": "evt_xhs_llm:E4",
+          "direction": "支持",
+          "quote": "长期依赖外部模型，不是最好的选择。",
+          "reason": "标题式表述直接称小红书'长期依赖外部模型'，与 claim 所述依赖关系一致；但该证据与 E3 同根（toutiao.com），不构成独立来源。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "两条证据均指向'长期依赖外部模型'，方向支持，但谱系根同为 toutiao.com，属同一上游转载，缺乏独立来源印证，故仅能维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c19",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_xhs_llm:E3",
+          "direction": "支持",
+          "quote": "小红书悄悄开源发布了自己的大模型，内容平台也要造底座",
+          "reason": "标题与正文均指向小红书自研并开源基础模型、将AI从功能变为支撑整套产品能力的底座，与'内容平台也要造底座'的竞争关系表述一致。"
+        },
+        {
+          "evidenceId": "evt_xhs_llm:E4",
+          "direction": "支持",
+          "quote": "小红书悄悄开源发布了自己的大模型，内容平台也要造底座",
+          "reason": "与E3同源（lineage_root 均为 toutiao.com），内容为同一报道的另一版本，方向同样支持，但不构成独立来源。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "两条证据均支持'小红书自研开源基础模型、内容平台造底座'，但谱系根相同（toutiao.com），属同一上游转载，不构成独立印证；且证据未直接描述与既有基础模型提供方的竞争关系，故仅能给出待证实意见。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c2",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_xhs_llm:E3",
+          "direction": "无关",
+          "quote": "小红书悄悄开源发布了自己的大模型，内容平台也要造底座 2026-08-21 14:16·极客公园",
+          "reason": "该证据讨论小红书开源大模型 dots3-note preview，未涉及信封 rumor.subjectName 或 subjectCreditCode 字段内容，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_xhs_llm:E4",
+          "direction": "无关",
+          "quote": "小红书悄悄开源发布了自己的大模型，内容平台也要造底座 2026-08-20 14:31·极客公园",
+          "reason": "该证据同样只讨论小红书开源大模型，未提及信封 rumor 字段的取值，与 claim 无直接关联。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "两条证据均为同一 lineage_root（toutiao.com）的转载，且内容仅涉及小红书开源大模型，未提供任何关于信封 rumor.subjectName 或 subjectCreditCode 字段取值的信息，无法证实或推翻 claim。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c20",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_xhs_llm:E3",
+          "direction": "支持",
+          "quote": "前几天，我们注意小红书在海外发布了一款大模型 dots3-note preview。",
+          "reason": "该证据发布于 2026-08-21，明确称 dots3-note preview 为先行发布的 note 版本，未提及正式版发布，支持 claim 中『处于 preview 阶段、尚未见正式版发布信息』的判断。"
+        },
+        {
+          "evidenceId": "evt_xhs_llm:E4",
+          "direction": "支持",
+          "quote": "前几天，我们注意小红书在海外发布了一款大模型 dots3-note preview。",
+          "reason": "该证据发布于 2026-08-20，同样将 dots3-note preview 描述为先行发布的版本，未提及正式版发布，支持 claim。但两证据 lineage_root 均为 toutiao.com，属同根转载，不构成独立印证。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "两条证据均指向 dots3-note preview 为先行发布版本、未见正式版发布信息，方向一致支持 claim；但二者谱系根同为 toutiao.com，属同一上游转载，不构成独立来源印证，故仅能给出待证实意见。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c3",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_xhs_llm:E3",
+          "direction": "支持",
+          "quote": "这款模型采用 MoE 架构，总参数 280B、激活参数 16B，支持 512K 上下文，并具备文本、视觉、语音的多模态理解能力。",
+          "reason": "该证据逐项复述了 claim 中的架构、参数、上下文与多模态能力，且称小红书在海外发布 dots3-note preview，直接支持 claim。"
+        },
+        {
+          "evidenceId": "evt_xhs_llm:E4",
+          "direction": "支持",
+          "quote": "这款模型采用 MoE 架构，总参数 280B、激活参数 16B，支持 512K 上下文，并具备文本、视觉、语音的多模态理解能力。",
+          "reason": "与 E3 内容一致，同样支持 claim 的各项技术规格与发布事实；但谱系根同为 toutiao.com，与 E3 属同一上游转载，不构成独立印证。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "两条证据均支持 claim，但谱系根相同（toutiao.com），系同一上游的转载，不构成独立来源印证，故仅能维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c5",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_xhs_llm:E3",
+          "direction": "支持",
+          "quote": "小红书悄悄开源发布了自己的大模型，内容平台也要造底座 2026-08-21 14:16·极客公园",
+          "reason": "标题与 claim 完全一致，发布时间 2026-08-21 与 claim 的 publishedAt 一致，署名机构为媒体（极客公园），平台为 toutiao，支持 claim 各项要素。"
+        },
+        {
+          "evidenceId": "evt_xhs_llm:E4",
+          "direction": "矛盾",
+          "quote": "小红书悄悄开源发布了自己的大模型，内容平台也要造底座 2026-08-20 14:31·极客公园",
+          "reason": "标题与平台一致，但该条证据标注的发布时间为 2026-08-20，与 claim 所述 publishedAt 2026-08-21 不一致，对 claim 的时间要素构成矛盾。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "两条证据同根（lineage_root 均为 toutiao.com），不构成独立来源印证；且二者对同一标题给出的发布时间分别为 2026-08-21 与 2026-08-20，存在冲突，无法据此确认 claim 的 publishedAt 为 2026-08-21。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c6",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_xhs_llm:E3",
+          "direction": "支持",
+          "quote": "小红书悄悄开源发布了自己的大模型，内容平台也要造底座 2026-08-21 14:16·极客公园",
+          "reason": "标题与 claim 所述标题一致，来源平台为 toutiao、authorType 为媒体，但该证据显示的发布时间为 2026-08-21 14:16，与 claim 的 publishedAt 2026-08-20 不一致，仅部分支持。"
+        },
+        {
+          "evidenceId": "evt_xhs_llm:E4",
+          "direction": "支持",
+          "quote": "小红书悄悄开源发布了自己的大模型，内容平台也要造底座 2026-08-20 14:31·极客公园",
+          "reason": "标题、publishedAt（2026-08-20）、authorType（媒体）、平台（toutiao）均与 claim 一致，直接支持。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "两条证据标题均与 claim 一致，其中 E4 的日期 2026-08-20 与 claim 的 publishedAt 完全吻合，E3 日期为 2026-08-21 存在差异；但两条证据谱系根同为 toutiao.com，属同一上游转载，不构成独立来源印证，故仅给出已证实意见，最终由代码按独立来源规则裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c7",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_xhs_llm:E3",
+          "direction": "支持",
+          "quote": "小红书悄悄开源发布了自己的大模型，内容平台也要造底座 2026-08-21 14:16·极客公园",
+          "reason": "该证据标题与 claim 所述标题完全一致，且谱系根为 toutiao.com，与 claim 中'均标注来源 toutiao.com'相符。"
+        },
+        {
+          "evidenceId": "evt_xhs_llm:E4",
+          "direction": "支持",
+          "quote": "小红书悄悄开源发布了自己的大模型，内容平台也要造底座 2026-08-20 14:31·极客公园",
+          "reason": "该证据标题与 claim 所述标题完全一致，谱系根同为 toutiao.com，与 claim 中'均标注来源 toutiao.com'相符。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "两条证据标题逐字相同，均为'小红书悄悄开源发布了自己的大模型，内容平台也要造底座'，且 lineage_root 均为 toutiao.com，与 claim 描述一致；但二者同根（toutiao.com），不构成独立来源印证，仅能证明该标题与来源标注存在。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c8",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_xhs_llm:E3",
+          "direction": "支持",
+          "quote": "2026-08-21 14:16·极客公园",
+          "reason": "该证据正文开头即标注署名与时间，与 claim 所述署名\"极客公园\"、发布时间 2026-08-21 14:16 完全一致。"
+        },
+        {
+          "evidenceId": "evt_xhs_llm:E4",
+          "direction": "矛盾",
+          "quote": "2026-08-20 14:31·极客公园",
+          "reason": "同一标题文章在此证据中标注时间为 2026-08-20 14:31，与 claim 的 2026-08-21 14:16 不一致，削弱该时间断言。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "E3 支持署名与时间，E4 给出不同时间；两条证据谱系根同为 toutiao.com，属同一上游转载，不构成独立来源，故仅能标注待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c9",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_xhs_llm:E3",
+          "direction": "矛盾",
+          "quote": "2026-08-21 14:16·极客公园",
+          "reason": "该证据显示同一标题文章的发布时间为 2026-08-21 14:16，与 claim 所称 2026-08-20 14:31 不一致，且未出现作者连冉、编辑靖宇的署名信息。"
+        },
+        {
+          "evidenceId": "evt_xhs_llm:E4",
+          "direction": "支持",
+          "quote": "2026-08-20 14:31·极客公园 长期依赖外部模型，不是最好的选择。 作者｜连冉 编辑｜靖宇",
+          "reason": "该证据原文同时出现署名\"极客公园\"、发布时间\"2026-08-20 14:31\"、\"作者｜连冉\"与\"编辑｜靖宇\"，与 claim 各项要素一致。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "E4 逐项吻合 claim 的署名、作者、编辑与发布时间，但 E3 与 E4 谱系根同为 toutiao.com，属同一上游转载，不构成独立来源印证；且 E3 显示的发布时间与之冲突，故仅能给出待证实意见。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 2,
+      "mainTarget": "c14",
+      "action": "explore",
+      "gapChain": [
+        {
+          "gap": "缺少小红书官方开源仓库、模型卡或发布公告等一手信源，无法判定 dots3-note preview 是否存在官方发布记录。",
+          "acceptance": "需权威登记源记录或官方仓库/模型卡页面正文级证据：能定位到发布主体为小红书的官方仓库或模型卡条目（含模型名 dots3-note preview 或等价标识），或官方发布公告原文。",
+          "failover": "若官方仓库/模型卡/公告均查无，则记录为\"一手信源缺失\"，转向核验 c7/c8/c9 的同源转载关系以支撑\"竞对放风\"假设。"
+        },
+        {
+          "gap": "若存在官方仓库/模型卡，其登记的架构与参数口径（MoE、280B 总参、16B 激活、512K 上下文、多模态）是否与信封 summary 一致。",
+          "acceptance": "需模型卡或仓库 README 正文级证据，逐项比对架构、总参数、激活参数、上下文长度、模态能力字段。",
+          "failover": "若模型卡存在但字段不全，则仅登记可核验字段，其余标注\"官方未披露\"，不采信媒体口径。"
+        },
+        {
+          "gap": "发布主体工商身份未核验（信封 subjectCreditCode 为空），无法确认发布方与\"小红书\"实体的对应关系。",
+          "acceptance": "需权威登记源记录（如统一社会信用代码登记信息）或官方仓库归属账号的权威认证信息，确认发布主体身份。",
+          "failover": "若无法取得登记源记录，则保留 c15 为未决，并在报告中标注主体身份未核验。"
+        }
+      ],
+      "searchHints": [
+        "小红书 dots3-note preview 开源 仓库",
+        "dots3-note preview model card",
+        "小红书 大模型 官方发布公告"
+      ],
+      "sideTargets": [
+        "c3",
+        "c17",
+        "c20"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 3,
+      "mainTarget": "c17",
+      "action": "explore",
+      "gapChain": [
+        {
+          "gap": "小红书与 dots3-note preview 之间是否存在发布方与发布物的关联关系（c17），即是否存在可核验的官方发布载体（开源仓库/模型卡/发布公告）将二者绑定。",
+          "acceptance": "需权威登记源记录或官方发布页正文级证据：页面正文中同时出现发布主体标识（小红书或其官方组织账号/组织名）与发布物标识（dots3-note preview），且可判定为发布方-发布物关系。",
+          "failover": "若查无任何官方发布载体，则记录为\"未检索到官方发布载体\"的负向结果，转查 c3 的参数口径是否仅存在于媒体转述中。"
+        },
+        {
+          "gap": "若存在官方发布载体，其登记的主体身份信息（组织名/账号归属）是否可与信封 subjectName\"小红书\"对应，以支撑 c15（主体工商身份未核验）与 c2（subjectCreditCode 为空）。",
+          "acceptance": "需权威登记源记录：发布载体页面上的组织名/主体标识与\"小红书\"的对应关系可被逐字引用。",
+          "failover": "若发布载体未披露主体身份信息，则维持 c15 的未核验状态，不追加调用。"
+        }
+      ],
+      "searchHints": [
+        "dots3-note preview 开源仓库",
+        "小红书 dots3-note preview 模型卡",
+        "dots3-note preview 发布公告"
+      ],
+      "sideTargets": [
+        "c3",
+        "c20"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 4,
+      "mainTarget": "c11",
+      "action": "explore",
+      "gapChain": [
+        {
+          "gap": "k1 正文中\"前几天，我们注意小红书在海外发布了一款大模型 dots3-note preview。\"这一表述的完整原文与上下文（含\"我们\"所指主体、\"海外发布\"的具体渠道指向）尚未取得页面正文级证据。",
+          "acceptance": "需页面正文级证据：k1 详情页正文中可逐字复制出含\"小红书\"\"海外\"\"dots3-note preview\"的连续原文片段，并可见该句前后各至少一句上下文。",
+          "failover": "若 k1 详情页正文不可得或该句被截断，则改以 k2 详情页正文同段落取证；两者均不可得则将该缺口标注为不可取证并转入 c3 的官方信源链。"
+        },
+        {
+          "gap": "该\"海外发布\"表述是否指向可核验的发布渠道（官方开源仓库/模型卡/发布公告），即 c11 所述发布行为能否落到一手信源。",
+          "acceptance": "需权威登记源记录或官方发布页：出现与 dots3-note preview 对应的官方仓库条目、模型卡或发布公告，且发布主体可识别为小红书或其关联实体。",
+          "failover": "若查无官方一手信源，则记录\"仅媒体转述\"的取证结论，用于支撑\"竞对放风\"假设方向，并停止在本 claim 上追加调用。"
+        }
+      ],
+      "searchHints": [
+        "小红书 dots3-note preview 海外 发布",
+        "dots3-note preview 开源 仓库 模型卡",
+        "小红书 悄悄开源发布了自己的大模型 内容平台也要造底座"
+      ],
+      "sideTargets": [
+        "c12",
+        "c20"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 5,
+      "mainTarget": "c3",
+      "action": "explore",
+      "gapChain": [
+        {
+          "gap": "c3 所述发布口径（海外开源发布 dots3-note preview、MoE 架构、总参数 280B、激活参数 16B、512K 上下文、文本与多模态能力）缺少一手信源支撑，需先锚定是否存在官方开源仓库或模型卡。",
+          "acceptance": "需权威登记源记录：在官方开源仓库/模型卡托管平台检索到与 dots3-note preview 对应的仓库或模型卡条目（含发布方标识与模型名），或确认检索无结果。",
+          "failover": "若官方仓库/模型卡检索无结果，转向查证小红书官方发布公告或官方账号发布记录，作为替代一手信源。"
+        },
+        {
+          "gap": "若存在官方仓库/模型卡，需核对其披露的架构与参数口径是否与 c3 的 MoE、280B/16B、512K 表述一致。",
+          "acceptance": "需页面正文级证据：仓库 README 或模型卡正文中逐项出现架构类型、总参数量、激活参数量、上下文长度、模态能力的对应表述。",
+          "failover": "若仓库/模型卡存在但未披露参数细节，则降级为仅确认发布行为（c17/c11 方向），c3 参数口径标注为未获一手证实。"
+        },
+        {
+          "gap": "若一手信源缺失，需确认 c3 口径是否仅来自媒体转述（toutiao.com/极客公园），以区分\"真实经营动态\"与\"竞对放风\"假设。",
+          "acceptance": "需页面正文级证据：媒体正文中可逐字定位到 280B/16B/512K/MoE 等表述，且无任何官方来源引用。",
+          "failover": "若媒体正文亦无法定位上述参数表述，则 c3 记为无法证实，转由 c14 的 basisGaps 结论收口。"
+        }
+      ],
+      "searchHints": [
+        "dots3-note preview 开源仓库",
+        "小红书 dots3-note 模型卡",
+        "dots3-note preview MoE 280B 16B 512K"
+      ],
+      "sideTargets": [
+        "c20",
+        "c12"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 6,
+      "mainTarget": "c14",
+      "action": "explore",
+      "gapChain": [
+        {
+          "gap": "缺少小红书官方开源仓库、模型卡或发布公告等一手信源，无法验证 dots3-note preview 是否由小红书官方发布。",
+          "acceptance": "需权威登记源记录：在小红书官方 GitHub 组织或 Hugging Face 官方账号下检索到 dots3-note preview 的仓库/模型卡页面，页面正文级证据需含发布方署名与模型名称。",
+          "failover": "若官方仓库/模型卡不存在，则转向检索小红书官方博客、技术公众号或海外官方社媒账号的发布公告，验收标准为官方账号正文级证据。"
+        },
+        {
+          "gap": "若一手信源存在，需确认其发布主体身份与小红书（信封 subjectName）的归属关系，以支撑 c17 的发布方-发布物关联。",
+          "acceptance": "需权威登记源记录：官方仓库/模型卡页面中明确标注发布方为小红书（或小红书关联实体），或官方公告中明确署名小红书。",
+          "failover": "若发布方署名不明确，则记录为待核验，并转向查证小红书工商登记信息以锚定主体身份。"
+        }
+      ],
+      "searchHints": [
+        "小红书 dots3-note preview 官方开源仓库",
+        "dots3-note preview Hugging Face 模型卡",
+        "小红书 官方 大模型 发布公告"
+      ],
+      "sideTargets": [
+        "c3",
+        "c17",
+        "c20"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 主体与事件背景\n\n本节所涉信号信封的 kind 为 rumor，eventId 为 evt_xhs_llm，watchFocus 为\"竞品动态\"；该信封属性目前尚未核实 [c1]。\n\n信封 rumor.subjectName 为\"小红书\"，subjectCreditCode 为空字符串；上述主体标识目前尚未核实 [c2][E3][E4]。\n\n关于小红书与既有基础模型提供方的关系，现有材料指向两个方向，均尚未核实：其一，报道称小红书\"长期依赖外部模型\"，据此可描述为内容平台与既有基础模型提供方之间存在模型供应依赖关系 [c18][E3][E4]；其二，报道以\"内容平台也要造底座\"为口径，据此可描述为双方在模型底座层面构成竞争关系 [c19][E3][E4]。上述两项关系判断目前均尚未核实。\n\n就动机表述而言，k2 正文称\"长期依赖外部模型，不是最好的选择。\"；该表述目前尚未核实 [c10][E4][E3]。\n\n本节所引证据均来自给定列表，未引入列表之外的来源；涉及主体一律使用规范名\"小红书\"。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 动态时间线与关联方\n\n本节仅就线索 k1、k2 的标题、时间、署名与来源信息作台账投影，相关断言目前均处于待证实状态，以下表述不构成事实认定。\n\n**标题与来源。** 线索 k1 标题为\"小红书悄悄开源发布了自己的大模型，内容平台也要造底座\"，publishedAt 为 2026-08-21，authorType 为\"媒体\"，来源平台为 toutiao [E3][E4]；线索 k2 标题为\"小红书悄悄开源发布了自己的大模型，内容平台也要造底座\"，publishedAt 为 2026-08-20，authorType 为\"媒体\"，来源平台为 toutiao [E3][E4]。两条线索标题完全相同，且均标注来源 toutiao.com，目前尚未核实 [E3][E4]。\n\n**署名与发布时间。** k1 正文署名为\"极客公园\"，发布时间为 2026-08-21 14:16，目前尚未核实 [E3][E4]；k2 正文署名为\"极客公园\"，作者为连冉，编辑为靖宇，发布时间为 2026-08-20 14:31，目前尚未核实 [E3][E4]。\n\n**信封层信息。** 信封 signalTime 为 2026-08-21，source 为 toutiao.com，目前尚未核实（该断言未附证据引用）。\n\n**关联方口径。** 就上述线索是否构成同源转载、是否存在独立一手信源，现有台账未给出可核验结论，本节不作推断。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 核心事实\n\n本节仅就「核心事实」相关 claim 及其给定证据作忠实投影，不涉及其他节内容。\n\n### 一、发布行为与主体归属\n\n关于小红书在海外开源发布大模型 dots3-note preview 一事，现有证据均为转述性材料，尚无一手信源支撑，相关断言目前尚未核实。\n\n- 信封 summary 称：小红书在海外开源发布大模型 dots3-note preview，采用 MoE 架构，总参数 280B、激活参数 16B，支持 512K 上下文，具备文本与多模态能力。该表述目前尚未核实 [1][2]。\n- k1 正文称\"前几天，我们注意小红书在海外发布了一款大模型 dots3-note preview。\"该表述目前尚未核实 [1][2]。\n- 小红书与 dots3-note preview 之间存在发布方与发布物的关联关系，目前尚未核实 [1][2]。\n\n### 二、架构表述\n\n- k1 正文称该模型\"采用 Mo\"（原文在\"Mo\"处截断，未完整给出架构表述）。该表述目前尚未核实 [1][2]。\n\n需说明的是，信封 summary 中\"采用 MoE 架构\"的完整表述与 k1 正文在\"Mo\"处截断的表述并存，二者在证据中均未获一手信源确认。\n\n### 三、时效状态\n\n- 截至 2026-08-21，dots3-note preview 处于 preview 阶段，尚未见正式版发布信息。该状态目前尚未核实 [1][2]。\n\n### 证据引用\n\n[1] E3\n[2] E4\n\n### 核实状态说明\n\n本节所列全部 claim（c3、c11、c17、c20、c12）在给定台账中均为「待证实」状态，无已证实或矛盾断言，故统一采用\"目前尚未核实\"口径，未作事实升格。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 结论\n\n本节就本信号（信封标注为\"竞品动态:小红书在海外开源发布大模型 dots3-note preview,采用 MoE 架构,总参数 280B、激活参\"）的解读结论作忠实投影。以下各条均为解读环节登记内容，其核实状态以三态标注为准。\n\n**一、信号定性与信源基础**\n\n解读将本信号定性为\"竞情\"，理由为信封 kind 为 rumor、watchFocus 标注为\"竞品动态\"。该定性目前尚未核实。\n\n解读登记的 basisGaps 指出：该信号仅有媒体转述的两条同源报道（toutiao.com/极客公园），缺少小红书官方开源仓库、模型卡或发布公告等一手信源 [1][2]。该缺口目前尚未核实。\n\n解读登记的 basisGaps 另指出：信封未提供 subjectCreditCode，主体工商身份未核验 [1][2]。该缺口目前尚未核实。\n\n**二、假设种子**\n\n解读选定的假设种子标签为\"真实经营动态\"、\"新方向扩张\"、\"竞对放风\"。该选定内容目前尚未核实。\n\n**三、各假设的待核实状态**\n\n- \"真实经营动态\"：待核实 claim 4 条（c3、c11、c17、c20），已证实 0 条，已矛盾 0 条。\n- \"竞对放风\"：待核实 claim 5 条（c6、c7、c8、c9、c14），已证实 0 条，已矛盾 0 条。\n- \"新方向扩张\"：待核实 claim 3 条（c10、c18、c19），已证实 0 条，已矛盾 0 条。\n\n上述三组假设均处于待证实状态，尚无已证实或已矛盾的 claim 支撑，本节不作事实性认定。\n\n**证据引用**\n\n[1] E3\n[2] E4"
+    }
+  },
+  {
+    "stage": "s7_recommend",
+    "response": {
+      "items": [
+        {
+          "action": "补充核查一手信源：检索小红书官方开源仓库、模型卡或发布公告，核实 dots3-note preview 是否真实存在及其发布主体归属；同时核验主体工商身份（subjectCreditCode 为空）。",
+          "rationale": "全部 20 条 claim 均为\"待证实\"，无任何已证实或矛盾 claim，三条假设得分均为 0、verified 与 contradicted 均为 0，故本建议不依赖任何已成立结论，而是针对最大缺口：解读登记的 basisGaps 明确指出该信号仅有媒体转述的两条同源报道（toutiao.com/极客公园），缺少小红书官方开源仓库、模型卡或发布公告等一手信源；另一条 basisGaps 指出信封未提供 subjectCreditCode，主体工商身份未核验。在官方仓库/模型卡出现前，\"真实经营动态\"与\"竞对放风\"无法区分，任何后续动作都应以核查结果为前提。",
+          "basisClaimIds": [
+            "c14",
+            "c15",
+            "c17",
+            "c3"
+          ],
+          "hypothesisLabel": "真实经营动态"
+        },
+        {
+          "action": "核查信源独立性：比对 k1 与 k2 是否为同一稿件转载，追溯极客公园原始发布页与作者连冉、编辑靖宇的原文，确认是否存在独立于 toutiao.com 转载的第二信源。",
+          "rationale": "两条线索标题完全相同、均标注来源 toutiao.com，k1 与 k2 署名同为极客公园，仅发布时间相差一天（2026-08-21 14:16 与 2026-08-20 14:31），符合同源转载特征而非独立信源。若确认同源且无官方发布，则\"竞对放风\"方向为正；若存在独立一手信源，则该假设方向为负。此项核查是判断信号可信度的前置条件，结论未定前不宜据此调整竞争判断。",
+          "basisClaimIds": [
+            "c7",
+            "c8",
+            "c9",
+            "c6",
+            "c5"
+          ],
+          "hypothesisLabel": "竞对放风"
+        },
+        {
+          "action": "跟踪后续机会与竞争影响：持续监测 dots3-note preview 是否从 preview 阶段转入正式版发布，以及是否公开权重、许可条款与调用方式，据此评估自身模型选型与底座依赖策略。",
+          "rationale": "前提说明：本条依赖尚待证实的结论——c20 称截至 2026-08-21 该模型处于 preview 阶段、尚未见正式版发布信息，c3 的参数与能力口径（MoE、总参数 280B、激活参数 16B、512K 上下文、文本与多模态）亦均未证实，故本条仅为监测动作而非结论性判断。若后续官方发布坐实，则\"新方向扩张\"假设方向为正，需评估小红书由内容平台向模型底座层扩张对既有基础模型供应格局的影响；若始终查无实据，则应将该信号降级处理。",
+          "basisClaimIds": [
+            "c20",
+            "c3",
+            "c19",
+            "c18"
+          ],
+          "hypothesisLabel": "新方向扩张"
+        },
+        {
+          "action": "风险缓释：在官方信源确认前，不将该信号纳入竞品能力评估或采购决策输入，并对内部引用该报道的环节标注\"未经官方确认\"。",
+          "rationale": "信号信封 kind 为 rumor，watchFocus 标注为\"竞品动态\"，解读据此将本信号定性为\"竞情\"；但全部 claim 处于待证实状态，三条假设均无得分，且缺少一手信源与主体工商身份核验。在证据链补齐前，将未证实信息用于能力评估或采购决策存在误判风险，故建议先行标注与隔离，待核查结论明确后再决定是否升级处理。",
+          "basisClaimIds": [
+            "c1",
+            "c13",
+            "c14",
+            "c15"
+          ],
+          "hypothesisLabel": "竞对放风"
+        }
+      ]
+    }
+  }
+]

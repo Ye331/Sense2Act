@@ -1,0 +1,40 @@
+{
+ "case_id": "topkg_4",
+ "title": "TopK[4] [询比采购]北京通用航天医院LIS系统信创改造项目采购公告",
+ "source": "real",
+ "envelope_batch": "examples/upstream_topk/agent_top_k_samples.json",
+ "signal_index": 4,
+ "responses": "eval/bench/topkg_4/topkg2_4.json",
+ "event_id": "evt_topkg2_4",
+ "recorded_at": "2026-10-06 TopK live",
+ "pipeline_note": "tender 无种子+信封证据挂账修复后(轮0裁定 corpus_bound)",
+ "run_args": {
+  "assoc": "entity_text",
+  "max_rounds": 6
+ },
+ "enabled": true,
+ "meta": {
+  "domain": "电子病历与临床系统",
+  "kind": "tender",
+  "difficulty": {
+   "n_clues": null,
+   "clue_sources": null,
+   "same_source_ratio": 1.0,
+   "history_pollution": null,
+   "distractors": null
+  },
+  "claims_total": 24,
+  "claims_corpus": 24,
+  "claims_world": 0,
+  "qc": {
+   "verified": true,
+   "checked_by": null,
+   "protocol": "atomic-full(历史件迁移)",
+   "checked_at": null,
+   "origin_suite": "eval/topk"
+  },
+  "upstream_project_id": "R-bab072bbcb24e1c3",
+  "upstream_buyer": "北京通用航天医院",
+  "upstream_title": "[询比采购]北京通用航天医院LIS系统信创改造项目采购公告"
+ }
+}

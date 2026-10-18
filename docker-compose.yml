@@ -1,0 +1,62 @@
+# Sense2Act 全栈:docker compose up -d --build
+#   前端      http://127.0.0.1:5173
+#   后端      http://127.0.0.1:8080(swagger-ui.html)
+# 数据流:文档 → 后端 → signal-worker 检测 → 信号(达阈值自动立项)→ agent 调查 → 报告 → 前端 SSE 实时呈现
+# 后端服务定义复用 Backend/docker-compose.yml(extends),这里只补接入所需的配置。
+services:
+  postgres:
+    extends: { file: Backend/docker-compose.yml, service: postgres }
+    ports:
+      - "127.0.0.1:5432:5432"
+
+  api:
+    extends: { file: Backend/docker-compose.yml, service: api }
+    depends_on:
+      postgres: { condition: service_healthy }
+    environment:
+      INTERNAL_API_KEY: ${INTERNAL_API_KEY:-local-dev-internal-key}
+      # 语义检索用信号服务的同一个 bge 模型(512 维)
+      EMBEDDING_ENDPOINT: ${EMBEDDING_ENDPOINT:-http://signal-api:8001/embed}
+
+  signal-api:
+    build:
+      context: signal-service
+      args: { HF_ENDPOINT: "${HF_ENDPOINT:-https://huggingface.co}" }
+    image: sense2act/signal-service
+    restart: unless-stopped
+
+  signal-worker:
+    image: sense2act/signal-service
+    command: ["python", "-m", "bridge"]
+    depends_on: [signal-api, api]
+    environment:
+      BACKEND_URL: http://api:8080
+      INTERNAL_API_KEY: ${INTERNAL_API_KEY:-local-dev-internal-key}
+      SIGNAL_COMPANY_PROFILE: ${SIGNAL_COMPANY_PROFILE:-}
+    restart: unless-stopped
+
+  agent:
+    build: agent
+    depends_on: [api]
+    environment:
+      BACKEND_URL: http://api:8080
+      INTERNAL_API_KEY: ${INTERNAL_API_KEY:-local-dev-internal-key}
+      # replay:零 key 演示回放;live:真实模型 + 本地爬虫(需 DEEPSEEK_API_KEY)
+      AGENT_MODE: ${AGENT_MODE:-replay}
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      DEEPSEEK_BASE_URL: ${DEEPSEEK_BASE_URL:-https://api.deepseek.com}
+    volumes:
+      - agentdata:/app/data/worker
+    restart: unless-stopped
+
+  frontend:
+    build: frontend
+    depends_on: [api]
+    ports:
+      - "127.0.0.1:5173:80"
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  snapshots:
+  agentdata:

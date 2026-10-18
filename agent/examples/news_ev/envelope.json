@@ -1,0 +1,23 @@
+{
+  "kind": "rumor",
+  "event_id": "evt_news_ev",
+  "rumor": {
+    "subjectName": "新能源电池产业",
+    "summary": "传闻:动力电池行业近期出现新的产能扩张与安全标准调整动向,可能影响上游供应链格局",
+    "source": "weibo.com",
+    "signalTime": "2026-09-26",
+    "watchFocus": "竞品动态",
+    "clues": [
+      {
+        "clueId": "k1",
+        "source": "weibo.com",
+        "platform": "weibo",
+        "title": "行业动向帖",
+        "content": "社交媒体流传动力电池行业产能扩张与安全标准调整的讨论,涉及上游供应链格局变化。",
+        "url": "https://weibo.com/example/ev1",
+        "publishedAt": "2026-09-26",
+        "authorType": "自媒体"
+      }
+    ]
+  }
+}

@@ -1,0 +1,580 @@
+[
+  {
+    "stage": "s1a",
+    "response": {
+      "signalType": "商机",
+      "reason": "金额与新颖性双高、且与本企业医疗AI产品线高相关(relevance 0.90),信号发现层已确认历史依据充分",
+      "selectedSeedLabels": [
+        "正常大额采购",
+        "新方向扩张",
+        "异常输送"
+      ],
+      "basisGaps": []
+    }
+  },
+  {
+    "stage": "s1b",
+    "response": {
+      "claims": [
+        {
+          "id": "C1",
+          "text": "该院本次采购金额显著高于其历史采购水平(检测器:历史中位数的4.2倍)",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "检测器数字断言应固化为claim,私域历史库可核",
+          "hypothesisIds": [
+            "H0"
+          ],
+          "entityNames": [
+            "XX市第一人民医院"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "本次采购属于该院智慧医院三期建设的既定后续阶段",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "若属既定规划则削弱异常性假设,官网与批复可查",
+          "hypothesisIds": [
+            "H1"
+          ],
+          "entityNames": [
+            "XX市第一人民医院"
+          ]
+        },
+        {
+          "id": "C3",
+          "text": "该院智慧化一期与二期项目中标方均为X智汇科技有限公司",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "历史格局决定联合投标还是独立投标的建议",
+          "entityNames": [
+            "XX市第一人民医院",
+            "X科技"
+          ]
+        },
+        {
+          "id": "C4",
+          "text": "同市另有2家医院(市第二人民医院、市第三人民医院)启动同类AI辅助诊断采购",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 5,
+          "priorityReason": "假设区分度最高:建设潮假设的直接检验,卡关联方节",
+          "hypothesisIds": [
+            "H1"
+          ],
+          "entityNames": [
+            "市第二人民医院",
+            "市第三人民医院"
+          ]
+        }
+      ],
+      "hypotheses": [
+        {
+          "id": "H0",
+          "label": "正常大额采购",
+          "description": "金额异常仅反映正常项目周期波动",
+          "claimIds": [
+            "C1"
+          ]
+        },
+        {
+          "id": "H1",
+          "label": "新方向扩张",
+          "description": "属区域建设潮的一环,多院同步推进",
+          "claimIds": [
+            "C2",
+            "C4"
+          ]
+        },
+        {
+          "id": "H2",
+          "label": "异常输送",
+          "description": "采购结构指向利益输送(red-flag方向)",
+          "claimIds": []
+        }
+      ],
+      "gaps": [
+        {
+          "text": "该院既定建设规划文件(智慧医院三期)",
+          "relatedClaimId": "C2"
+        },
+        {
+          "text": "该院历史项目的中标方与金额分布",
+          "relatedClaimId": "C3"
+        },
+        {
+          "text": "同市其他医院的同类AI采购项目",
+          "relatedClaimId": "C4"
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 1,
+      "mainTarget": "C2",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "该院既定建设规划文件(智慧医院三期)",
+          "acceptance": "医院官网或卫健部门的规划/批复文件原文",
+          "failover": "无规划文件则查历史项目节奏,判断是否周期性"
+        }
+      ],
+      "searchHints": [
+        "医院 智慧医院 三期 规划"
+      ],
+      "sideTargets": []
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [],
+      "cohorts": []
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "evt_tender_medai:C1",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_medai:E1",
+          "direction": "无关",
+          "quote": "项目编号 MEDAI-2026-001",
+          "reason": "信封基础字段为背景信息,不直接作用于本断言"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E2",
+          "direction": "支持",
+          "quote": "本次采购金额为该院历史采购中位数的4.2倍",
+          "reason": "金额检测器直接支持"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E3",
+          "direction": "支持",
+          "quote": "近90天该院采购频次为历史均值的2.3倍",
+          "reason": "频率检测器间接支持采购强度上升"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E4",
+          "direction": "无关",
+          "quote": "首次出现的AI辅助诊断采购方向",
+          "reason": "新颖性不直接说明金额高低"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E5",
+          "direction": "无关",
+          "quote": "与本企业医疗AI产品线高度匹配",
+          "reason": "相关性不说明金额高低"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E6",
+          "direction": "无关",
+          "quote": "建设AI辅助诊断平台",
+          "reason": "规划内容不直接说明金额"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E7",
+          "direction": "无关",
+          "quote": "AI辅助诊断系统采购",
+          "reason": "批复内容不直接说明金额"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "检测器给出明确倍数"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "evt_tender_medai:C2",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_medai:E1",
+          "direction": "无关",
+          "quote": "项目编号 MEDAI-2026-001",
+          "reason": "信封基础字段为背景信息,不直接作用于本断言"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E2",
+          "direction": "无关",
+          "quote": "历史采购中位数的4.2倍",
+          "reason": "金额异常不说明规划归属"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E3",
+          "direction": "无关",
+          "quote": "采购频次",
+          "reason": "频率不说明规划归属"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E4",
+          "direction": "支持",
+          "quote": "属首次出现的AI辅助诊断采购方向",
+          "reason": "新方向与三期规划的平台建设对应"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E5",
+          "direction": "无关",
+          "quote": "产品线高度匹配",
+          "reason": "相关性不说明规划归属"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E6",
+          "direction": "支持",
+          "quote": "第三阶段(2026年)明确建设AI辅助诊断平台",
+          "reason": "官网规划原文直接对应本次采购"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E7",
+          "direction": "支持",
+          "quote": "原则同意 XX市第一人民医院 智慧医院三期建设方案",
+          "reason": "卫健批复佐证三期建设为既定规划"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "官网规划与卫健批复两个独立来源证实"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "evt_tender_medai:C3",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_medai:E1",
+          "direction": "无关",
+          "quote": "项目编号 MEDAI-2026-001",
+          "reason": "信封基础字段为背景信息,不直接作用于本断言"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E2",
+          "direction": "无关",
+          "quote": "中位数的4.2倍",
+          "reason": "金额不涉及中标方"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E3",
+          "direction": "无关",
+          "quote": "历史均值",
+          "reason": "频率不涉及中标方"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E4",
+          "direction": "无关",
+          "quote": "相似度仅0.3",
+          "reason": "新颖性不涉及中标方"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E5",
+          "direction": "无关",
+          "quote": "高度匹配",
+          "reason": "相关性不涉及中标方"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E6",
+          "direction": "无关",
+          "quote": "三年规划",
+          "reason": "规划不涉及历史中标方"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E7",
+          "direction": "无关",
+          "quote": "三期建设方案",
+          "reason": "批复不涉及历史中标方"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "尚无历史中标记录证据"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 2,
+      "mainTarget": "C3",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "该院智慧化一期二期项目的历史中标方与金额分布",
+          "acceptance": "内部历史库或政府采购公告的中标记录原文",
+          "failover": "历史库缺失时转公开政采网检索"
+        }
+      ],
+      "searchHints": [
+        "历史中标",
+        "XX市第一人民医院 中标"
+      ],
+      "sideTargets": [
+        "C1"
+      ]
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [],
+      "cohorts": [
+        {
+          "name": "同市三级医院",
+          "criteria": {
+            "city": "同市",
+            "level": "三级",
+            "topic": "AI辅助诊断采购"
+          },
+          "members": [
+            "市第二人民医院",
+            "市第三人民医院"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "evt_tender_medai:C1",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_medai:E1",
+          "direction": "无关",
+          "quote": "项目编号 MEDAI-2026-001",
+          "reason": "信封基础字段为背景信息,不直接作用于本断言"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E2",
+          "direction": "支持",
+          "quote": "历史采购中位数的4.2倍",
+          "reason": "金额检测器"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E3",
+          "direction": "支持",
+          "quote": "历史均值的2.3倍",
+          "reason": "频率检测器"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E4",
+          "direction": "无关",
+          "quote": "AI辅助诊断采购方向",
+          "reason": "不说明金额"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E5",
+          "direction": "无关",
+          "quote": "医疗AI产品线",
+          "reason": "不说明金额"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E6",
+          "direction": "无关",
+          "quote": "AI辅助诊断平台",
+          "reason": "不说明金额"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E7",
+          "direction": "无关",
+          "quote": "智慧医院三期建设方案",
+          "reason": "不说明金额"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E8",
+          "direction": "支持",
+          "quote": "近三年采购金额中位数114万元,最大单笔380万元",
+          "reason": "私域历史库直接给出基线分布,480万显著高于历史区间"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E9",
+          "direction": "支持",
+          "quote": "金额320万元",
+          "reason": "政采网二期中标320万,本次480万为其1.5倍,佐证高于历史水平"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "检测器、私域历史库与政采公告相互独立地证实金额显著偏高"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "evt_tender_medai:C2",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_medai:E1",
+          "direction": "无关",
+          "quote": "项目编号 MEDAI-2026-001",
+          "reason": "信封基础字段为背景信息,不直接作用于本断言"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E2",
+          "direction": "无关",
+          "quote": "历史采购中位数的4.2倍",
+          "reason": "金额不说明规划归属"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E3",
+          "direction": "无关",
+          "quote": "历史均值的2.3倍",
+          "reason": "频率不说明规划归属"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E4",
+          "direction": "支持",
+          "quote": "属首次出现的AI辅助诊断采购方向",
+          "reason": "新方向与三期平台建设对应"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E5",
+          "direction": "无关",
+          "quote": "医疗AI产品线",
+          "reason": "相关性不说明规划归属"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E6",
+          "direction": "支持",
+          "quote": "第三阶段(2026年)明确建设AI辅助诊断平台",
+          "reason": "官网规划原文"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E7",
+          "direction": "支持",
+          "quote": "原则同意 XX市第一人民医院 智慧医院三期建设方案",
+          "reason": "卫健批复"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E8",
+          "direction": "无关",
+          "quote": "内部历史库",
+          "reason": "历史中标记录不说明规划归属"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E9",
+          "direction": "无关",
+          "quote": "智慧医院二期项目中标公告",
+          "reason": "中标公告不说明规划归属"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "官网与批复两独立根维持证实;历史记录无关"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "evt_tender_medai:C3",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_medai:E1",
+          "direction": "无关",
+          "quote": "项目编号 MEDAI-2026-001",
+          "reason": "信封基础字段为背景信息,不直接作用于本断言"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E2",
+          "direction": "无关",
+          "quote": "4.2倍",
+          "reason": "不涉及中标方"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E3",
+          "direction": "无关",
+          "quote": "2.3倍",
+          "reason": "不涉及中标方"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E4",
+          "direction": "无关",
+          "quote": "相似度仅0.3",
+          "reason": "不涉及中标方"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E5",
+          "direction": "无关",
+          "quote": "高度匹配",
+          "reason": "不涉及中标方"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E6",
+          "direction": "无关",
+          "quote": "三年规划",
+          "reason": "不涉及中标方"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E7",
+          "direction": "无关",
+          "quote": "三期建设方案",
+          "reason": "不涉及中标方"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E8",
+          "direction": "支持",
+          "quote": "2021年智慧化一期、2023年二期项目均由 X智汇科技有限公司 中标",
+          "reason": "内部历史库记录两期中标方"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E9",
+          "direction": "支持",
+          "quote": "中标人 X智汇科技有限公司",
+          "reason": "政采网公告独立证实二期中标方"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "私域历史库与政采公告两个独立来源证实"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 3,
+      "mainTarget": "C4",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "同市其他医院的同类AI辅助诊断采购项目",
+          "acceptance": "公开招标公告级的两个独立来源",
+          "failover": "仅一家则建设潮证据不足,H1 维持待证实"
+        }
+      ],
+      "searchHints": [
+        "同市 医院 AI辅助诊断 招标"
+      ],
+      "sideTargets": []
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [],
+      "cohorts": []
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "evt_tender_medai:C4",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_medai:E10",
+          "direction": "支持",
+          "quote": "XX市第二人民医院 AI辅助诊断系统采购项目公开招标公告",
+          "reason": "市二院同类采购公告"
+        },
+        {
+          "evidenceId": "evt_tender_medai:E11",
+          "direction": "支持",
+          "quote": "XX市第三人民医院 智能影像AI辅助诊断系统采购项目招标公告",
+          "reason": "市三院同类采购公告,独立来源"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "政采网与公共资源交易两个独立来源证实同市两家医院启动同类采购"
+    }
+  }
+]

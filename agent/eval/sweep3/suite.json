@@ -1,0 +1,18 @@
+{
+ "suite_id": "sweep3-ai-post-dedup",
+ "variant": "中",
+ "weights": {
+  "miss": 1,
+  "over": 2,
+  "flip": 2
+ },
+ "default_budget": {
+  "s6_opinion_max": 40,
+  "llm_calls_max": 60
+ },
+ "cases": [
+  "ai3_coarse",
+  "ai3_middle",
+  "ai3_fine"
+ ]
+}

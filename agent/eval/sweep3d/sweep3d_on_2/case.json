@@ -1,0 +1,14 @@
+{
+ "case_id": "sweep3d_on_2",
+ "title": "讯飞 sweep3d ON 臂 #2(中档,disc on)",
+ "source": "real",
+ "envelope": "examples/ai_model_release/envelope.json",
+ "responses": "runs/recorded/sweep3d_on_2.json",
+ "seed": "examples/ai_model_release/evidence_seed.json",
+ "event_id": "evt_sweep3d_on_2",
+ "recorded_at": "2026-10-04 sweep3d live",
+ "pipeline_note": "disc 开关化 A/B(改造② on/off 各次);与 sweep3 同管道",
+ "run_args": {
+  "assoc": "entity_text"
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "case_id": "coarse_on_r2",
+ "title": "exp coarse/on/r2",
+ "source": "real",
+ "envelope": "examples/ai_model_release/envelope.json",
+ "responses": "runs/recorded/exp_coarse_on_r2.json",
+ "seed": "examples/ai_model_release/evidence_seed.json",
+ "event_id": "evt_exp_coarse_on_r2",
+ "run_args": {
+  "max_rounds": 6
+ },
+ "budget": {
+  "s6_opinion_max": 40,
+  "llm_calls_max": 60
+ },
+ "enabled": true,
+ "blocked_note": ""
+}

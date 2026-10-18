@@ -1,0 +1,157 @@
+{
+ "case_id": "topkg_4",
+ "event_id": "evt_topkg2_4",
+ "verified": true,
+ "verified_date": "2026-10-06",
+ "source": "TopK 信号4 重录(挂账修复后);corpus_bound 机械派生金标",
+ "claims": [
+  {
+   "draft_id": "c1",
+   "text": "信封载明项目编号为 R-bab072bbcb24e1c3。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c10",
+   "text": "信封 amountHistory 载明历史基线含 9 个模拟样本，amountAnomaly 解释称『历史基线含 9 个模拟样本,不代表真实历史证据充分』。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c11",
+   "text": "信封 frequencyAnomaly 解释称『截至当天近 30 天该采购单位采购 3 次,已完整观测的 4 个历史窗口平均 3 次,比值 1.00,频率异常得分 0.000』。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c12",
+   "text": "信封 noveltyHistory 载明该采购单位历史最相似项目为『[询比采购]北京通用航天医院单机医疗设备数据采集信创交互系统项目采购公告』(2026-07-21)，相似度 0.890865683555603，比较基数 36 个历史项目。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "elements": [
+    "2026-07-21",
+    "『[询比采购]北京通用航天医院"
+   ]
+  },
+  {
+   "draft_id": "c13",
+   "text": "信封 noveltyHistory 载明新颖性基线含 29 个模拟样本，noveltyAnomaly 解释称『历史基线含 29 个模拟样本,不代表真实历史证据充分』。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c14",
+   "text": "信封 relevance 解释称『项目与企业业务画像的语义相似度为 0.601,达到准入阈值 0.600』。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c15",
+   "text": "信封 companyProfile 载明企业业务画像包含『医疗AI、医学影像、辅助诊断、智慧医院、医院信息化、医疗大模型、医院数据平台、HIS、PACS、电子病历』。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c16",
+   "text": "解读将本信号定性为『商机』，理由为『信封 kind 为 tender』且『构成潜在投标/合作机会』。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c17",
+   "text": "解读称『金额与频率异常得分均为 0.000,noveltyAnomaly 得分 0.109,与历史最相似项目相似度 0.891,属该单位既有信息化采购序列的延续,未见负面或异动迹象』。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c18",
+   "text": "解读 basisGaps 载明『该采购单位历史金额基线含 9 个模拟样本、新颖性基线含 29 个模拟样本,不代表真实历史证据充分,需先补齐真实历史采购基线』。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c19",
+   "text": "解读 basisGaps 载明『contentSourceNote 说明基于本条记录已有字段生成,未抓取官方正文,未补造金额、参数或中标结果,需先获取官方采购公告正文以核实金额与参数』。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c2",
+   "text": "信封载明项目名称为『[询比采购]北京通用航天医院LIS系统信创改造项目采购公告』。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c20",
+   "text": "信封 sourceUrl 载明来源为『https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/630465763/3318/zhaobiao』。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c21",
+   "text": "信封 noveltyHistory 载明最相似项目 projectId 为 R-bf48429c8763915d，dataOrigin 为 real，sourceUrl 为『https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/615640844/3318/zhaobiao』。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c22",
+   "text": "信封 frequencyHistory 载明窗口为 30 天，recentCount 为 3，historicalWindowAverageCount 为 3.0，historicalWindowsUsed 为 4。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c23",
+   "text": "信封 rumor 字段为 null，即本信号未附带任何传闻类线索。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c24",
+   "text": "解读 selectedSeedLabels 载明所选假设种子标签为『真实经营动态』『新方向扩张』『正常大额采购』。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c3",
+   "text": "信封载明采购方为北京通用航天医院。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c4",
+   "text": "信封载明本项目金额为 980000.0 元。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c5",
+   "text": "信封载明本项目发布日期为 2026-09-11。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c6",
+   "text": "信封载明本项目领域为电子病历与临床系统，内容摘要为『[询比采购]北京通用航天医院LIS系统信创改造项目采购公告；采购单位：北京通用航天医院；领域：电子病历与临床系统』。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c7",
+   "text": "信封 contentSourceNote 载明『基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果。』",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c8",
+   "text": "信封 amountHistory 载明该采购单位过去 11 条有效金额中位数为 1511391.84 元，本项目金额为其 0.6484089526379869 倍。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  },
+  {
+   "draft_id": "c9",
+   "text": "信封 amountAnomaly 解释称『本项目金额 98.0 万元,为该采购单位过去 11 条有效金额中位数(151.1 万元)的 0.65 倍,金额异常得分 0.000』。",
+   "golden_status": "已证实",
+   "note": "信封自证"
+  }
+ ]
+}

@@ -1,0 +1,903 @@
+[
+  {
+    "stage": "s1a",
+    "response": {
+      "signalType": "风险",
+      "reason": "供应商主体负面传闻且命中供应链风险监测重点,可信度低的自媒体源,需要权威登记源核实",
+      "selectedSeedLabels": [
+        "真实经营动态",
+        "竞对放风",
+        "市场误读"
+      ],
+      "basisGaps": []
+    }
+  },
+  {
+    "stage": "s1b",
+    "response": {
+      "claims": [
+        {
+          "id": "C1",
+          "text": "B公司自2026年7月起拖欠员工工资",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "爆料核心断言,权威登记源可直接核实,卡核心事实节",
+          "hypothesisIds": [
+            "H0"
+          ],
+          "entityNames": [
+            "B公司"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "爆料账号产业内幕君2026的运营者为B公司前高管",
+          "category": "实体",
+          "sectionIndex": 0,
+          "priority": 3,
+          "priorityReason": "爆料可信度的关键变量,但身份证据难以获得",
+          "hypothesisIds": [
+            "H0"
+          ],
+          "entityNames": [
+            "产业内幕君2026",
+            "B公司"
+          ]
+        },
+        {
+          "id": "C3",
+          "text": "B公司截至2026-09-22登记状态为存续且无破产审查",
+          "category": "时效",
+          "sectionIndex": 0,
+          "priority": 3,
+          "validWindowDays": 30,
+          "refreshCycleDays": 7,
+          "priorityReason": "状态类,公示系统可一锤定音",
+          "entityNames": [
+            "B公司"
+          ]
+        },
+        {
+          "id": "C4",
+          "text": "A汽车与B公司存在核心供应关系",
+          "category": "关系",
+          "sectionIndex": 1,
+          "priority": 4,
+          "relationType": "供应",
+          "priorityReason": "风险传导路径的关键关系,年报与中标公示可证",
+          "entityNames": [
+            "A公司",
+            "B公司"
+          ]
+        },
+        {
+          "id": "C6",
+          "text": "A汽车截至2026-09-19未就供应商问题发布公告",
+          "category": "时效",
+          "sectionIndex": 1,
+          "priority": 4,
+          "validWindowDays": 14,
+          "priorityReason": "时效类,交易所公告可直接核实,可双线验证传闻影响面",
+          "entityNames": [
+            "A公司"
+          ]
+        }
+      ],
+      "hypotheses": [
+        {
+          "id": "H0",
+          "label": "真实经营动态",
+          "description": "B公司确已暴雷(欠薪+失联)",
+          "claimIds": [
+            "C1",
+            "C2"
+          ]
+        },
+        {
+          "id": "H1",
+          "label": "竞对放风",
+          "description": "竞争对手通过内容矩阵定向投放不利信息",
+          "claimIds": []
+        },
+        {
+          "id": "H2",
+          "label": "市场误读",
+          "description": "旧闻新炒或对正常经营变动的误读",
+          "claimIds": []
+        }
+      ],
+      "gaps": [
+        {
+          "text": "B公司欠薪与失信的官方登记记录核查",
+          "relatedClaimId": "C1"
+        },
+        {
+          "text": "爆料人身份的独立实名证据",
+          "relatedClaimId": "C2"
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 1,
+      "mainTarget": "C2",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "爆料账号产业内幕君2026的身份与历史行为记录",
+          "acceptance": "获得该账号历史爆料内容或身份线索的页面级证据",
+          "failover": "若身份无实名证据,转查转载账号矩阵行为特征"
+        }
+      ],
+      "searchHints": [
+        "产业内幕君 前高管"
+      ],
+      "sideTargets": []
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [],
+      "cohorts": []
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "evt_supplier_b:C2",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_supplier_b:E1",
+          "direction": "支持",
+          "quote": "B公司资金链断裂",
+          "reason": "爆料文自述发布者为知情者"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E2",
+          "direction": "支持",
+          "quote": "自称前财务总监",
+          "reason": "账号历史爆料中有高管身份自述,与C2所述前高管口径一致"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "两条证据均指向爆料者具有企业内部背景"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 2,
+      "mainTarget": "C1",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "B公司欠薪与执行失信的官方登记记录",
+          "acceptance": "权威登记源(执行公开/人社/裁判文书/公示系统)的查询结果",
+          "failover": "官方均无记录时,转查供应关系与竞对关联(H1方向)"
+        }
+      ],
+      "searchHints": [
+        "B公司 欠薪 官方记录"
+      ],
+      "sideTargets": [
+        "C3"
+      ]
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [
+        {
+          "id": "C5",
+          "text": "产业内幕君2026爆料矩阵与C汽车销售集团存在协同关联",
+          "category": "关系",
+          "sectionIndex": 1,
+          "priority": 4,
+          "relationType": "协同",
+          "parent": "C1",
+          "entityNames": [
+            "产业内幕君2026",
+            "C公司"
+          ],
+          "hypothesisLinks": [
+            "H1"
+          ]
+        }
+      ],
+      "cohorts": [
+        {
+          "name": "爆料转载矩阵",
+          "criteria": {
+            "desc": "首发两小时内转载爆料的账号"
+          },
+          "members": [
+            "产业内幕君2026"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "evt_supplier_b:C1",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_supplier_b:E1",
+          "direction": "支持",
+          "quote": "拖欠员工三个月工资",
+          "reason": "爆料原始来源"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E3",
+          "direction": "矛盾",
+          "quote": "无被执行人、失信被执行人记录",
+          "reason": "执行登记与欠薪失联叙事不符"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E4",
+          "direction": "矛盾",
+          "quote": "无 B新能源科技有限公司",
+          "reason": "人社欠薪名单无该公司记录"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E5",
+          "direction": "矛盾",
+          "quote": "判决已履行完毕",
+          "reason": "唯一劳动争议已了结且为2024年旧案"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E6",
+          "direction": "无关",
+          "quote": "登记状态为存续",
+          "reason": "在业状态不直接裁定欠薪真伪"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E7",
+          "direction": "无关",
+          "quote": "核心供应商包括 B新能源科技有限公司",
+          "reason": "供应关系与欠薪断言无关"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E8",
+          "direction": "无关",
+          "quote": "中标人含 B新能源科技有限公司",
+          "reason": "中标记录与欠薪断言无关"
+        }
+      ],
+      "verdict": "矛盾",
+      "reason": "三类权威登记均无欠薪或失信记录,与爆料叙事冲突"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "evt_supplier_b:C2",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_supplier_b:E1",
+          "direction": "支持",
+          "quote": "B公司资金链断裂",
+          "reason": "自述知情"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E2",
+          "direction": "支持",
+          "quote": "自称前财务总监",
+          "reason": "历史身份自述与C2口径一致"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E3",
+          "direction": "无关",
+          "quote": "失信被执行人记录",
+          "reason": "登记记录不涉及爆料人身份"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E4",
+          "direction": "无关",
+          "quote": "拖欠劳动报酬",
+          "reason": "名单不涉及爆料人身份"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E5",
+          "direction": "无关",
+          "quote": "劳动争议",
+          "reason": "裁判文书不涉及爆料人身份"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E6",
+          "direction": "无关",
+          "quote": "法定代表人无变更",
+          "reason": "工商快照不涉及爆料人身份"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E7",
+          "direction": "无关",
+          "quote": "年度报告披露",
+          "reason": "年报不涉及爆料人身份"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E8",
+          "direction": "无关",
+          "quote": "中标公示",
+          "reason": "中标记录不涉及爆料人身份"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "账号自述与爆料内容互相印证"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "evt_supplier_b:C3",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_supplier_b:E1",
+          "direction": "无关",
+          "quote": "创始人已失联",
+          "reason": "自媒体爆料不能证实登记状态"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E3",
+          "direction": "无关",
+          "quote": "被执行人",
+          "reason": "执行记录不等于登记状态"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E4",
+          "direction": "无关",
+          "quote": "重大违法行为",
+          "reason": "欠薪名单不等于登记状态"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E5",
+          "direction": "无关",
+          "quote": "2024 年一起",
+          "reason": "裁判记录不等于登记状态"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E6",
+          "direction": "支持",
+          "quote": "登记状态为存续",
+          "reason": "工商快照直接证实存续且无破产信息"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E7",
+          "direction": "无关",
+          "quote": "合作覆盖主力车型",
+          "reason": "年报不涉及B公司登记状态"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E8",
+          "direction": "无关",
+          "quote": "框架采购",
+          "reason": "中标记录不涉及B公司登记状态"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "工商快照显示存续且无破产审查"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "evt_supplier_b:C4",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_supplier_b:E1",
+          "direction": "无关",
+          "quote": "B公司资金链断裂",
+          "reason": "爆料以B公司为核心主体,但自述不足以证实供应关系"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E3",
+          "direction": "无关",
+          "quote": "检索",
+          "reason": "执行记录不涉及供应关系"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E4",
+          "direction": "无关",
+          "quote": "公布名单",
+          "reason": "欠薪名单不涉及供应关系"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E5",
+          "direction": "无关",
+          "quote": "新增案件",
+          "reason": "裁判记录不涉及供应关系"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E6",
+          "direction": "无关",
+          "quote": "无破产审查案件信息",
+          "reason": "登记状态不涉及供应关系"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E7",
+          "direction": "支持",
+          "quote": "核心供应商包括 B新能源科技有限公司",
+          "reason": "年报直接披露核心供应关系"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E8",
+          "direction": "支持",
+          "quote": "中标人含 B新能源科技有限公司",
+          "reason": "框架采购中标佐证供应关系持续"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "年报与中标公示两个独立来源证实"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "evt_supplier_b:C6",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_supplier_b:E7",
+          "direction": "无关",
+          "quote": "年度报告披露",
+          "reason": "年报为历史文件,不说明近期是否公告"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E8",
+          "direction": "无关",
+          "quote": "2026 年动力电池包框架采购",
+          "reason": "中标公示非供应商问题说明"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "尚无证据说明A公司是否发布过供应商问题公告"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 3,
+      "mainTarget": "C5",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "爆料转载矩阵账号与C汽车销售体系的关联证据",
+          "acceptance": "两个相互独立的来源给出账号-竞品关联的页面级证据",
+          "failover": "若无法建立关联,H1 失去支撑,转攻 C2 身份"
+        }
+      ],
+      "searchHints": [
+        "产业内幕君 转载 矩阵"
+      ],
+      "sideTargets": []
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [],
+      "cohorts": []
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "evt_supplier_b:C2",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_supplier_b:E1",
+          "direction": "支持",
+          "quote": "B公司资金链断裂",
+          "reason": "自述知情"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E2",
+          "direction": "支持",
+          "quote": "自称前财务总监",
+          "reason": "历史自述一致"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E3",
+          "direction": "无关",
+          "quote": "失信",
+          "reason": "不涉身份"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E4",
+          "direction": "无关",
+          "quote": "名单",
+          "reason": "不涉身份"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E5",
+          "direction": "无关",
+          "quote": "履行完毕",
+          "reason": "不涉身份"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E6",
+          "direction": "无关",
+          "quote": "存续",
+          "reason": "不涉身份"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E7",
+          "direction": "无关",
+          "quote": "年度报告",
+          "reason": "不涉身份"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E8",
+          "direction": "无关",
+          "quote": "中标公示",
+          "reason": "不涉身份"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E9",
+          "direction": "无关",
+          "quote": "18 个转载账号",
+          "reason": "矩阵行为特征不指向运营者个人身份"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E10",
+          "direction": "无关",
+          "quote": "互相关注",
+          "reason": "竞品互动不指向运营者个人身份"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "账号自述证据仍为同源,身份主张未获独立印证"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "evt_supplier_b:C5",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_supplier_b:E9",
+          "direction": "支持",
+          "quote": "18 个转载账号均为同周注册",
+          "reason": "矩阵化传播的组织特征"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E10",
+          "direction": "支持",
+          "quote": "存在互相关注与互动",
+          "reason": "竞品经销体系官方账号与爆料矩阵存在直接互动"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "无新增反向证据,维持两独立根的证实状态"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 4,
+      "mainTarget": "C6",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "A汽车是否就供应商问题发布过公告",
+          "acceptance": "交易所公告或官方渠道的公告原文",
+          "failover": "若查得公告,则C6时效过期翻转;若无,维持待证实"
+        }
+      ],
+      "searchHints": [
+        "A公司 供应链 公告"
+      ],
+      "sideTargets": []
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [],
+      "cohorts": []
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "evt_supplier_b:C4",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_supplier_b:E1",
+          "direction": "无关",
+          "quote": "B公司资金链断裂",
+          "reason": "爆料以B公司为核心主体,但自述不足以证实供应关系"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E3",
+          "direction": "无关",
+          "quote": "检索",
+          "reason": "不涉供应"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E4",
+          "direction": "无关",
+          "quote": "公布名单",
+          "reason": "不涉供应"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E5",
+          "direction": "无关",
+          "quote": "2024 年一起",
+          "reason": "不涉供应"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E6",
+          "direction": "无关",
+          "quote": "无破产审查",
+          "reason": "不涉供应"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E7",
+          "direction": "支持",
+          "quote": "核心供应商包括 B新能源科技有限公司",
+          "reason": "年报披露"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E8",
+          "direction": "支持",
+          "quote": "中标人含 B新能源科技有限公司",
+          "reason": "中标佐证"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E11",
+          "direction": "无关",
+          "quote": "多元电池供应体系",
+          "reason": "说明公告未否认与B的合作,不改变关系真伪"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "两独立来源证实,新公告不构成反证"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "evt_supplier_b:C6",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_supplier_b:E7",
+          "direction": "无关",
+          "quote": "年度报告",
+          "reason": "年报非供应商问题说明"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E8",
+          "direction": "无关",
+          "quote": "框架采购中标公示",
+          "reason": "中标公示非供应商问题说明"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E11",
+          "direction": "矛盾",
+          "quote": "就供应链情况发布说明公告",
+          "reason": "A公司已发布公告,C6所称未发布不成立(时效翻转)"
+        }
+      ],
+      "verdict": "矛盾",
+      "reason": "公告原文直接推翻未发布公告的断言"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 5,
+      "mainTarget": "C2",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "爆料人身份的第三方实名或权威报道证据",
+          "acceptance": "实名任职证据或权威媒体报道原文",
+          "failover": "仍无独立根则维持待证实,转入 Open Questions 人工补查"
+        }
+      ],
+      "searchHints": [
+        "产业内幕君 身份 长文"
+      ],
+      "sideTargets": []
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [],
+      "cohorts": []
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "evt_supplier_b:C2",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_supplier_b:E1",
+          "direction": "支持",
+          "quote": "B公司资金链断裂",
+          "reason": "自述知情"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E2",
+          "direction": "支持",
+          "quote": "自称前财务总监",
+          "reason": "历史自述"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E3",
+          "direction": "无关",
+          "quote": "失信",
+          "reason": "不涉身份"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E4",
+          "direction": "无关",
+          "quote": "名单",
+          "reason": "不涉身份"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E5",
+          "direction": "无关",
+          "quote": "履行完毕",
+          "reason": "不涉身份"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E6",
+          "direction": "无关",
+          "quote": "存续",
+          "reason": "不涉身份"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E7",
+          "direction": "无关",
+          "quote": "年度报告",
+          "reason": "不涉身份"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E8",
+          "direction": "无关",
+          "quote": "中标公示",
+          "reason": "不涉身份"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E9",
+          "direction": "无关",
+          "quote": "同周注册",
+          "reason": "不涉身份"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E10",
+          "direction": "无关",
+          "quote": "互动",
+          "reason": "不涉身份"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E12",
+          "direction": "支持",
+          "quote": "疑似汽车行业从业者",
+          "reason": "行业属性与B公司业务一致,但仍无实名"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "多份自述内容相互呼应"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "evt_supplier_b:C4",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_supplier_b:E1",
+          "direction": "无关",
+          "quote": "B公司资金链断裂",
+          "reason": "爆料以B公司为核心主体,但自述不足以证实供应关系"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E3",
+          "direction": "无关",
+          "quote": "检索",
+          "reason": "不涉供应"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E4",
+          "direction": "无关",
+          "quote": "公布名单",
+          "reason": "不涉供应"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E5",
+          "direction": "无关",
+          "quote": "2024 年一起",
+          "reason": "不涉供应"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E6",
+          "direction": "无关",
+          "quote": "无破产审查",
+          "reason": "不涉供应"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E7",
+          "direction": "支持",
+          "quote": "核心供应商包括 B新能源科技有限公司",
+          "reason": "年报披露"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E8",
+          "direction": "支持",
+          "quote": "中标人含 B新能源科技有限公司",
+          "reason": "中标佐证"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E11",
+          "direction": "无关",
+          "quote": "多元电池供应体系",
+          "reason": "未否认合作"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E13",
+          "direction": "矛盾",
+          "quote": "被列入经营异常名录",
+          "reason": "B公司被列入经营异常且A新增对另一电池厂投资,核心供应关系出现官方登记层面的反向信号"
+        }
+      ],
+      "verdict": "矛盾",
+      "reason": "工商变更显示供应格局已变,关系断言过期"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "evt_supplier_b:C5",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_supplier_b:E9",
+          "direction": "支持",
+          "quote": "18 个转载账号均为同周注册",
+          "reason": "矩阵化传播的组织特征未变"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E10",
+          "direction": "支持",
+          "quote": "存在互相关注与互动",
+          "reason": "竞品互动证据未变"
+        },
+        {
+          "evidenceId": "evt_supplier_b:E12",
+          "direction": "无关",
+          "quote": "疑似汽车行业从业者",
+          "reason": "身份讨论不涉及爆料矩阵与竞品的关联"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "无新增反向证据,维持两独立根的证实状态"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 6,
+      "mainTarget": "C2",
+      "action": "停",
+      "gapChain": [
+        {
+          "gap": "无更多可查证目标",
+          "acceptance": "剩余未决项均为身份类孤证,继续查证边际价值低于成本",
+          "failover": ""
+        }
+      ],
+      "searchHints": [],
+      "sideTargets": [],
+      "stopReason": "剩余未决仅C2(身份类,已两轮自查仍为同源自媒体孤证),继续查证边际价值低于成本,转 Open Questions 人工补查"
+    }
+  }
+]

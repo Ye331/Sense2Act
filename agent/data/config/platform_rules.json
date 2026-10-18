@@ -1,0 +1,32 @@
+{
+  "tools": [
+    {"name": "history_baseline", "kind": "history",
+     "match": ["历史中标", "历史采购", "历史基线", "采购基线", "金额基线", "历史金额", "历史项目"]}
+  ],
+  "platform_rules": [
+    {"id": "R6", "name": "招投标公告",
+     "match": ["招标", "中标", "成交公告", "采购公告", "采购意向", "询价",
+               "竞争性磋商", "竞争性谈判", "单一来源", "资格预审", "开标",
+               "废标", "更正公告"],
+     "platforms": ["ccgp", "tianjin_zfcg"],
+     "note": "政采/招投标缺口走政采权威源(2026-10-03:ccgp 静态列表通道可达已接入——检索端点仍被软封;天津站为区域补充。规则按首中匹配,R6 必须排在宽词 R1 之前;工具路由『历史中标』仍先于本表判工具,但 2026-10-16 起平台选择不再被工具短路——历史类缺口同样按本表出网,私域语义仅离线 FakeCollector 消费)"},
+    {"id": "R1", "name": "官方口径",
+     "match": ["公告", "批复", "公示", "年报", "监管", "官方", "规划", "工商"],
+     "platforms": ["official_website"],
+     "note": "cctv_news 2026-10-16 起移出默认路由(通用新闻栏目对行业信号'抓得到但不对题',实战多次产出无关证据如时政文章入账;适配器保留注册,显式指定 platforms 时仍可用,同 tianjin_zfcg 按需启用先例)"},
+    {"id": "R2", "name": "大众报道", "match": [], "default": true,
+     "platforms": ["toutiao", "south_weekend"]},
+    {"id": "R3", "name": "深度长文",
+     "match": ["深度", "调查", "起底", "长文"],
+     "platforms": ["south_weekend"], "grain": "全文级"},
+    {"id": "R4", "name": "微信生态",
+     "match": ["公众号", "微信"],
+     "platforms": ["sogou_wechat"], "grain": "摘要级"},
+    {"id": "R5", "name": "时效优先",
+     "match": ["最新", "刚刚", "今日", "昨日"],
+     "platforms": ["toutiao"]}
+  ],
+  "excluded_platforms": ["weibo", "xiaohongshu", "douyin", "wechat"],
+  "fallback_platforms": ["toutiao", "south_weekend"],
+  "note": "坚硬平台(微信正文/微博深度/小红书/抖音)不走 S3:探索器白名单命中即拒绝并回不可达。v1 手写,之后按轨迹日志命中率统计修正(B->A 迁移)。"
+}

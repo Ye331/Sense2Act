@@ -1,0 +1,11 @@
+{
+ "variant": "中",
+ "assoc": "entity_text",
+ "max_rounds": 6,
+ "max_llm_calls": 160,
+ "max_collect_calls": 80,
+ "disc": true,
+ "interleave": true,
+ "calibration": false,
+ "recorded_at": "2026-10-06T17:31:13"
+}

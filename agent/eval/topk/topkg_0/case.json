@@ -1,0 +1,16 @@
+{
+ "case_id": "topkg_0",
+ "title": "TopK[0] 天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号",
+ "source": "real",
+ "envelope_batch": "examples/upstream_topk/agent_top_k_samples.json",
+ "signal_index": 0,
+ "responses": "runs/recorded/topkg2_0.json",
+ "event_id": "evt_topkg2_0",
+ "recorded_at": "2026-10-06 TopK live",
+ "pipeline_note": "tender 无种子+信封证据挂账修复后(轮0裁定 corpus_bound)",
+ "run_args": {
+  "assoc": "entity_text",
+  "max_rounds": 6
+ },
+ "enabled": true
+}

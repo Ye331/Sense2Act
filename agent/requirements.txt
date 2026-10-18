@@ -1,0 +1,5 @@
+pydantic>=2.7
+openai>=1.0
+lxml>=5.3
+trafilatura>=2.3   # 通用官网适配器正文抽取(纯解析模式,egress 抓取)
+# python-dotenv 可选:代码内置了等价的 .env 解析,无需安装

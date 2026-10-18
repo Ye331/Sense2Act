@@ -1,0 +1,6 @@
+.env
+data/*.db
+data/worker
+runs
+eval
+__pycache__

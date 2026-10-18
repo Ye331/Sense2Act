@@ -1,0 +1,41 @@
+{
+ "case_id": "tender_linlu_linye",
+ "title": "杭州市国土绿化示范项目作业设计与检查验收(桐庐县林业技术推广中心)",
+ "source": "real",
+ "envelope": "eval/bench_staging/tender_linlu_linye/envelope.json",
+ "responses": "eval/bench_staging/tender_linlu_linye/responses.json",
+ "event_id": "evt_tender_linlu_linye",
+ "run_args": {
+  "max_rounds": 6,
+  "assoc": "entity_text"
+ },
+ "budget": {
+  "s6_opinion_max": 40,
+  "llm_calls_max": 60
+ },
+ "enabled": false,
+ "blocked_note": "金标草拟待人工核对(核对完成置 enabled=true 与 verified=true)",
+ "recorded_at": "2026-10-11 bench 回灌首批 live",
+ "pipeline_note": "双闸+去重+disc on+rumor/tender 现行为(无 P0-1 改造)",
+ "meta": {
+  "kind": "tender",
+  "domain": "农林绿化与生态工程",
+  "difficulty": {
+   "n_clues": null,
+   "clue_sources": null,
+   "same_source_ratio": null,
+   "history_pollution": null,
+   "distractors": null
+  },
+  "claims_total": 21,
+  "claims_corpus": 20,
+  "claims_world": 1,
+  "qc": {
+   "verified": false,
+   "checked_by": null,
+   "checked_at": null,
+   "protocol": "draft(系统建议终态待人工独立核对)",
+   "origin_suite": "bench 回灌首批(2026-10-11)"
+  }
+ }
+}

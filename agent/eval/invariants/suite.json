@@ -1,0 +1,19 @@
+{
+ "suite_id": "invariants-epistemic",
+ "variant": "中",
+ "require": {
+  "over": 0,
+  "flip": 0
+ },
+ "default_budget": {
+  "s6_opinion_max": 40,
+  "llm_calls_max": 60
+ },
+ "cases": [
+  "supplier_b",
+  "tender_medical_ai",
+  "ai_model_release",
+  "xhs_opensource",
+  "ai3_middle"
+ ]
+}

@@ -1,0 +1,21 @@
+{
+  "case_id": "tender_medical_ai",
+  "event_id": "evt_tender_medai",
+  "verified": true,
+  "source": "tests/test_e2e_tender.py::stop_reason/status_counts 断言(全部澄清,已证实=4)",
+  "note": "四条 claim 全部查证为已证实(多跳扩圈 + 权威公示源贯通),触发'全部澄清'停止。",
+  "claims": [
+    {"draft_id": "C1", "text": "该院本次采购金额显著高于其历史采购水平(约历史中位数的4.2倍)",
+     "golden_status": "已证实", "category": "事实",
+     "note": "历史采购基线可由公示系统历史中标记录核实"},
+    {"draft_id": "C2", "text": "本次采购属于该院智慧医院三期建设的既定后续阶段",
+     "golden_status": "已证实", "category": "事实",
+     "note": "可区分性 claim:三期规划证据支持'正常采购'假设"},
+    {"draft_id": "C3", "text": "该院智慧化一期与二期项目中标方均为X智汇科技有限公司",
+     "golden_status": "已证实", "category": "事实",
+     "note": "历史中标记录多跳核实"},
+    {"draft_id": "C4", "text": "同市另有2家医院(市第二、第三人民医院)启动同类AI辅助诊断采购",
+     "golden_status": "已证实", "category": "事实",
+     "note": "调查圈派生证据支持区域建设潮背景"}
+  ]
+}

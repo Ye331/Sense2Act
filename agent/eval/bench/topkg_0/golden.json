@@ -1,0 +1,285 @@
+{
+ "case_id": "topkg_0",
+ "event_id": "evt_topkg2_0",
+ "verified": true,
+ "verified_date": "2026-10-06",
+ "source": "TopK 信号0 重录(挂账修复后);corpus_bound 机械派生金标",
+ "claims": [
+  {
+   "draft_id": "c1",
+   "text": "信号信封载明项目编号为 R-c67b890aeb583592。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c10",
+   "text": "解读文本将本信号定性为『商机』，理由为项目方向与企业画像匹配，构成潜在投标/合作机会。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c11",
+   "text": "amountAnomaly 解释载明『本项目金额 627.0 万元，为该采购单位过去 10 条有效金额中位数(21.9 万元)的 28.63 倍，金额异常得分 1.000』。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c12",
+   "text": "amountAnomaly 解释载明『历史基线含 8 个模拟样本，不代表真实历史证据充分』。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c13",
+   "text": "frequencyAnomaly 解释载明『截至当天近 30 天该采购单位采购 2 次，已完整观测的 4 个历史窗口平均 0.75 次，比值 2.67，频率异常得分 0.625』。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c14",
+   "text": "noveltyAnomaly 解释载明该采购单位历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』(2026-06-29)，相似度 0.885，比较基数 10 个历史项目，新颖性异常得分 0.115。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "elements": [
+    "BH-ZLKGYY2026605",
+    "2026-06-29",
+    "『天津市肿瘤医院"
+   ],
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c16",
+   "text": "relevance 解释载明『项目与企业业务画像的语义相似度为 0.647，达到准入阈值 0.600』。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c17",
+   "text": "解读文本登记了三个假设种子标签：『真实经营动态』、『正常大额采购』、『新方向扩张』。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c18",
+   "text": "解读文本的 basisGaps 载明需先补齐真实历史采购金额基线、真实历史项目基线，并获取官方招标正文以核实金额、参数与资格条件。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c19",
+   "text": "信号信封载明 amountHistory 的 historicalMedianAmountYuan 为 218965.55 元、amountRatio 为 28.634641385368614、historyCount 为 10、simulatedHistoryCount 为 8。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c2",
+   "text": "信号信封载明采购方为天津市肿瘤医院空港医院。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c20",
+   "text": "信号信封载明 frequencyHistory 的 windowDays 为 30、recentCount 为 2、historicalWindowAverageCount 为 0.75、frequencyRatio 为 2.6666666666666665、historicalWindowsUsed 为 4。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c21",
+   "text": "信号信封载明 noveltyHistory 的 historyCount 为 10、simulatedHistoryCount 为 8、maxHistorySimilarity 为 0.8853666186332703。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c22",
+   "text": "信号信封载明 rumor 字段为空（null）。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c23",
+   "text": "信号信封载明 eventId 为空字符串。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c24",
+   "text": "信号信封载明 amountAnomaly 的 basisSufficient 为 true、frequencyAnomaly 的 basisSufficient 为 true、noveltyAnomaly 的 basisSufficient 为 true、relevance 的 basisSufficient 为 true。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c25",
+   "text": "信号信封载明 amountAnomaly 的 score 为 0.9999001206028643、frequencyAnomaly 的 score 为 0.625、noveltyAnomaly 的 score 为 0.11463338136672974、relevance 的 score 为 0.6469710469245911。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c26",
+   "text": "信号信封载明 mostSimilarProject 的 dataOrigin 为 real、publishDate 为 2026-06-29、projectId 为 R-f456d19c850a03af。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c27",
+   "text": "信号信封载明 kind 为 tender，signalType 定性为『商机』。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c28",
+   "text": "信号信封载明 sourceUrl 指向千里马招标网（qiye.qianlima.com）的招标信息详情页。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c29",
+   "text": "信号信封载明本项目采购内容为数智化病理系统，采购方式为公开招标。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c3",
+   "text": "信号信封载明本项目金额为 6270000.0 元（627.0 万元）。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c30",
+   "text": "信号信封载明本项目采购单位为天津市肿瘤医院空港医院，与最相似历史项目（R-f456d19c850a03af）的采购单位相同。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c31",
+   "text": "信号信封载明本项目金额 627.0 万元与历史中位数 21.9 万元之间存在 28.63 倍的量级差异，且近 30 天采购频次比值 2.67，两项异常同时出现。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c32",
+   "text": "信号信封载明本项目发布日期 2026-09-09 与最相似历史项目发布日期 2026-06-29 相隔约 72 天。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c33",
+   "text": "信号信封载明本项目金额 627.0 万元，而最相似历史项目（大型设备物联网和医疗设备全生命周期管理软件采购项目）的金额未在信封中给出。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c34",
+   "text": "信号信封载明本项目采购内容为数智化病理系统，与企业画像中的『医疗AI、医学影像、辅助诊断、智慧医院、医院信息化、医疗大模型、医院数据平台、HIS、PACS、电子病历』存在语义重叠。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c35",
+   "text": "信号信封载明本项目采购单位天津市肿瘤医院空港医院在近 30 天内采购 2 次，历史 4 个窗口平均 0.75 次。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c36",
+   "text": "信号信封载明本项目金额 627.0 万元，为该采购单位过去 10 条有效金额中位数 21.9 万元的 28.63 倍，金额异常得分 1.000，且历史基线含 8 个模拟样本。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c37",
+   "text": "信号信封载明本项目采购单位天津市肿瘤医院空港医院的历史最相似项目为『天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目 (项目编号BH-ZLKGYY2026605)公开招标公告』，相似度 0.885。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "elements": [
+    "BH-ZLKGYY2026605",
+    "『天津市肿瘤医院"
+   ],
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c38",
+   "text": "信号信封载明本项目采购单位天津市肿瘤医院空港医院的历史金额基线含 8 个模拟样本，历史项目基线含 8 个模拟样本，均不代表真实历史证据充分。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c4",
+   "text": "信号信封载明本项目发布日期为 2026-09-09。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c5",
+   "text": "信号信封载明项目名称为『天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告』，项目编号为 SHGP-2026-A536。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "elements": [
+    "SHGP-2026-A536",
+    "『天津市肿瘤医院"
+   ],
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c6",
+   "text": "信号信封的 contentSourceNote 载明『基于本条记录已有字段生成，未抓取官方正文，未补造金额、参数或中标结果』。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c7",
+   "text": "信号信封载明本项目领域为『其他』，项目摘要为『天津市肿瘤医院空港医院 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告；采购单位：天津市肿瘤医院空港医院；领域：其他』。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "elements": [
+    "SHGP-2026-A536",
+    "『天津市肿瘤医院"
+   ],
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c8",
+   "text": "信号信封载明来源链接为 https://qiye.qianlima.com/new_qd_yfbsite/#/infoCenter/infoDetail/629601584/2714/zhaobiao。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  },
+  {
+   "draft_id": "c9",
+   "text": "信号信封载明企业业务画像包含『医疗AI、医学影像、辅助诊断、智慧医院、医院信息化、医疗大模型、医院数据平台、HIS、PACS、电子病历』。",
+   "golden_status": "已证实",
+   "note": "信封自证",
+   "claim_kind": "corpus"
+  }
+ ]
+}

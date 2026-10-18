@@ -1,0 +1,648 @@
+[
+  {
+    "stage": "s1a",
+    "response": {
+      "signalType": "商机",
+      "reason": "信封 kind 为 tender,含明确招标项目:projectName 为\"中国历史研究院《（新编）中国通史》纂修工程出版服务项目公开招标公告\",purchaser 为\"中国历史研究院\",amountYuan 为 16840000.0,投标截止 2026-11-02 13:30,代理机构为华采招标集团有限公司,属于可参与的出版服务公开招标机会,故定性为商机。",
+      "selectedSeedLabels": [
+        "正常大额采购",
+        "真实经营动态"
+      ],
+      "basisGaps": [
+        "该采购单位历史采购记录与同类项目金额基线不足(amountHistory、noveltyHistory、frequencyHistory 均为 null),需先补齐历史基线以判断本次 1684 万元预算是否异常",
+        "正文未抓取,摘要由列表与详情字段生成,需补齐招标文件正文以核实服务范围与投标资格要求"
+      ]
+    }
+  },
+  {
+    "stage": "s1b",
+    "response": {
+      "claims": [
+        {
+          "id": "c1",
+          "text": "信封载明本次招标项目编号为 HCZB-2026-ZB0931。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "项目编号是后续所有查证与关联的锚点，可由信封第一方证据直接核实。",
+          "hypothesisIds": [],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c2",
+          "text": "信封载明本次招标项目名称为\"中国历史研究院《（新编）中国通史》纂修工程出版服务项目公开招标公告\"。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "项目名称界定采购标的与服务范围，是判断商机性质的基础断言。",
+          "hypothesisIds": [],
+          "entityNames": [
+            "中国历史研究院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c3",
+          "text": "信封载明本次招标的采购方为\"中国历史研究院\"。",
+          "category": "实体",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "采购方身份是主体背景与后续历史采购基线核查的锚点。",
+          "hypothesisIds": [],
+          "entityNames": [
+            "中国历史研究院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c4",
+          "text": "信封载明本次招标预算金额为 16840000.0 元（1684 万元）。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "金额是判断是否异常大额采购的核心变量，且被多条假设依赖。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c5",
+          "text": "信封载明本次招标公告的发布日期为 2026-10-11。",
+          "category": "时效",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "公告日期是时间线起点，决定时效衰减与投标窗口计算。",
+          "hypothesisIds": [],
+          "validWindowDays": 30,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c6",
+          "text": "信封载明本次招标的投标截止时间为 2026-11-02 13:30。",
+          "category": "时效",
+          "sectionIndex": 1,
+          "priority": 5,
+          "priorityReason": "投标截止时间直接决定商机可参与窗口，时效性最强。",
+          "hypothesisIds": [],
+          "validWindowDays": 22,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c7",
+          "text": "信封载明本次招标的代理机构为\"华采招标集团有限公司\"。",
+          "category": "实体",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "代理机构是关联方核查与投标对接的关键实体。",
+          "hypothesisIds": [],
+          "entityNames": [
+            "华采招标集团有限公司"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c8",
+          "text": "信封载明本次招标公告的来源链接为 https://www.ccgp.gov.cn/cggg/zygg/gkzb/202610/t20261011_27467046.htm。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 2,
+          "priorityReason": "来源链接是证据溯源依据，但本身业务影响有限。",
+          "hypothesisIds": [],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c9",
+          "text": "信封载明本次招标正文未抓取，摘要由列表与详情字段生成。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "正文缺失直接限制可核实范围，是后续查证规划的关键约束。",
+          "hypothesisIds": [],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c10",
+          "text": "解读将本信号定性为\"商机\"，理由为信封 kind 为 tender 且含明确招标项目。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 3,
+          "priorityReason": "解读定性是结论节的直接输入，但属解读文本自身复述。",
+          "hypothesisIds": [],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c11",
+          "text": "解读选定的假设种子标签为\"正常大额采购\"与\"真实经营动态\"。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 3,
+          "priorityReason": "种子标签决定竞争假设的初始方向，是假设登记的底稿。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c12",
+          "text": "信封中 amountHistory、noveltyHistory、frequencyHistory 三项历史基线字段均为 null。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "历史基线缺失是判断金额是否异常的直接障碍，卡住结论节。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c13",
+          "text": "解读指出该采购单位历史采购记录与同类项目金额基线不足，需先补齐历史基线以判断本次 1684 万元预算是否异常。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 4,
+          "priorityReason": "该缺口陈述直接决定本次金额异常性判断能否成立。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "entityNames": [
+            "中国历史研究院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c14",
+          "text": "解读指出正文未抓取，需补齐招标文件正文以核实服务范围与投标资格要求。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 4,
+          "priorityReason": "正文缺失限制服务范围与资格核实，影响商机可参与性判断。",
+          "hypothesisIds": [
+            "h2"
+          ],
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c15",
+          "text": "本次招标的采购方\"中国历史研究院\"与代理机构\"华采招标集团有限公司\"之间存在招标代理委托关系。",
+          "category": "关系",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "代理委托关系是关联方核查的起点，但需正文或公告原文佐证。",
+          "hypothesisIds": [],
+          "relationType": "协同",
+          "entityNames": [
+            "中国历史研究院",
+            "华采招标集团有限公司"
+          ],
+          "corpusBound": false
+        }
+      ],
+      "hypotheses": [
+        {
+          "id": "h1",
+          "label": "正常大额采购",
+          "description": "本次 1684 万元预算属于采购方常规业务范围内的正常大额采购，金额与同类项目历史基线相符。可区分 claim：c4（金额 1684 万元）与 c12（历史基线字段均为 null）——若补齐历史基线后本次金额处于同类项目正常区间，则支持本假设；若显著偏离历史中位数，则支持异常输送方向。当前因基线缺失，需补中国历史研究院同类出版服务项目的历史中标金额与频次数据才能区分。",
+          "claimIds": [
+            "c4",
+            "c12",
+            "c13"
+          ],
+          "op": "AND"
+        },
+        {
+          "id": "h2",
+          "label": "真实经营动态",
+          "description": "本次招标为采购方真实发生的经营/业务动态，服务范围与投标资格要求可由招标文件正文核实。可区分 claim：c2（项目名称界定出版服务标的）与 c14（正文未抓取）——若补齐正文后服务范围与《（新编）中国通史》纂修工程出版需求一致，则支持本假设；若正文缺失或服务范围与项目名称不符，则需重新评估。需补招标文件正文与投标资格要求才能区分。",
+          "claimIds": [
+            "c2",
+            "c14"
+          ],
+          "op": "AND"
+        }
+      ],
+      "gaps": [
+        {
+          "text": "中国历史研究院历史采购记录与同类出版服务项目的金额基线（amountHistory、noveltyHistory、frequencyHistory 均为 null）具体为何？",
+          "relatedClaimId": "c12"
+        },
+        {
+          "text": "本次招标文件正文的服务范围、投标资格要求与评标办法具体内容为何？",
+          "relatedClaimId": "c14"
+        },
+        {
+          "text": "华采招标集团有限公司与中国历史研究院之间是否存在既往代理合作记录？",
+          "relatedClaimId": "c15"
+        },
+        {
+          "text": "本次 1684 万元预算的构成明细（如印制、编校、排版等分项）为何？",
+          "relatedClaimId": "c4"
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c1",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_lishi_chuban:E1",
+          "direction": "支持",
+          "quote": "项目编号 HCZB-2026-ZB0931",
+          "reason": "该证据原文直接载明项目编号为 HCZB-2026-ZB0931，与 claim 所述一致，使 claim 更可能为真。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据为信号层信封基础字段，原文逐字载明“项目编号 HCZB-2026-ZB0931”，与 claim 完全吻合，故意见为已证实；但该证据谱系根为 signal_layer 单一来源，最终独立性判定由代码作出。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c10",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_lishi_chuban:E1",
+          "direction": "支持",
+          "quote": "项目名称 中国历史研究院《（新编）中国通史》纂修工程出版服务项目公开招标公告",
+          "reason": "该证据显示信封 kind 为招标类信号且含明确招标项目（公开招标公告、项目编号、投标截止时间），与 claim 所述解读理由一致，使 claim 更可能为真。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据为信号层信封基础字段，明确载有招标项目名称、项目编号与投标截止时间，支持将本信号定性为\"商机\"的理由（kind 为 tender 且含明确招标项目）。证据谱系根为 signal_layer，仅此一条，无独立来源冲突。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c11",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_lishi_chuban:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 HCZB-2026-ZB0931;项目名称 中国历史研究院《（新编）中国通史》纂修工程出版服务项目公开招标公告;采购方 中国历史研究院;预算金额 16840000.0 元;发布日期 2026-10-11;领域 (未标注)。",
+          "reason": "该证据仅描述招标信号的基础字段（项目编号、名称、采购方、预算、发布日期等），未涉及任何假设种子标签的解读，也未出现\"正常大额采购\"或\"真实经营动态\"字样，不改变 claim 成立与否的判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗中唯一证据为招标信号基础字段，与 claim 所述\"解读选定的假设种子标签\"无直接关联，既不能支持也不能否定该 claim，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c12",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_lishi_chuban:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 HCZB-2026-ZB0931;项目名称 中国历史研究院《（新编）中国通史》纂修工程出版服务项目公开招标公告;采购方 中国历史研究院;预算金额 16840000.0 元;发布日期 2026-10-11;领域 (未标注)。",
+          "reason": "该证据仅列出招标信号的基础字段(项目编号、名称、采购方、预算、发布日期等),未涉及信封中 amountHistory、noveltyHistory、frequencyHistory 三项历史基线字段的取值,无法改变 claim 为真或为假的判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗中唯一证据为信号层信封基础字段,未包含 amountHistory、noveltyHistory、frequencyHistory 三项历史基线字段的任何信息,既不能支持也不能否定 claim,故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c13",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_lishi_chuban:E1",
+          "direction": "无关",
+          "quote": "预算金额 16840000.0 元",
+          "reason": "该证据仅给出项目编号、名称、采购方、预算金额 1684 万元、发布日期与代理机构等基础字段，未涉及任何历史采购记录或同类项目金额基线，也未提及'需先补齐历史基线'的解读意见，因此不改变 claim 成立与否的判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一证据为信号层信封基础字段，仅能确认本次预算为 1684 万元，未提供历史采购记录或同类项目金额基线信息，无法验证'历史基线不足、需先补齐'的解读，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c14",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_lishi_chuban:E1",
+          "direction": "支持",
+          "quote": "正文未抓取,摘要由列表与详情字段生成",
+          "reason": "该证据原文明确记载\"正文未抓取\",与 claim 所述\"正文未抓取,需补齐招标文件正文\"一致,使 claim 更可能为真。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据为信号层信封,其原文自述\"正文未抓取,摘要由列表与详情字段生成\",直接印证 claim 中\"正文未抓取\"这一事实判断;但该证据未涉及\"需补齐正文以核实服务范围与投标资格要求\"的后续主张,且为单一来源,故仅就该事实部分给出已证实意见。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c2",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_lishi_chuban:E1",
+          "direction": "支持",
+          "quote": "项目名称 中国历史研究院《（新编）中国通史》纂修工程出版服务项目公开招标公告",
+          "reason": "信封基础字段中的项目名称与 claim 所述完全一致，直接支持该断言。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据为信号层信封基础字段，其项目名称字段逐字载明与 claim 相同的项目名称，方向为支持；但该证据谱系根为 signal_layer 单一来源，无独立来源交叉印证，故仅为意见，最终由代码按独立来源规则裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c3",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_lishi_chuban:E1",
+          "direction": "支持",
+          "quote": "采购方 中国历史研究院",
+          "reason": "该信号层信封基础字段直接载明采购方为中国历史研究院，与 claim 所述一致，使 claim 更可能为真。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据为信号层信封基础字段，明确载明\"采购方 中国历史研究院\"，与 claim 文本一致，故意见为已证实；但该证据谱系根为 signal_layer 单一来源，最终独立性判定由代码作出。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c4",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_lishi_chuban:E1",
+          "direction": "支持",
+          "quote": "预算金额 16840000.0 元",
+          "reason": "该证据为信号层信封基础字段，直接载明预算金额 16840000.0 元，与 claim 所述金额一致，使 claim 更可能为真。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一证据为信号层内部检测字段，谱系根为 signal_layer，且其摘要自述“正文未抓取,摘要由列表与详情字段生成”，属单一来源、非独立印证，尚不足以确证，故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c5",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_lishi_chuban:E1",
+          "direction": "支持",
+          "quote": "发布日期 2026-10-11",
+          "reason": "该证据为信号层信封基础字段，直接载明发布日期为 2026-10-11，与 claim 所述一致，使 claim 更可能为真。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据（信号层信封基础字段）逐字载明“发布日期 2026-10-11”，与 claim 完全吻合，故意见为已证实；但该证据谱系根为 signal_layer 单一来源，最终独立性判定由代码作出。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c6",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_lishi_chuban:E1",
+          "direction": "支持",
+          "quote": "投标截止 2026-11-02 13:30",
+          "reason": "该证据摘要字段直接载明投标截止时间为 2026-11-02 13:30，与 claim 所述一致，使 claim 更可能为真。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一证据（谱系根 signal_layer，credibility 中）在摘要中载明“投标截止 2026-11-02 13:30”，与 claim 一致，方向为支持；但该证据为单一来源，且其正文未抓取、摘要由列表与详情字段生成，无独立来源交叉印证，故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c7",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_lishi_chuban:E1",
+          "direction": "支持",
+          "quote": "代理机构 华采招标集团有限公司",
+          "reason": "该证据摘要字段直接载明代理机构为华采招标集团有限公司，与 claim 所述一致，使 claim 更可能为真。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据为信号层信封基础字段，其摘要明确载明\"代理机构 华采招标集团有限公司\"，与 claim 文本一致，故意见为已证实；但该证据为单一来源（谱系根 signal_layer），最终独立性判定由代码作出。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c8",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_lishi_chuban:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 HCZB-2026-ZB0931;项目名称 中国历史研究院《（新编）中国通史》纂修工程出版服务项目公开招标公告;采购方 中国历史研究院;预算金额 16840000.0 元;发布日期 2026-10-11;领域 (未标注)。",
+          "reason": "该证据仅给出项目编号、名称、采购方、预算、发布日期等基础字段,未包含任何来源链接信息,无法支持或否定 claim 中关于信封载明来源链接的断言。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一证据为信号层基础字段,未涉及来源链接 https://www.ccgp.gov.cn/cggg/zygg/gkzb/202610/t20261011_27467046.htm,既无印证也无反驳,故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c9",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_lishi_chuban:E1",
+          "direction": "支持",
+          "quote": "正文未抓取,摘要由列表与详情字段生成",
+          "reason": "该证据原文直接载明正文未抓取、摘要由列表与详情字段生成，与 claim 表述一致。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据原文逐字包含“正文未抓取,摘要由列表与详情字段生成”，直接支持 claim；但该证据谱系根为 signal_layer 单一来源，最终独立性判定由代码作出。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 1,
+      "mainTarget": "c12",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "c12 声称信封中 amountHistory、noveltyHistory、frequencyHistory 三项历史基线字段均为 null，需核实该字段缺失是信封本身未携带，还是采集环节未回填。",
+          "acceptance": "需信封原始字段级证据（信封 JSON 中三个字段键存在且值为 null，或键缺失的原文记录），页面正文级证据不足以替代。",
+          "failover": "若信封原始记录不可得，则改查 c8 来源链接对应详情页，确认页面是否载有历史采购记录区块。"
+        },
+        {
+          "gap": "在确认基线字段缺失后，需补齐采购方\"中国历史研究院\"同类出版服务项目的历史中标金额与频次基线，以判断本次 1684 万元预算是否偏离常规区间。",
+          "acceptance": "需权威登记源记录（如政府采购网中标/成交公告列表，含项目名称、中标金额、公告日期），至少覆盖同类出版服务项目 2 条以上可比记录。",
+          "failover": "若同类出版服务项目记录不足，则放宽至该采购方全部公开招标项目金额序列，并在报告中标注可比性下降。"
+        }
+      ],
+      "searchHints": [
+        "中国历史研究院 出版服务 中标公告",
+        "中国历史研究院 政府采购 预算金额",
+        "ccgp.gov.cn 中国历史研究院 招标"
+      ],
+      "sideTargets": [
+        "c13",
+        "c8"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 主体与事件背景\n\n信封载明本次招标的采购方为\"中国历史研究院\"[1]。\n\n该主体信息为本次事件的主体认定提供了直接依据，即本次招标的采购方主体已由信封载明内容予以确认[1]。\n\n**证据引用**\n\n[1] 信封载明本次招标的采购方为\"中国历史研究院\"。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 2,
+      "mainTarget": "c13",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "中国历史研究院（采购方）同类出版服务项目的历史中标金额与频次基线缺失，无法判断本次 1684 万元预算是否异常（c12 三项历史基线字段均为 null，c13 指出需先补齐历史基线）。",
+          "acceptance": "需权威登记源（如中国政府采购网中标/成交公告列表）页面正文级证据，能列出该采购方至少 2 条同类出版服务项目的中标金额与公告日期，形成可比基线。",
+          "failover": "若公开渠道查不到该采购方同类项目记录，则改查代理机构\"华采招标集团有限公司\"代理的同类出版服务项目金额区间作为替代基线，并在台账中标注基线来源为代理机构维度。"
+        },
+        {
+          "gap": "在获得基线后，需将本次 1684 万元预算与基线中位数/区间比对，判定是否显著偏离。",
+          "acceptance": "需能给出本次金额相对基线的偏离方向（处于正常区间 / 显著高于中位数）的明确结论，且该结论可直接用于区分 h1（正常大额采购）与异常输送方向。",
+          "failover": "若基线样本量不足 2 条无法形成区间，则如实标注\"基线不足，无法判定\"，并将该缺口回写台账，不再重复查证同一维度。"
+        }
+      ],
+      "searchHints": [
+        "中国历史研究院 出版服务 中标公告",
+        "中国历史研究院 政府采购 成交金额",
+        "华采招标集团有限公司 出版服务 中标"
+      ],
+      "sideTargets": [
+        "c12",
+        "c15"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 3,
+      "mainTarget": "c12",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "c12 声称信封中 amountHistory、noveltyHistory、frequencyHistory 三项历史基线字段均为 null，需在原始信封/详情页字段级记录中确认这三项确为 null 而非未展示。",
+          "acceptance": "需页面正文级或字段级原始记录证据：能逐字看到 amountHistory、noveltyHistory、frequencyHistory 三个字段名及其取值（null 或具体值）。",
+          "failover": "若详情页不展示这三项字段，则改从列表接口/原始 JSON 响应中取字段级证据；若仍不可得，则标注 c12 为不可核实并转向 c13 的历史基线补齐路径。"
+        },
+        {
+          "gap": "在确认基线字段缺失后，需补齐中国历史研究院同类出版服务项目的历史中标金额与频次基线，以判断本次 1684 万元预算是否偏离正常区间。",
+          "acceptance": "需权威登记源记录：中国政府采购网（ccgp.gov.cn）上中国历史研究院同类出版服务项目的历史中标公告，含中标金额与公告日期，至少可构成金额区间/中位数。",
+          "failover": "若该采购方无同类历史记录，则改用同类型出版服务项目（如其他国家级科研机构通史/志书出版服务）的公开中标金额作为参照基线，并在报告中标注参照口径差异。"
+        }
+      ],
+      "searchHints": [
+        "中国历史研究院 出版服务 中标公告",
+        "ccgp.gov.cn 中国历史研究院 采购 历史中标",
+        "《（新编）中国通史》纂修工程 出版服务 中标金额"
+      ],
+      "sideTargets": [
+        "c13",
+        "c8"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 动态时间线与关联方\n\n本次招标的公告发布日期为 2026-10-11，投标截止时间为 2026-11-02 13:30，两项时点均载于招标信封 [1]。代理机构为“华采招标集团有限公司”，亦由信封载明 [1]。\n\n关于采购方“中国历史研究院”与代理机构“华采招标集团有限公司”之间是否存在招标代理委托关系，目前尚未核实，现有证据列表中未附对应证据材料。\n\n### 证据引用\n\n[1] 信封载明本次招标公告的发布日期为 2026-10-11；信封载明本次招标的投标截止时间为 2026-11-02 13:30；信封载明本次招标的代理机构为“华采招标集团有限公司”。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 核心事实\n\n本次事件对应信封标注为\"中国历史研究院《（新编）中国通史》纂修工程出版服务项目公开招标公告\"[1]。\n\n信封载明，本次招标项目编号为 HCZB-2026-ZB0931[1]；项目名称为\"中国历史研究院《（新编）中国通史》纂修工程出版服务项目公开招标公告\"[1]；本次招标预算金额为 16840000.0 元（1684 万元）[1]。\n\n信封载明，本次招标正文未抓取，摘要由列表与详情字段生成[1]。\n\n关于历史基线，信封中 amountHistory、noveltyHistory、frequencyHistory 三项历史基线字段均为 null，该情况目前尚未核实[1]。\n\n关于来源链接，信封载明本次招标公告的来源链接为 https://www.ccgp.gov.cn/cggg/zygg/gkzb/202610/t20261011_27467046.htm，该情况目前尚未核实[1]。\n\n### 引用证据\n[1] 信封（E1）：中国历史研究院《（新编）中国通史》纂修工程出版服务项目公开招标公告；项目编号 HCZB-2026-ZB0931；预算金额 16840000.0 元；正文未抓取，摘要由列表与详情字段生成；amountHistory、noveltyHistory、frequencyHistory 均为 null；来源链接 https://www.ccgp.gov.cn/cggg/zygg/gkzb/202610/t20261011_27467046.htm。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 结论\n\n本信号被解读定性为\"商机\"，理由为信封 kind 为 tender 且含明确招标项目 [1]。解读选定的假设种子标签为\"正常大额采购\"与\"真实经营动态\"；目前尚未核实 [1]。\n\n解读指出正文未抓取，需补齐招标文件正文以核实服务范围与投标资格要求 [1]。\n\n解读指出该采购单位历史采购记录与同类项目金额基线不足，需先补齐历史基线以判断本次 1684 万元预算是否异常；目前尚未核实 [1]。\n\n假设研判方面，\"真实经营动态\"为当前主导假设（verified 2、contradicted 0、pending 0、score 2、dominant true）；\"正常大额采购\"（verified 1、contradicted 0、pending 2、score 1、dominant false）尚待补齐历史基线后区分。两假设均 emerged true、adjudicated false。"
+    }
+  },
+  {
+    "stage": "s7_recommend",
+    "response": {
+      "items": [
+        {
+          "action": "在投标截止时间 2026-11-02 13:30 前，通过来源链接 https://www.ccgp.gov.cn/cggg/zygg/gkzb/202610/t20261011_27467046.htm 获取并通读招标文件正文，核实服务范围与投标资格要求，据此评估本企业是否具备投标或分包参与条件。",
+          "rationale": "已证实 c14 指出正文未抓取、需补齐招标文件正文以核实服务范围与投标资格要求；c9 亦证实正文未抓取、摘要由列表与详情字段生成，故现有信息不足以判断参与门槛。c6 载明投标截止时间为 2026-11-02 13:30，构成时间约束。本建议依赖主导假设 h2（真实经营动态），该假设当前 verified=2、pending=0，但尚未 adjudicated，故以正文核实结果为准，不预设结论。",
+          "basisClaimIds": [
+            "c14",
+            "c9",
+            "c6"
+          ],
+          "hypothesisLabel": "真实经营动态"
+        },
+        {
+          "action": "补充核查采购方历史采购记录与同类出版服务项目金额基线（历史中标金额、频次），将本次 1684 万元预算与历史中位数比对，判断是否处于同类项目正常区间，再决定投入力度。",
+          "rationale": "c12 证实 amountHistory、noveltyHistory、frequencyHistory 三项历史基线字段均为 null（该 claim 状态为待证实，此处作为核查线索引用）；c13 指出该采购单位历史采购记录与同类项目金额基线不足，需先补齐历史基线以判断本次 1684 万元预算是否异常；c4 载明预算金额为 16840000.0 元（1684 万元）。本建议同时服务于 h1（正常大额采购）与 h2 的区分，前提是历史基线数据可获取；在基线补齐前不对金额是否异常作结论。",
+          "basisClaimIds": [
+            "c12",
+            "c13",
+            "c4"
+          ],
+          "hypothesisLabel": "正常大额采购"
+        },
+        {
+          "action": "核实采购方\"中国历史研究院\"与代理机构\"华采招标集团有限公司\"之间的招标代理委托关系是否成立，并确认代理机构在同类出版服务项目上的既往代理记录，作为联合伙伴与投标路径选择的依据。",
+          "rationale": "c15 载明两者之间存在招标代理委托关系，但该 claim 状态为待证实，需外部核实；c7 证实代理机构为\"华采招标集团有限公司\"，c3 证实采购方为\"中国历史研究院\"。在委托关系未证实前，不宜据此确定对接与联合伙伴安排。",
+          "basisClaimIds": [
+            "c15",
+            "c7",
+            "c3"
+          ],
+          "hypothesisLabel": "真实经营动态"
+        },
+        {
+          "action": "将本项目纳入商机监测台账，跟踪 2026-10-11 公告发布后的后续机会（如答疑、澄清、中标结果公示），并同步监测出版服务供应链与竞品动态，为是否参与及以何种方式参与提供决策输入。",
+          "rationale": "c10 证实解读将本信号定性为\"商机\"，理由为信封 kind 为 tender 且含明确招标项目；c5 证实公告发布日期为 2026-10-11；c1 证实项目编号为 HCZB-2026-ZB0931，可作为台账唯一标识；c2 证实项目名称为\"中国历史研究院《（新编）中国通史》纂修工程出版服务项目公开招标公告\"。监测重点为供应链风险、竞品动态、商机监测。本建议仅提供跟踪动作，不代替企业参与决策。",
+          "basisClaimIds": [
+            "c10",
+            "c5",
+            "c1",
+            "c2"
+          ],
+          "hypothesisLabel": "真实经营动态"
+        }
+      ]
+    }
+  }
+]

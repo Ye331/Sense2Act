@@ -1,0 +1,1181 @@
+[
+  {
+    "stage": "s1a",
+    "response": {
+      "signalType": "竞情",
+      "reason": "信封 kind 为 rumor，rumor.watchFocus 明确标注为\"竞品动态\"，summary 描述\"竞品动态:中国科学院大连化学物理研究所联合科大讯飞、阿里云发布智能化工大模型3.0Pro,作为国内化工行业首个大模型的迭代升级版本正式对外发布\"，主体为科大讯飞，属于竞争对手产品/合作动态，故定性为竞情。",
+      "selectedSeedLabels": [
+        "真实经营动态",
+        "新方向扩张"
+      ],
+      "basisGaps": [
+        "该信号仅有媒体转载报道（toutiao.com 转载环球网、光明网、金台资讯、新华社），缺少科大讯飞官方公告或一手信源，需先补齐官方发布与产品落地证据",
+        "subjectCreditCode 为空，主体统一社会信用代码缺失，需先补齐科大讯飞主体标识以确认关联主体",
+        "信号未提供该大模型3.0Pro的商业化模式、订单或收入信息，需先补齐其对本企业竞争格局的实际影响基线"
+      ]
+    }
+  },
+  {
+    "stage": "s1b",
+    "response": {
+      "claims": [
+        {
+          "id": "c1",
+          "text": "信号信封 kind 为 rumor，eventId 为 evt_ai_model，tender 为 null。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 3,
+          "priorityReason": "信封基础字段，是后续推理的地基，可由信封证据直接核实。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": []
+        },
+        {
+          "id": "c2",
+          "text": "信号主体为科大讯飞，subjectCreditCode 为空。",
+          "category": "实体",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "主体身份归属是竞情分析的地基，且信用代码缺失直接影响实体锚定。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "科大讯飞"
+          ]
+        },
+        {
+          "id": "c3",
+          "text": "信号摘要为：竞品动态:中国科学院大连化学物理研究所联合科大讯飞、阿里云发布智能化工大模型3.0Pro,作为国内化工行业首个大模型的迭代升级版本正式对外发布。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "信封内容摘要，是全部 claim 分解的原始断言来源。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "中国科学院大连化学物理研究所",
+            "科大讯飞",
+            "阿里云"
+          ]
+        },
+        {
+          "id": "c4",
+          "text": "信号来源为 toutiao.com，signalTime 为 2026-09-03，watchFocus 为竞品动态。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 3,
+          "priorityReason": "来源与关注焦点决定信号性质与时效基线。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": []
+        },
+        {
+          "id": "c5",
+          "text": "clue k3 与 k4 均记载：8月31日，由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "核心事实断言，被多条假设依赖，且为竞品动态的关键节点。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "中国科学院大连化学物理研究所",
+            "科大讯飞",
+            "阿里云"
+          ]
+        },
+        {
+          "id": "c6",
+          "text": "clue k3 与 k4 的发布时间分别为 2026-08-31 16:16 与 2026-08-31 16:00，来源分别为金台资讯与新华社。",
+          "category": "时效",
+          "sectionIndex": 1,
+          "priority": 4,
+          "priorityReason": "发布时间是时间线锚点，决定事件首发时点与传播路径。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "validWindowDays": 30,
+          "refreshCycleDays": 7,
+          "relationType": null,
+          "entityNames": []
+        },
+        {
+          "id": "c7",
+          "text": "clue k1 与 k2 均记载：9月2日，中国科学院大连化学物理研究所工作人员在使用应用智能化工大模型3.0Pro的中试装置开展试验工作。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "中试装置应用是产品落地证据，可区分纯发布与已落地应用。",
+          "hypothesisIds": [
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "中国科学院大连化学物理研究所"
+          ]
+        },
+        {
+          "id": "c8",
+          "text": "clue k1 与 k2 的发布时间均为 2026-09-03，分别为 09:13 与 09:34，来源分别为环球网与光明网。",
+          "category": "时效",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "二次转载时间线，用于判断传播扩散节奏。",
+          "hypothesisIds": [],
+          "validWindowDays": 30,
+          "refreshCycleDays": 7,
+          "relationType": null,
+          "entityNames": []
+        },
+        {
+          "id": "c9",
+          "text": "clue k1、k2、k3、k4 的标题均为\"我国化工行业首个大模型发布新版本\"。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 2,
+          "priorityReason": "标题一致性说明为同一事件的多次转载，非独立信源。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": []
+        },
+        {
+          "id": "c10",
+          "text": "clue k1、k2、k3、k4 的 authorType 均为媒体。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "信源类型均为媒体转载，缺少一手官方信源，影响可核实性。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": []
+        },
+        {
+          "id": "c11",
+          "text": "中国科学院大连化学物理研究所与科大讯飞、阿里云共同研发智能化工大模型3.0Pro。",
+          "category": "关系",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "联合研发关系是竞情核心，直接决定科大讯飞在化工大模型领域的参与身份。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": "协同",
+          "entityNames": [
+            "中国科学院大连化学物理研究所",
+            "科大讯飞",
+            "阿里云"
+          ]
+        },
+        {
+          "id": "c12",
+          "text": "智能化工大模型3.0Pro 被描述为国内化工行业首个大模型的迭代升级版本。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "首个大模型迭代升级的定位是竞争格局判断的关键断言。",
+          "hypothesisIds": [
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": []
+        },
+        {
+          "id": "c13",
+          "text": "解读将本信号定性为竞情，理由为 watchFocus 标注为竞品动态且主体为科大讯飞。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 4,
+          "priorityReason": "定性结论是后续假设与查证方向的依据。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "科大讯飞"
+          ]
+        },
+        {
+          "id": "c14",
+          "text": "解读选中的假设种子标签为\"真实经营动态\"与\"新方向扩张\"。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 4,
+          "priorityReason": "假设种子标签决定竞争假设的登记方向。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": []
+        },
+        {
+          "id": "c15",
+          "text": "解读 basisGaps 指出该信号仅有媒体转载报道，缺少科大讯飞官方公告或一手信源。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 4,
+          "priorityReason": "信源缺口直接影响可核实性，是查证规划的首要方向。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "科大讯飞"
+          ]
+        },
+        {
+          "id": "c16",
+          "text": "解读 basisGaps 指出 subjectCreditCode 为空，主体统一社会信用代码缺失。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 4,
+          "priorityReason": "主体标识缺失影响实体锚定与关联方核实。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "科大讯飞"
+          ]
+        },
+        {
+          "id": "c17",
+          "text": "解读 basisGaps 指出信号未提供该大模型3.0Pro的商业化模式、订单或收入信息。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 4,
+          "priorityReason": "商业化信息缺失是竞争影响评估的关键缺口。",
+          "hypothesisIds": [
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": []
+        },
+        {
+          "id": "c18",
+          "text": "clue k1 与 k2 的内容均以\"近日，由中国科学院大连化学物理研究所联\"或\"近日，由中国科学院大连化学物理研究所联合科大讯飞、阿\"截断结尾。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 2,
+          "priorityReason": "内容截断说明线索文本不完整，影响证据完整性判断。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "中国科学院大连化学物理研究所",
+            "科大讯飞"
+          ]
+        }
+      ],
+      "hypotheses": [
+        {
+          "id": "h1",
+          "label": "真实经营动态",
+          "description": "科大讯飞确实参与了中国科学院大连化学物理研究所联合阿里云等单位共同研发的智能化工大模型3.0Pro，并于2026年8月31日正式对外发布，属于真实的经营与研发动态。可区分 claim：c5（发布事实）、c6（发布时间）、c10（信源类型）、c11（联合研发关系）、c15（信源缺口）。若官方公告或一手信源证实发布，则支持本假设；若仅有媒体转载而无官方确认，则需降级。",
+          "claimIds": [
+            "c5",
+            "c6",
+            "c10",
+            "c11",
+            "c15"
+          ],
+          "op": "AND"
+        },
+        {
+          "id": "h2",
+          "label": "新方向扩张",
+          "description": "科大讯飞借由参与智能化工大模型3.0Pro，向化工行业大模型这一新方向进行业务扩张，且该产品已在中试装置中实际应用。可区分 claim：c5（发布事实）、c7（中试装置应用）、c11（联合研发关系）、c12（首个大模型迭代升级定位）、c17（商业化信息缺失）。若中试应用与商业化落地证据出现，则支持扩张判断；若仅为联合署名而无实际投入，则需重新评估。",
+          "claimIds": [
+            "c5",
+            "c7",
+            "c11",
+            "c12",
+            "c17"
+          ],
+          "op": "AND"
+        }
+      ],
+      "gaps": [
+        {
+          "text": "科大讯飞官方公告或一手信源（官网、公告、官方公众号）是否确认参与智能化工大模型3.0Pro 的研发与发布？",
+          "relatedClaimId": "c5"
+        },
+        {
+          "text": "科大讯飞在该大模型3.0Pro 中的具体角色与投入（技术提供方、算力提供方还是联合署名方）是什么？",
+          "relatedClaimId": "c11"
+        },
+        {
+          "text": "科大讯飞统一社会信用代码（subjectCreditCode）是什么，以确认主体标识？",
+          "relatedClaimId": "c2"
+        },
+        {
+          "text": "智能化工大模型3.0Pro 的商业化模式、订单或收入信息是什么，对本企业竞争格局的实际影响基线如何？",
+          "relatedClaimId": "c17"
+        },
+        {
+          "text": "该大模型3.0Pro 的中试装置应用是否已产生可验证的落地成果或客户案例？",
+          "relatedClaimId": "c7"
+        },
+        {
+          "text": "除媒体转载外，是否存在其他独立信源（行业机构、客户、合作方）可交叉验证本次发布？",
+          "relatedClaimId": "c10"
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 1,
+      "mainTarget": "c11",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "c11 称\"中国科学院大连化学物理研究所与科大讯飞、阿里云共同研发智能化工大模型3.0Pro\"，但现有线索均为媒体转载，缺少一手信源对联合研发主体名单的确认。",
+          "acceptance": "需权威登记源记录或发布方官方页面正文级证据，明确列出联合研发单位包含科大讯飞（与阿里云），且与\"智能化工大模型3.0Pro\"名称对应。",
+          "failover": "若官方页面仅列中国科学院大连化学物理研究所为发布方、未提科大讯飞，则转查科大讯飞官方渠道（官网/公告/官方公众号）是否自述参与，仍无则将该 claim 降级为\"仅媒体转述\"。"
+        },
+        {
+          "gap": "若第一环锚定到官方发布主体，仍需确认该产品\"3.0Pro\"版本与\"国内化工行业首个大模型的迭代升级版本\"（c12）的表述是否出自一手信源。",
+          "acceptance": "需发布方或权威媒体原文正文级证据，出现\"3.0Pro\"与\"迭代升级\"或\"首个大模型\"的连续表述。",
+          "failover": "若仅能查到\"首个大模型\"而无\"3.0Pro 迭代升级\"表述，则记录为部分证实并标注缺口，转下一轮处理 c12。"
+        }
+      ],
+      "searchHints": [
+        "智能化工大模型3.0Pro 发布 中国科学院大连化学物理研究所",
+        "科大讯飞 阿里云 智能化工大模型 联合研发",
+        "我国化工行业首个大模型发布新版本"
+      ],
+      "sideTargets": [
+        "c5",
+        "c12"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [
+        {
+          "id": "c19",
+          "text": "中国科学院大连化学物理研究所工作人员在中试装置上使用应用智能化工大模型3.0Pro开展试验工作。",
+          "category": "事实性",
+          "sectionIndex": 2,
+          "priority": 3,
+          "relationType": null,
+          "parent": "c7",
+          "entityNames": [
+            "中国科学院大连化学物理研究所",
+            "智能化工大模型3.0Pro"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c20",
+          "text": "智能化工大模型3.0Pro 的发布方包含中国科学院大连化学物理研究所、科大讯飞、阿里云三方。",
+          "category": "关系",
+          "sectionIndex": 2,
+          "priority": 3,
+          "relationType": "协同",
+          "parent": "c11",
+          "entityNames": [
+            "中国科学院大连化学物理研究所",
+            "科大讯飞",
+            "阿里云"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c21",
+          "text": "clue k1 与 k2 的标题与 clue k3 与 k4 的标题相同，均为\"我国化工行业首个大模型发布新版本\"。",
+          "category": "事实性",
+          "sectionIndex": 2,
+          "priority": 2,
+          "relationType": null,
+          "parent": "c9",
+          "entityNames": [],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c22",
+          "text": "clue k1 与 k2 的发布时间（2026-09-03）晚于 clue k3 与 k4 的发布时间（2026-08-31）。",
+          "category": "事实性",
+          "sectionIndex": 2,
+          "priority": 2,
+          "relationType": null,
+          "parent": "c8",
+          "entityNames": [],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c23",
+          "text": "clue k1 与 k2 的正文均以\"近日，由中国科学院大连化学物理研究所联\"或\"近日，由中国科学院大连化学物理研究所联合科大讯飞、阿\"截断结尾，未包含发布方完整名单。",
+          "category": "事实性",
+          "sectionIndex": 2,
+          "priority": 2,
+          "relationType": null,
+          "parent": "c18",
+          "entityNames": [],
+          "hypothesisLinks": []
+        }
+      ],
+      "cohorts": [
+        {
+          "name": "智能化工大模型3.0Pro 相关报道信源圈",
+          "criteria": {
+            "条件": "标题均为\"我国化工行业首个大模型发布新版本\"的媒体报道",
+            "已知信源": [
+              "环球网",
+              "光明网",
+              "金台资讯",
+              "新华社"
+            ],
+            "authorType": "媒体"
+          },
+          "members": [
+            "环球网",
+            "光明网",
+            "金台资讯",
+            "新华社"
+          ]
+        },
+        {
+          "name": "智能化工大模型3.0Pro 联合研发方圈",
+          "criteria": {
+            "条件": "被同一报道列为智能化工大模型3.0Pro 联合研发/发布单位的主体"
+          },
+          "members": [
+            "中国科学院大连化学物理研究所",
+            "科大讯飞",
+            "阿里云"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c11",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_ai_model:E5",
+          "direction": "支持",
+          "quote": "由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布",
+          "reason": "该证据明确称智能化工大模型3.0Pro由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发，与claim所述共同研发关系一致，使claim更可能为真。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据直接载明中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发智能化工大模型3.0Pro，与claim文本吻合；但该证据谱系根为toutiao.com、属单一来源转载，最终是否构成独立印证由代码按独立来源规则裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c13",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_ai_model:E5",
+          "direction": "无关",
+          "quote": "近日，由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布。",
+          "reason": "该证据仅报道化工大模型发布及科大讯飞参与研发，未涉及任何信号解读、竞情定性或 watchFocus 标注为竞品动态的内容，无法支持或反驳 claim 关于解读理由的描述。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一证据与 claim 所述解读定性理由（watchFocus 标注为竞品动态、主体为科大讯飞）无直接关联，既未印证也未推翻，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c15",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_ai_model:E5",
+          "direction": "无关",
+          "quote": "近日，由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布。",
+          "reason": "该证据为环球网转载新华网关于智能化工大模型3.0Pro发布的报道，内容涉及科大讯飞参与研发，但并未提及任何 basisGaps 信号，也未说明该信号是否仅有媒体转载报道、是否缺少科大讯飞官方公告或一手信源，因此不改变 claim 的判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗中仅有一条证据，且与 claim 所指的 basisGaps 信号及其信源结构无关，无法据此确认或否定该信号仅有媒体转载报道、缺少官方公告或一手信源，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c16",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_ai_model:E5",
+          "direction": "无关",
+          "quote": "我国化工行业首个大模型发布新版本 2026-09-03 09:13·环球网 来源：新华网",
+          "reason": "该证据内容为化工行业大模型3.0Pro发布，全文未涉及 basisGaps、subjectCreditCode 或统一社会信用代码缺失的任何信息，不改变 claim 成立与否的判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗中唯一证据与 claim 主题完全无关，未提供任何支持或反驳 basisGaps 指出 subjectCreditCode 为空的信息，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c18",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_ai_model:E5",
+          "direction": "无关",
+          "quote": "近日，由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布。",
+          "reason": "该证据仅证明存在以\"近日，由中国科学院大连化学物理研究所联合科大讯飞、阿\"开头的文本，但 claim 断言的是 clue k1 与 k2 两条线索的内容均以特定字符串截断结尾，本证据未涉及 k1、k2 两条线索本身，无法改变该断言成立的可能性。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗仅含一条证据，且该证据与 claim 所断言的 k1、k2 两条线索的截断结尾无直接关联，缺乏可判定该断言真伪的证据，故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c2",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_ai_model:E5",
+          "direction": "支持",
+          "quote": "由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布",
+          "reason": "该证据表明科大讯飞是智能化工大模型3.0Pro的联合研发主体之一，与claim所称信号主体为科大讯飞一致；但证据未涉及subjectCreditCode字段，无法据此判断其是否为空。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一证据支持信号主体为科大讯飞，但未提及subjectCreditCode是否为空，该部分信息缺失，故整体仍待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c3",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_ai_model:E5",
+          "direction": "支持",
+          "quote": "近日，由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布。作为国内化工行业首个大模型的迭代升级版本",
+          "reason": "该证据原文明确表述中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布，且为国内化工行业首个大模型的迭代升级版本，与 claim 核心要素一致。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据 evt_ai_model:E5 逐字支持 claim 中的发布主体、模型名称及'国内化工行业首个大模型的迭代升级版本'表述，方向为支持；但该证据谱系根为 toutiao.com 单一来源，独立来源规则下最终判决由代码裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c5",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_ai_model:E5",
+          "direction": "支持",
+          "quote": "近日，由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布。",
+          "reason": "该证据明确记载了与 claim 相同的研发主体（中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位）与发布对象（智能化工大模型3.0Pro），支持 claim 的核心内容；但证据仅称“近日”发布，未给出“8月31日”这一具体日期，故对日期部分不构成直接印证。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一证据支持了研发主体与发布事实，但未记载 claim 所称的具体发布日期“8月31日”，且该证据谱系根为 toutiao.com（转载新华网/环球网），来源单一，缺乏独立来源交叉印证，故综合意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c7",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_ai_model:E5",
+          "direction": "支持",
+          "quote": "9月2日，中国科学院大连化学物理研究所工作人员在使用应用智能化工大模型3.0Pro的中试装置开展试验工作。",
+          "reason": "该证据原文逐字包含 claim 所述核心事实：9月2日、中国科学院大连化学物理研究所工作人员、使用应用智能化工大模型3.0Pro的中试装置开展试验工作，直接支持 claim 为真。但该证据为单一来源（谱系根 toutiao.com，转载新华网/环球网），且 claim 声称 k1 与 k2 均记载，卷宗中仅见一条证据，无法据此确认双来源独立印证。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一证据 evt_ai_model:E5 原文与 claim 表述高度一致，方向为支持；但卷宗仅含一条证据，claim 所称 k1 与 k2 两处记载未获独立来源交叉验证，故综合意见为待证实。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 2,
+      "mainTarget": "c5",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "c5 记载的发布事实（8月31日由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布）目前仅有媒体转载报道支撑，缺少一手信源或官方发布记录。",
+          "acceptance": "需权威登记源记录或官方发布页正文级证据：能定位到发布方（中国科学院大连化学物理研究所/科大讯飞/阿里云任一）官网、官方公众号或权威通讯社（新华社）原始发布页，页面正文含发布主体、产品名“智能化工大模型3.0Pro”与发布日期 2026-08-31。",
+          "failover": "若三方官网与新华社原始页均无对应记录，则降级为“仅媒体转载、无一手信源”，转查 c15 的信源缺口并考虑对 c5 标注待降级。"
+        },
+        {
+          "gap": "c11 记载的联合研发关系（中国科学院大连化学物理研究所与科大讯飞、阿里云共同研发）在上一轮已作为主目标查证，需确认是否已取得可锚定三方共同署名的权威记录。",
+          "acceptance": "需页面正文级证据：同一权威来源页面正文中同时出现“中国科学院大连化学物理研究所”“科大讯飞”“阿里云”与“智能化工大模型3.0Pro”的联合研发/发布表述。",
+          "failover": "若仅能确认单方署名，则将该关系降级为“单方主导、其余为参与单位”，并在报告中标注署名口径分歧。"
+        },
+        {
+          "gap": "c7 记载的中试装置应用事实（9月2日工作人员在使用该大模型的中试装置开展试验工作）缺少非媒体转载的一手佐证，无法区分“真实经营动态”与“新方向扩张”两假设。",
+          "acceptance": "需页面正文级证据：发布方或应用单位官方渠道出现中试装置与该大模型关联使用的图文记录，含时间或装置名称等可核验要素。",
+          "failover": "若查不到官方中试记录，则维持媒体转载口径，并在两假设记分中标注该证据缺失、不据此上调“新方向扩张”。"
+        }
+      ],
+      "searchHints": [
+        "智能化工大模型3.0Pro 中国科学院大连化学物理研究所 科大讯飞 阿里云 发布",
+        "大连化物所 智能化工大模型 3.0Pro 官方发布",
+        "科大讯飞 智能化工大模型 中试装置"
+      ],
+      "sideTargets": [
+        "c20",
+        "c12"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [
+        {
+          "id": "c21",
+          "text": "中国科学院大连化学物理研究所的中试装置已实际应用智能化工大模型3.0Pro 开展试验工作。",
+          "category": "事实性",
+          "sectionIndex": 2,
+          "priority": 3,
+          "parent": "c7",
+          "entityNames": [
+            "中国科学院大连化学物理研究所",
+            "智能化工大模型3.0Pro"
+          ],
+          "hypothesisLinks": [
+            "真实经营动态"
+          ]
+        },
+        {
+          "id": "c22",
+          "text": "智能化工大模型3.0Pro 的发布方中，中国科学院大连化学物理研究所与科大讯飞、阿里云之间存在协同关系。",
+          "category": "关系",
+          "sectionIndex": 2,
+          "priority": 3,
+          "relationType": "协同",
+          "parent": "c20",
+          "entityNames": [
+            "中国科学院大连化学物理研究所",
+            "科大讯飞",
+            "阿里云"
+          ],
+          "hypothesisLinks": [
+            "新方向扩张"
+          ]
+        },
+        {
+          "id": "c23",
+          "text": "关于智能化工大模型3.0Pro 的报道中，可查到科大讯飞方就该模型发布的官方公告或一手信源。",
+          "category": "证据缺口",
+          "sectionIndex": 2,
+          "priority": 4,
+          "parent": "c15",
+          "entityNames": [
+            "科大讯飞",
+            "智能化工大模型3.0Pro"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c24",
+          "text": "关于智能化工大模型3.0Pro，可查到其商业化模式、订单或收入相关的公开信息。",
+          "category": "证据缺口",
+          "sectionIndex": 2,
+          "priority": 4,
+          "parent": "c17",
+          "entityNames": [
+            "智能化工大模型3.0Pro"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c25",
+          "text": "关于智能化工大模型3.0Pro 的发布方，可查到其统一社会信用代码等主体登记信息。",
+          "category": "证据缺口",
+          "sectionIndex": 2,
+          "priority": 3,
+          "parent": "c16",
+          "entityNames": [
+            "科大讯飞"
+          ],
+          "hypothesisLinks": []
+        }
+      ],
+      "cohorts": [
+        {
+          "name": "智能化工大模型3.0Pro 发布方与研发参与方",
+          "criteria": {
+            "描述": "在报道中被列为智能化工大模型3.0Pro 的联合研发或发布单位",
+            "证据范围": "本轮新证据 evt_ai_model:E6 及现有 claim c11、c20"
+          },
+          "members": [
+            "中国科学院大连化学物理研究所",
+            "科大讯飞",
+            "阿里云"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c11",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_ai_model:E5",
+          "direction": "支持",
+          "quote": "由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布",
+          "reason": "原文明确称该大模型由大连化物所联合科大讯飞、阿里云等单位共同研发，与 claim 的研发主体关系一致。"
+        },
+        {
+          "evidenceId": "evt_ai_model:E6",
+          "direction": "支持",
+          "quote": "由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布",
+          "reason": "内容与 E5 相同，同样支持该研发主体关系；但谱系根同为 toutiao.com，属同一上游转载，不构成独立印证。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "两条证据均支持 claim，但谱系根相同（toutiao.com），系同一上游来源的转载，不构成独立来源印证，故仅能给出待证实意见。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c13",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_ai_model:E5",
+          "direction": "无关",
+          "quote": "由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布",
+          "reason": "该证据仅提及科大讯飞参与研发化工大模型，未涉及 watchFocus 标注为竞品动态或任何竞情定性解读，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_ai_model:E6",
+          "direction": "无关",
+          "quote": "由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布",
+          "reason": "与 E5 同根（lineage_root 均为 toutiao.com），内容相同，同样未涉及 watchFocus 竞品动态标注或竞情定性，不改变 claim 判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "两条证据同根且内容一致，仅能证明科大讯飞参与化工大模型研发，均未提及 watchFocus 标注为竞品动态，也未涉及将本信号定性为竞情的解读过程，claim 缺乏证据支撑，维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c15",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_ai_model:E5",
+          "direction": "无关",
+          "quote": "我国化工行业首个大模型发布新版本 2026-09-03 09:13·环球网 来源：新华网",
+          "reason": "该证据内容为智能化工大模型3.0Pro发布的媒体报道，未涉及 basisGaps 对该信号的解读，也未说明是否存在科大讯飞官方公告或一手信源，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_ai_model:E6",
+          "direction": "无关",
+          "quote": "我国化工行业首个大模型发布新版本 2026-09-03 09:13·环球网 来源：新华网",
+          "reason": "与 E5 同根（lineage_root 均为 toutiao.com），内容相同，同样未涉及 basisGaps 解读或官方公告/一手信源问题，不改变 claim 判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "两条证据均为同一上游转载的媒体报道，内容仅描述智能化工大模型3.0Pro发布，未提及 basisGaps 的解读，也未提供科大讯飞官方公告或一手信源存在与否的信息，无法证实或推翻 claim，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c16",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_ai_model:E5",
+          "direction": "无关",
+          "quote": "我国化工行业首个大模型发布新版本 2026-09-03 09:13·环球网 来源：新华网",
+          "reason": "该证据通篇报道化工大模型3.0Pro发布，未涉及 basisGaps、subjectCreditCode 或统一社会信用代码缺失的任何内容，不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_ai_model:E6",
+          "direction": "无关",
+          "quote": "我国化工行业首个大模型发布新版本 2026-09-03 09:13·环球网 来源：新华网",
+          "reason": "与 E5 同根（lineage_root 均为 toutiao.com），内容为同一报道转载，同样未提及 basisGaps 或 subjectCreditCode，不改变 claim 判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "两条证据均为化工大模型发布的媒体报道，与 claim 所述 basisGaps 指出 subjectCreditCode 为空这一事实无任何关联，且二者同根不构成独立来源；无任何证据支持或反驳该 claim，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c18",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_ai_model:E5",
+          "direction": "支持",
+          "quote": "近日，由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布。",
+          "reason": "该证据原文出现以\"近日，由中国科学院大连化学物理研究所联\"起头、以\"科大讯飞、阿\"延续的连续片段，与 claim 所述 k1/k2 内容被截断的结尾形态一致，使 claim 更可能为真。"
+        },
+        {
+          "evidenceId": "evt_ai_model:E6",
+          "direction": "支持",
+          "quote": "近日，由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布。",
+          "reason": "与 E5 同根（lineage_root 均为 toutiao.com），内容相同，同样含\"近日，由中国科学院大连化学物理研究所联\"及\"科大讯飞、阿\"的连续片段，方向上支持 claim，但不构成独立来源。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "两条证据均含与 claim 所述截断结尾相符的连续原文片段，方向上支持；但二者谱系根相同（toutiao.com），属同一上游转载，不构成独立印证，故仅能维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c2",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_ai_model:E5",
+          "direction": "支持",
+          "quote": "由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布",
+          "reason": "该证据表明科大讯飞是智能化工大模型3.0Pro的联合研发主体之一，与claim所称信号主体为科大讯飞一致；但证据未涉及subjectCreditCode字段，无法印证其为空。"
+        },
+        {
+          "evidenceId": "evt_ai_model:E6",
+          "direction": "支持",
+          "quote": "由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布",
+          "reason": "与E5同根（lineage_root均为toutiao.com），系同一上游内容的转载，不构成独立印证；方向上同样指向科大讯飞为研发主体，但未涉及subjectCreditCode。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "两条证据同根，仅能支持“信号主体为科大讯飞”这一半，且无任何证据涉及subjectCreditCode是否为空，claim整体尚不足以证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c20",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_ai_model:E6",
+          "direction": "支持",
+          "quote": "由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布",
+          "reason": "该证据明确列出中国科学院大连化学物理研究所、科大讯飞、阿里云三方为智能化工大模型3.0Pro的联合研发发布方，直接支持claim。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据明确记载发布方包含中国科学院大连化学物理研究所、科大讯飞、阿里云三方，与claim一致；但仅有一条证据、单一谱系根，最终独立性判定由代码作出。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c3",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_ai_model:E5",
+          "direction": "支持",
+          "quote": "近日，由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布。作为国内化工行业首个大模型的迭代升级版本",
+          "reason": "该证据逐字包含 claim 的核心要素：发布主体（中国科学院大连化学物理研究所联合科大讯飞、阿里云）、发布对象（智能化工大模型3.0Pro）、发布状态（正式对外发布）及定位（国内化工行业首个大模型的迭代升级版本），使 claim 更可能为真。"
+        },
+        {
+          "evidenceId": "evt_ai_model:E6",
+          "direction": "支持",
+          "quote": "近日，由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布。作为国内化工行业首个大模型的迭代升级版本",
+          "reason": "内容与 E5 完全一致，同样逐字支持 claim 的各项要素；但两者 lineage_root 同为 toutiao.com，属同一上游转载，不构成独立印证。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "两条证据均逐字支持 claim 所述发布主体、模型名称、发布状态与行业定位；但二者谱系根相同（toutiao.com），实为同一上游来源的转载，独立来源数仅为 1，故该意见可能被代码按独立来源规则否决。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c5",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_ai_model:E5",
+          "direction": "支持",
+          "quote": "近日，由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布。",
+          "reason": "该证据确认了研发主体（中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位）与发布事实（智能化工大模型3.0Pro正式对外发布），与 claim 核心内容一致；但未提及具体日期为8月31日，仅称'近日'，故对日期部分不构成直接印证。"
+        },
+        {
+          "evidenceId": "evt_ai_model:E6",
+          "direction": "支持",
+          "quote": "近日，由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布。",
+          "reason": "内容与 E5 完全一致，谱系根同为 toutiao.com，属同一上游转载，不构成独立来源；方向上同样支持发布事实，但同样未给出8月31日这一具体日期。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "两条证据同根（lineage_root 均为 toutiao.com），实为同一上游稿件的转载，仅构成单一独立来源，且均只称'近日'发布，未记载 claim 所称的'8月31日'这一具体日期。发布主体与发布事实得到印证，但日期要素缺乏证据支撑，故综合意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c7",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_ai_model:E5",
+          "direction": "支持",
+          "quote": "9月2日，中国科学院大连化学物理研究所工作人员在使用应用智能化工大模型3.0Pro的中试装置开展试验工作。",
+          "reason": "该证据原文直接包含与 claim 表述一致的句子，指向同一事实。"
+        },
+        {
+          "evidenceId": "evt_ai_model:E6",
+          "direction": "支持",
+          "quote": "9月2日，中国科学院大连化学物理研究所工作人员在使用应用智能化工大模型3.0Pro的中试装置开展试验工作。",
+          "reason": "该证据原文同样包含与 claim 表述一致的句子，但谱系根与 E5 相同（toutiao.com），属同一上游转载，不构成独立印证。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "两条证据均逐字支持 claim 所述事实，但二者谱系根相同（toutiao.com），系同一上游来源的转载，不构成独立来源印证，故仅凭现有证据不足以判定为已证实。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 3,
+      "mainTarget": "c15",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "c15 称解读 basisGaps 指出该信号仅有媒体转载报道，缺少科大讯飞官方公告或一手信源；需确认是否存在科大讯飞官方渠道（官网新闻/公告、官方公众号、投资者关系公告）关于智能化工大模型3.0Pro 的发布声明。",
+          "acceptance": "需权威一手信源页面正文级证据：科大讯飞官方域名（如 iflytek.com）或官方公众号/公告页面正文中明确出现\"智能化工大模型3.0Pro\"及联合研发/发布表述；仅有媒体转载不计入。",
+          "failover": "若官方渠道无任何相关声明，则记录\"官方一手信源缺失\"为已证实缺口，转查中国科学院大连化学物理研究所官方渠道（其官网/公众号）是否发布该模型信息。"
+        },
+        {
+          "gap": "若科大讯飞官方渠道无声明，需确认中国科学院大连化学物理研究所（第一署名单位）官方渠道是否发布智能化工大模型3.0Pro 的发布信息，以判定该发布事实是否有一手信源支撑。",
+          "acceptance": "需权威登记源或机构官方页面正文级证据：dicp.ac.cn 域名页面或该所官方公众号正文中出现\"智能化工大模型3.0Pro\"发布表述。",
+          "failover": "若两方官方渠道均无声明，则判定该信号仅存媒体转载，c15 缺口成立，转查阿里云官方渠道作为最后一方一手信源。"
+        }
+      ],
+      "searchHints": [
+        "科大讯飞 智能化工大模型3.0Pro 发布",
+        "中国科学院大连化学物理研究所 智能化工大模型3.0Pro 官方",
+        "智能化工大模型3.0Pro 联合研发 官方公告"
+      ],
+      "sideTargets": [
+        "c11",
+        "c20",
+        "c22"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 4,
+      "mainTarget": "c11",
+      "action": "explore",
+      "gapChain": [
+        {
+          "gap": "c11 声称中国科学院大连化学物理研究所与科大讯飞、阿里云共同研发智能化工大模型3.0Pro，但现有证据仅为媒体转载报道，缺少任一研发方（尤其是科大讯飞）官方渠道对该联合研发关系的确认。",
+          "acceptance": "需权威一手信源页面正文级证据：科大讯飞官方公告/官网新闻页、或中国科学院大连化学物理研究所官网发布页，正文中明确出现该所与科大讯飞、阿里云共同研发/联合发布智能化工大模型3.0Pro 的表述。",
+          "failover": "若官方渠道无对应页面，则降级为仅采信媒体转载口径，将 c11 标注为“仅媒体级证据支持”，并转查 c20/c22 的协同关系是否有其他登记源（如企业登记、专利共同申请人）佐证。"
+        },
+        {
+          "gap": "若锚定到官方发布页，仍需确认该页面是否同时给出三方各自的角色分工（研发/发布/应用），以区分“真实经营动态”与“新方向扩张”两假设。",
+          "acceptance": "需同一官方页面正文级证据，逐字出现科大讯飞在其中的具体角色描述（如“联合研发”“提供大模型技术支持”等），而非仅列名。",
+          "failover": "若官方页面仅列名不述角色，则记录为“角色未明”，转由 c7（中试装置应用）与 c17（商业化信息缺失）继续区分假设。"
+        }
+      ],
+      "searchHints": [
+        "科大讯飞 智能化工大模型3.0Pro 联合研发 官方",
+        "中国科学院大连化学物理研究所 智能化工大模型3.0Pro 发布",
+        "科大讯飞 阿里云 大连化物所 化工大模型 公告"
+      ],
+      "sideTargets": [
+        "c20",
+        "c22"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 5,
+      "mainTarget": "c7",
+      "action": "explore",
+      "gapChain": [
+        {
+          "gap": "c7 记载\"9月2日，中国科学院大连化学物理研究所工作人员在使用应用智能化工大模型3.0Pro的中试装置开展试验工作\"，但现有证据仅来自 clue k1、k2 的媒体转载，缺少可核验的原始报道正文与配图说明，无法确认\"中试装置实际应用\"这一事实是否成立。",
+          "acceptance": "需页面正文级证据：取得 clue k1（环球网）或 k2（光明网）报道详情页正文，正文中须出现与 c7 表述一致的连续原文片段（含\"中试装置\"与\"智能化工大模型3.0Pro\"同现），并记录该段落的图注或正文位置。",
+          "failover": "若 k1、k2 详情页正文不含该表述或页面不可达，则改查同源转载链（金台资讯、新华社 k3/k4 详情页）是否含同一表述；若四源均无正文级佐证，则将 c7 降级为\"仅标题/摘要级转述\"并标注证据粒度不足。"
+        },
+        {
+          "gap": "即便正文确认中试装置应用，仍需判断该应用是否指向科大讯飞的实际投入（而非仅大连化物所单方试验），以区分\"真实经营动态\"与\"新方向扩张\"两假设。",
+          "acceptance": "需权威登记源记录或一手信源：科大讯飞官方渠道（公告、官网新闻、官方公众号）或大连化物所官方发布中，出现将科大讯飞列为该中试应用参与方/技术提供方的记录；若仅有媒体转述而无任一方官方确认，则记为\"未获官方确认\"。",
+          "failover": "若官方渠道无相关记录，则回退至 c15 已确认的信源缺口结论，将 c7 对两假设的区分力标注为\"不可区分\"，并转查 c17（商业化模式、订单或收入信息）以寻找替代区分证据。"
+        }
+      ],
+      "searchHints": [
+        "智能化工大模型3.0Pro 中试装置 试验",
+        "大连化学物理研究所 科大讯飞 阿里云 中试",
+        "我国化工行业首个大模型发布新版本 环球网 光明网"
+      ],
+      "sideTargets": [
+        "c18",
+        "c9",
+        "c8"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 6,
+      "mainTarget": "c5",
+      "action": "explore",
+      "gapChain": [
+        {
+          "gap": "c5 记载的发布事实（8月31日由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布）目前仅有媒体转载级证据，缺少一手信源或官方发布记录佐证。",
+          "acceptance": "需页面正文级证据：找到至少一个非媒体转载的一手信源页面（如发布方官网/官方公众号/权威登记或发布平台记录），其正文可逐字读到与 c5 一致的发布主体与发布事实表述。",
+          "failover": "若一轮内无法定位一手信源页面，则退而求其次：确认现有四条媒体线索（k1-k4）是否均转引自同一原始通稿，并记录该通稿的原始出处标识（如电头/来源署名），作为降级证据。"
+        },
+        {
+          "gap": "若上一环锚定到一手信源或原始通稿出处，需进一步确认该信源是否明确列出科大讯飞为联合研发/发布方之一（对应 c11、c20 的关系表述）。",
+          "acceptance": "需权威登记源记录或官方发布正文级证据：一手信源正文中逐字出现科大讯飞与智能化工大模型3.0Pro 的联合研发/发布关系表述。",
+          "failover": "若一手信源仅提及中国科学院大连化学物理研究所而未列科大讯飞，则记录该差异，作为对 c11/c20 的降级或反证线索，转由下一轮评估。"
+        }
+      ],
+      "searchHints": [
+        "智能化工大模型3.0Pro 正式发布",
+        "中国科学院大连化学物理研究所 科大讯飞 阿里云 联合研发",
+        "我国化工行业首个大模型发布新版本 通稿来源"
+      ],
+      "sideTargets": [
+        "c11",
+        "c20",
+        "c12"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 主体与事件背景\n\n本节所依据的信号信封 kind 为 rumor，eventId 为 evt_ai_model，tender 为 null；上述字段目前尚未核实。信号来源为 toutiao.com，signalTime 为 2026-09-03，watchFocus 为竞品动态；上述来源与时间信息目前尚未核实。\n\n信号主体为科大讯飞，subjectCreditCode 为空；该主体认定目前尚未核实 [1][2]。\n\n信号摘要为：竞品动态:中国科学院大连化学物理研究所联合科大讯飞、阿里云发布智能化工大模型3.0Pro,作为国内化工行业首个大模型的迭代升级版本正式对外发布。该摘要内容目前尚未核实 [1][2]。\n\n本节所涉两条待评估假设——真实经营动态与新方向扩张——其可区分 claim 均处于待证实状态，尚无已证实或已被矛盾的支持证据，故本节不作事实性认定。\n\n**证据引用**\n\n[1] E5\n[2] E6"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 动态时间线与关联方\n\n本节仅就线索 k1、k2、k3、k4 的发布时间、来源、作者类型与标题信息作台账投影，相关断言目前均处于待证实状态，尚未核实，以下不作事实认定。\n\n**发布时间与来源。** 关于 clue k3 与 k4，台账记载其发布时间分别为 2026-08-31 16:16 与 2026-08-31 16:00，来源分别为金台资讯与新华社；该说法目前尚未核实。关于 clue k1 与 k2，台账记载其发布时间均为 2026-09-03，分别为 09:13 与 09:34，来源分别为环球网与光明网；该说法目前尚未核实。\n\n**作者类型。** 关于 clue k1、k2、k3、k4 的 authorType，台账记载均为媒体；该说法目前尚未核实。\n\n**标题。** 关于 clue k1、k2、k3、k4 的标题，台账记载均为“我国化工行业首个大模型发布新版本”；该说法目前尚未核实。\n\n**内容截断形态。** 关于 clue k1 与 k2 的内容结尾，台账记载均以“近日，由中国科学院大连化学物理研究所联”或“近日，由中国科学院大连化学物理研究所联合科大讯飞、阿”截断结尾 [1][2]；该说法目前尚未核实。\n\n**关联方与信源缺口。** 上述线索所涉关联方包括中国科学院大连化学物理研究所、科大讯飞、阿里云，以及金台资讯、新华社、环球网、光明网等信源；各线索的发布时间、来源、作者类型与标题均缺乏已核实的一手信源支撑，相关缺口有待补充确认。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 核心事实\n\n本节所涉核心事实均处于待证实状态，以下按现有证据如实记录，不作事实升格。\n\n**一、联合研发与发布主体**\n\n关于智能化工大模型3.0Pro 的研发主体，现有线索记载：中国科学院大连化学物理研究所与科大讯飞、阿里云共同研发该模型 [1][2]。关于发布方构成，有记录显示发布方包含中国科学院大连化学物理研究所、科大讯飞、阿里云三方 [2]。上述研发与发布主体关系目前尚未核实。\n\n**二、发布时间与发布事实**\n\nclue k3 与 k4 均记载：8月31日，由中国科学院大连化学物理研究所联合科大讯飞、阿里云等单位共同研发的智能化工大模型3.0Pro正式对外发布 [1][2]。该发布事实目前尚未核实。\n\n**三、产品定位**\n\n智能化工大模型3.0Pro 被描述为国内化工行业首个大模型的迭代升级版本 [3]。该定位表述目前尚未核实，且给定证据列表中未附对应原文摘录。\n\n**四、应用情况**\n\nclue k1 与 k2 均记载：9月2日，中国科学院大连化学物理研究所工作人员在使用应用智能化工大模型3.0Pro的中试装置开展试验工作 [1][2]。该应用情况目前尚未核实。\n\n**五、主体间协同关系**\n\n关于中国科学院大连化学物理研究所与科大讯飞、阿里云之间是否存在协同关系，现有记录指向三方共同研发与联合发布 [1][2]，但该协同关系本身目前尚未核实，且给定证据列表中未附对应原文摘录。\n\n**证据引用说明**\n\n[1] E5；[2] E6；[3] 对应 claim c12，给定证据列表未提供原文摘录。\n\n**核实状态汇总**\n\n本节全部断言（c11、c5、c12、c7、c20、c22）均为待证实状态，尚无已证实或矛盾口径可供对照，后续需以官方公告或一手信源进一步核实。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 结论\n\n本节就本信号的解读定性、假设种子与依据缺口作忠实投影。以下各项均处于待证实状态，目前尚未核实，不得作为事实引用。\n\n**一、信号定性**\n\n解读将本信号定性为竞情，理由为 watchFocus 标注为竞品动态且主体为科大讯飞。该定性目前尚未核实 [1][2]。\n\n**二、假设种子**\n\n解读选中的假设种子标签为\"真实经营动态\"与\"新方向扩张\"。该选取结果目前尚未核实。\n\n**三、依据缺口**\n\n解读 basisGaps 共列出三项缺口：\n\n1. 该信号仅有媒体转载报道，缺少科大讯飞官方公告或一手信源。目前尚未核实 [1][2]。\n2. subjectCreditCode 为空，主体统一社会信用代码缺失。目前尚未核实 [1][2]。\n3. 信号未提供该大模型3.0Pro的商业化模式、订单或收入信息。目前尚未核实。\n\n**四、假设状态**\n\n两个假设种子\"真实经营动态\"与\"新方向扩张\"均已浮现，均非主导假设，得分均为 0，各自 verified 为 0、contradicted 为 0、pending 为 5。上述状态目前尚未核实。\n\n**五、待核实事项**\n\n本信号的信源层级、主体标识完整性与商业化信息均存在缺口，相关判断有待官方公告或一手信源补充后方可确认。\n\n---\n\n引用证据：\n[1] E5\n[2] E6"
+    }
+  },
+  {
+    "stage": "s7_recommend",
+    "response": {
+      "items": [
+        {
+          "action": "补充核查:优先获取科大讯飞官方公告或一手信源(如公司官网、交易所披露、官方公众号),以确认其是否实际参与智能化工大模型3.0Pro 的联合研发与发布;在获得官方确认前,不将该动态作为已成立的竞品事实纳入决策依据。",
+          "rationale": "全部 claim 均为待证实状态,记分板两个假设 verified 均为 0;c15 明确指出该信号仅有媒体转载报道,缺少科大讯飞官方公告或一手信源,c10 显示 clue k1、k2、k3、k4 的 authorType 均为媒体,c16 指出 subjectCreditCode 为空、主体统一社会信用代码缺失。因此当前证据链不足以支撑任何确定性结论,补充核查是其余建议的前置条件。",
+          "basisClaimIds": [
+            "c15",
+            "c10",
+            "c16",
+            "c11"
+          ],
+          "hypothesisLabel": "真实经营动态"
+        },
+        {
+          "action": "跟踪后续机会:持续监测智能化工大模型3.0Pro 在中试装置之外的应用扩展、商业化模式、订单与收入披露,并同步跟踪科大讯飞在化工行业大模型方向的后续动作,形成定期更新记录。",
+          "rationale": "c7 记载 9月2日中国科学院大连化学物理研究所工作人员在使用应用智能化工大模型3.0Pro 的中试装置开展试验工作,指向实际应用场景;但 c17 指出信号未提供该大模型3.0Pro 的商业化模式、订单或收入信息,故扩张判断目前仅为待证实前提,监测应以获取商业化落地证据为目标。",
+          "basisClaimIds": [
+            "c7",
+            "c17",
+            "c12"
+          ],
+          "hypothesisLabel": "新方向扩张"
+        },
+        {
+          "action": "评估参与方式与联合伙伴:围绕中国科学院大连化学物理研究所、科大讯飞、阿里云三方协同关系,梳理自身在化工行业大模型链条中的可切入环节(如数据、场景、集成或应用侧),评估潜在联合或对标方案,形成内部评估材料供决策层讨论。",
+          "rationale": "c11 记载三方共同研发,c20 记载发布方包含三方,c22 记载三方之间存在协同关系,提示该动态涉及多方联合而非单一厂商行为;但上述均为待证实 claim,评估材料须标注该前提,不得据此直接作出投入决策。",
+          "basisClaimIds": [
+            "c11",
+            "c20",
+            "c22"
+          ],
+          "hypothesisLabel": "真实经营动态"
+        },
+        {
+          "action": "风险缓释:针对该动态被定性为竞品动态的情形,建立竞品动态跟踪台账,记录发布时间、信源类型与信源缺口,并在信源升级为官方公告时触发复核,避免基于媒体转载信息提前调整竞争策略。",
+          "rationale": "c13 记载解读将本信号定性为竞情,理由为 watchFocus 标注为竞品动态且主体为科大讯飞;c4 记载信号来源为 toutiao.com、signalTime 为 2026-09-03、watchFocus 为竞品动态;c6 记载 clue k3 与 k4 来源分别为金台资讯与新华社、发布时间为 2026-08-31。信源层级差异与 c15 所述信源缺口共同构成需缓释的信息风险。",
+          "basisClaimIds": [
+            "c13",
+            "c4",
+            "c6",
+            "c15"
+          ],
+          "hypothesisLabel": "真实经营动态"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,108 @@
+{
+  "_note": "证据编号按入账顺序:E1=信封线索(R0) E2=R1 E3-E8=R2 E9,E10=R3 E11=R4 E12=R5 E13=刷新注入。qichacha.com 经谱系表折叠为 gsxt 根。",
+  "batches": [
+    {
+      "keys": ["产业内幕君 前高管", "爆料人 身份"],
+      "items": [
+        {
+          "platform": "weibo", "source": "weibo.com",
+          "url": "https://weibo.com/example/2",
+          "title": "账号考古:产业内幕君2026 的前世",
+          "content": "产业内幕君2026 该账号 2025 年爆料 E 公司时自称前财务总监,后经查实其为 E 公司普通职员;账号历史内容以职场爆料为主。",
+          "publishedAt": "2026-09-23", "authorType": "自媒体"
+        }
+      ]
+    },
+    {
+      "keys": ["B公司 欠薪 官方记录", "B公司 执行 失信"],
+      "items": [
+        {
+          "platform": "official_website", "source": "zxgk.court.gov.cn",
+          "url": "https://zxgk.court.gov.cn/b",
+          "title": "执行信息公开网查询:B新能源科技有限公司无记录",
+          "content": "在中国执行信息公开网以 B新能源科技有限公司 检索,截至 2026-09-23 无被执行人、失信被执行人记录。",
+          "publishedAt": "2026-09-23", "authorType": "官方"
+        },
+        {
+          "platform": "official_website", "source": "rsj.gov.cn",
+          "url": "https://rsj.gov.cn/gongshi",
+          "title": "市人社局欠薪名单公示:B公司不在列",
+          "content": "市人社局 2026 年第三季度拖欠劳动报酬重大违法行为公布名单中,无 B新能源科技有限公司。",
+          "publishedAt": "2026-09-23", "authorType": "官方"
+        },
+        {
+          "platform": "wenshu", "source": "wenshu.court.gov.cn",
+          "url": "https://wenshu.court.gov.cn/b",
+          "title": "裁判文书网:B公司劳动争议仅一起且已履行完毕",
+          "content": "裁判文书网检索 B新能源科技有限公司 劳动争议案件,仅 2024 年一起,判决已履行完毕,无 2026 年新增案件。",
+          "publishedAt": "2026-09-23", "authorType": "官方"
+        },
+        {
+          "platform": "official_website", "source": "qichacha.com",
+          "url": "https://qichacha.com/b",
+          "title": "企查查工商快照:B公司在业",
+          "content": "企查查显示 B新能源科技有限公司 登记状态为存续,无破产审查案件信息,法定代表人无变更。",
+          "publishedAt": "2026-09-23", "authorType": "聚合站"
+        },
+        {
+          "platform": "exchange", "source": "sse.com.cn",
+          "url": "https://sse.com.cn/a-annual",
+          "title": "A汽车 2025 年年报:核心供应商章节",
+          "content": "A汽车股份有限公司 2025 年年度报告披露:动力电池核心供应商包括 B新能源科技有限公司,合作覆盖主力车型。",
+          "publishedAt": "2026-04-30", "authorType": "官方"
+        },
+        {
+          "platform": "ggzy", "source": "ggzy.gov.cn",
+          "url": "https://ggzy.gov.cn/a-win",
+          "title": "公共资源交易:A汽车电池包框架采购中标公示",
+          "content": "A汽车股份有限公司 2026 年动力电池包框架采购中标公示,中标人含 B新能源科技有限公司。",
+          "publishedAt": "2026-03-15", "authorType": "官方"
+        }
+      ]
+    },
+    {
+      "keys": ["产业内幕君 转载 矩阵", "爆料账号 关联 C公司"],
+      "items": [
+        {
+          "platform": "weibo", "source": "weibo.com",
+          "url": "https://weibo.com/example/9",
+          "title": "转载账号行为数据",
+          "content": "产业内幕君2026 爆料首发两小时内,18 个转载账号均为同周注册、无历史内容,注册信息疑似同一设备簇。",
+          "publishedAt": "2026-09-23", "authorType": "自媒体"
+        },
+        {
+          "platform": "official_website", "source": "ccompany_web",
+          "url": "https://c.example.com/news",
+          "title": "C汽车经销体系官方账号互动记录",
+          "content": "C汽车销售集团有限公司 经销体系官方账号与产业内幕君2026 及多个转载矩阵账号存在互相关注与互动。",
+          "publishedAt": "2026-09-23", "authorType": "官方"
+        }
+      ]
+    },
+    {
+      "keys": ["A公司 供应链 公告", "A汽车 供应商 说明"],
+      "items": [
+        {
+          "platform": "exchange", "source": "sse.com.cn",
+          "url": "https://sse.com.cn/a-notice",
+          "title": "A汽车关于供应链情况的说明公告",
+          "content": "A汽车股份有限公司 就供应链情况发布说明公告:生产经营正常,已建立多元电池供应体系。",
+          "publishedAt": "2026-09-21", "authorType": "官方"
+        }
+      ]
+    },
+    {
+      "keys": ["产业内幕君 身份 长文"],
+      "items": [
+        {
+          "platform": "weibo", "source": "weibo.com",
+          "url": "https://weibo.com/example/12",
+          "title": "再谈产业内幕君2026 的身份",
+          "content": "另一篇自媒体长文称产业内幕君2026 疑似汽车行业从业者,但未提供实名或任职证据,身份仍无定论。",
+          "publishedAt": "2026-09-24", "authorType": "自媒体"
+        }
+      ]
+    }
+  ],
+  "history": {}
+}

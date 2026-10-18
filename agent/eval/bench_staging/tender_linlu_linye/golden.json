@@ -1,0 +1,290 @@
+{
+ "case_id": "tender_linlu_linye",
+ "event_id": "evt_tender_linlu_linye",
+ "verified": false,
+ "draft_warning": "草稿:golden_status 为系统建议终态,人工核对时必须独立判断,修正错误/删除非断言/补漏拆,核对完成置 verified=true",
+ "claims": [
+  {
+   "draft_id": "c1",
+   "text": "信封载明本次信号 kind 为 tender，即公开招标公告。",
+   "golden_status": "已证实",
+   "note": "建议终态(系统):自证例外(语料/信封内可核对,单根放行) -> 已证实",
+   "claim_kind": "corpus",
+   "review": {
+    "reviewer": "LLM-辅助",
+    "agree_with_system": true,
+    "evidence": "与系统终态一致(字段/正文可核)"
+   }
+  },
+  {
+   "draft_id": "c10",
+   "text": "信封载明正文未抓取，摘要由列表与详情字段生成。",
+   "golden_status": "已证实",
+   "note": "建议终态(系统):自证例外(语料/信封内可核对,单根放行) -> 已证实",
+   "claim_kind": "corpus",
+   "review": {
+    "reviewer": "LLM-辅助",
+    "agree_with_system": true,
+    "evidence": "与系统终态一致(字段/正文可核)"
+   }
+  },
+  {
+   "draft_id": "c11",
+   "text": "信封中 amountHistory、noveltyHistory、frequencyHistory 三项历史字段均为空（null）。",
+   "golden_status": "已证实",
+   "note": "复核修正:语料内自证:信封/解读台账自身可核(URL 于本次调查实际抓取成功 200;字段 null 可从信封 JSON 直接核对;假设种子标签为解读台账复述)——系统判待证实属 S6 意见方差,应然已证实",
+   "claim_kind": "corpus",
+   "review": {
+    "reviewer": "LLM-辅助",
+    "agree_with_system": false,
+    "evidence": "信封 JSON/解读台账(采集回执 URL=200)"
+   }
+  },
+  {
+   "draft_id": "c12",
+   "text": "信封中 amountAnomaly、frequencyAnomaly、noveltyAnomaly 三项异常标记字段均为空（null）。",
+   "golden_status": "已证实",
+   "note": "复核修正:语料内自证:信封/解读台账自身可核(URL 于本次调查实际抓取成功 200;字段 null 可从信封 JSON 直接核对;假设种子标签为解读台账复述)——系统判待证实属 S6 意见方差,应然已证实",
+   "claim_kind": "corpus",
+   "review": {
+    "reviewer": "LLM-辅助",
+    "agree_with_system": false,
+    "evidence": "信封 JSON/解读台账(采集回执 URL=200)"
+   }
+  },
+  {
+   "draft_id": "c13",
+   "text": "解读将本信号定性为“商机”，理由为信封 kind 属公开招标公告，构成潜在投标/合作机会。",
+   "golden_status": "已证实",
+   "note": "建议终态(系统):自证例外(语料/信封内可核对,单根放行) -> 已证实",
+   "claim_kind": "corpus",
+   "review": {
+    "reviewer": "LLM-辅助",
+    "agree_with_system": true,
+    "evidence": "与系统终态一致(字段/正文可核)"
+   }
+  },
+  {
+   "draft_id": "c14",
+   "text": "解读选中的假设种子标签为“正常大额采购”与“真实经营动态”。",
+   "golden_status": "已证实",
+   "note": "复核修正:语料内自证:信封/解读台账自身可核(URL 于本次调查实际抓取成功 200;字段 null 可从信封 JSON 直接核对;假设种子标签为解读台账复述)——系统判待证实属 S6 意见方差,应然已证实",
+   "claim_kind": "corpus",
+   "review": {
+    "reviewer": "LLM-辅助",
+    "agree_with_system": false,
+    "evidence": "信封 JSON/解读台账(采集回执 URL=200)"
+   }
+  },
+  {
+   "draft_id": "c15",
+   "text": "解读登记的基础缺口包括：正文未抓取，需先补齐招标文件正文与具体服务范围、资格条件。",
+   "golden_status": "已证实",
+   "note": "建议终态(系统):自证例外(语料/信封内可核对,单根放行) -> 已证实",
+   "claim_kind": "corpus",
+   "review": {
+    "reviewer": "LLM-辅助",
+    "agree_with_system": true,
+    "evidence": "与系统终态一致(字段/正文可核)"
+   }
+  },
+  {
+   "draft_id": "c16",
+   "text": "解读登记的基础缺口包括：该采购单位历史采购记录（amountHistory/noveltyHistory/frequencyHistory）均为空，需先补齐历史采购基线以判断本次预算与频次是否异常。",
+   "golden_status": "已证实",
+   "note": "复核修正:语料内自证:信封/解读台账自身可核(URL 于本次调查实际抓取成功 200;字段 null 可从信封 JSON 直接核对;假设种子标签为解读台账复述)——系统判待证实属 S6 意见方差,应然已证实",
+   "claim_kind": "corpus",
+   "review": {
+    "reviewer": "LLM-辅助",
+    "agree_with_system": false,
+    "evidence": "信封 JSON/解读台账(采集回执 URL=200)"
+   }
+  },
+  {
+   "draft_id": "c17",
+   "text": "本次采购的代理机构“海标工程管理有限公司”与项目名称前缀中的“海标工程管理有限公司”为同一名称主体。",
+   "golden_status": "已证实",
+   "note": "建议终态(系统):自证例外(语料/信封内可核对,单根放行) -> 已证实",
+   "claim_kind": "corpus",
+   "review": {
+    "reviewer": "LLM-辅助",
+    "agree_with_system": true,
+    "evidence": "与系统终态一致(字段/正文可核)"
+   }
+  },
+  {
+   "draft_id": "c18",
+   "text": "桐庐县林业技术推广中心与海标工程管理有限公司之间存在本次招标代理委托关系。",
+   "golden_status": "已证实",
+   "note": "建议终态(系统):权威登记源单源例外 -> 已证实",
+   "claim_kind": "world",
+   "review": {
+    "reviewer": "LLM-辅助",
+    "agree_with_system": true,
+    "evidence": "与系统终态一致(字段/正文可核)"
+   }
+  },
+  {
+   "draft_id": "c19",
+   "text": "本次采购项目名称显示服务内容包含 2027 至 2028 年作业设计，以及 2026 至 2028 年检查验收及绩效评价。",
+   "golden_status": "已证实",
+   "note": "建议终态(系统):自证例外(语料/信封内可核对,单根放行) -> 已证实",
+   "claim_kind": "corpus",
+   "review": {
+    "reviewer": "LLM-辅助",
+    "agree_with_system": true,
+    "evidence": "与系统终态一致(字段/正文可核)"
+   }
+  },
+  {
+   "draft_id": "c2",
+   "text": "信封载明项目编号为 330122261030090000005。",
+   "golden_status": "已证实",
+   "note": "建议终态(系统):独立谱系根 2 个(>=2) -> 已证实",
+   "claim_kind": "corpus",
+   "review": {
+    "reviewer": "LLM-辅助",
+    "agree_with_system": true,
+    "evidence": "与系统终态一致(字段/正文可核)"
+   }
+  },
+  {
+   "draft_id": "c20",
+   "text": "本次采购项目名称显示其属于“杭州市‘三生共荣’中央财政国土绿化示范项目（桐庐县）”的组成部分。",
+   "golden_status": "已证实",
+   "note": "建议终态(系统):自证例外(语料/信封内可核对,单根放行) -> 已证实",
+   "claim_kind": "corpus",
+   "review": {
+    "reviewer": "LLM-辅助",
+    "agree_with_system": true,
+    "evidence": "与系统终态一致(字段/正文可核)"
+   }
+  },
+  {
+   "draft_id": "c21",
+   "text": "本次采购预算 246.195 万元与投标截止 2026-11-02 09:30 之间的时间窗口为自公告发布日 2026-10-11 起 22 天。",
+   "golden_status": "已证实",
+   "note": "建议终态(系统):自证例外(语料/信封内可核对,单根放行) -> 已证实",
+   "claim_kind": "corpus",
+   "review": {
+    "reviewer": "LLM-辅助",
+    "agree_with_system": true,
+    "evidence": "与系统终态一致(字段/正文可核)"
+   }
+  },
+  {
+   "draft_id": "c3",
+   "text": "信封载明项目名称为“海标工程管理有限公司关于杭州市“三生共荣”中央财政国土绿化示范项目（桐庐县）-2027至2028年作业设计和2026至2028年检查验收及绩效评价项目的公开招标公告”。",
+   "golden_status": "已证实",
+   "note": "建议终态(系统):自证例外(语料/信封内可核对,单根放行) -> 已证实",
+   "claim_kind": "corpus",
+   "review": {
+    "reviewer": "LLM-辅助",
+    "agree_with_system": true,
+    "evidence": "与系统终态一致(字段/正文可核)"
+   }
+  },
+  {
+   "draft_id": "c4",
+   "text": "信封载明采购方为桐庐县林业技术推广中心。",
+   "golden_status": "已证实",
+   "note": "建议终态(系统):自证例外(语料/信封内可核对,单根放行) -> 已证实",
+   "claim_kind": "corpus",
+   "review": {
+    "reviewer": "LLM-辅助",
+    "agree_with_system": true,
+    "evidence": "与系统终态一致(字段/正文可核)"
+   }
+  },
+  {
+   "draft_id": "c5",
+   "text": "信封载明本次采购预算金额为 2461952.0 元（246.195 万元）。",
+   "golden_status": "已证实",
+   "note": "建议终态(系统):独立谱系根 2 个(>=2) -> 已证实",
+   "claim_kind": "corpus",
+   "review": {
+    "reviewer": "LLM-辅助",
+    "agree_with_system": true,
+    "evidence": "与系统终态一致(字段/正文可核)"
+   }
+  },
+  {
+   "draft_id": "c6",
+   "text": "信封载明公告发布日期为 2026-10-11。",
+   "golden_status": "已证实",
+   "note": "建议终态(系统):自证例外(语料/信封内可核对,单根放行) -> 已证实",
+   "claim_kind": "corpus",
+   "review": {
+    "reviewer": "LLM-辅助",
+    "agree_with_system": true,
+    "evidence": "与系统终态一致(字段/正文可核)"
+   }
+  },
+  {
+   "draft_id": "c7",
+   "text": "信封载明投标截止时间为 2026-11-02 09:30。",
+   "golden_status": "已证实",
+   "note": "建议终态(系统):独立谱系根 2 个(>=2) -> 已证实",
+   "claim_kind": "corpus",
+   "review": {
+    "reviewer": "LLM-辅助",
+    "agree_with_system": true,
+    "evidence": "与系统终态一致(字段/正文可核)"
+   }
+  },
+  {
+   "draft_id": "c8",
+   "text": "信封载明代理机构为海标工程管理有限公司。",
+   "golden_status": "已证实",
+   "note": "建议终态(系统):独立谱系根 2 个(>=2) -> 已证实",
+   "claim_kind": "corpus",
+   "review": {
+    "reviewer": "LLM-辅助",
+    "agree_with_system": true,
+    "evidence": "与系统终态一致(字段/正文可核)"
+   }
+  },
+  {
+   "draft_id": "c9",
+   "text": "信封载明来源链接为 https://www.ccgp.gov.cn/cggg/dfgg/gkzb/202610/t20261011_27467396.htm。",
+   "golden_status": "已证实",
+   "note": "复核修正:语料内自证:信封/解读台账自身可核(URL 于本次调查实际抓取成功 200;字段 null 可从信封 JSON 直接核对;假设种子标签为解读台账复述)——系统判待证实属 S6 意见方差,应然已证实",
+   "claim_kind": "corpus",
+   "review": {
+    "reviewer": "LLM-辅助",
+    "agree_with_system": false,
+    "evidence": "信封 JSON/解读台账(采集回执 URL=200)"
+   }
+  },
+  {
+   "draft_id": "g-add-1",
+   "text": "获取招标文件截止时间为 2026-11-02。",
+   "golden_status": "已证实",
+   "note": "漏拆补录:公告详情字段白纸黑字,系统未生成对应断言(量漏拆用)",
+   "claim_kind": "corpus",
+   "review": {
+    "reviewer": "LLM-辅助(提案,待人工确认)",
+    "evidence": "_detail_fields.json"
+   }
+  },
+  {
+   "draft_id": "g-add-2",
+   "text": "采购项目联系人樊袁烽,联系电话 13588383174。",
+   "golden_status": "已证实",
+   "note": "漏拆补录:公告详情字段白纸黑字,系统未生成对应断言(量漏拆用)",
+   "claim_kind": "corpus",
+   "review": {
+    "reviewer": "LLM-辅助(提案,待人工确认)",
+    "evidence": "_detail_fields.json"
+   }
+  }
+ ],
+ "review_v2": {
+  "reviewer": "LLM-辅助核对",
+  "date": "2026-10-12",
+  "agree": 16,
+  "flipped": 5,
+  "added": 2,
+  "protocol": "LLM 辅助核对 + 人工终审(终审后置 verified=true)"
+ }
+}

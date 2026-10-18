@@ -1,0 +1,27 @@
+{
+  "case_id": "ai_model_release",
+  "event_id": "evt_ai_model",
+  "verified": false,
+  "source": "草拟:依'信封自证/语料内可核对/单源实质断言'三类裁定,待人工核对",
+  "note": "金标草拟口径:c1-c4 信封元数据复述与 c5-c10/c12-c18 语料内容复述可直接核对故为已证实;c11(联合研发关系)为实质世界断言,语料仅同根头条转载(4 转载=1 独立根),正确终态=待证实(孤证不立)。S5 派生 claim(c20/c22)不入金标,以 system_extra 报告。人工核对后将 verified 置 true 冻结。",
+  "claims": [
+    {"draft_id": "c1", "text": "信号信封 kind 为 rumor,eventId 为 evt_ai_model", "golden_status": "已证实", "category": "事实", "note": "信封自证(元数据复述)"},
+    {"draft_id": "c2", "text": "信号主体为科大讯飞,subjectCreditCode 为空", "golden_status": "已证实", "category": "实体", "note": "信封自证;信用代码缺失亦为信封所载"},
+    {"draft_id": "c3", "text": "信封摘要记载化物所联合讯飞、阿里云发布智能化工大模型3.0Pro", "golden_status": "已证实", "category": "事实", "note": "摘要复述自证;实质研发断言由 c11 承载"},
+    {"draft_id": "c4", "text": "信号来源为 toutiao.com,signalTime 为 2026-09-03,watchFocus 为竞品动态", "golden_status": "已证实", "category": "事实", "note": "信封自证"},
+    {"draft_id": "c5", "text": "线索 k3 与 k4 均记载 8月31日化物所联合讯飞、阿里云等共同研发发布", "golden_status": "已证实", "category": "事实", "note": "语料内可核对(线索内容复述)"},
+    {"draft_id": "c6", "text": "线索 k3 与 k4 的发布时间分别为 2026-08-31 16:16 与 16:00", "golden_status": "已证实", "category": "时效", "note": "语料内可核对"},
+    {"draft_id": "c7", "text": "线索 k1 与 k2 均记载 9月2日化物所工作人员在中试装置上使用该模型", "golden_status": "已证实", "category": "事实", "note": "语料内可核对"},
+    {"draft_id": "c8", "text": "线索 k1 与 k2 的发布时间均为 2026-09-03(环球网与光明网)", "golden_status": "已证实", "category": "时效", "note": "语料内可核对"},
+    {"draft_id": "c9", "text": "四条线索标题均为'我国化工行业首个大模型发布新版本'", "golden_status": "已证实", "category": "事实", "note": "语料内可核对(同题转载)"},
+    {"draft_id": "c10", "text": "四条线索的 authorType 均为媒体", "golden_status": "已证实", "category": "事实", "note": "语料内可核对"},
+    {"draft_id": "c11", "text": "中国科学院大连化学物理研究所与科大讯飞、阿里云共同研发智能化工大模型3.0Pro", "golden_status": "待证实", "category": "关系", "note": "核心实质断言:4 条头条转载=1 独立根,无官方公告/权威源,正确终态=待证实(正确拒绝单源证实的样本)"},
+    {"draft_id": "c12", "text": "该模型被描述为国内化工行业首个大模型的迭代升级版本", "golden_status": "已证实", "category": "事实", "note": "'被描述为'属语料措辞复述,可核对"},
+    {"draft_id": "c13", "text": "解读将本信号定性为竞情(watchFocus=竞品动态且主体为科大讯飞)", "golden_status": "已证实", "category": "事实", "note": "解读记录复述,可核对"},
+    {"draft_id": "c14", "text": "解读选中的假设种子标签为'真实经营动态'与'新方向扩张'", "golden_status": "已证实", "category": "事实", "note": "解读记录复述"},
+    {"draft_id": "c15", "text": "解读 basisGaps 指出仅有媒体转载、缺官方公告或一手信源", "golden_status": "已证实", "category": "事实", "note": "解读记录复述"},
+    {"draft_id": "c16", "text": "解读 basisGaps 指出 subjectCreditCode 为空、主体工商身份未核验", "golden_status": "已证实", "category": "事实", "note": "解读记录复述"},
+    {"draft_id": "c17", "text": "解读 basisGaps 指出未提供商业化模式、订单或收入信息", "golden_status": "已证实", "category": "事实", "note": "解读记录复述"},
+    {"draft_id": "c18", "text": "线索 k1 与 k2 的正文开头均为'近日,由中国科学院大连化学物理研究所联…'的截断引文", "golden_status": "已证实", "category": "事实", "note": "语料内可核对"}
+  ]
+}

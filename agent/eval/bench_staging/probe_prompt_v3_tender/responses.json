@@ -1,0 +1,3394 @@
+[
+  {
+    "stage": "s1a",
+    "response": {
+      "signalType": "商机",
+      "reason": "信封 kind 为 tender,属公开招标公告:项目名称\"天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告\",采购单位\"天津市肿瘤医院空港医院\",金额 6270000.0 元,domain 为\"医疗设备\";relevance 解释称\"项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600\",构成潜在投标/合作机会,故定性为商机。金额与频率异常项 basisSufficient 均为 true,但 relevance 金额依据自述\"样本数 10(其中模拟样本 8,不代表真实历史证据充分)\",历史基线可靠性存疑。",
+      "selectedSeedLabels": [
+        "正常大额采购",
+        "真实经营动态",
+        "新方向扩张"
+      ],
+      "basisGaps": [
+        "该采购单位历史金额基线含 8 条模拟样本,不代表真实历史证据充分,需先补齐真实历史采购记录以核实 627.0 万元是否属正常大额采购",
+        "该项目正文缺失,摘要由公告字段生成,需先获取公告正文以确认采购范围与数智化病理系统是否属企业业务新方向"
+      ]
+    }
+  },
+  {
+    "stage": "s1b",
+    "response": {
+      "claims": [
+        {
+          "id": "c1",
+          "text": "信封载明:本次招标项目编号 PRJ-SHGP-2026-A536,项目名称\"天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告\",采购方为天津市肿瘤医院空港医院,金额 6270000.0 元,发布日期 2026-10-03,domain 为\"医疗设备\"。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "信封基础字段聚合条,是全部推理的地基,且金额与日期直接决定后续核实方向。",
+          "hypothesisIds": [
+            "h1",
+            "h2",
+            "h3"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c2",
+          "text": "信封金额异常检测器给出得分 0.800,并标注 basisSufficient 为 true。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "金额异常是本次调查的核心触发信号,直接支撑异常输送类假设。",
+          "hypothesisIds": [
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c3",
+          "text": "信封频率异常检测器给出得分 0.600,并标注 basisSufficient 为 true。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 3,
+          "priorityReason": "频率异常与金额异常同时出现,是判断是否属异常输送模式的关键组合证据。",
+          "hypothesisIds": [
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c4",
+          "text": "信封新颖性异常检测器给出得分 0.300,并标注 basisSufficient 为 true。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 2,
+          "priorityReason": "新颖性得分偏低,对判断是否属新方向扩张的区分力有限。",
+          "hypothesisIds": [
+            "h3"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c5",
+          "text": "信封 relevance 解释载明:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 3,
+          "priorityReason": "相关性阈值是商机定性的直接依据,决定是否投入投标资源。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c6",
+          "text": "信封 relevance 金额依据载明:历史截止日 2026-10-02,该采购单位过去 10 条有效金额中位数 21.9 万元,本项目金额 627.0 万元,为中位数的 28.63 倍,样本数 10(其中模拟样本 8,不代表真实历史证据充分)。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "金额为中位数 28.63 倍是异常输送假设的核心量化断言,且自述样本含 8 条模拟样本,直接卡住结论节。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c7",
+          "text": "信封 relevance 频率依据载明:统计窗口 30 天,近期项目数 2,历史窗口均值 0.75,比值 2.67。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 3,
+          "priorityReason": "频率比值 2.67 是频率异常的量化依据,与金额异常共同构成双异常。",
+          "hypothesisIds": [
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c8",
+          "text": "信封 relevance 新颖性依据载明:历史截止日 2026-10-02,样本数 10,最大相似度 0.885,对照项目为\"天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目\",链接 https://example.org/announcement/R-f456d19c850a03af。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "对照项目揭示采购单位既往同类采购轨迹,是判断本次是否属新方向的关键参照。",
+          "hypothesisIds": [
+            "h3"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c9",
+          "text": "解读将本信号定性为\"商机\",理由为信封 kind 为 tender 属公开招标公告,构成潜在投标/合作机会。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 3,
+          "priorityReason": "解读定性决定后续行动方向,是结论节的直接输入。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c10",
+          "text": "解读 basisGaps 载明:该采购单位历史金额基线含 8 条模拟样本,不代表真实历史证据充分,需先补齐真实历史采购记录以核实 627.0 万元是否属正常大额采购。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 5,
+          "priorityReason": "该缺口直接决定金额异常是否成立,卡住结论节且被多条假设依赖。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c11",
+          "text": "解读 basisGaps 载明:该项目正文缺失,摘要由公告字段生成,需先获取公告正文以确认采购范围与数智化病理系统是否属企业业务新方向。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 4,
+          "priorityReason": "正文缺失使采购范围无法确认,直接影响新方向扩张假设的成立与否。",
+          "hypothesisIds": [
+            "h3"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": true
+        },
+        {
+          "id": "c12",
+          "text": "信封 projectSummary 自述\"正文缺失,摘要由公告字段生成\",即本次公告正文内容未随信封提供。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 3,
+          "priorityReason": "正文缺失是全部外部核实需求的根源,决定调查必须外出采集。",
+          "hypothesisIds": [
+            "h3"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true
+        },
+        {
+          "id": "c13",
+          "text": "天津市肿瘤医院空港医院于 2026-10-03 发布了项目编号 SHGP-2026-A536 的数智化病理系统采购公开招标公告,该发布行为真实发生且未被更正或撤销。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 5,
+          "priorityReason": "发布真实性是全部商机判断的前提,若为假或已撤销则整条线索作废。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "validWindowDays": 30,
+          "refreshCycleDays": 7,
+          "relationType": null,
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": false
+        },
+        {
+          "id": "c14",
+          "text": "天津市肿瘤医院空港医院与本次数智化病理系统采购的潜在供应商之间存在可独立信源佐证的供应或合作关系。",
+          "category": "关系",
+          "sectionIndex": 1,
+          "priority": 4,
+          "priorityReason": "当事方关系真伪是区分正常采购与异常输送的关键,需独立信源佐证。",
+          "hypothesisIds": [
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": 14,
+          "relationType": "供应",
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": false
+        },
+        {
+          "id": "c15",
+          "text": "天津市肿瘤医院空港医院近两年有同等金额(百万元级)的公开采购记录,且该等采购有可查的业务解释。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 5,
+          "priorityReason": "该断言是异常输送假设的倒推条件:若为真则支持正常大额采购,若为假则削弱之。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": 730,
+          "refreshCycleDays": 30,
+          "relationType": null,
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": false
+        },
+        {
+          "id": "c16",
+          "text": "本次数智化病理系统采购属于天津市肿瘤医院空港医院既定建设规划或年度预算安排,而非临时新增项目。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 5,
+          "priorityReason": "该断言可区分\"正常采购\"与\"异常输送\":属既定规划则支持前者,属临时新增则支持后者。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": 365,
+          "refreshCycleDays": 30,
+          "relationType": null,
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": false
+        },
+        {
+          "id": "c17",
+          "text": "数智化病理系统采购对本企业构成可承接的机会,其成立条件包括本企业具备该领域资质与交付能力、且该项目未被资格条款排除。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 4,
+          "priorityReason": "影响与后果方向的世界断言,决定商机定性是否可转化为实际投标行动。",
+          "hypothesisIds": [
+            "h1",
+            "h3"
+          ],
+          "validWindowDays": 60,
+          "refreshCycleDays": 14,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": false
+        },
+        {
+          "id": "c18",
+          "text": "天津市肿瘤医院空港医院既往公开采购记录中存在与本次金额量级相当的采购,且其历史金额中位数并非 21.9 万元。",
+          "category": "矛盾",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "该断言与信封自述中位数 21.9 万元直接冲突,若为真则推翻金额异常结论,是核心矛盾点。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": 730,
+          "refreshCycleDays": 30,
+          "relationType": null,
+          "entityNames": [
+            "天津市肿瘤医院空港医院"
+          ],
+          "corpusBound": false
+        }
+      ],
+      "hypotheses": [
+        {
+          "id": "h1",
+          "label": "正常大额采购",
+          "description": "本次采购属采购单位既定建设规划内的正常大额采购,金额虽高但有业务解释。成立条件:该采购单位近两年有同等金额采购记录且属既定规划。可区分 claim:c15(同等金额采购记录)、c16(是否属既定建设规划)——若为真则支持本假设,若为假则削弱本假设。",
+          "claimIds": [
+            "c1",
+            "c5",
+            "c6",
+            "c9",
+            "c10",
+            "c13",
+            "c15",
+            "c16",
+            "c17",
+            "c18"
+          ],
+          "op": "AND"
+        },
+        {
+          "id": "h2",
+          "label": "异常输送",
+          "description": "本次采购金额与频率同时异常,可能存在异常输送。成立条件:金额偏离无业务解释、且当事方存在未披露关联关系。可区分 claim:c16(是否属既定建设规划)、c14(当事方关系是否有独立信源佐证)、c15(同等金额采购记录)——若 c16 为假且 c14 为真则支持本假设,反之削弱。",
+          "claimIds": [
+            "c2",
+            "c3",
+            "c6",
+            "c7",
+            "c10",
+            "c14",
+            "c15",
+            "c16",
+            "c18"
+          ],
+          "op": "AND"
+        },
+        {
+          "id": "h3",
+          "label": "新方向扩张",
+          "description": "数智化病理系统属企业业务新方向,本次采购是进入该方向的契机。成立条件:公告正文确认采购范围属新方向、且本企业具备承接能力。可区分 claim:c17(机会成立条件)——若为真则支持本假设,若为假则削弱。需要补公告正文与采购范围清单才能进一步区分。",
+          "claimIds": [
+            "c4",
+            "c8",
+            "c11",
+            "c12",
+            "c17"
+          ],
+          "op": "AND"
+        }
+      ],
+      "gaps": [
+        {
+          "text": "该采购单位近两年真实的公开采购记录(金额、时间、项目内容)是什么?现有基线含 8 条模拟样本,无法核实 627.0 万元是否属正常大额采购。",
+          "relatedClaimId": "c6"
+        },
+        {
+          "text": "本次公告正文的采购范围、技术参数与资格条款具体是什么?正文缺失导致无法确认数智化病理系统是否属企业业务新方向。",
+          "relatedClaimId": "c11"
+        },
+        {
+          "text": "本次公告是否已被更正、延期或撤销?发布真实性尚未经独立信源核实。",
+          "relatedClaimId": "c13"
+        },
+        {
+          "text": "该采购单位与本次潜在供应商之间是否存在未披露的关联关系或历史合作?",
+          "relatedClaimId": "c14"
+        },
+        {
+          "text": "该采购单位既往公开记录中是否存在违规、投诉或诉讼等行为 pattern?",
+          "relatedClaimId": "c15"
+        },
+        {
+          "text": "本企业是否具备数智化病理系统领域的资质与交付能力,该项目资格条款是否构成准入障碍?",
+          "relatedClaimId": "c17"
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c1",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E1",
+          "direction": "支持",
+          "quote": "招标信号基础字段:项目编号 PRJ-SHGP-2026-A536;项目名称 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告;采购方 天津市肿瘤医院空港医院;预算金额 6270000.0 元;发布日期 2026-10-03;领域 医疗设备。",
+          "reason": "该证据逐字给出 claim 所载全部信封字段(项目编号、项目名称、采购方、金额、发布日期、领域),直接支持 claim。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:金额变化得分 0.800;历史依据可用。",
+          "reason": "仅报告金额异常检测得分,不改变 claim 所载信封字段本身的真伪判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:频率变化得分 0.600;历史依据可用。",
+          "reason": "仅报告频率异常检测得分,与 claim 所载字段是否属实无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:采购新颖性得分 0.300;历史依据可用。",
+          "reason": "仅报告新颖性检测得分,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "reason": "仅报告相关性检测得分及金额/新颖性/频率依据,不直接证实或推翻 claim 所载信封字段。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "全部证据谱系根均为 signal_layer,属同一上游来源,不构成独立印证;E1 虽逐字复述 claim 全部字段,但仅为单一来源的自述,且其摘要注明“正文缺失,摘要由公告字段生成”,无独立原始公告佐证,故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c10",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E1",
+          "direction": "支持",
+          "quote": "预算金额 6270000.0 元",
+          "reason": "该证据确认采购单位与 627.0 万元金额的存在,是 claim 所述核实对象的基础事实。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:金额变化得分 0.800;历史依据可用。",
+          "reason": "仅给出金额异常评分,未涉及 basisGaps 中模拟样本与真实历史记录是否充分的问题。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:频率变化得分 0.600;历史依据可用。",
+          "reason": "仅给出频率异常评分,与 claim 关于历史金额基线样本构成的断言无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:采购新颖性得分 0.300;历史依据可用。",
+          "reason": "仅给出新颖性评分,不涉及历史基线样本是否为模拟样本。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E5",
+          "direction": "支持",
+          "quote": "样本数 10(其中模拟样本 8,不代表真实历史证据充分)",
+          "reason": "该证据逐字载明历史金额基线含 8 条模拟样本且不代表真实历史证据充分,直接支持 claim 的解读。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E5 原文明确载明历史金额基线样本数 10 中模拟样本 8 且不代表真实历史证据充分,与 claim 表述一致;E1 确认 627.0 万元金额。其余检测器证据仅给评分,不改变判断。所有证据同根于 signal_layer,不构成独立印证,故仅为意见。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c11",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E1",
+          "direction": "支持",
+          "quote": "正文缺失,摘要由公告字段生成。",
+          "reason": "该证据原文直接载明正文缺失、摘要由公告字段生成,与 claim 所述 basisGaps 内容一致,使 claim 更可能为真。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:金额变化得分 0.800;历史依据可用。",
+          "reason": "该证据仅涉及金额异常检测评分,未涉及正文缺失、摘要生成方式或采购范围确认,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:频率变化得分 0.600;历史依据可用。",
+          "reason": "该证据仅涉及频率异常检测评分,与 claim 所述正文缺失及采购范围确认无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:采购新颖性得分 0.300;历史依据可用。",
+          "reason": "该证据仅涉及新颖性检测评分,未涉及正文缺失或摘要生成方式,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E5",
+          "direction": "无关",
+          "quote": "项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "reason": "该证据涉及相关性检测与金额、新颖性、频率依据,未涉及正文缺失、摘要生成方式或采购范围确认,不改变 claim 判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "E1 直接载明正文缺失、摘要由公告字段生成,支持 claim 中关于 basisGaps 的描述;但 claim 中需先获取公告正文以确认采购范围与数智化病理系统是否属企业业务新方向这一部分,卷宗内无公告正文证据,无法确认,故综合意见为待证实。E2-E5 均为信号层检测器评分,与 claim 无关。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c12",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E1",
+          "direction": "支持",
+          "quote": "正文缺失,摘要由公告字段生成。",
+          "reason": "该证据原文直接包含与 claim 表述一致的字段自述,表明信封摘要由公告字段生成、正文缺失。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:金额变化得分 0.800;历史依据可用。",
+          "reason": "该证据仅涉及金额异常检测评分,不涉及信封是否提供正文或摘要生成方式。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:频率变化得分 0.600;历史依据可用。",
+          "reason": "该证据仅涉及频率异常检测评分,与正文是否随信封提供无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:采购新颖性得分 0.300;历史依据可用。",
+          "reason": "该证据仅涉及新颖性检测评分,不改变对 claim 的判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "reason": "该证据涉及相关性检测及金额、新颖性、频率依据,未涉及信封正文缺失或摘要生成方式。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一直接相关的证据 E1 原文含\"正文缺失,摘要由公告字段生成。\",与 claim 表述一致;其余证据均为检测器评分,与 claim 无关。注意 E1 与 E2-E5 同根(signal_layer),不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c2",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 PRJ-SHGP-2026-A536;项目名称 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告;采购方 天津市肿瘤医院空港医院;预算金额 6270000.0 元;发布日期 2026-10-03;领域 医疗设备。",
+          "reason": "该证据仅给出信封基础字段(项目编号、名称、采购方、预算金额、发布日期、领域),未涉及金额异常检测器得分或 basisSufficient 标注,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E2",
+          "direction": "支持",
+          "quote": "触发金额异常检测:金额变化得分 0.800;历史依据可用。",
+          "reason": "该证据直接给出金额异常检测得分 0.800,并称历史依据可用,与 claim 中得分 0.800 及 basisSufficient 为 true 的表述一致,使 claim 更可能为真。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:频率变化得分 0.600;历史依据可用。",
+          "reason": "该证据描述的是频率异常检测得分 0.600,与 claim 所指的金额异常检测得分及 basisSufficient 标注无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:采购新颖性得分 0.300;历史依据可用。",
+          "reason": "该证据描述的是新颖性检测得分 0.300,与 claim 所指的金额异常检测得分及 basisSufficient 标注无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "reason": "该证据描述的是相关性检测得分 0.647,虽含金额依据段落,但未给出金额异常检测器得分 0.800 或 basisSufficient 标注,不直接改变 claim 判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅 evt_probe_prompt_v3_tender:E2 直接支持 claim 的得分 0.800 与历史依据可用,但该证据与其余证据同属 signal_layer 同一谱系根,不构成独立来源印证;且 E5 金额依据段落自述样本中模拟样本 8,不代表真实历史证据充分,故综合意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c5",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 PRJ-SHGP-2026-A536;项目名称 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告;采购方 天津市肿瘤医院空港医院;预算金额 6270000.0 元;发布日期 2026-10-03;领域 医疗设备。",
+          "reason": "该证据仅载明信封基础字段(编号、名称、采购方、预算、发布日期、领域),未涉及语义相似度 0.647 或准入阈值 0.600,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:金额变化得分 0.800;历史依据可用。",
+          "reason": "该证据为金额异常检测得分,与语义相似度及准入阈值无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:频率变化得分 0.600;历史依据可用。",
+          "reason": "该证据为频率异常检测得分,与语义相似度及准入阈值无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:采购新颖性得分 0.300;历史依据可用。",
+          "reason": "该证据为新颖性检测得分,与语义相似度及准入阈值无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E5",
+          "direction": "支持",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "reason": "该证据原文逐字载明语义相似度 0.647 与准入阈值 0.600,与 claim 表述一致,使 claim 更可能为真。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一直接相关的证据 evt_probe_prompt_v3_tender:E5 原文逐字载明『项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600』,与 claim 完全吻合;其余四条证据仅涉及基础字段与金额/频率/新颖性检测,不构成矛盾。但全部证据同根(signal_layer),不构成独立来源印证,最终判决由代码按独立来源规则作出。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c6",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E1",
+          "direction": "支持",
+          "quote": "预算金额 6270000.0 元",
+          "reason": "该证据载明本项目预算金额 6270000.0 元,与 claim 中『本项目金额 627.0 万元』一致,支持金额部分。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:金额变化得分 0.800;历史依据可用。",
+          "reason": "仅给出金额异常得分,未载明中位数、样本数等 claim 所依据的具体数值,不改变判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:频率变化得分 0.600;历史依据可用。",
+          "reason": "涉及频率异常,与 claim 的金额中位数依据无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:采购新颖性得分 0.300;历史依据可用。",
+          "reason": "涉及新颖性得分,与 claim 的金额中位数依据无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E5",
+          "direction": "支持",
+          "quote": "金额依据:历史截止日 2026-10-02;该采购单位过去 10 条有效金额中位数 21.9 万元,本项目金额 627.0 万元,为中位数的 28.63 倍,样本数 10(其中模拟样本 8,不代表真实历史证据充分)。",
+          "reason": "该证据逐字载明 claim 所述全部数值要素(历史截止日、中位数、本项目金额、倍数、样本数及模拟样本说明),直接支持 claim。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E5 逐字载明 claim 的全部数值要素,E1 佐证本项目金额 627.0 万元;其余证据不涉及该金额依据。但需注意 E5 与 E1 同属 signal_layer 谱系根,且 E5 自述样本中 8 条为模拟样本、不代表真实历史证据充分,独立性存疑,最终由代码按独立来源规则裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c7",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 PRJ-SHGP-2026-A536;项目名称 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告;采购方 天津市肿瘤医院空港医院;预算金额 6270000.0 元;发布日期 2026-10-03;领域 医疗设备。",
+          "reason": "该证据仅载明项目基础字段,未涉及频率依据的统计窗口、近期项目数、历史窗口均值或比值。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:金额变化得分 0.800;历史依据可用。",
+          "reason": "该证据为金额异常检测,与频率依据的具体数值无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:频率变化得分 0.600;历史依据可用。",
+          "reason": "该证据仅给出频率变化得分 0.600,未载明统计窗口 30 天、近期项目数 2、历史窗口均值 0.75、比值 2.67 等具体数值。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:采购新颖性得分 0.300;历史依据可用。",
+          "reason": "该证据为新颖性检测,与频率依据数值无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E5",
+          "direction": "支持",
+          "quote": "频率依据:统计窗口 30 天,近期项目数 2,历史窗口均值 0.75,比值 2.67。",
+          "reason": "该证据原文逐字载明频率依据的统计窗口 30 天、近期项目数 2、历史窗口均值 0.75、比值 2.67,与 claim 完全一致。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一直接载明频率依据数值的证据 evt_probe_prompt_v3_tender:E5 与 claim 文本逐字一致;其余证据均不涉及该组数值,不构成矛盾。但全部证据同根(signal_layer),不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c8",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 PRJ-SHGP-2026-A536;项目名称 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告;采购方 天津市肿瘤医院空港医院;预算金额 6270000.0 元;发布日期 2026-10-03;领域 医疗设备。",
+          "reason": "该证据仅载明信封基础字段(项目编号、名称、采购方、预算、发布日期),未涉及 claim 所述新颖性依据中的历史截止日、样本数、最大相似度或对照项目,不改变判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:金额变化得分 0.800;历史依据可用。",
+          "reason": "该证据为金额异常检测条目,与 claim 所述新颖性依据内容无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:频率变化得分 0.600;历史依据可用。",
+          "reason": "该证据为频率异常检测条目,与 claim 所述新颖性依据内容无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:采购新颖性得分 0.300;历史依据可用。",
+          "reason": "该证据仅给出新颖性得分 0.300,未载明 claim 所述历史截止日、样本数、最大相似度与对照项目等具体依据内容。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E5",
+          "direction": "支持",
+          "quote": "新颖性依据:历史截止日 2026-10-02;样本数 10,最大相似度 0.885,对照项目:天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目,链接 https://example.org/announcement/R-f456d19c850a03af。",
+          "reason": "该证据逐字载明 claim 所述新颖性依据的全部要素:历史截止日 2026-10-02、样本数 10、最大相似度 0.885、对照项目名称及链接,与 claim 文本一致。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一直接载明新颖性依据细节的证据 E5 与 claim 文本逐字吻合;其余证据为信封基础字段与金额/频率/新颖性得分条目,不构成矛盾。但全部证据谱系根均为 signal_layer,属同一上游,不构成独立印证,最终判决由代码按独立来源规则作出。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c9",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E1",
+          "direction": "支持",
+          "quote": "天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告",
+          "reason": "信封字段明确标注为公开招标公告,支持将本信号定性为商机(潜在投标/合作机会)。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:金额变化得分 0.800",
+          "reason": "金额异常检测仅说明金额波动,不改变对信封 kind 是否为 tender 及是否构成商机的判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:频率变化得分 0.600",
+          "reason": "频率异常检测与信封 kind 定性无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:采购新颖性得分 0.300",
+          "reason": "新颖性得分不改变对公开招标公告构成商机的判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E5",
+          "direction": "支持",
+          "quote": "项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600",
+          "reason": "相关性检测显示项目与企业业务画像语义相似度达到准入阈值,支持该信号构成潜在投标/合作机会。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "证据 E1 明确信封为公开招标公告,E5 显示与企业业务画像相关性达阈值,支持商机定性;但全部证据谱系根均为 signal_layer,属同一上游,不构成独立来源印证,故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 1,
+      "mainTarget": "c16",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "本次数智化病理系统采购是否属于天津市肿瘤医院空港医院既定建设规划或年度预算安排(而非临时新增项目)",
+          "acceptance": "需权威登记源记录级证据:该采购单位或其上级主管部门公开的年度预算/建设规划/信息化项目清单中,出现与本项目名称或编号 SHGP-2026-A536 对应的条目;或公告正文中出现规划/预算依据表述",
+          "failover": "若查不到规划或预算条目,则改查该单位近两年同类信息化/医疗设备采购的立项批复或招标预告序列,以序列连续性间接判定是否属既定安排;仍无果则将该缺口登记为不可核实并转查 c15"
+        },
+        {
+          "gap": "该采购单位近两年是否存在同等金额(百万元级)的公开采购记录及其业务解释",
+          "acceptance": "需权威登记源记录级证据:可检索到该采购单位近两年单笔金额达百万元级的公开招标/中标公告原文条目(含项目名称、金额、日期)",
+          "failover": "若仅能查到十万元级记录,则记录为对 c15 的证伪方向证据,并据此复核 c18(历史金额中位数是否并非 21.9 万元)"
+        },
+        {
+          "gap": "本次公告发布行为是否真实发生且未被更正或撤销",
+          "acceptance": "需页面正文级证据:在公告发布源页面可读到与信封一致的公告标题、项目编号 SHGP-2026-A536、发布日期 2026-10-03,且无更正/撤销声明",
+          "failover": "若发布源页面不可达或正文缺失,则改查转载源或采购单位官网公告栏,以多源一致性替代单源正文"
+        }
+      ],
+      "searchHints": [
+        "天津市肿瘤医院空港医院 数智化病理系统 采购 公告",
+        "SHGP-2026-A536",
+        "天津市肿瘤医院空港医院 年度预算 信息化 建设项目"
+      ],
+      "sideTargets": [
+        "c15",
+        "c13"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [],
+      "cohorts": []
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c1",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E1",
+          "direction": "支持",
+          "quote": "招标信号基础字段:项目编号 PRJ-SHGP-2026-A536;项目名称 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告;采购方 天津市肿瘤医院空港医院;预算金额 6270000.0 元;发布日期 2026-10-03;领域 医疗设备。",
+          "reason": "该证据逐字给出 claim 所载全部信封字段(项目编号、项目名称、采购方、金额、发布日期、domain),直接支持 claim。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:金额变化得分 0.800;历史依据可用。",
+          "reason": "仅报告金额异常检测得分,不改变 claim 所载信封字段本身的真伪判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:频率变化得分 0.600;历史依据可用。",
+          "reason": "仅报告频率异常检测得分,与 claim 所载字段无直接关系。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:采购新颖性得分 0.300;历史依据可用。",
+          "reason": "仅报告新颖性检测得分,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "reason": "报告相关性与金额/频率/新颖性依据,属检测评分,不直接证实或推翻 claim 所载信封字段。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E10",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会今天（11日）发布9月份中国物流业景气指数。",
+          "reason": "物流业景气指数新闻,与天津市肿瘤医院空港医院招标信封字段无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E12",
+          "direction": "无关",
+          "quote": "10月11日凌晨，沙特民航总局发布公告确认，10日下午利雅得哈立德国王国际机场遭袭事件已造成12人死309人伤",
+          "reason": "沙特机场事件新闻,与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E13",
+          "direction": "无关",
+          "quote": "当地时间10月8日，欧盟理事会发布公告称，将针对部分俄罗斯相关个人和实体的制裁措施延长一年，至2027年10月9日。",
+          "reason": "欧盟对俄制裁新闻,与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E14",
+          "direction": "无关",
+          "quote": "泰山景区管委会10月6日发布辟谣公告：近日，有个别自媒体账号拼凑网络视频等资料，发布“网友称泰山躲雨80元一小时”等虚假信息。",
+          "reason": "泰山景区辟谣新闻,与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E15",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会10月11日发布，9月份中国物流业景气指数为51.5%，环比回升0.6个百分点，连续5个月处于扩张区间",
+          "reason": "物流业景气指数新闻,与 claim 无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一直接对应 claim 的信封字段证据为 E1,但其 lineage_root 为 signal_layer,与 E2–E5 同根,不构成独立来源印证;E10、E12–E15 与 claim 无关。故综合意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c11",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E1",
+          "direction": "支持",
+          "quote": "正文缺失,摘要由公告字段生成。",
+          "reason": "该证据原文直接载明正文缺失、摘要由公告字段生成,与 claim 所述 basisGaps 内容一致。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:金额变化得分 0.800;历史依据可用。",
+          "reason": "仅涉及金额异常检测评分,不涉及正文缺失或采购范围确认。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:频率变化得分 0.600;历史依据可用。",
+          "reason": "仅涉及频率异常检测评分,与 claim 内容无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:采购新颖性得分 0.300;历史依据可用。",
+          "reason": "仅涉及新颖性检测评分,不改变对 claim 的判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E5",
+          "direction": "无关",
+          "quote": "项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "reason": "涉及相关性评分与历史依据,未涉及正文缺失或采购范围确认。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E10",
+          "direction": "无关",
+          "quote": "企业运营效率迎来拐点，设备利用率指数今年以来首次回到扩张区间",
+          "reason": "物流业景气指数新闻,与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E12",
+          "direction": "无关",
+          "quote": "10月11日凌晨，沙特民航总局发布公告确认",
+          "reason": "沙特机场事件新闻,与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E9",
+          "direction": "无关",
+          "quote": "指数继续保持在扩张区间，较上月有所回升，物流需求持续回暖",
+          "reason": "物流业景气指数新闻,与 claim 无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 原文直接载明正文缺失、摘要由公告字段生成,支持 claim 中 basisGaps 的陈述;其余证据与 claim 无关。但需注意 E1 与 E2-E5 同根(signal_layer),不构成独立印证,且 claim 中关于采购范围与数智化病理系统是否属企业业务新方向的确认部分尚无正文证据支撑。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c13",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E10",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会今天（11日）发布9月份中国物流业景气指数。",
+          "reason": "内容为物流业景气指数，与天津市肿瘤医院空港医院招标公告发布行为无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E12",
+          "direction": "无关",
+          "quote": "10月11日凌晨，沙特民航总局发布公告确认，10日下午利雅得哈立德国王国际机场遭袭事件已造成12人死309人伤",
+          "reason": "内容为沙特机场遭袭事件，与claim所述招标公告无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E13",
+          "direction": "无关",
+          "quote": "当地时间10月8日，欧盟理事会发布公告称，将针对部分俄罗斯相关个人和实体的制裁措施延长一年，至2027年10月9日。",
+          "reason": "内容为欧盟对俄制裁，与claim所述招标公告无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E14",
+          "direction": "无关",
+          "quote": "泰山景区管委会10月6日发布辟谣公告",
+          "reason": "内容为泰山景区辟谣，与claim所述招标公告无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E15",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会10月11日发布，9月份中国物流业景气指数为51.5%",
+          "reason": "内容为物流业景气指数，与claim所述招标公告无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E6",
+          "direction": "无关",
+          "quote": "打卡“科技游”成为入境游新热点",
+          "reason": "内容为入境游与科技游，与claim所述招标公告无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E9",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会，9月11日发布9月份中国物流业景气指数。",
+          "reason": "内容为物流业景气指数，与claim所述招标公告无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内全部证据均与天津市肿瘤医院空港医院2026-10-03发布项目编号SHGP-2026-A536数智化病理系统采购公开招标公告一事无关，无任何证据支持或反驳该claim，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c14",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E10",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会今天（11日）发布9月份中国物流业景气指数。",
+          "reason": "该证据内容为中国物流业景气指数与产业链产供销衔接效率，未涉及天津市肿瘤医院空港医院，也未涉及数智化病理系统采购的供应商或合作关系，不改变本 claim 的判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗中唯一证据与 claim 主题无关，无任何证据支持或反驳该供应/合作关系，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c16",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E10",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会今天（11日）发布9月份中国物流业景气指数。",
+          "reason": "该证据内容为中国物流业景气指数与物流行业运营效率，与天津市肿瘤医院空港医院数智化病理系统采购是否属于既定建设规划或年度预算安排无任何关联，不改变claim判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗中唯一证据为物流业景气指数报道，与claim主题无关，无法提供任何支持或矛盾信息，claim仍待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c17",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E10",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会今天（11日）发布9月份中国物流业景气指数。",
+          "reason": "该证据仅涉及物流业景气指数与设备利用率、库存周转等宏观物流运行指标，未涉及数智化病理系统采购、本企业资质与交付能力或资格条款，不改变 claim 成立与否的判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E9",
+          "direction": "无关",
+          "quote": "指数继续保持在扩张区间，较上月有所回升，物流需求持续回暖，企业经营韧性不断显现。",
+          "reason": "该证据同样只描述物流业景气指数与物流需求回暖，与数智化病理系统采购机会、本企业资质交付能力及资格条款排除条件均无关联，不改变判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "两条证据均为物流业景气指数报道，与 claim 所述数智化病理系统采购机会的成立条件（本企业具备该领域资质与交付能力、项目未被资格条款排除）无任何关联，未提供支持或反驳信息；且两条证据谱系根同为 news.cctv.com，不构成独立来源。故该 claim 仍待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c8",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 PRJ-SHGP-2026-A536;项目名称 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告;采购方 天津市肿瘤医院空港医院;预算金额 6270000.0 元;发布日期 2026-10-03;领域 医疗设备。",
+          "reason": "该证据为信号层基础字段,未载明信封 relevance 新颖性依据的具体数值(历史截止日、样本数、最大相似度、对照项目及链接),不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:金额变化得分 0.800;历史依据可用。",
+          "reason": "该证据为金额异常检测,与 claim 所述新颖性依据字段无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:频率变化得分 0.600;历史依据可用。",
+          "reason": "该证据为频率异常检测,与 claim 所述新颖性依据字段无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:采购新颖性得分 0.300;历史依据可用。",
+          "reason": "该证据仅给出新颖性得分 0.300,未载明 claim 所述历史截止日、样本数、最大相似度、对照项目及链接等具体字段。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E5",
+          "direction": "支持",
+          "quote": "新颖性依据:历史截止日 2026-10-02;样本数 10,最大相似度 0.885,对照项目:天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目,链接 https://example.org/announcement/R-f456d19c850a03af。",
+          "reason": "该证据逐字载明 claim 所述新颖性依据的全部字段:历史截止日 2026-10-02、样本数 10、最大相似度 0.885、对照项目名称及链接,与 claim 完全一致。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E10",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会今天（11日）发布9月份中国物流业景气指数。",
+          "reason": "该证据为物流业景气指数新闻,与 claim 所述信封新颖性依据字段无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "证据 evt_probe_prompt_v3_tender:E5 逐字载明 claim 所述新颖性依据的全部字段(历史截止日 2026-10-02、样本数 10、最大相似度 0.885、对照项目名称及链接),与 claim 文本一致;其余证据或为其他检测器结果,或与新颖性依据无关,不构成矛盾。故综合意见为已证实。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 主体与事件背景\n\n本次招标项目编号为 PRJ-SHGP-2026-A536,项目名称为\"天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告\",采购方为天津市肿瘤医院空港医院,金额 6270000.0 元,发布日期 2026-10-03,domain 为\"医疗设备\"[1][2][3][4][5]。\n\n需说明的是,信封 projectSummary 自述\"正文缺失,摘要由公告字段生成\",即本次公告正文内容未随信封提供[1][2][3][4][5]。因此上述项目要素均来源于公告字段,公告正文所载采购范围、技术要求等细节目前尚未核实。\n\n本节仅陈述主体与事件背景层面的已证实信息,不涉及对采购动因、当事方关系或业务方向的研判。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 2,
+      "mainTarget": "c15",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "天津市肿瘤医院空港医院近两年是否存在同等金额(百万元级)的公开采购记录——这是区分 h1(正常大额采购)与 h2(异常输送)的关键缺口,且 c15 与 c18 互为镜像(历史金额中位数是否真为 21.9 万元)。",
+          "acceptance": "需权威登记源记录:在政府采购/公共资源交易等权威平台上检索到该采购单位近两年(2024-10 至 2026-10)的公开采购公告条目,须含项目名称、采购单位、金额、发布日期字段,且至少一条金额达百万元级;仅信封内复述或模拟样本不算查到。",
+          "failover": "若权威平台无该单位任何百万元级记录,则改查该单位上级主管/集团层面的集中采购公告,或转向 c16(既定建设规划/年度预算)以另一路径区分 h1 与 h2。"
+        },
+        {
+          "gap": "若锚定到同等金额采购记录,进一步核验该等采购是否有可查的业务解释(项目内容与本次数智化病理系统是否同属信息化/医疗设备建设脉络)。",
+          "acceptance": "需页面正文级证据:该历史采购公告正文或中标结果公告中载明采购标的与用途,能说明其业务性质;仅有标题字段不算。",
+          "failover": "若正文不可得,则退回仅以金额与时间字段登记 c15 为部分证实,并把业务解释缺口转记到 c16。"
+        }
+      ],
+      "searchHints": [
+        "天津市肿瘤医院空港医院 采购公告 2025",
+        "天津市肿瘤医院空港医院 中标 公告 金额",
+        "SHGP-2026-A536 数智化病理系统"
+      ],
+      "sideTargets": [
+        "c18",
+        "c16"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 3,
+      "mainTarget": "c18",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "c18 断言:天津市肿瘤医院空港医院既往公开采购记录中存在与本次金额量级(百万元级)相当的采购,且其历史金额中位数并非 21.9 万元——需外部权威登记源核实该单位真实历史采购金额分布。",
+          "acceptance": "需权威登记源(政府采购/招投标公告平台)页面正文级证据,列出该采购单位至少一条金额达百万元级的公开采购记录,并给出可核对的金额与日期字段;若同时能给出该单位历史金额中位数与 21.9 万元不一致的登记记录,则 c18 直接查实。",
+          "failover": "若权威登记源无该单位任何百万元级记录,则 c18 被证伪,转而核查 c15(同等金额采购记录)是否同样落空,并检视 h2(异常输送)是否因此获得支持。"
+        },
+        {
+          "gap": "若 c18 查实,需进一步确认该等百万元级采购是否有可查的业务解释(与 c15 的验收口径衔接),以区分 h1(正常大额采购)与 h2(异常输送)。",
+          "acceptance": "需该等历史采购公告正文或采购需求文件级证据,载明采购标的与用途,能对应到该单位既定建设规划或年度预算安排。",
+          "failover": "若仅有金额记录而无业务解释,则 h1 与 h2 仍不可区分,登记为部分证据并转查 c16(既定建设规划)。"
+        }
+      ],
+      "searchHints": [
+        "天津市肿瘤医院空港医院 采购公告 中标",
+        "天津市肿瘤医院空港医院 数智化病理系统 SHGP-2026-A536",
+        "天津市肿瘤医院空港医院 百万 采购 预算"
+      ],
+      "sideTargets": [
+        "c15",
+        "c16"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 4,
+      "mainTarget": "c14",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "c14 需要独立信源佐证天津市肿瘤医院空港医院与本次数智化病理系统采购潜在供应商之间存在供应或合作关系;当前台账 relations 为空,无任何关系证据。",
+          "acceptance": "需权威登记源记录(如中标/成交公告、合同备案、供应商登记信息)页面正文级证据,能逐字读出采购单位名称与供应商名称同现于同一份记录。",
+          "failover": "若公开登记源无任何同现记录,则改查该采购单位近两年中标公告的供应商名单,以名单是否存在作为弱化证据登记,并转 c15 的金额量级核对。"
+        },
+        {
+          "gap": "在锚定供应商身份后,需确认该供应商与本企业(信封业务画像主体)是否同一或存在关联,以判定 h2(异常输送)与 h1(正常大额采购)的区分方向。",
+          "acceptance": "需企业登记类权威源(工商/信用公示)页面正文级证据,能读出统一社会信用代码或股权关系字段。",
+          "failover": "若无法取得登记源,则仅登记供应商名称作为待核线索,不升级为关系证据,并转 c16 查既定建设规划。"
+        }
+      ],
+      "searchHints": [
+        "天津市肿瘤医院空港医院 中标公告 供应商",
+        "SHGP-2026-A536 中标 成交结果",
+        "天津市肿瘤医院空港医院 数智化病理系统 供应商"
+      ],
+      "sideTargets": [
+        "c15",
+        "c16"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [
+        {
+          "id": "c19",
+          "text": "天津市静海区医院与天津市西青医院各自发布的采购公告标题中均含「紧密型县域医共体建设项目」字样,且两项目均处于中标成交阶段。",
+          "category": "关系",
+          "sectionIndex": 2,
+          "priority": 3,
+          "relationType": "协同",
+          "parent": null,
+          "entityNames": [
+            "天津市静海区医院",
+            "天津市西青医院"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c20",
+          "text": "天津交通职业学院在 2026 年有两条项目编号前缀同为 PYGP-2026-A 的中标公告,分别为 PYGP-2026-A-0582 与 PYGP-2026-A-0565。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 3,
+          "relationType": null,
+          "parent": null,
+          "entityNames": [
+            "天津交通职业学院"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c21",
+          "text": "天津市人民医院复合手术室医疗设备采购项目(0615-2641031930899)与天津市静海区医院医学检验设备采购项目(0615-2641031960920)的项目编号前缀同为 0615-26410319。",
+          "category": "关系",
+          "sectionIndex": 2,
+          "priority": 3,
+          "relationType": "协同",
+          "parent": null,
+          "entityNames": [
+            "天津市人民医院",
+            "天津市静海区医院"
+          ],
+          "hypothesisLinks": []
+        }
+      ],
+      "cohorts": [
+        {
+          "name": "天津市紧密型县域医共体建设项目采购单位",
+          "criteria": {
+            "region": "天津市",
+            "keyword": "紧密型县域医共体建设项目",
+            "stage": "中标成交",
+            "source": "www.ccgp-tianjin.gov.cn"
+          },
+          "members": [
+            "天津市静海区医院",
+            "天津市西青医院"
+          ]
+        },
+        {
+          "name": "天津市三级医院近一年信息化/设备类公开采购单位",
+          "criteria": {
+            "region": "天津市",
+            "orgType": "医院",
+            "category": [
+              "医疗设备采购",
+              "信息化提升"
+            ],
+            "stage": "中标成交",
+            "source": "www.ccgp-tianjin.gov.cn"
+          },
+          "members": [
+            "天津市海河医院",
+            "天津市静海区医院",
+            "泰达国际心血管病医院",
+            "天津市人民医院",
+            "天津市西青医院"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c1",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E1",
+          "direction": "支持",
+          "quote": "招标信号基础字段:项目编号 PRJ-SHGP-2026-A536;项目名称 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告;采购方 天津市肿瘤医院空港医院;预算金额 6270000.0 元;发布日期 2026-10-03;领域 医疗设备。",
+          "reason": "该证据逐字载明 claim 中的项目编号、项目名称、采购方、金额、发布日期与领域,直接支持信封字段。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:金额变化得分 0.800;历史依据可用。",
+          "reason": "仅描述金额异常检测评分,不改变信封字段本身的真伪判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:频率变化得分 0.600;历史依据可用。",
+          "reason": "仅描述频率异常检测评分,与信封字段内容无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:采购新颖性得分 0.300;历史依据可用。",
+          "reason": "仅描述新颖性检测评分,不改变信封字段判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "reason": "仅描述相关性检测与金额/新颖性/频率依据,未对信封字段提出异议或印证。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E10",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会今天（11日）发布9月份中国物流业景气指数。",
+          "reason": "物流业景气指数新闻,与本次招标信封字段无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E12",
+          "direction": "无关",
+          "quote": "10月11日凌晨，沙特民航总局发布公告确认，10日下午利雅得哈立德国王国际机场遭袭事件已造成12人死309人伤",
+          "reason": "沙特机场事件新闻,与本次招标信封字段无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E13",
+          "direction": "无关",
+          "quote": "当地时间10月8日，欧盟理事会发布公告称，将针对部分俄罗斯相关个人和实体的制裁措施延长一年，至2027年10月9日。",
+          "reason": "欧盟制裁新闻,与本次招标信封字段无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E14",
+          "direction": "无关",
+          "quote": "泰山景区管委会10月6日发布辟谣公告",
+          "reason": "泰山景区辟谣新闻,与本次招标信封字段无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E15",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会10月11日发布，9月份中国物流业景气指数为51.5%，环比回升0.6个百分点，连续5个月处于扩张区间",
+          "reason": "物流业景气指数新闻,与本次招标信封字段无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 逐字载明 claim 全部信封字段(项目编号、项目名称、采购方、金额、发布日期、领域),方向为支持;E2-E5 为信号层检测评分,不改变字段真伪;E10/E12/E13/E14/E15 为无关新闻。但 E1 与 E2-E5 同根(signal_layer),不构成独立来源印证,故仅凭单一来源给出已证实意见,最终以代码独立来源规则为准。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c11",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E1",
+          "direction": "支持",
+          "quote": "正文缺失,摘要由公告字段生成。",
+          "reason": "该证据直接载明正文缺失、摘要由公告字段生成,与 claim 所述 basisGaps 内容一致。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:金额变化得分 0.800",
+          "reason": "仅涉及金额异常检测评分,不涉及正文缺失或采购范围确认。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:频率变化得分 0.600",
+          "reason": "仅涉及频率异常检测评分,与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:采购新颖性得分 0.300",
+          "reason": "仅涉及新颖性评分,不改变对 claim 的判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E5",
+          "direction": "无关",
+          "quote": "项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "reason": "涉及相关性与金额/新颖性/频率依据,未涉及正文缺失或采购范围确认。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E10",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会今天（11日）发布9月份中国物流业景气指数。",
+          "reason": "物流业景气指数新闻,与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E12",
+          "direction": "无关",
+          "quote": "10月11日凌晨，沙特民航总局发布公告确认",
+          "reason": "沙特机场事件新闻,与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E9",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会，9月11日发布9月份中国物流业景气指数。",
+          "reason": "物流业景气指数新闻,与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E16",
+          "direction": "无关",
+          "quote": "天津市海河医院棉织品洗涤服务项目 (项目编号:TBEC-2026-C-003)中标公告",
+          "reason": "其他医院洗涤服务中标公告,与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E17",
+          "direction": "无关",
+          "quote": "静海区紧密型县域医共体建设项目——医学检验设备采购项目 (项目编号:0615-2641031960920)中标公告",
+          "reason": "其他医院检验设备中标公告,与 claim 无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 直接载明正文缺失、摘要由公告字段生成,支持 claim 中关于 basisGaps 的陈述;其余证据均不涉及该内容。但需注意 E1 与 E2-E5 同根(signal_layer),不构成独立印证,且 claim 中'需先获取公告正文以确认采购范围与数智化病理系统是否属企业业务新方向'属推断性表述,证据未直接载明。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c13",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E10",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会今天（11日）发布9月份中国物流业景气指数。",
+          "reason": "内容为物流业景气指数，与天津市肿瘤医院空港医院数智化病理系统采购公告无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E12",
+          "direction": "无关",
+          "quote": "10月11日凌晨，沙特民航总局发布公告确认，10日下午利雅得哈立德国王国际机场遭袭事件已造成12人死309人伤",
+          "reason": "内容为沙特机场遭袭事件，与 claim 所述采购公告无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E13",
+          "direction": "无关",
+          "quote": "当地时间10月8日，欧盟理事会发布公告称，将针对部分俄罗斯相关个人和实体的制裁措施延长一年",
+          "reason": "内容为欧盟对俄制裁，与 claim 所述采购公告无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E14",
+          "direction": "无关",
+          "quote": "泰山景区管委会10月6日发布辟谣公告",
+          "reason": "内容为泰山景区辟谣，与 claim 所述采购公告无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E15",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会10月11日发布，9月份中国物流业景气指数为51.5%",
+          "reason": "内容为物流业景气指数，与 claim 所述采购公告无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E6",
+          "direction": "无关",
+          "quote": "打卡“科技游”成为入境游新热点",
+          "reason": "内容为入境游与科技游，与 claim 所述采购公告无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E9",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会，9月11日发布9月份中国物流业景气指数。",
+          "reason": "内容为物流业景气指数，与 claim 所述采购公告无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E16",
+          "direction": "无关",
+          "quote": "天津市海河医院 天津市海河医院棉织品洗涤服务项目 (项目编号:TBEC-2026-C-003)中标公告",
+          "reason": "为天津市海河医院洗涤服务项目中标公告，项目编号与主体均与 claim 不同，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E17",
+          "direction": "无关",
+          "quote": "天津市静海区医院 静海区紧密型县域医共体建设项目——医学检验设备采购项目 (项目编号:0615-2641031960920)中标公告",
+          "reason": "为天津市静海区医院检验设备采购中标公告，项目编号与主体均与 claim 不同，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E18",
+          "direction": "无关",
+          "quote": "天津市河东区城市管理综合服务中心 河东区2026年度第二批因工刨路项目材料采购 (项目编号:TJRR-CG-20260905)中标公告",
+          "reason": "为河东区刨路项目材料采购中标公告，项目编号与主体均与 claim 不同，不改变判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内全部证据均未涉及天津市肿瘤医院空港医院或项目编号 SHGP-2026-A536 的招标公告，无任何证据支持或反驳该 claim，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c14",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E10",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会今天（11日）发布9月份中国物流业景气指数。",
+          "reason": "内容为物流业景气指数，与天津市肿瘤医院空港医院及数智化病理系统采购供应商关系无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E16",
+          "direction": "无关",
+          "quote": "天津市海河医院 天津市海河医院棉织品洗涤服务项目 (项目编号:TBEC-2026-C-003)中标公告",
+          "reason": "为海河医院棉织品洗涤服务中标公告，与天津市肿瘤医院空港医院及数智化病理系统供应商关系无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E17",
+          "direction": "无关",
+          "quote": "天津市静海区医院 静海区紧密型县域医共体建设项目——医学检验设备采购项目 (项目编号:0615-2641031960920)中标公告",
+          "reason": "为静海区医院医学检验设备采购中标公告，未涉及天津市肿瘤医院空港医院或数智化病理系统供应商。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E18",
+          "direction": "无关",
+          "quote": "天津市河东区城市管理综合服务中心 河东区2026年度第二批因工刨路项目材料采购 (项目编号:TJRR-CG-20260905)中标公告",
+          "reason": "为道路材料采购中标公告，与claim主题无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E21",
+          "direction": "无关",
+          "quote": "天津市人民医院 天津市人民医院复合手术室医疗设备采购项目 (项目编号:0615-2641031930899)中标公告",
+          "reason": "为天津市人民医院复合手术室设备采购中标公告，未涉及天津市肿瘤医院空港医院或数智化病理系统供应商。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E22",
+          "direction": "无关",
+          "quote": "天津市武清区教育局机关 武清区京津产业新城中央湖九年一贯制学校图书采购项目 (项目编号:TJWQ-2026-A-0125)中标公告",
+          "reason": "为学校图书采购中标公告，与claim主题无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E25",
+          "direction": "无关",
+          "quote": "天津市西青医院 西青区紧密型县域医共体建设项目——资源共享中心信息化提升项目（三） (项目编号:XQYY-a-2026-021)中标公告",
+          "reason": "为西青医院信息化提升项目中标公告，未涉及天津市肿瘤医院空港医院或数智化病理系统供应商关系。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "全部七条证据均与claim主题（天津市肿瘤医院空港医院与数智化病理系统采购潜在供应商的供应或合作关系）无关，无任何证据支持或反驳该claim，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c15",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E16",
+          "direction": "无关",
+          "quote": "天津市海河医院 天津市海河医院棉织品洗涤服务项目 (项目编号:TBEC-2026-C-003)中标公告",
+          "reason": "采购主体为天津市海河医院，非天津市肿瘤医院空港医院，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E17",
+          "direction": "无关",
+          "quote": "天津市静海区医院 静海区紧密型县域医共体建设项目——医学检验设备采购项目 (项目编号:0615-2641031960920)中标公告",
+          "reason": "采购主体为天津市静海区医院，非天津市肿瘤医院空港医院，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E18",
+          "direction": "无关",
+          "quote": "天津市河东区城市管理综合服务中心 河东区2026年度第二批因工刨路项目材料采购 (项目编号:TJRR-CG-20260905)中标公告",
+          "reason": "采购主体为天津市河东区城市管理综合服务中心，非天津市肿瘤医院空港医院，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E21",
+          "direction": "无关",
+          "quote": "天津市人民医院 天津市人民医院复合手术室医疗设备采购项目 (项目编号:0615-2641031930899)中标公告",
+          "reason": "采购主体为天津市人民医院，非天津市肿瘤医院空港医院，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E22",
+          "direction": "无关",
+          "quote": "天津市武清区教育局机关 武清区京津产业新城中央湖九年一贯制学校图书采购项目 (项目编号:TJWQ-2026-A-0125)中标公告",
+          "reason": "采购主体为天津市武清区教育局机关，非天津市肿瘤医院空港医院，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E25",
+          "direction": "无关",
+          "quote": "天津市西青医院 西青区紧密型县域医共体建设项目——资源共享中心信息化提升项目（三） (项目编号:XQYY-a-2026-021)中标公告",
+          "reason": "采购主体为天津市西青医院，非天津市肿瘤医院空港医院，与claim无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内六条证据均为天津市其他单位的采购中标公告，无一条涉及天津市肿瘤医院空港医院，既无金额信息也无业务解释，无法支持或反驳claim，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c16",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E10",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会今天（11日）发布9月份中国物流业景气指数。",
+          "reason": "物流业景气指数与天津市肿瘤医院空港医院数智化病理系统采购是否属既定规划或年度预算无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E16",
+          "direction": "无关",
+          "quote": "天津市海河医院 天津市海河医院棉织品洗涤服务项目 (项目编号:TBEC-2026-C-003)中标公告",
+          "reason": "其他医院洗涤服务项目中标公告，不涉及天津市肿瘤医院空港医院数智化病理系统采购的规划或预算安排。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E17",
+          "direction": "无关",
+          "quote": "天津市静海区医院 静海区紧密型县域医共体建设项目——医学检验设备采购项目 (项目编号:0615-2641031960920)中标公告",
+          "reason": "静海区医院医学检验设备采购，与本案标的医院及项目无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E18",
+          "direction": "无关",
+          "quote": "天津市河东区城市管理综合服务中心 河东区2026年度第二批因工刨路项目材料采购 (项目编号:TJRR-CG-20260905)中标公告",
+          "reason": "市政道路材料采购，与数智化病理系统采购无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E19",
+          "direction": "无关",
+          "quote": "泰达国际心血管病医院 泰达国际心血管病医院护理辅助服务项目 (项目编号:XCSD-2026-A-659)中标公告",
+          "reason": "其他医院护理辅助服务项目，与本案采购的规划/预算属性无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E20",
+          "direction": "无关",
+          "quote": "天津经济技术开发区生态环境局 2026-2027年度环保审批第三方技术审核服务项目 (项目编号:TDJSZX-TEDA-2026-030)中标公告",
+          "reason": "环保审批服务采购，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E21",
+          "direction": "无关",
+          "quote": "天津市人民医院 天津市人民医院复合手术室医疗设备采购项目 (项目编号:0615-2641031930899)中标公告",
+          "reason": "其他医院医疗设备采购，不能证明或否证本案采购是否属既定规划或年度预算。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E22",
+          "direction": "无关",
+          "quote": "天津市武清区教育局机关 武清区京津产业新城中央湖九年一贯制学校图书采购项目 (项目编号:TJWQ-2026-A-0125)中标公告",
+          "reason": "学校图书采购，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E23",
+          "direction": "无关",
+          "quote": "天津交通职业学院 天津交通职业学院智能制造综合应用平台 (项目编号:PYGP-2026-A-0582 )中标公告",
+          "reason": "职业院校平台采购，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E24",
+          "direction": "无关",
+          "quote": "天津交通职业学院 天津交通职业学院智能交通信号采集与管理平台 (项目编号:PYGP-2026-A-0565)中标公告",
+          "reason": "职业院校平台采购，与本案无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "全部证据均为其他单位、其他标的的采购或行业指数信息，无一条涉及天津市肿瘤医院空港医院数智化病理系统采购的立项文件、建设规划或年度预算安排，既无支持也无矛盾，claim 维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c17",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E10",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会今天（11日）发布9月份中国物流业景气指数。",
+          "reason": "物流业景气指数与数智化病理系统采购机会及本企业资质能力无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E9",
+          "direction": "无关",
+          "quote": "指数继续保持在扩张区间，较上月有所回升，物流需求持续回暖，企业经营韧性不断显现。",
+          "reason": "物流需求回暖不涉及数智化病理系统采购项目或本企业承接条件。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E17",
+          "direction": "无关",
+          "quote": "天津市静海区医院 静海区紧密型县域医共体建设项目——医学检验设备采购项目 (项目编号:0615-2641031960920)中标公告",
+          "reason": "该公告为医学检验设备采购中标结果，非数智化病理系统采购，且未涉及本企业资质或资格条款。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E18",
+          "direction": "无关",
+          "quote": "天津市河东区城市管理综合服务中心 河东区2026年度第二批因工刨路项目材料采购 (项目编号:TJRR-CG-20260905)中标公告",
+          "reason": "因工刨路项目材料采购与数智化病理系统采购机会无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E21",
+          "direction": "无关",
+          "quote": "天津市人民医院 天津市人民医院复合手术室医疗设备采购项目 (项目编号:0615-2641031930899)中标公告",
+          "reason": "复合手术室医疗设备采购与数智化病理系统采购不同，且未提供本企业资质与交付能力信息。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E22",
+          "direction": "无关",
+          "quote": "天津市武清区教育局机关 武清区京津产业新城中央湖九年一贯制学校图书采购项目 (项目编号:TJWQ-2026-A-0125)中标公告",
+          "reason": "图书采购项目与数智化病理系统采购机会无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "全部证据均未涉及数智化病理系统采购项目本身，也未提供本企业在该领域的资质、交付能力或资格条款排除情况的信息，claim 的成立条件无法从现有证据得到印证或否定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c18",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E16",
+          "direction": "无关",
+          "quote": "天津市海河医院 天津市海河医院棉织品洗涤服务项目 (项目编号:TBEC-2026-C-003)中标公告 | 阶段:中标成交 | 项目编号:TBEC-2026-C-003",
+          "reason": "该证据为天津市海河医院棉织品洗涤服务项目中标公告,采购主体非天津市肿瘤医院空港医院,且未含任何金额信息,无法支持或反驳 claim 关于该院历史采购金额量级与中位数的断言。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E17",
+          "direction": "无关",
+          "quote": "天津市静海区医院 静海区紧密型县域医共体建设项目——医学检验设备采购项目 (项目编号:0615-2641031960920)中标公告 | 阶段:中标成交 | 项目编号:0615-2641031960920",
+          "reason": "该证据为天津市静海区医院医学检验设备采购项目中标公告,采购主体非天津市肿瘤医院空港医院,且未含金额信息,与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E18",
+          "direction": "无关",
+          "quote": "天津市河东区城市管理综合服务中心 河东区2026年度第二批因工刨路项目材料采购 (项目编号:TJRR-CG-20260905)中标公告 | 阶段:中标成交 | 项目编号:TJRR-CG-20260905",
+          "reason": "该证据为河东区城市管理综合服务中心因工刨路项目材料采购中标公告,采购主体与标的均与天津市肿瘤医院空港医院无关,且未含金额信息。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E21",
+          "direction": "无关",
+          "quote": "天津市人民医院 天津市人民医院复合手术室医疗设备采购项目 (项目编号:0615-2641031930899)中标公告 | 阶段:中标成交 | 项目编号:0615-2641031930899",
+          "reason": "该证据为天津市人民医院复合手术室医疗设备采购项目中标公告,采购主体非天津市肿瘤医院空港医院,且未含金额信息,不能改变对 claim 的判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E22",
+          "direction": "无关",
+          "quote": "天津市武清区教育局机关 武清区京津产业新城中央湖九年一贯制学校图书采购项目 (项目编号:TJWQ-2026-A-0125)中标公告 | 阶段:中标成交 | 项目编号:TJWQ-2026-A-0125",
+          "reason": "该证据为武清区教育局图书采购项目中标公告,采购主体非天津市肿瘤医院空港医院,且未含金额信息,与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E25",
+          "direction": "无关",
+          "quote": "天津市西青医院 西青区紧密型县域医共体建设项目——资源共享中心信息化提升项目（三） (项目编号:XQYY-a-2026-021)中标公告 | 阶段:中标成交 | 项目编号:XQYY-a-2026-021",
+          "reason": "该证据为天津市西青医院信息化提升项目中标公告,采购主体非天津市肿瘤医院空港医院,且未含金额信息,无法支持或反驳 claim。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内六条证据均为其他采购主体的中标公告,无一条涉及天津市肿瘤医院空港医院,亦无任何金额数据,既不能证明该院存在与本次金额量级相当的历史采购,也不能证明其历史金额中位数并非 21.9 万元,故 claim 仍待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c6",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E1",
+          "direction": "支持",
+          "quote": "预算金额 6270000.0 元",
+          "reason": "该证据载明本项目预算金额 6270000.0 元,与 claim 中『本项目金额 627.0 万元』一致,支持 claim 的金额部分。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:金额变化得分 0.800;历史依据可用。",
+          "reason": "仅给出金额异常得分,未载明中位数、样本数或倍数等 claim 具体数值,不改变判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:频率变化得分 0.600;历史依据可用。",
+          "reason": "仅涉及频率异常得分,与 claim 的金额依据无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:采购新颖性得分 0.300;历史依据可用。",
+          "reason": "仅涉及新颖性得分,与 claim 的金额依据无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E5",
+          "direction": "支持",
+          "quote": "金额依据:历史截止日 2026-10-02;该采购单位过去 10 条有效金额中位数 21.9 万元,本项目金额 627.0 万元,为中位数的 28.63 倍,样本数 10(其中模拟样本 8,不代表真实历史证据充分)。",
+          "reason": "该证据原文逐字包含 claim 所述全部数值要素(历史截止日、中位数、本项目金额、倍数、样本数及模拟样本说明),直接支持 claim。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E17",
+          "direction": "无关",
+          "quote": "天津市静海区医院 静海区紧密型县域医共体建设项目——医学检验设备采购项目 (项目编号:0615-2641031960920)中标公告",
+          "reason": "为其他采购单位的中标公告,与 claim 所述金额依据无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E18",
+          "direction": "无关",
+          "quote": "天津市河东区城市管理综合服务中心 河东区2026年度第二批因工刨路项目材料采购 (项目编号:TJRR-CG-20260905)中标公告",
+          "reason": "为其他采购单位的中标公告,与 claim 所述金额依据无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E21",
+          "direction": "无关",
+          "quote": "天津市人民医院 天津市人民医院复合手术室医疗设备采购项目 (项目编号:0615-2641031930899)中标公告",
+          "reason": "为其他采购单位的中标公告,与 claim 所述金额依据无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E22",
+          "direction": "无关",
+          "quote": "天津市武清区教育局机关 武清区京津产业新城中央湖九年一贯制学校图书采购项目 (项目编号:TJWQ-2026-A-0125)中标公告",
+          "reason": "为其他采购单位的中标公告,与 claim 所述金额依据无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E5 原文逐字载明 claim 的全部数值要素(历史截止日 2026-10-02、中位数 21.9 万元、本项目金额 627.0 万元、28.63 倍、样本数 10 及模拟样本 8 的说明),E1 亦印证本项目金额 6270000.0 元;其余证据与 claim 无关。但需注意 E1 与 E5 同根(signal_layer),不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c8",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 PRJ-SHGP-2026-A536;项目名称 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告",
+          "reason": "该证据为信号层基础字段,未涉及信封 relevance 新颖性依据的具体数值(截止日、样本数、最大相似度、对照项目与链接)。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:金额变化得分 0.800;历史依据可用。",
+          "reason": "该证据为金额异常检测,与新颖性依据无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:频率变化得分 0.600;历史依据可用。",
+          "reason": "该证据为频率异常检测,与新颖性依据无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:采购新颖性得分 0.300;历史依据可用。",
+          "reason": "该证据仅给出新颖性得分 0.300,未载明 claim 所述截止日、样本数、最大相似度、对照项目与链接。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E5",
+          "direction": "支持",
+          "quote": "新颖性依据:历史截止日 2026-10-02;样本数 10,最大相似度 0.885,对照项目:天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目,链接 https://example.org/announcement/R-f456d19c850a03af。",
+          "reason": "该证据逐字载明 claim 所述新颖性依据的全部要素:历史截止日 2026-10-02、样本数 10、最大相似度 0.885、对照项目名称与链接。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E10",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会今天（11日）发布9月份中国物流业景气指数。",
+          "reason": "该证据为物流业景气指数新闻,与 claim 所述信封字段无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E16",
+          "direction": "无关",
+          "quote": "天津市海河医院 天津市海河医院棉织品洗涤服务项目 (项目编号:TBEC-2026-C-003)中标公告",
+          "reason": "该证据为其他单位其他项目的中标公告,不涉及 claim 所述新颖性依据。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E17",
+          "direction": "无关",
+          "quote": "天津市静海区医院 静海区紧密型县域医共体建设项目——医学检验设备采购项目 (项目编号:0615-2641031960920)中标公告",
+          "reason": "该证据为其他单位其他项目的中标公告,不涉及 claim 所述新颖性依据。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E18",
+          "direction": "无关",
+          "quote": "天津市河东区城市管理综合服务中心 河东区2026年度第二批因工刨路项目材料采购 (项目编号:TJRR-CG-20260905)中标公告",
+          "reason": "该证据为其他单位其他项目的中标公告,不涉及 claim 所述新颖性依据。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E19",
+          "direction": "无关",
+          "quote": "泰达国际心血管病医院 泰达国际心血管病医院护理辅助服务项目 (项目编号:XCSD-2026-A-659)中标公告",
+          "reason": "该证据为其他单位其他项目的中标公告,不涉及 claim 所述新颖性依据。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E5 逐字载明 claim 所述新颖性依据的全部要素(历史截止日 2026-10-02、样本数 10、最大相似度 0.885、对照项目名称与链接),其余证据或为同根信号层其他检测项,或为无关公告与新闻,均不构成矛盾。但 E5 与 E1-E4 同根(signal_layer),独立来源印证有限,最终判决由代码按独立来源规则作出。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c9",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E1",
+          "direction": "支持",
+          "quote": "项目名称 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告",
+          "reason": "信封字段明确标注为公开招标公告,与 claim 所述 kind 为 tender 属公开招标公告一致,支持该定性。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:金额变化得分 0.800",
+          "reason": "金额异常检测仅说明金额波动,不涉及信号是否属公开招标公告的定性。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:频率变化得分 0.600",
+          "reason": "频率异常检测与商机定性无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:采购新颖性得分 0.300",
+          "reason": "新颖性评分不改变对信封 kind 的定性判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E5",
+          "direction": "无关",
+          "quote": "项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600",
+          "reason": "相关性检测说明业务匹配度,不直接证明该信号为公开招标公告。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E16",
+          "direction": "无关",
+          "quote": "天津市海河医院棉织品洗涤服务项目 (项目编号:TBEC-2026-C-003)中标公告",
+          "reason": "其他单位的中标公告,与本案信号定性无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E17",
+          "direction": "无关",
+          "quote": "静海区紧密型县域医共体建设项目——医学检验设备采购项目 (项目编号:0615-2641031960920)中标公告",
+          "reason": "其他项目中标公告,与本案信号定性无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E18",
+          "direction": "无关",
+          "quote": "河东区2026年度第二批因工刨路项目材料采购 (项目编号:TJRR-CG-20260905)中标公告",
+          "reason": "其他项目中标公告,与本案信号定性无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E19",
+          "direction": "无关",
+          "quote": "泰达国际心血管病医院护理辅助服务项目 (项目编号:XCSD-2026-A-659)中标公告",
+          "reason": "其他项目中标公告,与本案信号定性无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E20",
+          "direction": "无关",
+          "quote": "2026-2027年度环保审批第三方技术审核服务项目 (项目编号:TDJSZX-TEDA-2026-030)中标公告",
+          "reason": "其他项目中标公告,与本案信号定性无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 信封基础字段明确标注该信号为公开招标公告,直接支持 claim 关于 kind 为 tender 属公开招标公告、构成潜在投标/合作机会的定性;其余证据为检测器评分或其他项目公告,不改变该判断。但需注意 E1 与 E2-E5 同根于 signal_layer,不构成独立印证。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 5,
+      "mainTarget": "c16",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "c16 未决:本次数智化病理系统采购是否属天津市肿瘤医院空港医院既定建设规划或年度预算安排,而非临时新增项目。",
+          "acceptance": "需权威登记源记录级证据:该采购单位(或上级主管/天津市卫健委)公开的年度预算文本、建设规划文件或采购意向公开清单中,出现与数智化病理系统/病理信息化相关的条目,且时间落在 2026 年度或近两年规划期内。",
+          "failover": "若预算/规划文本不可得,退一步查该单位近两年公开采购意向公开(采购意向公告)中是否含病理类条目;仍无则记为查不到,转 c15 查同等金额采购记录。"
+        },
+        {
+          "gap": "若 c16 为真,需进一步确认该规划条目与本次公告(项目编号 SHGP-2026-A536)的对应关系,以区分 h1(正常大额采购)与 h2(异常输送)。",
+          "acceptance": "需页面正文级证据:规划/预算条目与本次公告在采购单位、标的类别(数智化病理系统)上可逐项对应,或公告正文中直接援引该规划/预算依据。",
+          "failover": "若无法建立对应关系,则 c16 仅作弱支持,不翻转 h1/h2 主导地位,转查 c14 关系佐证。"
+        }
+      ],
+      "searchHints": [
+        "天津市肿瘤医院空港医院 2026 年度预算 信息化",
+        "天津市肿瘤医院空港医院 采购意向公开 病理",
+        "天津市肿瘤医院空港医院 数智化病理系统 建设规划"
+      ],
+      "sideTargets": [
+        "c15",
+        "c18"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [
+        {
+          "id": "c22",
+          "text": "天津市第五中心医院于 2026 年发布了项目编号 XCSD-2026-A-482 的新内科综合楼中心机房信息化基础设施网络安全建设项目公开招标公告,该公告标题中同时含「信息化基础设施」与「网络安全」字样。",
+          "category": "采购公告事实",
+          "sectionIndex": 2,
+          "priority": 3,
+          "parent": null,
+          "entityNames": [
+            "天津市第五中心医院"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c23",
+          "text": "天津市西青医院于 2026 年发布了项目编号 XQYY-a-2026-021 的「西青区紧密型县域医共体建设项目——资源共享中心信息化提升项目(三)」中标公告,该公告标题中含「(三)」序号。",
+          "category": "采购公告事实",
+          "sectionIndex": 2,
+          "priority": 3,
+          "parent": "c19",
+          "entityNames": [
+            "天津市西青医院"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c24",
+          "text": "天津市北辰区中医医院于 2026 年发布了项目编号 YTKX2026-A-016 的中医智慧医共体信息化建设一期项目公开招标公告,该公告标题中含「一期」字样。",
+          "category": "采购公告事实",
+          "sectionIndex": 2,
+          "priority": 3,
+          "parent": null,
+          "entityNames": [
+            "天津市北辰区中医医院"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c25",
+          "text": "天津市西青医院(XQYY-a-2026-021,中标成交)与天津市北辰区中医医院(YTKX2026-A-016,招标采购)两个项目的公告标题中均含「医共体」与「信息化」字样,且均发布于 ccgp-tianjin.gov.cn。",
+          "category": "关系线索",
+          "sectionIndex": 2,
+          "priority": 3,
+          "relationType": "协同",
+          "parent": "c19",
+          "entityNames": [
+            "天津市西青医院",
+            "天津市北辰区中医医院"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c26",
+          "text": "天津市南开区人民政府兴南街道办事处机关在 2026 年有两条合同公告,项目编号分别为 南开区〔2026〕407626号 与 南开区〔2026〕410320号,标题中分别含「复印纸40箱」与「复印纸50箱」。",
+          "category": "采购公告事实",
+          "sectionIndex": 2,
+          "priority": 2,
+          "parent": null,
+          "entityNames": [
+            "天津市南开区人民政府兴南街道办事处机关"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c27",
+          "text": "洋县溢水镇上溢水村中药材仓储及冷链建设项目(设备采购)(二次)与洋县溢水镇香菇深加工建设项目(设备采购)(二次)两条招标公告标题中均含「洋县溢水镇」与「(二次)」字样,且均处于招标采购阶段。",
+          "category": "关系线索",
+          "sectionIndex": 2,
+          "priority": 3,
+          "relationType": "协同",
+          "parent": null,
+          "entityNames": [
+            "洋县溢水镇"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c28",
+          "text": "云南省农业农村厅 2026 年高素质农民培育(专题班)项目(项目编号 YNZC2026-G3-06147-YNTT-0131)与云南本土项目管理有限公司代理的石屏县 2026 年地膜科学使用回收项目(二次)两条公告均发布于 ccgp.gov.cn,且标题中均含「2026年」与「项目」字样。",
+          "category": "关系线索",
+          "sectionIndex": 2,
+          "priority": 2,
+          "relationType": "协同",
+          "parent": null,
+          "entityNames": [
+            "云南省农业农村厅",
+            "云南本土项目管理有限公司"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c29",
+          "text": "天津市水务工程运行调度中心(天津市防汛物资管理中心)2026 年水调中心信息化运行维护项目(项目编号 SDZXXXHYXWHXM-2026-01)的采购方式为竞争性磋商,而非公开招标。",
+          "category": "采购公告事实",
+          "sectionIndex": 2,
+          "priority": 2,
+          "parent": null,
+          "entityNames": [
+            "天津市水务工程运行调度中心(天津市防汛物资管理中心)"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c30",
+          "text": "天津市武清区王庆坨医院血液透析科室建设-设备采购项目(项目编号 WQCG2026-137)的采购方式为竞争性谈判,而非公开招标。",
+          "category": "采购公告事实",
+          "sectionIndex": 2,
+          "priority": 2,
+          "parent": null,
+          "entityNames": [
+            "天津市武清区王庆坨医院"
+          ],
+          "hypothesisLinks": []
+        }
+      ],
+      "cohorts": [
+        {
+          "name": "天津市医共体信息化建设采购单位圈",
+          "criteria": {
+            "region": "天津市",
+            "keyword": "公告标题含「医共体」且含「信息化」",
+            "stage": "招标采购或中标成交",
+            "source": "ccgp-tianjin.gov.cn"
+          },
+          "members": [
+            "天津市西青医院",
+            "天津市北辰区中医医院"
+          ]
+        },
+        {
+          "name": "天津市医院信息化/网络安全基础设施采购圈",
+          "criteria": {
+            "region": "天津市",
+            "keyword": "公告标题含「信息化」或「网络安全」",
+            "stage": "招标采购",
+            "source": "ccgp-tianjin.gov.cn"
+          },
+          "members": [
+            "天津市第五中心医院",
+            "天津市北辰区中医医院",
+            "天津市水务工程运行调度中心(天津市防汛物资管理中心)"
+          ]
+        },
+        {
+          "name": "天津市南开区街道办小额办公用品合同圈",
+          "criteria": {
+            "region": "天津市南开区",
+            "keyword": "公告标题含「复印纸」或「碎纸机」",
+            "stage": "合同签订",
+            "source": "ccgp-tianjin.gov.cn"
+          },
+          "members": [
+            "天津市南开区人民政府兴南街道办事处机关",
+            "天津市南开区人民政府水上公园街道办事处机关"
+          ]
+        },
+        {
+          "name": "洋县溢水镇乡村振兴设备采购(二次)圈",
+          "criteria": {
+            "region": "陕西省洋县溢水镇",
+            "keyword": "公告标题含「洋县溢水镇」且含「(二次)」",
+            "stage": "招标采购",
+            "source": "ccgp.gov.cn"
+          },
+          "members": [
+            "洋县溢水镇上溢水村中药材仓储及冷链建设项目(设备采购)(二次)",
+            "洋县溢水镇香菇深加工建设项目(设备采购)(二次)"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c1",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E1",
+          "direction": "支持",
+          "quote": "招标信号基础字段:项目编号 PRJ-SHGP-2026-A536;项目名称 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告;采购方 天津市肿瘤医院空港医院;预算金额 6270000.0 元;发布日期 2026-10-03;领域 医疗设备。",
+          "reason": "该证据逐字载明 claim 中的项目编号、项目名称、采购方、金额、发布日期与领域,直接支持信封字段。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:金额变化得分 0.800;历史依据可用。",
+          "reason": "仅描述金额异常检测评分,不改变信封字段本身的真伪判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:频率变化得分 0.600;历史依据可用。",
+          "reason": "仅描述频率异常检测评分,与信封字段内容无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:采购新颖性得分 0.300;历史依据可用。",
+          "reason": "仅描述新颖性检测评分,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E5",
+          "direction": "无关",
+          "quote": "触发相关性检测:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600。",
+          "reason": "描述相关性评分及金额/新颖性/频率依据,未对信封字段真伪提供支持或反驳。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E10",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会今天（11日）发布9月份中国物流业景气指数。",
+          "reason": "物流业景气指数新闻,与招标信封字段无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E12",
+          "direction": "无关",
+          "quote": "10月11日凌晨，沙特民航总局发布公告确认，10日下午利雅得哈立德国王国际机场遭袭事件已造成12人死309人伤",
+          "reason": "沙特机场事件新闻,与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E13",
+          "direction": "无关",
+          "quote": "当地时间10月8日，欧盟理事会发布公告称，将针对部分俄罗斯相关个人和实体的制裁措施延长一年，至2027年10月9日。",
+          "reason": "欧盟制裁新闻,与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E14",
+          "direction": "无关",
+          "quote": "泰山景区管委会10月6日发布辟谣公告",
+          "reason": "泰山景区辟谣新闻,与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E15",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会10月11日发布，9月份中国物流业景气指数为51.5%，环比回升0.6个百分点，连续5个月处于扩张区间",
+          "reason": "物流业景气指数新闻,与 claim 无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一直接载明信封字段的证据 E1 逐字支持 claim 全部要素;其余证据为检测器评分或无关新闻,不构成反驳。但 E1 与检测器证据同根(signal_layer),独立来源有限,故仅给出已证实意见,最终由代码按独立来源规则裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c10",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E1",
+          "direction": "无关",
+          "quote": "预算金额 6270000.0 元",
+          "reason": "仅给出预算金额与项目基础字段,未涉及 basisGaps 或模拟样本说明。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:金额变化得分 0.800;历史依据可用。",
+          "reason": "金额异常检测结论,未载明模拟样本或基线构成。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:频率变化得分 0.600;历史依据可用。",
+          "reason": "频率异常检测结论,与 basisGaps 模拟样本无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:采购新颖性得分 0.300;历史依据可用。",
+          "reason": "新颖性检测结论,未涉及基线样本构成。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E5",
+          "direction": "支持",
+          "quote": "样本数 10(其中模拟样本 8,不代表真实历史证据充分)",
+          "reason": "该证据原文直接载明历史金额基线含 8 条模拟样本且不代表真实历史证据充分,与 claim 表述一致。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E26",
+          "direction": "无关",
+          "quote": "云南省农业农村厅2026年高素质农民培育（专题班）项目公开招标公告",
+          "reason": "其他地区无关采购公告,不涉及本 claim 的基线样本问题。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E27",
+          "direction": "无关",
+          "quote": "浙江策鼎工程项目管理有限公司关于常山法院2026-2028年度特邀调解员服务采购项目的公开招标公告",
+          "reason": "其他地区无关采购公告,不涉及本 claim 的基线样本问题。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E28",
+          "direction": "无关",
+          "quote": "绍兴市建新造价咨询事务所有限公司关于2026年越城区工业废气污染防治综合服务的公开招标公告",
+          "reason": "其他地区无关采购公告,不涉及本 claim 的基线样本问题。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E5 原文明确载明历史金额基线样本数 10 中模拟样本 8 且不代表真实历史证据充分,直接支撑 claim 关于 basisGaps 的解读;其余证据或为同根信号层检测结论,或为无关公告,不改变判断。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c11",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E1",
+          "direction": "支持",
+          "quote": "正文缺失,摘要由公告字段生成",
+          "reason": "该证据原文直接载明'正文缺失,摘要由公告字段生成',与 claim 所述 basisGaps 内容一致,支持 claim。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:金额变化得分 0.800",
+          "reason": "仅涉及金额异常检测评分,不涉及正文缺失或摘要生成方式,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:频率变化得分 0.600",
+          "reason": "仅涉及频率异常检测评分,与 claim 所述 basisGaps 内容无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:采购新颖性得分 0.300",
+          "reason": "仅涉及新颖性检测评分,不涉及正文缺失或摘要生成方式。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E5",
+          "direction": "无关",
+          "quote": "项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600",
+          "reason": "涉及相关性检测与金额/新颖性/频率依据,未提及正文缺失或摘要生成方式,不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E10",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会今天（11日）发布9月份中国物流业景气指数。",
+          "reason": "物流业景气指数新闻,与 claim 所述 basisGaps 内容无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E12",
+          "direction": "无关",
+          "quote": "10月11日凌晨，沙特民航总局发布公告确认",
+          "reason": "沙特机场遭袭事件新闻,与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E9",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会，9月11日发布9月份中国物流业景气指数。",
+          "reason": "物流业景气指数新闻,与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E16",
+          "direction": "无关",
+          "quote": "天津市海河医院棉织品洗涤服务项目 (项目编号:TBEC-2026-C-003)中标公告",
+          "reason": "另一采购项目的中标公告,与 claim 所述 basisGaps 内容无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E17",
+          "direction": "无关",
+          "quote": "静海区紧密型县域医共体建设项目——医学检验设备采购项目 (项目编号:0615-2641031960920)中标公告",
+          "reason": "另一采购项目的中标公告,与 claim 无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 原文逐字载明'正文缺失,摘要由公告字段生成',直接支持 claim 关于 basisGaps 载明内容的部分;其余证据均为检测评分或其他无关新闻/公告,不构成矛盾。但'需先获取公告正文以确认采购范围与数智化病理系统是否属企业业务新方向'属基于缺失状态的推断性表述,卷宗内无公告正文可核验,故该部分仅由 E1 间接支撑。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c13",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E10",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会今天（11日）发布9月份中国物流业景气指数。",
+          "reason": "内容为物流业景气指数，与天津市肿瘤医院空港医院招标公告发布行为无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E12",
+          "direction": "无关",
+          "quote": "10月11日凌晨，沙特民航总局发布公告确认，10日下午利雅得哈立德国王国际机场遭袭事件已造成12人死309人伤",
+          "reason": "内容为沙特机场遭袭事件，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E13",
+          "direction": "无关",
+          "quote": "当地时间10月8日，欧盟理事会发布公告称，将针对部分俄罗斯相关个人和实体的制裁措施延长一年",
+          "reason": "内容为欧盟对俄制裁，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E14",
+          "direction": "无关",
+          "quote": "泰山景区管委会10月6日发布辟谣公告",
+          "reason": "内容为泰山景区辟谣，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E15",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会10月11日发布，9月份中国物流业景气指数为51.5%",
+          "reason": "内容为物流业景气指数，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E6",
+          "direction": "无关",
+          "quote": "打卡“科技游”成为入境游新热点",
+          "reason": "内容为入境游与科技游，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E9",
+          "direction": "无关",
+          "quote": "9月份物流业景气指数继续保持在扩张区间 行业运行呈现多维度改善态势",
+          "reason": "内容为物流业景气指数，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E16",
+          "direction": "无关",
+          "quote": "天津市海河医院 天津市海河医院棉织品洗涤服务项目 (项目编号:TBEC-2026-C-003)中标公告",
+          "reason": "为天津市海河医院洗涤服务项目中标公告，项目编号与主体均与 claim 不同，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E17",
+          "direction": "无关",
+          "quote": "天津市静海区医院 静海区紧密型县域医共体建设项目——医学检验设备采购项目 (项目编号:0615-2641031960920)中标公告",
+          "reason": "为静海区医院检验设备采购中标公告，与 claim 所述项目无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E18",
+          "direction": "无关",
+          "quote": "天津市河东区城市管理综合服务中心 河东区2026年度第二批因工刨路项目材料采购 (项目编号:TJRR-CG-20260905)中标公告",
+          "reason": "为河东区道路材料采购中标公告，与 claim 所述项目无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内没有任何证据提及天津市肿瘤医院空港医院或项目编号 SHGP-2026-A536 的招标公告，全部证据与 claim 无关，无法证实或推翻该发布行为。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c14",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E10",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会今天（11日）发布9月份中国物流业景气指数。",
+          "reason": "内容为物流业景气指数，与天津市肿瘤医院空港医院及数智化病理系统采购供应商关系无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E16",
+          "direction": "无关",
+          "quote": "天津市海河医院 天津市海河医院棉织品洗涤服务项目 (项目编号:TBEC-2026-C-003)中标公告",
+          "reason": "为海河医院棉织品洗涤服务项目，与天津市肿瘤医院空港医院及数智化病理系统供应商关系无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E17",
+          "direction": "无关",
+          "quote": "天津市静海区医院 静海区紧密型县域医共体建设项目——医学检验设备采购项目 (项目编号:0615-2641031960920)中标公告",
+          "reason": "为静海区医院医学检验设备采购，与天津市肿瘤医院空港医院及数智化病理系统供应商关系无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E18",
+          "direction": "无关",
+          "quote": "天津市河东区城市管理综合服务中心 河东区2026年度第二批因工刨路项目材料采购 (项目编号:TJRR-CG-20260905)中标公告",
+          "reason": "为道路材料采购，与天津市肿瘤医院空港医院及数智化病理系统供应商关系无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E21",
+          "direction": "无关",
+          "quote": "天津市人民医院 天津市人民医院复合手术室医疗设备采购项目 (项目编号:0615-2641031930899)中标公告",
+          "reason": "为人民医院复合手术室设备采购，与天津市肿瘤医院空港医院及数智化病理系统供应商关系无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E22",
+          "direction": "无关",
+          "quote": "天津市武清区教育局机关 武清区京津产业新城中央湖九年一贯制学校图书采购项目 (项目编号:TJWQ-2026-A-0125)中标公告",
+          "reason": "为学校图书采购，与天津市肿瘤医院空港医院及数智化病理系统供应商关系无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E25",
+          "direction": "无关",
+          "quote": "天津市西青医院 西青区紧密型县域医共体建设项目——资源共享中心信息化提升项目（三） (项目编号:XQYY-a-2026-021)中标公告",
+          "reason": "为西青医院信息化提升项目，主体非天津市肿瘤医院空港医院，未涉及该院与数智化病理系统供应商的关系。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E36",
+          "direction": "无关",
+          "quote": "天津市水务工程运行调度中心（天津市防汛物资管理中心） 2026年水调中心信息化运行维护项目 (项目编号:SDZXXXHYXWHXM-2026-01)竞争性磋商公告",
+          "reason": "为水务中心信息化运维项目，与天津市肿瘤医院空港医院及数智化病理系统供应商关系无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E37",
+          "direction": "无关",
+          "quote": "天津市第五中心医院 天津市第五中心医院新内科综合楼中心机房信息化基础设施网络安全建设项目 (项目编号:XCSD-2026-A-482)公开招标公告",
+          "reason": "为第五中心医院机房网络安全项目，与天津市肿瘤医院空港医院及数智化病理系统供应商关系无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E38",
+          "direction": "无关",
+          "quote": "天津市西青医院 西青区紧密型县域医共体建设项目——资源共享中心信息化提升项目（三） (项目编号:XQYY-a-2026-021)中标公告",
+          "reason": "为西青医院信息化提升项目，与天津市肿瘤医院空港医院及数智化病理系统供应商关系无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "全部证据均未涉及天津市肿瘤医院空港医院，亦未涉及数智化病理系统采购的供应商，无任何证据可佐证该院与潜在供应商之间存在供应或合作关系，claim 维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c15",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E16",
+          "direction": "无关",
+          "quote": "天津市海河医院 天津市海河医院棉织品洗涤服务项目 (项目编号:TBEC-2026-C-003)中标公告",
+          "reason": "采购主体为天津市海河医院，非天津市肿瘤医院空港医院，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E17",
+          "direction": "无关",
+          "quote": "天津市静海区医院 静海区紧密型县域医共体建设项目——医学检验设备采购项目 (项目编号:0615-2641031960920)中标公告",
+          "reason": "采购主体为天津市静海区医院，非天津市肿瘤医院空港医院。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E18",
+          "direction": "无关",
+          "quote": "天津市河东区城市管理综合服务中心 河东区2026年度第二批因工刨路项目材料采购 (项目编号:TJRR-CG-20260905)中标公告",
+          "reason": "采购主体为天津市河东区城市管理综合服务中心，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E21",
+          "direction": "无关",
+          "quote": "天津市人民医院 天津市人民医院复合手术室医疗设备采购项目 (项目编号:0615-2641031930899)中标公告",
+          "reason": "采购主体为天津市人民医院，非天津市肿瘤医院空港医院。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E22",
+          "direction": "无关",
+          "quote": "天津市武清区教育局机关 武清区京津产业新城中央湖九年一贯制学校图书采购项目 (项目编号:TJWQ-2026-A-0125)中标公告",
+          "reason": "采购主体为天津市武清区教育局机关，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E25",
+          "direction": "无关",
+          "quote": "天津市西青医院 西青区紧密型县域医共体建设项目——资源共享中心信息化提升项目（三） (项目编号:XQYY-a-2026-021)中标公告",
+          "reason": "采购主体为天津市西青医院，非天津市肿瘤医院空港医院。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E26",
+          "direction": "无关",
+          "quote": "云南省农业农村厅2026年高素质农民培育（专题班）项目公开招标公告",
+          "reason": "采购主体为云南省农业农村厅，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E27",
+          "direction": "无关",
+          "quote": "浙江策鼎工程项目管理有限公司关于常山法院2026-2028年度特邀调解员服务采购项目的公开招标公告",
+          "reason": "采购主体为常山法院，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E28",
+          "direction": "无关",
+          "quote": "绍兴市建新造价咨询事务所有限公司关于2026年越城区工业废气污染防治综合服务的公开招标公告",
+          "reason": "采购主体为绍兴市越城区相关单位，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E32",
+          "direction": "无关",
+          "quote": "2026年和田市医共体远程诊疗及智慧医疗建设项目（包一）公开招标公告",
+          "reason": "采购主体为和田市医共体项目，与 claim 无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内全部证据的采购主体均非天津市肿瘤医院空港医院，无一条涉及该院的采购记录，既无支持也无矛盾证据，claim 无法据此证实或推翻，维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c16",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E10",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会今天（11日）发布9月份中国物流业景气指数。",
+          "reason": "内容为物流业景气指数，与天津市肿瘤医院空港医院数智化病理系统采购是否属既定规划或年度预算无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E16",
+          "direction": "无关",
+          "quote": "天津市海河医院 天津市海河医院棉织品洗涤服务项目 (项目编号:TBEC-2026-C-003)中标公告",
+          "reason": "为海河医院棉织品洗涤服务项目中标公告，与空港医院数智化病理系统采购的规划/预算属性无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E17",
+          "direction": "无关",
+          "quote": "天津市静海区医院 静海区紧密型县域医共体建设项目——医学检验设备采购项目 (项目编号:0615-2641031960920)中标公告",
+          "reason": "为静海区医院医学检验设备采购中标公告，与空港医院数智化病理系统采购的规划/预算属性无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E18",
+          "direction": "无关",
+          "quote": "天津市河东区城市管理综合服务中心 河东区2026年度第二批因工刨路项目材料采购 (项目编号:TJRR-CG-20260905)中标公告",
+          "reason": "为河东区因工刨路项目材料采购中标公告，与空港医院数智化病理系统采购的规划/预算属性无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E19",
+          "direction": "无关",
+          "quote": "泰达国际心血管病医院 泰达国际心血管病医院护理辅助服务项目 (项目编号:XCSD-2026-A-659)中标公告",
+          "reason": "为泰达国际心血管病医院护理辅助服务项目中标公告，与空港医院数智化病理系统采购的规划/预算属性无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E20",
+          "direction": "无关",
+          "quote": "天津经济技术开发区生态环境局 2026-2027年度环保审批第三方技术审核服务项目 (项目编号:TDJSZX-TEDA-2026-030)中标公告",
+          "reason": "为生态环境局环保审批第三方技术审核服务项目中标公告，与空港医院数智化病理系统采购的规划/预算属性无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E21",
+          "direction": "无关",
+          "quote": "天津市人民医院 天津市人民医院复合手术室医疗设备采购项目 (项目编号:0615-2641031930899)中标公告",
+          "reason": "为天津市人民医院复合手术室医疗设备采购中标公告，与空港医院数智化病理系统采购的规划/预算属性无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E22",
+          "direction": "无关",
+          "quote": "天津市武清区教育局机关 武清区京津产业新城中央湖九年一贯制学校图书采购项目 (项目编号:TJWQ-2026-A-0125)中标公告",
+          "reason": "为武清区教育局图书采购中标公告，与空港医院数智化病理系统采购的规划/预算属性无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E23",
+          "direction": "无关",
+          "quote": "天津交通职业学院 天津交通职业学院智能制造综合应用平台 (项目编号:PYGP-2026-A-0582 )中标公告",
+          "reason": "为天津交通职业学院智能制造平台中标公告，与空港医院数智化病理系统采购的规划/预算属性无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E24",
+          "direction": "无关",
+          "quote": "天津交通职业学院 天津交通职业学院智能交通信号采集与管理平台 (项目编号:PYGP-2026-A-0565)中标公告",
+          "reason": "为天津交通职业学院智能交通信号平台中标公告，与空港医院数智化病理系统采购的规划/预算属性无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "全部证据均为其他单位/其他项目的采购或行业指数信息，无一条涉及天津市肿瘤医院空港医院数智化病理系统采购是否属既定建设规划或年度预算安排，无法支持或推翻该 claim，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c17",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E10",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会今天（11日）发布9月份中国物流业景气指数。",
+          "reason": "物流业景气指数与数智化病理系统采购机会无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E9",
+          "direction": "无关",
+          "quote": "指数继续保持在扩张区间，较上月有所回升，物流需求持续回暖，企业经营韧性不断显现。",
+          "reason": "物流需求回暖不涉及病理系统采购资质或资格条款。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E17",
+          "direction": "无关",
+          "quote": "静海区紧密型县域医共体建设项目——医学检验设备采购项目",
+          "reason": "医学检验设备采购中标公告，非数智化病理系统采购，且为中标结果，不证明本企业资质或资格条款。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E18",
+          "direction": "无关",
+          "quote": "河东区2026年度第二批因工刨路项目材料采购",
+          "reason": "市政道路材料采购，与病理系统无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E21",
+          "direction": "无关",
+          "quote": "天津市人民医院复合手术室医疗设备采购项目",
+          "reason": "复合手术室设备采购，非数智化病理系统，且为中标公告。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E22",
+          "direction": "无关",
+          "quote": "武清区京津产业新城中央湖九年一贯制学校图书采购项目",
+          "reason": "图书采购，与病理系统无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E26",
+          "direction": "无关",
+          "quote": "云南省农业农村厅2026年高素质农民培育（专题班）项目公开招标公告",
+          "reason": "农民培育服务采购，与病理系统无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E27",
+          "direction": "无关",
+          "quote": "常山法院2026-2028年度特邀调解员服务采购项目的公开招标公告",
+          "reason": "调解员服务采购，与病理系统无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E28",
+          "direction": "无关",
+          "quote": "2026年越城区工业废气污染防治综合服务的公开招标公告",
+          "reason": "废气污染防治服务，与病理系统无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E29",
+          "direction": "无关",
+          "quote": "2026年洋县溢水镇上溢水村中药材仓储及冷链建设项目(设备采购)(二次)招标公告",
+          "reason": "中药材仓储冷链设备采购，与数智化病理系统无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "全部证据均未涉及数智化病理系统采购项目，也未提供本企业资质、交付能力或资格条款排除与否的任何信息，claim 的成立条件无一得到印证，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c18",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E16",
+          "direction": "无关",
+          "quote": "天津市海河医院 天津市海河医院棉织品洗涤服务项目 (项目编号:TBEC-2026-C-003)中标公告 | 阶段:中标成交 | 项目编号:TBEC-2026-C-003",
+          "reason": "该证据为天津市海河医院棉织品洗涤服务项目中标公告,与天津市肿瘤医院空港医院的历史采购记录及金额中位数无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E17",
+          "direction": "无关",
+          "quote": "天津市静海区医院 静海区紧密型县域医共体建设项目——医学检验设备采购项目 (项目编号:0615-2641031960920)中标公告 | 阶段:中标成交 | 项目编号:0615-2641031960920",
+          "reason": "该证据为天津市静海区医院的设备采购中标公告,主体非天津市肿瘤医院空港医院,不涉及该院历史采购金额。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E18",
+          "direction": "无关",
+          "quote": "天津市河东区城市管理综合服务中心 河东区2026年度第二批因工刨路项目材料采购 (项目编号:TJRR-CG-20260905)中标公告 | 阶段:中标成交 | 项目编号:TJRR-CG-20260905",
+          "reason": "该证据为河东区城市管理综合服务中心的材料采购中标公告,与天津市肿瘤医院空港医院无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E21",
+          "direction": "无关",
+          "quote": "天津市人民医院 天津市人民医院复合手术室医疗设备采购项目 (项目编号:0615-2641031930899)中标公告 | 阶段:中标成交 | 项目编号:0615-2641031930899",
+          "reason": "该证据为天津市人民医院的设备采购中标公告,主体非天津市肿瘤医院空港医院。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E22",
+          "direction": "无关",
+          "quote": "天津市武清区教育局机关 武清区京津产业新城中央湖九年一贯制学校图书采购项目 (项目编号:TJWQ-2026-A-0125)中标公告 | 阶段:中标成交 | 项目编号:TJWQ-2026-A-0125",
+          "reason": "该证据为武清区教育局的图书采购中标公告,与天津市肿瘤医院空港医院无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E25",
+          "direction": "无关",
+          "quote": "天津市西青医院 西青区紧密型县域医共体建设项目——资源共享中心信息化提升项目（三） (项目编号:XQYY-a-2026-021)中标公告 | 阶段:中标成交 | 项目编号:XQYY-a-2026-021",
+          "reason": "该证据为天津市西青医院的信息化提升项目中标公告,主体非天津市肿瘤医院空港医院。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E26",
+          "direction": "无关",
+          "quote": "云南省农业农村厅2026年高素质农民培育（专题班）项目公开招标公告 | 阶段:招标采购 | 预算:420万元 | 投标截止:2026-11-02 09:30 | 项目编号:YNZC2026-G3-06147-YNTT-0131",
+          "reason": "该证据为云南省农业农村厅的培训项目招标公告,与天津市肿瘤医院空港医院历史采购记录无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E27",
+          "direction": "无关",
+          "quote": "浙江策鼎工程项目管理有限公司关于常山法院2026-2028年度特邀调解员服务采购项目的公开招标公告 | 阶段:招标采购 | 预算:187.72万元 | 投标截止:2026-11-02 09:30 | 项目编号:330822262070010000026-ZJCD-GK-2026006",
+          "reason": "该证据为常山法院调解员服务采购招标公告,与天津市肿瘤医院空港医院无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E28",
+          "direction": "无关",
+          "quote": "绍兴市建新造价咨询事务所有限公司关于2026年越城区工业废气污染防治综合服务的公开招标公告 | 阶段:招标采购 | 预算:65万元 | 投标截止:2026-11-02 14:00 | 项目编号:330602261240010000011-JXCG2026021",
+          "reason": "该证据为越城区工业废气污染防治服务招标公告,与天津市肿瘤医院空港医院无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E32",
+          "direction": "无关",
+          "quote": "2026年和田市医共体远程诊疗及智慧医疗建设项目（包一）公开招标公告 | 阶段:招标采购",
+          "reason": "该证据为和田市医共体远程诊疗项目招标公告,与天津市肿瘤医院空港医院历史采购记录无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内全部证据均为其他地区或天津市其他单位的采购公告,无一条涉及天津市肿瘤医院空港医院的历史采购记录或金额中位数,既不能支持也不能否定该 claim,故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c19",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E26",
+          "direction": "无关",
+          "quote": "云南省农业农村厅2026年高素质农民培育（专题班）项目公开招标公告 | 阶段:招标采购",
+          "reason": "该证据为云南省农业农村厅高素质农民培育项目，与天津市静海区医院、天津市西青医院及紧密型县域医共体建设项目无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E27",
+          "direction": "无关",
+          "quote": "浙江策鼎工程项目管理有限公司关于常山法院2026-2028年度特邀调解员服务采购项目的公开招标公告 | 阶段:招标采购",
+          "reason": "该证据为常山法院特邀调解员服务采购项目，与claim所述两家医院及医共体项目无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E28",
+          "direction": "无关",
+          "quote": "绍兴市建新造价咨询事务所有限公司关于2026年越城区工业废气污染防治综合服务的公开招标公告 | 阶段:招标采购",
+          "reason": "该证据为越城区工业废气污染防治综合服务项目，与claim所述内容无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E29",
+          "direction": "无关",
+          "quote": "2026年洋县溢水镇上溢水村中药材仓储及冷链建设项目(设备采购)(二次)招标公告 | 阶段:招标采购",
+          "reason": "该证据为洋县中药材仓储及冷链建设项目，与claim所述两家医院及医共体项目无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E30",
+          "direction": "无关",
+          "quote": "2026年洋县溢水镇香菇深加工建设项目（设备采购）(二次)招标公告 | 阶段:招标采购",
+          "reason": "该证据为洋县香菇深加工建设项目，与claim所述内容无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E31",
+          "direction": "无关",
+          "quote": "洋县戚氏街道办事处2026年洋县戚氏街道全丰村农事服务中心建设项目(二次)招标公告 | 阶段:招标采购",
+          "reason": "该证据为洋县农事服务中心建设项目，与claim所述内容无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E32",
+          "direction": "无关",
+          "quote": "2026年和田市医共体远程诊疗及智慧医疗建设项目（包一）公开招标公告 | 阶段:招标采购",
+          "reason": "该证据虽涉及医共体，但为和田市医共体远程诊疗及智慧医疗建设项目，且阶段为招标采购而非中标成交，与claim所述天津两家医院及「紧密型县域医共体建设项目」标题无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E33",
+          "direction": "无关",
+          "quote": "哈尔滨市公安局香坊分局2026年度案件司法鉴定审计服务招标公告 | 阶段:招标采购",
+          "reason": "该证据为哈尔滨市公安局香坊分局司法鉴定审计服务项目，与claim所述内容无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E34",
+          "direction": "无关",
+          "quote": "云南本土项目管理有限公司关于石屏县2026年地膜科学使用回收项目（二次）的公开招标公告 | 阶段:招标采购",
+          "reason": "该证据为石屏县地膜科学使用回收项目，与claim所述内容无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E35",
+          "direction": "无关",
+          "quote": "长武县2026-2027年采暖季生物质压块取暖燃料采购项目招标公告 | 阶段:招标采购",
+          "reason": "该证据为长武县生物质压块取暖燃料采购项目，与claim所述内容无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内10条证据均为其他地区、其他领域的采购公告，无一涉及天津市静海区医院或天津市西青医院，也无任何证据提及「紧密型县域医共体建设项目」标题或中标成交阶段，claim缺乏任何支持或反驳证据，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c20",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E26",
+          "direction": "无关",
+          "quote": "云南省农业农村厅2026年高素质农民培育（专题班）项目公开招标公告",
+          "reason": "该证据为云南省农业农村厅项目招标公告，项目编号为YNZC2026-G3-06147-YNTT-0131，与天津交通职业学院及PYGP-2026-A前缀无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E27",
+          "direction": "无关",
+          "quote": "浙江策鼎工程项目管理有限公司关于常山法院2026-2028年度特邀调解员服务采购项目的公开招标公告",
+          "reason": "该证据为常山法院调解员服务采购公告，项目编号330822262070010000026-ZJCD-GK-2026006，与claim所述主体及编号无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E28",
+          "direction": "无关",
+          "quote": "绍兴市建新造价咨询事务所有限公司关于2026年越城区工业废气污染防治综合服务的公开招标公告",
+          "reason": "该证据为越城区工业废气污染防治服务公告，项目编号330602261240010000011-JXCG2026021，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E29",
+          "direction": "无关",
+          "quote": "2026年洋县溢水镇上溢水村中药材仓储及冷链建设项目(设备采购)(二次)招标公告",
+          "reason": "该证据为洋县中药材仓储冷链项目公告，未涉及天津交通职业学院或PYGP-2026-A编号。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E30",
+          "direction": "无关",
+          "quote": "2026年洋县溢水镇香菇深加工建设项目（设备采购）(二次)招标公告",
+          "reason": "该证据为洋县香菇深加工项目公告，与claim所述内容无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E31",
+          "direction": "无关",
+          "quote": "洋县戚氏街道办事处2026年洋县戚氏街道全丰村农事服务中心建设项目(二次)招标公告",
+          "reason": "该证据为洋县农事服务中心项目公告，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E32",
+          "direction": "无关",
+          "quote": "2026年和田市医共体远程诊疗及智慧医疗建设项目（包一）公开招标公告",
+          "reason": "该证据为和田市医共体项目公告，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E33",
+          "direction": "无关",
+          "quote": "哈尔滨市公安局香坊分局2026年度案件司法鉴定审计服务招标公告",
+          "reason": "该证据为哈尔滨公安司法鉴定审计服务公告，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E34",
+          "direction": "无关",
+          "quote": "云南本土项目管理有限公司关于石屏县2026年地膜科学使用回收项目（二次）的公开招标公告",
+          "reason": "该证据为石屏县地膜回收项目公告，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E35",
+          "direction": "无关",
+          "quote": "长武县2026-2027年采暖季生物质压块取暖燃料采购项目招标公告",
+          "reason": "该证据为长武县生物质燃料采购公告，与claim无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内10条证据均为其他地区/单位的招标公告，无一涉及天津交通职业学院，也无任何证据出现PYGP-2026-A-0582或PYGP-2026-A-0565编号，既无支持也无矛盾，claim仍待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c21",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E26",
+          "direction": "无关",
+          "quote": "项目编号:YNZC2026-G3-06147-YNTT-0131",
+          "reason": "该证据项目编号为 YNZC2026-G3-06147-YNTT-0131，与 claim 所述 0615-26410319 前缀无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E27",
+          "direction": "无关",
+          "quote": "项目编号:330822262070010000026-ZJCD-GK-2026006",
+          "reason": "该证据项目编号为 330822262070010000026-ZJCD-GK-2026006，与 claim 所述前缀无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E28",
+          "direction": "无关",
+          "quote": "项目编号:330602261240010000011-JXCG2026021",
+          "reason": "该证据项目编号为 330602261240010000011-JXCG2026021，与 claim 所述前缀无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E29",
+          "direction": "无关",
+          "quote": "2026年洋县溢水镇上溢水村中药材仓储及冷链建设项目(设备采购)(二次)招标公告 | 阶段:招标采购",
+          "reason": "该证据未含任何项目编号，无法印证或否定 claim 所述编号前缀。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E30",
+          "direction": "无关",
+          "quote": "2026年洋县溢水镇香菇深加工建设项目（设备采购）(二次)招标公告 | 阶段:招标采购",
+          "reason": "该证据未含任何项目编号，与 claim 所述编号前缀无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E31",
+          "direction": "无关",
+          "quote": "洋县戚氏街道办事处2026年洋县戚氏街道全丰村农事服务中心建设项目(二次)招标公告 | 阶段:招标采购",
+          "reason": "该证据未含任何项目编号，与 claim 所述编号前缀无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E32",
+          "direction": "无关",
+          "quote": "2026年和田市医共体远程诊疗及智慧医疗建设项目（包一）公开招标公告 | 阶段:招标采购",
+          "reason": "该证据未含任何项目编号，与 claim 所述编号前缀无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E34",
+          "direction": "无关",
+          "quote": "云南本土项目管理有限公司关于石屏县2026年地膜科学使用回收项目（二次）的公开招标公告 | 阶段:招标采购",
+          "reason": "该证据未含任何项目编号，与 claim 所述编号前缀无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E35",
+          "direction": "无关",
+          "quote": "长武县2026-2027年采暖季生物质压块取暖燃料采购项目招标公告 | 阶段:招标采购",
+          "reason": "该证据未含任何项目编号，与 claim 所述编号前缀无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E36",
+          "direction": "无关",
+          "quote": "项目编号:SDZXXXHYXWHXM-2026-01",
+          "reason": "该证据项目编号为 SDZXXXHYXWHXM-2026-01，与 claim 所述 0615-26410319 前缀无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内 10 条证据均为其他地区/项目的招标公告，无一涉及天津市人民医院复合手术室项目(0615-2641031930899)或天津市静海区医院医学检验设备项目(0615-2641031960920)，也无任何证据显示二者编号前缀同为 0615-26410319，故无法证实亦无法否定，维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c6",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E1",
+          "direction": "支持",
+          "quote": "预算金额 6270000.0 元",
+          "reason": "该证据载明本项目预算金额 6270000.0 元,与 claim 中『本项目金额 627.0 万元』一致,支持金额部分。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:金额变化得分 0.800;历史依据可用。",
+          "reason": "仅给出金额异常得分,未载明中位数、样本数或倍数等 claim 具体数值,不改变判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:频率变化得分 0.600;历史依据可用。",
+          "reason": "频率异常得分与 claim 的金额依据无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:采购新颖性得分 0.300;历史依据可用。",
+          "reason": "新颖性得分与 claim 的金额依据无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E5",
+          "direction": "支持",
+          "quote": "金额依据:历史截止日 2026-10-02;该采购单位过去 10 条有效金额中位数 21.9 万元,本项目金额 627.0 万元,为中位数的 28.63 倍,样本数 10(其中模拟样本 8,不代表真实历史证据充分)。",
+          "reason": "该证据原文逐字包含 claim 所述全部金额依据要素(历史截止日、中位数、本项目金额、倍数、样本数及模拟样本说明),直接支持。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E17",
+          "direction": "无关",
+          "quote": "天津市静海区医院 静海区紧密型县域医共体建设项目——医学检验设备采购项目 (项目编号:0615-2641031960920)中标公告",
+          "reason": "为其他采购单位的中标公告,与 claim 的金额依据无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E18",
+          "direction": "无关",
+          "quote": "天津市河东区城市管理综合服务中心 河东区2026年度第二批因工刨路项目材料采购 (项目编号:TJRR-CG-20260905)中标公告",
+          "reason": "为其他采购单位的中标公告,与 claim 的金额依据无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E21",
+          "direction": "无关",
+          "quote": "天津市人民医院 天津市人民医院复合手术室医疗设备采购项目 (项目编号:0615-2641031930899)中标公告",
+          "reason": "为其他采购单位的中标公告,与 claim 的金额依据无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E22",
+          "direction": "无关",
+          "quote": "天津市武清区教育局机关 武清区京津产业新城中央湖九年一贯制学校图书采购项目 (项目编号:TJWQ-2026-A-0125)中标公告",
+          "reason": "为其他采购单位的中标公告,与 claim 的金额依据无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E26",
+          "direction": "无关",
+          "quote": "云南省农业农村厅2026年高素质农民培育（专题班）项目公开招标公告",
+          "reason": "为其他地区其他单位的招标公告,与 claim 的金额依据无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E5 原文逐字载明 claim 全部金额依据要素(历史截止日 2026-10-02、中位数 21.9 万元、本项目金额 627.0 万元、28.63 倍、样本数 10 及模拟样本 8 的说明),E1 亦印证本项目金额 6270000.0 元;其余证据与金额依据无关。注意 E1 与 E5 同根(signal_layer),不构成独立来源印证。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c7",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 PRJ-SHGP-2026-A536;项目名称 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告",
+          "reason": "仅载明项目基础字段,未涉及信封 relevance 频率依据的统计窗口、项目数与比值。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:金额变化得分 0.800;历史依据可用。",
+          "reason": "该证据为金额异常检测,与频率依据数值无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:频率变化得分 0.600;历史依据可用。",
+          "reason": "仅给出频率变化得分 0.600,未载明统计窗口 30 天、近期项目数 2、历史窗口均值 0.75、比值 2.67 等具体数值。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:采购新颖性得分 0.300;历史依据可用。",
+          "reason": "该证据为新颖性检测,与频率依据数值无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E5",
+          "direction": "支持",
+          "quote": "频率依据:统计窗口 30 天,近期项目数 2,历史窗口均值 0.75,比值 2.67。",
+          "reason": "原文逐字载明 claim 所述四项数值,直接支持该断言。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E39",
+          "direction": "无关",
+          "quote": "天津市北辰区中医医院 中医智慧医共体信息化建设一期项目 (项目编号:YTKX2026-A-016)公开招标公告 | 阶段:招标采购 | 项目编号:YTKX2026-A-016",
+          "reason": "为另一采购单位项目的公告,与信封频率依据数值无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一直接载明该组数值的证据为 E5,其原文逐字包含统计窗口 30 天、近期项目数 2、历史窗口均值 0.75、比值 2.67;其余证据均不涉及该组数值。E5 与其余证据同属 signal_layer 谱系根,不构成独立来源印证,故仅为意见,最终由代码按独立来源规则裁定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c8",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 PRJ-SHGP-2026-A536;项目名称 天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告",
+          "reason": "该证据为信号层基础字段,未载明信封 relevance 新颖性依据的具体数值(历史截止日、样本数、最大相似度、对照项目及链接),不改变 claim 判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:金额变化得分 0.800;历史依据可用。",
+          "reason": "该证据为金额异常检测,与 claim 所述新颖性依据无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:频率变化得分 0.600;历史依据可用。",
+          "reason": "该证据为频率异常检测,与 claim 所述新颖性依据无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:采购新颖性得分 0.300;历史依据可用。",
+          "reason": "该证据仅给出新颖性得分 0.300,未载明 claim 所述历史截止日、样本数、最大相似度、对照项目及链接等具体依据。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E5",
+          "direction": "支持",
+          "quote": "新颖性依据:历史截止日 2026-10-02;样本数 10,最大相似度 0.885,对照项目:天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目,链接 https://example.org/announcement/R-f456d19c850a03af。",
+          "reason": "该证据逐字载明 claim 所述新颖性依据的全部要素:历史截止日 2026-10-02、样本数 10、最大相似度 0.885、对照项目名称及链接,直接支持 claim。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E10",
+          "direction": "无关",
+          "quote": "中国物流与采购联合会今天（11日）发布9月份中国物流业景气指数。",
+          "reason": "该证据为物流业景气指数新闻,与 claim 所述信封新颖性依据无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E16",
+          "direction": "无关",
+          "quote": "天津市海河医院 天津市海河医院棉织品洗涤服务项目 (项目编号:TBEC-2026-C-003)中标公告",
+          "reason": "该证据为其他单位中标公告,与 claim 所述新颖性依据无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E17",
+          "direction": "无关",
+          "quote": "天津市静海区医院 静海区紧密型县域医共体建设项目——医学检验设备采购项目 (项目编号:0615-2641031960920)中标公告",
+          "reason": "该证据为其他单位中标公告,与 claim 所述新颖性依据无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E18",
+          "direction": "无关",
+          "quote": "天津市河东区城市管理综合服务中心 河东区2026年度第二批因工刨路项目材料采购 (项目编号:TJRR-CG-20260905)中标公告",
+          "reason": "该证据为其他单位中标公告,与 claim 所述新颖性依据无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E19",
+          "direction": "无关",
+          "quote": "泰达国际心血管病医院 泰达国际心血管病医院护理辅助服务项目 (项目编号:XCSD-2026-A-659)中标公告",
+          "reason": "该证据为其他单位中标公告,与 claim 所述新颖性依据无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "证据 E5 逐字载明 claim 所述新颖性依据的全部要素(历史截止日 2026-10-02、样本数 10、最大相似度 0.885、对照项目名称及链接),与 claim 完全一致;其余证据或为信号层其他检测项,或为无关公告与新闻,不构成矛盾。故意见为已证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c9",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E1",
+          "direction": "支持",
+          "quote": "天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告",
+          "reason": "信封基础字段明确标注为公开招标公告,与 claim 所述 kind 为 tender 属公开招标公告一致,支持该定性。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E2",
+          "direction": "无关",
+          "quote": "触发金额异常检测:金额变化得分 0.800",
+          "reason": "金额异常检测仅说明金额波动,不涉及信号是否被定性为商机。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E3",
+          "direction": "无关",
+          "quote": "触发频率异常检测:频率变化得分 0.600",
+          "reason": "频率异常检测与商机定性无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E4",
+          "direction": "无关",
+          "quote": "触发新颖性检测:采购新颖性得分 0.300",
+          "reason": "新颖性评分不改变对商机定性的判断。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E5",
+          "direction": "支持",
+          "quote": "项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600",
+          "reason": "相关性检测达到准入阈值,支持该信号构成潜在投标/合作机会的定性。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E16",
+          "direction": "无关",
+          "quote": "天津市海河医院棉织品洗涤服务项目 (项目编号:TBEC-2026-C-003)中标公告",
+          "reason": "其他单位的中标公告,与本信号定性无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E17",
+          "direction": "无关",
+          "quote": "静海区紧密型县域医共体建设项目——医学检验设备采购项目 (项目编号:0615-2641031960920)中标公告",
+          "reason": "其他项目中标公告,与本信号定性无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E18",
+          "direction": "无关",
+          "quote": "河东区2026年度第二批因工刨路项目材料采购 (项目编号:TJRR-CG-20260905)中标公告",
+          "reason": "其他项目中标公告,与本信号定性无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E19",
+          "direction": "无关",
+          "quote": "泰达国际心血管病医院护理辅助服务项目 (项目编号:XCSD-2026-A-659)中标公告",
+          "reason": "其他项目中标公告,与本信号定性无关。"
+        },
+        {
+          "evidenceId": "evt_probe_prompt_v3_tender:E20",
+          "direction": "无关",
+          "quote": "2026-2027年度环保审批第三方技术审核服务项目 (项目编号:TDJSZX-TEDA-2026-030)中标公告",
+          "reason": "其他项目中标公告,与本信号定性无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "信封基础字段明确为公开招标公告,且相关性检测达到准入阈值,支持将本信号定性为商机;其余检测器与无关中标公告不改变该判断。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 6,
+      "mainTarget": "c15",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "天津市肿瘤医院空港医院近两年是否存在百万元级公开采购记录(用于检验 c15,并同时为 c18 的『历史金额中位数并非 21.9 万元』提供对照)",
+          "acceptance": "需权威登记源(ccgp-tianjin.gov.cn / ccgp.gov.cn)页面正文级证据:至少一条该采购单位近两年中标或成交公告,载明金额达百万元量级,含项目编号、公告日期、金额字段",
+          "failover": "若该采购单位名下查不到任何百万元级记录,则改查其上级或同区域三级医院同类记录,并在台账中把 c15 记为证伪方向证据"
+        },
+        {
+          "gap": "该等百万元级采购是否有可查的业务解释(是否属既定建设规划/年度预算,用于区分 h1 与 h2)",
+          "acceptance": "需页面正文级证据:公告正文或采购需求文件中出现建设规划、年度预算、立项批复等表述,或同一采购单位连续多期同类项目的时间序列",
+          "failover": "若正文缺失(与 c11/c12 同情形),则退一步只登记金额与时间序列,把『业务解释』缺口留给后续轮次或问人裁决"
+        }
+      ],
+      "searchHints": [
+        "天津市肿瘤医院空港医院 中标公告 2025 2026",
+        "天津市肿瘤医院空港医院 采购 金额 万元",
+        "ccgp-tianjin.gov.cn 天津市肿瘤医院空港医院"
+      ],
+      "sideTargets": [
+        "c18",
+        "c16"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 动态时间线与关联方\n\n### 一、发布行为\n\n天津市肿瘤医院空港医院于 2026-10-03 发布了项目编号 SHGP-2026-A536 的数智化病理系统采购公开招标公告,该发布行为真实发生且未被更正或撤销。目前尚未核实 [1][2][3][4][5]。\n\n### 二、采购记录与规划归属\n\n天津市肿瘤医院空港医院近两年有同等金额(百万元级)的公开采购记录,且该等采购有可查的业务解释。目前尚未核实 [6][7][8][9][10]。\n\n本次数智化病理系统采购属于天津市肿瘤医院空港医院既定建设规划或年度预算安排,而非临时新增项目。目前尚未核实 [1][6][7][8][11]。\n\n### 三、关联方关系\n\n天津市肿瘤医院空港医院与本次数智化病理系统采购的潜在供应商之间存在可独立信源佐证的供应或合作关系。目前尚未核实 [1][6][7][8][9]。\n\n### 四、信封 relevance 新颖性依据\n\n信封 relevance 新颖性依据载明:历史截止日 2026-10-02,样本数 10,最大相似度 0.885,对照项目为\"天津市肿瘤医院空港医院大型设备物联网和医疗设备全生命周期管理软件采购项目\",链接 https://example.org/announcement/R-f456d19c850a03af [12][13][14][15][16]。\n\n### 五、假设区分要点\n\n- 假设 h1(正常大额采购)的可区分 claim 为 c15(同等金额采购记录)、c16(是否属既定建设规划),二者目前均处于待证实状态。\n- 假设 h2(异常输送)的可区分 claim 为 c16、c14(当事方关系是否有独立信源佐证)、c15,目前均处于待证实状态。\n- 假设 h3(新方向扩张)的可区分 claim 为 c17(机会成立条件),需补公告正文与采购范围清单才能进一步区分。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 核心事实\n\n### 一、已证实事实\n\n信封 relevance 金额依据载明:历史截止日 2026-10-02,该采购单位过去 10 条有效金额中位数 21.9 万元,本项目金额 627.0 万元,为中位数的 28.63 倍,样本数 10(其中模拟样本 8,不代表真实历史证据充分)[1][2][3][4][5]。\n\n信封金额异常检测器给出得分 0.800,并标注 basisSufficient 为 true[2][1][3][4][5]。\n\n信封 relevance 解释载明:项目与企业业务画像的语义相似度为 0.647,达到准入阈值 0.600[5][1][2][3][4]。\n\n信封 relevance 频率依据载明:统计窗口 30 天,近期项目数 2,历史窗口均值 0.75,比值 2.67[5][1][2][3][4]。\n\n### 二、待证实事项\n\n关于采购单位历史采购记录:天津市肿瘤医院空港医院既往公开采购记录中是否存在与本次金额量级相当的采购,且其历史金额中位数是否并非 21.9 万元,目前尚未核实[6][7][8][9][10]。\n\n关于关联项目:天津市静海区医院与天津市西青医院各自发布的采购公告标题中是否均含「紧密型县域医共体建设项目」字样,且两项目是否均处于中标成交阶段,目前尚未核实[11][12][13][14][15]。\n\n关于项目编号:天津交通职业学院在 2026 年是否有两条项目编号前缀同为 PYGP-2026-A 的中标公告,分别为 PYGP-2026-A-0582 与 PYGP-2026-A-0565,目前尚未核实[11][12][13][14][15]。\n\n关于编号前缀重合:天津市人民医院复合手术室医疗设备采购项目(0615-2641031930899)与天津市静海区医院医学检验设备采购项目(0615-2641031960920)的项目编号前缀是否同为 0615-26410319,目前尚未核实[11][12][13][14][15]。\n\n### 三、证据引用对照\n\n[1] E1 [2] E5 [3] E2 [4] E3 [5] E4 [6] E16 [7] E17 [8] E18 [9] E21 [10] E22 [11] E26 [12] E27 [13] E28 [14] E29 [15] E30"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 结论\n\n**一、信号定性与解读依据**\n\n解读将本信号定性为\"商机\",理由为信封 kind 为 tender 属公开招标公告,构成潜在投标/合作机会[c9]。该定性所依据的公告为\"天津市肿瘤医院空港医院数智化病理系统采购项目 (项目编号SHGP-2026-A536)公开招标公告\"。\n\n**二、解读已载明的两项基础缺口**\n\n解读 basisGaps 载明:该采购单位历史金额基线含 8 条模拟样本,不代表真实历史证据充分,需先补齐真实历史采购记录以核实 627.0 万元是否属正常大额采购[c10]。\n\n解读 basisGaps 另载明:该项目正文缺失,摘要由公告字段生成,需先获取公告正文以确认采购范围与数智化病理系统是否属企业业务新方向[c11]。\n\n**三、机会成立条件(目前尚未核实)**\n\n数智化病理系统采购对本企业构成可承接的机会,其成立条件包括本企业具备该领域资质与交付能力、且该项目未被资格条款排除[c17]。上述条件目前尚未核实,不得作为既定事实使用。\n\n**四、待区分假设**\n\n本信号现有三项假设均处于 emerged 状态、尚未 adjudicated:\n\n- h1\"正常大额采购\"(dominant,score 5):本次采购属采购单位既定建设规划内的正常大额采购,金额虽高但有业务解释;成立条件为该采购单位近两年有同等金额采购记录且属既定规划。\n- h2\"异常输送\"(score 4):本次采购金额与频率同时异常,可能存在异常输送;成立条件为金额偏离无业务解释、且当事方存在未披露关联关系。\n- h3\"新方向扩张\"(score 4):数智化病理系统属企业业务新方向,本次采购是进入该方向的契机;成立条件为公告正文确认采购范围属新方向、且本企业具备承接能力。\n\n三项假设的进一步区分均依赖补齐真实历史采购记录与公告正文,与前述两项基础缺口一致[c10][c11]。\n\n**五、结论**\n\n在真实历史采购记录与公告正文补齐之前,本信号仅可确认为公开招标公告所构成的潜在投标/合作机会[c9];627.0 万元是否属正常大额采购、采购范围是否属企业业务新方向,以及机会是否成立,均尚待核实[c10][c11][c17]。"
+    }
+  },
+  {
+    "stage": "s7_recommend",
+    "response": {
+      "items": [
+        {
+          "action": "优先补齐该采购单位真实历史采购记录(近两年公开采购公告及金额),核实 627.0 万元是否属正常大额采购,再决定是否投入投标资源。",
+          "rationale": "当前金额异常检测得分 0.800、本项目金额为中位数 21.9 万元的 28.63 倍,但样本数 10 中模拟样本 8,不代表真实历史证据充分;c15、c16、c18 均待证实,主导假设 h1(正常大额采购)尚未裁决。本建议以 h1 成立为前提,若补齐后无同等金额记录且不属既定规划,则应转向 h2 风险视角。",
+          "basisClaimIds": [
+            "c2",
+            "c6",
+            "c10",
+            "c15",
+            "c16",
+            "c18"
+          ],
+          "hypothesisLabel": "正常大额采购"
+        },
+        {
+          "action": "获取公告正文与采购范围清单,核对资格条款是否将本企业排除,并评估本企业数智化病理系统领域的资质与交付能力是否匹配。",
+          "rationale": "信封自述正文缺失、摘要由公告字段生成,采购范围与是否属企业业务新方向均无法确认;c17 待证实,机会成立条件(资质、交付能力、未被资格条款排除)尚未核验。本建议依赖 h3(新方向扩张),在正文与范围清单补齐前不得视为已成立机会。",
+          "basisClaimIds": [
+            "c11",
+            "c12",
+            "c17",
+            "c5"
+          ],
+          "hypothesisLabel": "新方向扩张"
+        },
+        {
+          "action": "对当事方关系做补充核查:以独立信源排查天津市肿瘤医院空港医院与潜在供应商之间是否存在未披露的供应或合作关系,并同步跟踪该单位后续采购公告。",
+          "rationale": "c14 待证实,当事方关系目前无独立信源佐证;c13 亦待证实,发布行为本身尚未经独立确认。本建议用于对 h2(异常输送)做风险缓释与排除,核查结论未出前不宜将本次采购直接定性为异常输送。",
+          "basisClaimIds": [
+            "c13",
+            "c14",
+            "c7"
+          ],
+          "hypothesisLabel": "异常输送"
+        },
+        {
+          "action": "将本项目纳入商机监测清单,跟踪其后续澄清、更正与中标结果公告,并同步监测同类数智化病理系统采购的竞品动态与供应链风险。",
+          "rationale": "信封 kind 为 tender 属公开招标公告,构成潜在投标/合作机会;新颖性依据显示最大相似度 0.885 的对照项目为同单位大型设备物联网和医疗设备全生命周期管理软件采购项目,存在同类需求延续可能。本建议仅要求跟踪,不替代企业是否投标的决策。",
+          "basisClaimIds": [
+            "c9",
+            "c8",
+            "c1"
+          ],
+          "hypothesisLabel": "正常大额采购"
+        }
+      ]
+    }
+  }
+]
