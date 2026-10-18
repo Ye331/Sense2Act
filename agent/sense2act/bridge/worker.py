@@ -4,6 +4,7 @@
   live    真实模型 + 本地爬虫(需 DEEPSEEK_API_KEY)
   replay  演示回放:用 examples/<case> 的录制响应与证据种子,零网络零 key,
           信封取自录制样例本身(录制件只对它的信封自洽),写回的仍是后端真实调查。
+          招投标信号回放 --replay-case,新闻信号(rumor)回放 --replay-rumor-case。
 """
 from __future__ import annotations
 
@@ -19,7 +20,7 @@ from ..cli import build_parser, build_pipeline
 from ..llm import DeepSeekLLM, ModelBudgetExceeded, ReplayLLM, model_call_budget
 from ..models.envelope import InvestigationEnvelope
 from .client import CONFLICT, BackendClient, BackendError
-from .envelope import build_envelope
+from .envelope import build_envelope, signal_kind
 from .report import build_report
 from .reporter import InvestigationAborted, StepReporter, TokenMeter
 
@@ -103,7 +104,7 @@ class Worker:
 
     def _prepare(self, context: dict, inv_id: str):
         if self.opts.mode == "replay":
-            case = Path(self.opts.replay_case)
+            case = Path(self.opts.replay_rumor_case if signal_kind(context) == "rumor" else self.opts.replay_case)
             envelope = InvestigationEnvelope.model_validate(json.loads((case / "envelope.json").read_text(encoding="utf-8-sig")))
             entries = json.loads((case / "responses.json").read_text(encoding="utf-8-sig"))
             seed = case / "evidence_seed.json"
@@ -127,6 +128,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--backend", default=os.getenv("BACKEND_URL", "http://127.0.0.1:8080"))
     parser.add_argument("--mode", choices=["live", "replay"], default=os.getenv("AGENT_MODE", "live"))
     parser.add_argument("--replay-case", default=os.getenv("AGENT_REPLAY_CASE", str(ROOT / "examples/tender_medical_ai")))
+    parser.add_argument("--replay-rumor-case",
+                        default=os.getenv("AGENT_REPLAY_RUMOR_CASE", str(ROOT / "examples/ai_model_release")))
     parser.add_argument("--data-dir", default=os.getenv("AGENT_DATA_DIR", str(ROOT / "data/worker")))
     parser.add_argument("--config-dir", default=str(ROOT / "data/config"))
     parser.add_argument("--interval", type=float, default=float(os.getenv("AGENT_POLL_SECONDS", "5")))

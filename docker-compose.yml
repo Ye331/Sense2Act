@@ -33,6 +33,10 @@ services:
       BACKEND_URL: http://api:8080
       INTERNAL_API_KEY: ${INTERNAL_API_KEY:-local-dev-internal-key}
       SIGNAL_COMPANY_PROFILE: ${SIGNAL_COMPANY_PROFILE:-}
+      # 新闻文档的监测配置(主体/业务词/事件规则);留空用 signals/news/platform.json,off 关闭新闻检测
+      SIGNAL_NEWS_CONFIG: ${SIGNAL_NEWS_CONFIG:-}
+    volumes:
+      - newsdata:/app/outputs/news-bridge
     restart: unless-stopped
 
   collector:
@@ -78,3 +82,4 @@ volumes:
   snapshots:
   agentdata:
   collectordata:
+  newsdata:

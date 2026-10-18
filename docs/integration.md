@@ -33,7 +33,7 @@
 | `content_text` 前 800 字 | `project_summary` | 历史文档只有标题 |
 | `profiles`（关注画像名） | `company_profile` | 无画像时用 `SIGNAL_COMPANY_PROFILE` / `config.yaml bridge.company_profile` |
 
-只有 `doc_type=announcement` 参与招投标检测；本批全部文档最后统一 `detection-scan-complete`。
+只有 `doc_type=announcement` 参与招投标检测，`doc_type=news` 走新闻检测（见第 7 节），政策文档不判定；本批全部文档最后统一 `detection-scan-complete`。
 
 ## 2. 检测 → 信号命中（hits）
 
@@ -102,3 +102,29 @@ token：`DeepSeekLLM` 记录每次调用的 `total_tokens`，随下一条 step �
 - 标题：`项目名：主导假设`；摘要：S7「结论」节 + 状态分布 + 停止原因。
 - 行动建议：S7 recommendations，首条 `high`，其余 `medium`。
 - 事件图谱：事件=项目（`procurement`）；主体=采购单位（org/participant）、项目（project/object）。
+
+## 7. 新闻文档 → 新闻信号 → rumor 信封（signal-service/bridge/news.py → agent）
+
+新闻文档 → 新闻检测输入（`signals/news` 的 ContentItem）：
+
+| 后端 | 检测输入 | 说明 |
+| --- | --- | --- |
+| `id` | `contentId` / `dedupKey` | 线索 id 即平台文档 id |
+| `title` / `content_text` | `title` / `summary`（前 300 字）/ `content` | |
+| `raw.platform` | `platform` | 来源可信度按平台取 |
+| `raw.source_name`（无则 `raw.site`、URL 域名） | `ext.sourceName` | 独立来源计数，决定多来源共振加分 |
+| `GET /documents/{id}/snapshot` | `ext.publication` | 原文发布时间只认快照里的发布字段；读不到的只观察、不立项 |
+
+监测主体、业务词、事件规则族在 `signals/news/platform.json`（`SIGNAL_NEWS_CONFIG` 可换，`off` 关闭）。同一事件的多篇报道归成一个告警，达到调查资格（`agentTriggerScore`）的推一条信号：
+
+| 信号字段 | 值 |
+| --- | --- |
+| `document.id` | 事件首条报道的文档 |
+| `detector` | `signal-service/news-v0.1` |
+| `score` | 引擎分 ÷ 红色阈值（3.0），封顶 1；调查门槛 1.5 约对应 0.5 |
+| `hits[0].rule_type` | `news_event`（`rule_id` 留空） |
+| `hits[0].detail` | `score`、`reliable`、`explanation`（与招投标命中同约定），外加 `subject_name`、`event_types`、`signal_type`、`priority`、`raw_score`、`document_ids`（同事件全部报道） |
+| `hits[0].detail.rumor` | RumorSignal 载荷：`subject_name`、`summary`、`source`、`signal_time`、`watch_focus`、`clues[]`（每条线索带原文、URL、原文发布时间、来源） |
+
+Agent 侧（`sense2act/bridge/envelope.py`）：带 `news_event` 命中的信号装配成 `kind=rumor` 信封，`detail.rumor` 原样作为 RumorSignal；replay 模式回放 `examples/ai_model_release`。报告（`report.py`）标题为"主体·首条报道标题:主导假设"，事件图谱的事件类型为 `news`，主体为监测对象（org / participant）。
+

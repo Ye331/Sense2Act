@@ -456,3 +456,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .management-form .field-wide { flex: 1 1 100%; max-width: none; }
 .field-hint { display: block; margin-top: 4px; font-weight: 400; color: var(--s2-helper); font-size: var(--s2-font-meta); overflow-wrap: anywhere; }
 .field textarea.code-input { width: 100%; min-height: 84px; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 13px; resize: vertical; }
+
+/* 文档库:非公告文档(新闻/政策)标题前的类型标签 */
+.doc-type-tag { display: inline-block; margin-right: 8px; padding: 1px 7px; border-radius: 4px; background: var(--s2-action-soft); color: var(--s2-action); font-size: var(--s2-font-meta); font-weight: 600; vertical-align: 1px; }

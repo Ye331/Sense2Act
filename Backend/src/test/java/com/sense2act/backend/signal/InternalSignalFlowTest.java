@@ -287,4 +287,26 @@ class InternalSignalFlowTest {
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code").value(40401));
     }
+
+    @Test
+    @Order(6)
+    void 大命中信号_超过BTree单项上限仍可写入且幂等() throws Exception {
+        seed();
+        // 新闻信号的命中带线索原文,轻松超过 2.7KB;V9 前整列 jsonb 唯一约束会让写入 500
+        String body = "{\"document\":{\"id\":\"%s\"},\"hits\":[{\"rule_type\":\"news_event\",\"weight\":1.0,"
+                + "\"detail\":{\"score\":0.4,\"rumor\":{\"clues\":[{\"content\":\"%s\"}]}}}],"
+                + "\"score\":0.4,\"detector\":\"news-test\"}";
+        String json = body.formatted(docB, "原文".repeat(3000));
+        MvcResult first = mockMvc.perform(post("/api/v1/internal/signals")
+                        .header("X-Internal-Key", "test-key").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.status").value("pending"))
+                .andReturn();
+        String signalId = objectMapper.readTree(
+                first.getResponse().getContentAsString(StandardCharsets.UTF_8)).path("data").path("signal_id").asText();
+        mockMvc.perform(post("/api/v1/internal/signals")
+                        .header("X-Internal-Key", "test-key").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.signal_id").value(signalId));
+    }
 }

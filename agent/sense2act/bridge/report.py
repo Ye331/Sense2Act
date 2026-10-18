@@ -22,10 +22,38 @@ def _plain(markdown: str) -> str:
     return re.sub(r"\n{2,}", "\n", text).strip()
 
 
+def _day(value: str | None) -> dict:
+    day = (value or "")[:10]
+    return {"start_date": day} if re.fullmatch(r"\d{4}-\d{2}-\d{2}", day) else {}
+
+
+def _framing(envelope) -> tuple[str, str, dict]:
+    """按信封类型取:报告标题主语、没有扩展结论时的兜底事实、事件图谱(事件 + 主体)。"""
+    if envelope.kind == "rumor" and envelope.rumor:
+        rumor = envelope.rumor
+        clue = rumor.clues[0] if rumor.clues else None
+        headline = f"{rumor.subject_name}·{clue.title}" if clue and clue.title else rumor.summary[:80]
+        fallback = f"{rumor.source} 报道《{(clue.title if clue else rumor.summary)[:200]}》,本轮调查未形成可证实的扩展结论"
+        extraction = {
+            "event": {"title": headline[:500], "type": "news", **_day(clue.published_at if clue else rumor.signal_time)},
+            "entities": [{"name": rumor.subject_name, "type": "org", "role": "participant"}],
+            "relations": [{"source": "entity:0", "target": "event", "relation": "参与"}]}
+        return headline, fallback, extraction
+    tender = envelope.tender
+    fallback = f"{tender.purchaser} 发布招标《{tender.project_name}》,本轮调查未形成可证实的扩展结论"
+    extraction = {
+        "event": {"title": tender.project_name[:500], "type": "procurement", **_day(tender.published_date)},
+        "entities": [{"name": tender.purchaser or "采购单位", "type": "org", "role": "participant"},
+                     {"name": tender.project_name, "type": "project", "role": "object"}],
+        "relations": [{"source": "entity:0", "target": "event", "relation": "参与"},
+                      {"source": "entity:1", "target": "event", "relation": "同属"}]}
+    return tender.project_name, fallback, extraction
+
+
 def build_report(reporter: StepReporter, envelope, summary: dict | None, stop_reason: str) -> dict:
     ledger, event_id = reporter.ledger, reporter.event_id
-    tender = envelope.tender
-    # 信封基础字段证据(E1,走 doc_id 登记)是所有 claim 的兜底依据
+    headline, fallback, extraction = _framing(envelope)
+    # 信封首条证据(招投标=基础字段 E1 走 doc_id 登记;新闻=首条线索)是所有 claim 的兜底依据
     base = reporter.evidence.get(f"{event_id}:E1")
 
     claims = []
@@ -44,13 +72,12 @@ def build_report(reporter: StepReporter, envelope, summary: dict | None, stop_re
         text = ("查证不成立:" if status == "矛盾" else "") + row["text"]
         claims.append({"text": text[:2000], "nature": nature, "confidence": confidence, "evidence_ids": evidence_ids})
     if not claims and base:
-        claims.append({"text": f"{tender.purchaser} 发布招标《{tender.project_name}》,本轮调查未形成可证实的扩展结论",
-                       "nature": "fact", "confidence": 0.95, "evidence_ids": [base]})
+        claims.append({"text": fallback, "nature": "fact", "confidence": 0.95, "evidence_ids": [base]})
 
     standings = (summary or {}).get("standings") or ledger.hypothesis_standings(event_id)
     leading = next((s for s in standings if s.get("dominant")), None) or \
         max(standings, key=lambda s: (s.get("score", 0), s.get("verified", 0)), default=None)
-    title = f"{tender.project_name}:{leading['label']}" if leading else tender.project_name
+    title = f"{headline}:{leading['label']}" if leading else headline
 
     conclusion = next((s["draft_text"] for s in ledger.get_sections(event_id) if s["title"] == "结论" and s["draft_text"]), "")
     counts = ledger.status_counts(event_id)
@@ -60,18 +87,10 @@ def build_report(reporter: StepReporter, envelope, summary: dict | None, stop_re
     suggestions = [{"text": r["action"][:1000], "priority": "high" if i == 0 else "medium"}
                    for i, r in enumerate((summary or {}).get("recommendations") or []) if r.get("action")]
 
-    entities = [{"name": tender.purchaser or "采购单位", "type": "org", "role": "participant"},
-                {"name": tender.project_name, "type": "project", "role": "object"}]
     return {
         "title": title[:500],
         "summary": summary_text[:2000],
         "claims": claims,
         "action_suggestions": suggestions,
-        "event_extraction": {
-            "event": {"title": tender.project_name[:500], "type": "procurement",
-                      **({"start_date": tender.published_date} if re.fullmatch(r"\d{4}-\d{2}-\d{2}", tender.published_date or "") else {})},
-            "entities": entities,
-            "relations": [{"source": "entity:0", "target": "event", "relation": "参与"},
-                          {"source": "entity:1", "target": "event", "relation": "同属"}],
-        },
+        "event_extraction": extraction,
     }

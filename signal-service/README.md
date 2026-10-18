@@ -6,7 +6,7 @@ Sense2Act 的信号服务：招投标与新闻信号检测，并通过 `bridge/`
 
 | 入口 | 作用 |
 | --- | --- |
-| `python -m bridge` | **平台检测 worker**：轮询后端 `detection-queue`，按单位取历史，跑招投标检测，入选 Top-K 的回推 `POST /internal/signals`（达阈值后端自动立项调查），本批标记扫描完成 |
+| `python -m bridge` | **平台检测 worker**：轮询后端 `detection-queue`。招投标公告按单位取历史跑检测，入选 Top-K 的回推 `POST /internal/signals`；新闻文档（`doc_type=news`）走新闻事件检测，达到调查资格的推 `news_event` 信号。达阈值后端自动立项调查，本批标记扫描完成 |
 | `uvicorn application:app --port 8001` | HTTP 服务：`POST /embed`（后端语义检索的向量端点）、`/api/v1/signals/tender/detect`、`/api/v1/signals/news/detect`（离线批量分析） |
 | `python -m signals.tender.cli` / `python -m signals.news.cli` | 文件批处理 |
 
@@ -74,7 +74,9 @@ python -m signals.news.cli crawl --crawler-root ../crawler --data-dir runs/news-
 
 只检测使用 `NewsSignalDiscovery.run(items)`；`NewsService.detect(items, company_id)` 检测后经 `TaskClient` 提交合格信号（`TASK_SUBMIT_URL` 未配置时为 `not_submitted`，信号保持待提交）。成功提交不重复重交，失败重试间隔至少 60 秒，ID、载荷和有效期保持不变。
 
-**平台接入现状**：Sense2Act 后端的信号以文档为锚，暂无新闻（rumor）信号入口，因此新闻目前只检测、不立项。后端补上入口后，把 `TASK_SUBMIT_URL` 指向它即可接通；有效期经 `X-Signal-Expires-At` 传递，确认后端支持后再设 `TASK_SUBMIT_EXPIRY_SUPPORTED=1`。有效期为独立调度元数据，四字段提交 JSON 与 Agent 载荷不增加字段，不使用 `signal_time` 推断有效期。
+**平台接入**：新闻以 `doc_type=news` 文档进入平台（采集服务的新闻源），由 `python -m bridge` 的新闻分支（`bridge/news.py`）检测：原文发布时间从文档快照读取，同一事件的多篇报道归组，多来源共振评分；达到调查资格的告警推成一条信号，锚在首条报道上，命中 `rule_type=news_event`，`detail.rumor` 即 Agent 的 RumorSignal 载荷。平台监测配置是 `signals/news/platform.json`（医疗 AI 竞品与行业主体，回看 180 天），`SIGNAL_NEWS_CONFIG` 可换成别的配置、设 `off` 关闭；检测状态在 `SIGNAL_NEWS_DATA`（默认 `outputs/news-bridge`，容器里挂了卷）。字段映射见 [../docs/integration.md](../docs/integration.md) 第 7 节。
+
+`TASK_SUBMIT_URL` 是不经平台、独立部署时的提交通道，平台内不使用。有效期经 `X-Signal-Expires-At` 传递，确认接收方支持后再设 `TASK_SUBMIT_EXPIRY_SUPPORTED=1`。
 
 ## 测试
 
@@ -84,6 +86,6 @@ $env:PYTHONUTF8 = '1'      # Windows 默认 GBK 读不了测试夹具
 .\.venv\Scripts\python.exe -m pytest -q
 ```
 
-覆盖招标与新闻检测、原文时间、上下文关联、历史调查去重，以及 `tests/test_bridge.py`（假后端校验 检测队列 → 信号 → 扫描完成 与 `/embed` 线约）。单元测试用可控向量，不加载语义模型。
+覆盖招标与新闻检测、原文时间、上下文关联、历史调查去重，以及 `tests/test_bridge.py`（假后端校验 检测队列 → 信号 → 扫描完成 与 `/embed` 线约）、`tests/test_bridge_news.py`（新闻文档 → 快照读原文时间 → 事件归组 → `news_event` 信号，只推一次）。单元测试用可控向量，不加载语义模型。
 
 已知待修正项：招标去重未充分区分项目编号冲突。

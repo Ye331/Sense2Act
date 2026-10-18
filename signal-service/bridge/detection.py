@@ -1,11 +1,13 @@
-"""后端检测队列 → 招投标检测 → 信号回推(契约 Backend/docs/api-design.md §9.2)。
+"""后端检测队列 → 招投标 / 新闻检测 → 信号回推(契约 Backend/docs/api-design.md §9.2)。
 
     GET  /internal/detection-queue         待扫描文档 + 启用规则 + 关注画像
     GET  /documents?org_id=&date_to=       同单位历史(检测需要真实历史,严格早于检测日)
+    GET  /documents/{id}(/snapshot)        新闻文档的来源字段与原文快照(读原文发布时间)
     POST /internal/signals                 入选 Top-K 的命中;后端按阈值自动立项调查
     POST /internal/detection-scan-complete 本批全部处理完毕(有无命中都要标)
 
-检测算法本身不改:复用 signals.tender 的 SignalDetector,这里只做数据进出。
+检测算法本身不改:招投标复用 signals.tender 的 SignalDetector,新闻复用 signals.news(见 news.py),
+这里只做数据进出。
 """
 from __future__ import annotations
 
@@ -18,6 +20,7 @@ import httpx
 from signals.tender.schemas import Announcement, DetectionRequest
 from signals.tender.service import TenderService
 from .hits import record_hits
+from .news import NewsBridge
 
 log = logging.getLogger("signal.bridge")
 DETECTOR = "signal-service/tender-v0.2"
@@ -50,9 +53,17 @@ class BackendClient:
                 return rows
             page += 1
 
-    def push_signal(self, document_id: str, hits: list[dict], score: float) -> dict:
+    def document(self, document_id: str) -> dict:
+        return self._call("GET", f"/documents/{document_id}")
+
+    def snapshot(self, document_id: str) -> str | None:
+        """文档原文快照(HTML);没有快照返回 None。"""
+        response = self._http.get(f"/documents/{document_id}/snapshot")
+        return response.text if response.status_code == 200 else None
+
+    def push_signal(self, document_id: str, hits: list[dict], score: float, detector: str = DETECTOR) -> dict:
         return self._call("POST", "/internal/signals", json={
-            "document": {"id": document_id}, "hits": hits, "score": score, "detector": DETECTOR})
+            "document": {"id": document_id}, "hits": hits, "score": score, "detector": detector})
 
     def scan_complete(self, document_ids: list[str]) -> None:
         if document_ids:
@@ -71,9 +82,11 @@ def _announcement(doc: dict, summary: str = "") -> Announcement | None:
 
 
 class DetectionBridge:
-    def __init__(self, client: BackendClient, service: TenderService, default_profile: str, company_id: str = "platform"):
+    def __init__(self, client: BackendClient, service: TenderService, default_profile: str, company_id: str = "platform",
+                 news: NewsBridge | None = None):
         self.client, self.service = client, service
         self.default_profile, self.company_id = default_profile, company_id
+        self.news = news          # None = 不做新闻检测,新闻文档照常标记已扫描
 
     def run_once(self, limit: int = 50) -> dict:
         items = self.client.detection_queue(limit)
@@ -84,15 +97,20 @@ class DetectionBridge:
         rules = {rule["type"]: rule for rule in items[0].get("rules") or [] if rule.get("enabled", True)}
 
         by_day: dict[str, list[dict]] = defaultdict(list)
+        news: list[dict] = []
         for item in items:
             doc = item["document"]
-            # 检测只覆盖招投标公告;其他类型文档(政策/新闻)本服务不判定,照常标记已扫描
+            # 招投标公告按发布日批检测,新闻走新闻检测;政策文档本服务不判定,照常标记已扫描
             if doc.get("doc_type") == "announcement" and doc.get("publish_date"):
                 by_day[doc["publish_date"]].append(doc)
+            elif doc.get("doc_type") == "news":
+                news.append(doc)
 
         signals = 0
         for day, docs in sorted(by_day.items()):
             signals += self._detect_day(date.fromisoformat(day), docs, profile, rules)
+        if self.news is not None and news:
+            signals += self.news.detect(news)
         self.client.scan_complete([item["document"]["id"] for item in items])
         return {"scanned": len(items), "signals": signals}
 

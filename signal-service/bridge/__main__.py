@@ -1,7 +1,8 @@
 """python -m bridge:检测 worker。
 
 环境变量:BACKEND_URL、INTERNAL_API_KEY(与后端一致)、SIGNAL_COMPANY_PROFILE(无关注画像时的兜底画像)、
-SIGNAL_POLL_SECONDS、SIGNAL_CONFIG、SIGNAL_MODEL_PATH(语义模型目录)。
+SIGNAL_POLL_SECONDS、SIGNAL_CONFIG、SIGNAL_MODEL_PATH(语义模型目录)、
+SIGNAL_NEWS_CONFIG(新闻监测配置,off 关闭新闻检测)、SIGNAL_NEWS_DATA(新闻检测状态目录)。
 """
 import logging
 import os
@@ -9,10 +10,11 @@ import time
 
 import httpx
 
-from core.config import load_config
+from core.config import ROOT, load_config
 from signals.common.task_client import TaskClient
 from signals.tender.service import TenderService
 from .detection import BackendClient, DetectionBridge
+from .news import NewsBridge
 
 log = logging.getLogger("signal.bridge")
 
@@ -27,9 +29,15 @@ def main() -> None:
     interval = float(os.getenv("SIGNAL_POLL_SECONDS", "10"))
     # 信号经 bridge 回推后端,TenderService 自带的任务提交保持关闭
     service = TenderService(config, task_client=TaskClient(url=""))
-    bridge = DetectionBridge(BackendClient(os.getenv("BACKEND_URL", "http://127.0.0.1:8080"), key), service,
-                             os.getenv("SIGNAL_COMPANY_PROFILE") or config["bridge"]["company_profile"])
-    log.info("detection worker up, polling every %.0fs", interval)
+    client = BackendClient(os.getenv("BACKEND_URL", "http://127.0.0.1:8080"), key)
+    news_config = os.getenv("SIGNAL_NEWS_CONFIG") or config["bridge"].get("news_config") or ""
+    news = None
+    if news_config and news_config.lower() != "off":
+        news = NewsBridge(client, ROOT / news_config, ROOT / os.getenv("SIGNAL_NEWS_DATA", "outputs/news-bridge"))
+    bridge = DetectionBridge(client, service, os.getenv("SIGNAL_COMPANY_PROFILE") or config["bridge"]["company_profile"],
+                             news=news)
+    log.info("detection worker up, polling every %.0fs, news detection %s", interval,
+             f"on ({news_config})" if news else "off")
     while True:
         try:
             result = bridge.run_once()

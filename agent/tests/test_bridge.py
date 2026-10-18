@@ -7,7 +7,7 @@ import unittest
 from pathlib import Path
 
 from sense2act.bridge.client import CONFLICT, UNPROCESSABLE, BackendError
-from sense2act.bridge.envelope import build_envelope
+from sense2act.bridge.envelope import build_envelope, signal_kind
 from sense2act.bridge.reporter import normalize_published
 from sense2act.bridge.worker import Worker
 
@@ -20,13 +20,24 @@ HITS = [
     {"rule_type": "novelty", "weight": 0.5, "detail": {"score": 0.83, "reliable": True, "explanation": "首次出现的采购方向"}},
     {"rule_type": "semantic_match", "weight": 0, "detail": {"score": 0.9, "explanation": "与医疗AI画像高度相关", "profile": "医疗AI"}},
 ]
+# 新闻信号:signal-service/bridge/news.py 推送的形状(detail.rumor = RumorSignal 载荷,线索 id 即新闻文档 id)
+NEWS_DOC = {"id": "doc_n1", "doc_type": "news", "title": "我国化工行业首个大模型发布新版本", "publish_date": "2026-09-03",
+            "url": "http://www.toutiao.com/a7681110928078766644/?channel=", "content_text": "科大讯飞联合发布智能化工大模型3.0Pro"}
+RUMOR = {"subject_name": "科大讯飞", "subject_credit_code": "", "summary": "科大讯飞等联合发布智能化工大模型3.0Pro",
+         "source": "环球网", "signal_time": "2026-10-18T10:00:00+00:00", "watch_focus": "核实联合发布是否属实",
+         "clues": [{"clue_id": "doc_n1", "source": "环球网", "platform": "toutiao", "title": NEWS_DOC["title"],
+                    "content": NEWS_DOC["content_text"], "url": NEWS_DOC["url"],
+                    "published_at": "2026-09-03T09:13:00+08:00", "author_type": "媒体"}]}
+NEWS_HITS = [{"rule_type": "news_event", "rule_id": None, "rule_version": None, "weight": 1.0,
+              "detail": {"score": 0.98, "reliable": True, "explanation": "规则[竞品与行业发布],主体“科大讯飞”", "rumor": RUMOR}}]
 
 
 class FakeBackend:
     """只实现 worker 用到的内部接口,按后端规则拒绝非法写入。"""
 
-    def __init__(self, status="created", max_rounds=8, token_budget=10**9):
+    def __init__(self, status="created", max_rounds=8, token_budget=10**9, hits=HITS, document=DOC):
         self.inv = {"id": "inv_1", "status": status, "max_rounds": max_rounds, "token_budget": token_budget, "token_used": 0}
+        self.hits, self.document = hits, document
         self.steps, self.questions, self.evidences, self.report = [], {}, {}, None
         self.request_ids = {}
 
@@ -43,7 +54,7 @@ class FakeBackend:
         self.inv["status"] = "investigating"
 
     def context(self, inv_id):
-        return {"investigation": self.inv, "signal": {"id": "sig_1", "hits": HITS, "score": "0.91", "document": DOC}}
+        return {"investigation": self.inv, "signal": {"id": "sig_1", "hits": self.hits, "score": "0.91", "document": self.document}}
 
     def step(self, inv_id, event, round_no, payload, token_usage=0, request_id=None):
         self._writable()
@@ -98,7 +109,8 @@ class FakeBackend:
 
 
 def worker_for(backend, data_dir):
-    opts = argparse.Namespace(mode="replay", replay_case=str(ROOT / "examples/tender_medical_ai"), data_dir=data_dir,
+    opts = argparse.Namespace(mode="replay", replay_case=str(ROOT / "examples/tender_medical_ai"),
+                              replay_rumor_case=str(ROOT / "examples/ai_model_release"), data_dir=data_dir,
                               config_dir=str(ROOT / "data/config"), max_llm_calls=160, max_collect_calls=80)
     return Worker(backend, opts)
 
@@ -160,6 +172,32 @@ class BridgeTest(unittest.TestCase):
         self.assertEqual(tender.relevance.score, 0.9)
         self.assertIsNone(tender.frequency_anomaly)
         self.assertEqual(tender.amount_history.amount_ratio, 4.2)
+
+    def test_news_signal_replays_rumor_case_end_to_end(self):
+        backend = FakeBackend(hits=NEWS_HITS, document=NEWS_DOC)
+        with tempfile.TemporaryDirectory() as tmp:
+            self.assertEqual(worker_for(backend, tmp).poll_once(), 1)
+        self.assertEqual(backend.inv["status"], "completed", backend.inv.get("error"))
+        report = backend.report
+        self.assertTrue(report["title"].startswith("科大讯飞·"))          # 新闻信号按监测主体出标题
+        self.assertEqual(report["event_extraction"]["event"]["type"], "news")
+        self.assertEqual(report["event_extraction"]["entities"][0]["name"], "科大讯飞")
+        self.assertTrue(report["claims"])
+        # 线索卡作为外部证据登记:带 URL、发布时间与 Agent 读到的原文快照
+        self.assertTrue(all(e.get("url") and e.get("published_at") and e.get("snapshot") for e in backend.evidences.values()))
+
+    def test_news_hit_builds_rumor_envelope(self):
+        context = {"signal": {"hits": NEWS_HITS, "document": NEWS_DOC}}
+        self.assertEqual(signal_kind(context), "rumor")
+        self.assertEqual(signal_kind({"signal": {"hits": HITS, "document": DOC}}), "tender")
+        envelope = build_envelope(context, "evt_n")
+        self.assertEqual(envelope.kind, "rumor")
+        self.assertEqual(envelope.rumor.subject_name, "科大讯飞")
+        self.assertEqual(envelope.rumor.clues[0].clue_id, "doc_n1")
+        self.assertEqual(envelope.rumor.clues[0].published_at, "2026-09-03T09:13:00+08:00")
+        broken = [{**NEWS_HITS[0], "detail": {"score": 0.9}}]
+        with self.assertRaises(ValueError):
+            build_envelope({"signal": {"hits": broken, "document": NEWS_DOC}}, "evt_n")
 
     def test_published_time_normalization(self):
         self.assertEqual(normalize_published("2026-01-15"), "2026-01-15")

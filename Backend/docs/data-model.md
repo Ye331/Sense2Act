@@ -102,7 +102,7 @@ name（规范化）、aliases（JSONB 归一别名）、type（buyer/supplier/go
 | investigation_id | FK | 自动/手动开调查后回填 |
 | decided_by / decided_at / decision_reason | | 人工决策留痕，dismiss 必填 reason |
 
-UNIQUE (document_id, detector, hits) 是推送幂等键：同文档同检测器同命中重复推返回已有 signal_id。jsonb 相等忽略键序，但要求键集一致（值为 null 的键也算键）。索引 (status, created_at desc)、(org_id)、(score desc)。
+唯一索引 (document_id, detector, md5(hits::text)) 是推送幂等键（V9 起；原先直接对整列 jsonb 建唯一约束，命中超过约 2.7KB 就写入失败）：同文档同检测器同命中重复推返回已有 signal_id。jsonb 文本形式已规范化，键序不影响，但要求键集一致（值为 null 的键也算键）。索引 (status, created_at desc)、(org_id)、(score desc)。
 
 ### investigation_policies（调查策略）
 

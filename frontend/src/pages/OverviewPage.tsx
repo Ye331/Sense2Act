@@ -3,7 +3,7 @@ import { Icon } from '../components/Icon'
 import { StatusBadge } from '../components/UI'
 import { api } from '../api/client'
 import type { Dashboard, Report, Signal } from '../api/client'
-import { errorText, investigationService, listReports, listSignals, ruleNames, score } from '../services/investigations'
+import { errorText, investigationService, listReports, listSignals, ruleNames, score, signalSubject } from '../services/investigations'
 import type { ActivityView, InvestigationTask } from '../types/domain'
 import './OverviewPage.css'
 
@@ -40,9 +40,9 @@ export function OverviewPage({ tasks }: { tasks: InvestigationTask[] }) {
         <section className="ov-signals" aria-labelledby="ov-signals-title">
           <div className="ov-section-head"><h2 id="ov-signals-title">待研判信号 <span>{pending.length}</span></h2><a href="#/signals">全部信号 <Icon name="arrow" size={14}/></a></div>
           {pending.length ? <div className="ov-signal-list">
-            <div className="ov-signal-columns" aria-hidden="true"><span>项目与采购机构</span><span>评分</span><span>状态</span><span>操作</span></div>
+            <div className="ov-signal-columns" aria-hidden="true"><span>信号与研究对象</span><span>评分</span><span>状态</span><span>操作</span></div>
             {pending.slice(0, 4).map(signal => <article className="ov-signal-row" key={signal.id}>
-              <div className="ov-signal-content"><h3><a href={`#/signals/${signal.id}`}>{signal.document.title}</a></h3><div className="ov-signal-meta"><span>{signal.org?.name}</span><span className="ov-reasons">{signal.hits.map(hit => ruleNames[hit.rule_type] || hit.rule_type).join('、') || '商机线索'}</span></div></div>
+              <div className="ov-signal-content"><h3><a href={`#/signals/${signal.id}`}>{signal.document.title}</a></h3><div className="ov-signal-meta"><span>{signalSubject(signal)}</span><span className="ov-reasons">{signal.hits.map(hit => ruleNames[hit.rule_type] || hit.rule_type).join('、') || '商机线索'}</span></div></div>
               <span className="ov-score" aria-label={`信号评分 ${score(signal)}`}><strong>{score(signal)}</strong><small>/100</small></span><span className="ov-signal-status">待研判</span>
               <a className="ov-review-link" href={`#/signals/${signal.id}`} aria-label={`进入研判：${signal.document.title}`}>研判 <Icon name="arrow" size={14}/></a>
             </article>)}

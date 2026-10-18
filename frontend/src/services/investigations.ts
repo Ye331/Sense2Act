@@ -9,6 +9,7 @@ const STATUS: Record<Investigation['status'], TaskStatus> = {
 
 export const ruleNames: Record<string, string> = {
   amount_anomaly: '金额异常', frequency_burst: '频率突增', semantic_match: '业务相关', novelty: '采购新颖', composite: '组合规则',
+  news_event: '新闻事件',
 }
 export const natureNames: Record<ClaimNature, string> = { fact: '事实', inference: '推断', speculation: '推测' }
 export const sourceNames: Record<string, string> = {
@@ -40,6 +41,19 @@ export function describeStep(step: Pick<Step, 'round' | 'content'>): string {
   }
 }
 
+/** 新闻信号：signal-service 新闻分支推送的 news_event 命中，detail 带监测主体、事件类型与报道文档。 */
+export const newsHit = (signal?: Pick<Signal, 'hits'>) => signal?.hits.find(hit => hit.rule_type === 'news_event')
+/** 信号的研究对象：招投标是采购单位，新闻是监测主体。 */
+export const signalSubject = (signal?: Signal) => {
+  const news = newsHit(signal)
+  return news ? String(news.detail?.subject_name || '监测主体') : signal?.org?.name || '采购单位未知'
+}
+/** 新闻信号归组的报道数（同一事件的多家来源）。 */
+export const reportCount = (signal?: Pick<Signal, 'hits'>) => {
+  const ids = newsHit(signal)?.detail?.document_ids
+  return Array.isArray(ids) ? ids.length : 1
+}
+
 export const toStage = (step: Step): StageView => ({
   key: `S${step.seq}`, event: step.content.event, round: step.round,
   title: eventTitles[step.content.event] || step.type, description: describeStep(step),
@@ -52,8 +66,8 @@ function buildTask(investigation: Investigation, signal: Signal | undefined, ste
     id: investigation.id,
     status: STATUS[investigation.status],
     investigation, signal, report,
-    title: signal?.document.title || '招标调查',
-    subject: signal?.org?.name || '采购单位未知',
+    title: signal?.document.title || '调查任务',
+    subject: signalSubject(signal),
     createdAt: investigation.created_at,
     updatedAt: investigation.finished_at || investigation.started_at || investigation.created_at,
     currentRound: investigation.current_round,

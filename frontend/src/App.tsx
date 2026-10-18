@@ -23,7 +23,7 @@ const nav = [
     { href: '#/reports', label: '调查报告', icon: 'report' as const },
   ] },
   { label: '资料与关联', items: [
-    { href: '#/documents', label: '招投标文档', icon: 'file' as const },
+    { href: '#/documents', label: '文档库', icon: 'file' as const },
     { href: '#/events', label: '事件图谱', icon: 'layers' as const },
   ] },
   { label: '运行管理', items: [
@@ -31,7 +31,7 @@ const nav = [
     { href: '#/admin/rules', label: '系统管理', icon: 'shield' as const },
   ] },
 ]
-const titles: Record<string, string> = { overview: '情报总览', signals: '商机信号', tasks: '调查任务', reports: '调查报告', documents: '招投标文档', evidences: '证据详情', events: '事件图谱', organizations: '机构详情', sources: '信息源管理', admin: '系统管理' }
+const titles: Record<string, string> = { overview: '情报总览', signals: '商机信号', tasks: '调查任务', reports: '调查报告', documents: '文档库', evidences: '证据详情', events: '事件图谱', organizations: '机构详情', sources: '信息源管理', admin: '系统管理' }
 const roleLabels: Record<string, string> = { admin: '管理员', analyst: '分析员', viewer: '访客' }
 const noticeLabels: Record<string, string> = { signal_created: '发现新信号', report_ready: '报告已生成', investigation_completed: '调查已完成', source_degraded: '信息源异常' }
 

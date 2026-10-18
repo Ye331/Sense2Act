@@ -29,3 +29,5 @@ buyer_aliases:
 # 后端接入(python -m bridge):后端未配置关注画像时用此画像判断相关性
 bridge:
   company_profile: 医疗信息化与医疗AI解决方案提供商,关注医院AI辅助诊断、影像AI、智慧医院与医疗数据平台建设项目
+  # doc_type=news 文档的新闻监测配置(主体/业务词/事件规则族);环境变量 SIGNAL_NEWS_CONFIG=off 可关闭
+  news_config: signals/news/platform.json

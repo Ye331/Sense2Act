@@ -1,12 +1,13 @@
 """后端调查 context → 调查信封(纯代码映射,不走 LLM)。
 
-信号命中(hits)由 signal-service 写入,detail 约定带 score / explanation / reliable,
-这里还原成 TenderSignal 的四个检测器——检测解释因此成为调查的第一批证据(检测-调查置信贯通)。
+信号命中(hits)由 signal-service 写入,detail 约定带 score / explanation / reliable:
+- 招投标信号:还原成 TenderSignal 的四个检测器——检测解释因此成为调查的第一批证据(检测-调查置信贯通);
+- 新闻信号(rule_type=news_event):detail.rumor 即 RumorSignal 载荷,线索卡成为第一批证据。
 """
 from __future__ import annotations
 
 from ..models.envelope import (AmountHistory, DetectorScore, FrequencyHistory, InvestigationEnvelope,
-                               NoveltyHistory, TenderSignal)
+                               NoveltyHistory, RumorSignal, TenderSignal)
 
 # 后端 rule_type → TenderSignal 字段
 DETECTORS = {
@@ -34,12 +35,26 @@ def _float(value) -> float | None:
         return None
 
 
+NEWS_RULE = "news_event"
+
+
+def signal_kind(context: dict) -> str:
+    """信号类型:带新闻事件命中的是 rumor(传闻/动态核实),其余按招投标处理。"""
+    hits = (context.get("signal") or {}).get("hits") or []
+    return "rumor" if any(h.get("rule_type") == NEWS_RULE for h in hits) else "tender"
+
+
 def build_envelope(context: dict, event_id: str) -> InvestigationEnvelope:
     signal = context.get("signal") or {}
     doc = signal.get("document") or {}
     if not doc:
         raise ValueError("调查 context 缺少信号文档,无法装配信封")
     hits = signal.get("hits") or []
+    if signal_kind(context) == "rumor":
+        rumor = next(h for h in hits if h.get("rule_type") == NEWS_RULE).get("detail", {}).get("rumor")
+        if not rumor:
+            raise ValueError("新闻信号缺少 rumor 载荷(signal-service/bridge/news.py 写入),无法装配信封")
+        return InvestigationEnvelope(kind="rumor", event_id=event_id, rumor=RumorSignal.model_validate(rumor))
     detectors = {DETECTORS[h["rule_type"]]: _detector(h) for h in hits if h.get("rule_type") in DETECTORS}
     details = {h.get("rule_type"): h.get("detail") or {} for h in hits}
 

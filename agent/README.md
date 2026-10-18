@@ -188,11 +188,12 @@ GET created → start(CAS) → context → 装配信封 → pipeline.run
 
 ```powershell
 $env:INTERNAL_API_KEY = 'local-dev-internal-key'      # 与后端一致
-python -m sense2act worker --mode replay              # 零 key:用 examples/tender_medical_ai 录制件
+python -m sense2act worker --mode replay              # 零 key:招投标信号回放 examples/tender_medical_ai,新闻信号回放 examples/ai_model_release
 python -m sense2act worker --mode live                # 真模型 + 本地爬虫,需 DEEPSEEK_API_KEY
 ```
 
 - 后端是预算权威:`max_rounds` 取自调查;超轮次/预算(42201)转为预算护栏优雅停止并交部分报告;用户停止(40901)立即收手。
+- 信封:招投标信号(检测器命中)装配 tender 信封;新闻信号(命中 `news_event`,由 signal-service 的新闻分支推送)以 `detail.rumor` 装配 rumor 信封,报告以监测主体为标题主语、事件类型记 `news`。
 - 证据:信号层证据以 `doc_id` 登记;外部证据带 URL、发布时间和 Agent 读到的原文(作快照);缺 URL/时间的不登记、不被报告引用。
 - 每个调查一份台账库:`data/worker/<investigation_id>/ledger.db`,产物在同目录 `runs/`。
 - 字段映射见 `../docs/integration.md`;契约测试 `tests/test_bridge.py`。

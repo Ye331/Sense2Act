@@ -1,0 +1,281 @@
+{
+  "profile": {
+    "enterpriseId": "sense2act-medical-ai",
+    "enterpriseName": "医疗信息化与医疗 AI 解决方案商",
+    "industry": "医疗信息化与医疗人工智能",
+    "businessKeywords": [
+      "大模型",
+      "人工智能",
+      "AI",
+      "智能体",
+      "医疗",
+      "医院",
+      "智慧医院",
+      "医疗信息化",
+      "辅助诊断",
+      "医学影像",
+      "影像",
+      "电子病历",
+      "病历",
+      "临床决策"
+    ],
+    "excludeWords": [
+      "抽奖",
+      "优惠券",
+      "带货",
+      "红包"
+    ],
+    "excludeTitleWords": [
+      "招聘",
+      "直播预告"
+    ],
+    "offTopicTitleWords": [],
+    "requirePublishedAt": true,
+    "calendarTimezone": "Asia/Shanghai"
+  },
+  "search": {
+    "queries": [
+      "科大讯飞 大模型",
+      "讯飞医疗",
+      "联影智能",
+      "推想医疗",
+      "深睿医疗",
+      "数坤科技",
+      "医疗大模型 发布"
+    ],
+    "platforms": [
+      "toutiao",
+      "south_weekend",
+      "cctv_news"
+    ],
+    "feeds": []
+  },
+  "monitor": {
+    "entities": [
+      {
+        "entityId": "iflytek",
+        "canonicalName": "科大讯飞",
+        "type": "competitor",
+        "aliases": [
+          "讯飞",
+          "讯飞医疗",
+          "iFLYTEK"
+        ],
+        "products": [
+          {
+            "name": "讯飞星火",
+            "aliases": [
+              "星火大模型"
+            ]
+          }
+        ]
+      },
+      {
+        "entityId": "united_imaging",
+        "canonicalName": "联影智能",
+        "type": "competitor",
+        "aliases": [
+          "联影医疗",
+          "联影"
+        ],
+        "products": []
+      },
+      {
+        "entityId": "infervision",
+        "canonicalName": "推想医疗",
+        "type": "competitor",
+        "aliases": [
+          "推想科技",
+          "Infervision"
+        ],
+        "products": []
+      },
+      {
+        "entityId": "deepwise",
+        "canonicalName": "深睿医疗",
+        "type": "competitor",
+        "aliases": [
+          "深睿"
+        ],
+        "products": []
+      },
+      {
+        "entityId": "shukun",
+        "canonicalName": "数坤科技",
+        "type": "competitor",
+        "aliases": [
+          "数坤"
+        ],
+        "products": []
+      },
+      {
+        "entityId": "alibaba_cloud",
+        "canonicalName": "阿里云",
+        "type": "industry_actor",
+        "aliases": [
+          "阿里巴巴云"
+        ],
+        "products": [
+          {
+            "name": "通义千问",
+            "aliases": [
+              "通义"
+            ]
+          }
+        ]
+      },
+      {
+        "entityId": "nhc",
+        "canonicalName": "国家卫生健康委员会",
+        "type": "regulator",
+        "aliases": [
+          "国家卫健委",
+          "卫健委"
+        ],
+        "products": []
+      }
+    ],
+    "settings": {
+      "lookbackHours": 4320,
+      "tauHours": 4320,
+      "cooldownHours": 24,
+      "eventGroupHardWindowHours": 2,
+      "resonanceWindowHours": 72,
+      "objectWindowChars": 32,
+      "clusterOverlapThreshold": 0.72,
+      "clusterMinSharedBigrams": 12,
+      "grayMode": false,
+      "agentAutoTrigger": false,
+      "agentTriggerScore": 1.5
+    },
+    "families": [
+      {
+        "id": "competitor_launch",
+        "name": "竞品与行业发布",
+        "appliesTo": [
+          "self",
+          "competitor",
+          "industry_actor"
+        ],
+        "actions": [
+          "发布",
+          "推出",
+          "上线",
+          "开源",
+          "首发",
+          "亮相",
+          "落地",
+          "launch",
+          "release"
+        ],
+        "objectWords": [
+          "大模型",
+          "模型",
+          "产品",
+          "系统",
+          "平台",
+          "版本",
+          "智能体",
+          "解决方案"
+        ],
+        "noticeWords": [
+          "评测",
+          "盘点",
+          "体验"
+        ],
+        "weight": 2,
+        "eventTypes": [
+          "PRODUCT_LAUNCH"
+        ]
+      },
+      {
+        "id": "market_move",
+        "name": "中标、合作与融资",
+        "appliesTo": [
+          "self",
+          "competitor",
+          "industry_actor"
+        ],
+        "actions": [
+          "中标",
+          "签约",
+          "战略合作",
+          "联合研发",
+          "融资",
+          "收购",
+          "入围"
+        ],
+        "objectWords": [
+          "项目",
+          "医院",
+          "合同",
+          "协议",
+          "订单",
+          "轮",
+          "亿元"
+        ],
+        "weight": 2,
+        "eventTypes": [
+          "FINANCING"
+        ]
+      },
+      {
+        "id": "regulation",
+        "name": "监管政策",
+        "appliesTo": [
+          "regulator"
+        ],
+        "actions": [
+          "印发",
+          "发布",
+          "出台",
+          "征求意见"
+        ],
+        "objectWords": [
+          "通知",
+          "办法",
+          "指南",
+          "规范",
+          "意见",
+          "标准"
+        ],
+        "weight": 1.5,
+        "eventTypes": [
+          "POLICY"
+        ]
+      },
+      {
+        "id": "public_opinion",
+        "name": "争议与回应",
+        "appliesTo": [
+          "self",
+          "competitor",
+          "industry_actor"
+        ],
+        "actions": [
+          "回应",
+          "辟谣",
+          "召回",
+          "起诉",
+          "投诉",
+          "否认",
+          "澄清",
+          "处罚"
+        ],
+        "objectWords": [
+          "产品",
+          "数据",
+          "隐私",
+          "质量",
+          "传闻",
+          "消息",
+          "问题"
+        ],
+        "weight": 2,
+        "eventTypes": [
+          "PUBLIC_OPINION"
+        ]
+      }
+    ]
+  }
+}

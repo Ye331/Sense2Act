@@ -290,6 +290,8 @@ PUT 全量必填（缺字段 40001），即时生效于后续自动触发；max_
 
 `POST /internal/detection-scan-complete`：`{ "document_ids": [], "detector": "..." }`，标记已扫描无命中。
 
+新闻信号（2026-10-18）：`doc_type=news` 的文档由检测服务做新闻事件检测，信号同样以文档为锚（事件首条报道），`detector` 为 `signal-service/news-v0.1`，命中 `rule_type=news_event`，`detail` 除 `score/reliable/explanation` 外带 `rumor`（Agent 装配 rumor 信封的完整载荷）与 `document_ids`（同事件全部报道）。hits 原样落库，后端不区分信号来源。
+
 ### 9.3 Agent 调查服务
 
 | 接口 | 说明 |
@@ -357,3 +359,4 @@ ReportDraft：
 | 2026-10-14 | 接入修复，消费者需同步 | detection-queue.document.amount 从实现中的 JSON number 修正为契约定义的小数字符串；报告每条 claim 强制非空 evidence_ids；本库证据强制发布时间/可读取快照；终态问题写入返回 40901。按实际消费行为视为兼容性变更，合码/部署前接入方需同步 |
 | 2026-10-14 | 增量 | detection-queue 新增 rules；新增 GET /internal/signal-rules 与内部 steps 查询；steps 新增可选 request_id；context 新增 questions；OpenAPI 补认证声明与检测文档 DTO。既有路径/状态值保留 |
 | 2026-10-17 | 增量 | 全链路接入：detection-queue.document 新增 org_id、url（检测服务取同单位历史、回溯原文）；evidences 新增可选 snapshot（Agent 所见原文即快照，反爬/限时页不再因回源失败被拒）。均为新增可选字段，非破坏性 |
+| 2026-10-18 | 增量 | 新闻信号接入：§9.2 新增命中类型 `news_event`（detail.rumor 为 RumorSignal 载荷），沿用既有推送接口与幂等语义；信号幂等唯一键改为 (document_id, detector, md5(hits))（V9），修复命中超过约 2.7KB 时写入 500。无路径/字段/状态值变更，非破坏性 |
