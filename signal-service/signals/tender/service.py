@@ -1,6 +1,6 @@
 """检测、精简输出和提交的业务入口。"""
 from copy import deepcopy
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from hashlib import sha256
 import json
 
@@ -13,7 +13,7 @@ from signals.common.schemas import SignalSubmission
 from signals.common.task_client import TaskClient
 from signals.tender.normalization import normalize_batch
 from signals.tender.schemas import DetectionRequest, DetectionResponse
-from signals.tender.signal_detector import SignalDetector
+from signals.tender.signal_detector import BUSINESS_TZ, SignalDetector
 
 PAYLOAD_FIELDS = [
     'project_id', 'procurement_project_id', 'title', 'buyer', 'publish_date', 'amount_yuan',
@@ -54,12 +54,17 @@ def make_signal(company_id: str, record: dict) -> SignalSubmission:
 
 
 class TenderService:
-    def __init__(self, config: dict | None = None, encoder=None, task_client: TaskClient | None = None):
+    def __init__(self, config: dict | None = None, encoder=None, task_client: TaskClient | None = None, clock=None):
         self.config = config if config is not None else load_config()
         self.encoder = encoder
         self.task_client = task_client if task_client is not None else TaskClient()
+        self.clock = clock if clock is not None else lambda: datetime.now(timezone.utc)
 
     def detect(self, request: DetectionRequest) -> DetectionResponse:
+        now = self.clock()
+        if now.tzinfo is None or now.utcoffset() is None:
+            raise ValueError('评估时钟必须带时区')
+        evaluation_date = now.astimezone(BUSINESS_TZ).date()
         config = deepcopy(self.config)
         config['business'] = {'company_profile': request.company_profile}
         config['date_range'] = {'raw_start': request.history_start_date.isoformat()}
@@ -70,7 +75,8 @@ class TenderService:
         else:
             encoder = self.encoder if self.encoder is not None else get_shared_encoder(config['embedding'])
             detector = SignalDetector(config, encoder=encoder)
-            frame = detector.detect_day(history, current, pd.Timestamp(request.detection_date))
+            frame = detector.detect_day(history, current, pd.Timestamp(request.detection_date),
+                                        evaluation_date=evaluation_date)
             records = json_value(frame.to_dict(orient='records'))
         signals = []
         for record in records:

@@ -30,6 +30,7 @@
 | `org_id` | — | `GET /documents?org_id=&date_to=检测日-1`，近 730 天，严格早于检测日 |
 | `amount`（小数字符串） | `amount`（元） | |
 | `publish_date` | `publish_date` / 检测日 | 按发布日分批，每批独立 Top-K |
+| `deadline`（可选） | `deadline` | 当前北京时间日期判断是否已截止，与按发布日期取历史独立；旧后端缺此字段按未知处理 |
 | `content_text` 前 800 字 | `project_summary` | 历史文档只有标题 |
 | `profiles`（关注画像名） | `company_profile` | 无画像时用 `SIGNAL_COMPANY_PROFILE` / `config.yaml bridge.company_profile` |
 
@@ -41,10 +42,14 @@
 
 | 检测指标 | `rule_type` | `weight` | `detail` 关键字段 |
 | --- | --- | --- | --- |
-| 金额 | `amount_anomaly` | 0.5 | `ratio`、`historical_median`、`samples` |
-| 新颖性 | `novelty` | 0.5 | `max_similarity`、`most_similar_title/url`、`samples` |
+| 金额 | `amount_anomaly` | 默认 0.3，按可用指标归一 | `ratio`、`historical_median`、`samples` |
+| 新颖性 | `novelty` | 默认 0.2，按可用指标归一 | `max_similarity`、`most_similar_title/url`、`samples` |
 | 频率 | `frequency_burst` | 0（仅参考） | `recent_count`、`historical_average`、`ratio`、`window_days` |
-| 相关性 | `semantic_match` | 0（门槛） | `threshold`、`profile` |
+| 相关性 | `semantic_match` | 默认 0.5，按可用指标归一（同时作门槛） | `threshold`、`profile` |
+
+总分为可用指标加权和除以可用权重之和；`hits[].weight` 为归一后的实际权重。新客户无可靠历史时，只推相关性命中，权重为 1，总分等于相关性分；缺失历史分数不补零，仍须通过相关性门槛并进入同一 Top-K。
+
+招投标检测器 `signal-service/tender-v0.4` 在 Top-K 前排除已过截止日期的候选，保留其检测分数和原文，不影响历史样本。当日截止、日期未知仍可排名，解释标记待核实，不增加分数惩罚或改变立项阈值。相关性命中 `detail` 附带 `deadline`（未知省略）、`evaluation_date`（北京时间评估日）、`deadline_status`（open / expired / needs_verification）、`deadline_reason`；Agent 通过现有检测解释读取时效与待核实事项。每次检测只读取一次评估时钟，不允许 API 客户端指定评估日期。本规则仅影响后续扫描，不重扫旧文档、不修改已存在信号或调查。
 
 **每个 `detail` 都带 `score`、`reliable`、`explanation`**——这是与 Agent 的约定：Agent 把它们还原为 `TenderSignal` 的检测器，检测解释成为调查的第一批证据。`rule_id/rule_version` 取自队列下发的启用规则（`novelty` 暂无对应规则类型，留空）。
 

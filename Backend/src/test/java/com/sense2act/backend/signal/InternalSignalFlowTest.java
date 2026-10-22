@@ -120,6 +120,7 @@ class InternalSignalFlowTest {
         docA = insertDoc("sig-a-" + suffix, orgA, "医疗信息化", "3250000.00", "2026-09-24");
         docB = insertDoc("sig-b-" + suffix, null, null, null, "2026-09-20");
         docC = insertDoc("sig-c-" + suffix, orgA, "不存在的类别", "100.00", "2026-09-18");
+        jdbcTemplate.update("UPDATE documents SET deadline=? WHERE id=?", LocalDate.of(2026, 10, 23), docA);
 
         orgStatsMapper.recompute(orgA, "医疗信息化");   // docA 的基线
     }
@@ -159,6 +160,9 @@ class InternalSignalFlowTest {
         assertThat(first.path("document").path("id").asText()).isEqualTo(docA);
         assertThat(first.path("document").path("org_name").asText()).startsWith("信号测试医院");
         assertThat(first.path("document").path("content_text").asText()).startsWith("正文-");
+        assertThat(first.path("document").path("deadline").asText()).isEqualTo("2026-10-23");
+        assertThat(first.path("document").has("raw")).isFalse();
+        assertThat(items.get(1).path("document").has("deadline")).isFalse();
         assertThat(first.path("org_stats").path("category").asText()).isEqualTo("医疗信息化");
         assertThat(first.path("org_stats").path("sample_count").asInt()).isEqualTo(1);
         assertThat(first.path("profiles").toString()).contains("医疗AI", "数据平台");   // V3 种子画像

@@ -13,8 +13,9 @@ embedding:
   cpu_threads: 4
 
 priority_weights:
-  amount: 0.5
-  novelty: 0.5
+  relevance: 0.5
+  amount: 0.3
+  novelty: 0.2
   frequency: 0.0
 
 # 仅用于内部优先级描述，不是自动调查的最低门槛。

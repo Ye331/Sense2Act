@@ -3895,6 +3895,10 @@
           },
           "url" : {
             "type" : "string"
+          },
+          "deadline" : {
+            "type" : "string",
+            "format" : "date"
           }
         }
       },

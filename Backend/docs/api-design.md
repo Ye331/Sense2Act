@@ -267,13 +267,15 @@ PUT 全量必填（缺字段 40001），即时生效于后续自动触发；max_
 { "items": [ {
   "document": {
     "id": "doc_01H...", "doc_type": "announcement", "title": "...",
-    "org_name": "某市人民医院", "amount": "3250000.00", "publish_date": "2026-09-24",
+    "org_name": "某市人民医院", "amount": "3250000.00", "publish_date": "2026-09-24", "deadline": "2026-10-23",
     "region": "...", "category": "医疗信息化", "content_text": "...",
     "org_id": "org_01H...", "url": "http://..." },
   "org_stats": { "category": "医疗信息化", "sample_count": 23, "amount_mean": 820000,
                  "amount_std": 410000, "amount_p95": 1900000, "freq_mean_30d": 0.4 },
   "profiles": ["医疗AI", "数据平台"] } ] }
 ```
+
+`document.deadline` 为可选投标截止日期（YYYY-MM-DD），未知时按全局 non_null 配置省略；直接读取已有文档字段，不返回 raw。检测服务使用当前北京时间日期筛选：早于评估日期的退出 Top-K；当天截止或日期未知的保留候选并标记待核实；晚于评估日期的仅说明日期层面未截止。发布日期仍只用于历史比较。
 
 `POST /internal/signals`，推送命中。幂等：同 document + detector + hits 重复推返回已有 signal_id。rule_id / rule_version 可空，没注册规则就只留 rule_type 和 detector 标识。
 
@@ -359,4 +361,5 @@ ReportDraft：
 | 2026-10-14 | 接入修复，消费者需同步 | detection-queue.document.amount 从实现中的 JSON number 修正为契约定义的小数字符串；报告每条 claim 强制非空 evidence_ids；本库证据强制发布时间/可读取快照；终态问题写入返回 40901。按实际消费行为视为兼容性变更，合码/部署前接入方需同步 |
 | 2026-10-14 | 增量 | detection-queue 新增 rules；新增 GET /internal/signal-rules 与内部 steps 查询；steps 新增可选 request_id；context 新增 questions；OpenAPI 补认证声明与检测文档 DTO。既有路径/状态值保留 |
 | 2026-10-17 | 增量 | 全链路接入：detection-queue.document 新增 org_id、url（检测服务取同单位历史、回溯原文）；evidences 新增可选 snapshot（Agent 所见原文即快照，反爬/限时页不再因回源失败被拒）。均为新增可选字段，非破坏性 |
+| 2026-10-22 | 增量 | detection-queue.document 新增可选 deadline 日期字段，支持招投标机会日期级筛选；现有字段、数据库结构及调查状态不变 |
 | 2026-10-18 | 增量 | 新闻信号接入：§9.2 新增命中类型 `news_event`（detail.rumor 为 RumorSignal 载荷），沿用既有推送接口与幂等语义；信号幂等唯一键改为 (document_id, detector, md5(hits))（V9），修复命中超过约 2.7KB 时写入 500。无路径/字段/状态值变更，非破坏性 |

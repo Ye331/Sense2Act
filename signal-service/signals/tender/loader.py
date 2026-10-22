@@ -14,6 +14,7 @@ FILE_ALIASES = {
     'title': ['title', '项目名称', '项目标题', '标题'],
     'buyer': ['buyer', '招标单位', '采购单位', '采购人'],
     'publish_date': ['publish_date', '信息发布时间', '发布时间', '发布日期'],
+    'deadline': ['deadline', '投标截止日期', '投标截止时间'],
     'amount': ['amount', 'amount_yuan', '招标金额（元）', '金额', '招标金额', '预算金额', '预算金额（万元）'],
     'source_url': ['source_url', '官网查看地址', '详情链接', '来源链接', '链接'],
     'project_number': ['project_number', '项目编号'],
@@ -47,11 +48,14 @@ def _records_from_frame(frame: pd.DataFrame, source: Path, sheet: str = '') -> l
             if pd.isna(stamp):
                 raise ValueError('发布日期缺失')
             values['publish_date'] = stamp.date().isoformat()
+            raw_deadline = values['deadline']
+            values['deadline'] = (pd.Timestamp(raw_deadline).date().isoformat()
+                                  if normalize_text(raw_deadline) else None)
             values['amount'] = parse_amount(values['amount'],
                                             '万元' if '万元' in (columns['amount'] or '') else '元')
             if pd.isna(values['amount']):
                 values['amount'] = None
-            for key in values.keys() - {'amount', 'publish_date'}:
+            for key in values.keys() - {'amount', 'publish_date', 'deadline'}:
                 values[key] = normalize_text(values[key])
             values['data_origin'] = values['data_origin'] or 'real'
             values['id'] = values['id'] or stable_announcement_id(values)
