@@ -16,6 +16,7 @@ class Announcement(BaseModel):
     title: NonEmpty
     buyer: str = ''
     publish_date: date
+    deadline: date | None = None
     amount: float | None = Field(default=None, ge=0, allow_inf_nan=False)
     project_summary: str = ''
     source_url: str = ''
@@ -39,6 +40,11 @@ class Announcement(BaseModel):
         elif type(value) is not date:
             raise ValueError('日期必须为 YYYY-MM-DD')
         return value
+
+    @field_validator('deadline', mode='before')
+    @classmethod
+    def strict_deadline(cls, value):
+        return None if value is None else cls.strict_date(value)
 
     @field_validator('data_origin')
     @classmethod

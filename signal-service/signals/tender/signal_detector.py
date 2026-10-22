@@ -1,12 +1,25 @@
 from __future__ import annotations
 
 import math
+from datetime import date, datetime, timedelta, timezone
 
 import numpy as np
 import pandas as pd
 
 from .signal_explainer import build_explanation
 from .project_identity import ProjectHistory
+
+BUSINESS_TZ = timezone(timedelta(hours=8))
+
+
+def deadline_assessment(deadline, evaluation_date: date) -> tuple[str, str]:
+    if deadline is None or pd.isna(deadline):
+        return 'needs_verification', '截止日期未知，待核实'
+    if deadline < evaluation_date:
+        return 'expired', '已截止，退出当前投标机会排名'
+    if deadline == evaluation_date:
+        return 'needs_verification', '当日截止，具体时刻待核实'
+    return 'open', '日期层面未截止，尚未核实具体时刻和参与条件'
 
 
 SIGNAL_COLUMNS = [
@@ -15,6 +28,7 @@ SIGNAL_COLUMNS = [
     'project_match_method', 'project_event', 'is_project_update', 'history_announcement_count',
     'project_id', 'title', 'buyer', 'publish_date', 'detection_date', 'amount_yuan', 'source_url',
     'project_summary', 'category', 'content_source_type', 'content_source_note',
+    'deadline', 'evaluation_date', 'deadline_status', 'deadline_reason',
     'source_file', 'source_sheet', 'source_row', 'history_cutoff', 'history_size',
     'relevance_score', 'relevance_threshold', 'relevance_pass', 'embedding_model', 'embedding_revision',
     'company_profile_used', 'amount_score', 'amount_ratio', 'historical_median_amount',
@@ -23,7 +37,7 @@ SIGNAL_COLUMNS = [
     'most_similar_history_date', 'most_similar_history_url', 'novelty_history_count', 'novelty_reliable',
     'recent_count', 'historical_frequency', 'frequency_ratio', 'frequency_score',
     'frequency_history_windows_used', 'frequency_window', 'frequency_reliable',
-    'amount_weight', 'novelty_weight', 'frequency_weight', 'priority_score', 'priority',
+    'relevance_weight', 'amount_weight', 'novelty_weight', 'frequency_weight', 'scoring_weight_sum', 'priority_score', 'priority',
     'priority_confidence', 'min_history_count', 'high_priority_threshold', 'medium_priority_threshold',
     'evidence_status', 'priority_eligible', 'partial_score',
     'top_k', 'rank', 'is_signal', 'signal_reason',
@@ -43,8 +57,10 @@ class SignalDetector:
         self.config = config
         self.settings = config['detector']
         self.weights = {key: float(value) for key, value in (weights or config['priority_weights']).items()}
-        if set(self.weights) != {'amount', 'novelty', 'frequency'}:
-            raise ValueError('Priority 只能包含 amount、novelty、frequency，相关性仅作 Gate')
+        # 兼容已有的三指标配置；新默认配置将相关性同时用于准入与排名。
+        self.weights.setdefault('relevance', 0.0)
+        if set(self.weights) != {'relevance', 'amount', 'novelty', 'frequency'}:
+            raise ValueError('Priority 只能包含 relevance、amount、novelty、frequency')
         if any(not math.isfinite(value) or value < 0 for value in self.weights.values()) or not math.isclose(sum(self.weights.values()), 1.0):
             raise ValueError('Priority 权重必须非负且合计为 1')
         if not 0 <= float(self.settings['relevance_threshold']) <= 1:
@@ -120,7 +136,7 @@ class SignalDetector:
                     frequency_history_windows_used=len(counts), frequency_window=window, frequency_reliable=bool(reliable))
 
     def detect_day(self, history: pd.DataFrame, today: pd.DataFrame, day: pd.Timestamp,
-                   *, project_state: ProjectHistory | None = None) -> pd.DataFrame:
+                   *, project_state: ProjectHistory | None = None, evaluation_date: date | None = None) -> pd.DataFrame:
         """检测当天真实公告；只读取历史快照，不提前提交当日项目。"""
         if history['publish_date'].isna().any() or today['publish_date'].isna().any():
             raise ValueError('History / Current 不能包含缺失日期')
@@ -130,6 +146,7 @@ class SignalDetector:
             raise ValueError('Current 只能包含检测当天的数据')
         if today.empty:
             return empty_signals()
+        evaluation_date = evaluation_date if evaluation_date is not None else datetime.now(BUSINESS_TZ).date()
         history_announcements = len(history)
         # 使用已有历史及更新别名匹配当天公告，试算不会改变正式历史。
         state = project_state if project_state is not None else ProjectHistory(history)
@@ -157,7 +174,12 @@ class SignalDetector:
                           medium_priority_threshold=float(self.config['thresholds']['medium']),
                           top_k=int(self.config['display']['top_k']), priority_score=np.nan, rank=np.nan,
                           is_signal=False, priority='未通过业务筛选', priority_confidence='未分析',
-                          evidence_status='not_applicable', priority_eligible=False, partial_score=np.nan)
+                          evidence_status='not_applicable', priority_eligible=False, partial_score=np.nan,
+                          scoring_weight_sum=0.0)
+            deadline = row.get('deadline')
+            deadline_status, deadline_reason = deadline_assessment(deadline, evaluation_date)
+            record.update(deadline=deadline, evaluation_date=evaluation_date,
+                          deadline_status=deadline_status, deadline_reason=deadline_reason)
             record.update({f'{key}_weight': value for key, value in self.weights.items()})
             record.update(identities.loc[row['id']].to_dict())
             record['history_announcement_count'] = history_announcements
@@ -170,22 +192,28 @@ class SignalDetector:
                 record.update(self._amount(row, buyer_history))
                 record.update(self._novelty(row, buyer_history))
                 record.update(self._frequency(row, buyer_history, new_today, day))
-                available_score = sum(self.weights[key] * record[f'{key}_score']
-                                               for key in self.weights if record[f'{key}_reliable'] and self.weights[key] > 0)
-                reliable_count = sum(bool(record[f'{key}_reliable']) for key in self.weights if self.weights[key] > 0)
+                available = {key: weight for key, weight in self.weights.items()
+                             if weight > 0 and (key == 'relevance' or record[f'{key}_reliable'])}
+                available_score = sum(weight * record[f'{key}_score'] for key, weight in available.items())
+                weight_sum = sum(available.values())
+                reliable_count = len(available)
                 active_count = sum(value > 0 for value in self.weights.values())
-                if reliable_count == active_count:
-                    record.update(evidence_status='sufficient', priority_eligible=True,
-                                  priority_confidence='充分', priority_score=available_score)
-                    record['priority'] = ('高优先级' if available_score >= record['high_priority_threshold'] else
-                                          '中优先级' if available_score >= record['medium_priority_threshold'] else '普通候选')
-                elif reliable_count:
-                    record.update(evidence_status='partial', priority_confidence='低置信度',
-                                  partial_score=available_score, priority='部分历史，低置信度')
+                sufficient = reliable_count == active_count
+                record.update(scoring_weight_sum=weight_sum,
+                              evidence_status='sufficient' if sufficient else 'partial' if reliable_count else 'insufficient',
+                              priority_confidence='充分' if sufficient else '低置信度' if reliable_count else '历史不足')
+                if weight_sum > 0 and row['buyer']:
+                    # 缺失指标保留空值；仅对有依据的指标归一，允许新客户按相关性参与同一排名。
+                    score = available_score / weight_sum
+                    record.update(priority_eligible=True, priority_score=score,
+                                  partial_score=available_score if not sufficient else np.nan)
+                    record['priority'] = ('高优先级' if score >= record['high_priority_threshold'] else
+                                          '中优先级' if score >= record['medium_priority_threshold'] else '普通候选')
                 else:
-                    record.update(evidence_status='insufficient', priority_confidence='历史不足',
-                                  priority='新客户/历史不足，待调查')
-                    # 保留独立指标的真实可靠性，但不为完整排名补造依据。
+                    record['priority'] = '采购单位缺失，待核实' if not row['buyer'] else '评分依据不足，待调查'
+            # 保留历史与分数，仅在排名前剔除过期候选，避免其占用 Top-K 名额。
+            if deadline_status == 'expired':
+                record.update(priority_eligible=False, priority='已截止')
             records.append(record)
         result = pd.DataFrame(records).reindex(columns=SIGNAL_COLUMNS)
         candidates = result.loc[result['priority_eligible']].sort_values(['priority_score', 'project_id'], ascending=[False, True])

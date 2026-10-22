@@ -23,7 +23,7 @@ from .hits import record_hits
 from .news import NewsBridge
 
 log = logging.getLogger("signal.bridge")
-DETECTOR = "signal-service/tender-v0.2"
+DETECTOR = "signal-service/tender-v0.4"
 HISTORY_DAYS = 730
 
 
@@ -77,7 +77,8 @@ def _announcement(doc: dict, summary: str = "") -> Announcement | None:
     org = doc.get("org") or {}
     return Announcement(
         id=doc["id"], title=doc.get("title") or doc["id"], buyer=doc.get("org_name") or org.get("name") or "",
-        publish_date=doc["publish_date"], amount=float(doc["amount"]) if doc.get("amount") not in (None, "") else None,
+        publish_date=doc["publish_date"], deadline=doc.get("deadline"),
+        amount=float(doc["amount"]) if doc.get("amount") not in (None, "") else None,
         project_summary=summary or doc.get("title") or "", source_url=doc.get("url") or "", category=doc.get("category") or "")
 
 

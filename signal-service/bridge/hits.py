@@ -30,6 +30,8 @@ def record_hits(record: dict, weights: dict[str, float], profile: str, rules: di
 
     def add(kind: str, weight: float, detail: dict):
         rule = rules.get(RULE_TYPES[kind], {})
+        # 命中记录实际参与总分的权重，与缺失指标后的归一计算保持一致。
+        weight /= record['scoring_weight_sum']
         hits.append({"rule_type": RULE_TYPES[kind], "rule_id": rule.get("id"), "rule_version": rule.get("version"),
                      "weight": _num(weight, 3) or 0.0, "detail": {k: v for k, v in detail.items() if v is not None}})
 
@@ -55,8 +57,12 @@ def record_hits(record: dict, weights: dict[str, float], profile: str, rules: di
             "window_days": int(record["frequency_window"]),
             "explanation": f"近 {int(record['frequency_window'])} 天该单位项目 {int(record['recent_count'])} 个,"
                            f"历史窗口均值 {record['historical_frequency']:.2f} 个(比值 {record['frequency_ratio']:.2f})"})
-    add("relevance", 0.0, {
+    add("relevance", weights.get("relevance", 0.0), {
         "score": _num(record["relevance_score"]), "reliable": True, "threshold": _num(record["relevance_threshold"]),
         "profile": profile,
-        "explanation": f"与关注画像的语义相关性 {record['relevance_score']:.3f}(门槛 {record['relevance_threshold']:.2f})"})
+        "deadline": record.get("deadline"), "evaluation_date": record["evaluation_date"],
+        "deadline_status": record["deadline_status"], "deadline_reason": record["deadline_reason"],
+        "explanation": f"与关注画像的语义相关性 {record['relevance_score']:.3f}(门槛 {record['relevance_threshold']:.2f});"
+                       f"北京时间评估日期 {record['evaluation_date']},截止日期 {record.get('deadline') or '未知'}:"
+                       f"{record['deadline_reason']}"})
     return hits

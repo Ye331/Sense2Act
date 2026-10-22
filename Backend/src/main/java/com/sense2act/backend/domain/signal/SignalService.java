@@ -86,7 +86,7 @@ public class SignalService {
             com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy.class)
     public record QueueDocument(String id, String docType, String title, String orgName,
                                 String amount, LocalDate publishDate, String region, String category,
-                                String contentText, String orgId, String url) { }
+                                String contentText, String orgId, String url, LocalDate deadline) { }
 
     /** 未扫描文档按入库先后吐给检测服务,一次带齐 org_stats 基线与启用画像。 */
     public List<QueueDoc> detectionQueue(Integer limit) {
@@ -122,7 +122,7 @@ public class SignalService {
                     d.getOrgId() == null ? null : orgNames.get(d.getOrgId()),
                     d.getAmount() == null ? null : d.getAmount().toPlainString(),
                     d.getPublishDate(), d.getRegion(), d.getCategory(), d.getContentText(),
-                    d.getOrgId(), d.getUrl());
+                    d.getOrgId(), d.getUrl(), d.getDeadline());
             Map<String, Object> statsView = null;
             if (d.getOrgId() != null && d.getCategory() != null) {
                 OrgStat s = stats.get(d.getOrgId() + "\n" + d.getCategory());

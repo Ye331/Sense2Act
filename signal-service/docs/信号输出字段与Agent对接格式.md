@@ -96,6 +96,8 @@ Agent 字段改名由适配器完成。
 分数未知时填 `null`，不能填为零。
 不可用指标的可靠性设为 `false`。
 相关性评分不使用历史可靠性标记。
+相关性同时参与准入与综合排名，默认权重为相关性 0.5、金额 0.3、新颖性 0.2，频率 0。总分为可用指标加权和除以可用指标权重之和；新客户无可靠历史时总分等于相关性分，历史指标仍为 null，并在 signal_reason 中标明依据不完整。
+公告输入增加可选 deadline（YYYY-MM-DD）。检测记录包含 deadline、evaluation_date、deadline_status、deadline_reason：按当前北京时间日期排除已截止候选，当日截止或日期未知标记待核实但仍可排名。单条提交的精简 payload 字段保持不变，时效依据随 signal_reason 传递；平台桥接另在 semantic_match.detail 附带这四个字段，未知 deadline 省略。
 正文不足与指标不可用原因写入摘要或 `signal_reason`。
 
 ### 3.2 依据如何保留

@@ -1,7 +1,9 @@
 """后端接入:检测队列 → 检测 → 信号回推 → 扫描完成;/embed 向量端点。"""
 import json
+from datetime import datetime, timezone
 
 import httpx
+import pytest
 from fastapi.testclient import TestClient
 
 from application import create_app
@@ -63,8 +65,26 @@ def test_queue_documents_are_detected_and_signals_pushed(service):
     # 与 Agent 的约定:每个命中都带 score / reliable / explanation
     assert all({"score", "reliable", "explanation"} <= set(hit["detail"]) for hit in signal["hits"])
     assert hits["semantic_match"]["detail"]["profile"] == "医疗信息系统"
+    assert hits["semantic_match"]["weight"] == .5
+    assert hits["amount_anomaly"]["weight"] == .3
+    assert hits["novelty"]["weight"] == .2
+    assert sum(h["weight"] * h["detail"]["score"] for h in signal["hits"]) == pytest.approx(signal["score"], abs=.0001)
     # 有无命中、是否公告,处理过的文档全部标记已扫描
     assert sorted(backend.scanned) == ["doc_c1", "doc_p1"]
+
+
+def test_new_buyer_pushes_only_relevance_with_effective_weight(service):
+    backend = FakeBackend()
+    client = BackendClient("http://backend", "k", transport=httpx.MockTransport(backend))
+    client.history = lambda org_id, before: []
+    bridge = DetectionBridge(client, service, "医疗信息系统")
+    assert bridge.run_once() == {"scanned": 2, "signals": 1}
+    signal = backend.signals[0]
+    assert len(signal["hits"]) == 1
+    hit = signal["hits"][0]
+    assert hit["rule_type"] == "semantic_match"
+    assert hit["weight"] == 1
+    assert signal["score"] == hit["detail"]["score"]
 
 
 def test_empty_queue_is_a_noop(service):
@@ -73,6 +93,39 @@ def test_empty_queue_is_a_noop(service):
     bridge = DetectionBridge(BackendClient("http://backend", "k", transport=transport), service, "画像")
     assert bridge.run_once() == {"scanned": 0, "signals": 0}
     assert len(calls) == 1
+
+
+@pytest.mark.parametrize('deadline,status,signals', [
+    ('2026-10-21', 'expired', 0),
+    ('2026-10-22', 'needs_verification', 1),
+    ('2026-10-23', 'open', 1),
+    (None, 'needs_verification', 1),
+])
+def test_deadline_passes_through_bridge_and_all_documents_finish_scan(service, monkeypatch, deadline, status, signals):
+    service.clock = lambda: datetime(2026, 10, 22, 2, tzinfo=timezone.utc)
+    monkeypatch.setitem(QUEUE[0]['document'], 'deadline', deadline)
+    backend = FakeBackend()
+    bridge = DetectionBridge(BackendClient('http://backend', 'k', transport=httpx.MockTransport(backend)),
+                             service, '医疗信息系统')
+    assert bridge.run_once() == {'scanned': 2, 'signals': signals}
+    assert sorted(backend.scanned) == ['doc_c1', 'doc_p1']
+    if signals:
+        detail = next(h['detail'] for h in backend.signals[0]['hits'] if h['rule_type'] == 'semantic_match')
+        assert detail['evaluation_date'] == '2026-10-22'
+        assert detail['deadline_status'] == status
+        assert detail.get('deadline') == deadline
+        assert detail['deadline_reason'] in detail['explanation']
+
+
+def test_invalid_deadline_does_not_mark_batch_scanned(service, monkeypatch):
+    monkeypatch.setitem(QUEUE[0]['document'], 'deadline', '2026-02-30')
+    backend = FakeBackend()
+    bridge = DetectionBridge(BackendClient('http://backend', 'k', transport=httpx.MockTransport(backend)),
+                             service, '医疗信息系统')
+    with pytest.raises(ValueError):
+        bridge.run_once()
+    assert backend.scanned == []
+    assert backend.signals == []
 
 
 def test_embed_endpoint_matches_backend_wire_contract(service):
