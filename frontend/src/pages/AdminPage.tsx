@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ConfirmDialog } from '../components/ConfirmDialog'
-import { EmptyState, PageHeading } from '../components/UI'
+import { PageHeading } from '../components/UI'
+import { Icon } from '../components/Icon'
 import { api } from '../api/client'
 import type { Policy } from '../api/client'
 import { errorText, ruleNames } from '../services/investigations'
@@ -67,7 +68,7 @@ export function AdminPage({ tab = 'rules', id, isAdmin }: { tab?: string; id?: s
   const [error, setError] = useState('')
   const [notice, setNotice] = useState('')
   useEffect(() => { setError(''); setNotice('') }, [active, id])
-  return <div className="page"><PageHeading eyebrow="运行管理 / 配置" title="系统管理" description="调整识别规则与调查策略，管理回测及关注画像。规则与画像随 detection-queue 下发给检测服务。"/>{!isAdmin && <EmptyState title="需要管理员权限" text="系统管理仅对 admin 账号开放。"/>}<div className="management-tabs" role="navigation" aria-label="系统管理子页面">{tabs.map(item => <a key={item.id} className={active === item.id ? 'selected' : ''} href={`#/admin/${item.id}`}>{item.name}</a>)}</div>{error && <p className="form-error" role="alert">{error}</p>}{notice && <p role="status">{notice}</p>}
+  return <div className="page admin-workspace"><PageHeading eyebrow="运行管理 / 配置" title="系统管理" description="调整识别规则与调查策略，管理回测及关注画像。规则与画像随 detection-queue 下发给检测服务。"/><div className="management-tabs" role="navigation" aria-label="系统管理子页面">{tabs.map(item => <a key={item.id} className={active === item.id ? 'selected' : ''} href={`#/admin/${item.id}`}>{item.name}</a>)}</div>{!isAdmin && <section className="panel admin-permission"><span className="admin-permission-icon"><Icon name="lock" size={25}/></span><h2>需要管理员权限</h2><p>系统管理仅对 admin 账号开放。</p></section>}{error && <p className="form-error" role="alert">{error}</p>}{notice && <p role="status">{notice}</p>}
     {isAdmin && active === 'rules' && <Rules onError={setError} onNotice={setNotice}/ >}{isAdmin && active === 'policies' && <Policies onError={setError} onNotice={setNotice}/ >}{isAdmin && active === 'backtests' && <Backtests id={id} onError={setError} onNotice={setNotice}/ >}{isAdmin && active === 'profiles' && <Profiles onError={setError} onNotice={setNotice}/ >}
   </div>
 }

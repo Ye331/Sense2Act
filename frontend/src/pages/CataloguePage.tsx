@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Icon } from '../components/Icon'
 import { ConfirmDialog } from '../components/ConfirmDialog'
-import { EmptyState, ErrorBar, PageHeading } from '../components/UI'
+import { EmptyState, ErrorBar, ErrorState, PageHeading } from '../components/UI'
 import { api } from '../api/client'
 import type { DocumentDetail, DocumentItem, Evidence, Hit, Signal } from '../api/client'
 import { errorText, formatDate, listDocuments, listSignals, money, newsClues, newsHit, reportCount, ruleNames, score, signalSubject, sourceNames } from '../services/investigations'
@@ -22,18 +22,19 @@ export function CataloguePage({ section, id, onChange }: { section: Section; id?
   const [signals, setSignals] = useState<Signal[]>([])
   const [detail, setDetail] = useState<any>()
   const [error, setError] = useState('')
+  const [loaded, setLoaded] = useState(false)
   const [busy, setBusy] = useState(false)
   const [dismissOpen, setDismissOpen] = useState(false)
   const [query, setQuery] = useState('')
   const [signalFilter, setSignalFilter] = useState('all')
   const [snapshot, setSnapshot] = useState<{ content: string; contentType: string }>()
-  useEffect(() => { let active = true; (async () => {
+  useEffect(() => { let active = true; setLoaded(false); setError(''); (async () => {
     if (id) {
       const result = section === 'documents' ? await api.document(id) : section === 'signals' ? await api.signal(id) : await api.evidence(id)
       if (active) setDetail(result)
     } else if (section === 'documents') { const items = await listDocuments(); if (active) setDocuments(items) }
     else if (section === 'signals') { const items = await listSignals(); if (active) setSignals(items) }
-  })().catch(err => { if (active) setError(errorText(err)) }); return () => { active = false } }, [section, id])
+  })().catch(err => { if (active) setError(errorText(err)) }).finally(() => { if (active) setLoaded(true) }); return () => { active = false } }, [section, id])
 
   const act = async (operation: 'investigate' | 'confirmed' | 'dismissed', reason?: string) => { if (!id) return; setBusy(true); setError(''); try {
     if (operation === 'investigate') { const created = await api.investigateSignal(id); onChange(); window.location.hash = `#/tasks/${created.investigation_id}`; return }
@@ -47,10 +48,11 @@ export function CataloguePage({ section, id, onChange }: { section: Section; id?
   const visibleSignals = signals.filter(signal => matches(`${signal.document.title} ${signal.org?.name} ${signal.id}`) && (signalFilter === 'all' || signal.status === signalFilter))
   const backHref = section === 'evidences' ? detail?.investigation_id ? `#/reports/${detail.investigation_id}` : '#/reports' : `#/${section}`
 
-  return <div className="page tasks-page">{id && <a className="back-link" href={backHref}>← {section === 'evidences' ? '返回报告' : '返回列表'}</a>}
+  return <div className={`page tasks-page${section === 'signals' && !id ? ' signal-worklist' : section === 'documents' && !id ? ' documents-worklist' : ''}`}>{id && <a className="back-link" href={backHref}>← {section === 'evidences' ? '返回报告' : '返回列表'}</a>}
     <PageHeading eyebrow={section === 'signals' ? '研判工作 / 信号' : '资料与关联'} title={title} description={section === 'documents' ? '检索采集的公告与新闻，追溯关联信号与机构。' : section === 'signals' ? '检测服务推送的商机线索：确认、忽略或发起调查。' : '调查结论背后的原始证据与快照。'}/>
-    <ErrorBar message={error}/>
+    {id && <ErrorBar message={error}/>}
     {!id && section !== 'evidences' && <section className="panel task-table-panel"><div className="task-toolbar"><div className="search-box"><Icon name="search" size={18}/><input aria-label="搜索" placeholder="搜索项目、机构或编号" value={query} onChange={event => setQuery(event.target.value)}/></div>{section === 'signals' && <div className="select-wrap"><select aria-label="筛选信号状态" value={signalFilter} onChange={event => setSignalFilter(event.target.value)}><option value="all">全部状态</option>{Object.entries(signalStatus).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></div>}</div>
+      {!loaded ? <div className="loading-state" role="status">正在加载{section === 'signals' ? '商机信号' : '文档'}…</div> : error ? <ErrorState message={error}/> : <>
       <div className="table-count">显示 <strong>{section === 'documents' ? visibleDocuments.length : visibleSignals.length}</strong> / {section === 'documents' ? documents.length : signals.length} 条</div>
       {section === 'signals' ? visibleSignals.length ? <div className="signal-brief-list">{visibleSignals.map(signal => <article className="signal-brief" key={signal.id}>
         <div className="signal-brief-score"><strong>{score(signal)}</strong><span>信号评分</span></div>
@@ -58,8 +60,13 @@ export function CataloguePage({ section, id, onChange }: { section: Section; id?
           <div className="signal-brief-meta">{newsHit(signal) ? <><span>监测主体 {signalSubject(signal)}</span><span>发布 {signal.document.publish_date}</span><span>{reportCount(signal)} 篇报道</span></> : <>{signal.org && <a href={`#/organizations/${signal.org.id}`}>{signal.org.name} ↗</a>}<span>发布 {signal.document.publish_date}</span><span>预算 {money(signal.document.amount)}</span></>}</div>
           <div className="signal-brief-rules">{signal.hits.map((hit, index) => <span key={`${hit.rule_type}-${index}`}>{ruleNames[hit.rule_type] || hit.rule_type}</span>)}</div></div>
         <a className="button button-secondary signal-brief-action" href={`#/signals/${signal.id}`}>进入研判 <Icon name="arrow" size={15}/></a>
-      </article>)}</div> : <EmptyState title="暂无信号" text="检测服务发现商机后会出现在这里。"/>
-      : visibleDocuments.length ? <div className="table-scroll"><table className="task-table"><thead><tr><th>标题</th><th>机构</th><th>金额</th><th>发布日期</th><th>操作</th></tr></thead><tbody>{visibleDocuments.map(doc => <tr key={doc.id}><td><strong>{doc.doc_type !== 'announcement' && <span className="doc-type-tag">{docTypes[doc.doc_type] || doc.doc_type}</span>}{doc.title}</strong>{(doc.category || doc.region) && <small className="management-subline">{[doc.category, doc.region].filter(Boolean).join(' · ')}</small>}</td><td>{doc.org?.name || '—'}</td><td>{doc.doc_type === 'news' ? '—' : money(doc.amount)}</td><td>{doc.publish_date}</td><td><a className="table-view" href={`#/documents/${doc.id}`}>查看详情 →</a></td></tr>)}</tbody></table></div> : <EmptyState title="暂无文档" text="爬虫推送或运行演示种子脚本后会出现在这里。"/>}
+      </article>)}</div> : <EmptyState title={signals.length ? "没有匹配的商机信号" : "暂无商机信号"} text={signals.length ? "试试其他关键词或状态。" : "检测服务发现商机后会出现在这里。"}/>
+      : visibleDocuments.length ? <div className="document-results">{visibleDocuments.map(doc => <article className="document-result" key={doc.id}>
+        <span className="document-result-icon" aria-hidden="true"><Icon name="file" size={19}/></span>
+        <div className="document-result-main"><h2><a href={`#/documents/${doc.id}`}>{doc.title}</a></h2><div className="document-result-meta"><span>{doc.org?.name || '—'}</span>{(doc.category || doc.region) && <span>{[doc.category, doc.region].filter(Boolean).join(' · ')}</span>}</div></div>
+        <span className="doc-type-tag">{docTypes[doc.doc_type] || doc.doc_type}</span><span className="document-result-amount">{doc.doc_type === 'news' ? '—' : money(doc.amount)}</span><time className="document-result-date">{doc.publish_date || '—'}</time><a className="table-view" href={`#/documents/${doc.id}`}>查看详情 <Icon name="arrow" size={14}/></a>
+      </article>)}</div> : <EmptyState title={documents.length ? "没有匹配的文档" : "暂无文档"} text={documents.length ? "试试其他关键词。" : "采集到文档后会显示在这里。"}/>}
+      </>}
     </section>}
     {id && !detail && !error && <div className="loading-state">正在读取详情…</div>}
     {id && section === 'documents' && detail && <DocumentView doc={detail} busy={busy} onSnapshot={openSnapshot}/>}

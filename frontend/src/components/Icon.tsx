@@ -1,6 +1,6 @@
 import type { SVGProps } from 'react'
 
-type Name = 'overview' | 'tasks' | 'agent' | 'report' | 'search' | 'plus' | 'arrow' | 'chevron' | 'filter' | 'file' | 'check' | 'clock' | 'shield' | 'layers' | 'activity' | 'close' | 'external' | 'spark' | 'alert' | 'download' | 'database'
+type Name = 'overview' | 'tasks' | 'agent' | 'report' | 'search' | 'plus' | 'arrow' | 'chevron' | 'filter' | 'file' | 'check' | 'clock' | 'shield' | 'layers' | 'activity' | 'bell' | 'close' | 'external' | 'spark' | 'alert' | 'download' | 'database' | 'lock'
 
 const paths: Record<Name, React.ReactNode> = {
   overview: <><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></>,
@@ -15,11 +15,13 @@ const paths: Record<Name, React.ReactNode> = {
   shield: <><path d="M12 2 4 5v6c0 5 3 8 8 11 5-3 8-6 8-11V5z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></>,
   layers: <><path d="m12 3 9 5-9 5-9-5zM3 12l9 5 9-5M3 16l9 5 9-5"/></>,
   activity: <path d="M3 12h4l3-7 4 14 3-7h4"/>, close: <path d="M5 5l14 14M19 5 5 19"/>,
+  bell: <><path d="M18 8a6 6 0 0 0-12 0c0 7-3 8-3 9h18c0-1-3-2-3-9"/><path d="M10 21h4"/></>,
   external: <><path d="M13 5h6v6M19 5l-9 9"/><path d="M19 14v5H5V5h5"/></>,
   spark: <><path d="m12 2 1.5 6.5L20 10l-6.5 1.5L12 18l-1.5-6.5L4 10l6.5-1.5zM19 17l.5 2.5L22 20l-2.5.5L19 23l-.5-2.5L16 20l2.5-.5z"/></>,
   alert: <><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 17h.01"/></>,
   download: <><path d="M12 3v12m-4-4 4 4 4-4M4 17v4h16v-4"/></>,
   database: <><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></>,
+  lock: <><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 15v2"/></>,
 }
 
 export function Icon({ name, size = 18, ...props }: SVGProps<SVGSVGElement> & { name: Name; size?: number }) {

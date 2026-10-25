@@ -1,0 +1,119 @@
+/* Scoped presentation for the event, source and administration workspaces. */
+main.main-content:has(> .events-workspace),
+main.main-content:has(> .sources-workspace),
+main.main-content:has(> .admin-workspace) {
+  max-width: none;
+  min-width: 0;
+  min-height: calc(100vh - 68px);
+  padding: 28px clamp(24px, 2.8vw, 52px) 56px;
+  background: #f2f5f9;
+}
+
+.events-workspace, .sources-workspace, .admin-workspace { width: min(100%, 1480px); margin: 0 auto; min-width: 0; }
+.events-workspace .page-heading, .sources-workspace .page-heading, .admin-workspace .page-heading { margin-bottom: 22px; }
+.events-workspace .page-heading .eyebrow, .sources-workspace .page-heading .eyebrow, .admin-workspace .page-heading .eyebrow { display: block; color: #45769d; font-size: 12px; font-weight: 650; letter-spacing: 0; margin: 0 0 7px; }
+.events-workspace .page-heading h1, .sources-workspace .page-heading h1, .admin-workspace .page-heading h1 { color: #172e45; font-size: clamp(30px, 2.25vw, 34px); font-weight: 660; line-height: 1.2; letter-spacing: -.04em; }
+.events-workspace .page-heading p, .sources-workspace .page-heading p, .admin-workspace .page-heading p { color: #65788e; font-size: 14px; line-height: 1.65; margin-top: 7px; }
+
+.events-workspace .task-table-panel, .sources-workspace .task-table-panel,
+.admin-workspace .task-table-panel, .admin-workspace .report-section,
+.sources-workspace .report-section, .admin-workspace .admin-permission {
+  border: 0;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 5px 18px #27435a08;
+  overflow: hidden;
+}
+.events-workspace .table-count, .sources-workspace .table-count, .admin-workspace .table-count { padding: 19px 24px 7px; font-size: 13px; color: #65788e; }
+.events-workspace .table-count strong, .sources-workspace .table-count strong, .admin-workspace .table-count strong { color: #172e45; font-weight: 680; }
+.events-workspace .task-table, .sources-workspace .task-table, .admin-workspace .task-table { width: 100%; table-layout: fixed; border-collapse: collapse; font-size: 13px; }
+.events-workspace .task-table th, .sources-workspace .task-table th, .admin-workspace .task-table th { background: #fff; color: #74879a; border: 0; padding: 14px 24px 11px; text-align: left; font-size: 12px; font-weight: 650; letter-spacing: 0; }
+.events-workspace .task-table td, .sources-workspace .task-table td, .admin-workspace .task-table td { border: 0; border-top: 1px solid #edf0f3; padding: 17px 24px; vertical-align: middle; color: #405870; font-size: 13px; line-height: 1.55; overflow-wrap: anywhere; }
+.events-workspace .task-table tbody tr:hover td, .sources-workspace .task-table tbody tr:hover td, .admin-workspace .task-table tbody tr:hover td { background: #f8fafc; }
+.events-workspace .task-table td strong, .sources-workspace .task-table td strong, .admin-workspace .task-table td:first-child { color: #172e45; font-size: 14px; font-weight: 630; }
+.events-workspace .management-subline, .sources-workspace .management-subline { margin-top: 4px; color: #74879a; font-size: 12px; line-height: 1.45; font-weight: 400; }
+.events-workspace .table-view, .sources-workspace .table-view, .admin-workspace .table-view { color: #246ba5; font-weight: 650; white-space: nowrap; }
+.events-workspace .table-view:hover, .sources-workspace .table-view:hover, .admin-workspace .table-view:hover { color: #164e7d; text-decoration: underline; text-underline-offset: 3px; }
+.events-workspace .table-view:focus-visible, .sources-workspace .table-view:focus-visible, .admin-workspace .table-view:focus-visible { outline: 2px solid #246ba5; outline-offset: 4px; border-radius: 2px; }
+.events-workspace .operations-date, .sources-workspace .operations-date { color: #65788e; font-variant-numeric: tabular-nums; }
+.events-workspace .operations-type { display: inline-flex; align-items: center; max-width: 100%; color: #326a8f; background: #edf4f8; border-radius: 4px; padding: 3px 7px; font-size: 12px; font-weight: 600; }
+.events-workspace .task-table th:nth-child(1) { width: 53%; }
+.events-workspace .task-table th:nth-child(2) { width: 19%; }
+.events-workspace .task-table th:nth-child(3) { width: 17%; }
+.events-workspace .task-table th:nth-child(4) { width: 11%; }
+.sources-workspace .task-table th:nth-child(1) { width: 26%; }
+.sources-workspace .task-table th:nth-child(2) { width: 26%; }
+.sources-workspace .task-table th:nth-child(3) { width: 18%; }
+.sources-workspace .task-table th:nth-child(4) { width: 11%; }
+.sources-workspace .task-table th:nth-child(5) { width: 19%; }
+.sources-workspace .task-table:has(th:nth-child(6)) th:nth-child(1) { width: 22%; }
+.sources-workspace .task-table:has(th:nth-child(6)) th:nth-child(2) { width: 22%; }
+.sources-workspace .task-table:has(th:nth-child(6)) th:nth-child(3) { width: 16%; }
+.sources-workspace .task-table:has(th:nth-child(6)) th:nth-child(4) { width: 10%; }
+.sources-workspace .task-table:has(th:nth-child(6)) th:nth-child(5) { width: 15%; }
+.sources-workspace .task-table:has(th:nth-child(6)) th:nth-child(6) { width: 15%; }
+.sources-workspace .cron-value { color: #536b80; white-space: normal; overflow-wrap: anywhere; font-size: 12px; }
+.sources-workspace .signal-status { font-size: 12px; }
+.sources-workspace .management-actions .button { min-height: 32px; font-size: 12px; }
+
+.operations-state { padding: 52px 24px 62px; color: #65788e; font-size: 14px; text-align: center; }
+.operations-empty { min-height: 215px; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 28px 24px 36px; text-align: center; }
+.operations-empty-icon, .admin-permission-icon { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: #edf4f8; color: #246ba5; margin-bottom: 14px; }
+.operations-empty strong, .admin-permission h2 { color: #172e45; font-size: 17px; font-weight: 660; line-height: 1.35; }
+.operations-empty p, .admin-permission p { max-width: 440px; color: #65788e; font-size: 13px; line-height: 1.6; margin-top: 7px; }
+
+.admin-workspace .management-tabs { display: flex; align-items: stretch; flex-wrap: nowrap; gap: 28px; overflow-x: auto; margin: 0 0 16px; padding: 0 2px; border: 0; scrollbar-width: thin; }
+.admin-workspace .management-tabs a { flex: none; display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 2px 11px; border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: transparent; color: #65788e; font-size: 14px; font-weight: 580; white-space: nowrap; transition: color .16s ease, border-color .16s ease; }
+.admin-workspace .management-tabs a:hover { color: #246ba5; }
+.admin-workspace .management-tabs a.selected { color: #246ba5; border-bottom-color: #246ba5; background: transparent; font-weight: 680; }
+.admin-workspace .management-tabs a:focus-visible { outline: 2px solid #246ba5; outline-offset: -4px; border-radius: 3px; }
+.admin-workspace .admin-permission { min-height: 248px; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 36px 24px; text-align: center; }
+.admin-workspace .admin-permission-icon { width: 56px; height: 56px; margin-bottom: 17px; }
+.admin-workspace .admin-permission h2 { font-size: 18px; }
+.admin-workspace .admin-permission p { font-size: 14px; }
+.admin-workspace .report-section { margin-bottom: 16px; }
+.admin-workspace .panel-heading { padding: 22px 24px 18px; }
+.admin-workspace .panel-heading h2 { color: #172e45; font-size: 18px; font-weight: 650; }
+.admin-workspace .management-form { padding: 0 24px 24px; gap: 14px; }
+.admin-workspace .management-form .field { max-width: 340px; }
+.admin-workspace .management-form .field span { color: #52687c; font-size: 13px; }
+.admin-workspace .management-form .field input, .admin-workspace .management-form .field select,
+.sources-workspace .management-form .field input, .sources-workspace .management-form .field select,
+.sources-workspace .management-form .field textarea { color: #172e45; background: #fff; border: 1px solid #d8e2ea; border-radius: 6px; font-size: 14px; }
+.admin-workspace .management-form .field input:focus-visible, .admin-workspace .management-form .field select:focus-visible,
+.sources-workspace .management-form .field input:focus-visible, .sources-workspace .management-form .field select:focus-visible,
+.sources-workspace .management-form .field textarea:focus-visible { outline: 2px solid #246ba5; outline-offset: 1px; box-shadow: none; }
+.sources-workspace .report-section { margin-bottom: 16px; }
+.sources-workspace .panel-heading { padding: 22px 24px 18px; }
+.sources-workspace .panel-heading h2 { color: #172e45; font-size: 18px; }
+.sources-workspace .management-form { padding: 0 24px 24px; }
+.sources-workspace .management-form .field span { color: #52687c; font-size: 13px; }
+
+@media (max-width: 1100px) {
+  .sources-workspace .task-table th, .sources-workspace .task-table td { padding-left: 14px; padding-right: 14px; }
+  .sources-workspace .task-table:has(th:nth-child(6)) { min-width: 900px; }
+}
+@media (max-width: 760px) {
+  body:has(.events-workspace), body:has(.sources-workspace), body:has(.admin-workspace) { min-width: 0; }
+  main.main-content:has(> .events-workspace), main.main-content:has(> .sources-workspace), main.main-content:has(> .admin-workspace) { min-height: 0; padding: 22px 15px 48px; }
+  .events-workspace .page-heading h1, .sources-workspace .page-heading h1, .admin-workspace .page-heading h1 { font-size: 30px; }
+  .events-workspace .table-count, .sources-workspace .table-count { padding: 17px 17px 7px; }
+  .events-workspace .task-table, .sources-workspace .task-table, .sources-workspace .task-table:has(th:nth-child(6)) { min-width: 0; }
+  .events-workspace .task-table thead, .sources-workspace .task-table thead { display: none; }
+  .events-workspace .task-table tbody, .sources-workspace .task-table tbody { display: block; }
+  .events-workspace .task-table tr, .sources-workspace .task-table tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 9px 12px; padding: 17px; border-top: 1px solid #edf0f3; }
+  .events-workspace .task-table td, .sources-workspace .task-table td { display: block; min-width: 0; padding: 0; border: 0; }
+  .events-workspace .task-table td:first-child, .sources-workspace .task-table td:first-child { grid-column: 1 / -1; }
+  .events-workspace .task-table td:last-child { grid-column: 2; grid-row: 2; justify-self: end; text-align: right; }
+  .sources-workspace .task-table td:nth-child(2) { grid-column: 1 / -1; }
+  .sources-workspace .task-table td:nth-child(3), .sources-workspace .task-table td:nth-child(4), .sources-workspace .task-table td:nth-child(5) { grid-column: 1 / -1; display: flex; gap: 8px; align-items: baseline; }
+  .sources-workspace .task-table td:nth-child(3)::before, .sources-workspace .task-table td:nth-child(4)::before, .sources-workspace .task-table td:nth-child(5)::before { content: attr(data-label); flex: none; color: #8393a3; font-size: 12px; }
+  .sources-workspace .task-table td:has(.management-actions) { grid-column: 1 / -1; grid-row: auto; justify-self: stretch; text-align: left; }
+  .sources-workspace .task-table td:has(.management-actions) .management-actions { justify-content: flex-start; }
+  .events-workspace .task-table td strong, .sources-workspace .task-table td strong { display: block; overflow-wrap: anywhere; }
+  .admin-workspace .management-tabs { gap: 22px; }
+  .admin-workspace .management-form .field, .sources-workspace .management-form .field { max-width: none; flex-basis: 100%; }
+  .admin-workspace .task-table, .sources-workspace .task-table { table-layout: auto; }
+  .admin-workspace .table-scroll { overflow-x: auto; }
+  .admin-workspace .task-table { min-width: 660px; }
+}
