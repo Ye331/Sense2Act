@@ -13,6 +13,10 @@ export function NatureBadge({ nature }: { nature: ClaimNature }) { return <span 
 export function EmptyState({ title, text, action }: { title: string; text: string; action?: ReactNode }) {
   return <div className="empty-state"><span className="empty-icon"><Icon name="file" size={26}/></span><strong>{title}</strong><p>{text}</p>{action}</div>
 }
+export function ErrorState({ message, title = '加载失败' }: { message: string; title?: string }) {
+  return <div className="empty-state" role="alert"><span className="empty-icon"><Icon name="alert" size={26}/></span><strong>{title}</strong><p>{message}</p></div>
+}
+
 export function PageHeading({ eyebrow, title, description, action }: { eyebrow: string; title: string; description: string; action?: ReactNode }) {
   return <div className="page-heading"><div>{eyebrow && <span className="eyebrow">{eyebrow}</span>}<h1>{title}</h1><p>{description}</p></div>{action && <div className="heading-action">{action}</div>}</div>
 }

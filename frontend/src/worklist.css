@@ -1,0 +1,194 @@
+/* Signal and investigation indexes only. Detail views and other pages retain their styles. */
+main.main-content:has(> .signal-worklist),
+main.main-content:has(> .tasks-worklist) {
+  max-width: none;
+  min-height: calc(100vh - 62px);
+  padding: 27px clamp(24px, 2.8vw, 52px) 64px;
+  background: #f2f5f9;
+}
+
+.signal-worklist,
+.tasks-worklist {
+  width: 100%;
+  max-width: 1480px;
+  margin: 0 auto;
+  color: #172e45;
+}
+
+.signal-worklist .page-heading,
+.tasks-worklist .page-heading { align-items: flex-end; gap: 24px; margin-bottom: 22px; }
+.signal-worklist .eyebrow,
+.tasks-worklist .eyebrow { margin-bottom: 8px; color: #246ba5; font-size: 13px; font-weight: 550; letter-spacing: 0; }
+.signal-worklist .page-heading h1,
+.tasks-worklist .page-heading h1 { color: #172e45; font-size: clamp(30px, 2.25vw, 34px); font-weight: 660; line-height: 1.2; letter-spacing: -.04em; }
+.signal-worklist .page-heading p,
+.tasks-worklist .page-heading p { margin-top: 7px; color: #65788e; font-size: 14px; line-height: 1.6; }
+.tasks-worklist .heading-action { padding: 0 0 2px; }
+.tasks-worklist .heading-action .button { min-height: 42px; padding: 0 17px; border: 1px solid #246ba5; border-radius: 7px; background: #246ba5; color: #fff; box-shadow: none; font-size: 13px; font-weight: 620; transition: background-color .16s ease, border-color .16s ease; }
+.tasks-worklist .heading-action .button:hover { background: #195581; border-color: #195581; transform: none; }
+.tasks-worklist .heading-action .button:disabled { opacity: .55; cursor: not-allowed; }
+
+.signal-worklist .task-table-panel,
+.tasks-worklist .task-table-panel { overflow: hidden; border: 0; border-radius: 10px; background: #fff; box-shadow: 0 5px 18px #27435a08; }
+.signal-worklist .task-toolbar,
+.tasks-worklist .task-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 19px 22px 14px; border: 0; background: #fff; }
+.signal-worklist .search-box,
+.tasks-worklist .search-box { flex: 1 1 380px; max-width: 520px; min-width: min(100%, 270px); height: 42px; min-height: 42px; border: 1px solid #dce5ec; border-radius: 6px; background: #fff; color: #738ba1; transition: border-color .16s ease, box-shadow .16s ease; }
+.signal-worklist .search-box:hover,
+.tasks-worklist .search-box:hover { border-color: #b9cbda; }
+.signal-worklist .search-box:focus-within,
+.tasks-worklist .search-box:focus-within { border-color: #246ba5; box-shadow: 0 0 0 3px #246ba51a; }
+.signal-worklist .search-box input,
+.tasks-worklist .search-box input { min-width: 0; color: #172e45; font-size: 14px; }
+.signal-worklist .search-box input::placeholder,
+.tasks-worklist .search-box input::placeholder { color: #8194a7; }
+.signal-worklist .select-wrap,
+.tasks-worklist .select-wrap { min-width: 148px; }
+.signal-worklist .select-wrap select,
+.tasks-worklist .select-wrap select { width: 100%; min-height: 42px; height: 42px; border: 1px solid #dce5ec; border-radius: 6px; background-color: #fff; color: #405e78; font-size: 14px; cursor: pointer; transition: border-color .16s ease, box-shadow .16s ease; }
+.signal-worklist .select-wrap select:hover,
+.tasks-worklist .select-wrap select:hover { border-color: #b9cbda; }
+.signal-worklist .select-wrap select:focus-visible,
+.tasks-worklist .select-wrap select:focus-visible { outline: 0; border-color: #246ba5; box-shadow: 0 0 0 3px #246ba51a; }
+.signal-worklist .table-count,
+.tasks-worklist .table-count { padding: 0 22px 14px; color: #71859a; font-size: 13px; line-height: 1.5; }
+.signal-worklist .table-count strong,
+.tasks-worklist .table-count strong { color: #172e45; font-weight: 650; }
+
+/* Signals read as one compact research list, not a stack of cards. */
+.signal-worklist .signal-brief-list { padding: 0 22px 5px; }
+.signal-worklist .signal-brief { grid-template-columns: 64px minmax(0, 1fr) auto; align-items: center; gap: 18px; padding: 19px 1px; border-top: 1px solid #e9eef2; transition: background-color .16s ease; }
+.signal-worklist .signal-brief:hover { background: #f8fafc; }
+.signal-worklist .signal-brief-score { min-height: 62px; padding: 9px 4px; border-radius: 7px; background: #edf3f8; color: #246ba5; }
+.signal-worklist .signal-brief-score strong { font-size: 24px; font-weight: 660; line-height: 1.15; }
+.signal-worklist .signal-brief-score span { margin-top: 3px; color: #71859a; font-size: 11px; }
+.signal-worklist .signal-brief-heading { align-items: center; gap: 12px; }
+.signal-worklist .signal-brief h2 { min-width: 0; color: #172e45; font-size: 16px; font-weight: 630; line-height: 1.5; overflow-wrap: anywhere; }
+.signal-worklist .signal-brief h2 a:hover { color: #246ba5; text-decoration: underline; text-underline-offset: 3px; }
+.signal-worklist .signal-status { flex: none; padding: 4px 8px; font-size: 12px; font-weight: 600; }
+.signal-worklist .signal-brief-meta { gap: 3px 16px; margin-top: 6px; color: #65788e; font-size: 12px; line-height: 1.6; }
+.signal-worklist .signal-brief-meta a { color: #527596; }
+.signal-worklist .signal-brief-meta a:hover { color: #246ba5; text-decoration: underline; }
+.signal-worklist .signal-brief-rules { gap: 6px; margin-top: 9px; }
+.signal-worklist .signal-brief-rules span { padding: 2px 7px; border: 0; border-radius: 4px; background: #f1f4f7; color: #65788e; font-size: 11px; }
+.signal-worklist .signal-brief-action { min-height: 34px; padding: 0 11px; border-color: #c8d8e5; border-radius: 5px; background: #fff; color: #246ba5; box-shadow: none; font-size: 12px; }
+.signal-worklist .signal-brief-action:hover { border-color: #246ba5; background: #f4f8fb; transform: none; }
+
+/* Tasks keep their operational columns on desktop and become labelled rows on phones. */
+.tasks-worklist .table-scroll { overflow-x: auto; }
+.tasks-worklist .task-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tasks-worklist .task-table th { padding: 11px 20px; border-top: 1px solid #e9eef2; border-bottom: 1px solid #e9eef2; background: #f8fafc; color: #71859a; font-size: 12px; font-weight: 580; white-space: nowrap; }
+.tasks-worklist .task-table td { padding: 17px 20px; border-bottom: 1px solid #e9eef2; color: #38516a; font-size: 13px; line-height: 1.5; white-space: nowrap; }
+.tasks-worklist .task-table tbody tr:last-child td { border-bottom: 0; }
+.tasks-worklist .task-table tbody tr { transition: background-color .16s ease; }
+.tasks-worklist .task-table tbody tr:hover td { background: #f8fafc; }
+.tasks-worklist .task-table td:first-child { width: 42%; min-width: 260px; white-space: normal; }
+.tasks-worklist .task-name-cell { align-items: center; gap: 12px; min-width: 0; }
+.tasks-worklist .task-type-icon { flex: none; width: 39px; height: 39px; border-radius: 50%; background: #edf3f8; color: #4e7ca5; }
+.tasks-worklist .task-name-cell > div { min-width: 0; }
+.tasks-worklist .task-name-cell strong { display: block; max-width: none; color: #172e45; font-size: 14px; font-weight: 630; line-height: 1.5; overflow-wrap: anywhere; }
+.tasks-worklist .task-name-cell small { display: block; margin-top: 4px; color: #71859a; font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.tasks-worklist .status-badge { padding: 5px 8px; border-radius: 4px; font-size: 12px; }
+.tasks-worklist .evidence-cell { color: #526f88; }
+.tasks-worklist .muted-cell { color: #71859a; }
+.tasks-worklist .table-view { display: inline-flex; align-items: center; gap: 5px; color: #246ba5; font-size: 12px; font-weight: 620; }
+.tasks-worklist .table-view:hover { color: #164f7b; text-decoration: underline; text-underline-offset: 3px; }
+
+.signal-worklist .empty-state,
+.tasks-worklist .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 210px; padding: 24px 18px 30px; border-top: 1px solid #e9eef2; text-align: center; }
+.signal-worklist .empty-icon,
+.tasks-worklist .empty-icon { display: grid; place-items: center; width: 48px; height: 48px; margin: 0 0 12px; border: 0; border-radius: 50%; background: #edf3f8; color: #718da7; }
+.signal-worklist .empty-state strong,
+.tasks-worklist .empty-state strong { color: #172e45; font-size: 16px; font-weight: 620; line-height: 1.5; }
+.signal-worklist .empty-state p,
+.tasks-worklist .empty-state p { margin-top: 5px; color: #65788e; font-size: 13px; line-height: 1.55; }
+.tasks-worklist .empty-state .button { min-height: 35px; margin-top: 13px; border: 1px solid #9fc1db; border-radius: 5px; background: #fff; color: #246ba5; box-shadow: none; font-size: 12px; }
+.tasks-worklist .empty-state .button:hover { border-color: #246ba5; background: #f5f9fc; transform: none; }
+.signal-worklist a:focus-visible,
+.tasks-worklist a:focus-visible,
+.tasks-worklist button:focus-visible { outline: 2px solid #246ba5; outline-offset: 3px; }
+
+@media (max-width: 1024px) {
+  .signal-worklist .signal-brief { grid-template-columns: 58px minmax(0, 1fr); }
+  .signal-worklist .signal-brief-action { grid-column: 2; justify-self: start; }
+  .tasks-worklist .task-table th,
+  .tasks-worklist .task-table td { padding-left: 13px; padding-right: 13px; }
+}
+@media (max-width: 760px) {
+  body:has(.signal-worklist),
+  body:has(.tasks-worklist) { min-width: 0; }
+  main.main-content:has(> .signal-worklist),
+  main.main-content:has(> .tasks-worklist) { min-height: 0; padding: 22px 15px 48px; }
+  .signal-worklist .page-heading,
+  .tasks-worklist .page-heading { align-items: flex-start; flex-direction: column; gap: 15px; }
+  .signal-worklist .page-heading h1,
+  .tasks-worklist .page-heading h1 { font-size: 30px; }
+  .signal-worklist .task-toolbar,
+  .tasks-worklist .task-toolbar { padding: 16px 16px 12px; }
+  .signal-worklist .search-box,
+  .tasks-worklist .search-box { flex-basis: 100%; min-width: 0; }
+  .signal-worklist .select-wrap,
+  .tasks-worklist .select-wrap { flex: 1; min-width: 0; }
+  .signal-worklist .table-count,
+  .tasks-worklist .table-count { padding-left: 16px; padding-right: 16px; }
+  .signal-worklist .signal-brief-list { padding: 0 16px 4px; }
+  .signal-worklist .signal-brief { gap: 12px; }
+  .signal-worklist .signal-brief-heading { align-items: flex-start; flex-direction: column; gap: 5px; }
+}
+@media (max-width: 640px) {
+  .tasks-worklist .table-scroll { overflow: visible; }
+  .tasks-worklist .task-table,
+  .tasks-worklist .task-table tbody,
+  .tasks-worklist .task-table tr,
+  .tasks-worklist .task-table td { display: block; width: 100%; }
+  .tasks-worklist .task-table thead { display: none; }
+  .tasks-worklist .task-table tr { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px 12px; padding: 17px 16px; border-top: 1px solid #e9eef2; }
+  .tasks-worklist .task-table td,
+  .tasks-worklist .task-table td:first-child { min-width: 0; width: auto; padding: 0; border: 0; white-space: normal; }
+  .tasks-worklist .task-table td:first-child { grid-column: 1 / -1; margin-bottom: 3px; }
+  .tasks-worklist .task-table td::before { display: block; margin-bottom: 2px; color: #8396a9; content: attr(data-label); font-size: 11px; }
+  .tasks-worklist .task-table td:first-child::before { display: none; }
+  .tasks-worklist .task-table td:last-child { align-self: end; }
+  .tasks-worklist .task-table td:last-child::before { display: none; }
+}
+
+/* Keep one control edge: the search shell owns focus, while select owns its border. */
+.signal-worklist .search-box input:focus-visible,
+.tasks-worklist .search-box input:focus-visible { outline: none; box-shadow: none; }
+.signal-worklist .search-box:focus-within,
+.tasks-worklist .search-box:focus-within { border-color: #246ba5; box-shadow: 0 0 0 2px #246ba522; }
+.signal-worklist .select-wrap,
+.tasks-worklist .select-wrap { height: 42px; padding: 0; border: 0; border-radius: 6px; background: transparent; }
+.signal-worklist .select-wrap select,
+.tasks-worklist .select-wrap select { padding-left: 12px; outline: none; box-shadow: none; }
+.signal-worklist .select-wrap select:focus-visible,
+.tasks-worklist .select-wrap select:focus-visible { border-color: #246ba5; box-shadow: 0 0 0 2px #246ba522; }
+
+/* The investigation dialog is local to the task list; other dialogs are untouched. */
+.tasks-worklist .investigation-modal-backdrop { padding: 20px; background: rgba(20, 24, 31, .4); }
+.tasks-worklist .investigation-modal { width: min(560px, 100%); max-height: calc(100vh - 40px); overflow-y: auto; border-radius: 10px; background: #fff; box-shadow: 0 16px 48px #14181f24; }
+.tasks-worklist .investigation-modal .modal-header { padding: 24px 24px 0; gap: 18px; }
+.tasks-worklist .investigation-modal .modal-header h2 { margin-top: 3px; color: #172e45; font-size: 22px; font-weight: 650; }
+.tasks-worklist .investigation-modal .modal-header p { margin-top: 10px; color: #65788e; font-size: 13px; line-height: 1.6; }
+.tasks-worklist .investigation-modal .icon-button { width: 34px; height: 34px; flex: none; border-radius: 6px; background: #f3f6f8; color: #65788e; }
+.tasks-worklist .investigation-modal .icon-button:hover { background: #e9eff3; color: #172e45; }
+.tasks-worklist .investigation-modal .icon-button:focus-visible { outline: 2px solid #246ba5; outline-offset: 2px; }
+.tasks-worklist .investigation-modal .form-body { padding: 24px 24px 15px; }
+.tasks-worklist .investigation-modal .field { margin-bottom: 12px; }
+.tasks-worklist .investigation-modal .field label { margin-bottom: 8px; color: #405a72; font-size: 13px; }
+.tasks-worklist .investigation-modal .form-body select { min-height: 42px; color: #172e45; font-size: 14px; }
+.tasks-worklist .investigation-modal .form-body > p { margin: 11px 0 0; color: #65788e; font-size: 13px; line-height: 1.6; }
+.tasks-worklist .investigation-modal .modal-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 11px; padding: 0 24px 24px; }
+.tasks-worklist .investigation-modal .modal-actions .button { min-height: 40px; padding: 0 16px; border-radius: 6px; box-shadow: none; font-size: 13px; }
+.tasks-worklist .investigation-modal .modal-actions .button-secondary { border-color: #ccd9e3; background: #fff; color: #405e78; }
+.tasks-worklist .investigation-modal .modal-actions .button-secondary:hover { border-color: #9db7c9; background: #f7f9fb; }
+.tasks-worklist .investigation-modal .modal-actions .button-primary:not(:disabled) { border-color: #246ba5; background: #246ba5; color: #fff; }
+.tasks-worklist .investigation-modal .modal-actions .button-primary:not(:disabled):hover { border-color: #195581; background: #195581; transform: none; }
+.tasks-worklist .investigation-modal .modal-actions .button-primary:disabled { border-color: #e3e8ed; background: #edf1f4; color: #8999a8; cursor: not-allowed; }
+@media (max-width: 420px) {
+  .tasks-worklist .investigation-modal-backdrop { padding: 12px; }
+  .tasks-worklist .investigation-modal { max-height: calc(100vh - 24px); }
+  .tasks-worklist .investigation-modal .modal-header { padding: 20px 20px 0; }
+  .tasks-worklist .investigation-modal .form-body { padding: 20px 20px 14px; }
+  .tasks-worklist .investigation-modal .modal-actions { padding: 0 20px 20px; }
+}

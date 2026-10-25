@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ConfirmDialog } from '../components/ConfirmDialog'
 import { ErrorBar, PageHeading } from '../components/UI'
+import { Icon } from '../components/Icon'
 import { api } from '../api/client'
 import type { Source } from '../api/client'
 import { errorText, formatDate } from '../services/investigations'
@@ -48,8 +49,10 @@ export function SourcesPage({ canEdit }: { canEdit: boolean }) {
   const [error, setError] = useState('')
   const [notice, setNotice] = useState('')
   const [busy, setBusy] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [loadFailed, setLoadFailed] = useState(false)
   const load = async () => setRows((await api.sources()).items)
-  useEffect(() => { load().catch(err => setError(errorText(err))) }, [])
+  useEffect(() => { load().catch(err => { setLoadFailed(true); setError(errorText(err)) }).finally(() => setLoading(false)) }, [])
   const action = async (work: () => Promise<unknown>, success: string) => {
     setBusy(true); setError(''); setNotice('')
     try { await work(); await load(); setNotice(success) } catch (err) { setError(errorText(err)) } finally { setBusy(false) }
@@ -60,7 +63,7 @@ export function SourcesPage({ canEdit }: { canEdit: boolean }) {
   }, editing ? '信息源已更新' : '信息源已新增')
   const field = (key: Exclude<keyof Form, 'enabled'>) => ({ value: form[key], onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => setForm({ ...form, [key]: event.target.value }) })
   const example = adapters.find(item => item.value === form.adapter)?.example
-  return <div className="page"><PageHeading eyebrow="运行管理 / 采集" title="信息源管理" description="采集服务按运行计划领取到期信息源（ingest-queue），抓取入库后回报运行结果，健康度随之更新。"/>
+  return <div className="page sources-workspace"><PageHeading eyebrow="运行管理 / 采集" title="信息源管理" description="采集服务按运行计划领取到期信息源（ingest-queue），抓取入库后回报运行结果，健康度随之更新。"/>
     <ErrorBar message={error}/>{notice && <p role="status">{notice}</p>}
     {canEdit && <section className="panel report-section"><div className="panel-heading"><h2>{editing ? '编辑信息源' : '新增信息源'}</h2></div><div className="management-form">
       <label className="field"><span>名称 *</span><input aria-label="信息源名称" {...field('name')}/></label>
@@ -72,7 +75,7 @@ export function SourcesPage({ canEdit }: { canEdit: boolean }) {
       <label className="field field-wide"><span>采集配置（JSON）{example && <small className="field-hint">示例：{example}</small>}</span><textarea className="code-input" aria-label="采集配置" rows={3} spellCheck={false} {...field('config')}/></label>
       <button className="button button-primary" disabled={busy || !form.name || !form.url} onClick={save}>{editing ? '保存修改' : '新增信息源'}</button>{editing && <button className="button button-secondary" onClick={() => { setEditing(null); setForm(empty) }}>取消编辑</button>}
     </div></section>}
-    <section className="panel task-table-panel"><div className="table-count">共 <strong>{rows.length}</strong> 个信息源</div><div className="table-scroll"><table className="task-table"><thead><tr><th>名称 / 地址</th><th>适配器 / 配置</th><th>计划</th><th>健康度</th><th>最近运行</th>{canEdit && <th>操作</th>}</tr></thead><tbody>{rows.map(row => { const [label, className] = healthNames[row.health || ''] || ['未知', 'signal-status-dismissed']; return <tr key={row.id}><td><strong>{row.name}</strong><small className="management-subline">{row.url}</small></td><td>{adapterLabel(row.adapter)}<small className="management-subline">{typeNames[row.type] || row.type}{configSummary(row.config) && ` · ${configSummary(row.config)}`}</small></td><td>{row.schedule_cron ? <code className="cron-value">{row.schedule_cron}</code> : '仅手动'}</td><td><span className={`signal-status ${row.enabled ? className : 'signal-status-dismissed'}`}>{row.enabled ? label : '停用'}</span></td><td>{formatDate(row.last_run_at)}{row.last_run_status && <small className="management-subline">{row.last_run_status === 'failed' ? '失败' : '成功'}</small>}</td>{canEdit && <td><div className="management-actions"><button className="button button-secondary" onClick={() => { setEditing(row.id); setForm({ name: row.name, type: row.type, url: row.url, adapter: row.adapter || '', schedule_cron: row.schedule_cron || '', enabled: row.enabled, config: JSON.stringify(row.config || {}, null, 2) }); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>编辑</button><button className="button button-secondary" disabled={busy} onClick={() => action(() => api.runSource(row.id), '已置为到期，采集服务下次轮询即领取')}>运行</button><button className="button button-secondary" disabled={busy} onClick={() => setDeleting(row)}>删除</button></div></td>}</tr> })}</tbody></table></div></section>
+    <section className="panel task-table-panel"><div className="table-count">共 <strong>{rows.length}</strong> 个信息源</div>{loading ? <div className="operations-state" role="status">正在加载信息源…</div> : loadFailed ? null : rows.length ? <div className="table-scroll"><table className="task-table"><thead><tr><th>名称 / 地址</th><th>适配器 / 配置</th><th>计划</th><th>健康度</th><th>最近运行</th>{canEdit && <th>操作</th>}</tr></thead><tbody>{rows.map(row => { const [label, className] = healthNames[row.health || ''] || ['未知', 'signal-status-dismissed']; return <tr key={row.id}><td data-label="名称 / 地址"><strong>{row.name}</strong><small className="management-subline">{row.url}</small></td><td data-label="适配器 / 配置">{adapterLabel(row.adapter)}<small className="management-subline">{typeNames[row.type] || row.type}{configSummary(row.config) && ` · ${configSummary(row.config)}`}</small></td><td data-label="计划">{row.schedule_cron ? <code className="cron-value">{row.schedule_cron}</code> : '仅手动'}</td><td data-label="健康度"><span className={`signal-status ${row.enabled ? className : 'signal-status-dismissed'}`}>{row.enabled ? label : '停用'}</span></td><td data-label="最近运行" className="operations-date">{formatDate(row.last_run_at)}{row.last_run_status && <small className="management-subline">{row.last_run_status === 'failed' ? '失败' : '成功'}</small>}</td>{canEdit && <td data-label="操作"><div className="management-actions"><button className="button button-secondary" onClick={() => { setEditing(row.id); setForm({ name: row.name, type: row.type, url: row.url, adapter: row.adapter || '', schedule_cron: row.schedule_cron || '', enabled: row.enabled, config: JSON.stringify(row.config || {}, null, 2) }); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>编辑</button><button className="button button-secondary" disabled={busy} onClick={() => action(() => api.runSource(row.id), '已置为到期，采集服务下次轮询即领取')}>运行</button><button className="button button-secondary" disabled={busy} onClick={() => setDeleting(row)}>删除</button></div></td>}</tr> })}</tbody></table></div> : <div className="operations-empty"><span className="operations-empty-icon"><Icon name="database" size={25}/></span><strong>暂无信息源</strong><p>当前尚未配置任何信息源，配置完成后会在此显示。</p></div>}</section>
     {deleting && <ConfirmDialog title="删除信息源" description={`确认删除“${deleting.name}”？该信息源将从采集列表移除。`} confirmLabel="确认删除" busy={busy} onClose={() => setDeleting(null)} onConfirm={async () => { await action(() => api.deleteSource(deleting.id), '信息源已删除'); setDeleting(null) }}/>}
   </div>
 }

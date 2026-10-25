@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { ErrorBar, PageHeading } from '../components/UI'
+import { Icon } from '../components/Icon'
 import { api } from '../api/client'
 import type { EventGraph, EventItem } from '../api/client'
 import { errorText } from '../services/investigations'
@@ -25,12 +26,13 @@ export function EventsPage({ id }: { id?: string }) {
   const [rows, setRows] = useState<EventItem[]>([])
   const [graph, setGraph] = useState<EventGraph>()
   const [error, setError] = useState('')
-  useEffect(() => { let active = true; setGraph(undefined); setError('')
+  const [loading, setLoading] = useState(true)
+  useEffect(() => { let active = true; setGraph(undefined); setError(''); if (!id) setLoading(true)
     const work = id ? api.eventGraph(id).then(result => { if (active) setGraph(result) }) : api.events().then(result => { if (active) setRows(result.items) })
-    work.catch(err => { if (active) setError(errorText(err)) })
+    work.catch(err => { if (active) setError(errorText(err)) }).finally(() => { if (active && !id) setLoading(false) })
     return () => { active = false } }, [id])
-  return <div className="page"><PageHeading eyebrow="资料与关联 / 事件" title="事件图谱" description="Agent 从调查报告中抽取事件、主体与关系，后端校验落库。"/><ErrorBar message={error}/>
-    {!id && <section className="panel task-table-panel"><div className="table-count">共 <strong>{rows.length}</strong> 个事件</div><div className="table-scroll"><table className="task-table"><thead><tr><th>事件</th><th>类型</th><th>开始日期</th><th>操作</th></tr></thead><tbody>{rows.map(row => <tr key={row.id}><td><strong>{row.title}</strong><small className="management-subline">{row.id}</small></td><td>{eventNames[row.type] || row.type}</td><td>{row.start_date || '—'}</td><td><a className="table-view" href={`#/events/${row.id}`}>查看图谱 →</a></td></tr>)}</tbody></table></div></section>}
+  return <div className="page events-workspace"><PageHeading eyebrow="资料与关联 / 事件" title="事件图谱" description="Agent 从调查报告中抽取事件、主体与关系，后端校验落库。"/><ErrorBar message={error}/>
+    {!id && <section className="panel task-table-panel"><div className="table-count">共 <strong>{rows.length}</strong> 个事件</div>{loading ? <div className="operations-state" role="status">正在加载事件…</div> : error ? null : rows.length ? <div className="table-scroll"><table className="task-table"><thead><tr><th>事件</th><th>类型</th><th>开始日期</th><th>操作</th></tr></thead><tbody>{rows.map(row => <tr key={row.id}><td data-label="事件"><strong>{row.title}</strong><small className="management-subline">{row.id}</small></td><td data-label="类型"><span className="operations-type">{eventNames[row.type] || row.type}</span></td><td data-label="开始日期" className="operations-date">{row.start_date || '—'}</td><td data-label="操作"><a className="table-view" href={`#/events/${row.id}`}>查看图谱 →</a></td></tr>)}</tbody></table></div> : <div className="operations-empty"><span className="operations-empty-icon"><Icon name="layers" size={25}/></span><strong>暂无事件记录</strong><p>从调查报告中抽取并校验的事件会显示在这里。</p></div>}</section>}
     {id && <><a className="back-link" href="#/events">← 返回事件列表</a>{!graph && !error && <div className="loading-state">正在加载事件…</div>}
       {graph && <section className="panel report-section"><div className="panel-heading"><h2>{graph.event.title}</h2><span className="demo-ribbon">{eventNames[graph.event.type] || graph.event.type}</span></div><div className="management-detail"><p>事件 ID：{graph.event.id} · 开始日期：{graph.event.start_date || '—'}</p><GraphView graph={graph}/><h3>相关报告</h3>{graph.reports.length ? <div className="management-link-list">{graph.reports.map(report => <a key={report.id} className="text-link" href={`#/reports/${report.id}`} onClick={async event => { event.preventDefault(); const detail = await api.report(report.id); window.location.hash = `#/reports/${detail.investigation_id}` }}>{report.title} →</a>)}</div> : <p>暂无关联报告</p>}</div></section>}</>}
   </div>

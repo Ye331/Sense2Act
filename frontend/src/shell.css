@@ -1,0 +1,50 @@
+/* Shared workstation chrome. Navigation and topbar only. */
+.app-shell .sidebar { width:248px; flex:none; background:#11283d; border-right:0; color:#e5edf4; }
+.app-shell .brand { height:76px; min-height:76px; padding:0 24px; gap:13px; border:0; background:transparent; }
+.app-shell .brand strong { color:#fff; font-size:22px; font-weight:660; letter-spacing:-.035em; }
+.app-shell .brand small { margin-top:4px; color:#b4c5d2; font-size:12px; letter-spacing:0; }
+.app-shell .brand-mark { width:39px; height:39px; border-radius:50%; background:#2677b7; box-shadow:none; }
+.app-shell .main-nav { padding:18px 13px 0; }
+.app-shell .nav-group { margin:0 0 23px; }
+.app-shell .nav-group+.nav-group { padding-top:7px; border-top:0; }
+.app-shell .nav-caption { padding:9px 13px 8px; color:#a5b9c8; font-size:12px; font-weight:560; letter-spacing:.02em; }
+.app-shell .nav-link,.app-shell .nav-link.secondary { height:45px; margin:2px 0; padding:0 14px; gap:12px; border-radius:8px; color:#deE8ef; font-size:14px; font-weight:500; transition:background-color .16s ease,color .16s ease; }
+.app-shell .nav-link svg { color:#c4d5e2; opacity:1; }
+.app-shell .nav-link:hover:not(.active) { background:#19374f; color:#fff; }
+.app-shell .nav-link.active { background:#204662; color:#fff; font-weight:650; }
+.app-shell .nav-link.active svg { color:#fff; }
+.app-shell .nav-link.active:before { display:none; }
+.app-shell .nav-link:focus-visible,.app-shell .brand:focus-visible { outline:2px solid #9fc5dd; outline-offset:2px; }
+.app-shell .sidebar-bottom { padding:0 24px 22px; }
+.app-shell .sidebar-footer { padding-top:16px; border-top:1px solid #ffffff25; color:#a9bbca; font-size:12px; }
+
+.app-shell .topbar { height:62px; padding:0 34px; border-bottom:1px solid #e8edf2; background:#fff; position:sticky; top:0; z-index:8; }
+.app-shell .topbar-path { color:#71849a; font-size:13px; }
+.app-shell .topbar-path strong { color:#172e45; font-size:14px; font-weight:650; }
+.app-shell .topbar-right { gap:15px; }
+.app-shell .topbar-action { display:inline-flex; align-items:center; gap:9px; min-height:40px; padding:0 4px; color:#526b80; font-size:13px; }
+.app-shell .topbar-action:hover { color:#2169a2; }
+.app-shell .topbar-action:focus-visible { outline:2px solid #6b9fbe; outline-offset:2px; border-radius:4px; }
+.app-shell .topbar-divider { height:25px; background:#e8edf2; }
+.app-shell .avatar,.app-shell .topbar .avatar { width:34px; height:34px; border-radius:50%; background:#38536d; color:#fff; font-size:13px; }
+.app-shell .topbar-user { color:#263d54; font-size:13px; font-weight:560; }
+.app-shell .notification-popover { border-color:#e2e9ef; border-radius:8px; }
+
+@media(max-width:1180px) { .app-shell .sidebar { width:218px; } .app-shell .topbar { padding:0 24px; } }
+@media(max-width:760px) {
+  .app-shell { display:block; }
+  .app-shell .sidebar { width:100%; height:auto; min-height:0; position:relative; }
+  .app-shell .brand { height:58px; min-height:58px; padding:0 16px; }
+  .app-shell .brand-mark { width:32px; height:32px; }
+  .app-shell .brand strong { font-size:18px; }
+  .app-shell .brand small { font-size:9px; }
+  .app-shell .sidebar-bottom,.app-shell .nav-caption { display:none; }
+  .app-shell .main-nav { display:flex; overflow-x:auto; overflow-y:hidden; padding:3px 9px 8px; scrollbar-width:none; }
+  .app-shell .main-nav::-webkit-scrollbar { display:none; }
+  .app-shell .nav-group { display:flex; flex:none; margin:0; }
+  .app-shell .nav-group+.nav-group { padding:0; border:0; }
+  .app-shell .nav-link,.app-shell .nav-link.secondary { height:37px; padding:0 11px; font-size:13px; white-space:nowrap; }
+  .app-shell .topbar { height:50px; padding:0 15px; }
+  .app-shell .topbar-path { display:none; }
+  .app-shell .topbar-right { width:100%; justify-content:flex-end; }
+}

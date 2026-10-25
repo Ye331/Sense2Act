@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Icon } from '../components/Icon'
 import { ReportGraph } from '../components/ReportGraph'
-import { EmptyState, NatureBadge, PageHeading } from '../components/UI'
+import { EmptyState, ErrorState, NatureBadge, PageHeading } from '../components/UI'
 import { api } from '../api/client'
 import type { Report } from '../api/client'
 import { errorText, sourceNames } from '../services/investigations'
@@ -13,16 +13,17 @@ export function ReportPage({ investigationId }: { investigationId: string }) {
   const [report, setReport] = useState<Report | null>()
   const [feedback, setFeedback] = useState('')
   const [message, setMessage] = useState('')
+  const [loadError, setLoadError] = useState('')
   const [adopted, setAdopted] = useState<string[]>([])
   const [falsePositive, setFalsePositive] = useState(false)
   const [busy, setBusy] = useState(false)
-  const load = () => api.reports({ investigation_id: investigationId })
+  const load = () => { setLoadError(''); return api.reports({ investigation_id: investigationId })
     .then(page => page.items[0] ? api.report(page.items[0].id) : null)
-    .then(setReport).catch(err => { setReport(null); setMessage(errorText(err)) })
+    .then(setReport).catch(err => { setReport(null); setLoadError(errorText(err)) }) }
   useEffect(() => { load() }, [investigationId])
 
   if (report === undefined) return <div className="loading-state">正在加载报告…</div>
-  if (report === null) return <div className="page"><a className="back-link" href={`#/tasks/${investigationId}`}>← 返回调查详情</a><EmptyState title="暂无调查报告" text={message || '调查提交报告后将在此显示。'}/></div>
+  if (report === null) return <div className="page"><a className="back-link" href={`#/tasks/${investigationId}`}>← 返回调查详情</a>{loadError ? <ErrorState message={loadError}/> : <EmptyState title="暂无调查报告" text="调查提交报告后将在此显示。"/>}</div>
 
   const evidences = [...new Map(report.claims.flatMap(claim => claim.evidences).map(ref => [ref.id, ref])).values()]
   const sendFeedback = async () => { setBusy(true); setMessage(''); try {
