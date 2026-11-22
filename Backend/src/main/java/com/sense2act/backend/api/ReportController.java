@@ -52,6 +52,15 @@ public class ReportController {
         return ApiResponse.ok(reportService.detail(id));
     }
 
+    @GetMapping("/api/v1/reports/{id}/attachments/{attachmentId}/content")
+    public ResponseEntity<byte[]> attachment(@PathVariable String id, @PathVariable String attachmentId) {
+        ReportService.AttachmentContent content = reportService.attachmentContent(id, attachmentId);
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(content.contentType()))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + attachmentId + "\"")
+                .body(content.bytes());
+    }
+
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public record FeedbackPost(List<String> adoptedSuggestionIds, String comment, String flag) {
     }

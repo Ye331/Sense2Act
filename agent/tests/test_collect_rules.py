@@ -58,7 +58,7 @@ class TestRouter(unittest.TestCase):
 
     def test_platform_rules_and_exclusion(self):
         req = self.router.route("官方公告与批复", ["公告"], "")
-        self.assertIn("official_website", req.platforms)
+        self.assertNotIn("official_website", req.platforms)  # 未命中机构档案不得泛化官网
         # cctv_news 2026-10-16 起移出默认路由(通用新闻栏目对行业信号不对题)
         self.assertNotIn("cctv_news", req.platforms)
         for p in req.platforms:

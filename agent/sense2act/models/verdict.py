@@ -48,3 +48,6 @@ class VerdictResult(SchemaModel):
     overridden: bool = False                  # LLM 意见被否决
     skipped: bool = False                     # 验票失败,维持原态
     note: str = ""
+    predicate_form: dict | None = None        # 谓词形态标注留痕(件 4;归一化
+                                              # 验票后形态,None=无标注/验票失败
+                                              # 回退——审计含判定来源)

@@ -115,12 +115,29 @@ class LedgerRepository:
         self.conn = conn
         self._config_dir = Path(config_dir)
 
+    @property
+    def config_dir(self) -> Path:
+        """模式表目录公共读口(P 波:d_hooks 起草输入侧 load_present_rules
+        用;报告/链侧同表同源纪律)。"""
+        return self._config_dir
+
     # ------------------------------------------------------------------ 事件
 
     def register_event(
         self, envelope: InvestigationEnvelope, signal_type: str, event_id: str
     ) -> tuple[str, bool]:
-        """登记事件;项目生命周期续查:同 project_id 的 open 事件直接续接(不重开)。"""
+        """登记事件;项目生命周期续查:同 project_id 的 open 事件直接续接(不重开)。
+
+        resume 复查路径(动态报告②):同 event_id 已存在(含已 closed)→ 重开
+        续查(status 置回 open,信封刷新为本次入参),返回 continued=True。"""
+        if self.event_exists(event_id):
+            self.conn.execute(
+                "UPDATE events SET status='open', updated_at=?,"
+                " envelope_json=? WHERE event_id=?",
+                (_now(), envelope.model_dump_json(by_alias=True), event_id),
+            )
+            self.conn.commit()
+            return event_id, True
         project_id = (
             envelope.tender.project_id
             if envelope.kind == "tender" and envelope.tender
@@ -170,6 +187,80 @@ class LedgerRepository:
             "SELECT 1 FROM events WHERE event_id=?", (event_id,)
         ).fetchone() is not None
 
+    def event_envelope_json(self, event_id: str) -> str | None:
+        """读回登记信封原始 JSON(resume 续查重建信封用;无事件返回 None)。"""
+        row = self.conn.execute(
+            "SELECT envelope_json FROM events WHERE event_id=?", (event_id,)
+        ).fetchone()
+        return row["envelope_json"] if row else None
+
+    def claims_due_for_recheck(self, event_id: str, now: str = "") -> list[sqlite3.Row]:
+        """时效到期待复查的终态 claim(动态报告①:复查选择器)。
+
+        判据(纯时钟,确定性):末次确认时间取 transitions 末条 ts(无 transition
+        的用事件 created_at):
+          - 时效类(valid_window_days):末次确认 + 窗口 <= now -> 到期
+          - refresh_cycle_days 非空:末次确认 + 周期 <= now -> 到期复查
+        只选终态(已证实/矛盾):待证实本就未决,无"复查"语义。
+        """
+        moment = (now or _now())[:10]
+        due: list[sqlite3.Row] = []
+        rows = self.conn.execute(
+            "SELECT claim_id, draft_id, text, status, category,"
+            " valid_window_days, refresh_cycle_days FROM claims"
+            " WHERE event_id=? AND status IN ('已证实','矛盾')", (event_id,)
+        ).fetchall()
+        created = self.conn.execute(
+            "SELECT created_at FROM events WHERE event_id=?", (event_id,)
+        ).fetchone()
+        base_ts = (created["created_at"] if created else _now())[:10]
+        from datetime import date, timedelta
+        for r in rows:
+            window = r["valid_window_days"] if r["category"] == "时效" else None
+            cycle = r["refresh_cycle_days"]
+            if not window and not cycle:
+                continue
+            last = self.conn.execute(
+                "SELECT ts FROM claim_transitions WHERE claim_id=?"
+                " ORDER BY id DESC LIMIT 1", (r["claim_id"],)).fetchone()
+            anchor = (last["ts"][:10] if last else base_ts)
+            days = window or cycle
+            try:
+                expire = (date.fromisoformat(anchor)
+                          + timedelta(days=int(days))).isoformat()
+            except (ValueError, TypeError):
+                continue
+            if expire <= moment:
+                due.append(r)
+        return due
+
+    def downgrade_untouched_due(self, event_id: str, session_start: str,
+                                round_no: int) -> list[str]:
+        """时钟降级(动态报告④):到期 claim 本会话无新证据触及 -> 状态刷新降回待证实。
+
+        认识论护栏:纯时钟操作只允许降级(终态->待证实,成因=状态刷新,
+        note=时效到期),不得凭空翻成矛盾/已证实——翻转终态必须挂证据。
+        "本会话触及"判据 = 名下证据 fetched_at >= session_start(确定性)。
+        返回降级的 draft_id 列表(供入账日志与报告)。
+        """
+        downgraded: list[str] = []
+        for r in self.claims_due_for_recheck(event_id):
+            touched = self.conn.execute(
+                "SELECT 1 FROM claim_evidence ce JOIN evidence e"
+                " ON e.evidence_id=ce.evidence_id"
+                " WHERE ce.claim_id=? AND e.fetched_at >= ? LIMIT 1",
+                (r["claim_id"], session_start)).fetchone()
+            if touched:
+                continue
+            if self.update_claim_status(
+                    r["claim_id"], "待证实", "状态刷新", round_no):
+                downgraded.append(r["draft_id"])
+        if downgraded:
+            self.log(event_id, round_no, "刷新", {
+                "clock_downgraded": downgraded,
+                "note": "时效到期且本会话无新证据,降回待证实(纯时钟降级,不判终态)"})
+        return downgraded
+
     # ------------------------------------------------------------- 蓝图落库
 
     def install_blueprint(
@@ -193,6 +284,8 @@ class LedgerRepository:
             remap: dict[str, str] = {}      # 被并 claim 草案 id -> 保留草案 id(空串=拦截)
             merges: list[dict] = []
             blocked: list[dict] = []
+            cross_run_dup: list[str] = []
+            cross_run_derived: list[dict] = []
             kept_texts: list[tuple[str, str]] = []   # (草案 id, 去重比对文本)
             contra = [(r["claim_id"], _dedup_text(r["text"])) for r in
                       self.conn.execute(
@@ -227,20 +320,38 @@ class LedgerRepository:
                 if restatement_of:
                     remap[claim.id] = ""
                     continue
-                kept_texts.append((claim.id, norm))
-                claim_id = f"{event_id}:{claim.id}"
+                # 跨 run 撞号三分支(P2,2026-10-22):草案 id 是轮内顺序号,
+                # 续查注回原事件时必然重编——"id 同"不构成"同断言"的证据
+                # (评测层双闸教训在台账层的前置兑现)。id 空闲=直插;同文=
+                # 同一断言幂等跳过;异文=派生新条(d 后缀),假设归属经 remap
+                # 转给新条,旧条判决历史原封不动(append-only)。
+                final_id, how = self._resolve_claim_id(event_id, claim.id, claim.text)
+                if how == "dup":
+                    cross_run_dup.append(claim.id)
+                    kept_texts.append((claim.id, norm))
+                    continue
+                if how == "derived":
+                    parent_id: str | None = f"{event_id}:{claim.id}"
+                    remap[claim.id] = final_id
+                    cross_run_derived.append({"draft": claim.id, "as": final_id})
+                    kept_texts.append((final_id, norm))
+                else:
+                    parent_id = None
+                    kept_texts.append((claim.id, norm))
+                claim_id = f"{event_id}:{final_id}"
                 self.conn.execute(
                     "INSERT INTO claims(claim_id,event_id,draft_id,text,category,status,"
                     "section_id,priority,priority_reason,created_round,updated_round,"
                     "valid_window_days,refresh_cycle_days,relation_type,parent_claim_id,"
-                    "corpus_bound)"
-                    " VALUES(?,?,?,?,?,'待证实',?,?,?,?,?,?,?,?,?,?)",
+                    "corpus_bound,created_at,gist)"
+                    " VALUES(?,?,?,?,?,'待证实',?,?,?,?,?,?,?,?,?,?,?,?)",
                     (
-                        claim_id, event_id, claim.id, claim.text,
+                        claim_id, event_id, final_id, claim.text,
                         claim.category.value, sec_ids[claim.section_index],
                         claim.priority, claim.priority_reason, round_no, round_no,
                         claim.valid_window_days, claim.refresh_cycle_days,
-                        claim.relation_type, None, int(claim.corpus_bound),
+                        claim.relation_type, parent_id, int(claim.corpus_bound),
+                        _now(), claim.gist,
                     ),
                 )
                 for i, name in enumerate(claim.entity_names[:3]):
@@ -277,28 +388,90 @@ class LedgerRepository:
             "dedup_merged": merges,
             # 改造①审计线:矛盾重述拦截记录
             "contradiction_blocked": blocked,
+            # P2 审计线:跨 run 幂等跳过与异文派生(失败不伪装——同文重入
+            # 与派生重述都留痕,不让"新断言进不来"静默发生)
+            "cross_run_dup": cross_run_dup,
+            "cross_run_derived": cross_run_derived,
         })
+
+    def max_round(self, event_id: str) -> int:
+        """该 event 已有最大轮号(D7 全局续接起点,2026-10-23;空事件=0)。
+
+        decision_log 每轮必先写决策单(kind='决策单',降级轮也有 log),
+        故其 max(round) ≥ 任何表实际用过的轮号——单查询安全上界,
+        免逐表 MAX。续查注回原事件时由此跨 run 续接轮号。
+        """
+        row = self.conn.execute(
+            "SELECT COALESCE(MAX(round), 0) AS m FROM decision_log"
+            " WHERE event_id=?", (event_id,)).fetchone()
+        return int(row["m"])
+
+    def _resolve_claim_id(self, event_id: str, draft_id: str,
+                          text: str) -> tuple[str, str]:
+        """跨 run 撞号三分支(P2,2026-10-22),返回 (最终 draft_id, 处置)。
+
+        处置 ∈ {"new","dup","derived"}:id 空闲 -> 原 id 直插;同文
+        (_dedup_text 口径=NFKC+全半角+去空白,与本仓库去重同一归一)->
+        同一断言,调用方幂等跳过;异文 -> 派生新 id(d 后缀+序数递进,
+        查库至空闲:C3d/C3d2/...,确定性可重放)。三入口(install_blueprint/
+        add_claim)共用本判定,语义统一。
+        """
+        row = self.conn.execute(
+            "SELECT text FROM claims WHERE claim_id=?",
+            (f"{event_id}:{draft_id}",)).fetchone()
+        if row is None:
+            return draft_id, "new"
+        if _dedup_text(row["text"]) == _dedup_text(text):
+            return draft_id, "dup"
+        base = draft_id + "d"
+        cand, n = base, 1
+        while self.conn.execute(
+                "SELECT 1 FROM claims WHERE claim_id=?",
+                (f"{event_id}:{cand}",)).fetchone() is not None:
+            n += 1
+            cand = f"{base}{n}"
+        return cand, "derived"
 
     def add_claim(
         self, event_id: str, draft: dict, round_no: int,
         aliases: dict[str, str] | None = None,
     ) -> str:
-        """派生 claim 入账(S5 派生环);draft 可带 entity_names(关系类前两个=头/尾)。"""
+        """派生 claim 入账(S5 派生环);draft 可带 entity_names(关系类前两个=头/尾)。
+
+        跨 run 撞号(P2):同文=同一断言,幂等返回原 id 不重复入账;
+        异文=派生新条(d 后缀;draft 未带 parent 时 parent 指被撞原条),
+        返回实际入库 id——调用方拿返回值挂后续(实体链接/证据/裁决),
+        勿自行拼 id。
+        """
         aliases = aliases or {}
-        claim_id = f"{event_id}:{draft['id']}"
         with transaction(self.conn):
+            final_id, how = self._resolve_claim_id(
+                event_id, draft["id"], draft["text"])
+            if how == "dup":
+                return f"{event_id}:{final_id}"
+            if how == "derived":
+                parent = (f"{event_id}:{draft['parent']}" if draft.get("parent")
+                          else f"{event_id}:{draft['id']}")
+            else:
+                parent = (f"{event_id}:{draft['parent']}"
+                          if draft.get("parent") else None)
+            claim_id = f"{event_id}:{final_id}"
             self.conn.execute(
                 "INSERT INTO claims(claim_id,event_id,draft_id,text,category,status,"
                 "section_id,priority,priority_reason,created_round,updated_round,"
-                "valid_window_days,refresh_cycle_days,relation_type,parent_claim_id)"
-                " VALUES(?,?,?,?,?,'待证实',?,?,?,?,?,?,?,?,?)",
+                "valid_window_days,refresh_cycle_days,relation_type,parent_claim_id,"
+                "created_at,gist,reborn_from)"
+                " VALUES(?,?,?,?,?,'待证实',?,?,?,?,?,?,?,?,?,?,?,?)",
                 (
-                    claim_id, event_id, draft["id"], draft["text"], draft["category"],
+                    claim_id, event_id, final_id, draft["text"], draft["category"],
                     f"{event_id}:S{draft.get('section_index', 2)}", draft.get("priority", 3),
                     draft.get("priority_reason", ""), round_no, round_no,
                     draft.get("valid_window_days"), draft.get("refresh_cycle_days"),
                     draft.get("relation_type"),
-                    f"{event_id}:{draft['parent']}" if draft.get("parent") else None,
+                    parent,
+                    _now(),
+                    draft.get("gist", ""),    # 派生条无 gist=空(短名属父断言)
+                    draft.get("reborn_from", ""),   # 转生谱系(§六.3;常规=空)
                 ),
             )
             for i, name in enumerate(draft.get("entity_names", [])[:3]):
@@ -564,6 +737,14 @@ class LedgerRepository:
             "SELECT claim_id FROM claims WHERE event_id=? AND corpus_bound=1"
             " ORDER BY created_round, draft_id", (event_id,)).fetchall()]
 
+    def claim_gists(self, event_id: str) -> dict[str, str]:
+        """{draft_id: gist} 短名表(gist 短名方案,2026-10-30;呈现层消费)。
+        只收非空 gist——空条不进表,消费端自然 fallback 截断(旧台账/未开
+        prompt 形态零变化)。附录 B 核对面不消费本表(全文对账位)。"""
+        return {r["draft_id"]: r["gist"] for r in self.conn.execute(
+            "SELECT draft_id, gist FROM claims"
+            " WHERE event_id=? AND gist != ''", (event_id,)).fetchall()}
+
     def top_open_claim(self, event_id: str) -> sqlite3.Row | None:
         rows = self.open_claims(event_id)
         return rows[0] if rows else None
@@ -639,6 +820,22 @@ class LedgerRepository:
         return self.conn.execute(
             "SELECT * FROM evidence WHERE evidence_id=?", (evidence_id,)
         ).fetchone()
+
+    # -------------------------------------------------------------- 报告附件(A 线)
+
+    def attach_assets(self, evidence_id: str, assets: list[dict]) -> None:
+        """附件(图片)登记:唯一写口=A7 资产步骤;S4-S6 不读该列(判决链隔离)。"""
+        self.conn.execute(
+            "UPDATE evidence SET assets=? WHERE evidence_id=?",
+            (json.dumps(assets, ensure_ascii=False), evidence_id))
+        self.conn.commit()
+
+    def evidence_assets(self, event_id: str) -> dict[str, list[dict]]:
+        """evidence_id(全号)-> 附件列表;仅 S7 渲染消费。"""
+        rows = self.conn.execute(
+            "SELECT evidence_id, assets FROM evidence"
+            " WHERE event_id=? AND assets != '[]'", (event_id,)).fetchall()
+        return {r["evidence_id"]: json.loads(r["assets"]) for r in rows}
 
     def claim_row(self, claim_id: str) -> sqlite3.Row | None:
         return self.conn.execute(
@@ -895,6 +1092,15 @@ class LedgerRepository:
                  "target": a["target_id"].rsplit(":", 1)[-1],
                  "choice": a["choice_text"]}
                 for a in adjs][:5]
+        # 时效到期待复查(动态报告③):终态 claim 过窗/过周期 -> S2 优先重查。
+        # 空则省键——旧回放的 prompt 字节不变(回放纪律)。
+        due = self.claims_due_for_recheck(event_id)
+        if due:
+            summary["due_recheck"] = [
+                {"id": r["draft_id"], "text": r["text"][:60],
+                 "reason": ("时效窗口过期" if r["category"] == "时效"
+                            and r["valid_window_days"] else "复查周期到期")}
+                for r in due]
         return summary
 
     def status_counts(self, event_id: str) -> dict[str, int]:

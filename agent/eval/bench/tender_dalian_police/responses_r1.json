@@ -1,0 +1,4361 @@
+[
+  {
+    "stage": "s1a",
+    "response": {
+      "signalType": "商机",
+      "reason": "信封 kind 为 tender,项目为“大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告”,采购单位“大连市公安局（本级）”,代理机构“大连市政府采购中心”,金额 45232.0 元,并明确“潜在投标人应在大连市政府采购云平台确认并获取招标文件，并于2026年12月4日8时30分（北京时间）前提交投标文件”,属于公开可参与的投标机会,故定性为商机。",
+      "selectedSeedLabels": [
+        "真实经营动态",
+        "正常大额采购"
+      ],
+      "basisGaps": [
+        "信封中 amountHistory、noveltyHistory、frequencyHistory 均为 null,该单位历史采购金额、频次与项目新颖度基线不足,需先补齐历史采购基线",
+        "信封中 amountAnomaly、frequencyAnomaly、noveltyAnomaly 均为 null,缺少异常判定结果,需先补齐金额与频次异常检测",
+        "信封中 relevance 为 null 且 companyProfile 为空,与本公司业务的相关性依据不足,需先补齐相关性与主体画像"
+      ]
+    }
+  },
+  {
+    "stage": "s1b",
+    "response": {
+      "claims": [
+        {
+          "id": "c1",
+          "text": "信封载明：项目编号 DLZFCG2026448-2，采购方为大连市公安局（本级），金额 45232.0 元，发布日期 2026-10-22。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 4,
+          "priorityReason": "基础字段是全部推理的地基，且金额与日期直接决定投标时效。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "大连市公安局（本级）"
+          ],
+          "corpusBound": true,
+          "predicateForm": null
+        },
+        {
+          "id": "c2",
+          "text": "信封载明：代理机构为大连市政府采购中心，潜在投标人应在大连市政府采购云平台确认并获取招标文件。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 3,
+          "priorityReason": "代理机构与获取渠道决定参与路径，但可由信封直接核实。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [
+            "大连市政府采购中心"
+          ],
+          "corpusBound": true,
+          "predicateForm": null
+        },
+        {
+          "id": "c3",
+          "text": "信封载明：投标文件提交截止时间为 2026 年 12 月 4 日 8 时 30 分（北京时间）。",
+          "category": "时效",
+          "sectionIndex": 1,
+          "priority": 5,
+          "priorityReason": "截止时间是最强时效约束，过期即丧失全部商机价值。",
+          "hypothesisIds": [],
+          "validWindowDays": 43,
+          "refreshCycleDays": 7,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true,
+          "predicateForm": null
+        },
+        {
+          "id": "c4",
+          "text": "解读将本信号定性为“商机”，依据是信封 kind 为 tender 且为公开可参与的投标机会。",
+          "category": "事实",
+          "sectionIndex": 0,
+          "priority": 3,
+          "priorityReason": "解读定性是后续调查的起点，但属信封内复述。",
+          "hypothesisIds": [],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true,
+          "predicateForm": null
+        },
+        {
+          "id": "c5",
+          "text": "解读自述：信封中 amountHistory、noveltyHistory、frequencyHistory 均为 null，历史采购基线不足。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "基线缺失直接卡住异常判定与结论节，需优先补齐。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true,
+          "predicateForm": null
+        },
+        {
+          "id": "c6",
+          "text": "解读自述：信封中 amountAnomaly、frequencyAnomaly、noveltyAnomaly 均为 null，缺少异常判定结果。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "异常检测结果缺失使“正常采购”与“异常输送”无法在语料内区分。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true,
+          "predicateForm": null
+        },
+        {
+          "id": "c7",
+          "text": "解读自述：信封中 relevance 为 null 且 companyProfile 为空，与本公司业务的相关性依据不足。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "相关性缺口决定本商机是否值得投入投标资源。",
+          "hypothesisIds": [
+            "h3"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": true,
+          "predicateForm": null
+        },
+        {
+          "id": "c8",
+          "text": "大连市公安局（本级）在 2026 年 10 月 22 日通过中国政府采购网发布了本项目 D 包的公开招标公告。",
+          "category": "事实",
+          "sectionIndex": 1,
+          "priority": 5,
+          "priorityReason": "发布行为是否真实发生是全部商机判断的前提，且需外部核验。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": 7,
+          "relationType": null,
+          "entityNames": [
+            "大连市公安局（本级）"
+          ],
+          "corpusBound": false,
+          "predicateForm": null
+        },
+        {
+          "id": "c9",
+          "text": "该招标公告自发布后未被更正、撤销或延期。",
+          "category": "时效",
+          "sectionIndex": 1,
+          "priority": 5,
+          "priorityReason": "更正或撤销会直接推翻商机定性，时效衰减极快。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "validWindowDays": 7,
+          "refreshCycleDays": 3,
+          "relationType": null,
+          "entityNames": [
+            "大连市公安局（本级）"
+          ],
+          "corpusBound": false,
+          "predicateForm": null
+        },
+        {
+          "id": "c10",
+          "text": "大连市公安局（本级）与大连市政府采购中心之间存在本项目项下的委托代理关系，且有独立于本公告的信源佐证。",
+          "category": "关系",
+          "sectionIndex": 1,
+          "priority": 3,
+          "priorityReason": "代理关系有独立佐证可提升公告可信度，但非核心风险点。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": null,
+          "relationType": "协同",
+          "entityNames": [
+            "大连市公安局（本级）",
+            "大连市政府采购中心"
+          ],
+          "corpusBound": false,
+          "predicateForm": null
+        },
+        {
+          "id": "c11",
+          "text": "大连市公安局（本级）近两年有同等金额（约 4.5 万元）的服装类采购记录。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "该断言是区分“正常采购”与“异常输送”的关键外部证据，直接卡结论节。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": 30,
+          "relationType": null,
+          "entityNames": [
+            "大连市公安局（本级）"
+          ],
+          "corpusBound": false,
+          "predicateForm": null
+        },
+        {
+          "id": "c12",
+          "text": "大连市公安局（本级）既往服装类采购以公开招标为主要采购方式。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 4,
+          "priorityReason": "采购方式模式归纳可佐证本次公开招标是否属常规做法。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": 30,
+          "relationType": null,
+          "entityNames": [
+            "大连市公安局（本级）"
+          ],
+          "corpusBound": false,
+          "predicateForm": null
+        },
+        {
+          "id": "c13",
+          "text": "本项目 D 包金额 45232.0 元与大连市公安局（本级）同类服装采购的历史中位数相比无显著偏离。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 5,
+          "priorityReason": "金额偏离度是异常输送假设成立与否的核心可区分证据。",
+          "hypothesisIds": [
+            "h1",
+            "h2"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": 30,
+          "relationType": null,
+          "entityNames": [
+            "大连市公安局（本级）"
+          ],
+          "corpusBound": false,
+          "predicateForm": null
+        },
+        {
+          "id": "c14",
+          "text": "本企业具备警用服装类产品的供货资质或既往供货业绩。",
+          "category": "实体",
+          "sectionIndex": 3,
+          "priority": 5,
+          "priorityReason": "自身资质决定商机能否转化为实际投标，是结论节成立的前提。",
+          "hypothesisIds": [
+            "h3"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": 90,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": false,
+          "predicateForm": null
+        },
+        {
+          "id": "c15",
+          "text": "本企业参与本项目投标的预期收益（毛利或战略价值）超过投标成本。",
+          "category": "事实",
+          "sectionIndex": 3,
+          "priority": 4,
+          "priorityReason": "收益成本比决定是否值得投入，但依赖 c14 与报价信息。",
+          "hypothesisIds": [
+            "h3"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": 30,
+          "relationType": null,
+          "entityNames": [],
+          "corpusBound": false,
+          "predicateForm": null
+        },
+        {
+          "id": "c16",
+          "text": "本项目 D 包与 A、B、C 包属于同一采购项目的分包，各包预算与采购内容相互独立。",
+          "category": "事实",
+          "sectionIndex": 2,
+          "priority": 3,
+          "priorityReason": "分包结构影响投标策略与竞争格局判断。",
+          "hypothesisIds": [
+            "h1"
+          ],
+          "validWindowDays": null,
+          "refreshCycleDays": 30,
+          "relationType": null,
+          "entityNames": [
+            "大连市公安局（本级）"
+          ],
+          "corpusBound": false,
+          "predicateForm": null
+        }
+      ],
+      "hypotheses": [
+        {
+          "id": "h1",
+          "label": "正常公开采购",
+          "description": "本次招标为大连市公安局常规服装采购，金额与方式均属正常范围。可区分证据：c11（近两年同等金额记录）、c13（与历史中位无显著偏离）、c12（公开招标为主）为真则支持本假设，为假则削弱。",
+          "claimIds": [
+            "c8",
+            "c9",
+            "c10",
+            "c11",
+            "c12",
+            "c13",
+            "c16"
+          ],
+          "op": "AND"
+        },
+        {
+          "id": "h2",
+          "label": "异常输送/定向采购",
+          "description": "本次采购金额或频次异常，可能存在定向输送。可区分证据：c11 为假（无同等金额先例）且 c13 为假（显著偏离历史中位）则支持本假设；若 c11、c13 为真则削弱。需补历史采购明细与中标结果才能进一步区分。",
+          "claimIds": [
+            "c5",
+            "c6",
+            "c8",
+            "c11",
+            "c13"
+          ],
+          "op": "AND"
+        },
+        {
+          "id": "h3",
+          "label": "本企业可参与的实质商机",
+          "description": "本企业具备资质且收益覆盖成本，本项目构成实质商机。可区分证据：c14（自身资质）与 c15（收益成本比）为真则支持，为假则削弱。需补本企业资质与报价测算才能区分。",
+          "claimIds": [
+            "c7",
+            "c14",
+            "c15"
+          ],
+          "op": "AND"
+        }
+      ],
+      "gaps": [
+        {
+          "text": "大连市公安局（本级）近两年服装类采购的金额、频次与采购方式基线数据（用于计算历史中位数与异常判定）。",
+          "relatedClaimId": "c11"
+        },
+        {
+          "text": "本项目 D 包是否已有更正公告、撤销公告或延期公告。",
+          "relatedClaimId": "c9"
+        },
+        {
+          "text": "本企业的警用服装供货资质、既往业绩与产能是否满足本项目要求。",
+          "relatedClaimId": "c14"
+        },
+        {
+          "text": "本项目 A、B、C 包的预算金额与采购内容，以及各包潜在投标人竞争格局。",
+          "relatedClaimId": "c16"
+        },
+        {
+          "text": "大连市公安局（本级）与大连市政府采购中心在本项目之外的既往代理合作记录。",
+          "relatedClaimId": "c10"
+        },
+        {
+          "text": "本项目投标所需的具体资质门槛、样品要求与评分办法（招标文件正文未在信封中给出）。",
+          "relatedClaimId": "c14"
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c1",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E1",
+          "direction": "支持",
+          "quote": "项目编号 DLZFCG2026448-2;项目名称 大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告;采购方 大连市公安局（本级）;预算金额 45232.0 元;发布日期 2026-10-22",
+          "reason": "该证据逐项载明项目编号、采购方、金额与发布日期，与 claim 四项字段完全一致，使 claim 更可能为真。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一证据为信号层内部检测（credibility 中），谱系根为 signal_layer，无独立来源交叉印证；虽字段逐项吻合，仍不足以按独立来源规则判为已证实，故意见为待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c2",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E1",
+          "direction": "支持",
+          "quote": "代理机构:大连市政府采购中心;正文摘要:大连市公安局2026年新警及晋监民警服装采购项目D包的潜在投标人应在大连市政府采购云平台确认并获取招标文件",
+          "reason": "该证据原文同时载明代理机构为大连市政府采购中心，以及潜在投标人应在大连市政府采购云平台确认并获取招标文件，与 claim 的两项联结均一致。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据（信号层信封基础字段）逐字包含 claim 的两项内容：代理机构为大连市政府采购中心、潜在投标人应在大连市政府采购云平台确认并获取招标文件。该证据为单一来源，无独立印证，但内容直接支撑 claim，故意见为已证实。",
+      "subclaim": null
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c3",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E1",
+          "direction": "支持",
+          "quote": "并于2026年12月4日8时30分（北京时间）前提交投标文件",
+          "reason": "该证据的正文摘要逐字载明提交投标文件的截止时间为2026年12月4日8时30分（北京时间），与 claim 所述一致。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "唯一证据（信号层信封基础字段）的正文摘要直接载明截止时间为2026年12月4日8时30分（北京时间），与 claim 完全吻合；但该证据为单一来源，最终是否已证实由代码按独立来源规则裁定。",
+      "subclaim": null
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c4",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E1",
+          "direction": "支持",
+          "quote": "项目名称 大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "信封字段显示项目为“公开招标公告”，并载明潜在投标人可获取招标文件、提交投标文件，即公开可参与的投标机会，与 claim 所述“kind 为 tender 且为公开可参与的投标机会”相符；但该证据未直接出现“商机”定性字样，仅支撑其依据部分。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一证据为信号层信封基础字段，属单一来源（谱系根 signal_layer），虽内容与 claim 依据（公开招标、可参与投标）一致，但未直接体现“商机”定性表述，且无独立来源印证，故意见为待证实。",
+      "subclaim": {
+        "text": "该信号为公开招标公告，潜在投标人可获取招标文件并提交投标文件。",
+        "evidenceIds": [
+          "evt_tender_dalian_police_r1:E1"
+        ],
+        "reason": "证据原文明确载明公开招标及投标参与方式，可逐字蕴含该收窄断言，且不含“商机”定性等未满足谓词。"
+      }
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c5",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 DLZFCG2026448-2;项目名称 大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告;采购方 大连市公安局（本级）;预算金额 45232.0 元;发布日期 2026-10-22;领域 (未标注)。",
+          "reason": "该证据只给出招标信号的基础字段（项目编号、名称、采购方、预算、发布日期），未涉及信封中 amountHistory、noveltyHistory、frequencyHistory 是否为 null，也未涉及历史采购基线是否充足，因此不改变对 claim 的判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗中唯一证据为信号层基础字段，未包含任何关于信封历史字段取值或历史基线充足性的信息，claim 无法据此证实或证伪。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c6",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 DLZFCG2026448-2;项目名称 大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该证据只列出招标信号的基础字段与正文摘要，未涉及信封中 amountAnomaly、frequencyAnomaly、noveltyAnomaly 的取值，无法支持或反驳 claim。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗仅有一条证据，且其内容为招标信号基础字段，未包含任何关于信封异常字段是否为 null 的信息，claim 无法据此判定。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c7",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 DLZFCG2026448-2;项目名称 大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告;采购方 大连市公安局（本级）;预算金额 45232.0 元;发布日期 2026-10-22;领域 (未标注)。",
+          "reason": "该证据只列出信封的基础字段（项目编号、名称、采购方、预算、发布日期、领域未标注），未涉及 relevance 字段是否为 null，也未涉及 companyProfile 是否为空，因此不改变对 claim 的判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗中唯一证据为信号层信封基础字段，未包含 relevance 与 companyProfile 的取值信息，无法印证或反驳 claim 所述“relevance 为 null 且 companyProfile 为空”，故维持待证实。",
+      "subclaim": null
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 1,
+      "mainTarget": "c11",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "大连市公安局（本级）近两年是否存在同等金额（约 4.5 万元）的服装类采购记录——这是区分 h1（正常公开采购）与 h2（异常输送/定向采购）的关键证据，且 c11 与 c13 同属 S2 节最后未决项，卡住 h1/h2 的裁决。",
+          "acceptance": "需权威登记源记录：中国政府采购网或辽宁/大连政府采购网的中标（成交）公告正文级证据，含采购人=大连市公安局（本级）、品目为服装类、金额约 4.5 万元、时间在近两年内；仅标题或摘要不算查到。",
+          "failover": "若政府采购网无记录，改查大连市公共资源交易平台或公安局部门预算/决算公开中的服装采购条目；仍无则记为查无，转 c13 用历史中位数口径间接判定。"
+        },
+        {
+          "gap": "若 c11 查到多条历史服装采购记录，需提取金额序列以计算历史中位数，支撑 c13（本项目 45232.0 元是否显著偏离）。",
+          "acceptance": "需至少 3 条可核验的历史服装类采购金额记录（页面正文级），足以计算中位数并与 45232.0 元比较。",
+          "failover": "记录不足 3 条则 c13 标注信息不足，不强行下结论；改由 c12（采购方式）单线推进 h1/h2 区分。"
+        }
+      ],
+      "searchHints": [
+        "大连市公安局 服装 采购 中标公告",
+        "大连市公安局 本级 政府采购 服装 成交结果",
+        "site:ccgp.gov.cn 大连市公安局 服装"
+      ],
+      "sideTargets": [
+        "c13",
+        "c12"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [
+        {
+          "id": "c17",
+          "text": "天津市肿瘤医院在 2026 年通过中国政府采购网天津分网发布了至少两个独立编号（BH-ZLYY2026871、BH-ZLYY2026890）的设备采购项目中标公告。",
+          "category": "采购频次",
+          "parent": "c11",
+          "priority": 3,
+          "entityNames": [
+            "天津市肿瘤医院"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c18",
+          "text": "天津市滨海新区卫生健康委员会本级与天津市河西区卫生健康委员会系统在 2026 年均在中国政府采购网天津分网留有采购公告记录（前者为中标公告，后者为采购意向公告）。",
+          "category": "采购主体分布",
+          "parent": null,
+          "priority": 2,
+          "entityNames": [
+            "天津市滨海新区卫生健康委员会本级",
+            "天津市河西区卫生健康委员会系统"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c19",
+          "text": "天津市西青区中医医院 2026 年信息化软件采购项目（XCSD-2026-C-293）已进入中标成交阶段，公告载明项目编号与阶段信息。",
+          "category": "采购阶段",
+          "parent": null,
+          "priority": 2,
+          "entityNames": [
+            "天津市西青区中医医院"
+          ],
+          "hypothesisLinks": []
+        }
+      ],
+      "cohorts": [
+        {
+          "name": "天津市三级/区级医疗机构且 2026 年有设备或信息化采购公告",
+          "criteria": {
+            "region": "天津市",
+            "entityType": "医疗机构",
+            "timeWindow": "2026年",
+            "signal": "在中国政府采购网天津分网发布设备采购或信息化软件采购的中标/意向公告"
+          },
+          "members": [
+            "天津市肿瘤医院",
+            "天津市滨海新区中医医院",
+            "天津市西青区中医医院",
+            "天津中医药大学第一附属医院",
+            "天津市滨海新区卫生健康委员会本级",
+            "天津市河西区卫生健康委员会系统"
+          ]
+        },
+        {
+          "name": "天津市高校及职业院校 2026 年有政府采购记录",
+          "criteria": {
+            "region": "天津市",
+            "entityType": "高等院校/职业院校",
+            "timeWindow": "2026年",
+            "signal": "在中国政府采购网天津分网发布采购意向、中标或合同公告"
+          },
+          "members": [
+            "天津现代职业技术学院",
+            "天津职业技术师范大学",
+            "天津财经大学"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c1",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E1",
+          "direction": "支持",
+          "quote": "招标信号基础字段:项目编号 DLZFCG2026448-2;项目名称 大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告;采购方 大连市公安局（本级）;预算金额 45232.0 元;发布日期 2026-10-22",
+          "reason": "信号层信封字段逐项与 claim 一致：项目编号、采购方、金额、发布日期。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "天津医疗设备项目，与大连公安服装采购无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "天津设备采购，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "项目编号：DLZFCG2026448-2\n项目名称：大连市公安局2026年新警及晋监民警服装采购项目D包\n项目预算金额：45232元；",
+          "reason": "官方公告正文载明项目编号与预算金额 45232 元，与 claim 一致；采购方与发布日期见标题及信封字段。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "天津医疗设备项目，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "天津信息化软件项目，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "天津学院采购项目，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E8",
+          "direction": "无关",
+          "quote": "天津财经大学财税与公共管理学院购置台式电脑项目(项目编号:市本级〔2026〕416950号)合同公告",
+          "reason": "天津合同公告，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E9",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026871)中标公告",
+          "reason": "天津设备采购，无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1（信号层信封）与 E2（ccgp 官方公告正文）两条独立来源均载明项目编号 DLZFCG2026448-2、采购方大连市公安局（本级）、金额 45232 元、发布日期 2026-10-22，与 claim 完全吻合；其余证据为无关的天津项目公告。",
+      "subclaim": null
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c10",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E10",
+          "direction": "无关",
+          "quote": "天津市武清区市政工程服务中心政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津武清区采购意向公告，与大连市公安局及大连市政府采购中心的委托代理关系无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院 天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "天津医疗设备中标公告，与本案主体及项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "天津肿瘤医院设备采购中标公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "无关",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该公告为大连市公安局服装采购项目D包招标公告，正文未出现大连市政府采购中心作为受托代理机构的表述，也未提及委托代理关系；仅凭此公告无法支撑委托代理关系，亦不构成矛盾。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "天津市滨海新区卫生健康委员会本级 滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "天津医疗设备中标公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院 天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "天津信息化软件中标公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "天津学院采购中标公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E6",
+          "direction": "无关",
+          "quote": "天津职业技术师范大学政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津高校采购意向公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E7",
+          "direction": "无关",
+          "quote": "天津市河西区卫生健康委员会系统政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津卫健系统采购意向公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E8",
+          "direction": "无关",
+          "quote": "天津财经大学天津财经大学财税与公共管理学院购置台式电脑项目(项目编号:市本级〔2026〕416950号)合同公告",
+          "reason": "天津财经大学合同公告，与本案无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内唯一涉及大连市公安局项目的证据（E2）为服装采购D包招标公告，正文未载明大连市政府采购中心为受托代理机构，亦无任何独立于本公告的信源佐证委托代理关系；其余证据均为天津地区无关公告。claim 的两个联结（委托代理关系存在、有独立信源佐证）均无证据支撑，维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c11",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "项目预算金额：45232元；",
+          "reason": "该公告为大连市公安局2026年服装类采购项目，预算金额45232元，与claim所述约4.5万元金额吻合，且采购内容为帽徽、肩章、警号等服装类物品，支持存在同等金额服装类采购记录。但该证据仅覆盖2026年一个年度，无法单独证明“近两年”均有记录。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅有一条官方公告证据显示大连市公安局2026年有45232元的服装类采购项目，金额与claim吻合，但claim要求“近两年”均有同等金额记录，现有证据只覆盖单一年度，不足以完整证实，故意见为待证实。",
+      "subclaim": {
+        "text": "大连市公安局2026年有预算金额45232元的服装类采购项目。",
+        "evidenceIds": [
+          "evt_tender_dalian_police_r1:E2"
+        ],
+        "reason": "该收窄断言逐字被证据蕴含（项目预算金额45232元、服装采购项目），去掉了“近两年”这一未被证据满足的谓词。"
+      }
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c12",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该证据是一份公开招标公告，表明大连市公安局本级在2026年以公开招标方式采购服装类项目，为“以公开招标为主要采购方式”提供了单点支持；但仅一个项目、一个包，不足以证明“既往”整体以公开招标为主。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅有一条同源证据（公开招标公告）显示一次服装类采购采用公开招标，无法覆盖“既往”整体采购方式分布，不足以证实“以公开招标为主要采购方式”，亦无矛盾证据。",
+      "subclaim": null
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c13",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院 天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "天津医疗设备采购中标公告，与大连市公安局服装采购D包金额及历史中位数比较无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "天津设备采购中标公告，与本案金额比较无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "项目预算金额：45232元；",
+          "reason": "该公告确认D包预算金额为45232元，与claim所述金额一致；但未提供历史中位数数据，无法支撑“无显著偏离”的比较判断。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "天津市滨海新区卫生健康委员会本级 滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "天津医疗设备采购公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院 天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "天津信息化软件采购公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "天津学院采购公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E8",
+          "direction": "无关",
+          "quote": "天津财经大学天津财经大学财税与公共管理学院购置台式电脑项目(项目编号:市本级〔2026〕416950号)合同公告",
+          "reason": "天津高校电脑采购合同公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E9",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026871)中标公告",
+          "reason": "天津设备采购中标公告，与本案无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅E2确认D包预算金额45232元，与claim金额部分一致；但卷宗中没有任何大连市公安局（本级）同类服装采购的历史中位数数据，无法验证“无显著偏离”的比较判断，故维持待证实。",
+      "subclaim": {
+        "text": "本项目D包预算金额为45232元。",
+        "evidenceIds": [
+          "evt_tender_dalian_police_r1:E2"
+        ],
+        "reason": "E2原文明确载明“项目预算金额：45232元；”，可逐字蕴含该收窄断言，且不含历史中位数比较谓词。"
+      }
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c14",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "无关",
+          "quote": "采购需求：D包：采购一批帽徽、肩章、警号等；",
+          "reason": "该公告仅为采购方发布的招标公告，列明采购标的（帽徽、肩章、警号等）与投标人资格要求，未涉及任何具体供应商的警用服装供货资质或既往供货业绩，不能改变对本企业资质的判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗仅含一份采购方招标公告，未提供任何关于本企业是否具备警用服装类产品供货资质或既往供货业绩的信息，claim 无法据此证实或证伪。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c15",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院 天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "该证据是其他单位、其他项目的中标公告，未涉及本企业投标的收益或成本信息。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "该证据是其他单位、其他项目的中标公告，未涉及本企业投标的收益或成本信息。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "无关",
+          "quote": "项目预算金额：45232元；",
+          "reason": "该证据只给出项目预算与资格要求，未提供本企业投标成本或预期收益（毛利/战略价值）的任何数据，无法改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "天津市滨海新区卫生健康委员会本级 滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "该证据是其他单位、其他项目的中标公告，未涉及本企业投标的收益或成本信息。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院 天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "该证据是其他单位、其他项目的中标公告，未涉及本企业投标的收益或成本信息。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "该证据是其他单位、其他项目的中标公告，未涉及本企业投标的收益或成本信息。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E9",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026871)中标公告",
+          "reason": "该证据是其他单位、其他项目的中标公告，未涉及本企业投标的收益或成本信息。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "全部证据均为其他项目的中标公告或招标公告，未包含本企业投标成本、预期毛利或战略价值的任何数据，无法支持或反驳该 claim。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c16",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院 天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "天津另一采购项目的中标公告，与本项目D包及A、B、C包的分包关系无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "天津另一采购项目的中标公告，与本项目分包结构无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "项目名称：大连市公安局2026年新警及晋监民警服装采购项目D包",
+          "reason": "该公告确认存在“大连市公安局2026年新警及晋监民警服装采购项目D包”，并给出D包预算金额与采购需求（帽徽、肩章、警号等），支持D包为该项目分包且预算与采购内容独立；但未涉及A、B、C包，仅部分支撑。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院 天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "天津另一采购项目的中标公告，与本项目分包结构无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "天津另一采购项目的中标公告，与本项目分包结构无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E9",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026871)中标公告",
+          "reason": "天津另一采购项目的中标公告，与本项目分包结构无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅E2一条证据涉及本项目D包，确认D包存在及其预算与采购内容，但未提及A、B、C包，无法印证“同一采购项目的分包”及“各包预算与采购内容相互独立”的完整断言；其余证据均为无关的天津项目公告。",
+      "subclaim": {
+        "text": "大连市公安局2026年新警及晋监民警服装采购项目D包的预算金额为45232元，采购内容为采购一批帽徽、肩章、警号等。",
+        "evidenceIds": [
+          "evt_tender_dalian_police_r1:E2"
+        ],
+        "reason": "E2原文逐字给出D包预算金额与采购需求，可独立成句且不含未满足谓词；仅覆盖D包部分，不涉及A、B、C包。"
+      }
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c2",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E1",
+          "direction": "支持",
+          "quote": "代理机构:大连市政府采购中心;正文摘要:大连市公安局2026年新警及晋监民警服装采购项目D包的潜在投标人应在大连市政府采购云平台确认并获取招标文件",
+          "reason": "信号层信封同时载明代理机构为大连市政府采购中心，以及潜在投标人应在大连市政府采购云平台确认并获取招标文件，与 claim 的两个联结均吻合。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E10",
+          "direction": "无关",
+          "quote": "天津市武清区市政工程服务中心政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津武清区采购意向公告，与本项目代理机构及文件获取渠道无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包的潜在投标人应在大连市政府采购云平台确认并获取招标文件",
+          "reason": "官方公告正文明确潜在投标人应在大连市政府采购云平台确认并获取招标文件；代理机构字段见信号层信封，本条正文未直接出现代理机构表述，但获取渠道部分直接支持。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "天津另一项目的中标公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E6",
+          "direction": "无关",
+          "quote": "天津职业技术师范大学政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津高校采购意向公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E7",
+          "direction": "无关",
+          "quote": "天津市河西区卫生健康委员会系统政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津河西区采购意向公告，与 claim 无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1（信号层信封）与 E2（官方公告正文）分别覆盖代理机构与文件获取渠道两个联结，内容一致；其余证据为无关的天津项目公告。注意 E1 与 E2 谱系根不同（signal_layer 与 ccgp），但 E1 摘要可能转述自公告，独立性存疑，最终由代码按独立来源规则裁定。",
+      "subclaim": null
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c3",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E1",
+          "direction": "支持",
+          "quote": "并于2026年12月4日8时30分（北京时间）前提交投标文件",
+          "reason": "信号层摘要逐字载明提交截止时间为2026年12月4日8时30分（北京时间），与 claim 一致。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "并于2026年12月4日8时30分（北京时间）前提交投标文件",
+          "reason": "官方公告正文逐字载明同一截止时间，直接支撑 claim。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "两条证据均逐字载明投标文件提交截止时间为2026年12月4日8时30分（北京时间）；虽同源于同一公告（E1 为信号层摘要、E2 为官方原文），但内容与 claim 完全吻合，无相反证据。",
+      "subclaim": null
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c4",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E1",
+          "direction": "支持",
+          "quote": "项目名称 大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "信封基础字段显示为公开招标公告，且载明潜在投标人可获取招标文件并提交投标文件，符合 tender 与公开可参与投标机会的定性。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包的潜在投标人应在大连市政府采购云平台确认并获取招标文件，并于2026年12月4日8时30分（北京时间）前提交投标文件。",
+          "reason": "官方公告原文明确为公开招标，并给出潜在投标人获取文件与提交投标文件的程序，支撑“公开可参与的投标机会”这一联结。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "两条证据分别来自信号层与官方公告，均显示该信号为公开招标公告且潜在投标人可参与投标，与 claim 的定性依据一致；虽同源于同一采购项目，但方向一致且无相反证据。",
+      "subclaim": null
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c7",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E1",
+          "direction": "无关",
+          "quote": "招标信号基础字段:项目编号 DLZFCG2026448-2;项目名称 大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该证据是信号层信封的基础字段摘要，未涉及 relevance 字段取值或 companyProfile 内容，无法印证或推翻 claim 关于信封字段为空的断言。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "无关",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该证据为招标公告正文，内容为项目基本情况与投标人资格要求，未提及信封 relevance 或 companyProfile 字段，与 claim 所述字段状态无直接关联。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "两条证据均为招标公告内容，未包含信封 relevance 与 companyProfile 字段的实际取值信息，无法验证 claim 所述“relevance 为 null 且 companyProfile 为空”，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c8",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E10",
+          "direction": "无关",
+          "quote": "天津市武清区市政工程服务中心政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津武清区采购意向，与大连市公安局D包招标公告无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "天津医疗设备中标公告，与大连公安服装D包无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "天津肿瘤医院设备中标公告，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该公告标题与正文明确为大连市公安局本项目D包公开招标公告，支持claim核心内容；但原文未出现发布日期2026年10月22日，也未出现'中国政府采购网'字样（仅平台标注为ccgp），日期与发布渠道部分未被原文直接印证。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "天津医疗设备中标公告，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "天津信息化软件中标公告，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "天津学院采购中标公告，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E6",
+          "direction": "无关",
+          "quote": "天津职业技术师范大学政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津高校采购意向，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E7",
+          "direction": "无关",
+          "quote": "天津市河西区卫生健康委员会系统政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津卫健系统采购意向，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E8",
+          "direction": "无关",
+          "quote": "天津财经大学财税与公共管理学院购置台式电脑项目(项目编号:市本级〔2026〕416950号)合同公告",
+          "reason": "天津高校合同公告，无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅E2一条证据与本claim相关，其标题与正文确认存在'大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告'，但原文未载明发布日期2026年10月22日，也未出现'中国政府采购网'字样；其余证据均为天津地区无关公告。日期与发布渠道两个联结词缺乏原文支撑，且仅单一来源，故意见为待证实。",
+      "subclaim": {
+        "text": "大连市公安局2026年新警及晋监民警服装采购项目D包发布了公开招标公告。",
+        "evidenceIds": [
+          "evt_tender_dalian_police_r1:E2"
+        ],
+        "reason": "E2原文标题与正文逐字蕴含该收窄断言，剥离了未被原文支撑的发布日期与发布渠道谓词。"
+      }
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c9",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院 天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "该证据是另一项目的中标公告，与大连市公安局服装采购项目D包招标公告是否被更正、撤销或延期无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "该证据是另一项目的中标公告，与目标招标公告的后续状态无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "无关",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该证据是招标公告原文本身，只证明公告发布，未包含任何关于更正、撤销或延期的信息，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "天津市滨海新区卫生健康委员会本级 滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "该证据是另一项目的中标公告，与目标招标公告的后续状态无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院 天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "该证据是另一项目的中标公告，与目标招标公告的后续状态无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "该证据是另一项目的中标公告，与目标招标公告的后续状态无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E9",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026871)中标公告",
+          "reason": "该证据是另一项目的中标公告，与目标招标公告的后续状态无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内无任何证据涉及该招标公告发布后是否被更正、撤销或延期；唯一相关证据E2仅为公告原文，不含后续变更信息，故无法证实也无法证伪。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 主体与事件背景\n\n信封信息显示，本项目编号为 DLZFCG2026448-2，采购方为大连市公安局（本级），金额 45232.0 元，发布日期 2026-10-22 [1][2][3][4][5]。\n\n信封同时载明，代理机构为大连市政府采购中心，潜在投标人应在大连市政府采购云平台确认并获取招标文件 [1][2][3][4][5]。\n\n解读环节将本信号定性为“商机”，依据是信封 kind 为 tender 且属于公开可参与的投标机会 [1][2]。\n\n围绕本次采购的性质，目前存在三种并行假设：其一为正常公开采购（当前主导假设，已证实 3 项、待证实 4 项、被否证 0 项）；其二为异常输送/定向采购（已证实 2 项、待证实 3 项、被否证 0 项）；其三为本企业可参与的实质商机（已证实 0 项、待证实 3 项、被否证 0 项）。上述假设均尚未完成裁定，其中后两者所需的区分性证据（历史采购明细与中标结果、本企业资质与报价测算）目前尚未核实，本节不作定性结论。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 2,
+      "mainTarget": "c13",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "大连市公安局（本级）近两年服装类采购的历史金额明细（用于计算中位数，判断 45232.0 元是否显著偏离）",
+          "acceptance": "需权威登记源记录：中国政府采购网（或辽宁分网）上该采购方近两年服装类项目的中标/合同公告，逐条含项目名称、金额、日期，至少 3 条可算中位数",
+          "failover": "若中国政府采购网检索不到足量记录，改查辽宁省/大连市公共资源交易平台同类公告；仍不足则降级为 c12（采购方式）先行"
+        },
+        {
+          "gap": "该采购方既往服装类采购的采购方式（公开招标/竞争性磋商/询价等）分布",
+          "acceptance": "需页面正文级证据：每条公告正文中载明采购方式字段，可统计公开招标占比",
+          "failover": "若正文不可得，仅以公告标题/类型字段作弱证据登记，并标注粒度不足"
+        }
+      ],
+      "searchHints": [
+        "大连市公安局 服装 采购 中标公告 2025",
+        "大连市公安局 警用服装 招标 中国政府采购网 辽宁",
+        "大连市公安局 本级 服装 合同公告 金额"
+      ],
+      "sideTargets": [
+        "c12",
+        "c13a"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [
+        {
+          "id": "c17",
+          "text": "天津商业大学在2026年同期发布了多个'冷链物流产教融合实训设备更新'项目包（至少含TJCU-2026GZ-059第3包与TJCU-2026GZ-045第2包），且均已进入合同签订阶段。",
+          "category": "采购项目关联",
+          "sectionIndex": 2,
+          "priority": 3,
+          "parent": null,
+          "entityNames": [
+            "天津商业大学"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c18",
+          "text": "天津市滨海新区住房和建设事务服务中心的滨海新区城市内涝治理项目（三期）相关技术服务（项目编号JTXG-2026-ZC-029）已发布合同公告。",
+          "category": "采购项目状态",
+          "sectionIndex": 2,
+          "priority": 2,
+          "parent": null,
+          "entityNames": [
+            "天津市滨海新区住房和建设事务服务中心"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c19",
+          "text": "天津市商务局（天津市人民政府口岸服务办公室）机关的2026-2029年度天津市冬春（静态）蔬菜储备项目第8包（项目编号QYTJ-2026A165）已进入合同签订阶段。",
+          "category": "采购项目状态",
+          "sectionIndex": 2,
+          "priority": 2,
+          "parent": null,
+          "entityNames": [
+            "天津市商务局（天津市人民政府口岸服务办公室）"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c20",
+          "text": "天津市东丽区供热燃气管理事务中心的华明翠园东北侧供热一次管道架空敷设项目施工第1包（项目编号TJZDGX2026-164）已进入合同签订阶段。",
+          "category": "采购项目状态",
+          "sectionIndex": 2,
+          "priority": 2,
+          "parent": null,
+          "entityNames": [
+            "天津市东丽区供热燃气管理事务中心"
+          ],
+          "hypothesisLinks": []
+        }
+      ],
+      "cohorts": [
+        {
+          "name": "天津市政府采购网2026年合同签订阶段项目（本轮证据圈）",
+          "criteria": {
+            "source": "www.ccgp-tianjin.gov.cn",
+            "stage": "合同签订",
+            "year": 2026
+          },
+          "members": [
+            "天津商业大学",
+            "天津市滨海新区住房和建设事务服务中心",
+            "天津市商务局（天津市人民政府口岸服务办公室）",
+            "天津市东丽区供热燃气管理事务中心"
+          ]
+        },
+        {
+          "name": "天津商业大学冷链物流产教融合实训设备更新项目系列包",
+          "criteria": {
+            "采购人": "天津商业大学",
+            "项目名称关键词": "冷链物流产教融合实训设备更新",
+            "项目编号前缀": "TJCU-2026GZ-"
+          },
+          "members": [
+            "天津商业大学"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c1",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E1",
+          "direction": "支持",
+          "quote": "招标信号基础字段:项目编号 DLZFCG2026448-2;项目名称 大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告;采购方 大连市公安局（本级）;预算金额 45232.0 元;发布日期 2026-10-22",
+          "reason": "信号层信封字段逐项与 claim 一致：项目编号、采购方、金额、发布日期均吻合。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "项目编号：DLZFCG2026448-2\n项目名称：大连市公安局2026年新警及晋监民警服装采购项目D包\n项目预算金额：45232元；",
+          "reason": "官方公告原文载明项目编号与预算金额 45232 元，与 claim 一致；采购方与发布日期见标题及信封字段。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "天津医疗设备项目，与大连公安服装采购无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "天津设备采购项目，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "天津医疗设备项目，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "天津信息化软件项目，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "天津学院采购项目，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E8",
+          "direction": "无关",
+          "quote": "天津财经大学财税与公共管理学院购置台式电脑项目(项目编号:市本级〔2026〕416950号)合同公告",
+          "reason": "天津高校电脑采购合同，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E9",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026871)中标公告",
+          "reason": "天津设备采购项目，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E13",
+          "direction": "无关",
+          "quote": "天津商业大学冷链物流产教融合实训设备更新原位拉曼光谱仪等购置项目_第3包(项目编号:TJCU-2026GZ-059)合同公告",
+          "reason": "天津高校设备合同，与 claim 无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1（信号层信封）与 E2（官方公告原文）均逐项载明项目编号 DLZFCG2026448-2、采购方大连市公安局（本级）、金额 45232 元、发布日期 2026-10-22，与 claim 完全吻合；其余证据为天津无关项目。注意 E1 与 E2 谱系根不同（signal_layer 与 ccgp），但 E1 内容本身即转述公告字段，独立性存疑，最终由代码按独立来源规则裁定。",
+      "subclaim": null
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c10",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E10",
+          "direction": "无关",
+          "quote": "天津市武清区市政工程服务中心政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津武清区采购意向，与大连市公安局及大连市政府采购中心的委托代理关系无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院 天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "天津医疗设备中标公告，与本 claim 主体和项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "天津肿瘤医院设备采购，与本 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "无关",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该公告为大连市公安局项目招标公告，但正文未出现大连市政府采购中心作为受托代理机构的表述，也未提及委托代理关系；仅能证明项目存在，不能支撑委托代理关系，亦不构成矛盾。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "天津市滨海新区卫生健康委员会本级 滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "天津项目中标公告，与本 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院 天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "天津项目中标公告，与本 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "天津项目中标公告，与本 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E6",
+          "direction": "无关",
+          "quote": "天津职业技术师范大学政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津采购意向公告，与本 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E7",
+          "direction": "无关",
+          "quote": "天津市河西区卫生健康委员会系统政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津采购意向公告，与本 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E8",
+          "direction": "无关",
+          "quote": "天津财经大学天津财经大学财税与公共管理学院购置台式电脑项目(项目编号:市本级〔2026〕416950号)合同公告",
+          "reason": "天津合同公告，与本 claim 无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内唯一涉及大连市公安局项目的证据 E2 未载明大连市政府采购中心为受托代理机构，其余证据均为天津地区无关公告；委托代理关系及独立信源佐证均无证据支撑，维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c8",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E10",
+          "direction": "无关",
+          "quote": "天津市武清区市政工程服务中心政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津武清区采购意向，与大连市公安局D包招标公告无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "天津医疗设备中标公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "天津肿瘤医院设备中标公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该公告标题与正文明确为大连市公安局本项目D包公开招标公告，支持claim核心内容；但原文未出现发布日期2026年10月22日及发布平台中国政府采购网的明确表述，仅能部分支撑。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "天津医疗设备中标公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "天津信息化软件中标公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "天津学院采购中标公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E6",
+          "direction": "无关",
+          "quote": "天津职业技术师范大学政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津高校采购意向，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E7",
+          "direction": "无关",
+          "quote": "天津市河西区卫生健康委员会系统政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津卫健系统采购意向，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E8",
+          "direction": "无关",
+          "quote": "天津财经大学财税与公共管理学院购置台式电脑项目(项目编号:市本级〔2026〕416950号)合同公告",
+          "reason": "天津高校合同公告，与本案无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅E2一条证据与本claim相关，其标题与正文确认大连市公安局本项目D包公开招标公告存在，但未载明发布日期2026年10月22日，也未明确发布平台为中国政府采购网；其余证据均为天津地区无关公告。关键要素（日期、发布平台）缺乏证据支撑，故意见为待证实。",
+      "subclaim": {
+        "text": "大连市公安局2026年新警及晋监民警服装采购项目D包发布了公开招标公告。",
+        "evidenceIds": [
+          "evt_tender_dalian_police_r1:E2"
+        ],
+        "reason": "E2标题与正文逐字确认该D包公开招标公告存在，但撑不起发布日期与发布平台两个联结词，故收窄为不含日期与平台的断言。"
+      }
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 3,
+      "mainTarget": "c12",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "大连市公安局（本级）既往服装类采购的采购方式分布（公开招标/竞争性磋商/询价等）未知，无法判断本次公开招标是否为该单位服装类采购的主要方式。",
+          "acceptance": "需在中国政府采购网（或辽宁分网）检索到大连市公安局（本级）近两年服装类采购公告至少 2 条，且每条公告正文级载明采购方式字段，能统计出公开招标占比。",
+          "failover": "若中国政府采购网检索受限，改查辽宁政府采购网或大连市公共资源交易平台同口径公告；若仍无正文级采购方式字段，则降级为标注“无法核实”，转查 c13a 或 c9。"
+        },
+        {
+          "gap": "若上一步仅得到公告列表而无采购方式字段，需进一步确认这些服装类采购项目实际采用的采购方式。",
+          "acceptance": "需公告详情页正文级证据（含“采购方式：公开招标/竞争性磋商/询价”等字段原文），或中标公告中载明的采购方式。",
+          "failover": "若详情页不可达，改用中标结果公告中的“采购方式”字段；若均不可得，则 c12 标注为证据不足，不强行裁定。"
+        }
+      ],
+      "searchHints": [
+        "大连市公安局 服装 采购 公开招标 2025",
+        "大连市公安局 警用服装 中标公告 采购方式",
+        "site:ccgp.gov.cn 大连市公安局 服装"
+      ],
+      "sideTargets": [
+        "c13a",
+        "c9"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [],
+      "cohorts": [
+        {
+          "name": "天津市2026年政府采购公开招标项目（同一公告源 ccgp-tianjin）",
+          "criteria": {
+            "source": "www.ccgp-tianjin.gov.cn",
+            "stage": "招标采购",
+            "projectNoPrefixYear": "2026",
+            "note": "同一公告源、同为2026年公开招标公告，可核查各项目编号格式与代理机构编码是否一致"
+          },
+          "members": [
+            "天津师范大学 激光共聚焦显微镜采购项目",
+            "天津市第三中心医院（东丽院区）第三批检验科设备采购项目",
+            "天津市教育招生考试院考试服务项目",
+            "天津海运职业学院智能机舱能量管理模拟器项目",
+            "天津市住房和城乡建设委员会建立房屋全生命周期安全管理机制项目"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c1",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E1",
+          "direction": "支持",
+          "quote": "招标信号基础字段:项目编号 DLZFCG2026448-2;项目名称 大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告;采购方 大连市公安局（本级）;预算金额 45232.0 元;发布日期 2026-10-22",
+          "reason": "信号层信封字段逐项载明项目编号、采购方、金额与发布日期，与 claim 一致。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "天津医疗设备项目，与大连公安服装采购信封字段无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "不同项目不同编号，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "项目编号：DLZFCG2026448-2\n项目名称：大连市公安局2026年新警及晋监民警服装采购项目D包\n项目预算金额：45232元；",
+          "reason": "官方公告正文载明项目编号与预算金额 45232 元，与 claim 一致；采购方与发布日期见标题及信封字段。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "天津医疗设备项目，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "不同项目，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "不同项目，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E8",
+          "direction": "无关",
+          "quote": "天津财经大学财税与公共管理学院购置台式电脑项目(项目编号:市本级〔2026〕416950号)合同公告",
+          "reason": "不同项目，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E9",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026871)中标公告",
+          "reason": "不同项目，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E13",
+          "direction": "无关",
+          "quote": "天津商业大学冷链物流产教融合实训设备更新原位拉曼光谱仪等购置项目_第3包(项目编号:TJCU-2026GZ-059)合同公告",
+          "reason": "不同项目，与 claim 无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1（信号层信封）与 E2（官方公告正文）均载明项目编号 DLZFCG2026448-2、采购方大连市公安局（本级）、金额 45232 元、发布日期 2026-10-22，claim 各字段获一致印证；其余证据为无关的天津项目。注意 E1 与 E2 谱系根不同（signal_layer 与 ccgp），但 E1 内容本身即转述公告字段，独立性存疑，最终由代码裁定。",
+      "subclaim": null
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c10",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E10",
+          "direction": "无关",
+          "quote": "天津市武清区市政工程服务中心政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津武清区采购意向公告，与本项目及委托代理关系无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院 天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "天津医疗设备中标公告，与本项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "天津肿瘤医院设备中标公告，与本项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "无关",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该公告为本项目招标公告，但正文未出现大连市政府采购中心作为受托代理机构的表述，也未提及委托代理关系，无法支持或反驳 claim。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "天津市滨海新区卫生健康委员会本级 滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "天津医疗设备中标公告，与本项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院 天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "天津信息化软件中标公告，与本项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "天津学院采购中标公告，与本项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E6",
+          "direction": "无关",
+          "quote": "天津职业技术师范大学政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津高校采购意向公告，与本项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E7",
+          "direction": "无关",
+          "quote": "天津市河西区卫生健康委员会系统政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津卫健系统采购意向公告，与本项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E8",
+          "direction": "无关",
+          "quote": "天津财经大学天津财经大学财税与公共管理学院购置台式电脑项目(项目编号:市本级〔2026〕416950号)合同公告",
+          "reason": "天津财经大学合同公告，与本项目无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内唯一涉及本项目的证据 E2 为招标公告，其正文未载明大连市政府采购中心为受托代理机构，亦无任何独立于本公告的信源佐证委托代理关系；其余证据均为天津地区无关公告。claim 两项联结（委托代理关系存在、有独立信源佐证）均无证据支撑，维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c12",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该公告显示大连市公安局本级服装类采购项目采用公开招标方式，为“以公开招标为主要采购方式”提供单点支持，但仅一个项目、一个包，不足以证明“既往”“主要”。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E18",
+          "direction": "无关",
+          "quote": "天津师范大学 激光共聚焦显微镜采购项目 (项目编号:BNZB-2026-C-0740)公开招标公告",
+          "reason": "天津师范大学设备采购，与大连市公安局服装采购无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E19",
+          "direction": "无关",
+          "quote": "天津市第三中心医院 天津市第三中心医院（东丽院区）第三批检验科设备采购项目 (项目编号:XCSD-2026-A-938)公开招标公告",
+          "reason": "天津医院设备采购，与大连市公安局服装采购无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E20",
+          "direction": "无关",
+          "quote": "天津市教育招生考试院 天津市教育招生考试院考试服务项目 (项目编号:TJBD-2026-C-499)公开招标公告",
+          "reason": "天津考试服务采购，与大连市公安局服装采购无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E21",
+          "direction": "无关",
+          "quote": "天津海运职业学院 天津海运职业学院智能机舱能量管理模拟器项目 (项目编号:YFGP-2026-B-0400)公开招标公告",
+          "reason": "天津院校设备采购，与大连市公安局服装采购无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E22",
+          "direction": "无关",
+          "quote": "天津市住房和城乡建设委员会机关 天津市住房和城乡建设委员会建立房屋全生命周期安全管理机制项目 (项目编号:XFZB-2026-TJHX-ZF141)公开招标公告",
+          "reason": "天津住建委服务采购，与大连市公安局服装采购无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅E2一条证据显示大连市公安局本级一个服装采购项目采用公开招标，其余证据均为无关的天津项目。单一样本不足以支撑“既往以公开招标为主要采购方式”的概括性断言，且无独立来源印证，故维持待证实。",
+      "subclaim": {
+        "text": "大连市公安局2026年新警及晋监民警服装采购项目D包采用公开招标方式。",
+        "evidenceIds": [
+          "evt_tender_dalian_police_r1:E2"
+        ],
+        "reason": "E2原文标题与正文明确该项目为公开招标公告，可逐字蕴含该收窄断言；原claim的“既往”“主要”等概括谓词无法由单条证据支撑。"
+      }
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c13",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院 天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "天津医疗设备采购中标公告，与大连市公安局服装采购D包金额及历史中位数比较无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "天津医疗设备采购，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "项目预算金额：45232元；",
+          "reason": "该公告确认D包预算金额为45232元，支撑claim中金额部分；但未提供历史中位数数据，无法支撑'无显著偏离'的比较判断。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "天津市滨海新区卫生健康委员会本级 滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "天津医疗设备采购，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院 天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "天津信息化软件采购，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "天津学院设备采购，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E8",
+          "direction": "无关",
+          "quote": "天津财经大学天津财经大学财税与公共管理学院购置台式电脑项目(项目编号:市本级〔2026〕416950号)合同公告",
+          "reason": "天津高校电脑采购合同，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E9",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026871)中标公告",
+          "reason": "天津医疗设备采购，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E18",
+          "direction": "无关",
+          "quote": "天津师范大学 激光共聚焦显微镜采购项目 (项目编号:BNZB-2026-C-0740)公开招标公告",
+          "reason": "天津高校显微镜采购，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E19",
+          "direction": "无关",
+          "quote": "天津市第三中心医院 天津市第三中心医院（东丽院区）第三批检验科设备采购项目 (项目编号:XCSD-2026-A-938)公开招标公告",
+          "reason": "天津医院检验设备采购，与claim无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅E2确认D包预算金额45232元，但卷宗中无任何大连市公安局（本级）同类服装采购的历史中位数数据，'无显著偏离'的比较判断缺乏证据支撑，故维持待证实。",
+      "subclaim": {
+        "text": "本项目D包预算金额为45232元。",
+        "evidenceIds": [
+          "evt_tender_dalian_police_r1:E2"
+        ],
+        "reason": "E2原文明确载明'项目预算金额：45232元；'，可逐字蕴含该收窄断言，剥离了无证据支撑的历史中位数比较谓词。"
+      }
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c16",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院 天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "天津医院设备采购中标公告，与大连市公安局服装采购项目D包及A/B/C包分包关系无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "天津肿瘤医院设备采购，与本案项目分包结构无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该公告确认存在'大连市公安局2026年新警及晋监民警服装采购项目D包'，项目编号DLZFCG2026448-2，并载明D包预算45232元与采购内容（帽徽、肩章、警号等），支持D包为该项目分包且预算与采购内容独立；但未涉及A、B、C包，仅部分支撑。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院 天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "天津信息化软件采购，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "天津学院设备采购，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E9",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026871)中标公告",
+          "reason": "天津肿瘤医院设备采购，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E18",
+          "direction": "无关",
+          "quote": "天津师范大学 激光共聚焦显微镜采购项目 (项目编号:BNZB-2026-C-0740)公开招标公告",
+          "reason": "天津师范大学设备采购，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E19",
+          "direction": "无关",
+          "quote": "天津市第三中心医院 天津市第三中心医院（东丽院区）第三批检验科设备采购项目 (项目编号:XCSD-2026-A-938)公开招标公告",
+          "reason": "天津医院设备采购，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E20",
+          "direction": "无关",
+          "quote": "天津市教育招生考试院 天津市教育招生考试院考试服务项目 (项目编号:TJBD-2026-C-499)公开招标公告",
+          "reason": "天津考试服务采购，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E21",
+          "direction": "无关",
+          "quote": "天津海运职业学院 天津海运职业学院智能机舱能量管理模拟器项目 (项目编号:YFGP-2026-B-0400)公开招标公告",
+          "reason": "天津学院设备采购，与本案无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅E2一条证据涉及本项目D包，确认D包存在、有独立预算与采购内容，但未提及A、B、C包，无法印证'与A、B、C包属于同一采购项目的分包'及'各包相互独立'的完整断言；其余证据均为无关的天津采购公告。",
+      "subclaim": {
+        "text": "大连市公安局2026年新警及晋监民警服装采购项目D包项目预算金额为45232元，采购内容为帽徽、肩章、警号等。",
+        "evidenceIds": [
+          "evt_tender_dalian_police_r1:E2"
+        ],
+        "reason": "E2原文逐字载明D包预算金额45232元及采购需求'D包：采购一批帽徽、肩章、警号等'，可独立成句且不含未满足谓词。"
+      }
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c2",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E1",
+          "direction": "支持",
+          "quote": "代理机构:大连市政府采购中心;正文摘要:大连市公安局2026年新警及晋监民警服装采购项目D包的潜在投标人应在大连市政府采购云平台确认并获取招标文件",
+          "reason": "信号层信封同时载明代理机构为大连市政府采购中心，以及潜在投标人应在大连市政府采购云平台确认并获取招标文件，与 claim 的两个联结均吻合。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E10",
+          "direction": "无关",
+          "quote": "天津市武清区市政工程服务中心政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津市政工程采购意向公告，与大连公安服装采购项目的代理机构及文件获取渠道无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包的潜在投标人应在大连市政府采购云平台确认并获取招标文件",
+          "reason": "官方公告正文明确潜在投标人应在大连市政府采购云平台确认并获取招标文件；代理机构字段见信号层信封，本条正文未直接出现代理机构表述，但整体指向同一公告。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "天津院校设备采购中标公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E6",
+          "direction": "无关",
+          "quote": "天津职业技术师范大学政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津高校采购意向公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E7",
+          "direction": "无关",
+          "quote": "天津市河西区卫生健康委员会系统政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津卫健系统采购意向公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E18",
+          "direction": "无关",
+          "quote": "天津师范大学 激光共聚焦显微镜采购项目 (项目编号:BNZB-2026-C-0740)公开招标公告",
+          "reason": "天津高校设备招标公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E19",
+          "direction": "无关",
+          "quote": "天津市第三中心医院 天津市第三中心医院（东丽院区）第三批检验科设备采购项目 (项目编号:XCSD-2026-A-938)公开招标公告",
+          "reason": "天津医院设备招标公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E20",
+          "direction": "无关",
+          "quote": "天津市教育招生考试院 天津市教育招生考试院考试服务项目 (项目编号:TJBD-2026-C-499)公开招标公告",
+          "reason": "天津考试服务招标公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E21",
+          "direction": "无关",
+          "quote": "天津海运职业学院 天津海运职业学院智能机舱能量管理模拟器项目 (项目编号:YFGP-2026-B-0400)公开招标公告",
+          "reason": "天津院校设备招标公告，与 claim 无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1（信号层信封）与 E2（官方公告正文）均指向同一大连公安服装采购项目：E1 载明代理机构为大连市政府采购中心，E1/E2 均载明潜在投标人应在大连市政府采购云平台确认并获取招标文件。二者谱系根不同（signal_layer 与 ccgp），构成独立来源印证；其余证据为天津地区无关公告。",
+      "subclaim": null
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c8",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E10",
+          "direction": "无关",
+          "quote": "天津市武清区市政工程服务中心政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津武清区采购意向，与大连市公安局D包招标公告无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "天津医疗设备中标公告，与大连公安服装D包无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "天津肿瘤医院设备中标公告，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该公告标题与正文明确为大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告，支持claim核心事实；但原文未出现'2026年10月22日'发布日与'中国政府采购网'发布渠道字样，日期与渠道部分未被该证据直接覆盖。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "天津医疗设备中标公告，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "天津信息化软件中标公告，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "天津学院采购中标公告，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E6",
+          "direction": "无关",
+          "quote": "天津职业技术师范大学政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津高校采购意向，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E7",
+          "direction": "无关",
+          "quote": "天津市河西区卫生健康委员会系统政府采购意向公告",
+          "reason": "天津卫健系统采购意向，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E8",
+          "direction": "无关",
+          "quote": "天津财经大学财税与公共管理学院购置台式电脑项目(项目编号:市本级〔2026〕416950号)合同公告",
+          "reason": "天津高校合同公告，无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅E2一条证据与claim相关，其标题与正文确认大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告存在，但未载明'2026年10月22日'发布日期，也未明示'通过中国政府采购网发布'（平台字段为ccgp但正文无此表述）；其余证据均为天津地区无关公告。日期与发布渠道两个联结词缺乏证据支撑，故意见为待证实。",
+      "subclaim": {
+        "text": "大连市公安局2026年新警及晋监民警服装采购项目D包发布了公开招标公告。",
+        "evidenceIds": [
+          "evt_tender_dalian_police_r1:E2"
+        ],
+        "reason": "E2标题与正文逐字确认该D包公开招标公告存在，但撑不起'2026年10月22日'与'通过中国政府采购网发布'两个限定，故收窄为不含日期与渠道的断言。"
+      }
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c9",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院 天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "该证据是天津某医院设备采购项目的中标公告，与大连市公安局服装采购项目D包的招标公告无关，不能说明该公告是否被更正、撤销或延期。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "该证据是天津某医院设备采购项目的中标公告，与大连市公安局服装采购项目D包的招标公告无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "无关",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该证据是招标公告原文，只能证明公告已发布，不能证明其发布后未被更正、撤销或延期；对时效性断言不构成支持或矛盾。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "天津市滨海新区卫生健康委员会本级 滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "该证据是天津某医疗设备项目的中标公告，与大连市公安局服装采购项目D包的招标公告无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院 天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "该证据是天津某医院信息化软件采购项目的中标公告，与大连市公安局服装采购项目D包的招标公告无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "该证据是天津某学院采购项目的中标公告，与大连市公安局服装采购项目D包的招标公告无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E9",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026871)中标公告",
+          "reason": "该证据是天津某医院设备采购项目的中标公告，与大连市公安局服装采购项目D包的招标公告无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E18",
+          "direction": "无关",
+          "quote": "天津师范大学 激光共聚焦显微镜采购项目 (项目编号:BNZB-2026-C-0740)公开招标公告",
+          "reason": "该证据是天津某高校采购项目的招标公告，与大连市公安局服装采购项目D包的招标公告无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E19",
+          "direction": "无关",
+          "quote": "天津市第三中心医院 天津市第三中心医院（东丽院区）第三批检验科设备采购项目 (项目编号:XCSD-2026-A-938)公开招标公告",
+          "reason": "该证据是天津某医院设备采购项目的招标公告，与大连市公安局服装采购项目D包的招标公告无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E20",
+          "direction": "无关",
+          "quote": "天津市教育招生考试院 天津市教育招生考试院考试服务项目 (项目编号:TJBD-2026-C-499)公开招标公告",
+          "reason": "该证据是天津某考试院服务项目的招标公告，与大连市公安局服装采购项目D包的招标公告无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗中仅 E2 涉及大连市公安局服装采购项目D包的招标公告，其内容只能证明公告已发布，未提供任何关于该公告发布后是否被更正、撤销或延期的信息；其余证据均为其他地区、其他项目的公告，与 claim 无关。故无法证实亦无法证伪，维持待证实。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 4,
+      "mainTarget": "c13",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "大连市公安局（本级）近两年（2024-2026）服装类采购的历史金额明细缺失，无法计算历史中位数以判断 45232.0 元是否显著偏离。",
+          "acceptance": "需在中国政府采购网（或辽宁分网）检索到大连市公安局（本级）近两年服装类采购公告/中标公告的页面正文级证据，至少取得 2 条含金额的独立记录，可据此计算中位数区间。",
+          "failover": "若中国政府采购网检索不到，改查辽宁省政府采购网或大连市公共资源交易平台；若仍无记录，则 c13 以'历史基线不足'标注为不可判定，转查 c12 的采购方式分布。"
+        },
+        {
+          "gap": "已取得的历史记录需确认采购方式（公开招标/竞争性磋商/询价等），以同时支撑 c12 的'公开招标为主要采购方式'判断。",
+          "acceptance": "需公告正文或中标公告中明确载明'采购方式'字段的页面级证据，至少覆盖 2 条记录。",
+          "failover": "若采购方式字段缺失，改从中标公告的'招标方式'栏或代理机构公告模板中提取；仍缺则 c12 降级为待证实并记录缺口。"
+        }
+      ],
+      "searchHints": [
+        "大连市公安局 服装 采购 中标公告 2025",
+        "大连市公安局 本级 服装 招标 2024 2025 金额",
+        "site:ccgp.gov.cn 大连市公安局 服装"
+      ],
+      "sideTargets": [
+        "c12",
+        "c13a"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [
+        {
+          "id": "c17",
+          "text": "天津市宁河区至少有5个区级单位（发展和改革委员会、芦台街道办事处、国防动员办公室、医疗保障局、土地整理中心）在2025年发布了面向中小企业预留项目执行情况公告。",
+          "category": "采购模式",
+          "sectionIndex": 2,
+          "priority": 3,
+          "relationType": null,
+          "parent": null,
+          "entityNames": [
+            "天津市宁河区发展和改革委员会",
+            "天津市宁河区人民政府芦台街道办事处",
+            "天津市宁河区国防动员办公室",
+            "天津市宁河区医疗保障局",
+            "天津市宁河区土地整理中心"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c18",
+          "text": "天津市排水管理事务中心的“天津市河口泵站群建设工程（复兴门泵站改扩建工程）基坑第三方监测项目”（项目编号:HT0932025000318-018）在发布后存在更正变更记录。",
+          "category": "采购流程",
+          "sectionIndex": 2,
+          "priority": 3,
+          "relationType": null,
+          "parent": null,
+          "entityNames": [
+            "天津市排水管理事务中心"
+          ],
+          "hypothesisLinks": []
+        }
+      ],
+      "cohorts": [
+        {
+          "name": "天津市宁河区2025年发布中小企业预留项目执行情况公告的区级单位",
+          "criteria": {
+            "region": "天津市宁河区",
+            "year": 2025,
+            "noticeType": "面向中小企业预留项目执行情况公告",
+            "level": "区级"
+          },
+          "members": [
+            "天津市宁河区发展和改革委员会",
+            "天津市宁河区人民政府芦台街道办事处",
+            "天津市宁河区国防动员办公室",
+            "天津市宁河区医疗保障局",
+            "天津市宁河区土地整理中心"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c1",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E1",
+          "direction": "支持",
+          "quote": "招标信号基础字段:项目编号 DLZFCG2026448-2;项目名称 大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告;采购方 大连市公安局（本级）;预算金额 45232.0 元;发布日期 2026-10-22",
+          "reason": "信号层信封字段逐项载明项目编号、采购方、金额与发布日期，与 claim 一致。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "天津医疗设备项目，与大连公安服装采购信封字段无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "不同项目不同编号，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "项目编号：DLZFCG2026448-2\n项目名称：大连市公安局2026年新警及晋监民警服装采购项目D包\n项目预算金额：45232元；",
+          "reason": "官方公告正文载明项目编号与预算金额 45232 元，与 claim 一致；采购方与发布日期见标题及信封。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "天津医疗设备项目，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "不同项目，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "不同项目，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E8",
+          "direction": "无关",
+          "quote": "天津财经大学财税与公共管理学院购置台式电脑项目(项目编号:市本级〔2026〕416950号)合同公告",
+          "reason": "不同项目，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E9",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026871)中标公告",
+          "reason": "不同项目，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E13",
+          "direction": "无关",
+          "quote": "天津商业大学冷链物流产教融合实训设备更新原位拉曼光谱仪等购置项目_第3包(项目编号:TJCU-2026GZ-059)合同公告",
+          "reason": "不同项目，与 claim 无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1（信号层信封）与 E2（官方公告正文）均载明项目编号 DLZFCG2026448-2、采购方大连市公安局（本级）、金额 45232.0 元、发布日期 2026-10-22，逐项吻合；其余证据为无关的天津项目。注意 E1 与 E2 谱系根不同（signal_layer 与 ccgp），但 E1 摘要本身即转述公告内容，独立性存疑，最终由代码按独立来源规则裁定。",
+      "subclaim": null
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c10",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E10",
+          "direction": "无关",
+          "quote": "天津市武清区市政工程服务中心政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津武清区采购意向公告，与大连市公安局及大连市政府采购中心的委托代理关系无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院 天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "天津医疗设备中标公告，与本 claim 主体和项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "天津肿瘤医院设备采购中标公告，与本 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "无关",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该公告虽为本项目（大连市公安局服装采购）的招标公告，但正文仅提及潜在投标人应在大连市政府采购云平台获取招标文件，未出现大连市政府采购中心作为受托代理机构的表述，也未涉及任何独立于本公告的信源，故不改变本 claim 的判断。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "天津市滨海新区卫生健康委员会本级 滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "天津医疗设备中标公告，与本 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院 天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "天津信息化软件中标公告，与本 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "天津学院采购中标公告，与本 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E6",
+          "direction": "无关",
+          "quote": "天津职业技术师范大学政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津高校采购意向公告，与本 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E7",
+          "direction": "无关",
+          "quote": "天津市河西区卫生健康委员会系统政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津卫健系统采购意向公告，与本 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E8",
+          "direction": "无关",
+          "quote": "天津财经大学天津财经大学财税与公共管理学院购置台式电脑项目(项目编号:市本级〔2026〕416950号)合同公告",
+          "reason": "天津财经大学合同公告，与本 claim 无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "全部证据中仅 E2 涉及本项目，但其内容未提及大连市政府采购中心作为受托代理机构，亦无独立于本公告的信源佐证委托代理关系；其余证据均为天津地区无关公告。委托代理关系及独立信源佐证均无证据支撑，维持待证实。",
+      "subclaim": null
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c15",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院 天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "其他单位的中标公告，未涉及本企业投标成本或收益信息。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "其他单位中标公告，与本企业投标收益成本比较无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "无关",
+          "quote": "项目预算金额：45232元；",
+          "reason": "仅给出项目预算与资格要求，未提供本企业投标成本或预期收益的任何数据。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "天津市滨海新区卫生健康委员会本级 滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "其他单位中标公告，不涉及本企业收益成本。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院 天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "其他单位中标公告，与本 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "其他单位中标公告，不涉及本企业投标收益成本。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E9",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026871)中标公告",
+          "reason": "其他单位中标公告，与本 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E24",
+          "direction": "无关",
+          "quote": "天津市和平区工商业联合会系统2025年面向中小企业预留项目执行情况公告",
+          "reason": "执行情况公告，未涉及本企业投标成本收益。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E25",
+          "direction": "无关",
+          "quote": "天津市宁河区发展和改革委员会（系统）2025年面向中小企业预留项目执行情况公告",
+          "reason": "执行情况公告，与本 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E26",
+          "direction": "无关",
+          "quote": "天津市宁河区人民政府芦台街道办事处（系统）2025年面向中小企业预留项目执行情况公告",
+          "reason": "执行情况公告，不涉及本企业投标收益成本。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "全部证据均为其他单位的中标公告或执行情况公告，未提供本企业投标成本与预期收益的任何数据，无法判断收益是否超过成本。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c2",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E1",
+          "direction": "支持",
+          "quote": "代理机构:大连市政府采购中心;正文摘要:大连市公安局2026年新警及晋监民警服装采购项目D包的潜在投标人应在大连市政府采购云平台确认并获取招标文件",
+          "reason": "信号层摘要同时载明代理机构为大连市政府采购中心、潜在投标人应在大连市政府采购云平台确认并获取招标文件，与 claim 两个联结均吻合；但该证据与 E2 同源于公告本身，不构成独立印证。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E10",
+          "direction": "无关",
+          "quote": "天津市武清区市政工程服务中心政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津市政工程采购意向公告，与大连公安服装采购项目的代理机构及文件获取渠道无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包的潜在投标人应在大连市政府采购云平台确认并获取招标文件",
+          "reason": "公告正文明确潜在投标人应在大连市政府采购云平台确认并获取招标文件；代理机构字段见 E1 同源摘要，本证据正文片段直接支撑获取渠道部分。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "天津院校设备采购中标公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E6",
+          "direction": "无关",
+          "quote": "天津职业技术师范大学政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津高校采购意向公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E7",
+          "direction": "无关",
+          "quote": "天津市河西区卫生健康委员会系统政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津卫健系统采购意向公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E18",
+          "direction": "无关",
+          "quote": "天津师范大学 激光共聚焦显微镜采购项目 (项目编号:BNZB-2026-C-0740)公开招标公告",
+          "reason": "天津高校设备招标公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E19",
+          "direction": "无关",
+          "quote": "天津市第三中心医院 天津市第三中心医院（东丽院区）第三批检验科设备采购项目 (项目编号:XCSD-2026-A-938)公开招标公告",
+          "reason": "天津医院设备招标公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E20",
+          "direction": "无关",
+          "quote": "天津市教育招生考试院 天津市教育招生考试院考试服务项目 (项目编号:TJBD-2026-C-499)公开招标公告",
+          "reason": "天津考试服务招标公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E21",
+          "direction": "无关",
+          "quote": "天津海运职业学院 天津海运职业学院智能机舱能量管理模拟器项目 (项目编号:YFGP-2026-B-0400)公开招标公告",
+          "reason": "天津院校设备招标公告，与 claim 无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1 与 E2 均指向同一公告，载明代理机构为大连市政府采购中心、潜在投标人应在大连市政府采购云平台确认并获取招标文件，与 claim 一致；但二者同根（同一公告），独立来源仅一条，最终是否成立由代码按独立来源规则裁定。",
+      "subclaim": null
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c8",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E10",
+          "direction": "无关",
+          "quote": "天津市武清区市政工程服务中心政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津武清区采购意向，与大连市公安局D包招标公告无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "天津医疗设备中标公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "天津肿瘤医院设备中标公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该公告标题与正文明确为大连市公安局本项目D包公开招标公告，支持claim主体与D包公开招标事实；但原文未出现发布日期2026年10月22日及中国政府采购网发布渠道字样，仅部分支撑。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "天津医疗设备中标公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "天津信息化软件中标公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "天津学院采购中标公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E6",
+          "direction": "无关",
+          "quote": "天津职业技术师范大学政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津高校采购意向，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E7",
+          "direction": "无关",
+          "quote": "天津市河西区卫生健康委员会系统政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津卫健系统采购意向，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E8",
+          "direction": "无关",
+          "quote": "天津财经大学财税与公共管理学院购置台式电脑项目(项目编号:市本级〔2026〕416950号)合同公告",
+          "reason": "天津高校合同公告，与本案无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅E2一条证据与本项目D包公开招标相关，可支撑主体与D包公开招标事实，但原文未载明发布日期2026年10月22日及通过中国政府采购网发布，且无独立来源印证，故意见为待证实。",
+      "subclaim": {
+        "text": "大连市公安局发布了2026年新警及晋监民警服装采购项目D包的公开招标公告。",
+        "evidenceIds": [
+          "evt_tender_dalian_police_r1:E2"
+        ],
+        "reason": "E2原文标题与正文逐字蕴含该收窄断言，剥离了发布日期与发布渠道两个未满足的联结词。"
+      }
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c9",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院 天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "该证据是另一项目的天津中标公告，与大连市公安局服装采购项目D包招标公告是否被更正、撤销或延期无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "该证据是另一项目的天津中标公告，与大连市公安局服装采购项目D包招标公告是否被更正、撤销或延期无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "无关",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该证据是招标公告原文，只能证明公告已发布，未包含任何关于该公告是否被更正、撤销或延期的信息。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "天津市滨海新区卫生健康委员会本级 滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "该证据是另一项目的天津中标公告，与大连市公安局服装采购项目D包招标公告是否被更正、撤销或延期无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院 天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "该证据是另一项目的天津中标公告，与大连市公安局服装采购项目D包招标公告是否被更正、撤销或延期无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "该证据是另一项目的天津中标公告，与大连市公安局服装采购项目D包招标公告是否被更正、撤销或延期无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E9",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026871)中标公告",
+          "reason": "该证据是另一项目的天津中标公告，与大连市公安局服装采购项目D包招标公告是否被更正、撤销或延期无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E18",
+          "direction": "无关",
+          "quote": "天津师范大学 激光共聚焦显微镜采购项目 (项目编号:BNZB-2026-C-0740)公开招标公告",
+          "reason": "该证据是另一项目的天津招标公告，与大连市公安局服装采购项目D包招标公告是否被更正、撤销或延期无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E19",
+          "direction": "无关",
+          "quote": "天津市第三中心医院 天津市第三中心医院（东丽院区）第三批检验科设备采购项目 (项目编号:XCSD-2026-A-938)公开招标公告",
+          "reason": "该证据是另一项目的天津招标公告，与大连市公安局服装采购项目D包招标公告是否被更正、撤销或延期无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E20",
+          "direction": "无关",
+          "quote": "天津市教育招生考试院 天津市教育招生考试院考试服务项目 (项目编号:TJBD-2026-C-499)公开招标公告",
+          "reason": "该证据是另一项目的天津招标公告，与大连市公安局服装采购项目D包招标公告是否被更正、撤销或延期无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内无任何证据涉及大连市公安局服装采购项目D包招标公告发布后的更正、撤销或延期情况；E2仅为公告原文，其余均为无关项目公告，故该 claim 无法被证实或证伪。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 5,
+      "mainTarget": "c9",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "该招标公告自发布后是否被更正、撤销或延期——需在公告发布源（中国政府采购网/大连市政府采购云平台）检索同一项目编号 DLZFCG2026448-2 的更正公告、废标/终止公告或延期公告记录。",
+          "acceptance": "需公告源页面正文级证据：能定位到项目编号 DLZFCG2026448-2 的更正/终止/延期公告条目（含标题与日期），或确认该编号下仅有原始招标公告而无任何后续变更公告。",
+          "failover": "若公告源检索不到该编号的变更记录，改查大连市政府采购云平台的项目详情页或代理机构大连市政府采购中心发布的公告列表，仍无则记为'未发现变更记录'并降级为待证实。"
+        },
+        {
+          "gap": "若存在变更公告，需确认变更内容是否影响投标截止时间（2026-12-4 8:30）或采购需求，以判断 c9 为真还是为假。",
+          "acceptance": "需变更公告正文级证据：明确写出变更后的截止时间或变更事项；若变更公告仅涉及非时效内容，则 c9 仍可判真。",
+          "failover": "若变更公告正文不可获取，仅能凭标题与日期登记为'存在变更但内容不明'，c9 维持待证实并转问人裁决口径。"
+        }
+      ],
+      "searchHints": [
+        "DLZFCG2026448-2 更正公告",
+        "大连市公安局 服装采购 终止公告 2026",
+        "大连市政府采购云平台 DLZFCG2026448 延期"
+      ],
+      "sideTargets": [
+        "c13a"
+      ],
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [
+        {
+          "id": "c17",
+          "text": "天津中医药大学第一附属医院与天津中医药大学第二附属医院在2026年均在天津市政府采购网发布医疗设备/耗材类采购公告。",
+          "category": "采购主体画像",
+          "sectionIndex": 2,
+          "priority": 3,
+          "relationType": null,
+          "parent": null,
+          "entityNames": [
+            "天津中医药大学第一附属医院",
+            "天津中医药大学第二附属医院"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c18",
+          "text": "天津市数据发展中心机关在2026年同时发布信息化运维服务项目（TGPC-2026-D-1093）与干部职工体检项目（TGPC-2026-D-1126）两项采购公告。",
+          "category": "采购主体画像",
+          "sectionIndex": 2,
+          "priority": 3,
+          "relationType": null,
+          "parent": null,
+          "entityNames": [
+            "天津市数据发展中心机关"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c19",
+          "text": "天津市公安局武清分局机关与天津市公安医院在2026年均在天津市政府采购网发布采购公告。",
+          "category": "采购主体画像",
+          "sectionIndex": 2,
+          "priority": 2,
+          "relationType": null,
+          "parent": null,
+          "entityNames": [
+            "天津市公安局武清分局机关",
+            "天津市公安医院"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c20",
+          "text": "本轮10条天津市政府采购网公告中，9条阶段为“更正变更”，1条为“终止废标”。",
+          "category": "公告阶段分布",
+          "sectionIndex": 2,
+          "priority": 2,
+          "relationType": null,
+          "parent": null,
+          "entityNames": [],
+          "hypothesisLinks": []
+        }
+      ],
+      "cohorts": [
+        {
+          "name": "天津市2026年发布更正/终止公告的公立医疗机构",
+          "criteria": {
+            "region": "天津市",
+            "entityType": "公立医院/医疗机构",
+            "stage": [
+              "更正变更",
+              "终止废标"
+            ],
+            "year": 2026
+          },
+          "members": [
+            "天津中医药大学第一附属医院",
+            "天津中医药大学第二附属医院",
+            "天津医科大学总医院",
+            "天津市公安医院"
+          ]
+        },
+        {
+          "name": "天津市2026年发布信息化/数据类采购的政府机关",
+          "criteria": {
+            "region": "天津市",
+            "entityType": "政府机关/事业单位",
+            "procurementCategory": "信息化运维/数据服务",
+            "year": 2026
+          },
+          "members": [
+            "天津市数据发展中心机关"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c1",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E1",
+          "direction": "支持",
+          "quote": "招标信号基础字段:项目编号 DLZFCG2026448-2;项目名称 大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告;采购方 大连市公安局（本级）;预算金额 45232.0 元;发布日期 2026-10-22",
+          "reason": "信号层信封字段逐项与 claim 一致：项目编号、采购方、金额、发布日期均吻合。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "天津医疗设备项目，与大连公安服装采购信封字段无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "不同项目不同编号，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "项目编号：DLZFCG2026448-2\n项目名称：大连市公安局2026年新警及晋监民警服装采购项目D包\n项目预算金额：45232元；",
+          "reason": "官方公告正文载明项目编号与预算金额 45232 元，与 claim 一致；采购方与发布日期见标题及信封字段。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "天津医疗设备项目，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "不同项目，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "不同项目，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E8",
+          "direction": "无关",
+          "quote": "天津财经大学财税与公共管理学院购置台式电脑项目(项目编号:市本级〔2026〕416950号)合同公告",
+          "reason": "不同项目，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E9",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026871)中标公告",
+          "reason": "不同项目，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E13",
+          "direction": "无关",
+          "quote": "天津商业大学冷链物流产教融合实训设备更新原位拉曼光谱仪等购置项目_第3包(项目编号:TJCU-2026GZ-059)合同公告",
+          "reason": "不同项目，与 claim 无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1（信号层信封）与 E2（官方公告正文）均载明项目编号 DLZFCG2026448-2、采购方大连市公安局（本级）、金额 45232 元、发布日期 2026-10-22，逐项吻合；其余证据为无关的天津项目。注意 E1 与 E2 谱系根不同（signal_layer 与 ccgp），但 E1 摘要内容与 E2 高度重合，独立性存疑，最终由代码按独立来源规则裁定。",
+      "subclaim": null
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c10",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E10",
+          "direction": "无关",
+          "quote": "天津市武清区市政工程服务中心政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津武清区采购意向公告，与大连市公安局及大连市政府采购中心的委托代理关系无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院 天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "天津医疗设备中标公告，与本案主体和项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "天津肿瘤医院设备采购中标公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "无关",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包的潜在投标人应在大连市政府采购云平台确认并获取招标文件",
+          "reason": "该公告为大连市公安局服装采购项目D包招标公告，仅提及采购人及采购云平台，未出现大连市政府采购中心作为受托代理机构的表述，也未涉及委托代理关系，故不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "天津市滨海新区卫生健康委员会本级 滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "天津医疗设备中标公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院 天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "天津信息化软件中标公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "天津学院采购中标公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E6",
+          "direction": "无关",
+          "quote": "天津职业技术师范大学政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津高校采购意向公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E7",
+          "direction": "无关",
+          "quote": "天津市河西区卫生健康委员会系统政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津卫健系统采购意向公告，与本案无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E8",
+          "direction": "无关",
+          "quote": "天津财经大学天津财经大学财税与公共管理学院购置台式电脑项目(项目编号:市本级〔2026〕416950号)合同公告",
+          "reason": "天津财经大学合同公告，与本案无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内唯一涉及大连市公安局项目的证据（E2）为招标公告，未载明大连市政府采购中心为受托代理机构，亦无任何独立于本公告的信源佐证委托代理关系；其余证据均为天津地区无关公告。claim 两项联结（委托代理关系存在、有独立信源佐证）均无证据支撑，维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c11",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "项目预算金额：45232元；",
+          "reason": "该公告为大连市公安局2026年新警及晋监民警服装采购项目D包，预算金额45232元，属服装类采购且金额与claim所述约4.5万元一致，支持存在同等金额服装类采购记录。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E32",
+          "direction": "无关",
+          "quote": "天津市公安局武清分局机关 公安武清分局滨湖路派出所办公家具采购项目（项目编号:TJWQ-2026-A-0145）更正公告",
+          "reason": "该证据为天津市公安局武清分局办公家具采购更正公告，与大连市公安局服装类采购无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E40",
+          "direction": "无关",
+          "quote": "天津市公安医院天津市公安医院全高清电子肠镜系统采购项目_第1包(项目编号:SHGP-2026-A541)更正公告",
+          "reason": "该证据为天津市公安医院医疗设备采购更正公告，与大连市公安局服装类采购无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅E2一条证据支持存在约4.5万元服装类采购，但claim称“近两年有同等金额的服装类采购记录”，单条2026年公告不足以覆盖“近两年”的复数记录要求，且无其他独立来源印证，故意见为待证实。",
+      "subclaim": {
+        "text": "大连市公安局2026年新警及晋监民警服装采购项目D包预算金额为45232元。",
+        "evidenceIds": [
+          "evt_tender_dalian_police_r1:E2"
+        ],
+        "reason": "E2原文明确载明该项目预算金额45232元，可逐字蕴含该收窄断言，剥离“近两年”与“记录”等未满足谓词。"
+      }
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c12",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该公告显示大连市公安局本级2026年服装类采购项目采用公开招标方式，为'以公开招标为主要采购方式'提供单点支持，但仅一个项目不足以证明'主要方式'。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E18",
+          "direction": "无关",
+          "quote": "天津师范大学 激光共聚焦显微镜采购项目 (项目编号:BNZB-2026-C-0740)公开招标公告",
+          "reason": "天津师范大学设备采购，与大连市公安局服装采购无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E19",
+          "direction": "无关",
+          "quote": "天津市第三中心医院 天津市第三中心医院（东丽院区）第三批检验科设备采购项目 (项目编号:XCSD-2026-A-938)公开招标公告",
+          "reason": "天津医院设备采购，与claim主体和标的均无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E20",
+          "direction": "无关",
+          "quote": "天津市教育招生考试院 天津市教育招生考试院考试服务项目 (项目编号:TJBD-2026-C-499)公开招标公告",
+          "reason": "天津考试服务采购，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E21",
+          "direction": "无关",
+          "quote": "天津海运职业学院 天津海运职业学院智能机舱能量管理模拟器项目 (项目编号:YFGP-2026-B-0400)公开招标公告",
+          "reason": "天津院校设备采购，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E22",
+          "direction": "无关",
+          "quote": "天津市住房和城乡建设委员会机关 天津市住房和城乡建设委员会建立房屋全生命周期安全管理机制项目 (项目编号:XFZB-2026-TJHX-ZF141)公开招标公告",
+          "reason": "天津住建委服务项目，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E32",
+          "direction": "无关",
+          "quote": "天津市公安局武清分局机关 公安武清分局滨湖路派出所办公家具采购项目（项目编号:TJWQ-2026-A-0145）更正公告",
+          "reason": "天津公安武清分局家具采购更正公告，主体、标的均不同，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E35",
+          "direction": "无关",
+          "quote": "天津市滨海新区教育体育局机关 滨海新区学校、体育场馆购买应急救护服务（AED）项目招标采购（项目编号:HKTI2026-ZC-GK001）更正公告",
+          "reason": "天津教育体育局AED服务采购，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E40",
+          "direction": "无关",
+          "quote": "天津市公安医院天津市公安医院全高清电子肠镜系统采购项目_第1包(项目编号:SHGP-2026-A-541)更正公告",
+          "reason": "天津公安医院医疗设备采购，与大连市公安局服装采购无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅E2一条证据显示大连市公安局本级一个服装类项目采用公开招标，可作单点支持；其余证据均为天津地区无关采购公告。单一项目不足以支撑'以公开招标为主要采购方式'的概括性断言，且无独立来源印证，故维持待证实。",
+      "subclaim": {
+        "text": "大连市公安局2026年新警及晋监民警服装采购项目D包采用公开招标方式。",
+        "evidenceIds": [
+          "evt_tender_dalian_police_r1:E2"
+        ],
+        "reason": "E2原文标题与正文明确该项目为公开招标公告，可逐字蕴含该收窄断言，剥离'主要采购方式'这一未满足的概括性谓词。"
+      }
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c12",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该公告显示大连市公安局本级服装类采购项目采用公开招标方式，为'以公开招标为主要采购方式'提供单点支持，但仅一个项目不足以证明'主要方式'。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E18",
+          "direction": "无关",
+          "quote": "天津师范大学 激光共聚焦显微镜采购项目 (项目编号:BNZB-2026-C-0740)公开招标公告",
+          "reason": "天津师范大学设备采购，与大连市公安局服装采购无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E19",
+          "direction": "无关",
+          "quote": "天津市第三中心医院 天津市第三中心医院（东丽院区）第三批检验科设备采购项目 (项目编号:XCSD-2026-A-938)公开招标公告",
+          "reason": "天津医院设备采购，与大连市公安局服装采购无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E20",
+          "direction": "无关",
+          "quote": "天津市教育招生考试院 天津市教育招生考试院考试服务项目 (项目编号:TJBD-2026-C-499)公开招标公告",
+          "reason": "天津考试院服务项目，与大连市公安局服装采购无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E21",
+          "direction": "无关",
+          "quote": "天津海运职业学院 天津海运职业学院智能机舱能量管理模拟器项目 (项目编号:YFGP-2026-B-0400)公开招标公告",
+          "reason": "天津院校设备项目，与大连市公安局服装采购无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E22",
+          "direction": "无关",
+          "quote": "天津市住房和城乡建设委员会机关 天津市住房和城乡建设委员会建立房屋全生命周期安全管理机制项目 (项目编号:XFZB-2026-TJHX-ZF141)公开招标公告",
+          "reason": "天津住建委项目，与大连市公安局服装采购无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E32",
+          "direction": "无关",
+          "quote": "天津市公安局武清分局机关 公安武清分局滨湖路派出所办公家具采购项目（项目编号:TJWQ-2026-A-0145）更正公告",
+          "reason": "天津武清分局办公家具采购更正公告，与大连市公安局服装采购无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E35",
+          "direction": "无关",
+          "quote": "天津市滨海新区教育体育局机关 滨海新区学校、体育场馆购买应急救护服务（AED）项目招标采购（项目编号:HKTI2026-ZC-GK001）更正公告",
+          "reason": "天津滨海新区AED服务项目，与大连市公安局服装采购无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E40",
+          "direction": "无关",
+          "quote": "天津市公安医院天津市公安医院全高清电子肠镜系统采购项目_第1包(项目编号:SHGP-2026-A-541)更正公告",
+          "reason": "天津公安医院医疗设备采购更正公告，与大连市公安局服装采购无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅E2一条证据显示大连市公安局本级一个服装类项目采用公开招标，可作单点支持；其余证据均为天津地区无关项目。单一项目不足以证明'以公开招标为主要采购方式'，且无历史采购方式统计，故维持待证实。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c12",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该公告显示大连市公安局服装类采购项目采用公开招标方式，为'以公开招标为主要采购方式'提供一条实例支撑，但仅一个项目、一个包，不足以证明'主要方式'。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E18",
+          "direction": "无关",
+          "quote": "天津师范大学 激光共聚焦显微镜采购项目 (项目编号:BNZB-2026-C-0740)公开招标公告",
+          "reason": "天津师范大学设备采购，与大连市公安局服装采购无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E19",
+          "direction": "无关",
+          "quote": "天津市第三中心医院 天津市第三中心医院（东丽院区）第三批检验科设备采购项目 (项目编号:XCSD-2026-A-938)公开招标公告",
+          "reason": "天津医院设备采购，与claim主体和标的均无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E20",
+          "direction": "无关",
+          "quote": "天津市教育招生考试院 天津市教育招生考试院考试服务项目 (项目编号:TJBD-2026-C-499)公开招标公告",
+          "reason": "天津考试服务项目，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E21",
+          "direction": "无关",
+          "quote": "天津海运职业学院 天津海运职业学院智能机舱能量管理模拟器项目 (项目编号:YFGP-2026-B-0400)公开招标公告",
+          "reason": "天津院校设备项目，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E22",
+          "direction": "无关",
+          "quote": "天津市住房和城乡建设委员会机关 天津市住房和城乡建设委员会建立房屋全生命周期安全管理机制项目 (项目编号:XFZB-2026-TJHX-ZF141)公开招标公告",
+          "reason": "天津住建委服务项目，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E32",
+          "direction": "无关",
+          "quote": "天津市公安局武清分局机关 公安武清分局滨湖路派出所办公家具采购项目（项目编号:TJWQ-2026-A-0145）更正公告",
+          "reason": "天津公安武清分局办公家具采购更正公告，主体、标的均不同，且为更正公告，不涉及大连市公安局服装采购方式。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E35",
+          "direction": "无关",
+          "quote": "天津市滨海新区教育体育局机关 滨海新区学校、体育场馆购买应急救护服务（AED）项目招标采购（项目编号:HKTI2026-ZC-GK001）更正公告",
+          "reason": "天津教育体育局AED服务项目更正公告，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E40",
+          "direction": "无关",
+          "quote": "天津市公安医院天津市公安医院全高清电子肠镜系统采购项目_第1包(项目编号:SHGP-2026-A541)更正公告",
+          "reason": "天津公安医院医疗设备采购更正公告，与大连市公安局服装采购方式无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅E2一条证据显示大连市公安局一个服装采购包采用公开招标，可作单例支撑；其余证据均为天津地区无关项目。缺乏历史采购方式的系统性证据，无法确认'主要采购方式'，故维持待证实。",
+      "subclaim": null
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c13",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院 天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "该证据是天津医疗设备采购的中标公告，与大连市公安局服装采购D包金额及历史中位数比较无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "该证据是天津医疗设备采购的中标公告，与大连市公安局服装采购D包金额及历史中位数比较无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "项目预算金额：45232元；",
+          "reason": "该证据确认本项目D包预算金额为45232元，与claim中的金额一致；但该证据未提供大连市公安局（本级）同类服装采购的历史中位数数据，因此只能支持金额部分，无法支持“无显著偏离”的比较结论。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "天津市滨海新区卫生健康委员会本级 滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "该证据是天津医疗设备采购的中标公告，与大连市公安局服装采购D包金额及历史中位数比较无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院 天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "该证据是天津信息化软件采购的中标公告，与大连市公安局服装采购D包金额及历史中位数比较无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "该证据是天津学院设备采购的中标公告，与大连市公安局服装采购D包金额及历史中位数比较无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E8",
+          "direction": "无关",
+          "quote": "天津财经大学天津财经大学财税与公共管理学院购置台式电脑项目(项目编号:市本级〔2026〕416950号)合同公告",
+          "reason": "该证据是天津高校电脑采购的合同公告，与大连市公安局服装采购D包金额及历史中位数比较无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E9",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026871)中标公告",
+          "reason": "该证据是天津医疗设备采购的中标公告，与大连市公安局服装采购D包金额及历史中位数比较无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E18",
+          "direction": "无关",
+          "quote": "天津师范大学 激光共聚焦显微镜采购项目 (项目编号:BNZB-2026-C-0740)公开招标公告",
+          "reason": "该证据是天津高校显微镜采购的招标公告，与大连市公安局服装采购D包金额及历史中位数比较无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E19",
+          "direction": "无关",
+          "quote": "天津市第三中心医院 天津市第三中心医院（东丽院区）第三批检验科设备采购项目 (项目编号:XCSD-2026-A-938)公开招标公告",
+          "reason": "该证据是天津医院检验科设备采购的招标公告，与大连市公安局服装采购D包金额及历史中位数比较无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "唯一相关证据E2仅确认D包预算金额为45232元，卷宗中没有任何关于大连市公安局（本级）同类服装采购历史中位数的数据，无法验证“无显著偏离”的比较结论，故维持待证实。",
+      "subclaim": {
+        "text": "本项目D包预算金额为45232元。",
+        "evidenceIds": [
+          "evt_tender_dalian_police_r1:E2"
+        ],
+        "reason": "E2原文明确载明“项目预算金额：45232元；”，可逐字蕴含该收窄断言，且该断言不含“历史中位数比较”这一未满足谓词。"
+      }
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c16",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院 天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "天津另一采购项目的中标公告，与大连市公安局服装采购项目D包及A/B/C包的分包关系无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "无关项目的中标公告，不涉及本项目分包结构。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该公告标题与项目名称明确以“D包”形式发布，表明D包是“大连市公安局2026年新警及晋监民警服装采购项目”下的分包；公告载明D包预算金额与采购需求（帽徽、肩章、警号等），支持D包有独立预算与采购内容。但未提及A、B、C包，故仅部分支撑。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院 天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "无关项目公告。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "无关项目公告。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E9",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026871)中标公告",
+          "reason": "无关项目公告。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E18",
+          "direction": "无关",
+          "quote": "天津师范大学 激光共聚焦显微镜采购项目 (项目编号:BNZB-2026-C-0740)公开招标公告",
+          "reason": "无关项目公告。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E19",
+          "direction": "无关",
+          "quote": "天津市第三中心医院 天津市第三中心医院（东丽院区）第三批检验科设备采购项目 (项目编号:XCSD-2026-A-938)公开招标公告",
+          "reason": "无关项目公告。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E20",
+          "direction": "无关",
+          "quote": "天津市教育招生考试院 天津市教育招生考试院考试服务项目 (项目编号:TJBD-2026-C-499)公开招标公告",
+          "reason": "无关项目公告。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E21",
+          "direction": "无关",
+          "quote": "天津海运职业学院 天津海运职业学院智能机舱能量管理模拟器项目 (项目编号:YFGP-2026-B-0400)公开招标公告",
+          "reason": "无关项目公告。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅E2一条证据与本项目相关，其证明D包属于该采购项目的分包并载明D包预算与采购内容；但卷宗中无任何证据涉及A、B、C包的存在、预算或采购内容，claim中“与A、B、C包属于同一采购项目的分包，各包预算与采购内容相互独立”部分缺乏证据支撑，故综合意见为待证实。",
+      "subclaim": {
+        "text": "大连市公安局2026年新警及晋监民警服装采购项目D包的项目预算金额为45232元，采购内容为采购一批帽徽、肩章、警号等。",
+        "evidenceIds": [
+          "evt_tender_dalian_police_r1:E2"
+        ],
+        "reason": "E2原文逐字载明D包预算金额与采购需求，可独立成句且不含未满足的谓词；仅覆盖D包部分，不涉及A/B/C包。"
+      }
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c2",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E1",
+          "direction": "支持",
+          "quote": "代理机构:大连市政府采购中心;正文摘要:大连市公安局2026年新警及晋监民警服装采购项目D包的潜在投标人应在大连市政府采购云平台确认并获取招标文件",
+          "reason": "信号层信封同时载明代理机构为大连市政府采购中心，以及潜在投标人应在大连市政府采购云平台确认并获取招标文件，与 claim 的两个联结均吻合。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E10",
+          "direction": "无关",
+          "quote": "天津市武清区市政工程服务中心政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津市政工程采购意向公告，与大连公安服装采购项目的代理机构及文件获取渠道无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包的潜在投标人应在大连市政府采购云平台确认并获取招标文件",
+          "reason": "官方公告正文明确潜在投标人应在大连市政府采购云平台确认并获取招标文件；代理机构字段虽未在本段出现，但同一公告与信封字段一致，整体支持 claim。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "天津院校设备中标公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E6",
+          "direction": "无关",
+          "quote": "天津职业技术师范大学政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津高校采购意向公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E7",
+          "direction": "无关",
+          "quote": "天津市河西区卫生健康委员会系统政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津卫健系统采购意向公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E18",
+          "direction": "无关",
+          "quote": "天津师范大学 激光共聚焦显微镜采购项目 (项目编号:BNZB-2026-C-0740)公开招标公告",
+          "reason": "天津高校设备招标公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E19",
+          "direction": "无关",
+          "quote": "天津市第三中心医院 天津市第三中心医院（东丽院区）第三批检验科设备采购项目 (项目编号:XCSD-2026-A-938)公开招标公告",
+          "reason": "天津医院设备招标公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E20",
+          "direction": "无关",
+          "quote": "天津市教育招生考试院 天津市教育招生考试院考试服务项目 (项目编号:TJBD-2026-C-499)公开招标公告",
+          "reason": "天津考试服务招标公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E21",
+          "direction": "无关",
+          "quote": "天津海运职业学院 天津海运职业学院智能机舱能量管理模拟器项目 (项目编号:YFGP-2026-B-0400)公开招标公告",
+          "reason": "天津院校设备招标公告，与 claim 无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1（信号层信封）与 E2（官方公告正文）均载明潜在投标人应在大连市政府采购云平台确认并获取招标文件，E1 另载明代理机构为大连市政府采购中心；其余证据均为天津地区无关公告。注意 E1 与 E2 谱系根不同（signal_layer 与 ccgp），但 E1 内容本身即为对公告的摘要，独立性存疑，最终由代码按独立来源规则裁定。",
+      "subclaim": null
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c8",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E10",
+          "direction": "无关",
+          "quote": "天津市武清区市政工程服务中心政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津武清区采购意向，与大连市公安局D包招标公告无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "天津医疗设备中标公告，与大连公安服装D包无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "天津肿瘤医院设备中标公告，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该公告标题与正文明确为大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告，支持claim中主体、项目D包及公开招标公告的存在；但原文未出现发布日期2026年10月22日，也未出现'中国政府采购网'字样（仅平台字段标注ccgp），故仅部分支撑。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "天津医疗设备中标公告，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "天津信息化软件中标公告，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "天津学院采购中标公告，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E6",
+          "direction": "无关",
+          "quote": "天津职业技术师范大学政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津高校采购意向，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E7",
+          "direction": "无关",
+          "quote": "天津市河西区卫生健康委员会系统政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津卫健系统采购意向，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E8",
+          "direction": "无关",
+          "quote": "天津财经大学财税与公共管理学院购置台式电脑项目(项目编号:市本级〔2026〕416950号)合同公告",
+          "reason": "天津高校合同公告，无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅E2一条证据与claim相关，其标题与正文确认大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告存在，但原文未载明发布日期2026年10月22日，也未出现'中国政府采购网'字样；其余证据均为天津地区无关公告。发布日期与发布平台两个联结词缺乏原文支撑，故意见为待证实。",
+      "subclaim": {
+        "text": "大连市公安局2026年新警及晋监民警服装采购项目D包发布了公开招标公告。",
+        "evidenceIds": [
+          "evt_tender_dalian_police_r1:E2"
+        ],
+        "reason": "E2标题与正文逐字确认该D包公开招标公告存在，但撑不起'2026年10月22日'与'通过中国政府采购网'两个联结词，故收窄为不含日期与平台的断言。"
+      }
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c9",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院 天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "该证据是另一项目的中标公告，与大连市公安局服装采购项目D包招标公告是否被更正、撤销或延期无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "该证据是另一项目的中标公告，与目标招标公告的后续状态无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "无关",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该证据是目标招标公告本身，只说明公告已发布，未提供任何关于其是否被更正、撤销或延期的信息。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "天津市滨海新区卫生健康委员会本级 滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "该证据是另一项目的中标公告，与目标招标公告的后续状态无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院 天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "该证据是另一项目的中标公告，与目标招标公告的后续状态无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "该证据是另一项目的中标公告，与目标招标公告的后续状态无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E9",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026871)中标公告",
+          "reason": "该证据是另一项目的中标公告，与目标招标公告的后续状态无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E18",
+          "direction": "无关",
+          "quote": "天津师范大学 激光共聚焦显微镜采购项目 (项目编号:BNZB-2026-C-0740)公开招标公告",
+          "reason": "该证据是另一项目的招标公告，与目标招标公告的后续状态无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E19",
+          "direction": "无关",
+          "quote": "天津市第三中心医院 天津市第三中心医院（东丽院区）第三批检验科设备采购项目 (项目编号:XCSD-2026-A-938)公开招标公告",
+          "reason": "该证据是另一项目的招标公告，与目标招标公告的后续状态无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E20",
+          "direction": "无关",
+          "quote": "天津市教育招生考试院 天津市教育招生考试院考试服务项目 (项目编号:TJBD-2026-C-499)公开招标公告",
+          "reason": "该证据是另一项目的招标公告，与目标招标公告的后续状态无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内没有任何证据涉及大连市公安局2026年新警及晋监民警服装采购项目D包招标公告发布后的更正、撤销或延期情况；E2仅为公告原文，其余均为无关项目公告，无法支持或反驳该时效性断言。"
+    }
+  },
+  {
+    "stage": "s2",
+    "response": {
+      "round": 6,
+      "mainTarget": "c14",
+      "action": "查工具",
+      "gapChain": [
+        {
+          "gap": "本企业是否具备警用服装类产品的供货资质（如警用装备/服装生产或销售资质、公安系统供应商准入记录）",
+          "acceptance": "需权威登记源记录级证据：国家企业信用信息公示系统或政府采购供应商库中本企业的经营范围/资质条目，或公安系统警用服装中标/供货合同公告中本企业作为供应商出现",
+          "failover": "若公示系统无相关资质条目，则转查本企业既往政府采购中标公告清单，以中标记录替代资质直接证据"
+        },
+        {
+          "gap": "本企业是否有警用服装类既往供货业绩（合同或中标记录）",
+          "acceptance": "需页面正文级证据：中国政府采购网或省级分网中标/合同公告正文中出现本企业名称且采购内容为服装类",
+          "failover": "若无警用服装业绩，则退查一般服装类供货业绩，并在报告中标注资质缺口"
+        }
+      ],
+      "searchHints": [
+        "本企业名称 警用服装 中标公告",
+        "警用服装 供应商 资质 政府采购",
+        "本企业 国家企业信用信息公示 经营范围 服装"
+      ],
+      "sideTargets": [
+        "c15"
+      ],
+      "questionPackage": null,
+      "stopReason": "",
+      "degraded": false
+    }
+  },
+  {
+    "stage": "s5_derive",
+    "response": {
+      "derivedClaims": [
+        {
+          "id": "c17",
+          "text": "天津市公安局河西分局机关在天津市政府采购网（ccgp-tianjin.gov.cn）发布过政府采购意向公告。",
+          "category": "采购主体行为",
+          "sectionIndex": 2,
+          "priority": 3,
+          "parent": null,
+          "entityNames": [
+            "天津市公安局河西分局机关"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c18",
+          "text": "天津市河西区卫生健康委员会系统在天津市政府采购网（ccgp-tianjin.gov.cn）发布过政府采购意向公告。",
+          "category": "采购主体行为",
+          "sectionIndex": 2,
+          "priority": 2,
+          "parent": null,
+          "entityNames": [
+            "天津市河西区卫生健康委员会系统"
+          ],
+          "hypothesisLinks": []
+        },
+        {
+          "id": "c19",
+          "text": "天津市水利科学研究院“排水管网专项体检”项目（项目编号:FRXG-2026-ZC089）已发布中标成交公告。",
+          "category": "采购结果",
+          "sectionIndex": 2,
+          "priority": 2,
+          "parent": null,
+          "entityNames": [
+            "天津市水利科学研究院"
+          ],
+          "hypothesisLinks": []
+        }
+      ],
+      "cohorts": [
+        {
+          "name": "天津市河西区近期发布政府采购意向的机关与事业单位",
+          "criteria": {
+            "region": "天津市河西区",
+            "source": "www.ccgp-tianjin.gov.cn",
+            "stage": "采购意向",
+            "timeWindow": "本轮证据覆盖期内"
+          },
+          "members": [
+            "天津市公安局河西分局机关",
+            "天津市河西区卫生健康委员会系统"
+          ]
+        },
+        {
+          "name": "天津市政府采购网近期发布采购意向或中标公告的采购单位",
+          "criteria": {
+            "source": "www.ccgp-tianjin.gov.cn",
+            "stage": [
+              "采购意向",
+              "中标成交"
+            ]
+          },
+          "members": [
+            "天津职业技术师范大学",
+            "天津市河西区卫生健康委员会系统",
+            "天津市公安局河西分局机关",
+            "天津市水利科学研究院"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c1",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E1",
+          "direction": "支持",
+          "quote": "招标信号基础字段:项目编号 DLZFCG2026448-2;项目名称 大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告;采购方 大连市公安局（本级）;预算金额 45232.0 元;发布日期 2026-10-22",
+          "reason": "信号层信封字段逐项与 claim 一致：项目编号、采购方、金额、发布日期均吻合。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "天津医疗设备项目，与大连公安服装采购信封字段无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "不同项目不同编号，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "项目编号：DLZFCG2026448-2\n项目名称：大连市公安局2026年新警及晋监民警服装采购项目D包\n项目预算金额：45232元；",
+          "reason": "官方公告正文载明项目编号与预算金额 45232 元，与 claim 一致；采购方与发布日期见标题及信封字段。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "天津医疗设备项目，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "不同项目，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "不同项目，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E8",
+          "direction": "无关",
+          "quote": "天津财经大学财税与公共管理学院购置台式电脑项目(项目编号:市本级〔2026〕416950号)合同公告",
+          "reason": "不同项目，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E9",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026871)中标公告",
+          "reason": "不同项目，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E13",
+          "direction": "无关",
+          "quote": "天津商业大学冷链物流产教融合实训设备更新原位拉曼光谱仪等购置项目_第3包(项目编号:TJCU-2026GZ-059)合同公告",
+          "reason": "不同项目，与 claim 无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E1（信号层信封）与 E2（官方公告正文）均逐项载明项目编号 DLZFCG2026448-2、采购方大连市公安局（本级）、金额 45232.0 元、发布日期 2026-10-22，与 claim 完全吻合；其余证据为无关的天津项目。注意 E1 与 E2 谱系根不同（signal_layer 与 ccgp），但 E1 本身即信号层抽取，独立性由代码裁定。",
+      "subclaim": null
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c10",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E10",
+          "direction": "无关",
+          "quote": "天津市武清区市政工程服务中心政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津武清区采购意向公告，与本项目及大连市公安局、大连市政府采购中心均无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院 天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "天津医疗设备中标公告，与本项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "天津肿瘤医院设备中标公告，与本项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "无关",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包的潜在投标人应在大连市政府采购云平台确认并获取招标文件",
+          "reason": "该公告为本项目招标公告，提及大连市政府采购云平台，但未出现大连市政府采购中心作为受托代理机构的表述，也未涉及委托代理关系，故不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "天津市滨海新区卫生健康委员会本级 滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "天津医疗设备中标公告，与本项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院 天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "天津信息化软件中标公告，与本项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "天津学院采购中标公告，与本项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E6",
+          "direction": "无关",
+          "quote": "天津职业技术师范大学政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津高校采购意向公告，与本项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E7",
+          "direction": "无关",
+          "quote": "天津市河西区卫生健康委员会系统政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津卫健系统采购意向公告，与本项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E8",
+          "direction": "无关",
+          "quote": "天津财经大学天津财经大学财税与公共管理学院购置台式电脑项目(项目编号:市本级〔2026〕416950号)合同公告",
+          "reason": "天津财经大学合同公告，与本项目无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内无任何证据表明大连市公安局（本级）与大连市政府采购中心之间存在本项目项下的委托代理关系，也无独立于本公告的信源佐证；唯一涉及本项目的E2仅提及大连市政府采购云平台，未涉及代理机构。故维持待证实。",
+      "subclaim": null
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c11",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "项目预算金额：45232元；",
+          "reason": "该公告为大连市公安局2026年新警及晋监民警服装采购项目D包，预算金额45232元，属服装类采购且金额与claim所述约4.5万元一致，支持claim。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E32",
+          "direction": "无关",
+          "quote": "天津市公安局武清分局机关 公安武清分局滨湖路派出所办公家具采购项目（项目编号:TJWQ-2026-A-0145）更正公告",
+          "reason": "天津武清分局办公家具采购，与大连市公安局服装采购无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E40",
+          "direction": "无关",
+          "quote": "天津市公安医院天津市公安医院全高清电子肠镜系统采购项目_第1包(项目编号:SHGP-2026-A541)更正公告",
+          "reason": "天津公安医院肠镜系统采购，与大连市公安局服装采购无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E44",
+          "direction": "无关",
+          "quote": "天津市公安局河西分局机关政府采购意向公告",
+          "reason": "天津河西分局采购意向，与大连市公安局服装采购无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅E2一条证据支持，且其金额45232元为2026年项目预算，claim称“近两年有同等金额的服装类采购记录”，单条证据不足以独立印证“近两年”的重复性；其余证据均无关。",
+      "subclaim": {
+        "text": "大连市公安局2026年新警及晋监民警服装采购项目D包预算金额为45232元。",
+        "evidenceIds": [
+          "evt_tender_dalian_police_r1:E2"
+        ],
+        "reason": "E2原文直接载明该项目预算金额45232元，可逐字蕴含该收窄断言。"
+      }
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c12",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该公告显示大连市公安局本级2026年服装类采购项目采用公开招标方式，为“以公开招标为主要采购方式”提供一例支持，但单一项目不足以证明“主要方式”的总体判断。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E18",
+          "direction": "无关",
+          "quote": "天津师范大学 激光共聚焦显微镜采购项目",
+          "reason": "天津师范大学设备采购，与大连市公安局服装采购无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E19",
+          "direction": "无关",
+          "quote": "天津市第三中心医院（东丽院区）第三批检验科设备采购项目",
+          "reason": "天津医院设备采购，与claim主体和标的均无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E20",
+          "direction": "无关",
+          "quote": "天津市教育招生考试院考试服务项目",
+          "reason": "天津考试服务采购，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E21",
+          "direction": "无关",
+          "quote": "天津海运职业学院智能机舱能量管理模拟器项目",
+          "reason": "天津院校设备采购，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E22",
+          "direction": "无关",
+          "quote": "天津市住房和城乡建设委员会建立房屋全生命周期安全管理机制项目",
+          "reason": "天津住建委服务项目，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E32",
+          "direction": "无关",
+          "quote": "公安武清分局滨湖路派出所办公家具采购项目",
+          "reason": "天津公安武清分局办公家具采购更正公告，主体、标的均不同，不改变判断。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E35",
+          "direction": "无关",
+          "quote": "滨海新区学校、体育场馆购买应急救护服务（AED）项目",
+          "reason": "天津滨海新区应急救护服务采购，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E40",
+          "direction": "无关",
+          "quote": "天津市公安医院全高清电子肠镜系统采购项目",
+          "reason": "天津公安医院医疗设备采购，与大连市公安局服装采购无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E44",
+          "direction": "无关",
+          "quote": "天津市公安局河西分局机关政府采购意向公告",
+          "reason": "天津公安河西分局采购意向，主体与标的均不同，不改变判断。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅E2一条证据显示大连市公安局本级一个服装类项目采用公开招标，可作单例支持，但不足以证明“以公开招标为主要采购方式”的总体性断言；其余证据均为天津地区无关采购公告，且同根于ccgp不构成独立印证。",
+      "subclaim": {
+        "text": "大连市公安局2026年新警及晋监民警服装采购项目D包采用公开招标方式。",
+        "evidenceIds": [
+          "evt_tender_dalian_police_r1:E2"
+        ],
+        "reason": "E2原文标题与正文明确该项目为公开招标公告，可逐字蕴含该收窄断言，剥离“主要采购方式”这一总体性谓词。"
+      }
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c13",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院 天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "天津医疗设备采购公告，与大连市公安局服装采购D包金额及历史中位数比较无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "天津设备采购公告，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "项目预算金额：45232元；",
+          "reason": "该公告确认D包预算金额为45232元，与claim所述金额一致；但未提供历史中位数数据，无法支撑'无显著偏离'的比较判断。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "天津市滨海新区卫生健康委员会本级 滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "天津医疗设备采购公告，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院 天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "天津信息化软件采购公告，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "天津学院设备采购公告，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E8",
+          "direction": "无关",
+          "quote": "天津财经大学天津财经大学财税与公共管理学院购置台式电脑项目(项目编号:市本级〔2026〕416950号)合同公告",
+          "reason": "天津高校电脑采购合同公告，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E9",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026871)中标公告",
+          "reason": "天津设备采购公告，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E18",
+          "direction": "无关",
+          "quote": "天津师范大学 激光共聚焦显微镜采购项目 (项目编号:BNZB-2026-C-0740)公开招标公告",
+          "reason": "天津高校显微镜采购公告，与claim无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E19",
+          "direction": "无关",
+          "quote": "天津市第三中心医院 天津市第三中心医院（东丽院区）第三批检验科设备采购项目 (项目编号:XCSD-2026-A-938)公开招标公告",
+          "reason": "天津医院检验设备采购公告，与claim无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅E2确认D包预算金额45232元，与claim金额部分一致；但卷宗中无任何大连市公安局（本级）同类服装采购的历史中位数数据，'无显著偏离'的比较判断缺乏证据支撑，故维持待证实。",
+      "subclaim": {
+        "text": "本项目D包预算金额为45232元。",
+        "evidenceIds": [
+          "evt_tender_dalian_police_r1:E2"
+        ],
+        "reason": "E2原文明确载明'项目预算金额：45232元；'，可逐字蕴含该收窄断言，且不含历史中位数比较谓词。"
+      }
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c15",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院 天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "该证据是其他采购项目的中标公告，未涉及本企业投标的成本与收益信息。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "该证据是其他采购项目的中标公告，未涉及本企业投标的成本与收益信息。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "无关",
+          "quote": "项目预算金额：45232元；",
+          "reason": "该证据只给出本项目预算与资格要求，未提供本企业投标成本或预期收益（毛利/战略价值）的任何信息。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "天津市滨海新区卫生健康委员会本级 滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "该证据是其他采购项目的中标公告，未涉及本企业投标的成本与收益信息。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院 天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "该证据是其他采购项目的中标公告，未涉及本企业投标的成本与收益信息。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "该证据是其他采购项目的中标公告，未涉及本企业投标的成本与收益信息。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E9",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026871)中标公告",
+          "reason": "该证据是其他采购项目的中标公告，未涉及本企业投标的成本与收益信息。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E24",
+          "direction": "无关",
+          "quote": "天津市和平区工商业联合会系统2025年面向中小企业预留项目执行情况公告",
+          "reason": "该证据是中小企业预留项目执行情况公告，未涉及本企业投标的成本与收益信息。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E25",
+          "direction": "无关",
+          "quote": "天津市宁河区发展和改革委员会（系统）2025年面向中小企业预留项目执行情况公告",
+          "reason": "该证据是中小企业预留项目执行情况公告，未涉及本企业投标的成本与收益信息。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E26",
+          "direction": "无关",
+          "quote": "天津市宁河区人民政府芦台街道办事处（系统）2025年面向中小企业预留项目执行情况公告",
+          "reason": "该证据是中小企业预留项目执行情况公告，未涉及本企业投标的成本与收益信息。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "全部证据均为其他项目公告或本项目预算/资格信息，无任何关于本企业投标成本或预期收益（毛利/战略价值）的内容，无法支持或反驳该 claim。"
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c2",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E1",
+          "direction": "支持",
+          "quote": "代理机构:大连市政府采购中心;正文摘要:大连市公安局2026年新警及晋监民警服装采购项目D包的潜在投标人应在大连市政府采购云平台确认并获取招标文件",
+          "reason": "信号层摘要同时载明代理机构为大连市政府采购中心、潜在投标人应在大连市政府采购云平台确认并获取招标文件，与 claim 两个联结均吻合。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E10",
+          "direction": "无关",
+          "quote": "天津市武清区市政工程服务中心政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津市政工程采购意向，与大连公安服装采购项目无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包的潜在投标人应在大连市政府采购云平台确认并获取招标文件",
+          "reason": "官方公告正文明确潜在投标人应在大连市政府采购云平台确认并获取招标文件；代理机构字段未在本段原文出现，但获取方式部分直接支持。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "天津院校中标公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E6",
+          "direction": "无关",
+          "quote": "天津职业技术师范大学政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津院校采购意向，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E7",
+          "direction": "无关",
+          "quote": "天津市河西区卫生健康委员会系统政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津卫健系统采购意向，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E18",
+          "direction": "无关",
+          "quote": "天津师范大学 激光共聚焦显微镜采购项目 (项目编号:BNZB-2026-C-0740)公开招标公告",
+          "reason": "天津师范大学设备采购公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E19",
+          "direction": "无关",
+          "quote": "天津市第三中心医院 天津市第三中心医院（东丽院区）第三批检验科设备采购项目 (项目编号:XCSD-2026-A-938)公开招标公告",
+          "reason": "天津医院设备采购公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E20",
+          "direction": "无关",
+          "quote": "天津市教育招生考试院 天津市教育招生考试院考试服务项目 (项目编号:TJBD-2026-C-499)公开招标公告",
+          "reason": "天津考试服务采购公告，与 claim 无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E21",
+          "direction": "无关",
+          "quote": "天津海运职业学院 天津海运职业学院智能机舱能量管理模拟器项目 (项目编号:YFGP-2026-B-0400)公开招标公告",
+          "reason": "天津院校设备采购公告，与 claim 无关。"
+        }
+      ],
+      "verdict": "已证实",
+      "reason": "E2 官方公告正文直接载明潜在投标人应在大连市政府采购云平台确认并获取招标文件；E1 信号层摘要另载明代理机构为大连市政府采购中心。E1 与 E2 谱系根不同（signal_layer 与 ccgp），构成两条独立来源，claim 两个联结均有支撑。其余证据为天津地区无关公告。",
+      "subclaim": null
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c8",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E10",
+          "direction": "无关",
+          "quote": "天津市武清区市政工程服务中心政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津武清区采购意向，与大连市公安局D包招标公告无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "天津医疗设备中标公告，与大连公安服装D包无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "天津肿瘤医院设备中标公告，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "支持",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该公告标题与正文明确为大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告，支持claim中项目主体与D包公开招标公告的存在；但原文未出现发布日期2026年10月22日，也未出现'中国政府采购网'字样（仅提及大连市政府采购云平台），故仅部分支撑。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "天津医疗设备中标公告，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "天津信息化软件中标公告，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "天津学院采购中标公告，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E6",
+          "direction": "无关",
+          "quote": "天津职业技术师范大学政府采购意向公告 | 阶段:采购意向",
+          "reason": "天津高校采购意向，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E7",
+          "direction": "无关",
+          "quote": "天津市河西区卫生健康委员会系统政府采购意向公告",
+          "reason": "天津卫健系统采购意向，无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E8",
+          "direction": "无关",
+          "quote": "天津财经大学财税与公共管理学院购置台式电脑项目(项目编号:市本级〔2026〕416950号)合同公告",
+          "reason": "天津高校合同公告，无关。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "仅E2一条证据与claim相关，可确认大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告存在，但该证据原文未载明发布日期2026年10月22日，也未载明发布平台为中国政府采购网（正文仅提及大连市政府采购云平台），claim中的时间与平台要素缺乏证据支撑，故意见为待证实。",
+      "subclaim": {
+        "text": "大连市公安局2026年新警及晋监民警服装采购项目D包发布了公开招标公告。",
+        "evidenceIds": [
+          "evt_tender_dalian_police_r1:E2"
+        ],
+        "reason": "E2原文标题与正文逐字载明该D包公开招标公告，但撑不起发布日期与'中国政府采购网'平台要素，故收窄为不含时间与平台谓词的断言。"
+      }
+    }
+  },
+  {
+    "stage": "s6_opinion",
+    "response": {
+      "claimId": "c9",
+      "evidenceJudgments": [
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E11",
+          "direction": "无关",
+          "quote": "天津中医药大学第一附属医院 天津中医药大学第一附属医院2026年急救和生命支持类医疗设备采购项目 (项目编号:TJBHGP-TJ-2026-007)中标公告",
+          "reason": "其他项目的中标公告，与大连市公安局服装采购项目D包招标公告是否被更正、撤销或延期无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E12",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026890)中标公告",
+          "reason": "其他项目的中标公告，不涉及本招标公告的后续状态。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E2",
+          "direction": "无关",
+          "quote": "大连市公安局2026年新警及晋监民警服装采购项目D包公开招标公告",
+          "reason": "该证据是招标公告原文本身，只能证明公告曾发布，未包含任何关于其后是否被更正、撤销或延期的信息。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E3",
+          "direction": "无关",
+          "quote": "天津市滨海新区卫生健康委员会本级 滨海新区中医医院二期项目开诊急需医疗设备购置项目（第二批） (项目编号:TJBHGP-BH-2026-077)中标公告",
+          "reason": "其他项目的中标公告，与本招标公告的时效状态无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E4",
+          "direction": "无关",
+          "quote": "天津市西青区中医医院 天津市西青区中医医院2026年信息化软件采购项目 (项目编号:XCSD-2026-C-293)中标公告",
+          "reason": "其他项目的中标公告，与本招标公告的时效状态无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E5",
+          "direction": "无关",
+          "quote": "天津现代职业技术学院 天津现代职业技术学院冻干粉针剂数字平台采购项目 (项目编号:PYGP-2026-A-0697)中标公告",
+          "reason": "其他项目的中标公告，与本招标公告的时效状态无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E9",
+          "direction": "无关",
+          "quote": "天津市肿瘤医院 天津市肿瘤医院设备采购项目 (项目编号:BH-ZLYY2026871)中标公告",
+          "reason": "其他项目的中标公告，与本招标公告的时效状态无关。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E18",
+          "direction": "无关",
+          "quote": "天津师范大学 激光共聚焦显微镜采购项目 (项目编号:BNZB-2026-C-0740)公开招标公告",
+          "reason": "其他项目的招标公告，不涉及本项目的更正、撤销或延期。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E19",
+          "direction": "无关",
+          "quote": "天津市第三中心医院 天津市第三中心医院（东丽院区）第三批检验科设备采购项目 (项目编号:XCSD-2026-A-938)公开招标公告",
+          "reason": "其他项目的招标公告，不涉及本项目的更正、撤销或延期。"
+        },
+        {
+          "evidenceId": "evt_tender_dalian_police_r1:E20",
+          "direction": "无关",
+          "quote": "天津市教育招生考试院 天津市教育招生考试院考试服务项目 (项目编号:TJBD-2026-C-499)公开招标公告",
+          "reason": "其他项目的招标公告，不涉及本项目的更正、撤销或延期。"
+        }
+      ],
+      "verdict": "待证实",
+      "reason": "卷宗内仅含本招标公告原文及若干无关的其他项目公告，没有任何证据涉及该公告发布后是否被更正、撤销或延期，无法支持也无法反驳该断言。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 动态时间线与关联方\n\n**投标截止时间。** 招标文件信封载明：投标文件提交截止时间为 2026 年 12 月 4 日 8 时 30 分（北京时间）[1][2]。\n\n**公告发布。** 大连市公安局（本级）于 2026 年 10 月 22 日通过中国政府采购网发布本项目 D 包公开招标公告[2][3][4][5][6]。\n\n**公告状态。** 关于该招标公告自发布后是否被更正、撤销或延期，目前尚未核实[4][5][2][6][7]。\n\n**委托代理关系。** 关于大连市公安局（本级）与大连市政府采购中心之间是否存在本项目项下的委托代理关系、且是否有独立于本公告的信源佐证，目前尚未核实[3][4][5][2][6]。\n\n**证据引用说明。** [1] E1；[2] E2；[3] E10；[4] E11；[5] E12；[6] E3；[7] E4。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 核心事实\n\n**一、采购主体历史记录**\n\n大连市公安局（本级）近两年有同等金额（约 4.5 万元）的服装类采购记录 [1][2][3][4]。\n\n**二、本项目 D 包金额**\n\n本项目 D 包预算金额为 45232 元，目前尚未核实 [5]。本项目 D 包金额 45232.0 元与大连市公安局（本级）同类服装采购的历史中位数相比是否无显著偏离，目前尚未核实 [5][6][7][2][8]。\n\n**三、既往采购方式**\n\n大连市公安局（本级）既往服装类采购是否以公开招标为主要采购方式，目前尚未核实 [5][9][10][11][12]。\n\n**四、解读信封数据完整性**\n\n解读自述显示，信封中 amountHistory、noveltyHistory、frequencyHistory 均为 null，历史采购基线不足，目前尚未核实 [13]。解读自述显示，信封中 amountAnomaly、frequencyAnomaly、noveltyAnomaly 均为 null，缺少异常判定结果，目前尚未核实 [13]。解读自述显示，信封中 relevance 为 null 且 companyProfile 为空，与本公司业务的相关性依据不足，目前尚未核实 [13][5]。\n\n**五、分包结构**\n\n本项目 D 包与 A、B、C 包属于同一采购项目的分包，各包预算与采购内容相互独立 [5][6][7][8][14]。\n\n---\n\n**证据引用对照**\n\n[1] E2；[2] E32；[3] E40；[4] E44；[5] E2；[6] E11；[7] E12；[8] E4；[9] E18；[10] E19；[11] E20；[12] E21；[13] E1；[14] E5。"
+    }
+  },
+  {
+    "stage": "s7_draft",
+    "response": {
+      "markdown": "## 结论\n\n关于本企业是否具备警用服装类产品的供货资质或既往供货业绩，目前尚未核实[c14]。现有证据仅指向招标公告本身，未见可支撑该判断的资质文件或既往供货记录。\n\n关于本企业参与本项目投标的预期收益（毛利或战略价值）是否超过投标成本，目前尚未核实[c15]。相关测算所依据的报价、成本与收益数据在现有证据中未见披露，无法就收益成本比作出判断。\n\n综上，就本企业视角而言，本项目是否构成可参与的实质商机，尚不具备作出肯定结论的证据基础；上述两项待证实事项需补充本企业资质材料与报价测算后方可进一步研判。"
+    }
+  },
+  {
+    "stage": "s7_recommend",
+    "response": {
+      "items": [
+        {
+          "action": "在投标截止（2026-12-4 8:30）前，先完成本企业警用服装供货资质与既往业绩的内部核查（c14），并据此决定是否在大连市政府采购云平台确认并获取招标文件；若资质不满足，则转为跟踪后续机会而非投标。",
+          "rationale": "主导假设为 h1（正常公开采购，已证实 3 条、无矛盾），但本企业能否参与取决于 h3，而 h3 的区分证据 c14（自身资质）与 c15（收益成本比）均待证实、尚无已证实支撑。因此本条以“资质核查先行”为前提性动作，不预设本企业具备资格；c7 亦显示 companyProfile 为空、相关性依据不足，需自行补齐。",
+          "basisClaimIds": [
+            "c1",
+            "c2",
+            "c3",
+            "c4",
+            "c7",
+            "c14"
+          ],
+          "hypothesisLabel": "本企业可参与的实质商机"
+        },
+        {
+          "action": "同步开展报价与成本测算：以 D 包 45232.0 元金额为基准，测算投标成本与预期毛利/战略价值，形成是否投标的收益成本结论（对应 c15），并与资质核查结果合并提交决策。",
+          "rationale": "c15 待证实，是 h3 成立的另一必要条件；c1 已证实金额 45232.0 元可作为测算基准。c5、c6 显示历史基线与异常判定均为 null，无法借助外部基线判断价格合理性，故须由企业自建测算。本条结论以 c15 后续被证实为前提。",
+          "basisClaimIds": [
+            "c1",
+            "c5",
+            "c6",
+            "c15"
+          ],
+          "hypothesisLabel": "本企业可参与的实质商机"
+        },
+        {
+          "action": "补充核查三项待证实事实以巩固或修正主导假设：①代理关系是否有独立于本公告的信源佐证（c10）；②本单位既往服装采购是否以公开招标为主（c12）；③D 包金额与同类采购历史中位数是否无显著偏离（c13）；并持续跟踪公告是否被更正、撤销或延期（c9）。",
+          "rationale": "h1 虽为主导（已证实 3、矛盾 0），但其可区分证据 c12、c13 仍待证实，c10、c9 亦未落地；若 c13 被证伪且 c11 转假，则 h2（异常输送/定向采购）权重上升。c11 已证实（近两年有约 4.5 万元同等金额记录），目前对 h2 构成削弱，但仍需 c13 补齐才能定论。",
+          "basisClaimIds": [
+            "c8",
+            "c9",
+            "c10",
+            "c11",
+            "c12",
+            "c13"
+          ],
+          "hypothesisLabel": "正常公开采购"
+        },
+        {
+          "action": "风险缓释与机会面扩展：鉴于 D 包与 A、B、C 包属同一项目分包且预算与内容相互独立，评估是否同时跟踪其他分包；并将竞品动态与供应链风险纳入监测清单，在投标前确认分包间是否存在资格或履约的连带约束。",
+          "rationale": "c16 已证实各包相互独立，意味着单包失利不排除其他包机会，可作为分散风险的依据；watch_focus 明确包含供应链风险与竞品动态。c13a（D 包预算 45232 元）仍待证实，与 c1 金额口径是否一致需在跟踪中核对，故本条不据此作金额判断。",
+          "basisClaimIds": [
+            "c16",
+            "c1",
+            "c13a"
+          ],
+          "hypothesisLabel": "正常公开采购"
+        }
+      ]
+    }
+  }
+]

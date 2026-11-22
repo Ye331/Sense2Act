@@ -1,10 +1,32 @@
 {
   "厦门大学附属第一医院": {
-    "domains": ["www.xmfh.com.cn"],
-    "aliases": ["厦大附一", "厦门大学第一附属医院", "第一医院"],
-    "news_paths": ["/yydt/xwgg.htm", "/yydt/xxgk1/tzgg.htm"],
+    "domains": [
+      "www.xmfh.com.cn"
+    ],
+    "aliases": [
+      "厦大附一",
+      "厦门大学第一附属医院"
+    ],
+    "news_paths": [
+      "/yydt/xwgg.htm",
+      "/yydt/xxgk1/tzgg.htm"
+    ],
     "item_xpath": null,
     "note": "2026-10-04 实测:经典 SSR(博达系CMS);列表条目=info/1730/N.htm 锚点带 title;日期在详情页(trafilatura/htmldate 可抽,中文日期有效)"
+  },
+  "北京大学人民医院": {
+    "domains": [
+      "www.pkuph.cn"
+    ],
+    "aliases": [
+      "北大人民医院",
+      "北京大学第二临床医学院"
+    ],
+    "news_paths": [
+      "/jiaodian_news.html"
+    ],
+    "item_xpath": null,
+    "note": "2026-10-23 实测:SSR(新闻聚焦栏目);列表条目锚点带 title,日期在列表行;详情页正文含 Uploads/Picture 图片(产品图附件可用)"
   },
   "_schema": {
     "domains": "官网域名列表(source/谱系用裸域)",

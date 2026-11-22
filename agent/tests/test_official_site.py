@@ -120,8 +120,10 @@ class TestOfficialSiteRegistration(unittest.TestCase):
         registry = build_default_registry(egress)
         self.assertIn("official_website", registry.platforms())
         router = ToolRouter(make_domain().platform_rules)
-        req = router.route("官方公告与批复", ["公告"], "")    # R1 缺口补上
-        self.assertIn("official_website", req.platforms)
+        req = router.route("官方公告与批复", ["公告"], "")
+        self.assertNotIn("official_website", req.platforms)  # 通用词不得落到任意官网档案
+        scoped = router.route("厦门大学附属第一医院官方公告", ["厦大附一 公告"], "")
+        self.assertIn("official_website", scoped.platforms)
         # cctv_news 2026-10-16 起移出默认路由(不对题),见 platform_rules.json R1 note
         self.assertNotIn("cctv_news", req.platforms)
 

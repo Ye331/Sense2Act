@@ -28,6 +28,8 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.math.BigDecimal;
 import java.net.InetSocketAddress;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.time.LocalDate;
@@ -46,7 +48,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * complete/fail 收尾(D6 信号 confirmed / 回退 pending)、报告页与证据详情/快照、md/pdf 导出。
  * 外部抓取用测试内 HttpServer 假源(成功 / 500 / 死端口三种)。
  */
-@SpringBootTest(properties = "app.internal-key=test-key")
+@SpringBootTest(properties = {"app.internal-key=test-key", "app.agent-data-dir=target/test-agentdata"})
 @AutoConfigureMockMvc
 @Testcontainers
 @org.springframework.test.annotation.DirtiesContext(classMode = org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER_CLASS)
@@ -89,6 +91,8 @@ class ReportFlowTest {
     String evDoc;  // 登记出的证据 id
     String evExt;
     String repId;
+    String attachmentId;
+    Path attachmentPath;
 
     void seed() throws Exception {
         if (invA != null) {
@@ -267,19 +271,38 @@ class ReportFlowTest {
                 + "\"nature\":\"fact\",\"confidence\":0.5,\"evidence_ids\":[\"" + evDoc + "\"]}]}", 42201);
         postReport(invA, "{\"title\":\"优先级非法\",\"claims\":[{\"text\":\"x\",\"nature\":\"fact\","
                 + "\"confidence\":0.5,\"evidence_ids\":[\"" + evDoc + "\"]}],\"action_suggestions\":[{\"text\":\"s\",\"priority\":\"urgent\"}]}", 40001);
+        postReport(invA, "{\"title\":\"附件越界\",\"claims\":[{\"text\":\"x\",\"nature\":\"fact\","
+                + "\"confidence\":0.5,\"evidence_ids\":[\"" + evDoc + "\"]}],\"attachments\":[{\"evidence_id\":\""
+                + evDoc + "\",\"kind\":\"image\",\"storage_key\":\"../escape.png\",\"content_type\":\"image/png\","
+                + "\"sha256\":\"" + "0".repeat(64) + "\",\"size\":1,\"presentation_only\":true}]}", 42201);
         assertThat(jdbcTemplate.queryForObject(
                 "SELECT count(*) FROM reports WHERE investigation_id = ?", Integer.class, invA)).isEqualTo(0);
 
         // 合法草稿:3 结论覆盖三种 nature、2 建议、图谱 1 事件 3 主体 2 关系
+        byte[] attachmentBytes = "fake-png-for-report-flow".getBytes(StandardCharsets.UTF_8);
+        String attachmentKey = invA + "/runs/evt_assets/assets/sample.png";
+        attachmentPath = Path.of(properties.agentDataDir()).resolve(attachmentKey);
+        Files.createDirectories(attachmentPath.getParent());
+        Files.write(attachmentPath, attachmentBytes);
         String draft = ("{\"title\":\"某市人民医院大额AI辅助诊断招标:规划三期建设而非孤立采购\","
                 + "\"summary\":\"该招标并非孤立事件:属于医院两年前规划的第三期建设;同市另有2家医院启动类似项目。\","
+                + "\"conclusions\":[{\"hypothesis_id\":\"h1\",\"label\":\"建设潮\",\"selected\":true,"
+                + "\"current_judgment\":\"当前更符合连续建设\",\"basis\":[\"规划已载明\"],\"gaps\":[\"同市样本待补\"],"
+                + "\"change_conditions\":[],\"next_steps\":[\"核验同市项目\"],"
+                + "\"supporting_claim_ids\":[\"c1\"],\"pending_claim_ids\":[\"c4\"]}],"
                 + "\"claims\":["
-                + "{\"text\":\"本次采购属于《医院信息化建设规划(2024-2027)》第三期建设计划\",\"nature\":\"fact\","
+                + "{\"source_claim_id\":\"c1\",\"status\":\"verified\",\"text\":\"本次采购属于《医院信息化建设规划(2024-2027)》第三期建设计划\",\"nature\":\"fact\","
                 + "\"confidence\":0.95,\"evidence_ids\":[\"%s\",\"%s\"]},"
-                + "{\"text\":\"本次预算约为近半年同类项目均值的 4 倍\",\"nature\":\"inference\","
+                + "{\"source_claim_id\":\"c2\",\"status\":\"verified\",\"text\":\"本次预算约为近半年同类项目均值的 4 倍\",\"nature\":\"inference\","
                 + "\"confidence\":0.8,\"evidence_ids\":[\"%s\"]},"
-                + "{\"text\":\"同市另有2家医院启动类似项目,可能是一轮建设潮的开始\",\"nature\":\"speculation\","
+                + "{\"source_claim_id\":\"c3\",\"status\":\"verified\",\"text\":\"同市另有2家医院启动类似项目,可能是一轮建设潮的开始\",\"nature\":\"speculation\","
                 + "\"confidence\":0.6,\"evidence_ids\":[\"%s\"]}],"
+                + "\"pending_findings\":[{\"source_claim_id\":\"c4\",\"text\":\"资格待核验\",\"gap\":\"缺资格文件\",\"next_step\":\"查资格\"}],"
+                + "\"process_notes\":[{\"source_claim_id\":\"c5\",\"text\":\"命中标签\",\"reason\":\"meta\"}],"
+                + "\"attachments\":[{\"evidence_id\":\"" + evDoc + "\",\"kind\":\"image\","
+                + "\"storage_key\":\"" + attachmentKey + "\",\"content_type\":\"image/png\",\"sha256\":\""
+                + sha256(attachmentBytes) + "\",\"size\":" + attachmentBytes.length
+                + ",\"caption\":\"公告截图\",\"presentation_only\":true}],"
                 + "\"action_suggestions\":["
                 + "{\"text\":\"评估参与方式:独立投标或联合既往合作方\",\"priority\":\"high\"},"
                 + "{\"text\":\"跟踪同市另外两家医院的立项进展\",\"priority\":\"medium\"}],"
@@ -301,11 +324,18 @@ class ReportFlowTest {
                 .andExpect(jsonPath("$.data.status").value("draft"))
                 .andExpect(jsonPath("$.data.claims.length()").value(3))
                 .andExpect(jsonPath("$.data.claims[0].nature").value("fact"))
+                .andExpect(jsonPath("$.data.claims[0].source_claim_id").value("c1"))
+                .andExpect(jsonPath("$.data.claims[0].status").value("verified"))
                 .andExpect(jsonPath("$.data.claims[0].confidence").value(0.95))
                 .andExpect(jsonPath("$.data.claims[0].evidences[0].id").value(evDoc))
                 .andExpect(jsonPath("$.data.claims[0].evidences[0].source_type").value("announcement"))
                 .andExpect(jsonPath("$.data.claims[1].evidences.length()").value(1))
                 .andExpect(jsonPath("$.data.claims[2].evidences.length()").value(1))
+                .andExpect(jsonPath("$.data.conclusions[0].selected").value(true))
+                .andExpect(jsonPath("$.data.pending_findings[0].source_claim_id").value("c4"))
+                .andExpect(jsonPath("$.data.process_notes.length()").value(1))
+                .andExpect(jsonPath("$.data.attachments.length()").value(1))
+                .andExpect(jsonPath("$.data.attachments[0].presentation_only").value(true))
                 .andExpect(jsonPath("$.data.action_suggestions.length()").value(2))
                 .andExpect(jsonPath("$.data.meta.rounds").value(1))
                 .andExpect(jsonPath("$.data.meta.tool_calls").value(1))
@@ -314,6 +344,7 @@ class ReportFlowTest {
                 .andExpect(jsonPath("$.data.disclaimer").value("本报告由AI生成，结论不替代人的自主判断"))
                 .andReturn();
         repId = read(r, "data.id");
+        attachmentId = read(r, "data.attachments.0.id");
         String eventId = read(r, "data.event_id");
         assertThat(eventId).isNotBlank();
 
@@ -424,6 +455,16 @@ class ReportFlowTest {
                 .andExpect(jsonPath("$.data.id").value(repId))
                 .andExpect(jsonPath("$.data.status").value("published"))
                 .andExpect(jsonPath("$.data.claims[0].evidences[0].title").exists());
+        mockMvc.perform(get("/api/v1/reports/{id}/attachments/{attachmentId}/content", repId, attachmentId)
+                        .header("Authorization", viewer))
+                .andExpect(status().isOk())
+                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.content()
+                        .contentType("image/png"));
+        Files.writeString(attachmentPath, "corrupted", StandardCharsets.UTF_8);
+        mockMvc.perform(get("/api/v1/reports/{id}/attachments/{attachmentId}/content", repId, attachmentId)
+                        .header("Authorization", viewer))
+                .andExpect(status().isUnprocessableEntity())
+                .andExpect(jsonPath("$.code").value(42201));
         mockMvc.perform(get("/api/v1/reports/rep_NOPE").header("Authorization", viewer))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code").value(40401));
@@ -546,7 +587,7 @@ class ReportFlowTest {
         JsonNode node = objectMapper.readTree(r.getResponse().getContentAsString(StandardCharsets.UTF_8));
         String[] parts = path.split("\\.");
         for (String p : parts) {
-            node = node.path(p);
+            node = node.isArray() ? node.path(Integer.parseInt(p)) : node.path(p);
         }
         return node.asText();
     }

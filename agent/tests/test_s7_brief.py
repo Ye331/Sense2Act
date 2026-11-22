@@ -171,14 +171,21 @@ class TestBrief(unittest.TestCase):
         self.assertIn("替换 8 条模拟样本", md)
 
     def test_dominant_snapshot_line(self):
-        """report.md 头部主导假设快照行(模板生成,修统计滞后 artifact)。"""
+        """report.md 头部领先假设行(模板生成,修统计滞后 artifact)。
+        报告文风线第一批(P5,2026-11-07):「主导假设(交付时快照):X(得分 N)」
+        →「当前领先假设:X」——"交付时快照"(调查过程词)与"得分 N"(记分
+        机制内部量)撤出人看层(记分明细在附录 D);旧断言随语义演进同步
+        注明(照三阶段先例)。"""
         self.led.update_claim_status("evt_t:C2", "已证实", None, 1)
         summary = self._finalize(envelope=_tender_envelope())
         md = (Path(self.tmp) / "evt_t" / "report.md").read_text(encoding="utf-8")
-        self.assertIn("主导假设(交付时快照)", md)
+        self.assertIn("当前领先假设:", md)
+        self.assertNotIn("交付时快照", md)
         doms = [s["label"] for s in summary["standings"] if s.get("dominant")]
         if doms:
-            self.assertIn(doms[0], md.split("主导假设(交付时快照)")[1].split("\n")[0])
+            self.assertIn(doms[0], md.split("当前领先假设:")[1].split("\n")[0])
+            # 头部不出记分机制内部量(记分明细在附录 D)
+            self.assertNotIn("得分", md.split("当前领先假设:")[1].split("\n")[0])
 
 
 if __name__ == "__main__":

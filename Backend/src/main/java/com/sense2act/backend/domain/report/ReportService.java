@@ -9,6 +9,7 @@ import com.sense2act.backend.common.BusinessException;
 import com.sense2act.backend.common.IdGen;
 import com.sense2act.backend.common.PageParams;
 import com.sense2act.backend.common.PageResult;
+import com.sense2act.backend.config.AppProperties;
 import com.sense2act.backend.domain.graph.EventEntityLink;
 import com.sense2act.backend.domain.graph.EventEntityLinkMapper;
 import com.sense2act.backend.domain.graph.EventRelation;
@@ -28,10 +29,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.security.MessageDigest;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.HexFormat;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -50,6 +56,8 @@ public class ReportService {
     public static final String DISCLAIMER = "本报告由AI生成，结论不替代人的自主判断";
 
     private static final Set<String> NATURES = Set.of("fact", "inference", "speculation");
+    private static final Set<String> CLAIM_STATUSES = Set.of("verified", "contested");
+    private static final Set<String> ATTACHMENT_TYPES = Set.of("image/png", "image/jpeg", "image/webp");
     private static final Set<String> PRIORITIES = Set.of("high", "medium", "low");
     private static final Set<String> ENTITY_TYPES = Set.of("org", "project", "product", "region", "policy");
     private static final Set<String> ENTITY_ROLES = Set.of("participant", "object", "scope", "beneficiary");
@@ -67,13 +75,14 @@ public class ReportService {
     private final InvestigationStepMapper stepMapper;
     private final EvidenceMapper evidenceMapper;
     private final InvestigationService investigationService;
+    private final AppProperties properties;
 
     public ReportService(ReportMapper reportMapper, ClaimMapper claimMapper, EvidenceLinkMapper evidenceLinkMapper,
                          ActionSuggestionMapper suggestionMapper, GraphEntityMapper entityMapper,
                          GraphEventMapper eventMapper, EventEntityLinkMapper eventEntityLinkMapper,
                          EventRelationMapper eventRelationMapper, InvestigationMapper investigationMapper,
                          InvestigationStepMapper stepMapper, EvidenceMapper evidenceMapper,
-                         InvestigationService investigationService) {
+                         InvestigationService investigationService, AppProperties properties) {
         this.reportMapper = reportMapper;
         this.claimMapper = claimMapper;
         this.evidenceLinkMapper = evidenceLinkMapper;
@@ -86,6 +95,7 @@ public class ReportService {
         this.stepMapper = stepMapper;
         this.evidenceMapper = evidenceMapper;
         this.investigationService = investigationService;
+        this.properties = properties;
     }
 
     // ---------- E4-2 提交 ReportDraft(内部) ----------
@@ -126,6 +136,10 @@ public class ReportService {
         report.setSummary(draft.summary() == null ? null : draft.summary().strip());
         report.setStatus(Report.STATUS_DRAFT);
         report.setMeta(meta);
+        report.setConclusions(copyObjects(draft.conclusions()));
+        report.setPendingFindings(copyObjects(draft.pendingFindings()));
+        report.setProcessNotes(copyObjects(draft.processNotes()));
+        report.setAttachments(normalizeAttachments(draft.attachments()));
         report.setCreatedAt(OffsetDateTime.now());
         report.setUpdatedAt(OffsetDateTime.now());
         reportMapper.insert(report);
@@ -147,6 +161,8 @@ public class ReportService {
             claim.setSeq(++seq);
             claim.setText(c.text().strip());
             claim.setNature(c.nature());
+            claim.setSourceClaimId(blankToNull(c.sourceClaimId()));
+            claim.setClaimStatus(c.status() == null ? "verified" : c.status());
             claim.setConfidence(c.confidence());
             claim.setCreatedAt(OffsetDateTime.now());
             claimMapper.insert(claim);
@@ -207,6 +223,12 @@ public class ReportService {
             if (c.nature() == null || !NATURES.contains(c.nature())) {
                 throw BusinessException.badRequest("claim.nature 只能是 fact/inference/speculation");
             }
+            if (c.status() != null && !CLAIM_STATUSES.contains(c.status())) {
+                throw BusinessException.badRequest("claim.status 只能是 verified/contested");
+            }
+            if (c.sourceClaimId() != null && c.sourceClaimId().length() > 100) {
+                throw BusinessException.badRequest("claim.source_claim_id 过长(≤100)");
+            }
             if (c.confidence() == null || c.confidence().compareTo(BigDecimal.ZERO) < 0
                     || c.confidence().compareTo(BigDecimal.ONE) > 0) {
                 throw BusinessException.badRequest("claim.confidence 需在 [0,1]");
@@ -227,6 +249,7 @@ public class ReportService {
                 throw BusinessException.unprocessable("claims 引用未登记证据: " + missing + "(整份拒收)");
             }
         }
+        validateStructuredClaims(draft, inv.getId());
         if (draft.actionSuggestions() != null) {
             for (DraftSuggestion s : draft.actionSuggestions()) {
                 if (s.text() == null || s.text().isBlank()) {
@@ -300,6 +323,131 @@ public class ReportService {
             }
         }
         throw BusinessException.badRequest("关系节点只能是 event 或 entity:<下标>: " + ref);
+    }
+
+    private void validateStructuredClaims(Draft draft, String investigationId) {
+        Set<String> sourceIds = new LinkedHashSet<>();
+        for (DraftClaim claim : draft.claims()) {
+            String sourceId = blankToNull(claim.sourceClaimId());
+            if (sourceId != null && !sourceIds.add(sourceId)) {
+                throw BusinessException.badRequest("source_claim_id 重复: " + sourceId);
+            }
+        }
+        for (Map<String, Object> conclusion : draft.conclusions() == null ? List.<Map<String, Object>>of() : draft.conclusions()) {
+            validateClaimIdList(conclusion.get("supporting_claim_ids"), sourceIds, "conclusions.supporting_claim_ids");
+            validateClaimIdList(conclusion.get("pending_claim_ids"), sourceIds, "conclusions.pending_claim_ids", false);
+        }
+        Set<String> evidenceIds = new LinkedHashSet<>();
+        for (DraftAttachment attachment : draft.attachments() == null ? List.<DraftAttachment>of() : draft.attachments()) {
+            if (attachment == null) throw BusinessException.badRequest("attachments 不能包含 null");
+            if (!"image".equals(attachment.kind()) || !ATTACHMENT_TYPES.contains(attachment.contentType())) {
+                throw BusinessException.unprocessable("附件仅支持 png/jpeg/webp 图片");
+            }
+            if (!attachment.presentationOnly()) {
+                throw BusinessException.unprocessable("附件必须标记 presentation_only=true");
+            }
+            if (attachment.size() == null || attachment.size() <= 0
+                    || attachment.size() > properties.attachmentMaxBytes()) {
+                throw BusinessException.unprocessable("附件大小非法或超限");
+            }
+            if (attachment.sha256() == null || !attachment.sha256().matches("[0-9a-fA-F]{64}")) {
+                throw BusinessException.unprocessable("附件 sha256 非法");
+            }
+            if (attachment.evidenceId() == null || attachment.evidenceId().isBlank()) {
+                throw BusinessException.badRequest("attachments[].evidence_id 必填");
+            }
+            evidenceIds.add(attachment.evidenceId());
+            Path path = resolveAttachmentPath(investigationId, attachment.storageKey());
+            verifyAttachmentFile(path, attachment.size(), attachment.sha256());
+        }
+        if (!evidenceIds.isEmpty()) {
+            Set<String> owned = evidenceMapper.selectList(new LambdaQueryWrapper<Evidence>()
+                            .eq(Evidence::getInvestigationId, investigationId).in(Evidence::getId, evidenceIds))
+                    .stream().map(Evidence::getId).collect(java.util.stream.Collectors.toSet());
+            if (!owned.containsAll(evidenceIds)) {
+                throw BusinessException.unprocessable("附件引用未登记或跨调查证据");
+            }
+        }
+    }
+
+    private static void validateClaimIdList(Object raw, Set<String> sourceIds, String field) {
+        validateClaimIdList(raw, sourceIds, field, true);
+    }
+
+    private static void validateClaimIdList(Object raw, Set<String> sourceIds, String field, boolean requireKnown) {
+        if (raw == null) return;
+        if (!(raw instanceof List<?> values)) throw BusinessException.badRequest(field + " 必须是数组");
+        if (requireKnown) {
+            List<String> missing = values.stream().map(String::valueOf)
+                    .filter(id -> !sourceIds.contains(id)).toList();
+            if (!missing.isEmpty()) throw BusinessException.unprocessable(field + " 引用了未提交 claim: " + missing);
+        }
+    }
+
+    private Path resolveAttachmentPath(String investigationId, String storageKey) {
+        if (storageKey == null || storageKey.isBlank() || storageKey.indexOf('\\') >= 0) {
+            throw BusinessException.unprocessable("附件 storage_key 非法");
+        }
+        Path relative = Path.of(storageKey).normalize();
+        if (relative.isAbsolute() || relative.startsWith("..") || relative.getNameCount() < 4
+                || !investigationId.equals(relative.getName(0).toString())) {
+            throw BusinessException.unprocessable("附件路径越界或调查归属不匹配");
+        }
+        Path root = Path.of(properties.agentDataDir()).toAbsolutePath().normalize();
+        Path resolved = root.resolve(relative).normalize();
+        if (!resolved.startsWith(root)) throw BusinessException.unprocessable("附件路径越界");
+        return resolved;
+    }
+
+    private List<Map<String, Object>> normalizeAttachments(List<DraftAttachment> attachments) {
+        List<Map<String, Object>> result = new ArrayList<>();
+        for (DraftAttachment a : attachments == null ? List.<DraftAttachment>of() : attachments) {
+            Map<String, Object> row = new LinkedHashMap<>();
+            row.put("id", IdGen.next("att"));
+            row.put("evidence_id", a.evidenceId());
+            row.put("kind", a.kind());
+            row.put("storage_key", a.storageKey());
+            row.put("content_type", a.contentType());
+            row.put("sha256", a.sha256().toLowerCase());
+            row.put("size", a.size());
+            row.put("caption", a.caption() == null ? "" : a.caption());
+            row.put("presentation_only", true);
+            result.add(row);
+        }
+        return result;
+    }
+
+    private void verifyAttachmentFile(Path path, long expectedSize, String expectedSha256) {
+        try {
+            if (!Files.isRegularFile(path)) throw BusinessException.unprocessable("附件源文件不存在");
+            if (Files.size(path) != expectedSize || expectedSize > properties.attachmentMaxBytes()) {
+                throw BusinessException.unprocessable("附件大小与登记信息不一致");
+            }
+            String digest = HexFormat.of().formatHex(
+                    MessageDigest.getInstance("SHA-256").digest(Files.readAllBytes(path)));
+            if (!digest.equalsIgnoreCase(expectedSha256)) {
+                throw BusinessException.unprocessable("附件 sha256 校验失败");
+            }
+        } catch (BusinessException e) {
+            throw e;
+        } catch (Exception e) {
+            throw BusinessException.unprocessable("附件读取失败: " + e.getMessage());
+        }
+    }
+
+    private static List<Map<String, Object>> copyObjects(List<Map<String, Object>> values) {
+        if (values == null) return List.of();
+        List<Map<String, Object>> copies = new ArrayList<>();
+        values.forEach(value -> copies.add(new LinkedHashMap<>(value)));
+        return copies;
+    }
+
+    private static List<Map<String, Object>> safeObjects(List<Map<String, Object>> values) {
+        return values == null ? List.of() : values;
+    }
+
+    private static String blankToNull(String value) {
+        return value == null || value.isBlank() ? null : value.strip();
     }
 
     /**
@@ -433,13 +581,46 @@ public class ReportService {
                     .stream().map(l -> evidences.get(l.getEvidenceId()))
                     .filter(java.util.Objects::nonNull)
                     .map(e -> new EvidenceRef(e.getId(), e.getTitle(), e.getSourceType())).toList();
-            return new ClaimView(c.getId(), c.getSeq(), c.getText(), c.getNature(), c.getConfidence(), refs);
+            return new ClaimView(c.getId(), c.getSourceClaimId(), c.getClaimStatus(), c.getSeq(),
+                    c.getText(), c.getNature(), c.getConfidence(), refs);
         }).toList();
         List<SuggestionView> sv = suggestions.stream()
                 .map(s -> new SuggestionView(s.getId(), s.getText(), s.getPriority(), s.getAdoptedAt())).toList();
         return new ReportView(report.getId(), report.getInvestigationId(), report.getSignalId(),
                 report.getEventId(), report.getTitle(), report.getSummary(), report.getStatus(),
-                claimViews, sv, report.getMeta(), DISCLAIMER, report.getCreatedAt());
+                safeObjects(report.getConclusions()), claimViews, safeObjects(report.getPendingFindings()),
+                safeObjects(report.getProcessNotes()), safeObjects(report.getAttachments()),
+                sv, report.getMeta(), DISCLAIMER, report.getCreatedAt());
+    }
+
+    /** 鉴权由 Controller/Security 完成；这里再次校验报告归属、路径、大小与摘要。 */
+    @Transactional(readOnly = true)
+    public AttachmentContent attachmentContent(String reportId, String attachmentId) {
+        Report report = reportMapper.selectById(reportId);
+        if (report == null) throw BusinessException.notFound("报告不存在: " + reportId);
+        Map<String, Object> item = safeObjects(report.getAttachments()).stream()
+                .filter(a -> attachmentId.equals(String.valueOf(a.get("id")))).findFirst()
+                .orElseThrow(() -> BusinessException.notFound("附件不存在: " + attachmentId));
+        String contentType = String.valueOf(item.get("content_type"));
+        if (!ATTACHMENT_TYPES.contains(contentType)) throw BusinessException.unprocessable("附件类型不允许内联");
+        Path path = resolveAttachmentPath(report.getInvestigationId(), String.valueOf(item.get("storage_key")));
+        try {
+            if (!Files.isRegularFile(path)) throw BusinessException.unprocessable("附件源文件不存在");
+            long expectedSize = ((Number) item.get("size")).longValue();
+            if (Files.size(path) != expectedSize || expectedSize > properties.attachmentMaxBytes()) {
+                throw BusinessException.unprocessable("附件大小与登记信息不一致");
+            }
+            byte[] bytes = Files.readAllBytes(path);
+            String digest = HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(bytes));
+            if (!digest.equalsIgnoreCase(String.valueOf(item.get("sha256")))) {
+                throw BusinessException.unprocessable("附件 sha256 校验失败");
+            }
+            return new AttachmentContent(bytes, contentType);
+        } catch (BusinessException e) {
+            throw e;
+        } catch (Exception e) {
+            throw BusinessException.unprocessable("附件读取失败: " + e.getMessage());
+        }
     }
 
     // ---------- E4-6 导出 ----------
@@ -525,13 +706,22 @@ public class ReportService {
 
     /** ReportDraft(§9.3)。token_usage 仅对账参考,不入账(D5:steps 为准)。 */
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-    public record Draft(String title, String summary, String eventId, List<DraftClaim> claims,
+    public record Draft(String title, String summary, String eventId,
+                        List<Map<String, Object>> conclusions, List<DraftClaim> claims,
+                        List<Map<String, Object>> pendingFindings, List<Map<String, Object>> processNotes,
+                        List<DraftAttachment> attachments,
                         List<DraftSuggestion> actionSuggestions, EventExtraction eventExtraction,
                         Integer tokenUsage) {
     }
 
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-    public record DraftClaim(String text, String nature, BigDecimal confidence, List<String> evidenceIds) {
+    public record DraftClaim(String sourceClaimId, String text, String nature, String status,
+                             BigDecimal confidence, List<String> evidenceIds) {
+    }
+
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+    public record DraftAttachment(String evidenceId, String kind, String storageKey, String contentType,
+                                  String sha256, Long size, String caption, boolean presentationOnly) {
     }
 
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
@@ -559,8 +749,12 @@ public class ReportService {
     }
 
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-    public record ClaimView(String id, Integer seq, String text, String nature, BigDecimal confidence,
+    public record ClaimView(String id, String sourceClaimId, String status, Integer seq,
+                            String text, String nature, BigDecimal confidence,
                             List<EvidenceRef> evidences) {
+    }
+
+    public record AttachmentContent(byte[] bytes, String contentType) {
     }
 
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
@@ -579,7 +773,9 @@ public class ReportService {
     /** 契约 §6 报告形状;meta.cost_estimate 序列化为字符串小数。 */
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public record ReportView(String id, String investigationId, String signalId, String eventId, String title,
-                             String summary, String status, List<ClaimView> claims,
+                             String summary, String status, List<Map<String, Object>> conclusions,
+                             List<ClaimView> claims, List<Map<String, Object>> pendingFindings,
+                             List<Map<String, Object>> processNotes, List<Map<String, Object>> attachments,
                              List<SuggestionView> actionSuggestions, Map<String, Object> meta,
                              String disclaimer, OffsetDateTime createdAt) {
     }

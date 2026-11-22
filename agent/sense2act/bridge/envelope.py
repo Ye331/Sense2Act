@@ -6,6 +6,8 @@
 """
 from __future__ import annotations
 
+import re
+
 from ..models.envelope import (AmountHistory, DetectorScore, FrequencyHistory, InvestigationEnvelope,
                                NoveltyHistory, RumorSignal, TenderSignal)
 
@@ -36,6 +38,18 @@ def _float(value) -> float | None:
 
 
 NEWS_RULE = "news_event"
+_PROJECT_NO_RE = re.compile(r"项目编号\s*[:：]\s*([A-Za-z0-9][A-Za-z0-9._-]{3,80})")
+
+
+def _project_id(doc: dict, details: dict) -> str:
+    """只取业务项目编号；Backend 的 doc_* 主键绝不能冒充项目编号。"""
+    for detail in details.values():
+        value = str((detail or {}).get("project_id") or "").strip()
+        if value:
+            return value
+    text = f"{doc.get('title') or ''}\n{doc.get('content_text') or ''}"
+    match = _PROJECT_NO_RE.search(text)
+    return match.group(1).rstrip(".。,，;；") if match else ""
 
 
 def signal_kind(context: dict) -> str:
@@ -64,7 +78,7 @@ def build_envelope(context: dict, event_id: str) -> InvestigationEnvelope:
     relevance = details.get("semantic_match", {})
     summary = (doc.get("content_text") or "").strip()
     tender = TenderSignal(
-        project_id=doc["id"],
+        project_id=_project_id(doc, details),
         project_name=doc.get("title") or doc["id"],
         purchaser=doc.get("org_name") or "",
         amount_yuan=_float(doc.get("amount")),

@@ -19,3 +19,6 @@ __pycache__/
 *.iml
 .DS_Store
 Thumbs.db
+
+# 证据链工作台本机直查缓存（真实出件不得入库）
+frontend/public/runs/

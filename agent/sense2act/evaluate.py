@@ -721,6 +721,31 @@ def case_path(case: dict, key: str) -> str:
 
 # -------------------------------------------------------------- 子进程执行
 
+# run_args -> investigate CLI flag 映射(与 cli 参数一一对应;on/off 型布尔
+# 在装配时序列化)。2026-10-25 同源纪律:键集必须覆盖 run_meta.ALIGN_KEYS
+# (META_KEYS 派生),测试锁死——新增开关改 META_KEYS 一处即全链生效。
+RUN_ARGS_FLAG_MAP = {"max_rounds": "--max-rounds",
+                     "max_llm_calls": "--max-llm-calls",
+                     "max_collect_calls": "--max-collect-calls",
+                     "assoc": "--assoc",
+                     "disc": "--disc",
+                     "calibration": "--calibration",
+                     "ask_mode": "--ask-mode",
+                     "ask_gate": "--ask-gate",
+                     "sim_persona": "--sim-persona",
+                     "sim_seed": "--sim-seed",
+                     "ask_final": "--ask-final",
+                     "rumor_meta_seed": "--rumor-meta-seed",
+                     "predicate_form": "--predicate-form",
+                     "predicate_check": "--predicate-check",
+                     "corpus_bound_code": "--corpus-bound-code",
+                     "t1_independence": "--t1-independence",
+                     "red_team": "--red-team",
+                     "red_team_budget": "--red-team-budget",
+                     "kb": "--kb",
+                     "flip_guard": "--flip-guard"}
+
+
 def build_investigate_args(case: dict, db: Path, runs_dir: Path,
                            variant: str = "中") -> list[str]:
     if case.get("envelope_batch"):
@@ -731,8 +756,11 @@ def build_investigate_args(case: dict, db: Path, runs_dir: Path,
                 "--replay", case_path(case, "responses")]
     else:
         args = ["--envelope", case_path(case, "envelope"),
-                "--replay", case_path(case, "responses"),
-                "--seed", case_path(case, "seed")]
+                "--replay", case_path(case, "responses")]
+        # seed 可选(batch/重录波案信封自带证据种子,无 seed 文件;
+        # 双回放案的采集段由 run_case 追加 --collect-replay/--crawler)
+        if case.get("seed"):
+            args += ["--seed", case_path(case, "seed")]
     args += ["--db", str(db), "--runs-dir", str(runs_dir),
              "--config-dir", case_path(case, "config_dir")
              if case.get("config_dir") else "data/config",
@@ -741,19 +769,28 @@ def build_investigate_args(case: dict, db: Path, runs_dir: Path,
         args += ["--event-id", case["event_id"]]
     if case.get("refresh_plan"):
         args += ["--refresh-plan", case_path(case, "refresh_plan")]
-    flag_map = {"max_rounds": "--max-rounds",
-                "max_llm_calls": "--max-llm-calls",
-                "max_collect_calls": "--max-collect-calls",
-                "assoc": "--assoc",
-                "calibration": "--calibration",
-                "ask_mode": "--ask-mode",
-                "ask_gate": "--ask-gate",
-                "sim_persona": "--sim-persona",
-                "sim_seed": "--sim-seed",
-                "ask_final": "--ask-final"}
-    for key, flag in flag_map.items():
+    for key, flag in RUN_ARGS_FLAG_MAP.items():
         if key in (case.get("run_args") or {}):
-            args += [flag, str(case["run_args"][key])]
+            v = case["run_args"][key]
+            # on/off 型布尔开关(cli choices=["on","off"]):meta 对齐后是
+            # Python bool,序列化成 on/off;interleave 是 --no-interleave
+            # store_true 反形态,True=默认不传,False 显式关。
+            if isinstance(v, bool):
+                args += [flag, "on" if v else "off"]
+            else:
+                args += [flag, str(v)]
+    if case.get("run_args", {}).get("interleave") is False:
+        args += ["--no-interleave"]
+    # store_true 型开关(图片线附件通道,2026-10-27 合入):不走上面的
+    # on/off 值映射(store_true 不接受值),True 才传 flag、缺省/False 不传;
+    # dry_run 是 --no-dry-run 的正向键,仅显式 False 时传反形态 flag。
+    _ra = case.get("run_args") or {}
+    if _ra.get("assets"):
+        args += ["--assets"]
+    if _ra.get("snapshots"):
+        args += ["--snapshots"]
+    if _ra.get("dry_run") is False:
+        args += ["--no-dry-run"]
     return args
 
 
@@ -768,8 +805,12 @@ def classify_failure(err: str) -> str:
     return "error"
 
 
-def run_case(case: dict, work: Path, timeout: int, variant: str = "中") -> dict:
-    """跑单案例(独立 subprocess,临时 db + 临时 runs-dir),归类运行状态。"""
+def run_case(case: dict, work: Path, timeout: int, variant: str = "中",
+             collect_replay: Path | None = None) -> dict:
+    """跑单案例(独立 subprocess,临时 db + 临时 runs-dir),归类运行状态。
+
+    collect_replay 非空=双回放采集段(方案B):--crawler local 选择 egress
+    回放分支,零网络。"""
     db = work / f"{case['case_id']}.db"
     runs_dir = work / "runs"
     # 参数配对契约(P0 防再犯,2026-10-05):录制件带 .meta.json 时,行为参数
@@ -788,6 +829,8 @@ def run_case(case: dict, work: Path, timeout: int, variant: str = "中") -> dict
             variant = mv
     cmd = [sys.executable, "-m", "sense2act", "investigate",
            *build_investigate_args(case, db, runs_dir, variant)]
+    if collect_replay is not None:
+        cmd += ["--collect-replay", str(collect_replay), "--crawler", "local"]
     try:
         proc = subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True,
                               text=True, encoding="utf-8", timeout=timeout)
@@ -818,20 +861,82 @@ def run_case(case: dict, work: Path, timeout: int, variant: str = "中") -> dict
             "db": str(db), "result_path": str(result_path), "note": err[-500:]}
 
 
-def run_and_score(case: dict, case_dir: Path, work: Path, timeout: int,
-                  weights: Weights, align_cfg: AlignConfig,
-                  default_budget: dict, variant: str) -> dict:
-    """disabled 案例直接列行;其余跑 investigate -> 取数 -> 打分。"""
-    if not case.get("enabled", True):
-        return {"case_id": case["case_id"], "title": case.get("title", ""),
-                "run_status": "disabled",
-                "note": case.get("blocked_note", "enabled=false")}
-    run = run_case(case, work, timeout, variant)
-    if run["run_status"] not in _SCOREABLE:
-        return {"case_id": case["case_id"], "title": case.get("title", ""),
-                "run_status": run["run_status"], "note": run["note"]}
+# 主读数=双回放,真值口径降为审计对照(2026-10-25 用户拍板,方案B解禁):
+# 重录波案证据靠 live 采集,单纯 LLM 回放拿不到采集证据池(回放台账 s=0/
+# 判决降待证实,既丢真值又虚高 A_w)。双回放(--replay LLM 段 × --collect-
+# replay 采集段)全链冻结复现,18 案实证 claims+sections 逐条一致;评测
+# 自包含(clone 即评)。录制台账(data/rerecord/*.db + runs/<event_id>/,
+# 均不入库)保留两用:①复现对照(逐条 diff,不一致=复现失败);②双回放
+# 失败案 fallback 的取数源。无采集录制件的案(离线 seed 案)走 --replay×
+# --seed 旧通道。复现率工具=tests/_planb_replay.py(升格对照:含节文本)。
+RECORDED_DB_DIR = REPO_ROOT / "data" / "rerecord"
+RECORDED_RUNS_DIR = REPO_ROOT / "runs"
+COLLECT_STAGING_DIR = REPO_ROOT / "eval" / "bench_staging"
+
+
+def recorded_outputs_dir(case: dict):
+    """录制台账+产物存在则返回 (db, runs_dir),否则 None(fallback 回放)。
+
+    db 命名=runner 产物 <case_id>_r1.db(金标同基 r1);runs 目录=event_id。
+    """
+    db = RECORDED_DB_DIR / f"{case['case_id']}_r1.db"
+    runs = RECORDED_RUNS_DIR / case["event_id"]
+    if db.exists() and (runs / "result.json").exists():
+        return db, runs
+    return None
+
+
+def collect_replay_path(case: dict, case_dir: Path):
+    """采集段录制件路径推导(零 case.json 改动):案例目录优先(自包含
+    打包后的目标布局),bench_staging(重录波录制件现行布局)兜底;
+    都没有 = None(非双回放案,走 seed/真值通道)。"""
+    for p in (case_dir / "collection_r1.json",
+              COLLECT_STAGING_DIR / case["case_id"] / "collection_r1.json"):
+        if p.exists():
+            return p
+    return None
+
+
+def replay_matches_recorded(rep_db: Path, rec_db: Path) -> tuple[bool, int]:
+    """复现对照(轻量):回放台账 vs 录制台账 claims 终态逐条 diff
+    (同号+同 status)。含节文本的升格对照由 tests/_planb_replay.py 把关。"""
+    def load(p: Path) -> dict:
+        con = sqlite3.connect(p)
+        try:
+            return dict(con.execute(
+                "SELECT claim_id, status FROM claims").fetchall())
+        finally:
+            con.close()
+    a, b = load(rep_db), load(rec_db)
+    bad = [k for k in set(a) | set(b) if a.get(k) != b.get(k)]
+    return (not bad), len(bad)
+
+
+def _score_recorded(case: dict, case_dir: Path, rec: tuple[Path, Path],
+                    weights: Weights, align_cfg: AlignConfig,
+                    default_budget: dict, variant: str, note: str) -> dict:
+    """从录制台账取数打分(真值口径;读库走临时目录复制,原库零触碰)。"""
+    db, runs_dir = rec
     golden_doc = load_golden(case_dir, case)
-    outputs = read_case_outputs(run["db"], run["result_path"], case["event_id"])
+    outputs = read_case_outputs(db, runs_dir / "result.json",
+                                case["event_id"])
+    report_md_path = runs_dir / "report.md"
+    report_md = (report_md_path.read_text(encoding="utf-8")
+                 if report_md_path.exists() else "")
+    return score_case(
+        case=case, golden_doc=golden_doc, outputs=outputs,
+        weights=weights, budget=case_budget(case, default_budget),
+        align_cfg=align_cfg, attempted_s6=None, report_md=report_md,
+        run_meta={"run_status": "ok", "variant": variant, "note": note})
+
+
+def _score_run(case: dict, case_dir: Path, run: dict, weights: Weights,
+               align_cfg: AlignConfig, default_budget: dict, variant: str,
+               note: str) -> dict:
+    """从 subprocess 回放产物(临时 db/runs)取数打分。"""
+    golden_doc = load_golden(case_dir, case)
+    outputs = read_case_outputs(run["db"], run["result_path"],
+                                case["event_id"])
     attempted = count_s6_attempted(case_path(case, "responses"))
     report_md_path = Path(run["result_path"]).parent / "report.md"
     report_md = (report_md_path.read_text(encoding="utf-8")
@@ -841,7 +946,55 @@ def run_and_score(case: dict, case_dir: Path, work: Path, timeout: int,
         budget=case_budget(case, default_budget), align_cfg=align_cfg,
         attempted_s6=attempted, report_md=report_md,
         run_meta={"run_status": run["run_status"], "variant": variant,
-                  "note": run.get("note", "")})
+                  "note": note})
+
+
+def run_and_score(case: dict, case_dir: Path, work: Path, timeout: int,
+                  weights: Weights, align_cfg: AlignConfig,
+                  default_budget: dict, variant: str) -> dict:
+    """disabled 案例直接列行;其余跑 investigate -> 取数 -> 打分。
+
+    通道优先级(2026-10-25 拍板):①双回放(有采集录制件)=主读数,跑通后
+    与录制台账逐条对照,复现失败标注并 fallback 真值;②真值口径(录制台账,
+    兼双回放失败案的 fallback);③离线回放(--replay×--seed,无录制件案)。
+    """
+    if not case.get("enabled", True):
+        return {"case_id": case["case_id"], "title": case.get("title", ""),
+                "run_status": "disabled",
+                "note": case.get("blocked_note", "enabled=false")}
+    rec = recorded_outputs_dir(case)
+    coll = collect_replay_path(case, case_dir)
+    if coll is not None:
+        run = run_case(case, work, timeout, variant, collect_replay=coll)
+        if run["run_status"] in _SCOREABLE:
+            if rec is None:
+                return _score_run(case, case_dir, run, weights, align_cfg,
+                                  default_budget, variant, "双回放(无录制台账对照)")
+            ok, n_bad = replay_matches_recorded(Path(run["db"]), rec[0])
+            if ok:
+                return _score_run(case, case_dir, run, weights, align_cfg,
+                                  default_budget, variant,
+                                  "双回放复现✓(对照录制台账逐条一致)")
+            return _score_recorded(
+                case, case_dir, rec, weights, align_cfg, default_budget,
+                variant,
+                f"双回放复现失败({n_bad}条不一致),fallback 真值口径")
+        if rec is not None:
+            return _score_recorded(
+                case, case_dir, rec, weights, align_cfg, default_budget,
+                variant,
+                f"双回放失败({run['run_status']}),fallback 真值口径")
+        return {"case_id": case["case_id"], "title": case.get("title", ""),
+                "run_status": run["run_status"], "note": run["note"]}
+    if rec is not None:
+        return _score_recorded(case, case_dir, rec, weights, align_cfg,
+                               default_budget, variant, "真值口径(录制台账)")
+    run = run_case(case, work, timeout, variant)
+    if run["run_status"] not in _SCOREABLE:
+        return {"case_id": case["case_id"], "title": case.get("title", ""),
+                "run_status": run["run_status"], "note": run["note"]}
+    return _score_run(case, case_dir, run, weights, align_cfg,
+                      default_budget, variant, run.get("note", ""))
 
 
 # ------------------------------------------------------------------ 报告

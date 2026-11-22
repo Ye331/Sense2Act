@@ -1,5 +1,9 @@
-"""S7 证据图谱挂载 e2e(档1):supplier_b 回放 → 附录 E 落 report.md/html。
+"""S7 附录 e2e(档1):supplier_b 回放 → 附录落 report.md/html。
 
+(报告文风线第二批 M5,2026-11-08:附录 E mermaid 证据图谱退役→证据链
+——md=md-chain 文字版/html=链卷面 svg 内嵌/CDN 退役;旧 mermaid 断言随
+语义演进同步注明,照三阶段先例。机器对账=chain-graph json/md 投影,
+evidence_graph 模块与单测保留=别处消费。)
 确定性由既有 test_deterministic_rerun 兜底(其字节级比对现覆盖图节)。
 """
 from __future__ import annotations
@@ -36,31 +40,31 @@ class TestS7EvidenceGraph(unittest.TestCase):
         self.assertEqual(proc.returncode, 0, proc.stderr[-400:])
         return out / EID
 
-    def test_report_contains_graph_section(self):
+    def test_report_contains_chain_section(self):
+        """附录 E=证据链文字版(md-chain):事实组+三态标注+前提行在位
+        (supplier_b 全未裁→无边不画语义,旧 mermaid 三图断言随 M5 语义
+        演进注明退役)。"""
         with tempfile.TemporaryDirectory() as tmp:
             out = self._run(tmp)
             md = (out / "report.md").read_text(encoding="utf-8")
-            self.assertIn("## 附录 E:证据图谱", md)
-            self.assertIn("### E.1 实体关系图", md)
-            self.assertIn("### E.2 复合事实 ⇒ 竞争假设", md)
-            self.assertIn("### E.3 证据 → 复合事实", md)
-            self.assertIn("图 B2 省略", md)              # supplier_b 全未裁:B2 占位
-            # 边带三态(supplier_b 事实:C5"协同"待证实→虚线;C4"供应"关系矛盾→红)
-            self.assertIn('-.->|"? 协同"|', md)
-            self.assertIn('-->|"供应 ✗"|', md)
-            self.assertIn("linkStyle", md)                  # 矛盾红边样式在场
-            self.assertIn("图例", md)                       # 三态图例必须在场
+            self.assertIn("## 附录 E:证据链(文字版)", md)
+            self.assertIn("事实组「关于", md)
+            self.assertIn("〔待查证〕", md)
+            self.assertIn("(前提: C1)", md)             # 前提收编卡内(批1.5)
+            self.assertNotIn("flowchart", md)           # mermaid 退役
+            self.assertNotIn("mermaid", md)
 
-    def test_html_embeds_mermaid(self):
+    def test_html_embeds_chain_svg(self):
+        """html 附录=链卷面 svg 内嵌;CDN mermaid 全套退役=离线零依赖
+        (断言随 M5 语义演进注明)。"""
         with tempfile.TemporaryDirectory() as tmp:
             out = self._run(tmp)
             html_text = (out / "report.html").read_text(encoding="utf-8")
-            self.assertIn("mermaid.min.js", html_text)
-            # supplier_b:图 B2 省略(占位为小字)→ 实际 mermaid 块 2 个
-            self.assertEqual(html_text.count('class="mermaid"'), 2)
-            self.assertIn("mermaid.initialize", html_text)
-            # 离线降级指引在场
-            self.assertIn("report.md 附录 E", html_text)
+            self.assertIn("附录:证据链", html_text)
+            self.assertIn("<svg", html_text)            # 链卷面内嵌
+            self.assertNotIn("mermaid", html_text)
+            self.assertNotIn("cdn.jsdelivr", html_text)  # CDN 退役
+            self.assertIn("本图为离线确定性渲染", html_text)
 
 
 if __name__ == "__main__":

@@ -29,6 +29,10 @@ class SourceReport(SchemaModel):
     count: int = 0
     retryable: bool | None = None
     message: str = ""
+    found: int = 0
+    accepted: int = 0
+    rejected: int = 0
+    irrelevant: int = 0
 
 
 class EvidenceItemLite(SchemaModel):
@@ -41,8 +45,12 @@ class EvidenceItemLite(SchemaModel):
     title: str = ""
     content: str
     published_at: str = ""
+    published_at_source: str = ""
     author_type: str = ""
     dedup_key: str = ""                       # 采集侧去重键(无则 S5 计算)
+    lineage_root: str = ""                    # 预设谱系根(K2 kb 通道继承原根
+                                              # 2026-10-27;空=S4 按 source/platform
+                                              # 现算,信封种子等既有路径零差异)
 
 
 class CollectReceipt(SchemaModel):

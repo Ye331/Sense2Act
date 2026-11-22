@@ -14,6 +14,7 @@ from .s3_executor import Executor, Explorer, StubExplorer, WordFamilyExplorer
 from .s4_observer import Observer, quality_signal
 from .s5_ledger import DerivationHook, LedgerWriter, LLMDeriver
 from .s6_verdict import LLMOpinionProvider, OpinionProvider, VerdictEngine
+from .s7_assets import AssetCollector, AssetConfig
 from .s7_report import LLMRecommendProvider, RecommendProvider, ReportBuilder
 
 __all__ = [
@@ -27,5 +28,6 @@ __all__ = [
     "Observer", "quality_signal",
     "DerivationHook", "LedgerWriter", "LLMDeriver",
     "LLMOpinionProvider", "OpinionProvider", "VerdictEngine",
+    "AssetCollector", "AssetConfig",
     "LLMRecommendProvider", "RecommendProvider", "ReportBuilder",
 ]

@@ -21,6 +21,10 @@ public class Claim {
 
     private String nature;
 
+    private String sourceClaimId;
+
+    private String claimStatus;
+
     private BigDecimal confidence;
 
     private OffsetDateTime createdAt;
@@ -64,6 +68,11 @@ public class Claim {
     public void setNature(String nature) {
         this.nature = nature;
     }
+
+    public String getSourceClaimId() { return sourceClaimId; }
+    public void setSourceClaimId(String sourceClaimId) { this.sourceClaimId = sourceClaimId; }
+    public String getClaimStatus() { return claimStatus; }
+    public void setClaimStatus(String claimStatus) { this.claimStatus = claimStatus; }
 
     public BigDecimal getConfidence() {
         return confidence;

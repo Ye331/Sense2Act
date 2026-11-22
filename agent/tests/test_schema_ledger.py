@@ -111,5 +111,116 @@ class TestDriftAndSnapshots(unittest.TestCase):
         self.assertEqual(ids, ["C1", "C2", "C3"])
 
 
+class TestCrossRunClaimId(unittest.TestCase):
+    """P2 跨 run 撞号三分支(2026-10-22):不撞直插/同文幂等/异文派生。
+
+    draft_id 是轮内顺序号非内容指纹,续查注回原事件必然重编——"id 同"
+    不构成"同断言"的证据(评测层双闸教训前置兑现到台账层)。
+    """
+
+    def setUp(self):
+        self.led = make_ledger()
+        install_simple(self.led)
+
+    def _install_bp(self, *claims, hyps=()):
+        from sense2act.models.base import ClaimCategory
+        from sense2act.models.intel import (AnalysisBlueprint, ClaimDraft,
+                                            HypothesisSeed)
+        drafts = [ClaimDraft(id=cid, text=text, category=ClaimCategory.FACT,
+                             section_index=2, entity_names=[])
+                  for cid, text in claims]
+        hyp_seeds = [HypothesisSeed(id="H0", label="续查假设", claim_ids=list(hyps))]
+        bp = AnalysisBlueprint(claims=drafts, hypotheses=hyp_seeds, gaps=[])
+        self.led.install_blueprint("evt_t", bp)
+
+    def _count(self):
+        return self.led.conn.execute(
+            "SELECT COUNT(*) AS n FROM claims WHERE event_id='evt_t'").fetchone()["n"]
+
+    def test_rerun_same_text_idempotent(self):
+        """同 id 同文=同一断言:幂等跳过不重复入账,审计留痕。"""
+        self._install_bp(("C1", "B公司拖欠工资"))   # 与 install_simple 的 C1 同文
+        self.assertEqual(self._count(), 3)          # 不新增
+        row = self.led.conn.execute(
+            "SELECT payload_json FROM decision_log WHERE event_id='evt_t'"
+            " AND kind='入账' ORDER BY id DESC LIMIT 1").fetchone()
+        import json
+        self.assertEqual(json.loads(row["payload_json"])["cross_run_dup"], ["C1"])
+
+    def test_rerun_diff_text_derives(self):
+        """同 id 异文=新知识:派生 C1d,parent 指旧条,假设归属转给新条。"""
+        # hyps 模拟真实续查:新 run 的 S1b 同样输出假设归属(H0 <- C1),
+        # 经 remap 落到派生条 C1d 名下
+        self._install_bp(("C1", "B公司涉嫌拖欠工资且涉及外包劳务纠纷"),
+                         hyps=["C1"])
+        row = self.led.conn.execute(
+            "SELECT text, parent_claim_id, created_at FROM claims"
+            " WHERE claim_id='evt_t:C1d'").fetchone()
+        self.assertIsNotNone(row)
+        self.assertEqual(row["parent_claim_id"], "evt_t:C1")
+        self.assertTrue(row["created_at"])          # P2 起新条写入账时刻
+        # 旧条原封不动(append-only)
+        old = self.led.conn.execute(
+            "SELECT text FROM claims WHERE claim_id='evt_t:C1'").fetchone()
+        self.assertEqual(old["text"], "B公司拖欠工资")
+        # 假设归属经 remap 转给派生新条(install_simple 的 H0 挂 C1)
+        linked = {r["claim_id"] for r in self.led.conn.execute(
+            "SELECT claim_id FROM hypothesis_claims WHERE hypothesis_id='evt_t:H0'")}
+        self.assertIn("evt_t:C1d", linked)
+
+    def test_derived_collision_progresses(self):
+        """C1d 已占且再撞异文:序数递进派生 C1d2(确定性可重放)。"""
+        from sense2act.models.base import ClaimCategory
+        from sense2act.models.intel import AnalysisBlueprint, ClaimDraft
+        self._install_bp(("C1", "异文一"))
+        bp = AnalysisBlueprint(
+            claims=[ClaimDraft(id="C1", text="异文二", category=ClaimCategory.FACT,
+                               section_index=2, entity_names=[])],
+            hypotheses=[], gaps=[])
+        self.led.install_blueprint("evt_t", bp)
+        ids = {r["claim_id"] for r in self.led.conn.execute(
+            "SELECT claim_id FROM claims WHERE event_id='evt_t'")}
+        self.assertIn("evt_t:C1d", ids)
+        self.assertIn("evt_t:C1d2", ids)
+
+    def test_add_claim_branches(self):
+        """add_claim 三入口统一语义:同文返回原 id 不入账;异文返回派生 id。"""
+        from sense2act.models.base import ClaimCategory
+        cat = ClaimCategory.FACT.value
+        base = {"category": cat, "section_index": 2, "priority": 3}
+        # 同文幂等
+        same = dict(base, id="C1", text="B公司拖欠工资")
+        self.assertEqual(self.led.add_claim("evt_t", same, 2), "evt_t:C1")
+        self.assertEqual(self._count(), 3)
+        # 异文派生:返回实际新 id,parent 自动指被撞原条
+        diff = dict(base, id="C1", text="B公司被曝拖欠工资且涉仲裁")
+        got = self.led.add_claim("evt_t", diff, 2)
+        self.assertEqual(got, "evt_t:C1d")
+        row = self.led.conn.execute(
+            "SELECT parent_claim_id FROM claims WHERE claim_id='evt_t:C1d'").fetchone()
+        self.assertEqual(row["parent_claim_id"], "evt_t:C1")
+        # 不撞直插行为不变
+        fresh = dict(base, id="C9", text="全新断言")
+        self.assertEqual(self.led.add_claim("evt_t", fresh, 2), "evt_t:C9")
+
+
+class TestMaxRound(unittest.TestCase):
+    """D7 round 全局续接的起点查询(2026-10-23):decision_log max(round)。"""
+
+    def test_empty_event_zero(self):
+        led = make_ledger()
+        install_simple(led)   # 轮 0 入账有 log(round=0)
+        self.assertEqual(led.max_round("evt_t2"), 0)
+
+    def test_tracks_max_round(self):
+        led = make_ledger()
+        install_simple(led)
+        led.log("evt_t", 3, "其他", {"note": "x"})
+        led.log("evt_t", 5, "其他", {"note": "y"})
+        self.assertEqual(led.max_round("evt_t"), 5)
+        led.log("evt_t", 4, "其他", {"note": "z"})
+        self.assertEqual(led.max_round("evt_t"), 5)   # 非单调写入不影响上界
+
+
 if __name__ == "__main__":
     unittest.main()

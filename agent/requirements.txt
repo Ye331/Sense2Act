@@ -4,3 +4,4 @@ lxml>=5.3
 trafilatura>=2.3   # 通用官网适配器正文抽取(纯解析模式,egress 抓取)
 beautifulsoup4>=4.12   # 搜狗微信适配器解析
 # python-dotenv 可选:代码内置了等价的 .env 解析,无需安装
+playwright>=1.40   # 可选:browser_auto 截图/捕获(B 线;装后需 playwright install chromium;离线/CI 不装不影响测试)

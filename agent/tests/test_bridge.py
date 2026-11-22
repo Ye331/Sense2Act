@@ -2,13 +2,18 @@
 from __future__ import annotations
 
 import argparse
+import sqlite3
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
+from types import SimpleNamespace
 
 from sense2act.bridge.client import CONFLICT, UNPROCESSABLE, BackendError
 from sense2act.bridge.envelope import build_envelope, signal_kind
-from sense2act.bridge.reporter import normalize_published
+from sense2act.bridge.report import _pack_summary, _plain
+from sense2act.bridge.report_projection import attachments, envelope_fact, fallback_fact, _specific_evidence_ids
+from sense2act.bridge.reporter import StepReporter, normalize_published
 from sense2act.bridge.worker import Worker
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -118,8 +123,13 @@ def worker_for(backend, data_dir):
 class BridgeTest(unittest.TestCase):
     def test_full_investigation_round_trip(self):
         backend = FakeBackend()
-        with tempfile.TemporaryDirectory() as tmp:
+        with tempfile.TemporaryDirectory(dir=ROOT) as tmp:
             self.assertEqual(worker_for(backend, tmp).poll_once(), 1)
+            runs = Path(tmp) / "inv_1" / "runs"
+            status = __import__("json").loads((runs / "chain.status.json").read_text(encoding="utf-8"))
+            payload = __import__("json").loads((runs / "chain.web.json").read_text(encoding="utf-8"))
+            self.assertEqual(status["status"], "ready")
+            self.assertEqual(payload["schema_version"], "chain_web.v1")
         self.assertEqual(backend.inv["status"], "completed", backend.inv.get("error"))
         events = [s["event"] for s in backend.steps]
         for expected in ("round_started", "questions_generated", "tool_selected", "tool_completed", "reflection_updated"):
@@ -131,7 +141,24 @@ class BridgeTest(unittest.TestCase):
         self.assertTrue(backend.questions)
         self.assertTrue(all(q["status"] == "clarified" for q in backend.questions.values()))
         self.assertEqual({c["nature"] for c in backend.report["claims"]}, {"fact"})
+        self.assertIn("当前判断：", backend.report["summary"])
+        self.assertIn("依据：", backend.report["summary"])
+        self.assertIn("改变条件：", backend.report["summary"])
         self.assertEqual(backend.report["event_extraction"]["entities"][0]["name"], "XX市第一人民医院")
+
+    def test_chain_failure_is_soft_and_writes_failed_status(self):
+        backend = FakeBackend()
+        with tempfile.TemporaryDirectory(dir=ROOT) as tmp, patch(
+                "sense2act.bridge.chain_artifact.build_chain_web",
+                side_effect=RuntimeError("secret C:/private/raw.txt")):
+            self.assertEqual(worker_for(backend, tmp).poll_once(), 1)
+            status = __import__("json").loads((Path(tmp) / "inv_1" / "runs" / "chain.status.json").read_text(encoding="utf-8"))
+            self.assertEqual(status["status"], "failed")
+            self.assertEqual(status["error_code"], "RuntimeError")
+            self.assertNotIn("private", status["error_message"])
+            self.assertFalse((Path(tmp) / "inv_1" / "runs" / "chain.web.json.tmp").exists())
+        self.assertEqual(backend.inv["status"], "completed")
+        self.assertIsNotNone(backend.report)
 
     def test_budget_rejection_still_delivers_partial_report(self):
         backend = FakeBackend(max_rounds=1)
@@ -140,6 +167,86 @@ class BridgeTest(unittest.TestCase):
         self.assertEqual(backend.inv["status"], "completed", backend.inv.get("error"))
         self.assertTrue(all(s["round"] <= 1 for s in backend.steps))
         self.assertTrue(backend.report["claims"])
+        self.assertEqual({c["nature"] for c in backend.report["claims"]}, {"fact"})
+        self.assertTrue(backend.report["pending_findings"])
+        self.assertTrue(all(c["status"] in {"verified", "contested"}
+                            for c in backend.report["claims"]))
+        submitted = {c["source_claim_id"] for c in backend.report["claims"]}
+        self.assertTrue(all(set(view["supporting_claim_ids"]) <= submitted
+                            for view in backend.report["conclusions"]))
+        for key in ("当前判断：", "依据：", "缺口：", "改变条件：", "下一步："):
+            self.assertIn(key, backend.report["summary"])
+        self.assertTrue(all(c["evidence_ids"] and
+                            all(eid in backend.evidences for eid in c["evidence_ids"])
+                            for c in backend.report["claims"]))
+
+    def test_report_projection_is_deterministic(self):
+        reports = []
+        for _ in range(2):
+            backend = FakeBackend(max_rounds=1)
+            with tempfile.TemporaryDirectory() as tmp:
+                worker_for(backend, tmp).poll_once()
+            reports.append(backend.report)
+        self.assertEqual(reports[0], reports[1])
+
+    def test_summary_cleanup_and_atomic_limit(self):
+        self.assertEqual(_plain("## 结论\n**判断** `值`〔内部注记〕"), "结论\n判断 值")
+        packed = _pack_summary(["当前判断：完整句。", "依据：引用 E12345。"],
+                               "结论状态:已证实 1 条。", limit=34)
+        self.assertLessEqual(len(packed), 34)
+        self.assertNotIn("E123", packed)  # 整行放不下时舍弃，不截断引用 ID
+        self.assertTrue(packed.endswith("结论状态:已证实 1 条。"))
+        self.assertEqual(_pack_summary([], "超长" * 100, limit=20),
+                         "结论状态与停止原因详见调查记录。")
+
+    def test_envelope_evidence_whitelist_requires_anchor_and_exact_value(self):
+        envelope = build_envelope({"signal": {"hits": HITS, "document": DOC}}, "evt_x")
+        self.assertTrue(envelope_fact("采购人为XX市第一人民医院", envelope))
+        self.assertTrue(envelope_fact("预算金额为4,800,000.00元", envelope))
+        self.assertFalse(envelope_fact("近两年存在同额采购", envelope))
+        self.assertFalse(envelope_fact("采购人为另一家医院", envelope))
+        self.assertEqual(fallback_fact(envelope),
+                         "项目名称为《XX市第一人民医院AI辅助诊断系统采购项目》")
+
+    def test_exact_direction_does_not_fall_back_to_opposite_evidence(self):
+        conn = sqlite3.connect(":memory:")
+        conn.row_factory = sqlite3.Row
+        conn.execute("CREATE TABLE claim_evidence(claim_id TEXT,evidence_id TEXT,ruling TEXT,round INT)")
+        conn.execute("INSERT INTO claim_evidence VALUES('c1','E1','矛盾',1)")
+        ledger = SimpleNamespace(conn=conn)
+        reporter = StepReporter(SimpleNamespace(), "inv", ledger, "evt", "doc")
+        reporter.evidence = {"E1": "ev_1"}
+        self.assertEqual(reporter.claim_evidence("c1", "支持", exact=True), [])
+        self.assertEqual(reporter.claim_evidence("c1", "矛盾", exact=True), ["ev_1"])
+
+    def test_current_announcement_cannot_support_historical_or_conditional_claim(self):
+        envelope = build_envelope({"signal": {"hits": HITS, "document": DOC}}, "evt_x")
+        row = {"url": DOC["url"], "title": DOC["title"], "content": DOC["content_text"]}
+        ledger = SimpleNamespace(evidence_row=lambda _eid: row)
+        reporter = SimpleNamespace(evidence={"evt_x:E2": "ev_2"}, ledger=ledger)
+        self.assertEqual(_specific_evidence_ids(
+            reporter, envelope, "近两年有同等金额的采购记录", ["ev_2"]), [])
+        self.assertEqual(_specific_evidence_ids(
+            reporter, envelope, "若本企业中标将形成正向收入贡献", ["ev_2"]), [])
+        self.assertEqual(_specific_evidence_ids(
+            reporter, envelope, "本企业若参与投标具备完成报名与递交的可行条件", ["ev_2"]), [])
+        self.assertEqual(_specific_evidence_ids(
+            reporter, envelope, "该项目已获立项批复并列入建设规划", ["ev_2"]), [])
+        self.assertEqual(_specific_evidence_ids(
+            reporter, envelope, "公告截至核查时未被更正或撤销", ["ev_2"]), [])
+
+    def test_screenshot_asset_projects_as_presentation_only_image(self):
+        ledger = SimpleNamespace(evidence_assets=lambda _event: {
+            "evt:E2": [{"path": "assets/E2_shot.png", "kind": "screenshot",
+                         "content_type": "image/png", "sha256": "a" * 64,
+                         "bytes": 42, "caption": "公告截图"}]})
+        reporter = SimpleNamespace(ledger=ledger, event_id="evt", inv="inv_1",
+                                   evidence={"evt:E2": "ev_2"})
+        projected = attachments(reporter)
+        self.assertEqual(projected[0]["kind"], "image")
+        self.assertEqual(projected[0]["storage_key"],
+                         "inv_1/runs/evt/assets/E2_shot.png")
+        self.assertTrue(projected[0]["presentation_only"])
 
     def test_user_stop_aborts_without_overwriting_terminal_state(self):
         backend = FakeBackend()
@@ -172,6 +279,13 @@ class BridgeTest(unittest.TestCase):
         self.assertEqual(tender.relevance.score, 0.9)
         self.assertIsNone(tender.frequency_anomaly)
         self.assertEqual(tender.amount_history.amount_ratio, 4.2)
+
+    def test_backend_document_id_never_masquerades_as_project_number(self):
+        envelope = build_envelope({"signal": {"hits": HITS, "document": DOC}}, "evt_x")
+        self.assertEqual(envelope.tender.project_id, "")
+        hits = [{**HITS[0], "detail": {**HITS[0]["detail"], "project_id": "1409992026AGK00184"}}, *HITS[1:]]
+        routed = build_envelope({"signal": {"hits": hits, "document": DOC}}, "evt_x")
+        self.assertEqual(routed.tender.project_id, "1409992026AGK00184")
 
     def test_news_signal_replays_rumor_case_end_to_end(self):
         backend = FakeBackend(hits=NEWS_HITS, document=NEWS_DOC)

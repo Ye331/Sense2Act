@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.sense2act.backend.common.mybatis.JsonbTypeHandler;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Map;
 
 /** 报告(reports,V5)。meta 由后端从 steps 计算(D5):轮次/工具数/token/费用。 */
@@ -32,6 +33,18 @@ public class Report {
 
     @TableField(typeHandler = JsonbTypeHandler.class)
     private Map<String, Object> meta;
+
+    @TableField(typeHandler = JsonbTypeHandler.class)
+    private List<Map<String, Object>> conclusions;
+
+    @TableField(typeHandler = JsonbTypeHandler.class)
+    private List<Map<String, Object>> pendingFindings;
+
+    @TableField(typeHandler = JsonbTypeHandler.class)
+    private List<Map<String, Object>> processNotes;
+
+    @TableField(typeHandler = JsonbTypeHandler.class)
+    private List<Map<String, Object>> attachments;
 
     private OffsetDateTime createdAt;
 
@@ -100,6 +113,15 @@ public class Report {
     public void setMeta(Map<String, Object> meta) {
         this.meta = meta;
     }
+
+    public List<Map<String, Object>> getConclusions() { return conclusions; }
+    public void setConclusions(List<Map<String, Object>> conclusions) { this.conclusions = conclusions; }
+    public List<Map<String, Object>> getPendingFindings() { return pendingFindings; }
+    public void setPendingFindings(List<Map<String, Object>> pendingFindings) { this.pendingFindings = pendingFindings; }
+    public List<Map<String, Object>> getProcessNotes() { return processNotes; }
+    public void setProcessNotes(List<Map<String, Object>> processNotes) { this.processNotes = processNotes; }
+    public List<Map<String, Object>> getAttachments() { return attachments; }
+    public void setAttachments(List<Map<String, Object>> attachments) { this.attachments = attachments; }
 
     public OffsetDateTime getCreatedAt() {
         return createdAt;

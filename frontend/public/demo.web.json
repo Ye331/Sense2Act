@@ -1,0 +1,3698 @@
+{
+  "claims": [
+    {
+      "anchor_name": "强(权威单源)",
+      "category": "事实",
+      "claim_id": "evt_demo_v3:C1",
+      "corpus_bound": false,
+      "draft_id": "C1",
+      "entities": [
+        "B新能源科技有限公司"
+      ],
+      "evidence_morph": null,
+      "family_rep": "",
+      "flipback_note": null,
+      "gap": null,
+      "gist": "信封载明：充电桩采购 项目编号/预算 189 万",
+      "history": "立项 11-10 → 查实 11-10",
+      "in_main": true,
+      "in_zone": false,
+      "interpretive": null,
+      "label": "充电桩采购 项目编号/预算 189 万",
+      "priority": 5,
+      "reborn_from": "",
+      "ruling_summary": {
+        "contra": 0,
+        "n_dup_root": 0,
+        "n_items": 1,
+        "n_roots": 1,
+        "support": 1,
+        "temporal": 0,
+        "unruled": 0
+      },
+      "status": "已证实",
+      "text": "信封载明：项目编号 DEMO-V3-2026-001，采购方为B新能源科技有限公司，预算金额 1890000 元，发布日期 2026-11-01"
+    },
+    {
+      "anchor_name": "弱(孤证)",
+      "category": "事实",
+      "claim_id": "evt_demo_v3:C10",
+      "corpus_bound": false,
+      "draft_id": "C10",
+      "entities": [
+        "B新能源科技有限公司"
+      ],
+      "evidence_morph": {
+        "n_contra_items": 0,
+        "n_support_roots": 1,
+        "same_source_contra": false,
+        "support_sources": [
+          "official_website"
+        ]
+      },
+      "family_rep": "",
+      "flipback_note": null,
+      "gap": {
+        "channel": "",
+        "channel_rationale": "",
+        "label": "仅一根独立支持,缺第二独立根",
+        "next": "第二个独立来源相互印证",
+        "next_channel": "",
+        "tries": 0,
+        "type": "孤证",
+        "unadjudicated": 0
+      },
+      "gist": "",
+      "history": "立项 11-10",
+      "in_main": true,
+      "in_zone": false,
+      "interpretive": null,
+      "label": "B新能源科技有限公司具备充电桩生产相关资质",
+      "priority": 3,
+      "reborn_from": "",
+      "ruling_summary": {
+        "contra": 0,
+        "n_dup_root": 0,
+        "n_items": 1,
+        "n_roots": 1,
+        "support": 1,
+        "temporal": 0,
+        "unruled": 0
+      },
+      "status": "待证实",
+      "text": "B新能源科技有限公司具备充电桩生产相关资质"
+    },
+    {
+      "anchor_name": "弱(孤证)",
+      "category": "事实",
+      "claim_id": "evt_demo_v3:C11",
+      "corpus_bound": false,
+      "draft_id": "C11",
+      "entities": [
+        "B新能源科技有限公司"
+      ],
+      "evidence_morph": {
+        "n_contra_items": 0,
+        "n_support_roots": 1,
+        "same_source_contra": false,
+        "support_sources": [
+          "official_website"
+        ]
+      },
+      "family_rep": "",
+      "flipback_note": null,
+      "gap": {
+        "channel": "",
+        "channel_rationale": "",
+        "label": "仅一根独立支持,缺第二独立根",
+        "next": "第二个独立来源相互印证",
+        "next_channel": "",
+        "tries": 0,
+        "type": "孤证",
+        "unadjudicated": 0
+      },
+      "gist": "",
+      "history": "立项 11-10",
+      "in_main": true,
+      "in_zone": false,
+      "interpretive": null,
+      "label": "B新能源科技有限公司有园区供电配套项目经验",
+      "priority": 3,
+      "reborn_from": "",
+      "ruling_summary": {
+        "contra": 0,
+        "n_dup_root": 0,
+        "n_items": 1,
+        "n_roots": 1,
+        "support": 1,
+        "temporal": 0,
+        "unruled": 0
+      },
+      "status": "待证实",
+      "text": "B新能源科技有限公司有园区供电配套项目经验"
+    },
+    {
+      "anchor_name": "弱(孤证)",
+      "category": "事实",
+      "claim_id": "evt_demo_v3:C12",
+      "corpus_bound": false,
+      "draft_id": "C12",
+      "entities": [
+        "B新能源科技有限公司"
+      ],
+      "evidence_morph": {
+        "n_contra_items": 0,
+        "n_support_roots": 1,
+        "same_source_contra": false,
+        "support_sources": [
+          "official_website"
+        ]
+      },
+      "family_rep": "",
+      "flipback_note": null,
+      "gap": {
+        "channel": "",
+        "channel_rationale": "",
+        "label": "仅一根独立支持,缺第二独立根",
+        "next": "第二个独立来源相互印证",
+        "next_channel": "",
+        "tries": 0,
+        "type": "孤证",
+        "unadjudicated": 0
+      },
+      "gist": "",
+      "history": "立项 11-10",
+      "in_main": true,
+      "in_zone": false,
+      "interpretive": null,
+      "label": "B新能源科技有限公司本地仓储能力覆盖项目所在区",
+      "priority": 3,
+      "reborn_from": "",
+      "ruling_summary": {
+        "contra": 0,
+        "n_dup_root": 0,
+        "n_items": 1,
+        "n_roots": 1,
+        "support": 1,
+        "temporal": 0,
+        "unruled": 0
+      },
+      "status": "待证实",
+      "text": "B新能源科技有限公司本地仓储能力覆盖项目所在区"
+    },
+    {
+      "anchor_name": "弱(查过没有)",
+      "category": "事实",
+      "claim_id": "evt_demo_v3:C13",
+      "corpus_bound": false,
+      "draft_id": "C13",
+      "entities": [
+        "B新能源科技有限公司"
+      ],
+      "evidence_morph": null,
+      "family_rep": "",
+      "flipback_note": null,
+      "gap": {
+        "channel": "",
+        "channel_rationale": "",
+        "label": "已查证未见载明(无关票/不可达)",
+        "next": "换证据通道补查",
+        "next_channel": "",
+        "tries": 1,
+        "type": "查证排除",
+        "unadjudicated": 0
+      },
+      "gist": "",
+      "history": "立项 11-10",
+      "in_main": false,
+      "in_zone": true,
+      "interpretive": null,
+      "label": "B新能源科技有限公司曾参与境外同类建设项目",
+      "priority": 2,
+      "reborn_from": "",
+      "ruling_summary": {
+        "contra": 0,
+        "n_dup_root": 0,
+        "n_items": 1,
+        "n_roots": 0,
+        "support": 0,
+        "temporal": 0,
+        "unruled": 0
+      },
+      "status": "待证实",
+      "text": "B新能源科技有限公司曾参与境外同类建设项目"
+    },
+    {
+      "anchor_name": "候审",
+      "category": "事实",
+      "claim_id": "evt_demo_v3:C14",
+      "corpus_bound": false,
+      "draft_id": "C14",
+      "entities": [
+        "B新能源科技有限公司"
+      ],
+      "evidence_morph": {
+        "n_contra_items": 0,
+        "n_support_roots": 2,
+        "same_source_contra": false,
+        "support_sources": [
+          "official_website",
+          "official_website"
+        ]
+      },
+      "family_rep": "",
+      "flipback_note": null,
+      "gap": {
+        "channel": "",
+        "channel_rationale": "",
+        "label": "证据量已达判决门槛,载明性核对未过",
+        "next": "核心谓词载明复核(候审)",
+        "next_channel": "",
+        "tries": 0,
+        "type": "谓词不足",
+        "unadjudicated": 0
+      },
+      "gist": "",
+      "history": "立项 11-10",
+      "in_main": true,
+      "in_zone": false,
+      "interpretive": null,
+      "label": "B新能源科技有限公司具备投标所需的双甲级资质",
+      "priority": 3,
+      "reborn_from": "",
+      "ruling_summary": {
+        "contra": 0,
+        "n_dup_root": 0,
+        "n_items": 2,
+        "n_roots": 2,
+        "support": 2,
+        "temporal": 0,
+        "unruled": 0
+      },
+      "status": "待证实",
+      "text": "B新能源科技有限公司具备投标所需的双甲级资质"
+    },
+    {
+      "anchor_name": "强(双根权威)",
+      "category": "事实",
+      "claim_id": "evt_demo_v3:C2",
+      "corpus_bound": false,
+      "draft_id": "C2",
+      "entities": [
+        "B新能源科技有限公司"
+      ],
+      "evidence_morph": null,
+      "family_rep": "evt_demo_v3:C2d",
+      "flipback_note": null,
+      "gap": null,
+      "gist": "B新能源近两年有同级采购记录",
+      "history": "立项 11-10 → 查实 11-10",
+      "in_main": true,
+      "in_zone": false,
+      "interpretive": null,
+      "label": "B新能源近两年有同级采购记录",
+      "priority": 4,
+      "reborn_from": "",
+      "ruling_summary": {
+        "contra": 0,
+        "n_dup_root": 1,
+        "n_items": 4,
+        "n_roots": 2,
+        "support": 3,
+        "temporal": 1,
+        "unruled": 0
+      },
+      "status": "已证实",
+      "text": "B新能源科技有限公司近两年有同等金额级(约百万元)的公开采购记录"
+    },
+    {
+      "anchor_name": "弱(孤证)",
+      "category": "事实",
+      "claim_id": "evt_demo_v3:C2d",
+      "corpus_bound": false,
+      "draft_id": "C2d",
+      "entities": [
+        "B新能源科技有限公司"
+      ],
+      "evidence_morph": {
+        "n_contra_items": 0,
+        "n_support_roots": 1,
+        "same_source_contra": false,
+        "support_sources": [
+          "official_website"
+        ]
+      },
+      "family_rep": "",
+      "flipback_note": null,
+      "gap": {
+        "channel": "",
+        "channel_rationale": "",
+        "label": "仅一根独立支持,缺第二独立根",
+        "next": "第二个独立来源相互印证",
+        "next_channel": "",
+        "tries": 0,
+        "type": "孤证",
+        "unadjudicated": 0
+      },
+      "gist": "",
+      "history": "立项 11-10 → 查实 11-10 → 立项 11-10",
+      "in_main": true,
+      "in_zone": false,
+      "interpretive": null,
+      "label": "B新能源科技有限公司近两年有同等金额级公开采购记录(复核)",
+      "priority": 4,
+      "reborn_from": "",
+      "ruling_summary": {
+        "contra": 0,
+        "n_dup_root": 0,
+        "n_items": 1,
+        "n_roots": 1,
+        "support": 1,
+        "temporal": 0,
+        "unruled": 0
+      },
+      "status": "待证实",
+      "text": "B新能源科技有限公司近两年有同等金额级公开采购记录(复核)"
+    },
+    {
+      "anchor_name": "中(双根普通)",
+      "category": "事实",
+      "claim_id": "evt_demo_v3:C3",
+      "corpus_bound": false,
+      "draft_id": "C3",
+      "entities": [
+        "B新能源科技有限公司"
+      ],
+      "evidence_morph": null,
+      "family_rep": "",
+      "flipback_note": null,
+      "gap": null,
+      "gist": "B新能源存在欠薪纠纷",
+      "history": "立项 11-10 → 查实 11-10",
+      "in_main": true,
+      "in_zone": false,
+      "interpretive": null,
+      "label": "B新能源存在欠薪纠纷",
+      "priority": 4,
+      "reborn_from": "",
+      "ruling_summary": {
+        "contra": 0,
+        "n_dup_root": 0,
+        "n_items": 3,
+        "n_roots": 3,
+        "support": 3,
+        "temporal": 0,
+        "unruled": 0
+      },
+      "status": "已证实",
+      "text": "B新能源科技有限公司存在供应商欠薪纠纷"
+    },
+    {
+      "anchor_name": "已证实但形态未覆盖",
+      "category": "事实",
+      "claim_id": "evt_demo_v3:C4",
+      "corpus_bound": false,
+      "draft_id": "C4",
+      "entities": [],
+      "evidence_morph": null,
+      "family_rep": "",
+      "flipback_note": null,
+      "gap": null,
+      "gist": "",
+      "history": "立项 11-10 → 查实 11-10",
+      "in_main": true,
+      "in_zone": false,
+      "interpretive": null,
+      "label": "本项目预算 1890000 元已列入 B新能源科技有限公司 2026 年度采购计划",
+      "priority": 4,
+      "reborn_from": "",
+      "ruling_summary": {
+        "contra": 0,
+        "n_dup_root": 0,
+        "n_items": 1,
+        "n_roots": 1,
+        "support": 1,
+        "temporal": 0,
+        "unruled": 0
+      },
+      "status": "已证实",
+      "text": "本项目预算 1890000 元已列入 B新能源科技有限公司 2026 年度采购计划"
+    },
+    {
+      "anchor_name": "已证实但形态未覆盖",
+      "category": "事实",
+      "claim_id": "evt_demo_v3:C5",
+      "corpus_bound": false,
+      "draft_id": "C5",
+      "entities": [],
+      "evidence_morph": null,
+      "family_rep": "",
+      "flipback_note": null,
+      "gap": null,
+      "gist": "",
+      "history": "立项 11-10 → 查实 11-10",
+      "in_main": false,
+      "in_zone": false,
+      "interpretive": null,
+      "label": "解读将本信号定性为“商机”，依据是信封 kind 为 tender 且为公开可参与的投标机会",
+      "priority": 3,
+      "reborn_from": "",
+      "ruling_summary": {
+        "contra": 0,
+        "n_dup_root": 0,
+        "n_items": 1,
+        "n_roots": 1,
+        "support": 1,
+        "temporal": 0,
+        "unruled": 0
+      },
+      "status": "已证实",
+      "text": "解读将本信号定性为“商机”，依据是信封 kind 为 tender 且为公开可参与的投标机会"
+    },
+    {
+      "anchor_name": "未触及",
+      "category": "事实",
+      "claim_id": "evt_demo_v3:C6",
+      "corpus_bound": false,
+      "draft_id": "C6",
+      "entities": [],
+      "evidence_morph": null,
+      "family_rep": "",
+      "flipback_note": null,
+      "gap": {
+        "channel": "",
+        "channel_rationale": "",
+        "label": "尚无任何查证尝试",
+        "next": "首次查证",
+        "next_channel": "",
+        "tries": 0,
+        "type": "未触及",
+        "unadjudicated": 0
+      },
+      "gist": "",
+      "history": "立项 11-10",
+      "in_main": false,
+      "in_zone": false,
+      "interpretive": null,
+      "label": "解读自述：信封中 amountHistory 与 noveltyHistory 均为 null",
+      "priority": 3,
+      "reborn_from": "",
+      "ruling_summary": {
+        "contra": 0,
+        "n_dup_root": 0,
+        "n_items": 0,
+        "n_roots": 0,
+        "support": 0,
+        "temporal": 0,
+        "unruled": 0
+      },
+      "status": "待证实",
+      "text": "解读自述：信封中 amountHistory 与 noveltyHistory 均为 null"
+    },
+    {
+      "anchor_name": "未触及",
+      "category": "事实",
+      "claim_id": "evt_demo_v3:C7",
+      "corpus_bound": false,
+      "draft_id": "C7",
+      "entities": [],
+      "evidence_morph": null,
+      "family_rep": "",
+      "flipback_note": null,
+      "gap": {
+        "channel": "",
+        "channel_rationale": "",
+        "label": "尚无任何查证尝试",
+        "next": "首次查证",
+        "next_channel": "",
+        "tries": 0,
+        "type": "未触及",
+        "unadjudicated": 0
+      },
+      "gist": "",
+      "history": "立项 11-10",
+      "in_main": false,
+      "in_zone": false,
+      "interpretive": null,
+      "label": "解读登记了三条基础缺口：该采购人历史采购记录与金额基线缺失、信号与本企业业务相关性未评估、domain 字段为空",
+      "priority": 3,
+      "reborn_from": "",
+      "ruling_summary": {
+        "contra": 0,
+        "n_dup_root": 0,
+        "n_items": 0,
+        "n_roots": 0,
+        "support": 0,
+        "temporal": 0,
+        "unruled": 0
+      },
+      "status": "待证实",
+      "text": "解读登记了三条基础缺口：该采购人历史采购记录与金额基线缺失、信号与本企业业务相关性未评估、domain 字段为空"
+    },
+    {
+      "anchor_name": "冲突",
+      "category": "事实",
+      "claim_id": "evt_demo_v3:C8",
+      "corpus_bound": false,
+      "draft_id": "C8",
+      "entities": [
+        "B新能源科技有限公司"
+      ],
+      "evidence_morph": null,
+      "family_rep": "",
+      "flipback_note": "翻回条件:两独立正向方可翻回",
+      "gap": null,
+      "gist": "B新能源已进入破产重整",
+      "history": "立项 11-10 → 被推翻 11-10",
+      "in_main": true,
+      "in_zone": false,
+      "interpretive": null,
+      "label": "B新能源已进入破产重整",
+      "priority": 5,
+      "reborn_from": "",
+      "ruling_summary": {
+        "contra": 1,
+        "n_dup_root": 0,
+        "n_items": 1,
+        "n_roots": 0,
+        "support": 0,
+        "temporal": 0,
+        "unruled": 0
+      },
+      "status": "矛盾",
+      "text": "B新能源科技有限公司已进入破产重整程序"
+    },
+    {
+      "anchor_name": "未触及",
+      "category": "事实",
+      "claim_id": "evt_demo_v3:C9",
+      "corpus_bound": false,
+      "draft_id": "C9",
+      "entities": [
+        "B新能源科技有限公司"
+      ],
+      "evidence_morph": null,
+      "family_rep": "",
+      "flipback_note": null,
+      "gap": {
+        "channel": "",
+        "channel_rationale": "",
+        "label": "尚无任何查证尝试",
+        "next": "首次查证",
+        "next_channel": "",
+        "tries": 0,
+        "type": "未触及",
+        "unadjudicated": 0
+      },
+      "gist": "B新能源近两年有重大违约",
+      "history": "立项 11-10",
+      "in_main": false,
+      "in_zone": true,
+      "interpretive": null,
+      "label": "B新能源近两年有重大违约",
+      "priority": 4,
+      "reborn_from": "",
+      "ruling_summary": {
+        "contra": 0,
+        "n_dup_root": 0,
+        "n_items": 0,
+        "n_roots": 0,
+        "support": 0,
+        "temporal": 0,
+        "unruled": 0
+      },
+      "status": "待证实",
+      "text": "B新能源科技有限公司近两年存在重大合同违约记录"
+    }
+  ],
+  "conclusions": [
+    {
+      "chosen": true,
+      "group_polarity": [
+        {
+          "group": "成员命题",
+          "n_none": 1,
+          "n_pos": 0,
+          "n_rev": 0
+        },
+        {
+          "group": "关于B新能源科技有限公司的事实",
+          "n_none": 3,
+          "n_pos": 0,
+          "n_rev": 0
+        }
+      ],
+      "grouping_source": "fallback",
+      "hypothesis_id": "evt_demo_v3:H0",
+      "label": "商机",
+      "member_ids": [
+        "evt_demo_v3:C1",
+        "evt_demo_v3:C2",
+        "evt_demo_v3:C4",
+        "evt_demo_v3:C9"
+      ],
+      "n_members": 4,
+      "n_verified": 3,
+      "runners_up": [
+        "evt_demo_v3:H1"
+      ],
+      "score": 3,
+      "state": "chosen",
+      "ticket": {
+        "checking": 2,
+        "counter": 0,
+        "support": 0
+      },
+      "verdict_line": "部分立住:3/4 条已证实"
+    },
+    {
+      "chosen": false,
+      "hypothesis_id": "evt_demo_v3:H1",
+      "label": "风险",
+      "n_members": 2,
+      "n_verified": 1,
+      "score": 0,
+      "state": "runner_up"
+    }
+  ],
+  "details": {
+    "claim:evt_demo_v3:C1": {
+      "category": "事实",
+      "entities": [
+        "B新能源科技有限公司"
+      ],
+      "gist": "信封载明：充电桩采购 项目编号/预算 189 万",
+      "text": "信封载明：项目编号 DEMO-V3-2026-001，采购方为B新能源科技有限公司，预算金额 1890000 元，发布日期 2026-11-01",
+      "transitions": [
+        {
+          "cause": "",
+          "claim_id": "evt_demo_v3:C1",
+          "evidence_id": "evt_demo_v3:E1",
+          "new_status": "已证实",
+          "old_status": "待证实",
+          "round": 1,
+          "ts": "2026-11-10T01:30:44+00:00"
+        }
+      ]
+    },
+    "claim:evt_demo_v3:C10": {
+      "category": "事实",
+      "entities": [
+        "B新能源科技有限公司"
+      ],
+      "gist": "",
+      "text": "B新能源科技有限公司具备充电桩生产相关资质",
+      "transitions": []
+    },
+    "claim:evt_demo_v3:C11": {
+      "category": "事实",
+      "entities": [
+        "B新能源科技有限公司"
+      ],
+      "gist": "",
+      "text": "B新能源科技有限公司有园区供电配套项目经验",
+      "transitions": []
+    },
+    "claim:evt_demo_v3:C12": {
+      "category": "事实",
+      "entities": [
+        "B新能源科技有限公司"
+      ],
+      "gist": "",
+      "text": "B新能源科技有限公司本地仓储能力覆盖项目所在区",
+      "transitions": []
+    },
+    "claim:evt_demo_v3:C13": {
+      "category": "事实",
+      "entities": [
+        "B新能源科技有限公司"
+      ],
+      "gist": "",
+      "text": "B新能源科技有限公司曾参与境外同类建设项目",
+      "transitions": []
+    },
+    "claim:evt_demo_v3:C14": {
+      "category": "事实",
+      "entities": [
+        "B新能源科技有限公司"
+      ],
+      "gist": "",
+      "text": "B新能源科技有限公司具备投标所需的双甲级资质",
+      "transitions": []
+    },
+    "claim:evt_demo_v3:C2": {
+      "category": "事实",
+      "entities": [
+        "B新能源科技有限公司"
+      ],
+      "gist": "B新能源近两年有同级采购记录",
+      "text": "B新能源科技有限公司近两年有同等金额级(约百万元)的公开采购记录",
+      "transitions": [
+        {
+          "cause": "",
+          "claim_id": "evt_demo_v3:C2",
+          "evidence_id": "evt_demo_v3:E4",
+          "new_status": "已证实",
+          "old_status": "待证实",
+          "round": 1,
+          "ts": "2026-11-10T01:30:44+00:00"
+        }
+      ]
+    },
+    "claim:evt_demo_v3:C2d": {
+      "category": "事实",
+      "entities": [
+        "B新能源科技有限公司"
+      ],
+      "gist": "",
+      "text": "B新能源科技有限公司近两年有同等金额级公开采购记录(复核)",
+      "transitions": []
+    },
+    "claim:evt_demo_v3:C3": {
+      "category": "事实",
+      "entities": [
+        "B新能源科技有限公司"
+      ],
+      "gist": "B新能源存在欠薪纠纷",
+      "text": "B新能源科技有限公司存在供应商欠薪纠纷",
+      "transitions": [
+        {
+          "cause": "",
+          "claim_id": "evt_demo_v3:C3",
+          "evidence_id": "evt_demo_v3:E8",
+          "new_status": "已证实",
+          "old_status": "待证实",
+          "round": 2,
+          "ts": "2026-11-10T01:30:44+00:00"
+        }
+      ]
+    },
+    "claim:evt_demo_v3:C4": {
+      "category": "事实",
+      "entities": [],
+      "gist": "",
+      "text": "本项目预算 1890000 元已列入 B新能源科技有限公司 2026 年度采购计划",
+      "transitions": [
+        {
+          "cause": "",
+          "claim_id": "evt_demo_v3:C4",
+          "evidence_id": "evt_demo_v3:E9",
+          "new_status": "已证实",
+          "old_status": "待证实",
+          "round": 2,
+          "ts": "2026-11-10T01:30:44+00:00"
+        }
+      ]
+    },
+    "claim:evt_demo_v3:C5": {
+      "category": "事实",
+      "entities": [],
+      "gist": "",
+      "text": "解读将本信号定性为“商机”，依据是信封 kind 为 tender 且为公开可参与的投标机会",
+      "transitions": [
+        {
+          "cause": "",
+          "claim_id": "evt_demo_v3:C5",
+          "evidence_id": "evt_demo_v3:E10",
+          "new_status": "已证实",
+          "old_status": "待证实",
+          "round": 2,
+          "ts": "2026-11-10T01:30:44+00:00"
+        }
+      ]
+    },
+    "claim:evt_demo_v3:C6": {
+      "category": "事实",
+      "entities": [],
+      "gist": "",
+      "text": "解读自述：信封中 amountHistory 与 noveltyHistory 均为 null",
+      "transitions": []
+    },
+    "claim:evt_demo_v3:C7": {
+      "category": "事实",
+      "entities": [],
+      "gist": "",
+      "text": "解读登记了三条基础缺口：该采购人历史采购记录与金额基线缺失、信号与本企业业务相关性未评估、domain 字段为空",
+      "transitions": []
+    },
+    "claim:evt_demo_v3:C8": {
+      "category": "事实",
+      "entities": [
+        "B新能源科技有限公司"
+      ],
+      "gist": "B新能源已进入破产重整",
+      "text": "B新能源科技有限公司已进入破产重整程序",
+      "transitions": [
+        {
+          "cause": "",
+          "claim_id": "evt_demo_v3:C8",
+          "evidence_id": "evt_demo_v3:E11",
+          "new_status": "矛盾",
+          "old_status": "待证实",
+          "round": 2,
+          "ts": "2026-11-10T01:30:44+00:00"
+        }
+      ]
+    },
+    "claim:evt_demo_v3:C9": {
+      "category": "事实",
+      "entities": [
+        "B新能源科技有限公司"
+      ],
+      "gist": "B新能源近两年有重大违约",
+      "text": "B新能源科技有限公司近两年存在重大合同违约记录",
+      "transitions": []
+    },
+    "evidence:evt_demo_v3:E1": {
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "excerpt": "政采公告:充电桩采购项目招标公告",
+      "platform": "ccgp",
+      "published_at": "",
+      "source_url": "",
+      "title": "中国政府采购网招标公告"
+    },
+    "evidence:evt_demo_v3:E10": {
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "excerpt": "信号解读字段陈述",
+      "platform": "signal_layer",
+      "published_at": "",
+      "source_url": "",
+      "title": "信号层"
+    },
+    "evidence:evt_demo_v3:E11": {
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "excerpt": "登记核查:无破产重整记录",
+      "platform": "gsxt",
+      "published_at": "",
+      "source_url": "",
+      "title": "登记系统核查"
+    },
+    "evidence:evt_demo_v3:E12": {
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "excerpt": "行业报告:B新能源能力概况(资质/供电配套/仓储)",
+      "platform": "official_website",
+      "published_at": "",
+      "source_url": "",
+      "title": "行业报告"
+    },
+    "evidence:evt_demo_v3:E13": {
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "excerpt": "境外项目库检索:无匹配记录",
+      "platform": "official_website",
+      "published_at": "",
+      "source_url": "",
+      "title": "境外检索"
+    },
+    "evidence:evt_demo_v3:E14": {
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "excerpt": "信用公示:建筑业资质甲级记录",
+      "platform": "official_website",
+      "published_at": "",
+      "source_url": "",
+      "title": "信用公示"
+    },
+    "evidence:evt_demo_v3:E15": {
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "excerpt": "行业协会名录:乙级资质待核",
+      "platform": "official_website",
+      "published_at": "",
+      "source_url": "",
+      "title": "协会名录"
+    },
+    "evidence:evt_demo_v3:E2": {
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "excerpt": "政采转载稿:充电桩采购招标",
+      "platform": "official_website",
+      "published_at": "",
+      "source_url": "",
+      "title": "政采转载稿"
+    },
+    "evidence:evt_demo_v3:E3": {
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "excerpt": "政采转载稿另一稿:充电桩采购招标(同根)",
+      "platform": "official_website",
+      "published_at": "",
+      "source_url": "",
+      "title": "政采转载稿另一稿"
+    },
+    "evidence:evt_demo_v3:E4": {
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "excerpt": "政采网公示:采购人历史项目",
+      "platform": "ccgp",
+      "published_at": "",
+      "source_url": "",
+      "title": "采购人历史公示"
+    },
+    "evidence:evt_demo_v3:E5": {
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "excerpt": "行业快讯:采购记录复核信息更新",
+      "platform": "official_website",
+      "published_at": "",
+      "source_url": "",
+      "title": "行业快讯"
+    },
+    "evidence:evt_demo_v3:E6": {
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "excerpt": "论坛帖称B新能源供应商讨薪",
+      "platform": "official_website",
+      "published_at": "",
+      "source_url": "",
+      "title": "行业论坛帖"
+    },
+    "evidence:evt_demo_v3:E8": {
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "excerpt": "供应商自述:与B新能源存在付款周期争议",
+      "platform": "official_website",
+      "published_at": "",
+      "source_url": "",
+      "title": "供应商来函"
+    },
+    "evidence:evt_demo_v3:E9": {
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "excerpt": "园区公示:2026 年度采购计划含充电桩",
+      "platform": "official_website",
+      "published_at": "",
+      "source_url": "",
+      "title": "年度计划"
+    },
+    "group:evt_demo_v3:H0#00": {
+      "members": [
+        "evt_demo_v3:C4"
+      ],
+      "name": "成员命题",
+      "polarity": {
+        "group": "成员命题",
+        "n_none": 1,
+        "n_pos": 0,
+        "n_rev": 0
+      }
+    },
+    "group:evt_demo_v3:H0#01": {
+      "members": [
+        "evt_demo_v3:C1",
+        "evt_demo_v3:C2",
+        "evt_demo_v3:C9"
+      ],
+      "name": "关于B新能源科技有限公司的事实",
+      "polarity": {
+        "group": "关于B新能源科技有限公司的事实",
+        "n_none": 3,
+        "n_pos": 0,
+        "n_rev": 0
+      }
+    },
+    "hypothesis:evt_demo_v3:H0": {
+      "chosen": true,
+      "group_polarity": [
+        {
+          "group": "成员命题",
+          "n_none": 1,
+          "n_pos": 0,
+          "n_rev": 0
+        },
+        {
+          "group": "关于B新能源科技有限公司的事实",
+          "n_none": 3,
+          "n_pos": 0,
+          "n_rev": 0
+        }
+      ],
+      "grouping_source": "fallback",
+      "hypothesis_id": "evt_demo_v3:H0",
+      "label": "商机",
+      "member_ids": [
+        "evt_demo_v3:C1",
+        "evt_demo_v3:C2",
+        "evt_demo_v3:C4",
+        "evt_demo_v3:C9"
+      ],
+      "n_members": 4,
+      "n_verified": 3,
+      "runners_up": [
+        "evt_demo_v3:H1"
+      ],
+      "score": 3,
+      "state": "chosen",
+      "ticket": {
+        "checking": 2,
+        "counter": 0,
+        "support": 0
+      },
+      "verdict_line": "部分立住:3/4 条已证实"
+    },
+    "hypothesis:evt_demo_v3:H1": {
+      "chosen": false,
+      "hypothesis_id": "evt_demo_v3:H1",
+      "label": "风险",
+      "n_members": 2,
+      "n_verified": 1,
+      "score": 0,
+      "state": "runner_up"
+    },
+    "ruling:evt_demo_v3:C10|evt_demo_v3:E12": {
+      "claim_id": "evt_demo_v3:C10",
+      "dup_root": false,
+      "evidence_id": "evt_demo_v3:E12",
+      "legacy": true,
+      "masked": false,
+      "num": "E12",
+      "quote": null,
+      "reason": null,
+      "root": "rootE",
+      "ruling": "支持",
+      "src": "official_website",
+      "title": "行业报告"
+    },
+    "ruling:evt_demo_v3:C11|evt_demo_v3:E12": {
+      "claim_id": "evt_demo_v3:C11",
+      "dup_root": false,
+      "evidence_id": "evt_demo_v3:E12",
+      "legacy": true,
+      "masked": false,
+      "num": "E12",
+      "quote": null,
+      "reason": null,
+      "root": "rootE",
+      "ruling": "支持",
+      "src": "official_website",
+      "title": "行业报告"
+    },
+    "ruling:evt_demo_v3:C12|evt_demo_v3:E12": {
+      "claim_id": "evt_demo_v3:C12",
+      "dup_root": false,
+      "evidence_id": "evt_demo_v3:E12",
+      "legacy": true,
+      "masked": false,
+      "num": "E12",
+      "quote": null,
+      "reason": null,
+      "root": "rootE",
+      "ruling": "支持",
+      "src": "official_website",
+      "title": "行业报告"
+    },
+    "ruling:evt_demo_v3:C13|evt_demo_v3:E13": {
+      "claim_id": "evt_demo_v3:C13",
+      "dup_root": false,
+      "evidence_id": "evt_demo_v3:E13",
+      "legacy": true,
+      "masked": false,
+      "num": "E13",
+      "quote": null,
+      "reason": null,
+      "root": "rootG",
+      "ruling": "无关",
+      "src": "official_website",
+      "title": "境外检索"
+    },
+    "ruling:evt_demo_v3:C14|evt_demo_v3:E14": {
+      "claim_id": "evt_demo_v3:C14",
+      "dup_root": false,
+      "evidence_id": "evt_demo_v3:E14",
+      "legacy": true,
+      "masked": false,
+      "num": "E14",
+      "quote": null,
+      "reason": null,
+      "root": "rootH",
+      "ruling": "支持",
+      "src": "official_website",
+      "title": "信用公示"
+    },
+    "ruling:evt_demo_v3:C14|evt_demo_v3:E15": {
+      "claim_id": "evt_demo_v3:C14",
+      "dup_root": false,
+      "evidence_id": "evt_demo_v3:E15",
+      "legacy": true,
+      "masked": false,
+      "num": "E15",
+      "quote": null,
+      "reason": null,
+      "root": "rootI",
+      "ruling": "支持",
+      "src": "official_website",
+      "title": "协会名录"
+    },
+    "ruling:evt_demo_v3:C1|evt_demo_v3:E1": {
+      "claim_id": "evt_demo_v3:C1",
+      "dup_root": false,
+      "evidence_id": "evt_demo_v3:E1",
+      "legacy": true,
+      "masked": false,
+      "num": "E1",
+      "quote": null,
+      "reason": null,
+      "root": "ccgp",
+      "ruling": "支持",
+      "src": "ccgp",
+      "title": "中国政府采购网招标公告"
+    },
+    "ruling:evt_demo_v3:C2d|evt_demo_v3:E2": {
+      "claim_id": "evt_demo_v3:C2d",
+      "dup_root": false,
+      "evidence_id": "evt_demo_v3:E2",
+      "legacy": true,
+      "masked": false,
+      "num": "E2",
+      "quote": null,
+      "reason": null,
+      "root": "rootA",
+      "ruling": "支持",
+      "src": "official_website",
+      "title": "政采转载稿"
+    },
+    "ruling:evt_demo_v3:C2|evt_demo_v3:E2": {
+      "claim_id": "evt_demo_v3:C2",
+      "dup_root": false,
+      "evidence_id": "evt_demo_v3:E2",
+      "legacy": true,
+      "masked": false,
+      "num": "E2",
+      "quote": null,
+      "reason": null,
+      "root": "rootA",
+      "ruling": "支持",
+      "src": "official_website",
+      "title": "政采转载稿"
+    },
+    "ruling:evt_demo_v3:C2|evt_demo_v3:E3": {
+      "claim_id": "evt_demo_v3:C2",
+      "dup_root": true,
+      "evidence_id": "evt_demo_v3:E3",
+      "legacy": true,
+      "masked": false,
+      "num": "E3",
+      "quote": null,
+      "reason": null,
+      "root": "rootA",
+      "ruling": "支持",
+      "src": "official_website",
+      "title": "政采转载稿另一稿"
+    },
+    "ruling:evt_demo_v3:C2|evt_demo_v3:E4": {
+      "claim_id": "evt_demo_v3:C2",
+      "dup_root": false,
+      "evidence_id": "evt_demo_v3:E4",
+      "legacy": true,
+      "masked": false,
+      "num": "E4",
+      "quote": null,
+      "reason": null,
+      "root": "ccgp",
+      "ruling": "支持",
+      "src": "ccgp",
+      "title": "采购人历史公示"
+    },
+    "ruling:evt_demo_v3:C2|evt_demo_v3:E5": {
+      "claim_id": "evt_demo_v3:C2",
+      "dup_root": false,
+      "evidence_id": "evt_demo_v3:E5",
+      "legacy": true,
+      "masked": false,
+      "num": "E5",
+      "quote": null,
+      "reason": null,
+      "root": "rootF",
+      "ruling": "时效刷新",
+      "src": "official_website",
+      "title": "行业快讯"
+    },
+    "ruling:evt_demo_v3:C3|evt_demo_v3:E6": {
+      "claim_id": "evt_demo_v3:C3",
+      "dup_root": false,
+      "evidence_id": "evt_demo_v3:E6",
+      "legacy": true,
+      "masked": false,
+      "num": "E6",
+      "quote": null,
+      "reason": null,
+      "root": "rootC",
+      "ruling": "支持",
+      "src": "official_website",
+      "title": "行业论坛帖"
+    },
+    "ruling:evt_demo_v3:C3|evt_demo_v3:E7": {
+      "claim_id": "evt_demo_v3:C3",
+      "dup_root": false,
+      "evidence_id": "evt_demo_v3:E7",
+      "legacy": true,
+      "masked": true,
+      "num": "E7",
+      "quote": null,
+      "reason": null,
+      "root": "rootC2",
+      "ruling": "支持",
+      "src": "",
+      "title": "〔internal〕材料"
+    },
+    "ruling:evt_demo_v3:C3|evt_demo_v3:E8": {
+      "claim_id": "evt_demo_v3:C3",
+      "dup_root": false,
+      "evidence_id": "evt_demo_v3:E8",
+      "legacy": true,
+      "masked": false,
+      "num": "E8",
+      "quote": null,
+      "reason": null,
+      "root": "rootC3",
+      "ruling": "支持",
+      "src": "official_website",
+      "title": "供应商来函"
+    },
+    "ruling:evt_demo_v3:C4|evt_demo_v3:E9": {
+      "claim_id": "evt_demo_v3:C4",
+      "dup_root": false,
+      "evidence_id": "evt_demo_v3:E9",
+      "legacy": true,
+      "masked": false,
+      "num": "E9",
+      "quote": null,
+      "reason": null,
+      "root": "rootD",
+      "ruling": "支持",
+      "src": "official_website",
+      "title": "年度计划"
+    },
+    "ruling:evt_demo_v3:C5|evt_demo_v3:E10": {
+      "claim_id": "evt_demo_v3:C5",
+      "dup_root": false,
+      "evidence_id": "evt_demo_v3:E10",
+      "legacy": true,
+      "masked": false,
+      "num": "E10",
+      "quote": null,
+      "reason": null,
+      "root": "signal_layer",
+      "ruling": "支持",
+      "src": "signal_layer",
+      "title": "信号层"
+    },
+    "ruling:evt_demo_v3:C8|evt_demo_v3:E11": {
+      "claim_id": "evt_demo_v3:C8",
+      "dup_root": false,
+      "evidence_id": "evt_demo_v3:E11",
+      "legacy": true,
+      "masked": false,
+      "num": "E11",
+      "quote": null,
+      "reason": null,
+      "root": "gsxt",
+      "ruling": "矛盾",
+      "src": "gsxt",
+      "title": "登记系统核查"
+    },
+    "verification:evt_demo_v3:C1": {
+      "items": [
+        {
+          "dup_root": false,
+          "evidence_id": "evt_demo_v3:E1",
+          "legacy": true,
+          "masked": false,
+          "num": "E1",
+          "quote": null,
+          "reason": null,
+          "root": "ccgp",
+          "ruling": "支持",
+          "src": "ccgp",
+          "title": "中国政府采购网招标公告"
+        }
+      ],
+      "threshold_note": ""
+    },
+    "verification:evt_demo_v3:C10": {
+      "items": [
+        {
+          "dup_root": false,
+          "evidence_id": "evt_demo_v3:E12",
+          "legacy": true,
+          "masked": false,
+          "num": "E12",
+          "quote": null,
+          "reason": null,
+          "root": "rootE",
+          "ruling": "支持",
+          "src": "official_website",
+          "title": "行业报告"
+        }
+      ],
+      "threshold_note": "仅一根独立支持,缺第二独立根·尚差第二个独立来源相互印证"
+    },
+    "verification:evt_demo_v3:C11": {
+      "items": [
+        {
+          "dup_root": false,
+          "evidence_id": "evt_demo_v3:E12",
+          "legacy": true,
+          "masked": false,
+          "num": "E12",
+          "quote": null,
+          "reason": null,
+          "root": "rootE",
+          "ruling": "支持",
+          "src": "official_website",
+          "title": "行业报告"
+        }
+      ],
+      "threshold_note": "仅一根独立支持,缺第二独立根·尚差第二个独立来源相互印证"
+    },
+    "verification:evt_demo_v3:C12": {
+      "items": [
+        {
+          "dup_root": false,
+          "evidence_id": "evt_demo_v3:E12",
+          "legacy": true,
+          "masked": false,
+          "num": "E12",
+          "quote": null,
+          "reason": null,
+          "root": "rootE",
+          "ruling": "支持",
+          "src": "official_website",
+          "title": "行业报告"
+        }
+      ],
+      "threshold_note": "仅一根独立支持,缺第二独立根·尚差第二个独立来源相互印证"
+    },
+    "verification:evt_demo_v3:C13": {
+      "items": [
+        {
+          "dup_root": false,
+          "evidence_id": "evt_demo_v3:E13",
+          "legacy": true,
+          "masked": false,
+          "num": "E13",
+          "quote": null,
+          "reason": null,
+          "root": "rootG",
+          "ruling": "无关",
+          "src": "official_website",
+          "title": "境外检索"
+        }
+      ],
+      "threshold_note": "已查证未见载明(无关票/不可达)·尚差换证据通道补查"
+    },
+    "verification:evt_demo_v3:C14": {
+      "items": [
+        {
+          "dup_root": false,
+          "evidence_id": "evt_demo_v3:E14",
+          "legacy": true,
+          "masked": false,
+          "num": "E14",
+          "quote": null,
+          "reason": null,
+          "root": "rootH",
+          "ruling": "支持",
+          "src": "official_website",
+          "title": "信用公示"
+        },
+        {
+          "dup_root": false,
+          "evidence_id": "evt_demo_v3:E15",
+          "legacy": true,
+          "masked": false,
+          "num": "E15",
+          "quote": null,
+          "reason": null,
+          "root": "rootI",
+          "ruling": "支持",
+          "src": "official_website",
+          "title": "协会名录"
+        }
+      ],
+      "threshold_note": "证据量已达判决门槛,载明性核对未过·尚差核心谓词载明复核(候审)"
+    },
+    "verification:evt_demo_v3:C2": {
+      "items": [
+        {
+          "dup_root": false,
+          "evidence_id": "evt_demo_v3:E2",
+          "legacy": true,
+          "masked": false,
+          "num": "E2",
+          "quote": null,
+          "reason": null,
+          "root": "rootA",
+          "ruling": "支持",
+          "src": "official_website",
+          "title": "政采转载稿"
+        },
+        {
+          "dup_root": true,
+          "evidence_id": "evt_demo_v3:E3",
+          "legacy": true,
+          "masked": false,
+          "num": "E3",
+          "quote": null,
+          "reason": null,
+          "root": "rootA",
+          "ruling": "支持",
+          "src": "official_website",
+          "title": "政采转载稿另一稿"
+        },
+        {
+          "dup_root": false,
+          "evidence_id": "evt_demo_v3:E4",
+          "legacy": true,
+          "masked": false,
+          "num": "E4",
+          "quote": null,
+          "reason": null,
+          "root": "ccgp",
+          "ruling": "支持",
+          "src": "ccgp",
+          "title": "采购人历史公示"
+        },
+        {
+          "dup_root": false,
+          "evidence_id": "evt_demo_v3:E5",
+          "legacy": true,
+          "masked": false,
+          "num": "E5",
+          "quote": null,
+          "reason": null,
+          "root": "rootF",
+          "ruling": "时效刷新",
+          "src": "official_website",
+          "title": "行业快讯"
+        }
+      ],
+      "threshold_note": ""
+    },
+    "verification:evt_demo_v3:C2d": {
+      "items": [
+        {
+          "dup_root": false,
+          "evidence_id": "evt_demo_v3:E2",
+          "legacy": true,
+          "masked": false,
+          "num": "E2",
+          "quote": null,
+          "reason": null,
+          "root": "rootA",
+          "ruling": "支持",
+          "src": "official_website",
+          "title": "政采转载稿"
+        }
+      ],
+      "threshold_note": "仅一根独立支持,缺第二独立根·尚差第二个独立来源相互印证"
+    },
+    "verification:evt_demo_v3:C3": {
+      "items": [
+        {
+          "dup_root": false,
+          "evidence_id": "evt_demo_v3:E6",
+          "legacy": true,
+          "masked": false,
+          "num": "E6",
+          "quote": null,
+          "reason": null,
+          "root": "rootC",
+          "ruling": "支持",
+          "src": "official_website",
+          "title": "行业论坛帖"
+        },
+        {
+          "dup_root": false,
+          "evidence_id": "evt_demo_v3:E7",
+          "legacy": true,
+          "masked": true,
+          "num": "E7",
+          "quote": null,
+          "reason": null,
+          "root": "rootC2",
+          "ruling": "支持",
+          "src": "",
+          "title": "〔internal〕材料"
+        },
+        {
+          "dup_root": false,
+          "evidence_id": "evt_demo_v3:E8",
+          "legacy": true,
+          "masked": false,
+          "num": "E8",
+          "quote": null,
+          "reason": null,
+          "root": "rootC3",
+          "ruling": "支持",
+          "src": "official_website",
+          "title": "供应商来函"
+        }
+      ],
+      "threshold_note": ""
+    },
+    "verification:evt_demo_v3:C4": {
+      "items": [
+        {
+          "dup_root": false,
+          "evidence_id": "evt_demo_v3:E9",
+          "legacy": true,
+          "masked": false,
+          "num": "E9",
+          "quote": null,
+          "reason": null,
+          "root": "rootD",
+          "ruling": "支持",
+          "src": "official_website",
+          "title": "年度计划"
+        }
+      ],
+      "threshold_note": ""
+    },
+    "verification:evt_demo_v3:C5": {
+      "items": [
+        {
+          "dup_root": false,
+          "evidence_id": "evt_demo_v3:E10",
+          "legacy": true,
+          "masked": false,
+          "num": "E10",
+          "quote": null,
+          "reason": null,
+          "root": "signal_layer",
+          "ruling": "支持",
+          "src": "signal_layer",
+          "title": "信号层"
+        }
+      ],
+      "threshold_note": ""
+    },
+    "verification:evt_demo_v3:C8": {
+      "items": [
+        {
+          "dup_root": false,
+          "evidence_id": "evt_demo_v3:E11",
+          "legacy": true,
+          "masked": false,
+          "num": "E11",
+          "quote": null,
+          "reason": null,
+          "root": "gsxt",
+          "ruling": "矛盾",
+          "src": "gsxt",
+          "title": "登记系统核查"
+        }
+      ],
+      "threshold_note": "翻回条件:两独立正向方可翻回"
+    }
+  },
+  "edges": [
+    {
+      "claim_ids": [
+        "evt_demo_v3:C1",
+        "evt_demo_v3:C2"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E1",
+        "evt_demo_v3:E4"
+      ],
+      "id": "cor:evt_demo_v3:C1|evt_demo_v3:C2",
+      "polarity": null,
+      "relation_type": "同源共据",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C1",
+      "status": null,
+      "target": "cl:evt_demo_v3:C2"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C1",
+        "evt_demo_v3:C4"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E1"
+      ],
+      "id": "der:evt_demo_v3:C1|evt_demo_v3:C4",
+      "polarity": null,
+      "relation_type": "前提",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C1",
+      "status": null,
+      "target": "cl:evt_demo_v3:C4"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C1"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E1"
+      ],
+      "id": "con:evt_demo_v3:C1|evt_demo_v3:H0",
+      "manual": false,
+      "polarity": null,
+      "rationale": "",
+      "relation_type": "传导",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C1",
+      "status": null,
+      "target": "hy:evt_demo_v3:H0"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C1"
+      ],
+      "evidence_ids": [],
+      "id": "rgb:evt_demo_v3:H0#01|evt_demo_v3:C1",
+      "polarity": null,
+      "relation_type": "入组",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C1",
+      "status": null,
+      "target": "rg:evt_demo_v3:H0#01"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C1"
+      ],
+      "evidence_ids": [],
+      "id": "vfc:evt_demo_v3:C1",
+      "polarity": null,
+      "relation_type": "核验",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C1",
+      "status": null,
+      "target": "vf:evt_demo_v3:C1"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C10",
+        "evt_demo_v3:C11"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E12"
+      ],
+      "id": "cor:evt_demo_v3:C10|evt_demo_v3:C11",
+      "polarity": null,
+      "relation_type": "同源共据",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C10",
+      "status": null,
+      "target": "cl:evt_demo_v3:C11"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C10",
+        "evt_demo_v3:C12"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E12"
+      ],
+      "id": "cor:evt_demo_v3:C10|evt_demo_v3:C12",
+      "polarity": null,
+      "relation_type": "同源共据",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C10",
+      "status": null,
+      "target": "cl:evt_demo_v3:C12"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C10"
+      ],
+      "evidence_ids": [],
+      "id": "vfc:evt_demo_v3:C10",
+      "polarity": null,
+      "relation_type": "核验",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C10",
+      "status": null,
+      "target": "vf:evt_demo_v3:C10"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C11",
+        "evt_demo_v3:C12"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E12"
+      ],
+      "id": "cor:evt_demo_v3:C11|evt_demo_v3:C12",
+      "polarity": null,
+      "relation_type": "同源共据",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C11",
+      "status": null,
+      "target": "cl:evt_demo_v3:C12"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C11"
+      ],
+      "evidence_ids": [],
+      "id": "vfc:evt_demo_v3:C11",
+      "polarity": null,
+      "relation_type": "核验",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C11",
+      "status": null,
+      "target": "vf:evt_demo_v3:C11"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C12"
+      ],
+      "evidence_ids": [],
+      "id": "vfc:evt_demo_v3:C12",
+      "polarity": null,
+      "relation_type": "核验",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C12",
+      "status": null,
+      "target": "vf:evt_demo_v3:C12"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C13"
+      ],
+      "evidence_ids": [],
+      "id": "vfc:evt_demo_v3:C13",
+      "polarity": null,
+      "relation_type": "核验",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C13",
+      "status": null,
+      "target": "vf:evt_demo_v3:C13"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C14"
+      ],
+      "evidence_ids": [],
+      "id": "vfc:evt_demo_v3:C14",
+      "polarity": null,
+      "relation_type": "核验",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C14",
+      "status": null,
+      "target": "vf:evt_demo_v3:C14"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C2",
+        "evt_demo_v3:C2d"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E2",
+        "evt_demo_v3:E3",
+        "evt_demo_v3:E4",
+        "evt_demo_v3:E5"
+      ],
+      "id": "der:evt_demo_v3:C2|evt_demo_v3:C2d",
+      "polarity": null,
+      "relation_type": "前提",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C2",
+      "status": null,
+      "target": "cl:evt_demo_v3:C2d"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C2"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E2",
+        "evt_demo_v3:E3",
+        "evt_demo_v3:E4",
+        "evt_demo_v3:E5"
+      ],
+      "id": "con:evt_demo_v3:C2|evt_demo_v3:H0",
+      "manual": false,
+      "polarity": null,
+      "rationale": "",
+      "relation_type": "传导",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C2",
+      "status": null,
+      "target": "hy:evt_demo_v3:H0"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C2"
+      ],
+      "evidence_ids": [],
+      "id": "rgb:evt_demo_v3:H0#01|evt_demo_v3:C2",
+      "polarity": null,
+      "relation_type": "入组",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C2",
+      "status": null,
+      "target": "rg:evt_demo_v3:H0#01"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C2"
+      ],
+      "evidence_ids": [],
+      "id": "vfc:evt_demo_v3:C2",
+      "polarity": null,
+      "relation_type": "核验",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C2",
+      "status": null,
+      "target": "vf:evt_demo_v3:C2"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C2d"
+      ],
+      "evidence_ids": [],
+      "id": "vfc:evt_demo_v3:C2d",
+      "polarity": null,
+      "relation_type": "核验",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C2d",
+      "status": null,
+      "target": "vf:evt_demo_v3:C2d"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C3"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E6",
+        "evt_demo_v3:E7",
+        "evt_demo_v3:E8"
+      ],
+      "id": "con:evt_demo_v3:C3|evt_demo_v3:H1",
+      "manual": false,
+      "polarity": null,
+      "rationale": "",
+      "relation_type": "传导",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C3",
+      "status": null,
+      "target": "hy:evt_demo_v3:H1"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C3"
+      ],
+      "evidence_ids": [],
+      "id": "vfc:evt_demo_v3:C3",
+      "polarity": null,
+      "relation_type": "核验",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C3",
+      "status": null,
+      "target": "vf:evt_demo_v3:C3"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C4"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E9"
+      ],
+      "id": "con:evt_demo_v3:C4|evt_demo_v3:H0",
+      "manual": false,
+      "polarity": null,
+      "rationale": "",
+      "relation_type": "传导",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C4",
+      "status": null,
+      "target": "hy:evt_demo_v3:H0"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C4"
+      ],
+      "evidence_ids": [],
+      "id": "rgb:evt_demo_v3:H0#00|evt_demo_v3:C4",
+      "polarity": null,
+      "relation_type": "入组",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C4",
+      "status": null,
+      "target": "rg:evt_demo_v3:H0#00"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C4"
+      ],
+      "evidence_ids": [],
+      "id": "vfc:evt_demo_v3:C4",
+      "polarity": null,
+      "relation_type": "核验",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C4",
+      "status": null,
+      "target": "vf:evt_demo_v3:C4"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C5"
+      ],
+      "evidence_ids": [],
+      "id": "vfc:evt_demo_v3:C5",
+      "polarity": null,
+      "relation_type": "核验",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C5",
+      "status": null,
+      "target": "vf:evt_demo_v3:C5"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C8"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E11"
+      ],
+      "id": "con:evt_demo_v3:C8|evt_demo_v3:H1",
+      "manual": false,
+      "polarity": null,
+      "rationale": "",
+      "relation_type": "传导",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C8",
+      "status": null,
+      "target": "hy:evt_demo_v3:H1"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C8"
+      ],
+      "evidence_ids": [],
+      "id": "vfc:evt_demo_v3:C8",
+      "polarity": null,
+      "relation_type": "核验",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C8",
+      "status": null,
+      "target": "vf:evt_demo_v3:C8"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C9"
+      ],
+      "evidence_ids": [],
+      "id": "con:evt_demo_v3:C9|evt_demo_v3:H0",
+      "manual": false,
+      "polarity": null,
+      "rationale": "",
+      "relation_type": "传导",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C9",
+      "status": null,
+      "target": "hy:evt_demo_v3:H0"
+    },
+    {
+      "claim_ids": [
+        "evt_demo_v3:C9"
+      ],
+      "evidence_ids": [],
+      "id": "rgb:evt_demo_v3:H0#01|evt_demo_v3:C9",
+      "polarity": null,
+      "relation_type": "入组",
+      "ruling_ids": [],
+      "source": "cl:evt_demo_v3:C9",
+      "status": null,
+      "target": "rg:evt_demo_v3:H0#01"
+    },
+    {
+      "authoritative": true,
+      "claim_ids": [
+        "evt_demo_v3:C1"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E1"
+      ],
+      "flip": "唯一根失效→回待证实",
+      "id": "sup:evt_demo_v3:E1|evt_demo_v3:C1",
+      "polarity": "正向",
+      "relation_type": "直接证明",
+      "root": "ccgp",
+      "root_no": 1,
+      "ruling_ids": [
+        "ruling:evt_demo_v3:C1|evt_demo_v3:E1"
+      ],
+      "source": "ev:evt_demo_v3:E1",
+      "status": "支持",
+      "target": "cl:evt_demo_v3:C1"
+    },
+    {
+      "authoritative": true,
+      "claim_ids": [
+        "evt_demo_v3:C8"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E11"
+      ],
+      "flip": null,
+      "id": "sup:evt_demo_v3:E11|evt_demo_v3:C8",
+      "polarity": "反向",
+      "relation_type": "反证",
+      "root": "gsxt",
+      "root_no": null,
+      "ruling_ids": [
+        "ruling:evt_demo_v3:C8|evt_demo_v3:E11"
+      ],
+      "source": "ev:evt_demo_v3:E11",
+      "status": "矛盾",
+      "target": "cl:evt_demo_v3:C8"
+    },
+    {
+      "authoritative": false,
+      "claim_ids": [
+        "evt_demo_v3:C10"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E12"
+      ],
+      "flip": null,
+      "id": "sup:evt_demo_v3:E12|evt_demo_v3:C10",
+      "polarity": "正向",
+      "relation_type": "佐证",
+      "root": "rootE",
+      "root_no": 1,
+      "ruling_ids": [
+        "ruling:evt_demo_v3:C10|evt_demo_v3:E12"
+      ],
+      "source": "ev:evt_demo_v3:E12",
+      "status": "支持",
+      "target": "cl:evt_demo_v3:C10"
+    },
+    {
+      "authoritative": false,
+      "claim_ids": [
+        "evt_demo_v3:C11"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E12"
+      ],
+      "flip": null,
+      "id": "sup:evt_demo_v3:E12|evt_demo_v3:C11",
+      "polarity": "正向",
+      "relation_type": "佐证",
+      "root": "rootE",
+      "root_no": 1,
+      "ruling_ids": [
+        "ruling:evt_demo_v3:C11|evt_demo_v3:E12"
+      ],
+      "source": "ev:evt_demo_v3:E12",
+      "status": "支持",
+      "target": "cl:evt_demo_v3:C11"
+    },
+    {
+      "authoritative": false,
+      "claim_ids": [
+        "evt_demo_v3:C12"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E12"
+      ],
+      "flip": null,
+      "id": "sup:evt_demo_v3:E12|evt_demo_v3:C12",
+      "polarity": "正向",
+      "relation_type": "佐证",
+      "root": "rootE",
+      "root_no": 1,
+      "ruling_ids": [
+        "ruling:evt_demo_v3:C12|evt_demo_v3:E12"
+      ],
+      "source": "ev:evt_demo_v3:E12",
+      "status": "支持",
+      "target": "cl:evt_demo_v3:C12"
+    },
+    {
+      "authoritative": false,
+      "claim_ids": [
+        "evt_demo_v3:C14"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E14"
+      ],
+      "flip": null,
+      "id": "sup:evt_demo_v3:E14|evt_demo_v3:C14",
+      "polarity": "正向",
+      "relation_type": "印证",
+      "root": "rootH",
+      "root_no": 1,
+      "ruling_ids": [
+        "ruling:evt_demo_v3:C14|evt_demo_v3:E14"
+      ],
+      "source": "ev:evt_demo_v3:E14",
+      "status": "支持",
+      "target": "cl:evt_demo_v3:C14"
+    },
+    {
+      "authoritative": false,
+      "claim_ids": [
+        "evt_demo_v3:C14"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E15"
+      ],
+      "flip": null,
+      "id": "sup:evt_demo_v3:E15|evt_demo_v3:C14",
+      "polarity": "正向",
+      "relation_type": "印证",
+      "root": "rootI",
+      "root_no": 2,
+      "ruling_ids": [
+        "ruling:evt_demo_v3:C14|evt_demo_v3:E15"
+      ],
+      "source": "ev:evt_demo_v3:E15",
+      "status": "支持",
+      "target": "cl:evt_demo_v3:C14"
+    },
+    {
+      "authoritative": false,
+      "claim_ids": [
+        "evt_demo_v3:C2"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E2"
+      ],
+      "flip": "此根失效→回待证实(仅剩 1 根)",
+      "id": "sup:evt_demo_v3:E2|evt_demo_v3:C2",
+      "polarity": "正向",
+      "relation_type": "印证",
+      "root": "rootA",
+      "root_no": 2,
+      "ruling_ids": [
+        "ruling:evt_demo_v3:C2|evt_demo_v3:E2"
+      ],
+      "source": "ev:evt_demo_v3:E2",
+      "status": "支持",
+      "target": "cl:evt_demo_v3:C2"
+    },
+    {
+      "authoritative": false,
+      "claim_ids": [
+        "evt_demo_v3:C2d"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E2"
+      ],
+      "flip": null,
+      "id": "sup:evt_demo_v3:E2|evt_demo_v3:C2d",
+      "polarity": "正向",
+      "relation_type": "佐证",
+      "root": "rootA",
+      "root_no": 1,
+      "ruling_ids": [
+        "ruling:evt_demo_v3:C2d|evt_demo_v3:E2"
+      ],
+      "source": "ev:evt_demo_v3:E2",
+      "status": "支持",
+      "target": "cl:evt_demo_v3:C2d"
+    },
+    {
+      "authoritative": false,
+      "claim_ids": [
+        "evt_demo_v3:C2"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E3"
+      ],
+      "flip": "此根失效→回待证实(仅剩 1 根)",
+      "id": "sup:evt_demo_v3:E3|evt_demo_v3:C2",
+      "polarity": "正向",
+      "relation_type": "印证",
+      "root": "rootA",
+      "root_no": 2,
+      "ruling_ids": [
+        "ruling:evt_demo_v3:C2|evt_demo_v3:E3"
+      ],
+      "source": "ev:evt_demo_v3:E3",
+      "status": "支持",
+      "target": "cl:evt_demo_v3:C2"
+    },
+    {
+      "authoritative": true,
+      "claim_ids": [
+        "evt_demo_v3:C2"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E4"
+      ],
+      "flip": "此根失效→回待证实(仅剩 1 根)",
+      "id": "sup:evt_demo_v3:E4|evt_demo_v3:C2",
+      "polarity": "正向",
+      "relation_type": "直接证明",
+      "root": "ccgp",
+      "root_no": 1,
+      "ruling_ids": [
+        "ruling:evt_demo_v3:C2|evt_demo_v3:E4"
+      ],
+      "source": "ev:evt_demo_v3:E4",
+      "status": "支持",
+      "target": "cl:evt_demo_v3:C2"
+    },
+    {
+      "authoritative": false,
+      "claim_ids": [
+        "evt_demo_v3:C2"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E5"
+      ],
+      "flip": "此根失效→回待证实(仅剩 1 根)",
+      "id": "sup:evt_demo_v3:E5|evt_demo_v3:C2",
+      "polarity": "时效",
+      "relation_type": "时效更新",
+      "root": "rootF",
+      "root_no": null,
+      "ruling_ids": [
+        "ruling:evt_demo_v3:C2|evt_demo_v3:E5"
+      ],
+      "source": "ev:evt_demo_v3:E5",
+      "status": "时效刷新",
+      "target": "cl:evt_demo_v3:C2"
+    },
+    {
+      "authoritative": false,
+      "claim_ids": [
+        "evt_demo_v3:C3"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E6"
+      ],
+      "flip": null,
+      "id": "sup:evt_demo_v3:E6|evt_demo_v3:C3",
+      "polarity": "正向",
+      "relation_type": "印证",
+      "root": "rootC",
+      "root_no": 1,
+      "ruling_ids": [
+        "ruling:evt_demo_v3:C3|evt_demo_v3:E6"
+      ],
+      "source": "ev:evt_demo_v3:E6",
+      "status": "支持",
+      "target": "cl:evt_demo_v3:C3"
+    },
+    {
+      "authoritative": false,
+      "claim_ids": [
+        "evt_demo_v3:C3"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E7"
+      ],
+      "flip": null,
+      "id": "sup:evt_demo_v3:E7|evt_demo_v3:C3",
+      "polarity": "正向",
+      "relation_type": "印证",
+      "root": "rootC2",
+      "root_no": 2,
+      "ruling_ids": [
+        "ruling:evt_demo_v3:C3|evt_demo_v3:E7"
+      ],
+      "source": "ev:evt_demo_v3:E7",
+      "status": "支持",
+      "target": "cl:evt_demo_v3:C3"
+    },
+    {
+      "authoritative": false,
+      "claim_ids": [
+        "evt_demo_v3:C3"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E8"
+      ],
+      "flip": null,
+      "id": "sup:evt_demo_v3:E8|evt_demo_v3:C3",
+      "polarity": "正向",
+      "relation_type": "印证",
+      "root": "rootC3",
+      "root_no": 3,
+      "ruling_ids": [
+        "ruling:evt_demo_v3:C3|evt_demo_v3:E8"
+      ],
+      "source": "ev:evt_demo_v3:E8",
+      "status": "支持",
+      "target": "cl:evt_demo_v3:C3"
+    },
+    {
+      "authoritative": false,
+      "claim_ids": [
+        "evt_demo_v3:C4"
+      ],
+      "evidence_ids": [
+        "evt_demo_v3:E9"
+      ],
+      "flip": "唯一根失效→回待证实",
+      "id": "sup:evt_demo_v3:E9|evt_demo_v3:C4",
+      "polarity": "正向",
+      "relation_type": "佐证",
+      "root": "rootD",
+      "root_no": 1,
+      "ruling_ids": [
+        "ruling:evt_demo_v3:C4|evt_demo_v3:E9"
+      ],
+      "source": "ev:evt_demo_v3:E9",
+      "status": "支持",
+      "target": "cl:evt_demo_v3:C4"
+    }
+  ],
+  "event": {
+    "as_of": "2026-11-10T01:30:44+00:00",
+    "as_of_round": null,
+    "event_id": "evt_demo_v3",
+    "kb_version": "",
+    "kind": "tender"
+  },
+  "evidence": [
+    {
+      "attachment_ref": null,
+      "authoritative": true,
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "evidence_id": "evt_demo_v3:E1",
+      "excerpt": "政采公告:充电桩采购项目招标公告",
+      "lineage_root": "ccgp",
+      "num": "E1",
+      "party": false,
+      "platform": "ccgp",
+      "published_at": null,
+      "same_root_count": 2,
+      "sensitivity": "public",
+      "source_ref": "ccgp",
+      "source_url": null,
+      "title": "中国政府采购网招标公告"
+    },
+    {
+      "attachment_ref": null,
+      "authoritative": false,
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "evidence_id": "evt_demo_v3:E10",
+      "excerpt": "信号解读字段陈述",
+      "lineage_root": "",
+      "num": "E10",
+      "party": false,
+      "platform": "signal_layer",
+      "published_at": null,
+      "same_root_count": 1,
+      "sensitivity": "public",
+      "source_ref": "signal_layer",
+      "source_url": null,
+      "title": "信号层"
+    },
+    {
+      "attachment_ref": null,
+      "authoritative": true,
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "evidence_id": "evt_demo_v3:E11",
+      "excerpt": "登记核查:无破产重整记录",
+      "lineage_root": "gsxt",
+      "num": "E11",
+      "party": false,
+      "platform": "gsxt",
+      "published_at": null,
+      "same_root_count": 1,
+      "sensitivity": "public",
+      "source_ref": "gsxt",
+      "source_url": null,
+      "title": "登记系统核查"
+    },
+    {
+      "attachment_ref": null,
+      "authoritative": false,
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "evidence_id": "evt_demo_v3:E12",
+      "excerpt": "行业报告:B新能源能力概况(资质/供电配套/仓储)",
+      "lineage_root": "rootE",
+      "num": "E12",
+      "party": false,
+      "platform": "official_website",
+      "published_at": null,
+      "same_root_count": 1,
+      "sensitivity": "public",
+      "source_ref": "rootE",
+      "source_url": null,
+      "title": "行业报告"
+    },
+    {
+      "attachment_ref": null,
+      "authoritative": false,
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "evidence_id": "evt_demo_v3:E13",
+      "excerpt": "境外项目库检索:无匹配记录",
+      "lineage_root": "",
+      "num": "E13",
+      "party": false,
+      "platform": "official_website",
+      "published_at": null,
+      "same_root_count": 1,
+      "sensitivity": "public",
+      "source_ref": "rootG",
+      "source_url": null,
+      "title": "境外检索"
+    },
+    {
+      "attachment_ref": null,
+      "authoritative": false,
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "evidence_id": "evt_demo_v3:E14",
+      "excerpt": "信用公示:建筑业资质甲级记录",
+      "lineage_root": "rootH",
+      "num": "E14",
+      "party": false,
+      "platform": "official_website",
+      "published_at": null,
+      "same_root_count": 1,
+      "sensitivity": "public",
+      "source_ref": "rootH",
+      "source_url": null,
+      "title": "信用公示"
+    },
+    {
+      "attachment_ref": null,
+      "authoritative": false,
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "evidence_id": "evt_demo_v3:E15",
+      "excerpt": "行业协会名录:乙级资质待核",
+      "lineage_root": "rootI",
+      "num": "E15",
+      "party": false,
+      "platform": "official_website",
+      "published_at": null,
+      "same_root_count": 1,
+      "sensitivity": "public",
+      "source_ref": "rootI",
+      "source_url": null,
+      "title": "协会名录"
+    },
+    {
+      "attachment_ref": null,
+      "authoritative": false,
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "evidence_id": "evt_demo_v3:E2",
+      "excerpt": "政采转载稿:充电桩采购招标",
+      "lineage_root": "rootA",
+      "num": "E2",
+      "party": false,
+      "platform": "official_website",
+      "published_at": null,
+      "same_root_count": 2,
+      "sensitivity": "public",
+      "source_ref": "rootA",
+      "source_url": null,
+      "title": "政采转载稿"
+    },
+    {
+      "attachment_ref": null,
+      "authoritative": false,
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "evidence_id": "evt_demo_v3:E3",
+      "excerpt": "政采转载稿另一稿:充电桩采购招标(同根)",
+      "lineage_root": "rootA",
+      "num": "E3",
+      "party": false,
+      "platform": "official_website",
+      "published_at": null,
+      "same_root_count": 2,
+      "sensitivity": "public",
+      "source_ref": "rootA",
+      "source_url": null,
+      "title": "政采转载稿另一稿"
+    },
+    {
+      "attachment_ref": null,
+      "authoritative": true,
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "evidence_id": "evt_demo_v3:E4",
+      "excerpt": "政采网公示:采购人历史项目",
+      "lineage_root": "ccgp",
+      "num": "E4",
+      "party": false,
+      "platform": "ccgp",
+      "published_at": null,
+      "same_root_count": 2,
+      "sensitivity": "public",
+      "source_ref": "ccgp",
+      "source_url": null,
+      "title": "采购人历史公示"
+    },
+    {
+      "attachment_ref": null,
+      "authoritative": false,
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "evidence_id": "evt_demo_v3:E5",
+      "excerpt": "行业快讯:采购记录复核信息更新",
+      "lineage_root": "rootF",
+      "num": "E5",
+      "party": false,
+      "platform": "official_website",
+      "published_at": null,
+      "same_root_count": 1,
+      "sensitivity": "public",
+      "source_ref": "rootF",
+      "source_url": null,
+      "title": "行业快讯"
+    },
+    {
+      "attachment_ref": null,
+      "authoritative": false,
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "evidence_id": "evt_demo_v3:E6",
+      "excerpt": "论坛帖称B新能源供应商讨薪",
+      "lineage_root": "rootC",
+      "num": "E6",
+      "party": false,
+      "platform": "official_website",
+      "published_at": null,
+      "same_root_count": 1,
+      "sensitivity": "public",
+      "source_ref": "rootC",
+      "source_url": null,
+      "title": "行业论坛帖"
+    },
+    {
+      "attachment_ref": null,
+      "authoritative": false,
+      "collected_at": null,
+      "evidence_id": "evt_demo_v3:E7",
+      "excerpt": null,
+      "lineage_root": "rootC2",
+      "num": "E7",
+      "party": false,
+      "platform": null,
+      "published_at": null,
+      "same_root_count": 1,
+      "sensitivity": "internal",
+      "source_ref": null,
+      "source_url": null,
+      "title": "〔internal〕材料"
+    },
+    {
+      "attachment_ref": null,
+      "authoritative": false,
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "evidence_id": "evt_demo_v3:E8",
+      "excerpt": "供应商自述:与B新能源存在付款周期争议",
+      "lineage_root": "rootC3",
+      "num": "E8",
+      "party": true,
+      "platform": "official_website",
+      "published_at": null,
+      "same_root_count": 1,
+      "sensitivity": "public",
+      "source_ref": "rootC3",
+      "source_url": null,
+      "title": "供应商来函"
+    },
+    {
+      "attachment_ref": null,
+      "authoritative": false,
+      "collected_at": "2026-11-10T01:30:44+00:00",
+      "evidence_id": "evt_demo_v3:E9",
+      "excerpt": "园区公示:2026 年度采购计划含充电桩",
+      "lineage_root": "rootD",
+      "num": "E9",
+      "party": false,
+      "platform": "official_website",
+      "published_at": null,
+      "same_root_count": 1,
+      "sensitivity": "public",
+      "source_ref": "rootD",
+      "source_url": null,
+      "title": "年度计划"
+    }
+  ],
+  "layers": [
+    {
+      "description": "原始材料/来源页;同根转载折叠见同源数,十家转载=一根",
+      "id": "source",
+      "label": "来源材料"
+    },
+    {
+      "description": "从材料抽取的事实命题;三态如实,已证实剥壳直陈,待证实/矛盾不伪装",
+      "id": "fact",
+      "label": "抽取事实"
+    },
+    {
+      "description": "每命题的验证单元:独立根数/同源折叠/支持反证计数,只显示判决已承认的量,不创造三态",
+      "id": "verification",
+      "label": "交叉验证"
+    },
+    {
+      "description": "论点组/派生/融合/解读桥;LLM 旁车只标建议或已验票,不冒充裁定",
+      "id": "reasoning",
+      "label": "推理关系"
+    },
+    {
+      "description": "假设卡:资格四态+票型(凭什么支持/与谁比较/差什么),关联全部成员命题",
+      "id": "conclusion",
+      "label": "结论假设"
+    }
+  ],
+  "meta": {
+    "as_of": "2026-11-10T01:30:44+00:00",
+    "as_of_round": null,
+    "channels_dropped": 0,
+    "co_root_omitted": false,
+    "derives_skipped": 0,
+    "event_id": "evt_demo_v3",
+    "kb_version": "",
+    "n_bridges_blocked": 0,
+    "n_bridges_drawn": 0,
+    "n_claims": 15,
+    "n_co_root_edges": 4,
+    "n_evidence_drawn": 13,
+    "n_fanout_merged_edges": 2,
+    "n_fusion_blocked": 0,
+    "n_fusion_cards": 0,
+    "n_fusion_drifted": 0,
+    "n_gen_drifted": 0,
+    "n_insight_drifted": 0,
+    "n_lineage_families": 1,
+    "n_lineage_merged": 1,
+    "n_no_edge_claims": 5,
+    "n_pending": 9,
+    "n_routed": {
+      "bridge": 0,
+      "clue": 0,
+      "meta": 0
+    },
+    "n_seed_hidden": 1,
+    "n_summary_drifted": 0,
+    "n_tried_hidden": 1,
+    "n_unadjudicated": 0,
+    "n_unruled_evidence": 0,
+    "n_zone": 2,
+    "sidecar_drifted": 0,
+    "web": {
+      "n_claims": 15,
+      "n_collapsed": 3,
+      "n_details": 63,
+      "n_edges": 44,
+      "n_evidence": 15,
+      "n_nodes": 44,
+      "web_validation": []
+    }
+  },
+  "nodes": [
+    {
+      "collapsed": false,
+      "detail_ref": "evidence:evt_demo_v3:E1",
+      "id": "ev:evt_demo_v3:E1",
+      "label": "中国政府采购网招标公告(ccgp)",
+      "lineage_root": "ccgp",
+      "num": "E1",
+      "position_hint": "source:000",
+      "provenance_ids": [],
+      "status": "",
+      "sub_type": "",
+      "type": "source"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "evidence:evt_demo_v3:E11",
+      "id": "ev:evt_demo_v3:E11",
+      "label": "登记系统核查(gsxt)",
+      "lineage_root": "gsxt",
+      "num": "E11",
+      "position_hint": "source:001",
+      "provenance_ids": [],
+      "status": "",
+      "sub_type": "",
+      "type": "source"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "evidence:evt_demo_v3:E12",
+      "id": "ev:evt_demo_v3:E12",
+      "label": "行业报告(official_website)",
+      "lineage_root": "rootE",
+      "num": "E12",
+      "position_hint": "source:002",
+      "provenance_ids": [],
+      "status": "",
+      "sub_type": "",
+      "type": "source"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "evidence:evt_demo_v3:E14",
+      "id": "ev:evt_demo_v3:E14",
+      "label": "信用公示(official_website)",
+      "lineage_root": "rootH",
+      "num": "E14",
+      "position_hint": "source:003",
+      "provenance_ids": [],
+      "status": "",
+      "sub_type": "",
+      "type": "source"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "evidence:evt_demo_v3:E15",
+      "id": "ev:evt_demo_v3:E15",
+      "label": "协会名录(official_website)",
+      "lineage_root": "rootI",
+      "num": "E15",
+      "position_hint": "source:004",
+      "provenance_ids": [],
+      "status": "",
+      "sub_type": "",
+      "type": "source"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "evidence:evt_demo_v3:E2",
+      "id": "ev:evt_demo_v3:E2",
+      "label": "政采转载稿(official_website)",
+      "lineage_root": "rootA",
+      "num": "E2",
+      "position_hint": "source:005",
+      "provenance_ids": [],
+      "status": "",
+      "sub_type": "",
+      "type": "source"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "evidence:evt_demo_v3:E3",
+      "id": "ev:evt_demo_v3:E3",
+      "label": "政采转载稿另一稿(official_website)",
+      "lineage_root": "rootA",
+      "num": "E3",
+      "position_hint": "source:006",
+      "provenance_ids": [],
+      "status": "",
+      "sub_type": "",
+      "type": "source"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "evidence:evt_demo_v3:E4",
+      "id": "ev:evt_demo_v3:E4",
+      "label": "采购人历史公示(ccgp)",
+      "lineage_root": "ccgp",
+      "num": "E4",
+      "position_hint": "source:007",
+      "provenance_ids": [],
+      "status": "",
+      "sub_type": "",
+      "type": "source"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "evidence:evt_demo_v3:E5",
+      "id": "ev:evt_demo_v3:E5",
+      "label": "行业快讯(official_website)",
+      "lineage_root": "rootF",
+      "num": "E5",
+      "position_hint": "source:008",
+      "provenance_ids": [],
+      "status": "",
+      "sub_type": "",
+      "type": "source"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "evidence:evt_demo_v3:E6",
+      "id": "ev:evt_demo_v3:E6",
+      "label": "行业论坛帖(official_website)",
+      "lineage_root": "rootC",
+      "num": "E6",
+      "position_hint": "source:009",
+      "provenance_ids": [],
+      "status": "",
+      "sub_type": "",
+      "type": "source"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "",
+      "id": "ev:evt_demo_v3:E7",
+      "label": "〔internal〕证据,内容不出境",
+      "lineage_root": "rootC2",
+      "num": "E7",
+      "position_hint": "source:010",
+      "provenance_ids": [],
+      "status": "",
+      "sub_type": "",
+      "type": "source"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "evidence:evt_demo_v3:E8",
+      "id": "ev:evt_demo_v3:E8",
+      "label": "供应商来函(official_website)",
+      "lineage_root": "rootC3",
+      "num": "E8",
+      "position_hint": "source:011",
+      "provenance_ids": [],
+      "status": "",
+      "sub_type": "",
+      "type": "source"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "evidence:evt_demo_v3:E9",
+      "id": "ev:evt_demo_v3:E9",
+      "label": "年度计划(official_website)",
+      "lineage_root": "rootD",
+      "num": "E9",
+      "position_hint": "source:012",
+      "provenance_ids": [],
+      "status": "",
+      "sub_type": "",
+      "type": "source"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "claim:evt_demo_v3:C4",
+      "id": "cl:evt_demo_v3:C4",
+      "label": "本项目预算 1890000 元已列入 B新能源科技有限公司 2026 年度采购计划",
+      "position_hint": "fact:000",
+      "provenance_ids": [
+        "evt_demo_v3:E9"
+      ],
+      "status": "已证实",
+      "sub_type": "fact",
+      "type": "fact"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "claim:evt_demo_v3:C1",
+      "id": "cl:evt_demo_v3:C1",
+      "label": "充电桩采购 项目编号/预算 189 万",
+      "position_hint": "fact:001",
+      "provenance_ids": [
+        "evt_demo_v3:E1"
+      ],
+      "status": "已证实",
+      "sub_type": "fact",
+      "type": "fact"
+    },
+    {
+      "collapsed": true,
+      "detail_ref": "claim:evt_demo_v3:C2",
+      "id": "cl:evt_demo_v3:C2",
+      "label": "B新能源近两年有同级采购记录",
+      "position_hint": "fact:002",
+      "provenance_ids": [
+        "evt_demo_v3:E2",
+        "evt_demo_v3:E3",
+        "evt_demo_v3:E4",
+        "evt_demo_v3:E5"
+      ],
+      "status": "已证实",
+      "sub_type": "family",
+      "type": "fact"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "claim:evt_demo_v3:C10",
+      "id": "cl:evt_demo_v3:C10",
+      "label": "B新能源科技有限公司具备充电桩生产相关资质",
+      "position_hint": "fact:003",
+      "provenance_ids": [
+        "evt_demo_v3:E12"
+      ],
+      "status": "待证实",
+      "sub_type": "fact",
+      "type": "fact"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "claim:evt_demo_v3:C11",
+      "id": "cl:evt_demo_v3:C11",
+      "label": "B新能源科技有限公司有园区供电配套项目经验",
+      "position_hint": "fact:004",
+      "provenance_ids": [
+        "evt_demo_v3:E12"
+      ],
+      "status": "待证实",
+      "sub_type": "fact",
+      "type": "fact"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "claim:evt_demo_v3:C12",
+      "id": "cl:evt_demo_v3:C12",
+      "label": "B新能源科技有限公司本地仓储能力覆盖项目所在区",
+      "position_hint": "fact:005",
+      "provenance_ids": [
+        "evt_demo_v3:E12"
+      ],
+      "status": "待证实",
+      "sub_type": "fact",
+      "type": "fact"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "claim:evt_demo_v3:C14",
+      "id": "cl:evt_demo_v3:C14",
+      "label": "B新能源科技有限公司具备投标所需的双甲级资质",
+      "position_hint": "fact:006",
+      "provenance_ids": [
+        "evt_demo_v3:E14",
+        "evt_demo_v3:E15"
+      ],
+      "status": "待证实",
+      "sub_type": "fact",
+      "type": "fact"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "claim:evt_demo_v3:C2d",
+      "id": "cl:evt_demo_v3:C2d",
+      "label": "B新能源科技有限公司近两年有同等金额级公开采购记录(复核)",
+      "position_hint": "fact:007",
+      "provenance_ids": [
+        "evt_demo_v3:E2",
+        "evt_demo_v3:E3",
+        "evt_demo_v3:E4",
+        "evt_demo_v3:E5"
+      ],
+      "status": "待证实",
+      "sub_type": "fact",
+      "type": "fact"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "claim:evt_demo_v3:C3",
+      "id": "cl:evt_demo_v3:C3",
+      "label": "B新能源存在欠薪纠纷",
+      "position_hint": "fact:008",
+      "provenance_ids": [
+        "evt_demo_v3:E6",
+        "evt_demo_v3:E7",
+        "evt_demo_v3:E8"
+      ],
+      "status": "已证实",
+      "sub_type": "fact",
+      "type": "fact"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "claim:evt_demo_v3:C8",
+      "id": "cl:evt_demo_v3:C8",
+      "label": "B新能源已进入破产重整",
+      "position_hint": "fact:009",
+      "provenance_ids": [
+        "evt_demo_v3:E11"
+      ],
+      "status": "矛盾",
+      "sub_type": "fact",
+      "type": "fact"
+    },
+    {
+      "collapsed": true,
+      "detail_ref": "claim:evt_demo_v3:C13",
+      "id": "cl:evt_demo_v3:C13",
+      "label": "B新能源科技有限公司曾参与境外同类建设项目",
+      "position_hint": "fact:010",
+      "provenance_ids": [
+        "evt_demo_v3:E13"
+      ],
+      "status": "待证实",
+      "sub_type": "zone",
+      "type": "fact"
+    },
+    {
+      "collapsed": true,
+      "detail_ref": "claim:evt_demo_v3:C9",
+      "id": "cl:evt_demo_v3:C9",
+      "label": "B新能源近两年有重大违约",
+      "no_direct_evidence": true,
+      "position_hint": "fact:011",
+      "provenance_ids": [],
+      "status": "待证实",
+      "sub_type": "zone",
+      "type": "fact"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "claim:evt_demo_v3:C5",
+      "id": "cl:evt_demo_v3:C5",
+      "label": "解读将本信号定性为“商机”，依据是信封 kind 为 tender 且为公开可参与的投标机会",
+      "position_hint": "fact:012",
+      "provenance_ids": [
+        "evt_demo_v3:E10"
+      ],
+      "status": "已证实",
+      "sub_type": "fact",
+      "type": "fact"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "claim:evt_demo_v3:C6",
+      "id": "cl:evt_demo_v3:C6",
+      "label": "解读自述：信封中 amountHistory 与 noveltyHistory 均为 null",
+      "no_direct_evidence": true,
+      "position_hint": "fact:013",
+      "provenance_ids": [],
+      "status": "待证实",
+      "sub_type": "fact",
+      "type": "fact"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "claim:evt_demo_v3:C7",
+      "id": "cl:evt_demo_v3:C7",
+      "label": "解读登记了三条基础缺口：该采购人历史采购记录与金额基线缺失、信号与本企业业务相关性未评估、domain 字段为空",
+      "no_direct_evidence": true,
+      "position_hint": "fact:014",
+      "provenance_ids": [],
+      "status": "待证实",
+      "sub_type": "fact",
+      "type": "fact"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "verification:evt_demo_v3:C4",
+      "id": "vf:evt_demo_v3:C4",
+      "label": "本项目预算 1890000 元已列入 B新能源科技有限公司 2026 年度采购计划",
+      "position_hint": "verification:000",
+      "provenance_ids": [
+        "evt_demo_v3:E9"
+      ],
+      "status": "已证实",
+      "sub_type": "",
+      "type": "verification"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "verification:evt_demo_v3:C1",
+      "id": "vf:evt_demo_v3:C1",
+      "label": "充电桩采购 项目编号/预算 189 万",
+      "position_hint": "verification:001",
+      "provenance_ids": [
+        "evt_demo_v3:E1"
+      ],
+      "status": "已证实",
+      "sub_type": "",
+      "type": "verification"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "verification:evt_demo_v3:C2",
+      "id": "vf:evt_demo_v3:C2",
+      "label": "B新能源近两年有同级采购记录",
+      "position_hint": "verification:002",
+      "provenance_ids": [
+        "evt_demo_v3:E2",
+        "evt_demo_v3:E3",
+        "evt_demo_v3:E4",
+        "evt_demo_v3:E5"
+      ],
+      "status": "已证实",
+      "sub_type": "",
+      "type": "verification"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "verification:evt_demo_v3:C10",
+      "id": "vf:evt_demo_v3:C10",
+      "label": "B新能源科技有限公司具备充电桩生产相关资质",
+      "position_hint": "verification:003",
+      "provenance_ids": [
+        "evt_demo_v3:E12"
+      ],
+      "status": "待证实",
+      "sub_type": "",
+      "type": "verification"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "verification:evt_demo_v3:C11",
+      "id": "vf:evt_demo_v3:C11",
+      "label": "B新能源科技有限公司有园区供电配套项目经验",
+      "position_hint": "verification:004",
+      "provenance_ids": [
+        "evt_demo_v3:E12"
+      ],
+      "status": "待证实",
+      "sub_type": "",
+      "type": "verification"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "verification:evt_demo_v3:C12",
+      "id": "vf:evt_demo_v3:C12",
+      "label": "B新能源科技有限公司本地仓储能力覆盖项目所在区",
+      "position_hint": "verification:005",
+      "provenance_ids": [
+        "evt_demo_v3:E12"
+      ],
+      "status": "待证实",
+      "sub_type": "",
+      "type": "verification"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "verification:evt_demo_v3:C14",
+      "id": "vf:evt_demo_v3:C14",
+      "label": "B新能源科技有限公司具备投标所需的双甲级资质",
+      "position_hint": "verification:006",
+      "provenance_ids": [
+        "evt_demo_v3:E14",
+        "evt_demo_v3:E15"
+      ],
+      "status": "待证实",
+      "sub_type": "",
+      "type": "verification"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "verification:evt_demo_v3:C2d",
+      "id": "vf:evt_demo_v3:C2d",
+      "label": "B新能源科技有限公司近两年有同等金额级公开采购记录(复核)",
+      "position_hint": "verification:007",
+      "provenance_ids": [
+        "evt_demo_v3:E2"
+      ],
+      "status": "待证实",
+      "sub_type": "",
+      "type": "verification"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "verification:evt_demo_v3:C3",
+      "id": "vf:evt_demo_v3:C3",
+      "label": "B新能源存在欠薪纠纷",
+      "position_hint": "verification:008",
+      "provenance_ids": [
+        "evt_demo_v3:E6",
+        "evt_demo_v3:E7",
+        "evt_demo_v3:E8"
+      ],
+      "status": "已证实",
+      "sub_type": "",
+      "type": "verification"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "verification:evt_demo_v3:C8",
+      "id": "vf:evt_demo_v3:C8",
+      "label": "B新能源已进入破产重整",
+      "position_hint": "verification:009",
+      "provenance_ids": [
+        "evt_demo_v3:E11"
+      ],
+      "status": "矛盾",
+      "sub_type": "",
+      "type": "verification"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "verification:evt_demo_v3:C13",
+      "id": "vf:evt_demo_v3:C13",
+      "label": "B新能源科技有限公司曾参与境外同类建设项目",
+      "position_hint": "verification:010",
+      "provenance_ids": [
+        "evt_demo_v3:E13"
+      ],
+      "status": "待证实",
+      "sub_type": "",
+      "type": "verification"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "verification:evt_demo_v3:C5",
+      "id": "vf:evt_demo_v3:C5",
+      "label": "解读将本信号定性为“商机”，依据是信封 kind 为 tender 且为公开可参与的投标机会",
+      "position_hint": "verification:011",
+      "provenance_ids": [
+        "evt_demo_v3:E10"
+      ],
+      "status": "已证实",
+      "sub_type": "",
+      "type": "verification"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "group:evt_demo_v3:H0#00",
+      "id": "rg:evt_demo_v3:H0#00",
+      "label": "成员命题",
+      "members": [
+        "evt_demo_v3:C4"
+      ],
+      "position_hint": "reasoning:000",
+      "provenance_ids": [
+        "evt_demo_v3:E9"
+      ],
+      "status": "",
+      "sub_type": "论点组",
+      "type": "reasoning"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "group:evt_demo_v3:H0#01",
+      "id": "rg:evt_demo_v3:H0#01",
+      "label": "关于B新能源科技有限公司的事实",
+      "members": [
+        "evt_demo_v3:C1",
+        "evt_demo_v3:C2",
+        "evt_demo_v3:C9"
+      ],
+      "position_hint": "reasoning:001",
+      "provenance_ids": [
+        "evt_demo_v3:E1",
+        "evt_demo_v3:E2",
+        "evt_demo_v3:E3",
+        "evt_demo_v3:E4",
+        "evt_demo_v3:E5"
+      ],
+      "status": "",
+      "sub_type": "论点组",
+      "type": "reasoning"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "hypothesis:evt_demo_v3:H0",
+      "id": "hy:evt_demo_v3:H0",
+      "label": "商机",
+      "position_hint": "conclusion:000",
+      "provenance_ids": [
+        "evt_demo_v3:E1",
+        "evt_demo_v3:E2",
+        "evt_demo_v3:E3",
+        "evt_demo_v3:E4",
+        "evt_demo_v3:E5",
+        "evt_demo_v3:E9"
+      ],
+      "status": "chosen",
+      "sub_type": "",
+      "type": "conclusion"
+    },
+    {
+      "collapsed": false,
+      "detail_ref": "hypothesis:evt_demo_v3:H1",
+      "id": "hy:evt_demo_v3:H1",
+      "label": "风险",
+      "position_hint": "conclusion:001",
+      "provenance_ids": [
+        "evt_demo_v3:E11",
+        "evt_demo_v3:E6",
+        "evt_demo_v3:E7",
+        "evt_demo_v3:E8"
+      ],
+      "status": "runner_up",
+      "sub_type": "",
+      "type": "conclusion"
+    }
+  ],
+  "omissions": [
+    {
+      "key": "channels_dropped",
+      "n": 0,
+      "note": "通道建议白名单外丢弃数"
+    },
+    {
+      "key": "co_root_omitted",
+      "n": 0,
+      "note": "共据边超上限省略(1=是)"
+    },
+    {
+      "key": "derives_skipped",
+      "n": 0,
+      "note": "前提边父条不在装配范围跳过数"
+    },
+    {
+      "key": "n_bridges_blocked",
+      "n": 0,
+      "note": "解读桥被机器闸拦下数(不落卡)"
+    },
+    {
+      "key": "n_fanout_merged_edges",
+      "n": 2,
+      "note": "扇出汇流并边省线数"
+    },
+    {
+      "key": "n_fusion_blocked",
+      "n": 0,
+      "note": "融合卡被机器闸拦下数(不落卡)"
+    },
+    {
+      "key": "n_fusion_cards",
+      "n": 0,
+      "note": "命题级多源印证卡数(被融合材料人看层折叠)"
+    },
+    {
+      "key": "n_fusion_drifted",
+      "n": 0,
+      "note": "融合旁车漂移弃用数(不落卡)"
+    },
+    {
+      "key": "n_gen_drifted",
+      "n": 0,
+      "note": "分组旁车漂移数(机械平铺兜底)"
+    },
+    {
+      "key": "n_insight_drifted",
+      "n": 0,
+      "note": "解读旁车镜像漂移数(不分流)"
+    },
+    {
+      "key": "n_lineage_families",
+      "n": 1,
+      "note": "同文谱系家族数(归并投影,正本台账全量在)"
+    },
+    {
+      "key": "n_lineage_merged",
+      "n": 1,
+      "note": "同文谱系归并折叠件数"
+    },
+    {
+      "key": "n_no_edge_claims",
+      "n": 5,
+      "note": "无边命题不进主图(含信封自证元陈述)"
+    },
+    {
+      "key": "n_seed_hidden",
+      "n": 1,
+      "note": "信封背景/检测器字段陈述不计材料层(卷面改造 §4-4)"
+    },
+    {
+      "key": "n_summary_drifted",
+      "n": 0,
+      "note": "材料概括旁车漂移数(词典短语兜底)"
+    },
+    {
+      "key": "n_tried_hidden",
+      "n": 1,
+      "note": "查过未见载明(无关票),留痕不逐条上图"
+    },
+    {
+      "key": "n_unadjudicated",
+      "n": 0,
+      "note": "挂账未裁材料(宽进关联,S6 未裁定)"
+    },
+    {
+      "key": "n_unruled_evidence",
+      "n": 0,
+      "note": "在案材料未入裁定(证据级去重)"
+    },
+    {
+      "key": "n_zone",
+      "n": 2,
+      "note": "待查证小区命题数(上图不上线)"
+    },
+    {
+      "key": "sidecar_drifted",
+      "n": 0,
+      "note": "极性/通道旁车指纹漂移弃用数"
+    }
+  ],
+  "schema_version": "chain_web.v1",
+  "stats": {
+    "lanes": {
+      "conclusion": 2,
+      "fact": 15,
+      "reasoning": 2,
+      "source": 13,
+      "verification": 12
+    },
+    "n_independent_roots": 11,
+    "n_materials": 13,
+    "n_same_root_collapsed": 2,
+    "platform_dist": {
+      "ccgp": 2,
+      "gsxt": 1,
+      "internal": 1,
+      "official_website": 10,
+      "signal_layer": 1
+    },
+    "ruling_dist": {
+      "挂账未裁": 0,
+      "支持": 15,
+      "无关票": 1,
+      "时效刷新": 1,
+      "未裁关联": 0,
+      "矛盾": 1
+    },
+    "status_dist": {
+      "已证实": 5,
+      "待证实": 9,
+      "矛盾": 1
+    }
+  },
+  "timeline": [
+    {
+      "cause": "",
+      "claim_id": "evt_demo_v3:C1",
+      "evidence_id": "evt_demo_v3:E1",
+      "new_status": "已证实",
+      "old_status": "待证实",
+      "round": 1,
+      "ts": "2026-11-10T01:30:44+00:00"
+    },
+    {
+      "cause": "",
+      "claim_id": "evt_demo_v3:C2",
+      "evidence_id": "evt_demo_v3:E4",
+      "new_status": "已证实",
+      "old_status": "待证实",
+      "round": 1,
+      "ts": "2026-11-10T01:30:44+00:00"
+    },
+    {
+      "cause": "",
+      "claim_id": "evt_demo_v3:C3",
+      "evidence_id": "evt_demo_v3:E8",
+      "new_status": "已证实",
+      "old_status": "待证实",
+      "round": 2,
+      "ts": "2026-11-10T01:30:44+00:00"
+    },
+    {
+      "cause": "",
+      "claim_id": "evt_demo_v3:C4",
+      "evidence_id": "evt_demo_v3:E9",
+      "new_status": "已证实",
+      "old_status": "待证实",
+      "round": 2,
+      "ts": "2026-11-10T01:30:44+00:00"
+    },
+    {
+      "cause": "",
+      "claim_id": "evt_demo_v3:C5",
+      "evidence_id": "evt_demo_v3:E10",
+      "new_status": "已证实",
+      "old_status": "待证实",
+      "round": 2,
+      "ts": "2026-11-10T01:30:44+00:00"
+    },
+    {
+      "cause": "",
+      "claim_id": "evt_demo_v3:C8",
+      "evidence_id": "evt_demo_v3:E11",
+      "new_status": "矛盾",
+      "old_status": "待证实",
+      "round": 2,
+      "ts": "2026-11-10T01:30:44+00:00"
+    }
+  ],
+  "verification": [
+    {
+      "claim_id": "evt_demo_v3:C4",
+      "morph": null,
+      "n_contra": 0,
+      "n_dup_root": 0,
+      "n_independent_roots": 1,
+      "n_items": 1,
+      "n_support": 1,
+      "n_temporal": 0,
+      "rep_evidence": [
+        "evt_demo_v3:E9"
+      ],
+      "status": "已证实",
+      "threshold_note": "",
+      "unruled_nums": []
+    },
+    {
+      "claim_id": "evt_demo_v3:C1",
+      "morph": null,
+      "n_contra": 0,
+      "n_dup_root": 0,
+      "n_independent_roots": 1,
+      "n_items": 1,
+      "n_support": 1,
+      "n_temporal": 0,
+      "rep_evidence": [
+        "evt_demo_v3:E1"
+      ],
+      "status": "已证实",
+      "threshold_note": "",
+      "unruled_nums": []
+    },
+    {
+      "claim_id": "evt_demo_v3:C2",
+      "morph": null,
+      "n_contra": 0,
+      "n_dup_root": 1,
+      "n_independent_roots": 2,
+      "n_items": 4,
+      "n_support": 3,
+      "n_temporal": 1,
+      "rep_evidence": [
+        "evt_demo_v3:E4",
+        "evt_demo_v3:E2",
+        "evt_demo_v3:E5"
+      ],
+      "status": "已证实",
+      "threshold_note": "",
+      "unruled_nums": []
+    },
+    {
+      "claim_id": "evt_demo_v3:C10",
+      "morph": {
+        "n_contra_items": 0,
+        "n_support_roots": 1,
+        "same_source_contra": false,
+        "support_sources": [
+          "official_website"
+        ]
+      },
+      "n_contra": 0,
+      "n_dup_root": 0,
+      "n_independent_roots": 1,
+      "n_items": 1,
+      "n_support": 1,
+      "n_temporal": 0,
+      "rep_evidence": [
+        "evt_demo_v3:E12"
+      ],
+      "status": "待证实",
+      "threshold_note": "仅一根独立支持,缺第二独立根·尚差第二个独立来源相互印证",
+      "unruled_nums": []
+    },
+    {
+      "claim_id": "evt_demo_v3:C11",
+      "morph": {
+        "n_contra_items": 0,
+        "n_support_roots": 1,
+        "same_source_contra": false,
+        "support_sources": [
+          "official_website"
+        ]
+      },
+      "n_contra": 0,
+      "n_dup_root": 0,
+      "n_independent_roots": 1,
+      "n_items": 1,
+      "n_support": 1,
+      "n_temporal": 0,
+      "rep_evidence": [
+        "evt_demo_v3:E12"
+      ],
+      "status": "待证实",
+      "threshold_note": "仅一根独立支持,缺第二独立根·尚差第二个独立来源相互印证",
+      "unruled_nums": []
+    },
+    {
+      "claim_id": "evt_demo_v3:C12",
+      "morph": {
+        "n_contra_items": 0,
+        "n_support_roots": 1,
+        "same_source_contra": false,
+        "support_sources": [
+          "official_website"
+        ]
+      },
+      "n_contra": 0,
+      "n_dup_root": 0,
+      "n_independent_roots": 1,
+      "n_items": 1,
+      "n_support": 1,
+      "n_temporal": 0,
+      "rep_evidence": [
+        "evt_demo_v3:E12"
+      ],
+      "status": "待证实",
+      "threshold_note": "仅一根独立支持,缺第二独立根·尚差第二个独立来源相互印证",
+      "unruled_nums": []
+    },
+    {
+      "claim_id": "evt_demo_v3:C14",
+      "morph": {
+        "n_contra_items": 0,
+        "n_support_roots": 2,
+        "same_source_contra": false,
+        "support_sources": [
+          "official_website",
+          "official_website"
+        ]
+      },
+      "n_contra": 0,
+      "n_dup_root": 0,
+      "n_independent_roots": 2,
+      "n_items": 2,
+      "n_support": 2,
+      "n_temporal": 0,
+      "rep_evidence": [
+        "evt_demo_v3:E14",
+        "evt_demo_v3:E15"
+      ],
+      "status": "待证实",
+      "threshold_note": "证据量已达判决门槛,载明性核对未过·尚差核心谓词载明复核(候审)",
+      "unruled_nums": []
+    },
+    {
+      "claim_id": "evt_demo_v3:C2d",
+      "morph": {
+        "n_contra_items": 0,
+        "n_support_roots": 1,
+        "same_source_contra": false,
+        "support_sources": [
+          "official_website"
+        ]
+      },
+      "n_contra": 0,
+      "n_dup_root": 0,
+      "n_independent_roots": 1,
+      "n_items": 1,
+      "n_support": 1,
+      "n_temporal": 0,
+      "rep_evidence": [
+        "evt_demo_v3:E2"
+      ],
+      "status": "待证实",
+      "threshold_note": "仅一根独立支持,缺第二独立根·尚差第二个独立来源相互印证",
+      "unruled_nums": []
+    },
+    {
+      "claim_id": "evt_demo_v3:C3",
+      "morph": null,
+      "n_contra": 0,
+      "n_dup_root": 0,
+      "n_independent_roots": 3,
+      "n_items": 3,
+      "n_support": 3,
+      "n_temporal": 0,
+      "rep_evidence": [
+        "evt_demo_v3:E6",
+        "evt_demo_v3:E7",
+        "evt_demo_v3:E8"
+      ],
+      "status": "已证实",
+      "threshold_note": "",
+      "unruled_nums": []
+    },
+    {
+      "claim_id": "evt_demo_v3:C8",
+      "morph": null,
+      "n_contra": 1,
+      "n_dup_root": 0,
+      "n_independent_roots": 0,
+      "n_items": 1,
+      "n_support": 0,
+      "n_temporal": 0,
+      "rep_evidence": [
+        "evt_demo_v3:E11"
+      ],
+      "status": "矛盾",
+      "threshold_note": "翻回条件:两独立正向方可翻回",
+      "unruled_nums": []
+    },
+    {
+      "claim_id": "evt_demo_v3:C13",
+      "morph": null,
+      "n_contra": 0,
+      "n_dup_root": 0,
+      "n_independent_roots": 0,
+      "n_items": 1,
+      "n_support": 0,
+      "n_temporal": 0,
+      "rep_evidence": [
+        "evt_demo_v3:E13"
+      ],
+      "status": "待证实",
+      "threshold_note": "已查证未见载明(无关票/不可达)·尚差换证据通道补查",
+      "unruled_nums": []
+    },
+    {
+      "claim_id": "evt_demo_v3:C5",
+      "morph": null,
+      "n_contra": 0,
+      "n_dup_root": 0,
+      "n_independent_roots": 1,
+      "n_items": 1,
+      "n_support": 1,
+      "n_temporal": 0,
+      "rep_evidence": [
+        "evt_demo_v3:E10"
+      ],
+      "status": "已证实",
+      "threshold_note": "",
+      "unruled_nums": []
+    }
+  ]
+}

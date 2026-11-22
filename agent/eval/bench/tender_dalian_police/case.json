@@ -1,0 +1,26 @@
+{
+  "case_id": "tender_dalian_police",
+  "title": "大连市公安局2026年新警及晋监民警服装采购D包(辽宁·公安被装)",
+  "source": "real",
+  "envelope": "eval/bench/tender_dalian_police/envelope.json",
+  "responses": "eval/bench/tender_dalian_police/responses_r1.json",
+  "event_id": "evt_tender_dalian_police_r1",
+  "run_args": {
+    "max_rounds": 6,
+    "assoc": "entity_text"
+  },
+  "budget": {
+    "s6_opinion_max": 40,
+    "llm_calls_max": 60
+  },
+  "enabled": true,
+  "pipeline_note": "统一重录波 AV=7e02c13,三开关 on;信封=ccgp 真实公告 2026-10-22(v2 提单装配,预算/编号/截止取自详情页白纸黑字)",
+  "meta": {
+    "qc": {
+      "verified": true,
+      "checked_by": "Jiu-26",
+      "protocol": "LLM 辅助核对 + 人工终审(改判抽查通过,2026-10-25)",
+      "checked_at": "2026-10-25"
+    }
+  }
+}

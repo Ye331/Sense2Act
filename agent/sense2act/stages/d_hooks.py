@@ -13,8 +13,10 @@ from typing import Protocol
 from pydantic import Field
 
 from ..llm import StructuredLLM, call_structured
+from ..chain_graph import claim_tier, load_present_rules
 from ..models.base import SchemaModel
 from ..prompts import S7_CHECK_PROMPT, S7_DRAFT_PROMPT, S7_EDIT_PROMPT
+from ..stages.s7_report import claim_input_row, verdict_brief
 from ..store.ledger import LedgerRepository
 
 
@@ -156,6 +158,9 @@ class DraftHooks:
         self._ledger = ledger
         self._writer = writer
         self._topk = evidence_topk
+        # 卷面呈现模式表(P 波:起草输入侧 M1 滤/剥壳同表同源;缺文件=空表
+        # =分流全关,确定性零行为变化,照 load_present_rules 纪律)
+        self._rules = load_present_rules(ledger.config_dir)
 
     def run_round_end(self, event_id: str, round_no: int) -> dict:
         """轮末钩子(不消耗查证轮数,成本走 token 账)。"""
@@ -222,15 +227,30 @@ class DraftHooks:
         return "(已移除)"
 
     def _context(self, event_id: str, sec, claims) -> dict:
+        """起草输入(P 波改造,2026-11-08):M1 三档滤+P2 附 gist/plain,
+        与 finalize 补节/终稿核对/建议同源(claim_input_row 公共函数)——
+        挡除/转写类不进 LLM 输入(快照与节归属语义不变,滤只动输入)。
+        模式表经 ledger.config_dir 一次装载(构造期)。"""
+        rules = self._rules
+        gists = self._ledger.claim_gists(event_id)
         claim_payload = []
         for c in claims:
-            refs = self._refs(c["claim_id"])
-            claim_payload.append({
-                "id": c["draft_id"], "text": c["text"], "status": c["status"],
-                "category": c["category"], "refs": refs,
-            })
-        return {
-            "event_id": event_id, "title": sec["title"], "kind": sec["kind"],
+            if claim_tier(c["text"] or "", rules):
+                continue
+            claim_payload.append(
+                claim_input_row(c, self._refs(c["claim_id"]), rules, gists))
+        sec = dict(sec)   # sqlite3.Row/测试合成 dict 双形态兼容(ord 缺省防御)
+        ctx = {
+            "event_id": event_id, "title": sec.get("title"),
+            "kind": sec.get("kind"),
             "claims": claim_payload,
             "standings": self._ledger.hypothesis_standings(event_id),
         }
+        if sec.get("kind") == "conclusion" or sec.get("ord") == 3:
+            # I2 研判说明素材包(判据×本案;与 finalize 补节同源=输入侧口径
+            # 不分叉;空表=无主导=键缺席零痕迹。结论节判据=finalize 同款
+            # [kind 存 standard,ord 3=结论])
+            brief = verdict_brief(self._ledger, event_id, rules, gists)
+            if brief:
+                ctx["verdict_brief"] = brief
+        return ctx

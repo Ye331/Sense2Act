@@ -70,6 +70,11 @@ CREATE TABLE IF NOT EXISTS claims (
   parent_claim_id   TEXT,
   unreachable       INTEGER NOT NULL DEFAULT 0,   -- 缺口标不可达(查不到->Open Questions)
   corpus_bound      INTEGER NOT NULL DEFAULT 0,   -- S1b 标注:信封/语料内自证型断言(第一方自证例外的判决输入;模型标注,代码判决)
+  created_at        TEXT NOT NULL DEFAULT '',     -- 入账时刻(P2 续查:跨运行新增条判定;空=早于一切锚点)
+  gist              TEXT NOT NULL DEFAULT '',     -- 条目短名(gist 短名方案,2026-10-30:S1b 出生摘要
+                                                  -- 供呈现层阅读面短摘;附录 B 核对面不消费;空=fallback)
+  reborn_from       TEXT NOT NULL DEFAULT '',     -- 转生谱系(三阶段 §六.3,2026-11-06):由解读转生的
+                                                  -- 线索命题回指 insights 条目 id;空=常规命题
   FOREIGN KEY (event_id) REFERENCES events(event_id)
 );
 CREATE INDEX IF NOT EXISTS idx_claims_event_status ON claims(event_id, status);
@@ -95,6 +100,8 @@ CREATE TABLE IF NOT EXISTS evidence (
   proj_stage_key TEXT NOT NULL DEFAULT '',  -- 结构化近重复键=项目编号|阶段(空=不参与)
   simhash      TEXT NOT NULL DEFAULT '',    -- 正文 character-bigram simhash(64-bit hex)
   near_dup_of  TEXT NOT NULL DEFAULT '',    -- simhash 近重复指向首条 evidence_id(仅标记,不拒)
+  assets       TEXT NOT NULL DEFAULT '[]',  -- 报告附件(JSON:路径/sha256/来源URL/类型;A 线
+                                            -- 资产步骤写,S7 渲染读;S4-S6 判决链不读=物理隔离)
   FOREIGN KEY (event_id) REFERENCES events(event_id)
 );
 CREATE UNIQUE INDEX IF NOT EXISTS idx_evidence_dedup ON evidence(event_id, dedup_key);

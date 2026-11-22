@@ -20,6 +20,7 @@ from ..cli import build_parser, build_pipeline
 from ..llm import DeepSeekLLM, ModelBudgetExceeded, ReplayLLM, model_call_budget
 from ..models.envelope import InvestigationEnvelope
 from .client import CONFLICT, BackendClient, BackendError
+from .chain_artifact import build_chain_artifact
 from .envelope import build_envelope, signal_kind
 from .report import build_report
 from .reporter import InvestigationAborted, StepReporter, TokenMeter
@@ -37,6 +38,23 @@ class Worker:
     def recover(self) -> None:
         """重启恢复(契约 §9.4):reporting 已交报告只收尾;investigating 的进程内状态已丢失,如实标失败。"""
         for inv in self.client.investigations("reporting"):
+            workdir = Path(self.opts.data_dir) / inv["id"]
+            db = workdir / "ledger.db"
+            if db.is_file():
+                from ..kb_chain import open_mains, close_mains
+                mains = open_mains([db], self.opts.config_dir)
+                try:
+                    if len(mains) == 1:
+                        event_id, ledger = next(iter(mains.items()))
+                        try:
+                            build_chain_artifact(
+                                investigation_id=inv["id"], event_id=event_id,
+                                ledger=ledger, runs_dir=workdir / "runs",
+                                config_dir=self.opts.config_dir)
+                        except Exception:  # 副产物失败不阻断主报告完成
+                            log.exception("chain artifact recovery failed inv=%s event=%s", inv["id"], event_id)
+                finally:
+                    close_mains(mains)
             self._quietly(self.client.complete, inv["id"])
             log.info("recovered %s: completed", inv["id"])
         for inv in self.client.investigations("investigating"):
@@ -91,6 +109,13 @@ class Worker:
             if not draft["claims"]:
                 raise RuntimeError("没有可登记的证据支撑任何结论(信号文档缺发布时间或原文快照)")
             self.client.submit_report(inv_id, draft)
+            try:
+                build_chain_artifact(
+                    investigation_id=inv_id, event_id=event_id,
+                    ledger=pipeline._ledger, runs_dir=workdir / "runs",  # noqa: SLF001
+                    config_dir=self.opts.config_dir)
+            except Exception:  # 报告是主交付；链失败已经落 status=failed
+                log.exception("chain artifact failed inv=%s event=%s", inv_id, event_id)
             self.client.complete(inv_id)
             log.info("completed %s: %s", inv_id, stop_reason)
         except InvestigationAborted as exc:
@@ -161,3 +186,7 @@ def main(argv: list[str] | None = None) -> int:
         if opts.once:
             return 0
         time.sleep(opts.interval)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

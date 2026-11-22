@@ -63,7 +63,12 @@ class Observer:
             for code in _CREDIT_CODE_RE.findall(text or ""):
                 found[code] = code
 
-            root = self._domain.upstream_root(item.source or item.platform)
+            # 预设根优先(K2 kb 通道 lineage 继承,2026-10-27):item 自带
+            # lineage_root 时不再按 source/platform 现算——复曝老证据不涨
+            # 独立根,"KB 证据不能单独支撑已证实"自然涌现(蓝图 §七)。
+            # 空=既有现算路径,信封种子/爬虫件零差异。
+            root = item.lineage_root or self._domain.upstream_root(
+                item.source or item.platform)
             credibility = self._domain.credibility_of(root)
             if item.author_type in ("自媒体", "匿名") and credibility == "高":
                 credibility = "中"

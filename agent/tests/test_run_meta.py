@@ -18,7 +18,9 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from sense2act.run_meta import (align_from_meta, meta_path, mismatches,  # noqa: E402
+from sense2act import evaluate as ev_mod  # noqa: E402
+from sense2act.run_meta import (ALIGN_KEYS, META_KEYS, _snapshot,  # noqa: E402
+                                align_from_meta, meta_path, mismatches,
                                 read_run_meta, write_run_meta)
 
 
@@ -148,6 +150,66 @@ class TestAskMetaKeys(unittest.TestCase):
         self.assertEqual(case["run_args"]["ask_mode"], "interactive")
         self.assertEqual(case["run_args"]["ask_gate"], False)
         self.assertIn("ask_mode", note)
+
+    def test_align_keys_derived_from_meta_keys(self):
+        """疫苗(2026-10-25 重录波教训):对齐白名单必须与 META_KEYS 同源派生
+        ——手工子集曾落后于开关扩容(disc/predicate_form 等未入白名单),
+        重录 r1 件(三开关 on)在 evaluate 回放被配对闸门全案拦截。
+        改 META_KEYS 一处,ALIGN_KEYS 必须自动跟随。"""
+        self.assertEqual(ALIGN_KEYS, tuple(k for k in META_KEYS if k != "variant"))
+
+    def test_flag_map_covers_align_keys(self):
+        """疫苗:evaluate 的 run_args->flag 映射必须覆盖全部对齐键(除
+        variant 单独传/interleave 走 --no-interleave 反形态/store_true 型
+        附件开关走 build_investigate_args 特例),否则对齐写进 run_args 的
+        参数不会被透传给 investigate——静默失配。"""
+        covered = (set(ev_mod.RUN_ARGS_FLAG_MAP)
+                   | {"variant", "interleave",
+                      # store_true 型(图片线附件,2026-10-27 合入):
+                      # on/off 值映射对它们非法,True 才传 flag
+                      "assets", "snapshots", "dry_run"})
+        self.assertEqual(covered, set(META_KEYS))
+
+    def test_store_true_switches_flow_through(self):
+        """端到端疫苗(图片线合入,2026-10-27):附件 store_true 开关经
+        align 对齐进 run_args 后,build_investigate_args 正确透传为 flag
+        (True 传/False 缺省);dry_run 显式 False 才传 --no-dry-run。"""
+        case = {"envelope": "e.json", "responses": "r.json",
+                "run_args": {"assets": True, "snapshots": True,
+                             "dry_run": False}}
+        argv = ev_mod.build_investigate_args(case, Path("d/x.db"), Path("r"))
+        self.assertIn("--assets", argv)
+        self.assertIn("--snapshots", argv)
+        self.assertIn("--no-dry-run", argv)
+        case2 = {"envelope": "e.json", "responses": "r.json",
+                 "run_args": {"assets": False, "dry_run": True}}
+        argv2 = ev_mod.build_investigate_args(case2, Path("d/x.db"), Path("r"))
+        self.assertNotIn("--assets", argv2)
+        self.assertNotIn("--snapshots", argv2)
+        self.assertNotIn("--no-dry-run", argv2)
+
+    def test_snapshot_dry_run_reverse_form(self):
+        """快照疫苗:CLI 属性 no_dry_run(store_true 反形态)反推 meta 键
+        dry_run(与 interleave 同构),配对比较按正向值进行。"""
+        a = args()
+        a.no_dry_run = True
+        snap = _snapshot(a)
+        self.assertFalse(snap["dry_run"])
+        a2 = args()
+        a2.no_dry_run = False
+        snap2 = _snapshot(a2)
+        self.assertTrue(snap2["dry_run"])
+
+    def test_align_new_switch_flows_through(self):
+        """端到端疫苗:meta 带新开关(如 predicate_form=True)时,align 纠正
+        run_args 且值可见——保证 build_investigate_args 能读到。"""
+        meta = {"predicate_form": True, "corpus_bound_code": True,
+                "t1_independence": True, "rumor_meta_seed": True}
+        case = {"run_args": {}}
+        note = align_from_meta(case, meta)
+        self.assertTrue(case["run_args"]["predicate_form"])
+        self.assertTrue(case["run_args"]["t1_independence"])
+        self.assertIn("predicate_form", note)
 
 
 if __name__ == "__main__":

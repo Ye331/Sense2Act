@@ -50,6 +50,46 @@ class InvestigationConfig:
                                         # (录制件配对纪律);live 验证/下批重录后转正
                                         # (先判后用不改判证据;默认关——判型是新 stage,
                                         # 旧录制件零影响,开启录制后回放须同开[meta 对齐])
+    predicate_form_enabled: bool = False  # 谓词形态标注(手术包件 4,2026-10-22):
+                                          # S1b 出生时标 predicate_form,判决单源例外
+                                          # 加法保守合并 blocklist∨LLM(只能加拦)。
+                                          # 默认 off=纯 blocklist 现行为(E2 三判据
+                                          # 已过闸,重录波以全开录制后转正)
+    predicate_check_enabled: bool = False  # 谓词充分性核对(2026-10-25):判决梯
+                                           # 权威放行路径前核对证据是否载明 claim
+                                           # 谓词,不载明→维持待证实(定标探针
+                                           # 七轮定标+用户拍板;默认 off=不装配=
+                                           # 零调用零痕迹,照 red_team 先例)
+    corpus_bound_code_enabled: bool = False  # corpus_bound 代码判定化(手术包件 6,
+                                             # 2026-10-22):claim×信封语料规范化子串
+                                             # 匹配,代码覆写模型标注(保守:对不上落
+                                             # world 慢路);默认 off=模型标注现行为
+    t1_independence_enabled: bool = False    # T1 根独立性查检(手术包件 5,
+                                             # 2026-10-22):支持根内容级近重复折并
+                                             # (判决侧与 ESS 侧同折,口径一致);
+                                             # 默认 off=数根现行为
+    red_team_enabled: bool = False      # 反驳模式(方案三,2026-10-23):判决后
+                                        # 对抗复核(选靶=已证实∧world断言∧单根;
+                                        # 反证走既有 S6 复验;空手不加分只留痕)。
+                                        # 默认 off=行为零变化(行为参数:多采集+
+                                        # 多 LLM+可能触发复验;重录波触发频率
+                                        # 读数后定转正,照三开关生命周期)
+    red_team_budget: int = 2            # 每 claim 定向查询上限(预算分账)
+    flip_guard_enabled: bool = False    # D4 维持偏置闸(2026-11-08):复验场景
+                                        # 降级需硬反证/冷却窗外拦+升回滞后+抖动
+                                        # 报警(规则表 data/config/flip_rules.json
+                                        # 版本化改表即生效;维持偏置=宁漏翻不误翻)。
+                                        # 默认 off=闸全关=全链零行为变化(旧录制件
+                                        # 回放零扰动;on 入 META_KEYS 配对,照
+                                        # --predicate-check 先例:录制 on 回放须同开)
+    kb_enabled: bool = False            # S3 第四通道(K2,2026-10-27):KB 检索
+                                        # (蓝图 §四;--kb 默认 off=不装配=全链
+                                        # 零字节差异;on 时 lineage 继承+版本配对;
+                                        # 泄漏墙红线:bench 主读数永远 KB-off)
+    kb_path: str = ""                   # K5 呈现消费(渲染批次 2026-10-27):
+                                        # --kb on 时=CLI --kb-path;资质核对门控
+                                        # 链见 s7_report._kb_rows(有规则卡∧有
+                                        # 自我卡否则零痕迹)
     askgate_enabled: bool = True        # 门1 分叉实在性(P1-8):候选假设已有主导(分差≥θ)
                                         # 就不烦用户,决策单改写查工具+审计。默认开——只拦
                                         # "声明了 adjudicationTarget 且映射到假设"的问询,
@@ -62,6 +102,19 @@ class InvestigationConfig:
                                         # 有剩 → 停前发起一次确定性裁决问询(问人版死轮
                                         # 兜底,同构:prompt 第一道不灵,代码第二道;
                                         # S2 三次 live 0 问人的流量钥匙;默认关=旧件零影响)
+    ess_enabled: bool = True            # ESS 证据强度分旁车(阶段一,2026-10-20;方案 §五):
+                                        # finalize 末尾纯计算写 runs/<event>/ess.json +
+                                        # decision_log 概要 1 条(kind='其他');零行为参数
+                                        # (不进判决/不进 prompt/不入 META_KEYS)——
+                                        # off=只不落旁车,调查行为分毫不差
+    assets_enabled: bool = False        # 报告附件(A 线,2026-10-23):S7 前对
+                                        # official_website 证据下载产品图入 assets 列,
+                                        # 仅报告渲染消费,判决链(S4-S6)不读;默认关=
+                                        # 离线/回放零扰动,live+crawler local 显式开启
+    snapshots_enabled: bool = False     # 招标公告截图(B 线,2026-10-23):对已证实
+                                        # 且挂判决的 ccgp/天津政采关键证据整页截图入
+                                        # 附件;browser_auto 隔离通道(决策 #14),默认
+                                        # dry-run,真拍受硬限协议强制,额度与 capture 共用
 
 
 @dataclass
@@ -87,6 +140,15 @@ class DomainConfig:
         claim,单一权威根不足以裁定(证据形态超出单份文件所能承载),不适用
         权威登记源单源例外,须走独立根>=2 慢路。空/缺键=现行为(零迁移)。"""
         return list(self.credibility.get("single_source_exception_blocklist", []))
+
+    @property
+    def pc_trigger_patterns(self) -> list[str]:
+        """充分性核对触发正清单(2026-10-25,定标探针拍板):病根族词样——
+        清单外 claim 不进核对闸(元数据承载型:发布日期/平台/缺省核查,
+        内容核对范畴上治不了,零错杀暴露);宁窄勿宽,漏触发=该条不治
+        (可观测)。空/缺键=闸零触发(等价 off)。"""
+        return list(self.credibility.get("predicate_check_trigger_patterns",
+                                         []))
 
     def credibility_of(self, root: str) -> str:
         tiers = self.credibility.get("tiers", {})

@@ -1,6 +1,6 @@
 """运行参数旁车文件(.meta.json):录制件 <-> 运行参数的配对契约(P0 防再犯)。
 
-背景(2026-10-05 失真排查,会话记录第十五节):live 用 --assoc entity_text 录制、
+背景(2026-10-05 回放失真专项排查):live 用 --assoc entity_text 录制、
 评测回放走默认 entity 档 → 证据挂账集不同(23 vs 15) → S6 验票失败丢失翻正、
 错位挂账触发危险翻正——判决级回放**静默**失真。配对纪律第三条:运行参数与
 管道版本同等必须配对。
@@ -27,7 +27,15 @@ from pathlib import Path
 META_KEYS = ("variant", "assoc", "max_rounds", "max_llm_calls",
              "max_collect_calls", "disc", "interleave", "calibration",
              "ask_mode", "ask_gate", "sim_persona", "sim_seed", "ask_final",
-             "rumor_meta_seed")
+             "rumor_meta_seed", "predicate_form", "corpus_bound_code",
+             "t1_independence", "predicate_check", "red_team",
+             "red_team_budget", "kb",
+             # 图片线附件通道(2026-10-27 合入):store_true 型,改变证据/
+             # 附件流(assets 下载、snapshots 真拍出网)——行为参数须配对
+             "assets", "snapshots", "dry_run",
+             # D4 维持偏置闸(2026-11-08):改变终态翻转行为(降级闸/滞后/
+             # 冷却窗)——录制 on 回放 off 会静默改变判决,须配对
+             "flip_guard")
 
 
 def meta_path(record_path: str | Path) -> Path:
@@ -48,12 +56,18 @@ def _snapshot(args) -> dict:
             # CLI 形态是 --no-interleave(store_true),反推布尔
             val = (not args.no_interleave) if hasattr(args, "no_interleave") \
                 else bool(getattr(args, "interleave", None))
+        elif key == "dry_run":
+            # 同 interleave:CLI 形态 --no-dry-run(B 线截图真拍开关),反推布尔
+            val = (not args.no_dry_run) if hasattr(args, "no_dry_run") \
+                else bool(getattr(args, "dry_run", None))
         else:
             val = getattr(args, key, None)
             if key == "variant":
                 val = _norm_variant(val)
             elif key in ("disc", "calibration", "ask_gate", "ask_final",
-                         "rumor_meta_seed"):
+                         "rumor_meta_seed", "predicate_form",
+                         "corpus_bound_code", "t1_independence",
+                         "predicate_check", "kb", "flip_guard"):
                 val = (val == "on") if isinstance(val, str) else bool(val)
         snap[key] = val
     return snap
@@ -103,18 +117,25 @@ def mismatches(meta: dict, args) -> dict[str, tuple]:
     return out
 
 
+# 对齐白名单=META_KEYS 全量减 variant(variant 冻结响应吸收,只比对不强改)。
+# 2026-10-25 重录波教训:手工子集落后于开关扩容(disc/rumor_meta_seed/
+# predicate_form/corpus_bound_code/t1_independence 未入白名单),重录 r1 件
+# (三开关 on)在 evaluate 回放被配对闸门全案拦截——白名单必须与 META_KEYS
+# 同源派生,新增开关只改 META_KEYS 一处。
+ALIGN_KEYS = tuple(k for k in META_KEYS if k != "variant")
+
+
 def align_from_meta(case: dict, meta: dict) -> str:
     """评测回放前把 case.run_args 对齐到录制 meta(原地修改,返回留痕文案)。
 
-    只对齐**行为参数**(assoc/max_rounds/max_llm_calls/max_collect_calls)——
-    它们改变挂账集与循环轮数;variant 在回放中被冻结响应吸收(按 stage 消费,
+    只对齐**行为参数**(ALIGN_KEYS=META_KEYS 减 variant)——它们改变挂账集、
+    循环轮数或判决;variant 在回放中被冻结响应吸收(按 stage 消费,
     与档位无关),只比对报告不强改。case 显式写值与 meta 冲突时同样以 meta
     为准(评测的目的是忠实复现录制时刻)。
     """
     ra = case.setdefault("run_args", {})
     fixed: list[str] = []
-    for key in ("assoc", "max_rounds", "max_llm_calls", "max_collect_calls",
-                "ask_mode", "ask_gate", "sim_persona", "sim_seed", "ask_final"):
+    for key in ALIGN_KEYS:
         mv = meta.get(key)
         if mv is not None and ra.get(key) != mv:
             fixed.append(f"{key}:{ra.get(key)}->{mv}")

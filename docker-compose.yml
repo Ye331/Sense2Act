@@ -15,8 +15,11 @@ services:
       postgres: { condition: service_healthy }
     environment:
       INTERNAL_API_KEY: ${INTERNAL_API_KEY:-local-dev-internal-key}
+      AGENT_DATA_DIR: /app/agentdata
       # 语义检索用信号服务的同一个 bge 模型(512 维)
       EMBEDDING_ENDPOINT: ${EMBEDDING_ENDPOINT:-http://signal-api:8001/embed}
+    volumes:
+      - agentdata:/app/agentdata:ro
 
   signal-api:
     build:

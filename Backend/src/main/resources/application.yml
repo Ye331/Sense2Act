@@ -45,6 +45,9 @@ app:
     ttl: ${JWT_TTL:12h}
   internal-key: ${INTERNAL_API_KEY:}
   snapshot-dir: ${SNAPSHOT_DIR:./snapshots}
+  # Agent worker 共享卷在 Backend 侧只读挂载；附件下载只允许从此根目录解析。
+  agent-data-dir: ${AGENT_DATA_DIR:./agentdata}
+  attachment-max-bytes: ${ATTACHMENT_MAX_BYTES:10485760}
   # E5-5:内部接口按 X-Internal-Key 限流(令牌桶,每分钟补充满桶);0 = 不限流
   internal-rate-limit-per-minute: ${INTERNAL_RATE_LIMIT_PER_MINUTE:600}
   embedding:
