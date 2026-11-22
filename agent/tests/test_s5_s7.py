@@ -6,6 +6,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -1309,22 +1310,32 @@ class TestReportStyleBatch3(unittest.TestCase):
             "<ul><li>A<ul><li>a1</li><li>a2</li></ul></li><li>B</li></ul>")
 
     def test_review_html_nested_list_and_png(self):
-        """html 嵌套列表在位(依据子项嵌父 li)+链图附 png(复查拍板 C:dot
-        检测修复后 html=dot svg 无降级注记+同目录 chain.png;无 dot=如实
-        降级+零 png,失败不伪装)。"""
-        from sense2act.chain_svg import _find_dot
+        """HTML 保留嵌套列表和内嵌 SVG，PNG 导出成功后给出同目录提示。"""
         from sense2act.models.intel import Recommendation
         recs = [Recommendation(action="跟踪", rationale="x",
                                basis_claim_ids=["C1"], hypothesis_label="")]
-        self._finalize(rec_items=recs)
+        png_bytes = b"\x89PNG\r\n\x1a\n"
+        with patch("sense2act.chain_svg._find_dot", return_value="dot"), \
+                patch("sense2act.chain_svg.subprocess") as subprocess:
+            subprocess.run.return_value.stdout = png_bytes
+            self._finalize(rec_items=recs)
+        self.assertEqual(subprocess.run.call_args.args[0], ["dot", "-Tpng"])
         html = self._html()
         self.assertIn("<li>依据(1 项,其中 0 项已查实):<ul><li>", html)
-        if _find_dot():
-            self.assertNotIn("降级布局", html)
-            self.assertIn("另存图片:chain.png", html)
-            self.assertTrue((Path(self.tmp) / "evt_t" / "chain.png").exists())
-        else:
-            self.assertIn("降级布局", html)   # 无 dot=如实降级
+        self.assertIn('<h2>附录:证据链</h2><svg', html)
+        self.assertIn("另存图片:chain.png", html)
+        self.assertEqual((Path(self.tmp) / "evt_t" / "chain.png").read_bytes(),
+                         png_bytes)
+
+    def test_review_html_keeps_svg_without_dot(self):
+        """没有 Graphviz 时仍交付内嵌 SVG，报告不宣称生成了 PNG。"""
+        with patch("sense2act.chain_svg._find_dot", return_value=None):
+            self._finalize()
+        html = self._html()
+        self.assertIn('<h2>附录:证据链</h2><svg', html)
+        self.assertNotIn("降级布局", html)
+        self.assertNotIn("另存图片:chain.png", html)
+        self.assertFalse((Path(self.tmp) / "evt_t" / "chain.png").exists())
 
 
 class TestReportStyleBatchP(unittest.TestCase):
