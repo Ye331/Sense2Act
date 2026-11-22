@@ -43,7 +43,7 @@ function queryParams(): URLSearchParams {
   return new URLSearchParams(raw)
 }
 
-export function ChainPage() {
+export function ChainPage({ standalone = false }: { standalone?: boolean } = {}) {
   const [load, setLoad] = useState<LoadResult | null>(null)
   const [runsList, setRunsList] = useState<LocalRun[]>([])
   const [currentRunFile, setCurrentRunFile] = useState('')
@@ -168,17 +168,19 @@ export function ChainPage() {
       })
       return
     }
+    if (standalone) { void loadStatic(); return }
+
     api.chainRuns({ page_size: 100 }).then(page => {
       const ready = page.items.find(item => item.status === 'ready')
       if (ready) return api.chainWeb<unknown>(ready.investigation_id).then(raw => acceptPayload(raw, ready.investigation_id))
       if (page.items[0]) { showStatus(page.items[0]); return }
       return loadStatic()
     }).catch(err => {
-      // 未登录的独立 chain.html / 几何门禁仍允许走梯度0；服务端 5xx/坏件必须显式失败。
+      // 登录已失效时仍可读取本地出件；服务端 5xx/坏件必须显式失败。
       if (err instanceof ApiError && err.status === 401) { void loadStatic(); return }
       settleLoad({ problems: [`证据链服务加载失败：${String(err)}`], fileName: 'REST /chain-web' })
     })
-  }, [loadLocalRun])
+  }, [loadLocalRun, standalone])
 
   const payload = load && 'payload' in load ? load.payload : null
 

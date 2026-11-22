@@ -5,7 +5,7 @@ import { ChainPage } from './pages/ChainPage'
 export function ChainStandaloneApp() {
   return <div className="app-shell chain-standalone">
     <main className="main-content" style={{ display: 'flex', flexDirection: 'column' }}>
-      <ChainPage />
+      <ChainPage standalone />
     </main>
   </div>
 }

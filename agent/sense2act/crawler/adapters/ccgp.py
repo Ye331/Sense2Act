@@ -253,10 +253,16 @@ class CcgpAdapter:
                             for item in result.items]
         return result
 
+    def harvest(self) -> AdapterResult:
+        """返回常驻采集所需的完整公告清单和列表获取状态。"""
+        items, failure = self._sweep_lists()
+        if failure:
+            return failure
+        return AdapterResult(status="success" if items else "empty", items=items)
+
     def sweep(self) -> list[dict]:
         """全量清单(不过滤,含地域/采购人/阶段)——供成果转储,不进 S3 回执。"""
-        items, _ = self._sweep_lists()
-        return items
+        return self.harvest().items
 
     # ------------------------------------------------------------------
 

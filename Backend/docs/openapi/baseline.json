@@ -1291,6 +1291,40 @@
         }
       }
     },
+    "/api/v1/reports/{id}/attachments/{attachmentId}/content" : {
+      "get" : {
+        "tags" : [ "report-controller" ],
+        "operationId" : "attachment",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "attachmentId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "string",
+                  "format" : "byte"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/organizations/{id}" : {
       "get" : {
         "tags" : [ "org-controller" ],
@@ -1486,6 +1520,58 @@
         }
       }
     },
+    "/api/v1/investigations/{id}/chain-web" : {
+      "get" : {
+        "tags" : [ "chain-web-controller" ],
+        "operationId" : "detail_4",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseJsonNode"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/investigations/{id}/chain-web/status" : {
+      "get" : {
+        "tags" : [ "chain-web-controller" ],
+        "operationId" : "status",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponseMapStringObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/internal/signal-rules" : {
       "get" : {
         "tags" : [ "internal-rule-controller" ],
@@ -1627,7 +1713,7 @@
     "/api/v1/evidences/{id}" : {
       "get" : {
         "tags" : [ "evidence-controller" ],
-        "operationId" : "detail_4",
+        "operationId" : "detail_5",
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
@@ -1715,7 +1801,7 @@
     "/api/v1/events/{id}" : {
       "get" : {
         "tags" : [ "event-controller" ],
-        "operationId" : "detail_5",
+        "operationId" : "detail_6",
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
@@ -1884,7 +1970,7 @@
     "/api/v1/documents/{id}" : {
       "get" : {
         "tags" : [ "document-controller" ],
-        "operationId" : "detail_6",
+        "operationId" : "detail_7",
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
@@ -1962,10 +2048,45 @@
         }
       }
     },
+    "/api/v1/chain-web" : {
+      "get" : {
+        "tags" : [ "chain-web-controller" ],
+        "operationId" : "list_9",
+        "parameters" : [ {
+          "name" : "page",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "page_size",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponsePageResultMapStringObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/admin/backtests/{id}" : {
       "get" : {
         "tags" : [ "admin-backtest-controller" ],
-        "operationId" : "detail_7",
+        "operationId" : "detail_8",
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
@@ -2609,10 +2730,43 @@
           "event_id" : {
             "type" : "string"
           },
+          "conclusions" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "object"
+              }
+            }
+          },
           "claims" : {
             "type" : "array",
             "items" : {
               "$ref" : "#/components/schemas/DraftClaim"
+            }
+          },
+          "pending_findings" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "object"
+              }
+            }
+          },
+          "process_notes" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "object"
+              }
+            }
+          },
+          "attachments" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/DraftAttachment"
             }
           },
           "action_suggestions" : {
@@ -2630,13 +2784,49 @@
           }
         }
       },
+      "DraftAttachment" : {
+        "type" : "object",
+        "properties" : {
+          "evidence_id" : {
+            "type" : "string"
+          },
+          "kind" : {
+            "type" : "string"
+          },
+          "storage_key" : {
+            "type" : "string"
+          },
+          "content_type" : {
+            "type" : "string"
+          },
+          "sha256" : {
+            "type" : "string"
+          },
+          "size" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "caption" : {
+            "type" : "string"
+          },
+          "presentation_only" : {
+            "type" : "boolean"
+          }
+        }
+      },
       "DraftClaim" : {
         "type" : "object",
         "properties" : {
+          "source_claim_id" : {
+            "type" : "string"
+          },
           "text" : {
             "type" : "string"
           },
           "nature" : {
+            "type" : "string"
+          },
+          "status" : {
             "type" : "string"
           },
           "confidence" : {
@@ -2744,6 +2934,12 @@
           "id" : {
             "type" : "string"
           },
+          "source_claim_id" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          },
           "seq" : {
             "type" : "integer",
             "format" : "int32"
@@ -2803,10 +2999,46 @@
           "status" : {
             "type" : "string"
           },
+          "conclusions" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "object"
+              }
+            }
+          },
           "claims" : {
             "type" : "array",
             "items" : {
               "$ref" : "#/components/schemas/ClaimView"
+            }
+          },
+          "pending_findings" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "object"
+              }
+            }
+          },
+          "process_notes" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "object"
+              }
+            }
+          },
+          "attachments" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "object"
+              }
             }
           },
           "action_suggestions" : {
@@ -3735,6 +3967,24 @@
           }
         }
       },
+      "ApiResponseJsonNode" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/JsonNode"
+          }
+        }
+      },
+      "JsonNode" : {
+        "type" : "object"
+      },
       "ApiResponseListRuleView" : {
         "type" : "object",
         "properties" : {
@@ -4007,6 +4257,47 @@
                 "type" : "object"
               }
             }
+          }
+        }
+      },
+      "ApiResponsePageResultMapStringObject" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/PageResultMapStringObject"
+          }
+        }
+      },
+      "PageResultMapStringObject" : {
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "object"
+              }
+            }
+          },
+          "total" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "page" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "page_size" : {
+            "type" : "integer",
+            "format" : "int32"
           }
         }
       },
