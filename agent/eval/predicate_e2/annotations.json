@@ -1,0 +1,709 @@
+{
+ "meta": {
+  "date": "2026-10-22",
+  "model": "deepseek-chat",
+  "temperature": 0,
+  "note": "predicate_form 三字段批量标注(E2 硬闸门实验)"
+ },
+ "case_set": [
+  {
+   "id": "p01",
+   "beyond_single_doc": true,
+   "predicate_type": "dependency",
+   "grounding_quotes": [
+    "独立于其现有主营业务运营"
+   ]
+  },
+  {
+   "id": "p02",
+   "beyond_single_doc": true,
+   "predicate_type": "cross_entity",
+   "grounding_quotes": [
+    "已获得独立信源证实"
+   ]
+  },
+  {
+   "id": "p03",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "收入以政府补贴为主"
+   ]
+  },
+  {
+   "id": "p04",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "达到该采购单位历史金额中位数的28倍"
+   ]
+  },
+  {
+   "id": "p05",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "显著高于行业基线水平"
+   ]
+  },
+  {
+   "id": "p06",
+   "beyond_single_doc": true,
+   "predicate_type": "persistence",
+   "grounding_quotes": [
+    "连续三个季度呈下滑趋势"
+   ]
+  },
+  {
+   "id": "p07",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "相比去年,其资产负债率明显上升"
+   ]
+  },
+  {
+   "id": "p08",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "已大幅超出既定预算"
+   ]
+  },
+  {
+   "id": "p09",
+   "beyond_single_doc": true,
+   "predicate_type": "persistence",
+   "grounding_quotes": [
+    "是否具有延续性尚不明确"
+   ]
+  },
+  {
+   "id": "p10",
+   "beyond_single_doc": true,
+   "predicate_type": "persistence",
+   "grounding_quotes": [
+    "官网不存在任何风险提示信息"
+   ]
+  },
+  {
+   "id": "p11",
+   "beyond_single_doc": true,
+   "predicate_type": "persistence",
+   "grounding_quotes": [
+    "未曾就此事发布过澄清公告"
+   ]
+  },
+  {
+   "id": "live_c10",
+   "beyond_single_doc": true,
+   "predicate_type": "conjunction",
+   "grounding_quotes": [
+    "存在本次招标代理委托关系",
+    "有独立于本公告的信源佐证"
+   ]
+  },
+  {
+   "id": "live_c14",
+   "beyond_single_doc": true,
+   "predicate_type": "conjunction",
+   "grounding_quotes": [
+    "具备承接 1684 万元级出版服务项目的资质与产能",
+    "在投标截止前持续成立"
+   ]
+  },
+  {
+   "id": "tmc_C1",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "显著高于其历史采购水平(约历史中位数的4.2倍)"
+   ]
+  },
+  {
+   "id": "tmc_C2",
+   "beyond_single_doc": true,
+   "predicate_type": "dependency",
+   "grounding_quotes": [
+    "属于该院智慧医院三期建设的既定后续阶段"
+   ]
+  },
+  {
+   "id": "tmc_C3",
+   "beyond_single_doc": true,
+   "predicate_type": "cross_entity",
+   "grounding_quotes": [
+    "一期与二期项目中标方均为X智汇科技有限公司"
+   ]
+  },
+  {
+   "id": "tmc_C4",
+   "beyond_single_doc": true,
+   "predicate_type": "cross_entity",
+   "grounding_quotes": [
+    "同市另有2家医院(市第二、第三人民医院)启动同类AI辅助诊断采购"
+   ]
+  },
+  {
+   "id": "n01",
+   "beyond_single_doc": false,
+   "predicate_type": "self_contained",
+   "grounding_quotes": [
+    "解读文本的basisGaps载明需先补齐真实历史基线"
+   ]
+  },
+  {
+   "id": "n02",
+   "beyond_single_doc": false,
+   "predicate_type": "self_contained",
+   "grounding_quotes": [
+    "信封解释载明本项目金额627.0万元,为该采购单位过去10条有效金额中位数(21.9万元)的28.63倍"
+   ]
+  },
+  {
+   "id": "n03",
+   "beyond_single_doc": false,
+   "predicate_type": "self_contained",
+   "grounding_quotes": [
+    "信号信封载明amountHistory的historicalMedianAmountYuan为218965.5元"
+   ]
+  },
+  {
+   "id": "n04",
+   "beyond_single_doc": false,
+   "predicate_type": "self_contained",
+   "grounding_quotes": [
+    "A公司的注册资本为1000万元,法定代表人为张某"
+   ]
+  },
+  {
+   "id": "n05",
+   "beyond_single_doc": false,
+   "predicate_type": "self_contained",
+   "grounding_quotes": [
+    "其官网『关于我们』页面载明公司成立于2015年"
+   ]
+  },
+  {
+   "id": "n06",
+   "beyond_single_doc": false,
+   "predicate_type": "self_contained",
+   "grounding_quotes": [
+    "本项目采购人为天津市肿瘤医院空港医院,采购方式为公开招标"
+   ]
+  },
+  {
+   "id": "live_c8",
+   "beyond_single_doc": false,
+   "predicate_type": "self_contained",
+   "grounding_quotes": [
+    "contentSourceNote 与 companyProfile 为空,招标正文与主体画像信息缺失"
+   ]
+  },
+  {
+   "id": "live_c6",
+   "beyond_single_doc": false,
+   "predicate_type": "self_contained",
+   "grounding_quotes": [
+    "amountAnomaly、frequencyAnomaly、noveltyAnomaly 均为 null"
+   ]
+  }
+ ],
+ "rewrites": [
+  {
+   "id": "rw_p01_1",
+   "beyond_single_doc": true,
+   "predicate_type": "dependency",
+   "grounding_quotes": [
+    "不依赖其现有主营业务运转"
+   ],
+   "parent_id": "p01"
+  },
+  {
+   "id": "rw_p01_2",
+   "beyond_single_doc": true,
+   "predicate_type": "dependency",
+   "grounding_quotes": [
+    "与既有主业分开运营、互不混同"
+   ],
+   "parent_id": "p01"
+  },
+  {
+   "id": "rw_p01_3",
+   "beyond_single_doc": true,
+   "predicate_type": "dependency",
+   "grounding_quotes": [
+    "脱离其现有主营业务单独运行"
+   ],
+   "parent_id": "p01"
+  },
+  {
+   "id": "rw_p01_4",
+   "beyond_single_doc": true,
+   "predicate_type": "dependency",
+   "grounding_quotes": [
+    "独立于现有主业之外运营"
+   ],
+   "parent_id": "p01"
+  },
+  {
+   "id": "rw_p01_5",
+   "beyond_single_doc": true,
+   "predicate_type": "dependency",
+   "grounding_quotes": [
+    "运营独立于其主营业务体系"
+   ],
+   "parent_id": "p01"
+  },
+  {
+   "id": "rw_p02_1",
+   "beyond_single_doc": true,
+   "predicate_type": "cross_entity",
+   "grounding_quotes": [
+    "互不隶属的消息渠道证实"
+   ],
+   "parent_id": "p02"
+  },
+  {
+   "id": "rw_p02_2",
+   "beyond_single_doc": true,
+   "predicate_type": "cross_entity",
+   "grounding_quotes": [
+    "另一家无关联媒体核实"
+   ],
+   "parent_id": "p02"
+  },
+  {
+   "id": "rw_p02_3",
+   "beyond_single_doc": true,
+   "predicate_type": "cross_entity",
+   "grounding_quotes": [
+    "与之无关的第二家媒体报道了同一消息"
+   ],
+   "parent_id": "p02"
+  },
+  {
+   "id": "rw_p02_4",
+   "beyond_single_doc": true,
+   "predicate_type": "cross_entity",
+   "grounding_quotes": [
+    "独立信源交叉证实"
+   ],
+   "parent_id": "p02"
+  },
+  {
+   "id": "rw_p02_5",
+   "beyond_single_doc": true,
+   "predicate_type": "cross_entity",
+   "grounding_quotes": [
+    "独立信源对该传闻予以了确认"
+   ],
+   "parent_id": "p02"
+  },
+  {
+   "id": "rw_p03_1",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "收入的主体部分来自政府补贴"
+   ],
+   "parent_id": "p03"
+  },
+  {
+   "id": "rw_p03_2",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "政府补贴构成该公司收入的最大份额"
+   ],
+   "parent_id": "p03"
+  },
+  {
+   "id": "rw_p03_3",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "大部分营收靠政府补贴支撑"
+   ],
+   "parent_id": "p03"
+  },
+  {
+   "id": "rw_p03_4",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "收入以政府补贴为主(占比过半)"
+   ],
+   "parent_id": "p03"
+  },
+  {
+   "id": "rw_p03_5",
+   "beyond_single_doc": true,
+   "predicate_type": "conjunction",
+   "grounding_quotes": [
+    "以政府补贴为主的收入结构使得其抗风险能力存疑"
+   ],
+   "parent_id": "p03"
+  },
+  {
+   "id": "rw_p04_1",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "达到该采购单位历史金额中间值的28倍"
+   ],
+   "parent_id": "p04"
+  },
+  {
+   "id": "rw_p04_2",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "是该采购单位历史典型采购水平的28倍"
+   ],
+   "parent_id": "p04"
+  },
+  {
+   "id": "rw_p04_3",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "较该采购单位惯常采购规模高出28倍"
+   ],
+   "parent_id": "p04"
+  },
+  {
+   "id": "rw_p04_4",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "达该单位历史金额中位数的28倍以上"
+   ],
+   "parent_id": "p04"
+  },
+  {
+   "id": "rw_p04_5",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "与该单位历史金额中位数相差28倍"
+   ],
+   "parent_id": "p04"
+  },
+  {
+   "id": "rw_p05_1",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "显著高于行业通常水平"
+   ],
+   "parent_id": "p05"
+  },
+  {
+   "id": "rw_p05_2",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "明显超出行业参照水准"
+   ],
+   "parent_id": "p05"
+  },
+  {
+   "id": "rw_p05_3",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "较行业一般情况高出许多"
+   ],
+   "parent_id": "p05"
+  },
+  {
+   "id": "rw_p05_4",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "显著高于行业基线"
+   ],
+   "parent_id": "p05"
+  },
+  {
+   "id": "rw_p05_5",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "以行业基线衡量,其利润率显著偏高"
+   ],
+   "parent_id": "p05"
+  },
+  {
+   "id": "rw_p06_1",
+   "beyond_single_doc": true,
+   "predicate_type": "persistence",
+   "grounding_quotes": [
+    "营收连续三个季度不断走低"
+   ],
+   "parent_id": "p06"
+  },
+  {
+   "id": "rw_p06_2",
+   "beyond_single_doc": true,
+   "predicate_type": "persistence",
+   "grounding_quotes": [
+    "营收已连续三季持续下降"
+   ],
+   "parent_id": "p06"
+  },
+  {
+   "id": "rw_p06_3",
+   "beyond_single_doc": true,
+   "predicate_type": "persistence",
+   "grounding_quotes": [
+    "连续三个季度,其营收一路走低"
+   ],
+   "parent_id": "p06"
+  },
+  {
+   "id": "rw_p06_4",
+   "beyond_single_doc": true,
+   "predicate_type": "persistence",
+   "grounding_quotes": [
+    "营收连续三季呈现下滑趋势"
+   ],
+   "parent_id": "p06"
+  },
+  {
+   "id": "rw_p06_5",
+   "beyond_single_doc": true,
+   "predicate_type": "persistence",
+   "grounding_quotes": [
+    "从趋势看其营收已连续三季下滑"
+   ],
+   "parent_id": "p06"
+  },
+  {
+   "id": "rw_p07_1",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "与去年相较,其资产负债率明显上升"
+   ],
+   "parent_id": "p07"
+  },
+  {
+   "id": "rw_p07_2",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "和上一年度比,其资产负债率明显走高"
+   ],
+   "parent_id": "p07"
+  },
+  {
+   "id": "rw_p07_3",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "较去年明显上升"
+   ],
+   "parent_id": "p07"
+  },
+  {
+   "id": "rw_p07_4",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "相比上年,其资产负债率明显攀升"
+   ],
+   "parent_id": "p07"
+  },
+  {
+   "id": "rw_p07_5",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "相比去年明显上升"
+   ],
+   "parent_id": "p07"
+  },
+  {
+   "id": "rw_p08_1",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "已大幅超出预定预算"
+   ],
+   "parent_id": "p08"
+  },
+  {
+   "id": "rw_p08_2",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "花费已远超原定预算规模"
+   ],
+   "parent_id": "p08"
+  },
+  {
+   "id": "rw_p08_3",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "大大突破当初设定的预算"
+   ],
+   "parent_id": "p08"
+  },
+  {
+   "id": "rw_p08_4",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "已大幅超出既定预算范围"
+   ],
+   "parent_id": "p08"
+  },
+  {
+   "id": "rw_p08_5",
+   "beyond_single_doc": true,
+   "predicate_type": "comparison",
+   "grounding_quotes": [
+    "按既定预算衡量,其扩建计划已严重超支"
+   ],
+   "parent_id": "p08"
+  },
+  {
+   "id": "rw_p09_1",
+   "beyond_single_doc": true,
+   "predicate_type": "persistence",
+   "grounding_quotes": [
+    "能否长期持续尚不明确"
+   ],
+   "parent_id": "p09"
+  },
+  {
+   "id": "rw_p09_2",
+   "beyond_single_doc": true,
+   "predicate_type": "persistence",
+   "grounding_quotes": [
+    "日后是否会续作尚不明确"
+   ],
+   "parent_id": "p09"
+  },
+  {
+   "id": "rw_p09_3",
+   "beyond_single_doc": true,
+   "predicate_type": "persistence",
+   "grounding_quotes": [
+    "能否长久维持尚不明确"
+   ],
+   "parent_id": "p09"
+  },
+  {
+   "id": "rw_p09_4",
+   "beyond_single_doc": true,
+   "predicate_type": "persistence",
+   "grounding_quotes": [
+    "是否具有延续性还不清楚"
+   ],
+   "parent_id": "p09"
+  },
+  {
+   "id": "rw_p09_5",
+   "beyond_single_doc": true,
+   "predicate_type": "persistence",
+   "grounding_quotes": [
+    "尚不明确该合作项目的延续性如何"
+   ],
+   "parent_id": "p09"
+  },
+  {
+   "id": "rw_p10_1",
+   "beyond_single_doc": true,
+   "predicate_type": "persistence",
+   "grounding_quotes": [
+    "官网上没有任何风险提示信息"
+   ],
+   "parent_id": "p10"
+  },
+  {
+   "id": "rw_p10_2",
+   "beyond_single_doc": true,
+   "predicate_type": "persistence",
+   "grounding_quotes": [
+    "官网未见任何风险提示内容"
+   ],
+   "parent_id": "p10"
+  },
+  {
+   "id": "rw_p10_3",
+   "beyond_single_doc": true,
+   "predicate_type": "persistence",
+   "grounding_quotes": [
+    "遍览其官网,找不到风险提示信息"
+   ],
+   "parent_id": "p10"
+  },
+  {
+   "id": "rw_p10_4",
+   "beyond_single_doc": true,
+   "predicate_type": "persistence",
+   "grounding_quotes": [
+    "官网不存在风险提示类信息"
+   ],
+   "parent_id": "p10"
+  },
+  {
+   "id": "rw_p10_5",
+   "beyond_single_doc": true,
+   "predicate_type": "persistence",
+   "grounding_quotes": [
+    "风险提示信息在其官网上不存在"
+   ],
+   "parent_id": "p10"
+  },
+  {
+   "id": "rw_p11_1",
+   "beyond_single_doc": true,
+   "predicate_type": "persistence",
+   "grounding_quotes": [
+    "从未就此事发布过澄清公告"
+   ],
+   "parent_id": "p11"
+  },
+  {
+   "id": "rw_p11_2",
+   "beyond_single_doc": true,
+   "predicate_type": "persistence",
+   "grounding_quotes": [
+    "至今没有就此事发布澄清公告"
+   ],
+   "parent_id": "p11"
+  },
+  {
+   "id": "rw_p11_3",
+   "beyond_single_doc": true,
+   "predicate_type": "persistence",
+   "grounding_quotes": [
+    "始终未发澄清公告"
+   ],
+   "parent_id": "p11"
+  },
+  {
+   "id": "rw_p11_4",
+   "beyond_single_doc": true,
+   "predicate_type": "persistence",
+   "grounding_quotes": [
+    "未曾发布过有关此事的澄清公告"
+   ],
+   "parent_id": "p11"
+  },
+  {
+   "id": "rw_p11_5",
+   "beyond_single_doc": true,
+   "predicate_type": "persistence",
+   "grounding_quotes": [
+    "就此事而言,该公司未曾发布澄清公告"
+   ],
+   "parent_id": "p11"
+  }
+ ]
+}

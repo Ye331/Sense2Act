@@ -5,11 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite --configLoader runner --host 127.0.0.1",
-    "build": "tsc -b && vite build --configLoader runner",
+    "build": "tsc -b && vite build --configLoader runner && vite build --configLoader runner --mode chain-offline && node scripts/make-offline.mjs",
     "typecheck": "tsc -b --pretty false",
-    "preview": "vite preview --host 127.0.0.1"
+    "preview": "vite preview --host 127.0.0.1",
+    "verify:lines": "node scripts/verify-lines.mjs",
+    "sync:runs": "node scripts/sync-chain-runs.mjs"
   },
   "dependencies": {
+    "@xyflow/react": "^12.12.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
@@ -17,6 +20,7 @@
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
     "@vitejs/plugin-react": "^4.5.0",
+    "playwright-core": "^1.65.0",
     "typescript": "^5.8.3",
     "vite": "^6.3.0"
   }

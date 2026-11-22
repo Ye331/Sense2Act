@@ -72,10 +72,14 @@ export interface Investigation { id: string; signal_id: string; status: Investig
 export interface Question { id: string; text: string; raised_in_round: number; status: 'open' | 'clarified' | 'unresolved' | 'abandoned'; answer_summary: string | null; evidence_ids: string[] | null }
 export interface Step { seq: number; round: number; type: string; content: Record<string, any>; token_usage: number; created_at: string }
 export interface EvidenceRef { id: string; title: string; source_type: string }
-export interface Claim { id: string; seq: number; text: string; nature: 'fact' | 'inference' | 'speculation'; confidence: number; evidences: EvidenceRef[] }
+export interface Claim { id: string; source_claim_id?: string | null; status?: 'verified' | 'contested'; seq: number; text: string; nature: 'fact' | 'inference' | 'speculation'; confidence: number; evidences: EvidenceRef[] }
+export interface ReportConclusion { hypothesis_id: string; label: string; selected: boolean; current_judgment: string; basis: string[]; gaps: string[]; change_conditions: string[]; next_steps: string[]; supporting_claim_ids: string[]; pending_claim_ids: string[] }
+export interface PendingFinding { source_claim_id: string; text: string; gap: string; next_step: string; diagnostic?: string }
+export interface ProcessNote { source_claim_id: string; text: string; reason: string }
+export interface ReportAttachment { id: string; evidence_id: string; kind: 'image'; storage_key: string; content_type: string; sha256: string; size: number; caption: string; presentation_only: true }
 export interface Suggestion { id: string; text: string; priority: 'high' | 'medium' | 'low'; adopted_at: string | null }
 export interface ReportItem { id: string; investigation_id: string; title: string; status: 'draft' | 'published'; created_at: string }
-export interface Report extends ReportItem { signal_id: string; event_id: string | null; summary: string | null; claims: Claim[]; action_suggestions: Suggestion[]; meta: { rounds: number; tool_calls: number; token_used: number; cost_estimate: string }; disclaimer: string }
+export interface Report extends ReportItem { signal_id: string; event_id: string | null; summary: string | null; conclusions?: ReportConclusion[]; claims: Claim[]; pending_findings?: PendingFinding[]; process_notes?: ProcessNote[]; attachments?: ReportAttachment[]; action_suggestions: Suggestion[]; meta: { rounds: number; tool_calls: number; token_used: number; cost_estimate: string }; disclaimer: string }
 export interface Evidence { id: string; investigation_id: string; source_type: string; title: string; url: string | null; excerpt: string; published_at: string | null; fetched_at: string; content_hash: string | null; doc_id: string | null }
 export interface Source { id: string; name: string; type: 'web_page' | 'api' | 'rss'; url: string; adapter: string; schedule_cron: string; config: Record<string, unknown> | null; enabled: boolean; health: string | null; last_run_at: string | null; last_run_status: string | null }
 export interface EventItem { id: string; title: string; type: string; status: string; start_date: string | null; summary?: string; entities?: { id: string; name: string; type: string; role: string }[] }
@@ -88,6 +92,7 @@ export interface WatchProfile { id: string; name: string; enabled: boolean; note
 export interface Counter { total: number; today: number; by_status?: Record<string, number> }
 export interface Dashboard { documents: Counter; signals: Counter; investigations: Counter; reports: Counter }
 export interface StreamEvent { id: string; event: string; data: Record<string, any> }
+export interface ChainArtifactStatus { schema_version: 'chain_artifact_status.v1'; investigation_id: string; event_id?: string; status: 'ready' | 'failed' | 'invalid'; generated_at?: string; projection_version?: string; n_nodes?: number; n_edges?: number; error_code?: string | null; error_message?: string | null; last_good_generated_at?: string }
 
 // ---------- REST ----------
 
@@ -120,6 +125,9 @@ export const api = {
     return all
   },
   stopInvestigation: (invId: string) => json<Investigation>('POST', `/investigations/${id(invId)}/stop`),
+  chainRuns: (query?: Query) => json<Page<ChainArtifactStatus>>('GET', '/chain-web', { query }),
+  chainStatus: (invId: string) => json<ChainArtifactStatus>('GET', `/investigations/${id(invId)}/chain-web/status`),
+  chainWeb: <T>(invId: string) => json<T>('GET', `/investigations/${id(invId)}/chain-web`),
 
   organization: (orgId: string) => json<Organization>('GET', `/organizations/${id(orgId)}`),
   evidence: (evId: string) => json<Evidence>('GET', `/evidences/${id(evId)}`),
@@ -127,6 +135,11 @@ export const api = {
 
   reports: (query?: Query) => json<Page<ReportItem>>('GET', '/reports', { query }),
   report: (reportId: string) => json<Report>('GET', `/reports/${id(reportId)}`),
+  async reportAttachment(reportId: string, attachmentId: string): Promise<Blob> {
+    const response = await send('GET', `/reports/${id(reportId)}/attachments/${id(attachmentId)}/content`)
+    if (!response.ok) { await unwrap(response); throw new ApiError('附件读取失败', 50001, response.status) }
+    return response.blob()
+  },
   feedback: (reportId: string, body: { adopted_suggestion_ids?: string[]; comment?: string; flag?: 'false_positive' }) =>
     json<{ newly_adopted: string[]; comment_recorded: boolean; flagged: boolean }>('POST', `/reports/${id(reportId)}/feedback`, { body }),
   exportMarkdown: (reportId: string) => text(`/reports/${id(reportId)}/export`, { format: 'md' }),

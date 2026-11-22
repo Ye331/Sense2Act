@@ -12,6 +12,26 @@ from ..models.observation import CollectRequest
 from ..store.ledger import normalize_text
 
 
+def _mentions_tianjin(*values: str) -> bool:
+    return any("天津" in normalize_text(value or "") for value in values)
+
+
+def _official_profile_matches(*values: str) -> bool:
+    """官网源只在目标主体明确命中档案时启用。"""
+    try:
+        from ..crawler.adapters.official_site import load_official_profiles
+        profiles = load_official_profiles()
+    except (OSError, ValueError, TypeError):
+        return False
+    blob = normalize_text(" ".join(value or "" for value in values)).casefold()
+    return any(
+        normalize_text(name).casefold() in blob
+        for canonical, profile in profiles.items()
+        for name in [canonical, *(profile.get("aliases") or [])]
+        if name
+    )
+
+
 class ToolRouter:
     def __init__(self, platform_rules: dict):
         self._cfg = platform_rules or {}
@@ -48,8 +68,14 @@ class ToolRouter:
         platforms = [p for p in platforms if p not in excluded] or list(
             self._cfg.get("fallback_platforms", []))
 
-        query = " ".join((hints or [claim_text])[:3]).strip() or claim_text
         ctx = search_context or {}
+        # 区域源和机构官网都是条件源，不能因“公告/规划”等通用词泛化扇出。
+        if not _mentions_tianjin(blob, ctx.get("buyer", ""), ctx.get("region", "")):
+            platforms = [p for p in platforms if p != "tianjin_zfcg"]
+        if not _official_profile_matches(blob, ctx.get("buyer", "")):
+            platforms = [p for p in platforms if p != "official_website"]
+
+        query = " ".join((hints or [claim_text])[:3]).strip() or claim_text
         # §八 契约:路由键确定性注入 query(零 LLM)——"自由词 | 编号:XXX |
         # 采购人:YYY"。检索键来自信封路由键(项目编号/采购人),自由词由 S2
         # 模型补充;适配器可解析编号/采购人做精确匹配,或取 | 前自由词搜索。

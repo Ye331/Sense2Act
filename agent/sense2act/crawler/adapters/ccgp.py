@@ -19,7 +19,7 @@ from __future__ import annotations
 
 import re
 from datetime import datetime, timedelta, timezone
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 import trafilatura
 from lxml import etree, html
@@ -42,23 +42,20 @@ _BUYER_RE = re.compile(r"采购人[:：]\s*([^\s<]+)")
 # 详情页字段(移植自 ccgp_spider.py,经真实页面校验)
 _BUDGET_RE = re.compile(
     r"预算金额[：:\s]*[￥¥]?\s*([0-9][0-9,，]*(?:\.[0-9]+)?)\s*(亿元|万元|万|元)")
-_CN_DT = r"20\d{2}年\d{1,2}月\d{1,2}日\s*\d{1,2}(?:[:：]|点)\d{2}"   # 时刻写作 08:35 或 09点00分
-# 正文条款优先、页首摘要表兜底:摘要表的"开标时间"偶有误填(2026-10-18 实抓湖北公告把
-# 投标"开始时间"填进了开标时间),正文"提交投标文件截止时间、开标时间和地点"一节才是准的
 _DEADLINE_RES = (
-    re.compile(rf"投标截止时间[：:\s]+({_CN_DT})"),
-    re.compile(rf"提交投标文件截止时间[：:\s]+({_CN_DT})"),
-    re.compile(rf"提交投标文件截止时间[^。]{{0,80}}?截止时间[：:\s]+({_CN_DT})"),
-    re.compile(rf"开标时间[：:\s]+({_CN_DT})"),
+    re.compile(r"投标截止时间[：:\s]+(20\d{2}年\d{1,2}月\d{1,2}日\s*\d{1,2}[:：]\d{2})"),
+    re.compile(r"提交投标文件截止时间[：:\s]+(20\d{2}年\d{1,2}月\d{1,2}日\s*\d{1,2}[:：]\d{2})"),
+    re.compile(r"开标时间[：:\s]+(20\d{2}年\d{1,2}月\d{1,2}日\s*\d{1,2}[:：]\d{2})"),
 )
 _CN_DT_RE = re.compile(
-    r"(20\d{2})年(\d{1,2})月(\d{1,2})日\s*(\d{1,2})(?:[:：]|点)(\d{2})")
+    r"(20\d{2})年(\d{1,2})月(\d{1,2})日\s*(\d{1,2})[:：](\d{2})")
 _DETAIL_NO_RE = re.compile(r"项目编号[：:\s]+([^\s]+)")
 _AGENCY_RE = re.compile(r"代理机构名称[：:\s]+(.{2,60}?)(?=\s*代理机构地址)")
 _CONTACT_RE = re.compile(r"项目联系人[：:\s]+([^\s]{2,30})")
 _PHONE_RE = re.compile(r"项目联系电话[：:\s]+([0-9\-\(\)（）+、]{6,40})")
 _SIGNUP_RE = re.compile(r"获取招标文件时间[：:\s]*([^。;；]*?)(?=\s*开标|$)")
 _CN_DATE_RE = re.compile(r"(20\d{2})年(\d{1,2})月(\d{1,2})日")
+_URL_DATE_RE = re.compile(r"/t(20\d{6})_\d+\.htm(?:l)?$", re.I)
 
 
 def _page_text(page: str) -> str:
@@ -124,6 +121,27 @@ def _parse_list_time(raw: str) -> str:
     except ValueError:
         return ""
     return moment.astimezone(timezone.utc).isoformat()
+
+
+def _date_to_utc(raw: str) -> str:
+    """确定性日期(YYYY-MM-DD/YYYYMMDD) -> ISO 日历日期（不伪造时刻）。"""
+    value = (raw or "").strip().replace("-", "")
+    if not re.fullmatch(r"20\d{6}", value):
+        return ""
+    try:
+        moment = datetime.strptime(value, "%Y%m%d")
+    except ValueError:
+        return ""
+    return moment.date().isoformat()
+
+
+def published_at_from_ccgp_url(url: str) -> str:
+    """仅接受 CCGP 标准公告 URL 中的 tYYYYMMDD_ 日期。"""
+    parsed = urlparse(url or "")
+    if parsed.scheme not in ("http", "https") or not parsed.hostname or not parsed.hostname.endswith("ccgp.gov.cn"):
+        return ""
+    match = _URL_DATE_RE.search(parsed.path)
+    return _date_to_utc(match.group(1)) if match else ""
 
 
 def money_to_yuan(text: str | None) -> float | None:
@@ -204,7 +222,7 @@ class CcgpAdapter:
 
     # EvidenceItemLite 契约键(extra=forbid:转储侧 rich 字段不得流入 S3 回执)
     _CONTRACT_KEYS = ("platform", "source", "url", "title", "content",
-                      "published_at", "author_type", "dedup_key")
+                      "published_at", "published_at_source", "author_type", "dedup_key")
 
     def search(self, query: str, limit: int, buyer: str = "", project_no: str = "",
                published_date: str = "", source_url: str = "") -> AdapterResult:
@@ -216,7 +234,7 @@ class CcgpAdapter:
         非本站 URL 或直抓失败回退列表扫查(egress 已录直抓请求,不伪装)。
         """
         if source_url:
-            direct = self._fetch_source_url(source_url)
+            direct = self._fetch_source_url(source_url, published_date=published_date)
             if direct is not None:
                 return direct
         items, failure = self._sweep_lists(target_date=published_date)
@@ -236,11 +254,7 @@ class CcgpAdapter:
         return result
 
     def harvest(self) -> AdapterResult:
-        """全量清单 + 8 态回执(不过滤,含地域/采购人/阶段)——供常驻采集(collector)。
-
-        与 sweep 同源,区别是失败不吞:列表被拦/改版/全部超时如实回失败态,
-        采集端据此回报源健康度;详情补抓由采集端按自己的礼貌上限决定。
-        """
+        """返回常驻采集所需的完整公告清单和列表获取状态。"""
         items, failure = self._sweep_lists()
         if failure:
             return failure
@@ -317,27 +331,32 @@ class CcgpAdapter:
 
     def _precise_match(self, items: list[dict], buyer: str, project_no: str,
                        limit: int) -> AdapterResult:
-        """定向精确匹配:采购人 + 项目编号 子串命中(替代宽词,避免误命中无关
-        公告)。采购人优先匹配列表页抽取的 buyer 字段,兜底标题;项目编号剥
-        PRJ- 前缀(信封 project_id 带前缀,标题里是无前缀形式)。"""
-        matched: list[dict] = []
-        for item in items:
-            if buyer:
-                hay = f"{item.get('buyer') or ''} {item['title']}"
-                if buyer not in hay:
-                    continue
-            if project_no:
-                core = project_no.replace("PRJ-", "")
-                if core not in item["title"] and project_no not in item["title"]:
-                    continue
-            matched.append(item)
+        """定向精确匹配:采购人/项目编号任一命中即入选,双命中优先(OR 评分)。
+
+        2026-10-21 live 实证修正:原 AND 语义在 project_no 为合成 ID(信封
+        projectId 兜底,非公告真实编号)时会连采购人已命中的目标一并排除
+        (哈医大附一院事件定向检索空手而归)。OR 评分 = buyer命中 + 编号命中,
+        零分剔除;排序:评分降序 -> 发布时间新者优先。"""
+        core = project_no.replace("PRJ-", "") if project_no else ""
+
+        def score(item: dict) -> int:
+            s = 0
+            if buyer and buyer in f"{item.get('buyer') or ''} {item['title']}":
+                s += 1
+            if core and (core in item["title"] or project_no in item["title"]):
+                s += 1
+            return s
+
+        matched = [(score(i), i) for i in items if score(i) > 0]
         if not matched:
             return AdapterResult(
                 status="empty",
                 message=f"定向检索(采购人『{buyer}』/项目编号『{project_no}』)"
                         f"在窗口内未命中")
-        matched.sort(key=lambda i: i["published_at"] or "", reverse=True)
-        return AdapterResult(status="success", items=matched[:limit])
+        matched.sort(key=lambda p: (p[1]["published_at"] or ""), reverse=True)
+        matched.sort(key=lambda p: -p[0])
+        return AdapterResult(status="success",
+                             items=[i for _, i in matched[:limit]])
 
     def _parse_list(self, page: str, page_url: str) -> list[dict] | None:
         try:
@@ -373,6 +392,7 @@ class CcgpAdapter:
                 "title": title,
                 "content": content,
                 "published_at": _parse_list_time(tmatch.group(1) if tmatch else ""),
+                "published_at_source": "list" if tmatch else "",
                 "author_type": "官方公告",
                 "dedup_key": f"ccgp:{m.group(1)}",
                 # 以下为转储侧字段(不进 EvidenceItemLite 契约,sweep 用)
@@ -406,6 +426,12 @@ class CcgpAdapter:
         (供精确检索/呈现回填)。正文抽取失败静默保持标题级,不伪装。
         """
         fields = parse_detail_fields(page)
+        text = _page_text(page)
+        tmatch = _LIST_TIME_RE.search(text)
+        detail_date = _parse_list_time(tmatch.group(1) if tmatch else "")
+        if detail_date:
+            item["published_at"] = detail_date
+            item["published_at_source"] = "detail"
         body = parse_detail_body(page)
         if body is None:
             # 旧版公告无已知正文容器时，仅在可核实详情字段存在时通用抽取。
@@ -443,7 +469,7 @@ class CcgpAdapter:
         item.update({k: v for k, v in fields.items()
                      if k not in ("content",)})
 
-    def _fetch_source_url(self, url: str) -> AdapterResult | None:
+    def _fetch_source_url(self, url: str, *, published_date: str = "") -> AdapterResult | None:
         """信封自带目标公告 URL 直抓(发现三,2026-10-16):最强路由键。
 
         返回 None = 本适配器不消费(非本站)或直抓失败 -> 调用方回退列表
@@ -469,14 +495,21 @@ class CcgpAdapter:
             "title": _detail_title(resp.text) or url,
             "content": "",
             "published_at": "",
+            "published_at_source": "",
             "author_type": "官方公告",
             "dedup_key": (f"ccgp:{m.group(1)}" if m
                           else f"ccgp:url:{url.rstrip('/').split('/')[-1]}"),
         }
-        text = _page_text(resp.text)
-        tmatch = _LIST_TIME_RE.search(text)
-        item["published_at"] = _parse_list_time(tmatch.group(1) if tmatch else "")
         self._apply_detail(item, resp.text)
+        if not item["published_at"]:
+            item["published_at"] = published_at_from_ccgp_url(url)
+            if item["published_at"]:
+                item["published_at_source"] = "url"
+        if not item["published_at"] and published_date:
+            # 此函数只由 source_url 原样直抓进入，故信封 URL 与候选 URL 精确相同。
+            item["published_at"] = _date_to_utc(published_date)
+            if item["published_at"]:
+                item["published_at_source"] = "envelope_exact"
         # 契约投影:rich 字段(budget_yuan 等)不得流入 S3 回执(extra=forbid),
         # 与列表路径 search() 尾部的投影同规
         return AdapterResult(

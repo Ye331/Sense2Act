@@ -1,0 +1,37 @@
+{
+  "version": "kb-0.2",
+  "note": "知识库入卡门槛与派生参数(2026-10-26 K1 切片;2026-10-27 K5 增 rule_check;蓝图=《实施方案/企业知识库-实施方案-20261025.md》§二/§三)。纪律:①卡 schema 冻结、卡种开放注册(card_kinds 版本化,kind 不写死代码);②改门槛=幂等重派生(全量重建,同源两遍逐字节一致);③数值/清单参数只进本表,代码零硬编码兜底(照 ess_rules 纪律,回归测试必须含改表即生效断言)。",
+  "card_kinds": ["实体", "项目", "话题", "案卷", "文档"],
+  "derived_kinds": ["实体", "项目", "案卷"],
+  "source_gate": {
+    "eligible_round_min": 1,
+    "eligible_lineage_roots": ["human"],
+    "eligible_platforms": ["internal_history"],
+    "browser_marker": "[browser_auto]",
+    "note": "来源则合格根判据(全机械,零 LLM):采集(round>=eligible_round_min)∨人答(lineage_root=human)∨内部历史(platform=internal_history)∨浏览器捕获(author_type 含 browser_marker)。其余(信封种子 platform=signal_layer、线索卡等 round=0 复述族)整族出局——解读信封/种子标签零知识增量,案卷卡全量兜底一条不丢。宁窄勿宽:capture_cli 也插 round=0,round 单独不作合格判据。"
+  },
+  "substance_gate": {
+    "exclude_self_contained": true,
+    "note": "对象卡只收世界断言(用户 2026-10-26 二次拍板:自证复述族彻底出局)。判据全机械,任一命中→不进对象卡 claim 链接(案卷卡全量兜底不变;信封事实由项目卡 attributes 承接——信封每 run 必然重新在场,存卡=零知识增量):①claims.corpus_bound=1(corpus_bound v2 代码判定列,重录波全开);②文本带框架词前缀(corpus_bound._strip_heads 同源消费,信封载明/线索卡称/公告载明/正文载明/解读载明…单源零漂移)。predicate_form 未落库(在 S6 payload),第三判据留待 S1b 落库后接入。"
+  },
+  "zones": {
+    "正卡": ["已证实", "矛盾"],
+    "未决": ["待证实"],
+    "待复核": "待复核",
+    "note": "状态则(蓝图 §二四则3):已证实/矛盾→正卡区(硬事实/翻转史最可复用);待证实∧有合格根→未决区(下轮 S1b 种子);其余不入对象卡(案卷卡兜底)。待复核=种子质量闸(§二):run meta predicate_check=off ∧ 文本命中病根族(trigger_patterns_source 指向的清单)→降权入待复核,不进正卡;predicate_check on 之后的新 run 产物直入正卡。"
+  },
+  "trigger_patterns_source": "credibility_rules.json:predicate_check_trigger_patterns",
+  "retrieval": {
+    "hits_max": 3,
+    "simhash_dist": 1,
+    "note": "K2 S3 第四通道检索参数(2026-10-27):每轮命中上限;simhash 近重复通道汉明距离阈值(与 ledger.SIMHASH_NEAR_DUP_DIST 同源同值,阈值语义='只标几乎完全一样'——见 ledger.py:37-40 定标注记)。只服务正卡区∧sensitivity=public(§七消费通道纪律+§6.4敏感红线);每指纹单 run 只服务一次。"
+  },
+  "rule_check": {
+    "predicates": ["gte", "lte", "holds", "exists"],
+    "item_kinds": ["准入", "红线", "加分"],
+    "default_item_kind": "准入",
+    "self_entity_id": "ent_self",
+    "note": "K5 规则卡比对参数(2026-10-27;蓝图 §三要点6 独立规则表+§6.3 认识论四分'内部规则不参与三态,比对表每格走三态')。predicates=上传校验白名单(开放注册:表内校验,清单外显式拒绝);item_kinds=条目种类(准入|红线|加分;v1 只影响呈现不改变比对逻辑,红线不满足=硬伤留渲染批次);self_entity_id=自我卡固定 id(蓝图 §三要点5:资质核对表=招标要求×自我卡 corpus 链;上传件 entity 带 self:true 归此 id)。三态语义=金标口径:已证实=载明∧比较真/矛盾=载明∧比较假/待证实=无载明(查不到→OQ 纪律,禁止伪装满足)。证据优先级=attributes 显式值>正卡区 claim 载明>未决区不作依据(未证实不能当合规证据,§七消费通道纪律同源)。"
+  },
+  "immutability": "卡与链是派生视图只存引用不拷贝状态(蓝图铁律):claim 三态现场读主库,zone 仅为派生时门槛判定快照(kb_version 随行,重派生可改)。"
+}

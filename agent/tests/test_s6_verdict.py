@@ -334,5 +334,46 @@ class TestPartialDerive(unittest.TestCase):
         self.assertIsNone(self.led.claim_row("evt_t:C2a"))
 
 
+class TestOpinionPayloadQuoteReason(unittest.TestCase):
+    """件 5(呈现完整化 B-4,2026-11-09 拍板带上):意见 payload judgments
+    落 quote/reason——裁定逐条清单可展示引文的落账底座。加法式(旧回放
+    对账不比 decision_log payload);验票失败路径(opinion=None)不受影响。"""
+
+    def setUp(self):
+        self.led = make_ledger()
+        install_simple(self.led)
+
+    def test_judgments_carry_quote_and_reason(self):
+        add_evidence(self.led, "evt_t", "some_web", "工资流水记录", "C2")
+        op = opinion("evt_t:C2", [("evt_t:E1", "支持", "工资流水记录", "原文直载")],
+                     verdict=ClaimStatus.PENDING)
+        VerdictEngine(self.led, AUTH, ScriptedOpinions([op]), retry=2).verify(
+            "evt_t:C2", 1)
+        rows = self.led.conn.execute(
+            "SELECT payload_json FROM decision_log "
+            "WHERE event_id='evt_t' AND kind='意见'").fetchall()
+        self.assertTrue(rows)
+        p = json.loads(rows[0][0])
+        j = p["judgments"][0]
+        self.assertEqual(j["quote"], "工资流水记录")
+        self.assertEqual(j["reason"], "原文直载")
+        self.assertEqual(j["direction"], "支持")
+
+    def test_ballot_failure_path_unaffected(self):
+        """验票失败(opinion=None)路径:无意见行落账(原形态不变)。"""
+        add_evidence(self.led, "evt_t", "some_web", "工资流水记录", "C2")
+
+        class Bad:
+            def opinion(self, claim, evidence, feedback=""):
+                op = opinion("evt_t:C2", [("evt_t:E1", "支持", "编造引文", "")],
+                             verdict=ClaimStatus.PENDING)
+                return op   # quote 非原文连续片段 -> 验票失败(retry 耗尽)
+
+        VerdictEngine(self.led, AUTH, Bad(), retry=0).verify("evt_t:C2", 1)
+        rows = self.led.conn.execute(
+            "SELECT 1 FROM decision_log WHERE kind='意见'").fetchall()
+        self.assertEqual(rows, [])
+
+
 if __name__ == "__main__":
     unittest.main()

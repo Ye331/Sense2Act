@@ -76,7 +76,7 @@ class StepReporter:
         self.document_id = document_id
         self.meter = meter
         self.evidence: dict[str, str] = {}        # 台账证据 id → 后端证据 id
-        self.skipped: dict[str, str] = {}         # 台账证据 id → 不可登记原因
+        self.skipped: dict[str, dict] = {}        # 台账证据 id → 结构化拒绝记录
         self.questions: dict[str, str] = {}       # 台账 claim id → 后端问题 id
         self.reported: dict[str, str] = {}        # claim id → 已上报终态
         self.rounds: set[int] = set()
@@ -151,10 +151,14 @@ class StepReporter:
         missing = len(local_ids) - len(registered)
         if missing:
             summary += f"(另 {missing} 条缺来源链接或发布时间,未入证据库)"
+        rejected = [self.skipped[local] for local in local_ids if local in self.skipped]
         self._step("tool_completed", round_no, {
             "round": round_no, "tool": "signal_layer" if signal_layer else self._tool, "ok": True,
             "latency_ms": 0 if signal_layer else int((time.monotonic() - self._selected_at) * 1000),
-            "result_summary": summary, "evidence_ids": registered}, f"{key}:done")
+            "result_summary": summary, "evidence_ids": registered,
+            "counts": {"found": len(local_ids), "accepted": len(registered),
+                       "rejected": len(rejected), "irrelevant": 0},
+            "rejections": rejected[:50]}, f"{key}:done")
 
     def _verdict(self, round_no: int, verdict: dict, key: str) -> None:
         claim_id, final = verdict.get("claim_id"), verdict.get("final")
@@ -184,7 +188,15 @@ class StepReporter:
         else:
             published = normalize_published(row["published_at"])
             if not row["url"] or not published:
-                self.skipped[local_id] = "缺来源链接" if not row["url"] else "缺发布时间"
+                code = "missing_url" if not row["url"] else "missing_published_at"
+                self.skipped[local_id] = {
+                    "local_evidence_id": local_id,
+                    "platform": row["platform"],
+                    "reason_code": code,
+                    "reason": "缺来源链接" if code == "missing_url" else "详情页与受信日期来源均未解析到发布时间",
+                    "url": row["url"] or "",
+                    "recoverable": True,
+                }
                 return None
             fields = {"source_type": SOURCE_TYPES.get(row["platform"], "web"), "url": row["url"],
                       "title": (row["title"] or row["url"])[:500], "excerpt": content[:2000],
@@ -194,17 +206,26 @@ class StepReporter:
         except BackendError as exc:
             if exc.code == CONFLICT:
                 raise InvestigationAborted(exc.message) from exc
-            self.skipped[local_id] = exc.message      # 42201/40001:这条证据不合规,不影响其余
+            self.skipped[local_id] = {
+                "local_evidence_id": local_id, "platform": row["platform"],
+                "reason_code": "backend_rejected", "reason": exc.message[:300],
+                "url": row["url"] or "", "recoverable": exc.code != CONFLICT,
+            }      # 42201/40001:这条证据不合规,不影响其余
             return None
         self.evidence[local_id] = view["id"]
         return view["id"]
 
-    def claim_evidence(self, claim_id: str, ruling: str | None = None) -> list[str]:
-        """claim 的后端证据 id:优先按裁定方向,退而取全部非“无关”挂账。"""
+    def claim_evidence(self, claim_id: str, ruling: str | None = None,
+                       *, exact: bool = False) -> list[str]:
+        """claim 的后端证据 id。
+
+        exact=True 时只返回指定裁定方向，供对外报告使用；问题时间线保留既有
+        “无同向票时展示全部相关票”的兼容行为。
+        """
         rows = self.ledger.conn.execute(
             "SELECT evidence_id, ruling FROM claim_evidence WHERE claim_id=? ORDER BY round", (claim_id,)).fetchall()
         picked = [r["evidence_id"] for r in rows if ruling and r["ruling"] == ruling]
-        if not picked:
+        if not picked and not exact:
             picked = [r["evidence_id"] for r in rows if r["ruling"] != "无关"]
         return list(dict.fromkeys(self.evidence[e] for e in picked if e in self.evidence))
 

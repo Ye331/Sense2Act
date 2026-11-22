@@ -317,7 +317,17 @@ ReportDraft：
 ```json
 {
   "title": "...", "summary": "...", "event_id": null,
-  "claims": [ { "text": "...", "nature": "fact", "confidence": 0.95, "evidence_ids": ["ev_01H..."] } ],
+  "conclusions": [ { "hypothesis_id": "h1", "label": "...", "selected": true,
+    "current_judgment": "...", "basis": ["..."], "gaps": ["..."],
+    "change_conditions": ["..."], "next_steps": ["..."],
+    "supporting_claim_ids": ["c1"], "pending_claim_ids": ["c2"] } ],
+  "claims": [ { "source_claim_id": "c1", "text": "...", "nature": "fact",
+    "status": "verified", "confidence": 0.95, "evidence_ids": ["ev_01H..."] } ],
+  "pending_findings": [ { "source_claim_id": "c2", "text": "...", "gap": "...", "next_step": "..." } ],
+  "process_notes": [],
+  "attachments": [ { "evidence_id": "ev_01H...", "kind": "image",
+    "storage_key": "inv_01H.../runs/evt_x/assets/E1_img1.png", "content_type": "image/png",
+    "sha256": "...64位十六进制...", "size": 12345, "caption": "...", "presentation_only": true } ],
   "action_suggestions": [ { "text": "...", "priority": "high" } ],
   "event_extraction": {
     "event": { "title": "...", "type": "construction_wave", "start_date": "2024-03-15" },
@@ -335,6 +345,8 @@ ReportDraft：
 - context 新增全量 `questions`，保留既有 `open_questions`。单 Agent 服务重启后先查询 investigating/reporting、context 与内部 steps；已提交报告只执行收尾，已终态任务不再写入。不支持多个 worker 同时接管一个调查，租约机制属后续范围。
 - 所有调查写入在同一调查行锁下校验状态和预算；问题只在 investigating 可修改，终态新写入返回 40901。
 - 每条 report claim 的 evidence_ids 必须非空且引用本调查已登记证据；缺失/空列表返回 42201。本库证据的文档必须有 publish_date 和可读取快照，否则登记返回 42201。
+- `conclusions/pending_findings/process_notes/attachments` 均为可选兼容字段，缺省按空数组处理；`source_claim_id` 用于与 Agent 台账稳定映射。附件必须绑定本调查证据，只接受 png/jpeg/webp、相对 storage_key、匹配的大小与 SHA-256，并保持 `presentation_only=true`。
+- 图片内容经 JWT 鉴权接口 `GET /reports/{reportId}/attachments/{attachmentId}/content` 读取；API 不返回宿主机绝对路径，附件不参与 claim 判决。
 - 全局事件日志与业务同事务提交，提交后广播；两个 SSE 流按持久游标有序补发。
 
 - 写接口都做不变量校验（状态机、轮次、预算、证据引用），非法写入 40901 / 42201。

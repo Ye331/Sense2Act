@@ -1,0 +1,227 @@
+/* 证据链工作台 · 审计卷宗视觉(方案 §五)
+   定位:研究证据台,不是彩色思维导图。颜色一律低饱和,配合图标/边框/文字三重编码,
+   不靠颜色单独表义。变量组挂在 .chain-page 作用域,复用 brand.css --s2-* 基础色板。 */
+.chain-page {
+  --s2-chain-source: #46627f;      /* 来源:权威靛蓝 */
+  --s2-chain-source-soft: #e9eef4;
+  --s2-chain-fact: #2e7d6e;        /* 事实:青碧 */
+  --s2-chain-fact-soft: #e6f2ee;
+  --s2-chain-verification: #55628c;/* 验证:蓝紫 */
+  --s2-chain-verification-soft: #ebf0f7;
+  --s2-chain-reasoning: #7a6f8f;   /* 推理:灰紫(虚线派生感) */
+  --s2-chain-reasoning-soft: #f0edf5;
+  --s2-chain-conclusion: #183b56;  /* 结论:深蓝黑(brand 主色) */
+  --s2-chain-conclusion-soft: #e8eef3;
+  --s2-chain-prove: #3d6a8f;       /* 直接证明/印证/佐证 */
+  --s2-chain-against: var(--s2-danger);
+  --s2-chain-temporal: var(--s2-warning-text);
+  --s2-chain-infer: #8a7f9c;
+  --s2-chain-same: #9aa7b1;
+  display: flex;
+  flex-direction: column;
+  /* 不依赖宿主布局链:主应用 .main-content 是普通滚动块(无确定高),
+     height:100% 会塌陷导致画布 0 高;用视口折算兜底 */
+  min-height: calc(100vh - 150px);
+  background: var(--s2-muted);
+}
+
+/* ── 顶部工具条 ─────────────────────────────── */
+.chain-toolbar { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; justify-content: space-between; padding: 10px 16px; background: var(--s2-surface); border-bottom: 1px solid var(--s2-line); }
+.chain-toolbar-id { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.chain-toolbar-id strong { font-size: 15px; color: var(--s2-brand); }
+.chain-asof { color: var(--s2-helper); font-size: 12.5px; white-space: nowrap; }
+.chip { display: inline-block; padding: 1px 8px; border-radius: 999px; background: var(--s2-muted); border: 1px solid var(--s2-line); color: var(--s2-secondary); font-size: 11.5px; white-space: nowrap; }
+.chip-schema { border-color: var(--s2-success); color: var(--s2-success-text); background: var(--s2-success-soft); }
+.chip-legacy { border-color: var(--s2-warning-text); color: var(--s2-warning-text); background: var(--s2-warning-soft); }
+.chain-toolbar-filters { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.lane-toggles { display: flex; gap: 4px; }
+.lane-toggle { border: 1px solid var(--s2-line-strong); background: var(--s2-surface); color: var(--s2-secondary); padding: 3px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; }
+.lane-toggle.off { opacity: 0.35; text-decoration: line-through; }
+.lane-toggle.lane-source.active, .lane-toggle.lane-source:not(.off) { border-color: var(--s2-chain-source); }
+.chain-search { width: 170px; height: var(--s2-control-height, 32px); padding: 4px 10px; border: 1px solid var(--s2-line-strong); border-radius: var(--s2-radius, 5px); font-size: 13px; }
+.chain-toolbar select { height: 30px; border: 1px solid var(--s2-line-strong); border-radius: 4px; font-size: 12.5px; color: var(--s2-text); background: var(--s2-surface); padding: 0 6px; }
+.chain-check { display: inline-flex; align-items: center; gap: 5px; font-size: 12.5px; color: var(--s2-secondary); cursor: pointer; white-space: nowrap; }
+
+/* ── 统计条:材料数≠独立根数,并排显式 ─────────── */
+.chain-stats { position: relative; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 7px 16px; background: var(--s2-surface); border-bottom: 1px solid var(--s2-line); font-size: 12.5px; color: var(--s2-secondary); }
+.chain-stats .stat b { color: var(--s2-text); font-size: 13px; }
+.stat-strong { border: 1px solid var(--s2-chain-source); border-radius: 4px; padding: 1px 8px; }
+.stat-status-verified b { color: var(--s2-success-text); }
+.stat-status-pending b { color: var(--s2-warning-text); }
+.stat-status-contra b { color: var(--s2-danger); }
+.stat-evidence-supported b { color: var(--s2-success-text); }
+.stat-evidence-contested, .stat-evidence-contested b { color: var(--s2-danger) !important; }
+.stat-evidence-unadjudicated, .stat-evidence-unadjudicated b { color: var(--s2-warning-text) !important; }
+.stat-evidence-no_direct { color: var(--s2-helper); }
+/* 裁边显式注记(泳道隐藏/同源开关):琥珀,呼应"省略显式呈现,不静默裁剪" */
+.stat-clipped { color: var(--s2-warning-text); background: var(--s2-warning-soft); border-radius: 4px; padding: 1px 8px; border: 1px dashed var(--s2-warning-text); }
+
+/* 自定义关系边标签(EdgeLabelRenderer Portal,JS 控制显隐):chip=边色描边+边色字 */
+.chain-rel-label { position: absolute; z-index: 1; font-size: 10.5px; font-weight: 600; letter-spacing: 0.5px; padding: 0 6px; background: var(--s2-surface); border: 1px solid currentColor; border-radius: 999px; pointer-events: none; white-space: nowrap; box-shadow: 0 1px 2px rgba(24,59,86,0.08); }
+.chain-omissions-btn { margin-left: auto; display: inline-flex; align-items: center; gap: 5px; border: 1px solid var(--s2-line-strong); background: var(--s2-surface); color: var(--s2-secondary); border-radius: 4px; padding: 3px 10px; font-size: 12px; cursor: pointer; }
+.chain-omissions-btn.has-omissions { border-color: var(--s2-warning-text); color: var(--s2-warning-text); background: var(--s2-warning-soft); }
+.chain-omissions-panel { position: absolute; top: calc(100% + 4px); right: 12px; z-index: 30; width: 420px; max-height: 300px; overflow: auto; background: var(--s2-surface); border: 1px solid var(--s2-line-strong); border-radius: 6px; box-shadow: 0 8px 24px rgba(24,59,86,0.14); padding: 10px 14px; font-size: 12.5px; }
+.chain-omissions-panel ul { list-style: none; margin: 6px 0 0; padding: 0; }
+.chain-omissions-panel li { padding: 3px 0; border-bottom: 1px dashed var(--s2-line); color: var(--s2-helper); }
+.chain-omissions-panel li b { color: var(--s2-text); }
+.chain-omissions-panel li.omission-active { color: var(--s2-warning-text); }
+.chain-omissions-panel li.omission-active b { color: var(--s2-warning-text); }
+.chain-omissions-panel code { float: right; }
+
+/* ── 画布与节点卡 ────────────────────────────── */
+.chain-canvas { position: relative; flex: 1; min-height: 540px; }
+/* xyflow 给根 div 打了 inline position:relative,且其高度由内容(全 absolute 层)撑=0——
+   父级只有 min-height 时画布塌空白;用 absolute+inset 强制填充父盒(压 inline 只能 !important) */
+.chain-canvas .react-flow { position: absolute !important; inset: 0; background: var(--s2-muted); }
+.react-flow__attribution { display: none; }
+
+.chain-card { width: 256px; background: var(--s2-surface); border: 1px solid var(--s2-line-strong); border-left-width: 4px; border-radius: 6px; box-shadow: 0 1px 3px rgba(24,59,86,0.08); font-size: 12px; color: var(--s2-text); transition: box-shadow 0.15s, opacity 0.15s; }
+.chain-card.is-selected { box-shadow: 0 0 0 2px var(--s2-action), 0 4px 12px rgba(24,59,86,0.18); }
+.chain-card.is-dimmed { opacity: 0.28; }
+.chain-card.evidence-no_direct { border-style: dashed; border-color: var(--s2-line-strong); border-left-color: var(--s2-chain-fact); }
+.chain-card.evidence-contested { border-color: var(--s2-danger); border-left-color: var(--s2-danger); }
+.chain-card.evidence-unadjudicated { border-color: var(--s2-warning-text); border-left-color: var(--s2-warning-text); }
+.chain-card.is-fact-cluster { border-width: 1px 1px 1px 5px; border-left-color: var(--s2-chain-fact); background: linear-gradient(135deg, var(--s2-surface), var(--s2-chain-fact-soft)); cursor: pointer; }
+.chain-card-head { display: flex; align-items: center; gap: 6px; padding: 5px 8px 2px; }
+.chain-num { font-family: ui-monospace, monospace; font-size: 11px; color: var(--s2-helper); }
+.chain-card-title { padding: 2px 9px 6px; line-height: 1.45; font-size: 12.5px; }
+.chain-card-head ~ .chain-card-title { padding-top: 0; }
+/* 卡面内容有界：全文保留在 title/抽屉，固定高布局不再被长标题撑破。 */
+.chain-card.lane-fact .chain-card-title { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.chain-card.lane-conclusion .chain-card-title { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.chain-meta-row { display: flex; flex-wrap: wrap; gap: 4px; padding: 0 9px 6px; }
+.chain-foot { display: flex; justify-content: space-between; gap: 6px; padding: 4px 9px 7px; border-top: 1px dashed var(--s2-line); color: var(--s2-helper); font-size: 11px; margin-top: 2px; }
+
+.chain-lane-badge { flex: none; font-size: 10.5px; padding: 1px 7px; border-radius: 3px; letter-spacing: 0.5px; }
+.lane-source .chain-lane-badge, .chain-lane-badge.lane-source { background: var(--s2-chain-source-soft); color: var(--s2-chain-source); }
+.chain-card.lane-source { border-left-color: var(--s2-chain-source); }
+.chain-card.lane-fact { border-left-color: var(--s2-chain-fact); }
+.chain-card.lane-verification { border-left-color: var(--s2-chain-verification); }
+.chain-card.lane-reasoning { border-left-color: var(--s2-chain-reasoning); border-style: solid; }
+.chain-card.lane-conclusion { border-left-color: var(--s2-chain-conclusion); }
+.chain-lane-badge.lane-fact { background: var(--s2-chain-fact-soft); color: var(--s2-chain-fact); }
+.chain-lane-badge.lane-verification { background: var(--s2-chain-verification-soft); color: var(--s2-chain-verification); }
+.chain-lane-badge.lane-reasoning { background: var(--s2-chain-reasoning-soft); color: var(--s2-chain-reasoning); }
+.chain-lane-badge.lane-conclusion { background: var(--s2-chain-conclusion-soft); color: var(--s2-chain-conclusion); }
+
+/* 三态:颜色+徽章文字双编码;待证实琥珀/矛盾暗红,不伪装终态 */
+.chain-status { margin-left: auto; font-size: 11px; padding: 1px 8px; border-radius: 999px; border: 1px solid transparent; white-space: nowrap; }
+.chain-status-verified { background: var(--s2-success-soft); color: var(--s2-success-text); border-color: var(--s2-success); }
+.chain-status-pending { background: var(--s2-warning-soft); color: var(--s2-warning-text); border-color: currentColor; }
+.chain-status-contra { background: var(--s2-danger-soft); color: var(--s2-danger); border-color: var(--s2-danger); }
+.chain-status-chosen { background: var(--s2-chain-conclusion-soft); color: var(--s2-chain-conclusion); border-color: var(--s2-chain-conclusion); }
+.chain-status-runnerup { background: var(--s2-muted); color: var(--s2-secondary); border-color: var(--s2-line-strong); }
+.chain-status-neutral { background: var(--s2-muted); color: var(--s2-secondary); }
+.chain-collapse-badge { font-size: 10.5px; color: var(--s2-helper); border: 1px dashed var(--s2-line-strong); border-radius: 3px; padding: 0 6px; }
+
+.chip-platform { font-family: ui-monospace, monospace; }
+.chip-auth { background: var(--s2-chain-source-soft); color: var(--s2-chain-source); border-color: currentColor; }
+.chip-party { background: var(--s2-warning-soft); color: var(--s2-warning-text); border-color: currentColor; }
+.chip-internal { background: var(--s2-danger-soft); color: var(--s2-danger); border-color: currentColor; }
+.chip-same { background: var(--s2-muted); color: var(--s2-secondary); }
+.chip-entity { background: var(--s2-chain-fact-soft); color: var(--s2-chain-fact); }
+.chip-subtype { background: var(--s2-chain-reasoning-soft); color: var(--s2-chain-reasoning); }
+.chip-family { background: var(--s2-chain-fact-soft); color: var(--s2-chain-fact); border-color: currentColor; }
+.chip-gap { background: var(--s2-warning-soft); color: var(--s2-warning-text); border-color: currentColor; }
+.chip-evidence-contested { background: var(--s2-danger-soft); color: var(--s2-danger); border-color: currentColor; }
+.chip-evidence-unadjudicated { background: var(--s2-warning-soft); color: var(--s2-warning-text); border-color: currentColor; }
+.chip-evidence-no_direct { background: var(--s2-muted); color: var(--s2-helper); border-style: dashed; }
+
+.chain-evidence-row { padding: 0 9px 6px; }
+.chain-family-row { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; padding: 0 9px 7px; color: var(--s2-helper); font-size: 11px; }
+.chain-cluster-count { padding: 0 9px 4px; color: var(--s2-chain-fact); }
+.chain-cluster-count b { font-size: 18px; }
+.cluster-action { color: var(--s2-action); font-weight: 600; }
+.chain-inference-text { margin: 0 9px 5px; color: var(--s2-secondary); font-size: 11.5px; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.chain-condition { margin: 0 9px 6px; padding: 4px 6px; border-left: 2px solid var(--s2-chain-reasoning); background: var(--s2-chain-reasoning-soft); color: var(--s2-secondary); font-size: 11px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+.chain-count-row { display: flex; gap: 10px; padding: 3px 9px 8px; color: var(--s2-secondary); font-size: 11.5px; }
+.chain-count-row b { font-size: 13px; color: var(--s2-text); margin-right: 2px; }
+.count-pos b { color: var(--s2-success-text); }
+.count-neg b { color: var(--s2-danger); }
+.count-temporal b { color: var(--s2-warning-text); }
+.chain-verdict { margin: 2px 9px 6px; padding: 5px 8px; background: var(--s2-chain-conclusion-soft); border-radius: 4px; font-size: 12px; color: var(--s2-chain-conclusion); }
+.chain-card.lane-conclusion .chain-verdict { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.45; }
+.chain-pending-hint { margin: -2px 9px 7px; color: var(--s2-warning-text); font-size: 11px; }
+
+.chain-lane-head { width: 256px; padding: 8px 10px; border-radius: 6px; border: 1px solid var(--s2-line-strong); background: var(--s2-surface); pointer-events: none; }
+.chain-lane-head strong { display: block; font-size: 13px; letter-spacing: 2px; }
+.chain-lane-head small { display: block; margin-top: 3px; font-size: 11px; line-height: 1.5; color: var(--s2-helper); }
+.chain-lane-head.lane-source strong { color: var(--s2-chain-source); }
+.chain-lane-head.lane-fact strong { color: var(--s2-chain-fact); }
+.chain-lane-head.lane-verification strong { color: var(--s2-chain-verification); }
+.chain-lane-head.lane-reasoning strong { color: var(--s2-chain-reasoning); }
+.chain-lane-head.lane-conclusion strong { color: var(--s2-chain-conclusion); }
+
+.chain-focus-hint { position: absolute; left: 16px; bottom: 14px; z-index: 12; background: var(--s2-surface); border: 1px solid var(--s2-line-strong); border-radius: 4px; padding: 4px 10px; font-size: 12px; color: var(--s2-secondary); box-shadow: 0 2px 8px rgba(24,59,86,0.1); }
+
+/* ── 详情抽屉 ──────────────────────────────── */
+.chain-drawer { position: absolute; top: 0; right: 0; bottom: 0; z-index: 20; width: 400px; max-width: 85%; background: var(--s2-surface); border-left: 1px solid var(--s2-line-strong); box-shadow: -8px 0 24px rgba(24,59,86,0.12); display: flex; flex-direction: column; }
+.chain-drawer-head { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--s2-line); }
+.chain-drawer-kind { font-size: 12px; font-weight: 600; color: var(--s2-action); letter-spacing: 1px; }
+.drawer-ref { font-family: ui-monospace, monospace; font-size: 11px; color: var(--s2-helper); word-break: break-all; }
+.drawer-close { margin-left: auto; border: none; background: none; font-size: 14px; color: var(--s2-secondary); cursor: pointer; padding: 4px 6px; }
+.drawer-close:hover { color: var(--s2-text); }
+.chain-drawer-body { flex: 1; overflow: auto; padding: 12px 16px 20px; font-size: 12.5px; line-height: 1.6; }
+.chain-drawer-body h3 { margin: 2px 0 8px; font-size: 14.5px; color: var(--s2-brand); }
+.chain-drawer-body h4 { margin: 14px 0 6px; font-size: 12px; letter-spacing: 1px; color: var(--s2-secondary); border-bottom: 1px dashed var(--s2-line); padding-bottom: 3px; }
+.chain-drawer-body dl { margin: 0; }
+.drawer-kv { display: flex; gap: 8px; padding: 3px 0; border-bottom: 1px dashed var(--s2-line); }
+.drawer-kv dt { flex: none; width: 76px; color: var(--s2-helper); font-size: 12px; }
+.drawer-kv dd { margin: 0; min-width: 0; }
+.drawer-gap { margin: 0; }
+.drawer-gap > div { display: grid; grid-template-columns: 78px minmax(0,1fr); gap: 6px; padding: 2px 0; }
+.drawer-gap dt { color: var(--s2-helper); }
+.drawer-gap dd { margin: 0; overflow-wrap: anywhere; }
+.chain-empty { color: var(--s2-helper); font-style: italic; }
+.drawer-quote { margin: 6px 0; padding: 8px 10px; background: var(--s2-muted); border-left: 3px solid var(--s2-action); border-radius: 0 4px 4px 0; font-size: 12.5px; }
+.drawer-note { margin: 6px 0; padding: 6px 9px; background: var(--s2-warning-soft); color: var(--s2-warning-text); border-radius: 4px; font-size: 12px; }
+.drawer-url small { display: block; margin-top: 3px; color: var(--s2-helper); }
+.drawer-url a { color: var(--s2-action); }
+.drawer-transitions, .drawer-rulings, .drawer-groups, .drawer-members { list-style: none; margin: 4px 0; padding: 0; }
+.drawer-transitions li, .drawer-rulings li, .drawer-groups li, .drawer-members li { padding: 4px 0; border-bottom: 1px dashed var(--s2-line); }
+.drawer-rulings li .chip { margin-right: 6px; }
+.drawer-src { display: block; color: var(--s2-helper); font-size: 11.5px; margin-top: 2px; }
+.drawer-reason { margin: 4px 0; color: var(--s2-secondary); }
+.drawer-hypothesis-description { margin: 4px 0 10px; color: var(--s2-secondary); }
+.drawer-claim-link { width: 100%; padding: 2px 0; border: 0; background: transparent; color: var(--s2-text); text-align: left; cursor: pointer; line-height: 1.55; }
+.drawer-claim-link:hover { color: var(--s2-action); }
+.drawer-claim-link .chain-status { display: inline-block; margin: 0 5px 0 0; }
+.drawer-next-steps { margin: 4px 0; padding-left: 22px; }
+.drawer-next-steps li { padding: 3px 0; }
+.drawer-source-note { margin-top: 14px; padding-top: 8px; border-top: 1px dashed var(--s2-line); color: var(--s2-helper); }
+.chip-ruling-pos { background: var(--s2-success-soft); color: var(--s2-success-text); border-color: currentColor; }
+.chip-ruling-neg { background: var(--s2-danger-soft); color: var(--s2-danger); border-color: currentColor; }
+.chip-ruling-other { background: var(--s2-muted); color: var(--s2-secondary); }
+.mono { font-family: ui-monospace, monospace; }
+
+/* ── 导入页 / 错误页 ─────────────────────────── */
+.chain-splash { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center; background: var(--s2-muted); border: 2px dashed transparent; padding: 20px; }
+.chain-splash.drag { border-color: var(--s2-action); background: var(--s2-action-soft); }
+.chain-splash-icon { color: var(--s2-chain-source); opacity: 0.75; }
+.chain-splash h2 { margin: 0; color: var(--s2-brand); letter-spacing: 2px; }
+.chain-splash p { margin: 0; color: var(--s2-secondary); font-size: 13.5px; line-height: 1.7; }
+.chain-splash-hint { font-size: 12px !important; color: var(--s2-helper) !important; }
+.chain-splash-hint code { background: var(--s2-surface); padding: 1px 6px; border-radius: 3px; border: 1px solid var(--s2-line); font-size: 11px; word-break: break-all; }
+.chain-splash-error .chain-splash-icon { color: var(--s2-danger); }
+.chain-error-list { text-align: left; max-width: 640px; background: var(--s2-danger-soft); border: 1px solid var(--s2-danger); border-radius: 6px; padding: 10px 16px 10px 30px; font-size: 12.5px; color: var(--s2-danger); }
+
+/* xyflow 控件/缩略图与卷宗风统一 */
+.react-flow__handle.chain-handle { opacity: 0; pointer-events: none; width: 4px; height: 4px; min-width: 0; min-height: 0; border: none; background: transparent; }
+
+/* ── 边降噪:标签归属/hover 强化(2026-11-10 目检反馈批;hover 邻域 F4 批) ─────
+   弱语义边(印证/佐证/传导/前提)标签默认隐藏,hover 该边才浮现;
+   强语义边(直接证明/反证/时效更新)标签常显(染色在 JS 侧=labelStyle)。
+   hover 邻域淡化在 ChainPage view useMemo 内 JS 计算(邻边 0.45,无关边不动)——
+   原全量淡化规则(.react-flow__edges:hover … 0.25)已删,不再依赖 CSS hover 链。 */
+.react-flow__edge .react-flow__edge-textwrapper { transition: opacity 0.15s; }
+.react-flow__edge.edge-weak .react-flow__edge-textwrapper { opacity: 0; }
+.react-flow__edge.edge-weak:hover .react-flow__edge-textwrapper,
+.react-flow__edge.edge-weak.selected .react-flow__edge-textwrapper { opacity: 1; }
+.react-flow__edge:hover .react-flow__edge-path,
+.react-flow__edge.selected .react-flow__edge-path { filter: drop-shadow(0 0 1.5px currentColor); }
+.react-flow__controls { box-shadow: 0 2px 8px rgba(24,59,86,0.12); border-radius: 6px; overflow: hidden; }
+.react-flow__controls-button { background: var(--s2-surface); border-bottom: 1px solid var(--s2-line); color: var(--s2-secondary); width: 26px; height: 26px; }
+.react-flow__controls-button:hover { background: var(--s2-muted); }
+.react-flow__minimap { border-radius: 6px; box-shadow: 0 2px 8px rgba(24,59,86,0.12); }
+.react-flow__edge.selected .react-flow__edge-path { stroke-width: 3; }

@@ -78,6 +78,9 @@ class InvestigationPipeline:
         calibrator=None,
         adjudicator=None,
         askgate=None,
+        red_team=None,
+        assets=None,
+        reborn=None,
     ):
         self._ledger = ledger
         self._domain = domain
@@ -94,6 +97,9 @@ class InvestigationPipeline:
         self._calibrator = calibrator   # 改造④:验收标准判型器(可选,默认关)
         self._adjudicator = adjudicator  # P1-8:人答裁决应用器(可选;None=答案不传导=旧行为)
         self._askgate = askgate          # P1-8:门1 分叉实在性(可选;None=不设门=旧行为)
+        self._red_team = red_team        # 方案三:反驳模式编排器(可选;None=off=零痕迹)
+        self._assets = assets            # A 线:报告附件收集器(可选;None=不收集=旧行为)
+        self._reborn = reborn            # 三阶段:线索转生注册器(可选;仅 resume 装配)
 
     # ------------------------------------------------------------------
 
@@ -104,6 +110,8 @@ class InvestigationPipeline:
         refresh_plan: dict[int, list[dict]] | None = None,
     ) -> dict:
         refresh_plan = refresh_plan or {}
+        from .store.ledger import _now as _ledger_now
+        session_start = _ledger_now()
         eid, continued = self._ledger.register_event(
             envelope, "", event_id)
         if continued:
@@ -164,6 +172,15 @@ class InvestigationPipeline:
             if gap and gap not in [g.text for g in blueprint.gaps]:
                 from .models.intel import GapDraft
                 blueprint.gaps.append(GapDraft(text=gap))
+        # corpus_bound 代码判定化(手术包件 6,2026-10-22):--corpus-bound-code
+        # on 时覆写 S1b 模型标注(模型降为对照信号,不一致留审计)。挂载点在
+        # tender_field_claims 机械追加**之前**——PRJ- 门语义(商机字段 claim
+        # 须详情正文级证实)不被本判定绕过;off=模型标注现行为(零迁移)。
+        if getattr(self._config, "corpus_bound_code_enabled", False):
+            from .corpus_bound import reconcile as _cb_reconcile
+            blueprint.claims, cb_audit = _cb_reconcile(blueprint.claims,
+                                                       envelope)
+            self._ledger.log(eid, 0, "其他", {"cb_code_audit": cb_audit})
         # 机械追加商机字段 claim(仅 v2 提单:procurement_project_id 带 PRJ- 前缀;
         # 世界断言,等 ccgp 详情正文级证实;id 续接 S1b)。v1 老 fixture(project_id
         # 如 MEDAI-2026-001)走老路径,回归基线零扰动。
@@ -176,6 +193,13 @@ class InvestigationPipeline:
                 blueprint.claims.append(c)
         self._ledger.install_blueprint(
             eid, blueprint, 0, aliases=self._domain.aliases)
+        # 谓词形态标注注入(手术包件 4,2026-10-22):S1b 标注(已验票清洗)
+        # 按 draft_id 交给判决引擎;--predicate-form off=空注入=纯 blocklist
+        # 现行为。续查场景旧 claim 无标注→自然回退 blocklist(安全侧)。
+        if getattr(self._config, "predicate_form_enabled", False):
+            self._verdicts.set_predicate_forms({
+                c.id: c.predicate_form for c in blueprint.claims
+                if c.predicate_form})
         # 回溯挂账:信封证据(轮 0)按实体交集挂到新生成的 claim 上
         self._writer5.associate_backlog(eid, 0)
         # 信封自证 claim(corpus_bound)挂账后立即裁定一次(轮 0):
@@ -188,10 +212,18 @@ class InvestigationPipeline:
         # 查证主循环
         stop_reason = ""
         ask_count = 0
-        round_no = 0
+        # D7(2026-10-23):round 全局续接——续查注回原事件时从该 event 已有
+        # 最大轮号+1 继续,round_progress/touched/死轮计量不再跨 run 交叠。
+        # 预算语义拍板:"每次运行最多再跑 N 轮"(max_rounds/dry-stop 语义不变,
+        # 只是起始号续接);单次运行(空事件)offset=0,行为逐字节等价。
+        # 轮 0 预置段(种子入账/首轮前处理)保持 0:每 run 一次的预置动作,
+        # 交叠可辨,偏移留观察项。
+        round_offset = self._ledger.max_round(eid)
+        round_no = round_offset
         dry_streak = 0   # 连续零信息增量轮数(S2 停与换纪律的代码兜底)
         try:
-            for round_no in range(1, self._config.max_rounds + 1):
+            for round_no in range(round_offset + 1,
+                                  round_offset + self._config.max_rounds + 1):
                 open_rows = self._ledger.open_claims(eid)
                 open_ids = [r["draft_id"] for r in open_rows]
                 if not open_ids:
@@ -302,8 +334,48 @@ class InvestigationPipeline:
         if not stop_reason:
             stop_reason = "轮数上限(硬停兜底;未决 claim 已进 Open Questions)"
 
+        # Red-team 反驳模式(方案三,2026-10-23):判决后对抗复核。挂主循环后
+        # finalize 前——此时全部判决已落账,选靶读完整 payload;off(None)=
+        # 零痕迹。空手不加分:复核结论全权归 S6 复验通道,本环节只留审计。
+        if self._red_team is not None:
+            self._red_team.run(eid, round_no, self._executor, self._observer,
+                               self._writer5)
+        # 报告附件(A 线图片 + B 线截图):S7 交付前收集;失败如实留痕,不阻交付
+        if self._assets is not None:
+            try:
+                collected = self._assets.collect(eid)
+                shots = self._assets.snapshots(eid)
+                self._ledger.log(eid, max(round_no, 1), "其他",
+                                 {"note": f"assets 附件收集: 产品图 {collected} 张 / "
+                                          f"公告截图 {shots} 张"})
+            except Exception as exc:  # noqa: BLE001 —— 附件层失败不伪装不阻报告
+                self._ledger.log(eid, max(round_no, 1), "其他",
+                                 {"note": f"assets 附件收集失败(如实无附件): "
+                                          f"{type(exc).__name__}"})
+
         costs = {"llm_calls": budget_report(),
                  "collect_calls": self._executor.collect_calls}
+        # 线索转生注册(三阶段 §六.3):resume 会话 finalize 前机械注册——
+        # 缺口建议类 insights → 去壳命题草稿 → add_claim 派生口入账(谱系=
+        # claims.reborn_from 回指 insights 条目);本会话不查,下轮续查接管。
+        # None=未装配=零痕迹;仅 continued(resume)触发,首轮回放不走转生。
+        reborn_claims: list[str] = []
+        if self._reborn is not None and continued:
+            try:
+                reborn_claims = list(self._reborn(self._ledger, eid,
+                                                  max(round_no, 1)))
+                if reborn_claims:
+                    self._ledger.log(eid, max(round_no, 1), "其他",
+                                     {"note": f"线索转生注册 {len(reborn_claims)}"
+                                              f" 条: {', '.join(reborn_claims)}"})
+            except Exception as exc:  # noqa: BLE001 —— 转生失败不伪装不阻交付
+                self._ledger.log(eid, max(round_no, 1), "其他",
+                                 {"note": f"线索转生注册失败(如实): "
+                                          f"{type(exc).__name__}: {exc}"})
+        # 时钟降级(动态报告④):到期 claim 本会话无新证据触及 -> 降回待证实,
+        # 让 S7 报告如实呈现"旧结论基于的状态已过期";纯时钟只降级不判终态。
+        clock_downgraded = self._ledger.downgrade_untouched_due(
+            eid, session_start, max(round_no, 1))
         summary = self._reports.finalize(
             eid, max(round_no, 1), stop_reason, costs=costs,
             envelope_label=label,
@@ -311,6 +383,8 @@ class InvestigationPipeline:
             envelope=envelope)
         self._ledger.close_event(eid)
         summary["continued_event"] = continued
+        summary["clock_downgraded"] = clock_downgraded
+        summary["reborn_claims"] = reborn_claims
         return summary
 
     # ------------------------------------------------------------------

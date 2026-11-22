@@ -21,11 +21,32 @@ def connect(db_path: str | Path) -> sqlite3.Connection:
         conn.commit()
     except sqlite3.OperationalError:
         pass
+    try:   # claims.created_at(2026-10-22 P2:续查新增条判定;照 corpus_bound 先例)
+        conn.execute("ALTER TABLE claims ADD COLUMN"
+                     " created_at TEXT NOT NULL DEFAULT ''")
+        conn.commit()
+    except sqlite3.OperationalError:
+        pass
+    try:   # claims.gist(gist 短名方案,2026-10-30:S1b 出生短名;照 created_at 先例)
+        conn.execute("ALTER TABLE claims ADD COLUMN"
+                     " gist TEXT NOT NULL DEFAULT ''")
+        conn.commit()
+    except sqlite3.OperationalError:
+        pass
+    try:   # claims.reborn_from(三阶段转生谱系,2026-11-06:由解读转生的
+        # 线索命题回指 insights 条目 id;照 gist 加法式先例,存量一字不动)
+        conn.execute("ALTER TABLE claims ADD COLUMN"
+                     " reborn_from TEXT NOT NULL DEFAULT ''")
+        conn.commit()
+    except sqlite3.OperationalError:
+        pass
     # 近重复去重三列迁移(2026-10-05 加 simhash/结构化键;旧 evidence 表补列,幂等)
+    # + 报告附件列(A 线,2026-10-23:图片附件,判决链不读)
     for ddl in (
         "ALTER TABLE evidence ADD COLUMN proj_stage_key TEXT NOT NULL DEFAULT ''",
         "ALTER TABLE evidence ADD COLUMN simhash TEXT NOT NULL DEFAULT ''",
         "ALTER TABLE evidence ADD COLUMN near_dup_of TEXT NOT NULL DEFAULT ''",
+        "ALTER TABLE evidence ADD COLUMN assets TEXT NOT NULL DEFAULT '[]'",
     ):
         try:
             conn.execute(ddl)

@@ -107,28 +107,6 @@ class TestCcgpAdapter(unittest.TestCase):
         self.assertEqual(hospital["dedup_key"], "ccgp:27439617")
         self.assertIn("2026-10-04T02:00:00", hospital["published_at"])  # 10:00 京时 -> UTC
 
-    def test_harvest_reports_failure_instead_of_empty(self):
-        """常驻采集用的全量通道:成功带富字段;被拦/改版如实回失败态(sweep 才吞成空表)。"""
-        ok = CcgpAdapter(http_get=routed_transport(OK_ROUTES)).harvest()
-        self.assertEqual(ok.status, "success")
-        self.assertEqual({i["buyer"] for i in ok.items},
-                         {"吉林市城市照明建设管理中心", "某市第一医院"})
-        blocked = CcgpAdapter(http_get=routed_transport({LOCAL_URL: (200, LIST_BLOCKED)}))
-        self.assertEqual(blocked.harvest().status, "authentication_required")
-        changed = {LOCAL_URL: (200, LIST_CHANGED), CENTRAL_URL: (200, LIST_CHANGED)}
-        self.assertEqual(CcgpAdapter(http_get=routed_transport(changed)).harvest().status,
-                         "parser_changed")
-        self.assertEqual(CcgpAdapter(http_get=routed_transport(changed)).sweep(), [])
-
-    def test_body_deadline_beats_misfilled_summary_table(self):
-        """2026-10-18 实抓湖北公告:页首摘要表把投标"开始时间"误填进开标时间,正文条款才准。"""
-        page = """<html><body><table><tr><td>开标时间</td><td>2026年10月19日 00:00</td></tr></table>
-        <div id="noticeArea"><p>四、提交投标文件截止时间、开标时间和地点</p>
-        <p>1、开始时间：2026年10月19日00点00分（北京时间）</p>
-        <p>2、截止时间：2026年11月10日09点00分（北京时间）</p></div></body></html>"""
-        from sense2act.crawler.adapters.ccgp import parse_detail_fields
-        self.assertEqual(parse_detail_fields(page)["deadline"], "2026-11-10 09:00")
-
     def test_search_detail_enrichment_and_contract(self):
         ad = CcgpAdapter(http_get=routed_transport(OK_ROUTES))
         r = ad.search("医院", 10)
@@ -255,11 +233,21 @@ class TestCcgpAdapter(unittest.TestCase):
         self.assertNotIn("吉林", " ".join(i["title"] for i in r2.items))
 
     def test_precise_match_project_no_miss_honest_empty(self):
-        """定向检索:项目编号未命中时如实 empty,不退回宽词伪装成功。"""
+        """定向检索:仅编号且未命中时如实 empty,不退回宽词伪装成功。"""
         ad = CcgpAdapter(http_get=routed_transport(OK_ROUTES))
         r = ad.search("医院", 10, project_no="SHGP-2026-A536")
         self.assertEqual(r.status, "empty")
         self.assertIn("未命中", r.message)
+
+    def test_precise_match_buyer_hits_despite_synthetic_project_no(self):
+        """2026-10-21 live 修正回归:buyer 命中 + 编号是合成 ID(不命中)时,
+        AND 语义曾把目标公告排除——OR 评分下单键命中仍入选。"""
+        ad = CcgpAdapter(http_get=routed_transport(OK_ROUTES))
+        r = ad.search("医院 采购", 10, buyer="某市第一医院",
+                      project_no="HRBYDFSYY-2026-HQ")   # 合成编号,公告里无
+        self.assertEqual(r.status, "success")
+        self.assertEqual(len(r.items), 1)
+        self.assertIn("某市第一医院", r.items[0]["title"])
 
     def test_pagination_backtrack(self):
         """翻页回溯:max_pages>1 时翻 index_2 拿更早一页的公告。"""
@@ -316,7 +304,17 @@ class TestCcgpRegistrationAndRouting(unittest.TestCase):
         self.assertNotIn("ccgp", registry.defaults())     # 按需启用(R6)
         router = ToolRouter(make_domain().platform_rules)
         req = router.route("查询该项目的中标结果公告", ["中标公告"], "claim")
-        self.assertEqual(req.platforms, ["ccgp", "tianjin_zfcg"])
+        # 2026-10-30 R6 扇出并入 official_website(当事方官网通道,语义反转同步断言)
+        self.assertEqual(req.platforms, ["ccgp"])
+
+    def test_tianjin_source_is_region_scoped(self):
+        router = ToolRouter(make_domain().platform_rules)
+        shanxi = router.route("查询忻州项目中标公告", ["中标公告"], "claim",
+                              search_context={"buyer": "忻州市人民医院"})
+        self.assertNotIn("tianjin_zfcg", shanxi.platforms)
+        tianjin = router.route("查询天津项目中标公告", ["天津 中标公告"], "claim",
+                               search_context={"buyer": "天津市某单位"})
+        self.assertIn("tianjin_zfcg", tianjin.platforms)
         domain = make_domain()
         self.assertEqual(domain.upstream_root("www.ccgp.gov.cn"), "ccgp")
         self.assertEqual(domain.credibility_of("ccgp"), "高")   # 权威根
@@ -351,6 +349,7 @@ class TestCcgpSourceUrlFetch(unittest.TestCase):
             "中国历史研究院《（新编）中国通史》纂修工程出版服务项目公开招标公告")
         self.assertEqual(item["dedup_key"], "ccgp:27467046")
         self.assertEqual(item["published_at"][:10], "2026-10-11")
+        self.assertEqual(item["published_at_source"], "detail")
         self.assertIn("预算:1684万元", item["content"])
         self.assertIn("投标截止:2026-11-02 13:30", item["content"])
         self.assertIn("代理机构:华采招标集团有限公司", item["content"])
@@ -390,6 +389,21 @@ class TestCcgpSourceUrlFetch(unittest.TestCase):
             {self.TARGET_URL: (200, LIST_BLOCKED)})).search(
             "q", 10, source_url=self.TARGET_URL)
         self.assertEqual(result.status, "authentication_required")
+
+    def test_standard_url_recovers_date_when_detail_has_none(self):
+        page = self.TARGET_PAGE.replace("发布时间： 2026-10-11 09:30", "")
+        item = CcgpAdapter(http_get=routed_transport({self.TARGET_URL: (200, page)})).search(
+            "q", 10, source_url=self.TARGET_URL).items[0]
+        self.assertEqual(item["published_at"], "2026-10-11")
+        self.assertEqual(item["published_at_source"], "url")
+
+    def test_exact_envelope_date_is_last_resort(self):
+        url = "https://www.ccgp.gov.cn/notice/target.htm"
+        page = self.TARGET_PAGE.replace("发布时间： 2026-10-11 09:30", "")
+        item = CcgpAdapter(http_get=routed_transport({url: (200, page)})).search(
+            "q", 10, source_url=url, published_date="2026-09-26").items[0]
+        self.assertEqual(item["published_at_source"], "envelope_exact")
+        self.assertEqual(item["published_at"], "2026-09-26")
 
 
 if __name__ == "__main__":

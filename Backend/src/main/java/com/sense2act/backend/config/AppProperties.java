@@ -8,7 +8,8 @@ import java.util.List;
 
 /** 应用配置,值全部来自环境变量(见 .env.example),环境差异不进代码。 */
 @ConfigurationProperties(prefix = "app")
-public record AppProperties(Jwt jwt, String internalKey, String snapshotDir, Seed seed, Embedding embedding,
+public record AppProperties(Jwt jwt, String internalKey, String snapshotDir, String agentDataDir,
+                            Long attachmentMaxBytes, Seed seed, Embedding embedding,
                             Investigation investigation, Integer internalRateLimitPerMinute, Cors cors) {
 
     public record Cors(List<String> allowedOrigins) {

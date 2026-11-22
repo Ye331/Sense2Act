@@ -1,0 +1,8 @@
+{
+  "version": "flip-rules-1",
+  "note": "翻转规则表(D 线 D4,2026-11-08)。分权:触发与判决一律确定性代码;维持偏置=宁漏翻不误翻;防抖三件套=滞后/冷却窗/抖动报警;内部权威≠免检(权威只豁免单源门槛不豁免复验)。缺文件=修正通道全关(确定性零行为变化,照 load_present_rules 纪律);改表即生效+测试锁。",
+  "downgrade": {"hard_root": 1, "authoritative_single": true, "hearsay": "observe_only"},
+  "hysteresis": {"promote_indep_roots": 2, "demote_hard_roots": 1},
+  "cooldown_days": 7,
+  "jitter_alarm": {"flips_per_claim_per_30d": 2}
+}

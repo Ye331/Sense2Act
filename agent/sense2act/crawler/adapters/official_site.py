@@ -35,6 +35,42 @@ _SECTION_WORDS = ("新闻", "公告", "动态", "资讯", "通知")
 _CONTENT_CAP = 1500
 _DATE_RE = re.compile(r"(\d{4})-(\d{2})-(\d{2})")
 _DETAILISH_RE = re.compile(r"info|article|news|detail|content|\d{4}", re.I)
+# 图片附件过滤(A 线,2026-10-23):明显图标/装饰/统计文件的文件名特征
+_IMG_JUNK_RE = re.compile(
+    r"logo|icon|sprite|avatar|favicon|spacer|pixel|qrcode|badge|btn|button",
+    re.I)
+
+
+def extract_image_urls(page: str, base_url: str, *, limit: int = 6) -> list[str]:
+    """详情页**正文区**图片 URL 抽取(纯解析,零网络;A 线报告附件用)。
+
+    2026-10-23 二代:trafilatura include_images 只取正文容器内的图——
+    站头 logo/页脚二维码/侧栏缩略图天然排除(用户反馈:全页 //img 扫查
+    把与内容无关的站级公共图收进了报告);正文抽取失败=无图(如实空缺,
+    不回退全页扫查)。垃圾过滤(data: URI/图标装饰文件名)与相对路径
+    补全、同 URL 去重保留。供 S7 资产步骤复用——适配器本身不下载图片。
+    """
+    try:
+        md = trafilatura.extract(page, include_images=True,
+                                 output_format="markdown") or ""
+    except Exception:
+        return []
+    out: list[str] = []
+    seen: set[str] = set()
+    for m in re.finditer(r"!\[[^\]]*\]\(([^)\s]+)\)", md):
+        src = m.group(1).strip()
+        if not src or src.startswith("data:"):
+            continue
+        if _IMG_JUNK_RE.search(src):
+            continue
+        url = urljoin(base_url, src)
+        if url in seen:
+            continue
+        seen.add(url)
+        out.append(url)
+        if len(out) >= limit:
+            break
+    return out
 
 
 def load_official_profiles(path: str | Path | None = None) -> dict:

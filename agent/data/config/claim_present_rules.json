@@ -1,0 +1,189 @@
+{
+  "version": "claim-present-rules-2",
+  "note": "卷面呈现模式表(三阶段 §三/§七.2,2026-11-06;四阶段批1 增 fanin_merge_min,2026-11-07;报告文风线第一批 增 report_verdict_phrases/report_stop_phrases,2026-11-07;报告文风线第二批 增 report_block_extra/report_rewrite_prefixes/report_rewrite_phrases/report_root_phrases/report_flip_phrases,2026-11-08)。四类前缀模式,全部取自真实台账锚点[忻州/dalian 系 bench 案]:shells=转述壳(已证实去壳直陈,待证实保留壳);interpretation=研判定性(→解读桥);gap_hint=缺口建议(→线索卡+转生清单);meta_info=元信息(→挡除+计数)。改表即生效+测试锁(照 ess_rules 数值参数纪律);bridge_min_verified=解读桥门槛(P3 首批 1,数量过多/质量参差时改表收紧);fanin_merge_min=扇出汇流阈值(四阶段 §六 拍板② 首批 3:(证据,关系词,目标组)同三元组边数≥阈值→渲染层并 1 条汇流边「关系词 ×N」;缺键=汇流关;2=几乎全汇流使命题层退化,小组(≤2 边)保留逐条边)。report_verdict_phrases=报告 OQ 条目卡材料行短语(判决 note→用户话,最长前缀匹配,读者不知情纪律:判决梯判据不上卡;缺键命中=通用兜底短语,首批锚点=判决梯全枚举[s6_verdict._rule_note]+忻州实账);report_stop_phrases=报告头部停止原因用户话(前缀匹配,全枚举值/前缀;缺键=通用兜底短语)。report_block_extra/report_rewrite_prefixes=报告正文输入三档分流(M1):挡除类不进 S7 正文 LLM 输入不上 OQ 卡(台账三态/附录 B/result.json 全量照旧=挡除≠抹平),转写类机械转写为局限说明句;判据=最长前缀匹配(转写长前缀优先于挡除短前缀,治同族 basisGaps 分档),挡除=interpretation/meta_info 两类前缀+report_block_extra 新增(解读登记=种子标签/缺口登记家族;解读的 basisGaps 载明=未知变体默认挡),锚点=忻州 r1(c3 解读定性/c4 检测器 null/c5 种子标签)+r3(c2 解读定性/c4 基线 null),转写=r3 c5(relevance 未评估)/c6(domain 空),全半角冒号双版照 gap_hint_strip 先例);report_rewrite_phrases=转写档→用户话短句(前缀映射,合并注入结论卡局限说明,字段名不出境);report_root_phrases=结论卡根数人话分档(multi/two/single/auth/auth_mixed 五档,禁「独立根」判据名);report_flip_phrases=结论卡何时变模板(gap=缺口查证为否研判不成立/evidence=支撑材料失实回落待查证,机器推导表述[唯一根失效→回待证实]禁上卡照批1.5 撤图先例)。report_stance_words=结论启发式 I1 的 T6 观点演化三键映射表(2026-11-08,方案《报告结论启发式呈现-设计方案》拍板7):signal_phrases=解读定性词→用户话措辞/signal_stances=定性词→方向族(positive/negative/watch/skeptic)/hypothesis_keywords=假设标签关键词→方向族(多者胜,平票/零命中=neutral 保守永不出逆转句=拍板9;skeptic 视同 neutral 保守);缺键/定性词未命中=对应洞察段零痕迹(失败不伪装)。",
+
+  "shells": [
+    "信封正文摘要载明",
+    "信封正文载明",
+    "信封 sourceUrl 指向",
+    "信封基础字段：",
+    "信封载明：",
+    "信封载明:",
+    "信封载明"
+  ],
+  "interpretation": [
+    "解读将本信号定性",
+    "解读定性",
+    "解读将本信号"
+  ],
+  "gap_hint": [
+    "解读登记",
+    "建议核查",
+    "建议关注"
+  ],
+  "meta_info": [
+    "解读自述",
+    "解读指出",
+    "解读选取的种子标签",
+    "解读选中的种子标签",
+    "信封未提供",
+    "信封未含"
+  ],
+  "gap_hint_strip": [
+    "解读登记了三条基础缺口：",
+    "解读登记了基础缺口：",
+    "解读登记了缺口：",
+    "解读登记缺口：",
+    "建议核查：",
+    "建议关注：",
+    "解读登记了三条基础缺口:",
+    "解读登记了基础缺口:",
+    "解读登记了缺口:",
+    "解读登记缺口:",
+    "建议核查:",
+    "建议关注:"
+  ],
+  "bridge_min_verified": 1,
+  "fanin_merge_min": 3,
+  "report_block_extra": [
+    "解读的 basisGaps 载明",
+    "解读登记",
+    "信封的"
+  ],
+  "report_rewrite_prefixes": [
+    "解读的 basisGaps 载明：该信号与本公司业务的相关性未评估",
+    "解读的 basisGaps 载明：domain 字段为空",
+    "解读的 basisGaps 载明:该信号与本公司业务的相关性未评估",
+    "解读的 basisGaps 载明:domain 字段为空"
+  ],
+  "report_rewrite_phrases": {
+    "解读的 basisGaps 载明：该信号与本公司业务的相关性未评估": "本次调查未评估该采购与贵司业务的匹配相关性",
+    "解读的 basisGaps 载明：domain 字段为空": "项目所属行业领域亦无公开标注",
+    "解读的 basisGaps 载明:该信号与本公司业务的相关性未评估": "本次调查未评估该采购与贵司业务的匹配相关性",
+    "解读的 basisGaps 载明:domain 字段为空": "项目所属行业领域亦无公开标注"
+  },
+  "report_root_phrases": {
+    "multi": "均由多处相互独立的公开来源分别印证",
+    "two": "由两处相互独立的公开来源分别印证",
+    "single": "目前仅由单一公开来源支撑,补证后更稳固",
+    "auth": "权威公示渠道已直接载明",
+    "auth_mixed": "权威公示渠道已直接载明,其余各条亦获独立来源相互印证"
+  },
+  "report_flip_phrases": {
+    "gap": "上述任一项查证为否,本研判不成立",
+    "evidence": "支撑材料若被证实失实,相关结论将回落为待查证",
+    "evidence_auth": "权威渠道的记载若被更正或撤销,相关结论将随之回落"
+  },
+
+  "report_verdict_phrases": {
+    "独立谱系根": "多个相互独立的公开来源分别记载,相互印证",
+    "权威登记源单源例外": "权威公示渠道已直接载明",
+    "自证例外": "由委托方提供的材料本身载明",
+    "支持方与反方均含权威登记源": "不同权威渠道的记载相互冲突",
+    "反方含权威登记源": "权威渠道出现相反记载",
+    "反方独立根": "公开来源出现相反记载",
+    "含信源条件谓词": "权威渠道虽有相关记载,尚不足以直接证实",
+    "谓词形态标注命中": "权威渠道虽有相关记载,尚不足以直接证实",
+    "支持根 0 个": "公开渠道暂未检索到能证实或否定这一条的材料",
+    "支持根": "公开渠道暂未检索到足够证实这一条的材料",
+    "无证据,维持原态": "公开渠道暂未检索到能证实或否定这一条的材料",
+    "验票失败维持原态": "材料核对未完成,暂作保留"
+  },
+  "report_stop_phrases": {
+    "全部澄清": "全部事项已核实,无需进一步调查",
+    "问人上限(打断纪律)": "已达到向委托方问询的次数上限,先行收尾",
+    "证据通道已穷尽": "公开渠道未再获得新信息,收尾(未核实事项见文末「待查证」清单)",
+    "预算护栏": "核查资源达到预设上限,提前收尾(已核实结论不受影响)",
+    "规划器选择停止": "调查规划判断继续核查收益有限,收尾",
+    "轮数上限": "完成设定调查轮次后收尾(未核实事项见文末「待查证」清单)"
+  },
+
+  "report_field_phrases": {
+    "amountHistory": "历史采购金额记录",
+    "frequencyHistory": "历史采购频次记录",
+    "noveltyHistory": "历史项目新颖性记录",
+    "amountAnomaly": "金额异常标记",
+    "frequencyAnomaly": "频次异常标记",
+    "noveltyAnomaly": "新颖性异常标记",
+    "relevance": "与本企业业务的相关性",
+    "domain": "行业领域",
+    "companyProfile": "企业画像",
+    "kind": "信号类型",
+    "tender": "招标信号",
+    "sourceUrl": "公告原文链接",
+    "project_id": "项目编号",
+    "project_name": "项目名称",
+    "purchaser": "采购方",
+    "amount_yuan": "预算金额",
+    "published_date": "公告发布日期",
+    "project_summary": "项目摘要",
+    "source_url": "公告原文链接",
+    "content_source_note": "内容来源说明",
+    "watch_focus": "监测重点",
+    "subject_name": "监测对象",
+    "subject_credit_code": "统一社会信用代码",
+    "signal_time": "信号时间",
+    "historical_median_amount_yuan": "历史金额中位数",
+    "amount_ratio": "金额倍数",
+    "history_count": "历史记录数",
+    "simulated_history_count": "模拟历史记录数",
+    "max_history_similarity": "历史最大相似度",
+    "most_similar_project": "最相似项目",
+    "window_days": "观察窗口",
+    "recent_count": "近期次数",
+    "historical_window_average_count": "历史窗口均值",
+    "frequency_ratio": "频率倍数",
+    "historical_windows_used": "使用窗口数"
+  },
+  "report_meta_phrases": {
+    "给定证据列表": "",
+    "该登记情况目前尚未核实": "该情况尚待核实",
+    "情报信封字段方面，": "",
+    "目前尚未核实信封是否提供": "尚待核实",
+    "依据信封信息": "依据信号",
+    "解读环节将本信号定性为": "本信号研判为",
+    "解读将其归为": "本信号研判为",
+    "解读层面": "此外",
+    "选定种子标签": "",
+    "关于的基线信息": "基线信息",
+    "均属解读侧标注，": "",
+    " 字段": ""
+  },
+  "report_timeline_events": {
+    "递交投标文件": "投标文件递交截止",
+    "获取招标文件": "招标文件获取",
+    "投标截止": "投标截止",
+    "开标": "开标",
+    "中标": "中标结果公布"
+  },
+  "report_stance_words": {
+    "signal_phrases": {
+      "商机": "投标机会线索",
+      "机会": "参与机会",
+      "扩张": "业务扩张动向",
+      "风险": "风险信号",
+      "暴雷": "风险信号",
+      "危机": "风险信号",
+      "竞争": "竞争对手动向",
+      "误读": "待澄清的市场说法",
+      "讹传": "待澄清的市场说法"
+    },
+    "signal_stances": {
+      "商机": "positive",
+      "机会": "positive",
+      "扩张": "positive",
+      "风险": "negative",
+      "暴雷": "negative",
+      "危机": "negative",
+      "竞争": "watch",
+      "误读": "skeptic",
+      "讹传": "skeptic"
+    },
+    "hypothesis_keywords": {
+      "positive": ["机会", "商机", "参与", "扩张"],
+      "negative": ["风险", "暴雷", "危机", "异常"],
+      "skeptic": ["误读", "讹传", "澄清"],
+      "watch": ["竞争", "竞对", "竞品", "动向"]
+    }
+  }
+}

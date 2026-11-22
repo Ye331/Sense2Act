@@ -335,6 +335,35 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .form-body .field>span { display: block; font-size: 13px; color: var(--s2-secondary); margin-bottom: 8px; }
 .icon-button { width: 32px; height: 32px; color: var(--s2-secondary); background: var(--s2-muted); }
 .section-empty { font-size: 14px; color: var(--s2-secondary); }
+.conclusion-sections { padding-bottom: 12px; }
+.conclusion-block { margin: 0 22px 10px; padding: 14px 16px; border: 1px solid var(--s2-line); border-radius: 8px; background: var(--s2-muted); }
+.conclusion-block h3 { font-size: 13px; color: var(--s2-brand); margin-bottom: 8px; }
+.conclusion-block ul { padding-left: 18px; }
+.conclusion-block li, .conclusion-block p { font-size: 13px; color: var(--s2-secondary); line-height: 1.7; margin: 3px 0; }
+/* 人话化批A:结论引导块(主结论 label+当前判断)+ 次选假设弱化块(各自 label+当前判断) */
+.conclusion-lead { border-left: 3px solid var(--s2-action); }
+.conclusion-lead h3 { font-size: 15px; }
+.conclusion-lead p { font-size: 13.5px; color: var(--s2-brand); }
+.conclusion-alternatives { margin: 0 22px 10px; display: grid; gap: 8px; }
+.conclusion-alt-caption { font-size: 12px; font-weight: 700; color: var(--s2-helper); }
+.conclusion-block.conclusion-alt { background: transparent; }
+.conclusion-block.conclusion-alt h3 { font-size: 12.5px; color: var(--s2-secondary); }
+.conclusion-block.conclusion-alt p { font-size: 12.5px; color: var(--s2-helper); }
+.pending-list { padding: 0 22px 14px; }
+.pending-list article { padding: 13px 0; border-top: 1px solid var(--s2-line); }
+.pending-list strong { font-size: 13px; color: var(--s2-brand); }
+.pending-list p { font-size: 12px; color: #8b6b35; margin: 7px 0; }
+.pending-list small { font-size: 11px; color: var(--s2-secondary); }
+.process-notes { padding: 18px 22px; }
+.process-notes summary { cursor: pointer; font-size: 13px; font-weight: 700; color: var(--s2-secondary); }
+.process-notes p { font-size: 12px; color: var(--s2-secondary); line-height: 1.65; margin-top: 9px; }
+.attachment-strip { display: flex; gap: 9px; overflow-x: auto; padding: 0 0 12px 40px; }
+.attachment-strip a { display: block; flex: none; width: 132px; color: var(--s2-secondary); }
+.attachment-strip img { display: block; width: 132px; height: 86px; object-fit: cover; border: 1px solid var(--s2-line); border-radius: 7px; background: var(--s2-muted); }
+.attachment-strip small { display: block; font-size: 11px; margin-top: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.attachment-loading, .attachment-failed { display: grid; place-items: center; flex: none; width: 132px; height: 86px; border: 1px dashed var(--s2-line); border-radius: 7px; color: var(--s2-secondary); font-size: 11px; }
+.attachment-failed { color: var(--s2-danger); background: #fff5f3; }
+.attachment-note { font-size: 11px; color: var(--s2-secondary); padding: 0 22px 16px; }
 .failure-banner, .draft-banner { font-size: 14px; }
 .mono-value { font-size: 13px; }
 .confirmation-modal { width: min(520px,100%); }

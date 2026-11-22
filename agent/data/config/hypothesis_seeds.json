@@ -5,5 +5,58 @@
   {"label": "信源讹传", "description": "信源链条中的误传或编造,无实体行为支撑"},
   {"label": "新方向扩张", "description": "主体进入新业务方向的既定扩张(建设潮的一环)"},
   {"label": "异常输送", "description": "采购/交易结构指向利益输送(red-flag 方向)"},
-  {"label": "正常大额采购", "description": "金额异常仅反映正常项目周期波动"}
+  {"label": "正常大额采购", "description": "金额异常仅反映正常项目周期波动"},
+  {
+    "event_id": "evt_tender_xinzhou_college_r1",
+    "label": "可投标商机",
+    "description": "忻州招标卷的人工可审计投影；只分组和组桥，不改假设裁定。",
+    "grouping": [
+      {"name": "项目与时限事实", "members": ["c11"]},
+      {"name": "参与条件待闭合", "members": ["c18", "c19"]},
+      {"name": "信封字段覆盖缺口", "members": ["c8", "c9"]}
+    ],
+    "reasoning_bridges": [
+      {
+        "id": "xinzhou_opportunity_participation",
+        "label": "商机可参与性",
+        "basis": ["c11", "c2", "c18", "c19"],
+        "context": ["c4", "c8", "c9"],
+        "routed_claims": ["c3"],
+        "rule": "公开采购只有在业务匹配、投标资格和履约资源同时成立时，才构成可执行商机。",
+        "inference_text": "项目与截止时间已有公开材料支撑；业务匹配、投标资格与交付资源仍待补证，因此目前只能得出条件性的潜在机会。",
+        "condition_or_gap": "只有在品类与本公司经营范围匹配，且资质、人力与交付资源足以按期投标时，可投标性才闭合。",
+        "targets": [
+          {"label": "可投标商机", "polarity": "正向", "rationale": "支持潜在商机，但参与资格尚未闭合。"}
+        ]
+      },
+      {
+        "id": "xinzhou_amount_anomaly",
+        "label": "金额异常判断",
+        "basis": ["c22a", "c15", "c22"],
+        "context": ["c4", "c6", "c7"],
+        "routed_claims": [],
+        "rule": "金额接近历史常态只能削弱异常假设，不能单独证明交易正常。",
+        "inference_text": "预算 999910 元和既往约百万元级采购记录已有支撑，但「与同类项目中位数无显著偏离」仍待独立历史基线复核。",
+        "condition_or_gap": "当独立历史基线证实金额位于常态区间时，可削弱异常方向；当前不应把「未见明显异常」写成「交易已证正常」。",
+        "targets": [
+          {"label": "正常大额采购", "polarity": "正向", "rationale": "金额尺度暂未显示明显偏离，但仍需历史基线。"},
+          {"label": "异常输送", "polarity": "反向", "rationale": "只削弱金额异常路径，不否定其他异常证据的可能。"}
+        ]
+      },
+      {
+        "id": "xinzhou_subject_agent_risk",
+        "label": "主体与代理风险",
+        "basis": ["c20", "c21", "c14"],
+        "context": [],
+        "routed_claims": [],
+        "rule": "公告存在只能证明采购事件的公开性，不能替代采购主体、代理机构及委托关系的合规审查。",
+        "inference_text": "采购方历史投诉/处罚、代理机构违规记录和委托关系的独立佐证均未闭合，目前不能从「未查到」推出「没有风险」。",
+        "condition_or_gap": "在主体与代理机构的独立合规记录、委托关系均完成核验前，正常与异常两个方向都必须保留这一条件限制。",
+        "targets": [
+          {"label": "正常大额采购", "polarity": "条件", "rationale": "正常方向仍受主体与代理合规核验限制。"},
+          {"label": "异常输送", "polarity": "条件", "rationale": "尚无足够主体/代理风险证据支持异常方向。"}
+        ]
+      }
+    ]
+  }
 ]

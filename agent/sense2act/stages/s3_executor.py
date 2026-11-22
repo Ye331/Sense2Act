@@ -101,10 +101,16 @@ class WordFamilyExplorer:
 
 
 class Executor:
-    def __init__(self, gate: NetworkGate, router: ToolRouter, explorer: Explorer):
+    def __init__(self, gate: NetworkGate, router: ToolRouter, explorer: Explorer,
+                 kb_retriever=None):
+        # kb_retriever(K2,2026-10-27):S3 第四通道,可选注入(照 pc_checker/
+        # red_team 条件装配先例)。零网络零 LLM,不占 collect 预算;None=off
+        # 全链零差异。接口:retrieve(claim_text, hints, search_context)
+        # -> (list[EvidenceItemLite], SourceReport)。
         self._gate = gate
         self._router = router
         self._explorer = explorer
+        self._kb_retriever = kb_retriever
 
     @property
     def collect_calls(self) -> int:
@@ -119,6 +125,17 @@ class Executor:
         search_context = 信封精确定位字段(采购人/项目编号/发布日期),下传给
         采集适配器做定向检索;explore 路径不消费(探索器换词自有语义)。
         """
+        obs, quality = self._execute_inner(
+            sheet, round_no, claim_text, unreachable_callback, search_context)
+        if self._kb_retriever is not None:
+            obs = self._kb_augment(sheet, round_no, claim_text,
+                                   search_context, obs)
+        return obs, quality
+
+    def _execute_inner(
+        self, sheet: DecisionSheet, round_no: int, claim_text: str,
+        unreachable_callback=None, search_context: dict | None = None,
+    ) -> tuple[ObservationPackage, str]:
         head = sheet.gap_chain[0]
         if sheet.action.value == "explore":
             outcome = self._explorer.explore(head, sheet.search_hints, claim_text)
@@ -163,6 +180,23 @@ class Executor:
         obs = self._assemble(sheet, round_no, receipt)
         quality = "ok" if receipt.items or receipt.status == "success" else "poor"
         return obs, quality
+
+    def _kb_augment(self, sheet: DecisionSheet, round_no: int, claim_text: str,
+                    search_context: dict | None, obs: ObservationPackage
+                    ) -> ObservationPackage:
+        """K2 第四通道增强(确定性,蓝图 §四):KB 命中→SourceReport(与爬虫
+        同构,8 态失败不伪装)并入观察包;回执恒入包(空回执也如实留痕)。
+        不改 quality 信号(CRAG 只看网络采集质量);lineage 继承在 item 预设
+        根(S4 守卫消费)。requery 回边不增强(KB 每指纹单 run 一次,重复
+        增强无增量)。"""
+        items, report = self._kb_retriever.retrieve(
+            claim_text, sheet.search_hints, search_context)
+        brief = obs.action_brief + (f" +kb×{len(items)}" if items else "")
+        return ObservationPackage(
+            round=round_no, main_target=sheet.main_target, action_brief=brief,
+            items=obs.items + items,
+            source_reports=obs.source_reports + [report],
+            trajectory=obs.trajectory)
 
     def requery(self, sheet: DecisionSheet, round_no: int, claim_text: str,
                 fallback_platforms: list[str],

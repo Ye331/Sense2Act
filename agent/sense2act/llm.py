@@ -216,8 +216,6 @@ class DeepSeekLLM:
                 {"role": "user", "content": user_prompt},
             ],
         )
-        # 供调用方记账(后端调查预算按真实 token 累计)
-        self.last_total_tokens = getattr(getattr(resp, "usage", None), "total_tokens", 0) or 0
         choice = resp.choices[0]
         if choice.finish_reason == "length":
             raise ValueError(f"[{stage}] 模型输出被截断(max_tokens=8192),请精简上下文")

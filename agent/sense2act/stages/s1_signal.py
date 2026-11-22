@@ -18,7 +18,7 @@ from ..llm import StructuredLLM, call_structured
 from ..models.base import ClaimCategory
 from ..models.envelope import InvestigationEnvelope, TenderSignal
 from ..models.intel import AnalysisBlueprint, ClaimDraft, QualificationResult
-from ..prompts import S1A_PROMPT, s1b_prompt
+from ..prompts import S1A_PROMPT, S1B_PREDICATE_FORM_INSTRUCTION, s1b_prompt
 
 
 class SignalAnalyzer(Protocol):
@@ -31,11 +31,16 @@ class SignalAnalyzer(Protocol):
 
 
 class LLMSignalAnalyzer:
-    def __init__(self, llm: StructuredLLM, retry: int = 2, variant: str = "中"):
+    def __init__(self, llm: StructuredLLM, retry: int = 2, variant: str = "中",
+                 predicate_form_enabled: bool = False):
         self._llm = llm
         self._retry = retry
+        self._pf_enabled = predicate_form_enabled
         # S1b 粒度档位在构造时固化(未知档位此处显式报错,不延迟到首轮调用)
-        self._s1b_system = s1b_prompt(variant)
+        # 谓词形态指令(件 4)开关 on 才追加——off 时 system prompt 字节不变
+        # (旧录制件回放零扰动)
+        self._s1b_system = s1b_prompt(variant) + (
+            S1B_PREDICATE_FORM_INSTRUCTION if predicate_form_enabled else "")
 
     def analyze_light(self, envelope: InvestigationEnvelope,
                       seed_labels: list[str]) -> QualificationResult:
@@ -63,9 +68,18 @@ class LLMSignalAnalyzer:
             + "\n\n关系类型词表(关系类 claim 的 relationType 须命中):\n"
             + json.dumps(relation_vocab, ensure_ascii=False)
         )
-        return call_structured(self._llm, stage="s1b", system=self._s1b_system,
-                               user=user,
-                               model_cls=AnalysisBlueprint, retry=self._retry)
+        blueprint = call_structured(self._llm, stage="s1b",
+                                    system=self._s1b_system, user=user,
+                                    model_cls=AnalysisBlueprint,
+                                    retry=self._retry)
+        if self._pf_enabled:
+            # 谓词形态验票清洗(件 4):畸形标注置 None=该条回退 blocklist
+            # (永不 fail-open;由 s6 消费侧 merge 双保险)
+            from ..predicate_form import validate as _pf_validate
+            for c in blueprint.claims:
+                if c.predicate_form is not None:
+                    c.predicate_form = _pf_validate(c.predicate_form, c.text)
+        return blueprint
 
 
 def tender_field_claims(t: TenderSignal | None) -> list[ClaimDraft]:

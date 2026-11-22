@@ -35,6 +35,17 @@ class ClaimDraft(SchemaModel):
     corpus_bound: bool = False                # S1b 标注:信封/语料内自证型断言
                                               # (true=复述/记载/字段取值;世界断言必须 false,
                                               #  拿不准 false。模型标注,代码判决——S6 第一方自证例外)
+    predicate_form: dict | None = None        # 谓词形态标注(手术包件 4,2026-10-22):
+                                              # {beyond_single_doc, predicate_type,
+                                              #  grounding_quotes}。dict 原始透传+
+                                              # predicate_form.validate 代码验票(畸形
+                                              # 不炸 S1b,失败回退 blocklist 永不
+                                              # fail-open);可选字段,旧 fixture 零迁移
+    gist: str = ""                            # 条目短名(gist 短名方案,2026-10-30):
+                                              # S1b 出生摘要,≤20 字名词短语含关键
+                                              # 实体/数字,供呈现层短摘(阅读面),
+                                              # 附录 B 核对面不消费。可选字段,旧
+                                              # fixture 零迁移(空=渲染 fallback 截断)
 
 
 class HypothesisSeed(SchemaModel):

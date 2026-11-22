@@ -1,0 +1,20 @@
+{
+ "variant": "中",
+ "assoc": "entity_text",
+ "max_rounds": 6,
+ "max_llm_calls": 160,
+ "max_collect_calls": 80,
+ "disc": true,
+ "interleave": true,
+ "calibration": false,
+ "ask_mode": "headless",
+ "ask_gate": true,
+ "sim_persona": "cooperative",
+ "sim_seed": 20261009,
+ "ask_final": false,
+ "rumor_meta_seed": false,
+ "predicate_form": true,
+ "corpus_bound_code": true,
+ "t1_independence": true,
+ "recorded_at": "2026-10-23T20:04:00"
+}

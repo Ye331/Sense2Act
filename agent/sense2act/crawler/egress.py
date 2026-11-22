@@ -9,6 +9,7 @@
 """
 from __future__ import annotations
 
+import base64
 import hashlib
 import json
 import urllib.request
@@ -25,24 +26,39 @@ class EgressResponse:
         self.text = text
 
 
+class EgressBinaryResponse:
+    """二进制响应(A 线报告附件,2026-10-23):data 为原始字节,不解码不猜。
+
+    与 EgressResponse 分立:文本路径(证据)与二进制路径(图片附件)各走各的
+    记忆缓存与校验;同一录制文件共存(records 条目按 encoding 字段区分)。
+    """
+
+    def __init__(self, status_code: int | None, data: bytes, content_type: str):
+        self.status_code = status_code
+        self.data = data
+        self.content_type = content_type
+
+
 class EgressHttpClient:
     """http_get 的标准实现;transport 可注入(测试替身)。"""
 
     def __init__(self, *, record_path: str | Path | None = None,
                  replay_path: str | Path | None = None,
-                 timeout: float = 10.0, transport=None):
+                 timeout: float = 10.0, transport=None, transport_binary=None):
         if record_path and replay_path:
             raise ValueError("record 与 replay 互斥")
-        if replay_path and transport is not None:
+        if replay_path and (transport is not None or transport_binary is not None):
             raise ValueError("replay 零网络:不接受 transport(I2)")
         self._record_path = Path(record_path) if record_path else None
         self._replay_path = Path(replay_path) if replay_path else None
         self._timeout = timeout
         self._transport = transport
+        self._transport_binary = transport_binary   # (url,timeout)->(code,bytes,type)
         self.calls = 0
         self._pending: dict[str, dict] = {}
         self._records: dict[str, dict] = {}
         self._memo: dict[str, EgressResponse] = {}   # 单次运行内同 URL 只取一次网
+        self._memo_bin: dict[str, EgressBinaryResponse] = {}   # 二进制同 URL 记忆
         if self._replay_path:
             if not self._replay_path.exists():
                 raise FileNotFoundError(f"出网回放文件不存在: {self._replay_path}")
@@ -57,13 +73,14 @@ class EgressHttpClient:
             return memo
         fp = egress_fingerprint(url)
         self.calls += 1
-        if self._records:
+        if self._replay_path is not None:   # 空记录文件同样零网络(I2:按模式判,不按字典真假)
             rec = self._records.get(fp)
             if rec is None:
                 from ..collect.crawler_gate import NotRecordedError
                 raise NotRecordedError(
                     f"出网回放未命中 {fp}({url})——请在录制模式重跑")
-            resp = EgressResponse(rec["status_code"], rec["text"])
+            # 旧文本记录无 text 键的情况不存在;二进制记录无 text → 空串兜底
+            resp = EgressResponse(rec["status_code"], rec.get("text", ""))
             self._memo[url] = resp
             return resp
         status_code, text = self._fetch(url, timeout or self._timeout)
@@ -74,6 +91,64 @@ class EgressHttpClient:
                                  "text": text}
             self._flush()
         return resp
+
+    def get_binary(self, url: str, timeout: float | None = None,
+                   headers: dict[str, str] | None = None) -> EgressBinaryResponse:
+        """二进制 GET(A 线报告附件:官网产品图下载)。
+
+        录制格式:同指纹公式(URL 维度不变),条目加 encoding="base64" +
+        data_b64 + content_type;旧文本条目(无该字段)在此视为未录制。
+        headers 可选参仅用于附件场景的 Referer(防盗链),不影响文本路径。
+        """
+        memo = self._memo_bin.get(url)
+        if memo is not None:
+            return memo
+        fp = egress_fingerprint(url)
+        self.calls += 1
+        if self._replay_path is not None:   # 同 I2:空记录文件零网络
+            rec = self._records.get(fp)
+            if rec is None or rec.get("encoding") != "base64":
+                from ..collect.crawler_gate import NotRecordedError
+                raise NotRecordedError(
+                    f"出网回放未命中二进制 {fp}({url})——录制时未下载该附件")
+            resp = EgressBinaryResponse(
+                rec["status_code"], base64.b64decode(rec["data_b64"]),
+                rec.get("content_type", ""))
+            self._memo_bin[url] = resp
+            return resp
+        status_code, data, content_type = self._fetch_binary(
+            url, timeout or self._timeout, headers)
+        resp = EgressBinaryResponse(status_code, data, content_type)
+        self._memo_bin[url] = resp
+        if self._record_path is not None:
+            self._pending[fp] = {
+                "url": url, "status_code": status_code,
+                "encoding": "base64",
+                "data_b64": base64.b64encode(data).decode("ascii"),
+                "content_type": content_type}
+            self._flush()
+        return resp
+
+    def _fetch_binary(self, url: str, timeout: float,
+                      headers: dict[str, str] | None
+                      ) -> tuple[int | None, bytes, str]:
+        if self._transport_binary is not None:
+            status_code, data, content_type = self._transport_binary(
+                url, timeout)
+            return status_code, data, content_type
+        req = urllib.request.Request(url, headers={
+            "User-Agent": "Mozilla/5.0",
+            "Accept-Encoding": "identity",
+            **(headers or {}),
+        })
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                return (resp.status, resp.read(),
+                        resp.headers.get("Content-Type", ""))
+        except urllib.error.HTTPError as exc:
+            return exc.code, b"", ""
+        except Exception as exc:
+            raise TimeoutError(type(exc).__name__) from exc
 
     def _fetch(self, url: str, timeout: float) -> tuple[int | None, str]:
         if self._transport is not None:

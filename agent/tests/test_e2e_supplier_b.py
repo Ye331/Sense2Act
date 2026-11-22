@@ -101,8 +101,10 @@ class TestSupplierBEndToEnd(unittest.TestCase):
         start = md.index("### Open Questions")
         end = md.index("### 行动建议")
         oq_block = md[start:end]
-        self.assertIn("C2", oq_block)          # 未决项如实保留在 OQ 节
-        self.assertNotIn("C1", oq_block)       # 已裁定项不混入
+        # 报告文风线第三批 M4:OQ 卡去 claim id 只留优先级,改以文本断言
+        # (照旧断言随语义演进注明先例)
+        self.assertIn("爆料账号产业内幕君2026的运营者为B公司前高管", oq_block)
+        self.assertNotIn("B公司自2026年7月起拖欠员工工资", oq_block)
 
     def test_decision_log_covers_all_kinds(self):
         kinds = {r["kind"] for r in self.conn.execute(

@@ -85,18 +85,6 @@ class TestTianjinZfcgAdapter(unittest.TestCase):
         self.assertEqual(len(r3.items), 1)
         self.assertEqual(r3.items[0]["dedup_key"], "tianjin_zfcg:1094165916")
 
-    def test_harvest_keeps_stage_fields_and_failure_states(self):
-        r = TianjinZfcgAdapter(http_get=ok_transport(TJ_OK)).harvest()
-        self.assertEqual(r.status, "success")
-        self.assertEqual(len(r.items), 3)                  # 跨栏目去重 + 跳过残缺条目
-        item = next(i for i in r.items if i["dedup_key"] == "tianjin_zfcg:1094165916")
-        self.assertEqual(item["stage"], "招标采购")
-        self.assertEqual(item["project_no"], "XCSD-2026-C-293")
-        for page, status in ((TJ_BLOCKED, "authentication_required"),
-                             (TJ_CHANGED, "parser_changed")):
-            self.assertEqual(TianjinZfcgAdapter(http_get=ok_transport(page)).harvest().status,
-                             status)
-
     def test_honest_empty_with_scanned_count(self):
         ad = TianjinZfcgAdapter(http_get=ok_transport(TJ_OK))
         r = ad.search("完全无关的词", 10)
@@ -213,10 +201,13 @@ class TestTianjinRegistrationAndRouting(unittest.TestCase):
     def test_router_r6_before_r1(self):
         router = ToolRouter(make_domain().platform_rules)
         req = router.route("查询该项目的中标结果公告", ["中标公告"], "claim")
-        self.assertEqual(req.platforms, ["ccgp", "tianjin_zfcg"])
+        # 区域/机构条件源不得被通用“中标公告”泛化扇出。
+        self.assertEqual(req.platforms, ["ccgp"])
         # 回归:泛官方词仍走 R1,不被 R6 抢走(cctv 2026-10-16 起移出默认路由)
         req1 = router.route("官方公告与批复", ["公告"], "")
-        self.assertIn("official_website", req1.platforms)
+        self.assertNotIn("official_website", req1.platforms)
+        req_tj = router.route("天津项目中标公告", ["天津 中标公告"], "claim")
+        self.assertIn("tianjin_zfcg", req_tj.platforms)
         # 回归:历史基线工具路由优先于平台规则
         reqh = router.route("历史中标方与金额分布", ["历史中标"], "")
         self.assertEqual(reqh.tool, "history_baseline")

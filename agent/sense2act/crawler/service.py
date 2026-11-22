@@ -16,6 +16,30 @@ from ..models.observation import (
 from .registry import SourceRegistry
 
 
+_GENERIC = {"采购", "公告", "项目", "招标", "中标", "成交", "公开", "查询", "结果", "历史"}
+
+
+def _relevance_anchor(raw: dict, req: CollectRequest) -> str:
+    """定向调查最低相关性闸；返回命中锚点，空串表示零锚点。"""
+    if not (req.buyer or req.project_no or req.source_url):
+        return "unscoped"
+    text = f"{raw.get('title', '')} {raw.get('content', '')}"
+    project_no = (req.project_no or "").replace("PRJ-", "")
+    if project_no and project_no in text:
+        return "project_no"
+    if req.buyer and req.buyer in text:
+        return "buyer"
+    query = (req.query or "").split("|")[0]
+    cores = []
+    for token in query.replace("，", " ").replace("、", " ").split():
+        token = token.strip()
+        if len(token) >= 2 and token not in _GENERIC and token not in cores:
+            cores.append(token)
+    if sum(1 for token in cores if token in text) >= 2:
+        return "title_terms"
+    return ""
+
+
 class LocalCollectService:
     def __init__(self, registry: SourceRegistry, egress=None, max_calls: int = 80):
         self._registry = registry
@@ -64,7 +88,11 @@ class LocalCollectService:
                     message=type(exc).__name__))
                 continue
             kept = 0
+            irrelevant = 0
             for raw in result.items[: max(0, req.limit)]:
+                if not _relevance_anchor(raw, req):
+                    irrelevant += 1
+                    continue
                 lite = EvidenceItemLite.model_validate(raw)
                 key = lite.dedup_key or f"{lite.source}|{lite.title}"
                 if key in seen:
@@ -74,7 +102,8 @@ class LocalCollectService:
                 kept += 1
             reports.append(SourceReport(
                 platform=platform, status=result.status, count=kept,
-                retryable=result.retryable, message=result.message or ""))
+                retryable=result.retryable, message=result.message or "",
+                found=len(result.items), accepted=kept, irrelevant=irrelevant))
 
         has_fail = any(r.status not in ("success", "empty") for r in reports)
         if has_fail and not items:
